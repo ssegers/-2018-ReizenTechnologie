@@ -14,3 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+/*
+ * FilterController
+ */
+Route::get('/filter', 'FilterController@getFilteredTraveller');
+route::post('/filter', 'FilterController@getFilteredTraveller');
