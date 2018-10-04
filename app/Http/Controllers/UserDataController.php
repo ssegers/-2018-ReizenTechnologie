@@ -32,7 +32,9 @@ class UserDataController extends Controller
             }
 
             $aUserData = Traveller::select(DB::raw($sSelectString))->paginate(2);
-        } else {
+
+        }
+        else {
             $aUserData = Traveller::paginate(2);
         }
 
