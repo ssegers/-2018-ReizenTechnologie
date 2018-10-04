@@ -11,9 +11,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-            $this->call([
-                TravellersTableSeeder::class,
-            ]);
-
+        $this->call([
+            TravellersTableSeeder::class,
+        ]);
     }
 }

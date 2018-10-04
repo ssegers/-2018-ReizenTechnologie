@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Traveller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -21,14 +22,16 @@ class UserDataController extends Controller
                 'email' => $request->post('email'),
                 'phone' => $request->post('phone'),
             ];
-            $sSelectString = "";
 
-            foreach ($aFilterChecked as $key => $filter) {
-                if ($filter) {
-                    $sSelectString .= ',' . $key;
+            $sSelectString = 'lastname,firstname';
+
+            foreach ($aFilterChecked as $sFilter => $bValue) {
+                if ($bValue) {
+                    $sSelectString .= ',' . $sFilter;
                 }
             }
-            $aUserData = Traveller::select($sSelectString)->paginate(2);
+
+            $aUserData = Traveller::select(DB::raw($sSelectString))->paginate(2);
         } else {
             $aUserData = Traveller::paginate(2);
         }
