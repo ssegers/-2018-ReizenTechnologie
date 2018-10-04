@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
-<<<<<<< HEAD
 use App\Traveller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Maatwebsite\Excel\Facades\Excel;
 
 class UserDataController extends Controller
 {
-    public function showUsersAsMentor(Request $request) {
+    public function showUsersAsMentor(Request $request)
+    {
         $id = Auth::id();
 
         $aUserData = [];
@@ -28,8 +29,7 @@ class UserDataController extends Controller
                 }
             }
             $aUserData = Traveller::select($sSelectString)->paginate(2);
-        }
-        else {
+        } else {
             $aUserData = Traveller::paginate(2);
         }
 
@@ -37,15 +37,9 @@ class UserDataController extends Controller
         return view('user.filter.filter', [
             'aUserData' => $aUserData,
         ]);
-=======
-use App\UserData;
-use Illuminate\Http\Request;
-use Maatwebsite\Excel\Facades\Excel;
+    }
 
-class UserDataController extends Controller
-{
-    
-    /*
+    /**
      * downloadExcel : this will download an excel file based on the session data of filters (the checked fields)
      */
     public function downloadExcel(Request $request)
@@ -59,6 +53,5 @@ class UserDataController extends Controller
                 $sheet->fromArray($data);
             });
         })->download('xlsx');
->>>>>>> develop
     }
 }
