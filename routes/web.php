@@ -16,4 +16,5 @@ Route::get('/', function () {
 });
 
 Route::get('user/trip/travellers', 'UserDataController@showUsersAsMentor');
+Route::post('user/trip/travellers', 'UserDataController@showUsersAsMentor');
 
