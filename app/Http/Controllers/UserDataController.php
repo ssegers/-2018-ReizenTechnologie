@@ -11,6 +11,6 @@ class UserDataController extends Controller
     public function showUserDataAsMentor() {
         $id = Auth::id();
 
-        $aUserData = Traveller::get();
+        $aUserData = Traveller::paginate(25);
     }
 }
