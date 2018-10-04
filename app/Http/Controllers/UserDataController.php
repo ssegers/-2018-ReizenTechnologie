@@ -8,9 +8,11 @@ use Illuminate\Support\Facades\Auth;
 
 class UserDataController extends Controller
 {
-    public function showUserDataAsMentor() {
+    public function showUsersAsMentor() {
         $id = Auth::id();
 
         $aUserData = Traveller::paginate(25);
+
+        return view('user.filter.filter');
     }
 }
