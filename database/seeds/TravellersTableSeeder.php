@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 class TravellersTableSeeder extends Seeder
 {
@@ -49,7 +48,7 @@ class TravellersTableSeeder extends Seeder
             'lastname' => 'Kerkhofs',
             'country' => 'belgië',
             'address' => 'stef zijn straat 15',
-            'sex' => 'man',
+            'gender' => 'man',
             'phone' => '0474567892',
             'emergency_phone_1' => '0471852963',
             'emergency_phone_2' => '0471717171',
@@ -65,7 +64,7 @@ class TravellersTableSeeder extends Seeder
             'lastname' => 'Akpinar',
             'country' => 'belgië',
             'address' => 'Kaan zijn straat 15',
-            'sex' => 'man',
+            'gender' => 'man',
             'phone' => '0474567892',
             'emergency_phone_1' => '0471852963',
             'emergency_phone_2' => '0471717171',

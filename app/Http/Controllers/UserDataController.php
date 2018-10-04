@@ -11,8 +11,10 @@ class UserDataController extends Controller
     public function showUsersAsMentor() {
         $id = Auth::id();
 
-        $aUserData = Traveller::paginate(25);
+        $aUserData = Traveller::paginate(2);
 
-        return view('user.filter.filter');
+        return view('user.filter.filter', [
+            'aUserData' => $aUserData,
+        ]);
     }
 }
