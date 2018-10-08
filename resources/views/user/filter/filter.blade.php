@@ -9,26 +9,20 @@
         <div class="form_container">
             <div class="options_container">
                 {{Form::open(array('action' => 'UserDataController@showUsersAsMentor', 'method' => 'post'))}}
+
+                @foreach($aFilterList as $sFilterName => $sFilterText)
                 <div class="option_cell">
-                    {{ Form::checkbox('email', 'email') }}
-                    {{ Form::label('email', 'Email', ['class' => 'field']) }}
+                    <label for="{{ $sFilterName }}">
+                        {{ $sFilterText }}
+                        @if(array_key_exists($sFilterName, $aFiltersChecked))
+                            {{ Form::checkbox($sFilterName, null, true) }}
+                        @else
+                            {{ Form::checkbox($sFilterName, null, false) }}
+                        @endif
+                    </label>
                 </div>
-                <div class="option_cell">
-                    {{ Form::checkbox('phone', 'phone') }}
-                    {{ Form::label('phone', 'Telefoon', ['class' => 'field']) }}
-                </div>
-                <div class="option_cell">
-                    {{ Form::checkbox('phone', 'phone') }}
-                    {{ Form::label('phone', 'Telefoon', ['class' => 'field']) }}
-                </div>
-                <div class="option_cell">
-                    {{ Form::checkbox('phone', 'phone') }}
-                    {{ Form::label('phone', 'Telefoon', ['class' => 'field']) }}
-                </div>
-                <div class="option_cell">
-                    {{ Form::checkbox('phone', 'phone') }}
-                    {{ Form::label('phone', 'Telefoon', ['class' => 'field']) }}
-                </div>
+                @endForeach
+
                 <div class="option_button">
                     <button type="submit" name="button-filter" value="button-filter">Filter lijst</button>
                 </div>
@@ -44,104 +38,24 @@
         </div>
         <div class="table_container">
             <table class="gegTable">
+                <thead>
                 <tr>
-                    <th>Voornaam</th>
-                    <th>Naam</th>
-                    <th>Email</th>
-                    <th>Telefoon</th>
-                    <th>Reis</th>
-                    <th>Klas</th>
+                    @foreach($aFiltersChecked as $sFilterValue)
+                        <th>{{ $sFilterValue }}</th>
+                    @endforeach
                 </tr>
-
-
-                <tr>
-                <tr>
-                    <td>test</td>
-                    <td>test</td>
-                    <td>test</td>
-                    <td>test</td>
-                    <td>test</td>
-                    <td>test</td>
-                </tr>
-                <tr>
-                    <td>test</td>
-                    <td>test</td>
-                    <td>test</td>
-                    <td>test</td>
-                    <td>test</td>
-                    <td>test</td>
-                </tr>
-                <tr>
-                    <td>test</td>
-                    <td>test</td>
-                    <td>test</td>
-                    <td>test</td>
-                    <td>test</td>
-                    <td>test</td>
-                </tr>
-                <tr>
-                    <td>test</td>
-                    <td>test</td>
-                    <td>test</td>
-                    <td>test</td>
-                    <td>test</td>
-                    <td>test</td>
-                </tr>
-                </tr>
+                </thead>
+                <tbody>
+                    @foreach($aUserData as $oUserData)
+                    <tr>
+                        @foreach($aFiltersChecked as $sFilterName => $sFilterText)
+                            <td>{{ $oUserData->$sFilterName }}</td>
+                        @endforeach
+                    </tr>
+                    @endforeach
+                </tbody>
+                    {{ $aUserData->links() }}
             </table>
-
-            <div class="pagination">
-                {{ $aUserData->links() }}
-            </div>
-
-
-            {{--<table class="gegTable">--}}
-            {{--<tr>--}}
-            {{--@foreach($afilters as $ofilters)--}}
-
-            {{--@php--}}
-            {{--if($ofilters=='firstname')--}}
-            {{--{--}}
-            {{--$ofilters='Voornaam';--}}
-            {{--}--}}
-            {{--if($ofilters=='lastname')--}}
-            {{--{--}}
-            {{--$ofilters='Naam';--}}
-            {{--}--}}
-
-            {{--if($ofilters=='email')--}}
-            {{--{--}}
-            {{--$ofilters='Email';--}}
-            {{--}--}}
-            {{--if($ofilters=='phone')--}}
-            {{--{--}}
-            {{--$ofilters='Telefoon';--}}
-            {{--}--}}
-            {{--if($ofilters=='trip_name')--}}
-            {{--{--}}
-            {{--$ofilters='Reis';--}}
-            {{--}--}}
-            {{--if($ofilters=='major_name')--}}
-            {{--{--}}
-            {{--$ofilters='Klas';--}}
-            {{--}--}}
-            {{--@endphp--}}
-
-            {{--<th>{{$ofilters}}</th>--}}
-            {{--@endforeach--}}
-            {{--</tr>--}}
-            {{--@foreach($afilteredUserList as $ofiltereduserlist => $data)--}}
-            {{--<tr>--}}
-            {{--@foreach($afilters as $ofilters=>$filter)--}}
-            {{--<td>--}}
-            {{--{{$data[$filter]}}--}}
-            {{--</td>--}}
-            {{--@endforeach--}}
-            {{--</tr>--}}
-            {{--@endforeach--}}
-
-            {{--</table>--}}
-
         </div>
     </div>
 
@@ -170,11 +84,17 @@
         }
         .table_container{
             background: #E9F3F8;
+            position: relative;
         }
         .option_cell{
-            display: grid;
-            grid-template-columns: 30px auto;
-            grid-template-rows: 50px;
+            position: relative;
+            display: block;
+            padding: 15px;
+            border-bottom: 1px solid black;
+        }
+        .option_cell input {
+            position: absolute;
+            right: 15px;
         }
         .option_button{
         }
@@ -201,8 +121,11 @@
         }
         .pagination{
             text-align: center;
+            position: absolute;
+            bottom: 0;
+            line-height: 20px;
         }
-        .pagination ul{
+        .pagination {
             list-style-type: none;
             display: inline-block;
             margin: auto;

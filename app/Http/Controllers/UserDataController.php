@@ -15,32 +15,33 @@ class UserDataController extends Controller
     {
         $id = Auth::id();
 
-        $aUserData = [];
+        $aFiltersChecked = array(
+            'lastname' => 'Familienaam',
+            'firstname' => 'Voornaam'
+        );
+
+        $aFilterList = array(
+            'email' => 'Email',
+            'phone' => 'Telefoon',
+        );
+
+        foreach ($aFilterList as $sFilterName => $sFilterText) {
+            if ($request->post($sFilterName) != false) {
+                $aFiltersChecked[$sFilterName] = $sFilterText;
+            }
+        }
 
         if ($request->post('button-filter')) {
-            $aFilterChecked = [
-                'email' => $request->post('email'),
-                'phone' => $request->post('phone'),
-            ];
-
-            $sSelectString = 'lastname,firstname';
-
-            foreach ($aFilterChecked as $sFilter => $bValue) {
-                if ($bValue) {
-                    $sSelectString .= ',' . $sFilter;
-                }
-            }
-
-            $aUserData = Traveller::select(DB::raw($sSelectString))->paginate(2);
-
+            $aUserData = Traveller::select(array_keys($aFiltersChecked))->paginate(2);
         }
         else {
             $aUserData = Traveller::paginate(2);
         }
 
-
         return view('user.filter.filter', [
             'aUserData' => $aUserData,
+            'aFilterList' => $aFilterList,
+            'aFiltersChecked' => $aFiltersChecked
         ]);
     }
 
