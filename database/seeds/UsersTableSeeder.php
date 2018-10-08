@@ -39,5 +39,40 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt('azertyuiop'),
             'role' => 'Beheerder',
         ]);
+
+        DB::table('users')->insert([
+            'name' => 'Reiziger',
+            'email' => 'r4123456@ucll.be',
+            'password' => bcrypt('azertyuiop'),
+            'role' => 'Reiziger',
+        ]);
+
+        DB::table('users')->insert([
+            'name' => 'Begeleider',
+            'email' => 'r5123456@ucll.be',
+            'password' => bcrypt('azertyuiop'),
+            'role' => 'Begeleider',
+        ]);
+
+        DB::table('users')->insert([
+            'name' => 'Reiziger',
+            'email' => 'r6123456@ucll.be',
+            'password' => bcrypt('azertyuiop'),
+            'role' => 'Reiziger',
+        ]);
+
+        DB::table('users')->insert([
+            'name' => 'Reiziger',
+            'email' => 'r7123456@ucll.be',
+            'password' => bcrypt('azertyuiop'),
+            'role' => 'Reiziger',
+        ]);
+
+        DB::table('users')->insert([
+            'name' => 'Reiziger',
+            'email' => 'r8123456@ucll.be',
+            'password' => bcrypt('azertyuiop'),
+            'role' => 'Reiziger',
+        ]);
     }
 }
