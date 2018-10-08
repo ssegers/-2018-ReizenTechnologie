@@ -35,7 +35,7 @@ class UserDataController extends Controller
 
         }
         else {
-            $aUserData = Traveller::paginate(2);
+            $aUserData = Traveller::select(DB::raw('lastname,firstname,phone'))->paginate(2);;
         }
 
 

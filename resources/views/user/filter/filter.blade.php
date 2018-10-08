@@ -47,47 +47,52 @@
                 <tr>
                     <th>Voornaam</th>
                     <th>Naam</th>
-                    <th>Email</th>
+                    {{--<th>Email</th>--}}
                     <th>Telefoon</th>
-                    <th>Reis</th>
-                    <th>Klas</th>
+                    {{--<th>Reis</th>--}}
+                    {{--<th>Klas</th>--}}
                 </tr>
-
-
-                <tr>
-                <tr>
-                    <td>test</td>
-                    <td>test</td>
-                    <td>test</td>
-                    <td>test</td>
-                    <td>test</td>
-                    <td>test</td>
-                </tr>
-                <tr>
-                    <td>test</td>
-                    <td>test</td>
-                    <td>test</td>
-                    <td>test</td>
-                    <td>test</td>
-                    <td>test</td>
-                </tr>
-                <tr>
-                    <td>test</td>
-                    <td>test</td>
-                    <td>test</td>
-                    <td>test</td>
-                    <td>test</td>
-                    <td>test</td>
-                </tr>
-                <tr>
-                    <td>test</td>
-                    <td>test</td>
-                    <td>test</td>
-                    <td>test</td>
-                    <td>test</td>
-                    <td>test</td>
-                </tr>
-                </tr>
+                @foreach ($aUserData as $user)
+                    <tr>
+                        <td>{{$user->firstname}}</td>
+                        <td>{{$user->lastname}}</td>
+                        <td>{{$user->phone}}</td>
+                    </tr>
+                @endforeach
+                {{--<tr>--}}
+                {{--<tr>--}}
+                    {{--<td>test</td>--}}
+                    {{--<td>test</td>--}}
+                    {{--<td>test</td>--}}
+                    {{--<td>test</td>--}}
+                    {{--<td>test</td>--}}
+                    {{--<td>test</td>--}}
+                {{--</tr>--}}
+                {{--<tr>--}}
+                    {{--<td>test</td>--}}
+                    {{--<td>test</td>--}}
+                    {{--<td>test</td>--}}
+                    {{--<td>test</td>--}}
+                    {{--<td>test</td>--}}
+                    {{--<td>test</td>--}}
+                {{--</tr>--}}
+                {{--<tr>--}}
+                    {{--<td>test</td>--}}
+                    {{--<td>test</td>--}}
+                    {{--<td>test</td>--}}
+                    {{--<td>test</td>--}}
+                    {{--<td>test</td>--}}
+                    {{--<td>test</td>--}}
+                {{--</tr>--}}
+                {{--<tr>--}}
+                    {{--<td>test</td>--}}
+                    {{--<td>test</td>--}}
+                    {{--<td>test</td>--}}
+                    {{--<td>test</td>--}}
+                    {{--<td>test</td>--}}
+                    {{--<td>test</td>--}}
+                {{--</tr>--}}
+                {{--</tr>--}}
             </table>
 
             <div class="pagination">
