@@ -11,25 +11,19 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class UserDataController extends Controller
 {
+    protected $aFilterList = [
+        'email' => 'Email',
+        'phone' => 'Telefoon',
+    ];
+    protected $request;
+
     public function showUsersAsMentor(Request $request)
     {
+        $this->request = $request;
+
         $id = Auth::id();
 
-        $aFiltersChecked = array(
-            'lastname' => 'Familienaam',
-            'firstname' => 'Voornaam'
-        );
-
-        $aFilterList = array(
-            'email' => 'Email',
-            'phone' => 'Telefoon',
-        );
-
-        foreach ($aFilterList as $sFilterName => $sFilterText) {
-            if ($request->post($sFilterName) != false) {
-                $aFiltersChecked[$sFilterName] = $sFilterText;
-            }
-        }
+        $aFiltersChecked = $this->getCheckedFilters();
 
         if ($request->post('button-filter')) {
             $aUserData = Traveller::select(array_keys($aFiltersChecked))->paginate(2);
@@ -40,7 +34,7 @@ class UserDataController extends Controller
 
         return view('user.filter.filter', [
             'aUserData' => $aUserData,
-            'aFilterList' => $aFilterList,
+            'aFilterList' => $this->aFilterList,
             'aFiltersChecked' => $aFiltersChecked
         ]);
     }
@@ -50,8 +44,11 @@ class UserDataController extends Controller
      */
     public function downloadExcel(Request $request)
     {
-        $aUserFields = $request->session()->get('filters');
-        $data = UserData::get($aUserFields)->toArray();
+        $this->request = $request;
+
+        $aUserFields = $this->getCheckedFilters();
+
+        $data = UserData::select(array_keys($aUserFields))->toArray();
 
         return Excel::create('Gebruikers', function($excel) use ($data) {
             $excel->sheet('mySheet', function($sheet) use ($data)
@@ -59,5 +56,26 @@ class UserDataController extends Controller
                 $sheet->fromArray($data);
             });
         })->download('xlsx');
+    }
+
+    /**
+     * Returns array of fields based on the current selected filters
+     *
+     * @author Yoeri op't Roodt
+     * @return array
+     */
+    private function getCheckedFilters() {
+        $aFiltersChecked = array(
+            'lastname' => 'Familienaam',
+            'firstname' => 'Voornaam'
+        );
+
+        foreach ($this->aFilterList as $sFilterName => $sFilterText) {
+            if ($this->request->post($sFilterName) != false) {
+                $aFiltersChecked[$sFilterName] = $sFilterText;
+            }
+        }
+
+        return $aFiltersChecked;
     }
 }
