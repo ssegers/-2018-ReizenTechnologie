@@ -7,16 +7,16 @@
                 {{Form::open(array('action' => 'UserDataController@showUsersAsMentor', 'method' => 'post'))}}
 
                 @foreach($aFilterList as $sFilterName => $sFilterText)
-                <div class="option_cell">
-                    <label for="{{ $sFilterName }}">
-                        {{ $sFilterText }}
-                        @if(array_key_exists($sFilterName, $aFiltersChecked))
-                            {{ Form::checkbox($sFilterName, null, true) }}
-                        @else
-                            {{ Form::checkbox($sFilterName, null, false) }}
-                        @endif
-                    </label>
-                </div>
+                    <div class="option_cell">
+                        <label for="{{ $sFilterName }}">
+                            {{ $sFilterText }}
+                            @if(array_key_exists($sFilterName, $aFiltersChecked))
+                                {{ Form::checkbox($sFilterName, null, true) }}
+                            @else
+                                {{ Form::checkbox($sFilterName, null, false) }}
+                            @endif
+                        </label>
+                    </div>
                 @endForeach
 
                 <div class="option_button">
@@ -42,16 +42,19 @@
                 </tr>
                 </thead>
                 <tbody>
-                    @foreach($aUserData as $oUserData)
+                @foreach($aUserData as $oUserData)
                     <tr>
                         @foreach($aFiltersChecked as $sFilterName => $sFilterText)
                             <td>{{ $oUserData->$sFilterName }}</td>
                         @endforeach
                     </tr>
-                    @endforeach
+                @endforeach
                 </tbody>
-                {{ $aUserData->links() }}
             </table>
+            <div class="pagination_container">
+                {{ $aUserData->links() }}
+            </div>
+
         </div>
     </div>
 @endsection
@@ -68,9 +71,9 @@
             padding: 50px;
             width: 1000px;
             margin: 0 auto;
-
-
         }
+
+
         .form_container{
             background: #E9F3F8;
         }
@@ -78,6 +81,8 @@
             background: #E9F3F8;
             position: relative;
         }
+
+
         .option_cell{
             position: relative;
             display: block;
@@ -90,6 +95,7 @@
         }
         .option_button{
         }
+
 
         .gegTable,.gegTable th,.gegTable td {
             border: 1px solid darkgray;
@@ -108,21 +114,26 @@
             padding: 15px;
             text-align: right;
         }
-        .gegTable{
-            margin-bottom: 100px;
-        }
-        .pagination{
-            text-align: center;
-            position: absolute;
-            bottom: 0;
+
+
+        .pagination_container{
             line-height: 20px;
+            position: absolute;
+            bottom:0;
+            /* move the element half way across the screen */
+            left: 50%;
+            /* allow the width to be calculated dynamically */
+            width: auto;
+            /* then move the element back again using a transform */
+            transform: translateX(-50%);
         }
-        .pagination {
+        .pagination_container ul{
             list-style-type: none;
             display: inline-block;
             margin: auto;
+            padding-inline-start: 0px;
         }
-        .pagination li {
+        .pagination_container li {
             float: left;
             padding-left: 5px;
             padding-right: 5px;
