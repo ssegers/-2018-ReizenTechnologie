@@ -40,6 +40,7 @@
             <table class="gegTable">
                 <thead>
                 <tr>
+<<<<<<< HEAD
                     @foreach($aFiltersChecked as $sFilterValue)
                         <th>{{ $sFilterValue }}</th>
                     @endforeach
@@ -55,6 +56,56 @@
                     @endforeach
                 </tbody>
                     {{ $aUserData->links() }}
+=======
+                    <th>Voornaam</th>
+                    <th>Naam</th>
+                    {{--<th>Email</th>--}}
+                    <th>Telefoon</th>
+                    {{--<th>Reis</th>--}}
+                    {{--<th>Klas</th>--}}
+                </tr>
+                @foreach ($aUserData as $user)
+                    <tr>
+                        <td>{{$user->firstname}}</td>
+                        <td>{{$user->lastname}}</td>
+                        <td>{{$user->phone}}</td>
+                    </tr>
+                @endforeach
+                {{--<tr>--}}
+                {{--<tr>--}}
+                    {{--<td>test</td>--}}
+                    {{--<td>test</td>--}}
+                    {{--<td>test</td>--}}
+                    {{--<td>test</td>--}}
+                    {{--<td>test</td>--}}
+                    {{--<td>test</td>--}}
+                {{--</tr>--}}
+                {{--<tr>--}}
+                    {{--<td>test</td>--}}
+                    {{--<td>test</td>--}}
+                    {{--<td>test</td>--}}
+                    {{--<td>test</td>--}}
+                    {{--<td>test</td>--}}
+                    {{--<td>test</td>--}}
+                {{--</tr>--}}
+                {{--<tr>--}}
+                    {{--<td>test</td>--}}
+                    {{--<td>test</td>--}}
+                    {{--<td>test</td>--}}
+                    {{--<td>test</td>--}}
+                    {{--<td>test</td>--}}
+                    {{--<td>test</td>--}}
+                {{--</tr>--}}
+                {{--<tr>--}}
+                    {{--<td>test</td>--}}
+                    {{--<td>test</td>--}}
+                    {{--<td>test</td>--}}
+                    {{--<td>test</td>--}}
+                    {{--<td>test</td>--}}
+                    {{--<td>test</td>--}}
+                {{--</tr>--}}
+                {{--</tr>--}}
+>>>>>>> 8cb8d8a65d08f49fd3fcfa676aa0ee06a3a7466b
             </table>
         </div>
     </div>

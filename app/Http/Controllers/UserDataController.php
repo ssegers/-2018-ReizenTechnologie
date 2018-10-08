@@ -35,7 +35,7 @@ class UserDataController extends Controller
             $aUserData = Traveller::select(array_keys($aFiltersChecked))->paginate(2);
         }
         else {
-            $aUserData = Traveller::paginate(2);
+            $aUserData = Traveller::select(DB::raw('lastname,firstname,phone'))->paginate(2);;
         }
 
         return view('user.filter.filter', [
