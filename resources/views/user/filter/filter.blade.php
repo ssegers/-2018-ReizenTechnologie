@@ -22,14 +22,14 @@
                 <div class="option_button">
                     <button type="submit" name="button-filter" value="button-filter">Filter lijst</button>
                 </div>
-                {{ Form::close() }}
             </div>
             <div class="option_button">
-                <button type="submit" name="Export To PDF" value="button-ToPDF">Export To PDF</button>
+                <button type="submit" name="export" value="pdf">Export To PDF</button>
             </div>
             <div class="option_button">
-                <button type="submit" name="Export To Excel" value="button-ToExcel">Export To Excel</button>
+                <button type="submit" name="export" value="exel">Export To Excel</button>
             </div>
+            {{ Form::close() }}
 
         </div>
         <div class="table_container">

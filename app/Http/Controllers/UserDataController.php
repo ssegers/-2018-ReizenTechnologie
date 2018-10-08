@@ -6,7 +6,6 @@ use App\Traveller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Session;
 use Maatwebsite\Excel\Facades\Excel;
 
 class UserDataController extends Controller
@@ -15,12 +14,11 @@ class UserDataController extends Controller
         'email' => 'Email',
         'phone' => 'Telefoon',
     ];
-    protected $request;
+    private $request;
 
     public function showUsersAsMentor(Request $request)
     {
         $this->request = $request;
-
         $id = Auth::id();
 
         $aFiltersChecked = $this->getCheckedFilters();
@@ -30,6 +28,10 @@ class UserDataController extends Controller
         }
         else {
             $aUserData = Traveller::select(DB::raw('lastname,firstname,phone'))->paginate(2);;
+        }
+
+        if ($request->post('export') == 'exel') {
+            $this->downloadExcel();
         }
 
         return view('user.filter.filter', [
@@ -42,13 +44,10 @@ class UserDataController extends Controller
     /**
      * downloadExcel : this will download an excel file based on the session data of filters (the checked fields)
      */
-    public function downloadExcel(Request $request)
-    {
-        $this->request = $request;
-
+    private function downloadExcel() {
         $aUserFields = $this->getCheckedFilters();
 
-        $data = UserData::select(array_keys($aUserFields))->toArray();
+        $data = Traveller::select(array_keys($aUserFields))->get()->toArray();
 
         return Excel::create('Gebruikers', function($excel) use ($data) {
             $excel->sheet('mySheet', function($sheet) use ($data)
