@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=Nunito");
 @import url("https://use.fontawesome.com/releases/v5.3.1/css/all.css");
 body {
+  background-color: red;
   background-color: #E9F3F8;
 }
 
@@ -110,6 +111,10 @@ body {
   float: left;
   padding-left: 5px;
   padding-right: 5px;
+}
+
+table {
+  background-color: red;
 }
 
 /*# sourceMappingURL=app.css.map */
