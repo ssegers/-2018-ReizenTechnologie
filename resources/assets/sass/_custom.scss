@@ -1,5 +1,4 @@
 body {
-  background-color: red;
   background-color: #E9F3F8;
 }
 
@@ -50,26 +49,6 @@ body {
 .export_buttons button{
   width: 49%;
   height: 100%;
-}
-.gegTable{
-  width: 100%;
-  table-layout: fixed;
-}
-.gegTable,.gegTable th,.gegTable td {
-  border: 1px solid darkgray;
-  border-collapse: collapse;
-}
-.gegTable th{
-  text-align: center;
-  background-color: #e00049;
-  color: #E9F3F8;
-}
-.gegTable th{
-  height: 50px;
-}
-.gegTable td{
-  padding: 15px;
-  text-align: right;
 }
 .pagination_container{
   line-height: 20px;

@@ -1,3 +1,20 @@
-table {
-  background-color: red;
+.gegTable{
+  width: 100%;
+  table-layout: fixed;
+}
+.gegTable,.gegTable th,.gegTable td {
+  border: 1px solid darkgray;
+  border-collapse: collapse;
+}
+.gegTable th{
+  text-align: center;
+  background-color: #e00049;
+  color: #E9F3F8;
+}
+.gegTable th{
+  height: 50px;
+}
+.gegTable td{
+  padding: 15px;
+  text-align: right;
 }
