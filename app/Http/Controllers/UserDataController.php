@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Traveller;
+use App\Http\Controllers\Storage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Maatwebsite\Excel\Facades\Excel;
-
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 class UserDataController extends Controller
 {
     protected $aFilterList = [
@@ -48,13 +50,19 @@ class UserDataController extends Controller
         $aUserFields = $this->getCheckedFilters();
 
         $data = Traveller::select(array_keys($aUserFields))->get()->toArray();
+        $pathToTheFile = 'public/travellers.xlsx';
+        /** Create a new Spreadsheet Object **/
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+        $sheet->fromArray($aUserFields, NULL, 'A1');
+        $sheet->fromArray($data, NULL, 'A2');
+        $writer = new Xlsx($spreadsheet);
+        $writer->save("travellers.xlsx");
+        $fileContents = Storage::disk('travellers.xlsx')->get($pathToTheFile);
+        $response = Response::make($fileContents, 200);
+        $response->header('Content-Type', Storage::disk(travellers.xlsx)->mimeType($pathToTheFile));
 
-        return Excel::create('Gebruikers', function($excel) use ($data) {
-            $excel->sheet('mySheet', function($sheet) use ($data)
-            {
-                $sheet->fromArray($data);
-            });
-        })->download('xlsx');
+
     }
 
     /**
