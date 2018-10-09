@@ -14,9 +14,12 @@ class CreateTravellersTable extends Migration
     public function up()
     {
         Schema::create('travellers', function (Blueprint $table) {
+
             $table->increments('traveller_id');
-            $table->string("firstname");
-            $table->string("lastname");
+            $table->integer("user_id");
+            $table->string("first_name");
+            $table->string("last_name");
+            $table->string('email')->unique();
             $table->string("country");
             $table->string("address");
             $table->string("gender");
@@ -32,7 +35,11 @@ class CreateTravellersTable extends Migration
             $table->timestamps();
 
 
+
+
+
         });
+
     }
 
     /**

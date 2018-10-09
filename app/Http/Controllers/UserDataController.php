@@ -30,7 +30,7 @@ class UserDataController extends Controller
             $aUserData = Traveller::select(array_keys($aFiltersChecked))->paginate(2);
         }
         else {
-            $aUserData = Traveller::select(DB::raw('lastname,firstname,phone'))->paginate(2);;
+            $aUserData = Traveller::select(array_keys($aFiltersChecked))->paginate(2);;
         }
 
         if ($request->post('export') == 'exel') {
@@ -80,8 +80,8 @@ class UserDataController extends Controller
      */
     private function getCheckedFilters() {
         $aFiltersChecked = array(
-            'lastname' => 'Familienaam',
-            'firstname' => 'Voornaam'
+            'last_name' => 'Familienaam',
+            'first_name' => 'Voornaam'
         );
 
         foreach ($this->aFilterList as $sFilterName => $sFilterText) {
