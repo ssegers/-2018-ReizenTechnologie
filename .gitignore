@@ -3,6 +3,6 @@
 *.pdf
 .idea/inspectionProfiles/profiles_settings.xml
 node_modules/
-vendor/
+/vendor
 .env
-public/css/
+/public/css
