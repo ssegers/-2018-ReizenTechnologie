@@ -15,6 +15,7 @@ class CreateTravellersTable extends Migration
     {
         Schema::create('travellers', function (Blueprint $table) {
             $table->increments('traveller_id');
+            $table->integer("user_id");
             $table->string("firstname");
             $table->string("lastname");
             $table->string("country");
@@ -30,6 +31,9 @@ class CreateTravellersTable extends Migration
             $table->string("medical_info")->nullable();
             $table->rememberToken();
             $table->timestamps();
+            $table->foreign("user_id")->references("id")->on("users");
+
+
 
 
         });
