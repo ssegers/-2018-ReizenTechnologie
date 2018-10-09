@@ -1,179 +1,146 @@
 @extends('layouts.app')
 
 @section('content')
+    <div class="container">
+        <div class="form_container">
+            <div class="options_container">
+                {{Form::open(array('action' => 'UserDataController@showUsersAsMentor', 'method' => 'post'))}}
 
+                @foreach($aFilterList as $sFilterName => $sFilterText)
+                    <div class="option_cell">
+                        <label for="{{ $sFilterName }}">
+                            {{ $sFilterText }}
+                            @if(array_key_exists($sFilterName, $aFiltersChecked))
+                                {{ Form::checkbox($sFilterName, null, true) }}
+                            @else
+                                {{ Form::checkbox($sFilterName, null, false) }}
+                            @endif
+                        </label>
+                    </div>
+                @endForeach
+
+                <div class="option_button">
+                    <button type="submit" name="button-filter" value="button-filter">Filter lijst</button>
+                </div>
+            </div>
+            <div class="option_button">
+                <button type="submit" name="export" value="pdf">Export To PDF</button>
+            </div>
+            <div class="option_button">
+                <button type="submit" name="export" value="exel">Export To Excel</button>
+            </div>
+            {{ Form::close() }}
+
+        </div>
+        <div class="table_container">
+            <table class="gegTable">
+                <thead>
+                <tr>
+                    @foreach($aFiltersChecked as $sFilterValue)
+                        <th>{{ $sFilterValue }}</th>
+                    @endforeach
+                </tr>
+                </thead>
+                <tbody>
+                @foreach($aUserData as $oUserData)
+                    <tr>
+                        @foreach($aFiltersChecked as $sFilterName => $sFilterText)
+                            <td>{{ $oUserData->$sFilterName }}</td>
+                        @endforeach
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+            <div class="pagination_container">
+                {{ $aUserData->links() }}
+            </div>
+
+        </div>
+    </div>
+@endsection
+@section('style')
+    <link src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container {
+            display: grid;
+            grid-template-columns: 20% auto;
+            grid-template-rows: 400px;
+            grid-column-gap: 5%;
+
+            background: white;
+            padding: 50px;
+            width: 1000px;
+            margin: 0 auto;
+        }
+
+
+        .form_container{
+            background: #E9F3F8;
+        }
+        .table_container{
+            background: #E9F3F8;
+            position: relative;
+        }
+
+
+        .option_cell{
+            position: relative;
+            display: block;
+            padding: 15px;
+            border-bottom: 1px solid black;
+        }
+        .option_cell input {
+            position: absolute;
+            right: 15px;
+        }
+        .option_button{
+        }
+
+
+        .gegTable{
+            width: 100%;
+            table-layout: fixed;
+        }
+        .gegTable,.gegTable th,.gegTable td {
+            border: 1px solid darkgray;
+            border-collapse: collapse;
+        }
+        .gegTable th{
+            text-align: center;
+            background-color: #e00049;
+            color: #E9F3F8;
+        }
+        .gegTable th{
+            height: 50px;
+        }
+        .gegTable td{
+            padding: 15px;
+            text-align: right;
+        }
+
+
+        .pagination_container{
+            line-height: 20px;
+            position: absolute;
+            bottom:0;
+            /* move the element half way across the screen */
+            left: 50%;
+            /* allow the width to be calculated dynamically */
+            width: auto;
+            /* then move the element back again using a transform */
+            transform: translateX(-50%);
+        }
+        .pagination_container ul{
+            list-style-type: none;
+            display: inline-block;
+            margin: auto;
+            padding-inline-start: 0px;
+        }
+        .pagination_container li {
+            float: left;
+            padding-left: 5px;
+            padding-right: 5px;
+        }
+    </style>
 @endsection
 
-{{--@section('style')--}}
-    {{--<style>--}}
-
-        {{--.search input{--}}
-            {{--width: 300px;--}}
-            {{--height: 50px;--}}
-            {{--border: transparent;--}}
-            {{--border-right: none;--}}
-            {{--outline: none;--}}
-            {{--padding-left: 5px;--}}
-        {{--}--}}
-        {{--.gegTable,.gegTable th,.gegTable td {--}}
-            {{--border: 1px solid darkgray;--}}
-            {{--border-collapse: collapse;--}}
-        {{--}--}}
-        {{--.gegTable th{--}}
-            {{--text-align: center;--}}
-            {{--background-color: #e00049;--}}
-            {{--color: #E9F3F8;--}}
-        {{--}--}}
-        {{--.gegTable th{--}}
-            {{--height: 50px;--}}
-            {{--width: 350px;--}}
-        {{--}--}}
-        {{--.gegTable td{--}}
-            {{--padding: 15px;--}}
-            {{--text-align: right;--}}
-        {{--}--}}
-        {{--.gegTable{--}}
-            {{--margin-bottom: 100px;--}}
-        {{--}--}}
-
-        {{--.filterTable,.filterTable td{--}}
-            {{--border-bottom: 1px solid darkgray;--}}
-            {{--border-top: 1px solid darkgray;--}}
-            {{--border-left: 0px;--}}
-            {{--border-right: 0px;--}}
-            {{--border-collapse: collapse;--}}
-        {{--}--}}
-
-        {{--.filterTable td{--}}
-            {{--padding: 20px 0px 15px 15px;--}}
-            {{--text-align: left;--}}
-        {{--}--}}
-        {{--.filterTable td:last-child{--}}
-            {{--padding: 15px;--}}
-        {{--}--}}
-
-        {{--.filterTable tr:last-child td{--}}
-            {{--text-align: center;--}}
-            {{--padding: 10px 0px 0px;--}}
-        {{--}--}}
-
-
-        {{--.filterTable{--}}
-            {{--margin-right: 50px;--}}
-            {{--margin-bottom: 100px;--}}
-        {{--}--}}
-        {{--.button{--}}
-            {{--width: 100%;--}}
-            {{--height: 100%;--}}
-            {{--background-color: #003469;--}}
-            {{--border: none;--}}
-            {{--color: white;--}}
-            {{--padding: 20px;--}}
-        {{--}--}}
-
-        {{--table{--}}
-            {{--margin-top: 50px;--}}
-            {{--display: inline-block;--}}
-            {{--float: left;--}}
-            {{--max-width: 800px;--}}
-            {{--text-align: center;--}}
-        {{--}--}}
-        {{--.field{--}}
-            {{--width: 180px;--}}
-
-        {{--}--}}
-
-    {{--</style>--}}
-{{--@endsection--}}
-{{--@section('content')--}}
-    {{--<div class="container">--}}
-
-        {{--<table class="filterTable">--}}
-            {{--{{Form::open(array('action' => 'FilterController@getFilteredTraveller', 'method' => 'post'))}}--}}
-            {{--<tr>--}}
-                {{--<td>{{ Form::label('lastname', 'Naam', ['class' => 'field']) }}</td>--}}
-                {{--<td>{{Form::checkbox('lastname', 'lastname')}}</td>--}}
-            {{--</tr>--}}
-            {{--<tr>--}}
-                {{--<td>{{ Form::label('firstname', 'Voornaam', ['class' => 'field']) }}</td>--}}
-                {{--<td>{{Form::checkbox('firstname', 'firstname')}}</td>--}}
-            {{--</tr>--}}
-            {{--<tr>--}}
-                {{--<td>{{ Form::label('email', 'Email', ['class' => 'field']) }}</td>--}}
-                {{--<td>{{Form::checkbox('email', 'email')}}</td>--}}
-            {{--</tr>--}}
-            {{--<tr>--}}
-                {{--<td>{{ Form::label('phone', 'Telefoon', ['class' => 'field']) }}</td>--}}
-                {{--<td>{{Form::checkbox('phone', 'phone')}}</td>--}}
-            {{--</tr>--}}
-            {{--<tr>--}}
-                {{--<td>{{ Form::label('trip_name', 'Reis', ['class' => 'field']) }}</td>--}}
-                {{--<td>{{Form::checkbox('trip_name', 'trip_name')}}</td>--}}
-            {{--</tr>--}}
-            {{--<tr>--}}
-                {{--<td>{{ Form::label('major_name', 'Klas', ['class' => 'field']) }}</td>--}}
-                {{--<td>{{Form::checkbox('major_name', 'major_name')}}</td>--}}
-            {{--</tr>--}}
-            {{--<tr>--}}
-                {{--<td colspan="2">--}}
-                    {{--{{Form::submit('Toon Lijst',['class'=>'button'])}}--}}
-                {{--</td>--}}
-            {{--</tr>--}}
-            {{--{{ Form::close() }}--}}
-        {{--</table>--}}
-
-        {{----}}
-            {{--@php--}}
-                {{--var_dump($tripid);--}}
-            {{--@endphp--}}
-        {{----}}
-
-        {{--<table class="gegTable">--}}
-            {{--<tr>--}}
-                {{--@foreach($afilters as $ofilters)--}}
-
-                    {{--@php--}}
-                        {{--if($ofilters=='firstname')--}}
-                            {{--{--}}
-                            {{--$ofilters='Voornaam';--}}
-                            {{--}--}}
-                        {{--if($ofilters=='lastname')--}}
-                            {{--{--}}
-                            {{--$ofilters='Naam';--}}
-                            {{--}--}}
-
-                        {{--if($ofilters=='email')--}}
-                            {{--{--}}
-                            {{--$ofilters='Email';--}}
-                            {{--}--}}
-                        {{--if($ofilters=='phone')--}}
-                            {{--{--}}
-                            {{--$ofilters='Telefoon';--}}
-                            {{--}--}}
-                        {{--if($ofilters=='trip_name')--}}
-                            {{--{--}}
-                            {{--$ofilters='Reis';--}}
-                            {{--}--}}
-                        {{--if($ofilters=='major_name')--}}
-                            {{--{--}}
-                            {{--$ofilters='Klas';--}}
-                            {{--}--}}
-                    {{--@endphp--}}
-
-                    {{--<th>{{$ofilters}}</th>--}}
-                {{--@endforeach--}}
-            {{--</tr>--}}
-            {{--@foreach($afilteredUserList as $ofiltereduserlist => $data)--}}
-                {{--<tr>--}}
-                    {{--@foreach($afilters as $ofilters=>$filter)--}}
-                        {{--<td>--}}
-                            {{--{{$data[$filter]}}--}}
-                        {{--</td>--}}
-                    {{--@endforeach--}}
-                {{--</tr>--}}
-            {{--@endforeach--}}
-
-        {{--</table>--}}
-    {{--</div>--}}
-
-{{--@endsection--}}

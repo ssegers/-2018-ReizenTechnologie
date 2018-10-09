@@ -15,8 +15,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-/*
- * FilterController
- */
-Route::get('/filter', 'FilterController@getFilteredTraveller');
-route::post('/filter', 'FilterController@getFilteredTraveller');
+Route::get('user/trip/travellers', 'UserDataController@showUsersAsMentor');
+Route::post('user/trip/travellers', 'UserDataController@showUsersAsMentor');
+
