@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
+use PhpOffice\PhpSpreadsheet\Exception;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use \PhpOffice\PhpSpreadsheet\Writer\Pdf\Dompdf;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
 
 class UserDataController extends Controller
 {
@@ -41,6 +45,9 @@ class UserDataController extends Controller
         if ($request->post('export') == 'exel') {
             $this->downloadExcel();
         }
+        if ($request->post('export') == 'pdf') {
+            $this->downloadPDF();
+        }
 
         return view('user.filter.filter', [
             'aUserData' => $aUserData,
@@ -63,6 +70,33 @@ class UserDataController extends Controller
                 $sheet->fromArray($data);
             });
         })->download('xlsx');
+    }
+
+    /**
+     * downloadPDF: deze functie zorgt ervoor dat je een pdf van de gefilterde lijst download.
+     */
+    private function downloadPDF(){
+        $aUserFields = $this->getCheckedFilters();
+
+        $data = Traveller::select(array_keys($aUserFields))->get()->toArray();
+
+        try {
+            $spreadsheet = new Spreadsheet();  /*----Spreadsheet object-----*/
+            $spreadsheet->getActiveSheet();
+            $activeSheet = $spreadsheet->getActiveSheet();
+            $activeSheet->fromArray($aUserFields,NULL, 'A1');
+            $activeSheet->fromArray($data,NULL,'A2');
+
+            IOFactory::registerWriter("PDF", Dompdf::class);
+            $writer = IOFactory::createWriter($spreadsheet, 'PDF');
+
+            header('Content-Disposition: attachment; filename="gefilterte_tabel.pdf"');
+            //$activeSheet->setCellValue('A1' , 'New file content')->getStyle('A1')->getFont()->setBold(true);
+
+            $writer->save("php://output");
+        } catch (Exception $e) {
+        }
+
     }
 
     /**
