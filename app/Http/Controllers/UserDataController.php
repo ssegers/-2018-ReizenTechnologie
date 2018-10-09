@@ -16,6 +16,17 @@ class UserDataController extends Controller
     protected $aFilterList = [
         'email' => 'Email',
         'phone' => 'Telefoon',
+        'country'=>'Land',
+        'address'=>'Adres',
+        'gender'=>'Geslacht',
+        'emergency_phone_1'=>'Noodnummer1',
+        'emergency_phone_2'=>'Noodnummer2',
+        'nationality'=>'Nationaliteit',
+        'birthdate'=>'Geboortedatum',
+        'birthplace'=>'Geboorteplaats',
+        'medical_issue'=>'Medisch probleem',
+        'medical_info'=>'Medische info'
+
     ];
     private $request;
 
@@ -27,10 +38,10 @@ class UserDataController extends Controller
         $aFiltersChecked = $this->getCheckedFilters();
 
         if ($request->post('button-filter')) {
-            $aUserData = Traveller::select(array_keys($aFiltersChecked))->paginate(2);
+            $aUserData = Traveller::select(array_keys($aFiltersChecked))->paginate(5);
         }
         else {
-            $aUserData = Traveller::select(array_keys($aFiltersChecked))->paginate(2);;
+            $aUserData = Traveller::select(array_keys($aFiltersChecked))->paginate(5);;
         }
 
         if ($request->post('export') == 'exel') {
@@ -56,12 +67,15 @@ class UserDataController extends Controller
         $sheet->fromArray($aUserFields, NULL, 'A1');
         $sheet->fromArray($data, NULL, 'A2');
         $writer = new Xlsx($spreadsheet);
-        $writer->save('travellers.xlsx');
+        header('Content-Disposition: attachment; filename="travellers.xlsx"');
+        $writer->save('php://output');
 
-        $sName = 'travellers.xlsx';
+        /*$sName = 'travellers.xlsx';
         $file= public_path() . '/'. $sName;
-        $response = response()->download($file);
-        echo $response;
+    */
+
+       /* $response = response()->download($file);
+        return $response;*/
         /*  $fileContents = Storage::disk('local')->get($file);
           echo $fileContents;*/
         /*    $fileContents = Storage::disk('local')->get($file);
