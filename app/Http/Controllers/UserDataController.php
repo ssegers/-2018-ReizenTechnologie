@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 
 use App\Traveller;
-use App\Http\Controllers\Storage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 class UserDataController extends Controller
@@ -48,20 +49,26 @@ class UserDataController extends Controller
      */
     private function downloadExcel() {
         $aUserFields = $this->getCheckedFilters();
-
         $data = Traveller::select(array_keys($aUserFields))->get()->toArray();
-        $pathToTheFile = 'public/travellers.xlsx';
         /** Create a new Spreadsheet Object **/
         $spreadsheet = new Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet();
         $sheet->fromArray($aUserFields, NULL, 'A1');
         $sheet->fromArray($data, NULL, 'A2');
         $writer = new Xlsx($spreadsheet);
-        $writer->save("travellers.xlsx");
-        $fileContents = Storage::disk('travellers.xlsx')->get($pathToTheFile);
-        $response = Response::make($fileContents, 200);
-        $response->header('Content-Type', Storage::disk(travellers.xlsx)->mimeType($pathToTheFile));
+        $writer->save('travellers.xlsx');
 
+        $sName = 'travellers.xlsx';
+        $file= public_path() . '/'. $sName;
+        $response = response()->download($file);
+        echo $response;
+        /*  $fileContents = Storage::disk('local')->get($file);
+          echo $fileContents;*/
+        /*    $fileContents = Storage::disk('local')->get($file);
+             $response = Response::make($fileContents, 200);
+             $response->header('Content-Type', Storage::disk('local')->mimeType($file));
+             return $response;*/
+       // return Storage::download($fileContents);
 
     }
 
