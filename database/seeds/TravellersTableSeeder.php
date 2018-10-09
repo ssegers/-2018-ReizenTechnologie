@@ -12,8 +12,9 @@ class TravellersTableSeeder extends Seeder
     public function run()
     {
         DB::table('travellers')->insert([
-            'firstname' => 'Stefan',
-            'lastname' => 'Segers',
+            'user_id' => 1,
+            'first_name' => 'Stefan',
+            'last_name' => 'Segers',
             'country' => 'belgië',
             'address' => 'sprinkhaanstraat 15',
             'gender' => 'man',
@@ -28,8 +29,9 @@ class TravellersTableSeeder extends Seeder
         ]);
 
         DB::table('travellers')->insert([
-            'firstname' => 'Robin',
-            'lastname' => 'Machiels',
+            'user_id' => 2,
+            'first_name' => 'Robin',
+            'last_name' => 'Machiels',
             'country' => 'belgië',
             'address' => 'herenstraat 35',
             'gender' => 'man',
@@ -44,8 +46,9 @@ class TravellersTableSeeder extends Seeder
         ]);
 
         DB::table('travellers')->insert([
-            'firstname' => 'Stef',
-            'lastname' => 'Kerkhofs',
+            'user_id' => 3,
+            'first_name' => 'Stef',
+            'last_name' => 'Kerkhofs',
             'country' => 'belgië',
             'address' => 'stef zijn straat 15',
             'gender' => 'man',
@@ -60,8 +63,9 @@ class TravellersTableSeeder extends Seeder
         ]);
 
         DB::table('travellers')->insert([
-            'firstname' => 'Nico',
-            'lastname' => 'Schelfhout',
+            'user_id' => 4,
+            'first_name' => 'Nico',
+            'last_name' => 'Schelfhout',
             'country' => 'belgië',
             'address' => 'Nico zijn straat 15',
             'gender' => 'man',
@@ -76,8 +80,9 @@ class TravellersTableSeeder extends Seeder
         ]);
 
         DB::table('travellers')->insert([
-            'firstname' => 'Michiel',
-            'lastname' => 'Guilliaums',
+            'user_id' => 5,
+            'first_name' => 'Michiel',
+            'last_name' => 'Guilliaums',
             'country' => 'belgië',
             'address' => 'Michiel zijn straat 15',
             'gender' => 'man',
@@ -92,8 +97,9 @@ class TravellersTableSeeder extends Seeder
         ]);
 
         DB::table('travellers')->insert([
-            'firstname' => 'Yoeri',
-            'lastname' => "Op't Roodt",
+            'user_id' => 6,
+            'first_name' => 'Yoeri',
+            'last_name' => "Op't Roodt",
             'country' => 'belgië',
             'address' => 'Yoeri zijn straat 15',
             'gender' => 'man',
@@ -108,8 +114,9 @@ class TravellersTableSeeder extends Seeder
         ]);
 
         DB::table('travellers')->insert([
-            'firstname' => 'Daan',
-            'lastname' => 'Vandebosch',
+            'user_id' => 7,
+            'first_name' => 'Daan',
+            'last_name' => 'Vandebosch',
             'country' => 'belgië',
             'address' => 'Daan zijn straat 15',
             'gender' => 'man',
@@ -124,8 +131,9 @@ class TravellersTableSeeder extends Seeder
         ]);
 
         DB::table('travellers')->insert([
-            'firstname' => 'Joren',
-            'lastname' => 'Meynen',
+            'user_id' => 8,
+            'first_name' => 'Joren',
+            'last_name' => 'Meynen',
             'country' => 'belgië',
             'address' => 'Joren zijn straat 15',
             'gender' => 'man',
@@ -140,8 +148,9 @@ class TravellersTableSeeder extends Seeder
         ]);
 
         DB::table('travellers')->insert([
-            'firstname' => 'Sasha',
-            'lastname' => 'Vandevoorde',
+            'user_id' => 9,
+            'first_name' => 'Sasha',
+            'last_name' => 'Vandevoorde',
             'country' => 'belgië',
             'address' => 'Sasha zijn straat 15',
             'gender' => 'man',
@@ -156,8 +165,9 @@ class TravellersTableSeeder extends Seeder
         ]);
 
         DB::table('travellers')->insert([
-            'firstname' => 'Kaan',
-            'lastname' => 'Akpinar',
+            'user_id' => 10,
+            'first_name' => 'Kaan',
+            'last_name' => 'Akpinar',
             'country' => 'belgië',
             'address' => 'Kaan zijn straat 15',
             'gender' => 'man',
