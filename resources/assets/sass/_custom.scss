@@ -1,5 +1,4 @@
 body {
-  background-color: red;
   background-color: #E9F3F8;
 }
 
@@ -43,30 +42,13 @@ body {
   color: white;
   padding: 20px;
 }
-.export_buttons input{
-  width: 25%;
-  height: 25%;
-  border: none;
+.export_buttons{
+  margin-top: 5px;
+  height: 40px;
 }
-.gegTable{
-  width: 100%;
-  table-layout: fixed;
-}
-.gegTable,.gegTable th,.gegTable td {
-  border: 1px solid darkgray;
-  border-collapse: collapse;
-}
-.gegTable th{
-  text-align: center;
-  background-color: #e00049;
-  color: #E9F3F8;
-}
-.gegTable th{
-  height: 50px;
-}
-.gegTable td{
-  padding: 15px;
-  text-align: right;
+.export_buttons button{
+  width: 49%;
+  height: 100%;
 }
 .pagination_container{
   line-height: 20px;
