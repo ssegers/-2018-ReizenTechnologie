@@ -22,8 +22,9 @@ class RegisterController extends Controller
     /*---------------------------------------------------------------------------FORM---------------------------------------*/
     /*----------------------------------------------------------------------------------------------------------------------*/
     public function formPost(Request $aRequest){
+        $aData["key"] = $aRequest->post('key');
 
-        return redirect('reg/form2');
+        return redirect('map/naam');
     }
     public function form(){
         return view('user.register.form');
