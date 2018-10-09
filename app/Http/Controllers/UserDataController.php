@@ -16,6 +16,17 @@ class UserDataController extends Controller
     protected $aFilterList = [
         'email' => 'Email',
         'phone' => 'Telefoon',
+        'country'=>'Land',
+        'address'=>'Adres',
+        'gender'=>'Geslacht',
+        'emergency_phone_1'=>'Noodnummer1',
+        'emergency_phone_2'=>'Noodnummer2',
+        'nationality'=>'Nationaliteit',
+        'birthdate'=>'Geboortedatum',
+        'birthplace'=>'Geboorteplaats',
+        'medical_issue'=>'Medisch probleem',
+        'medical_info'=>'Medische info'
+
     ];
     private $request;
 
@@ -27,10 +38,10 @@ class UserDataController extends Controller
         $aFiltersChecked = $this->getCheckedFilters();
 
         if ($request->post('button-filter')) {
-            $aUserData = Traveller::select(array_keys($aFiltersChecked))->paginate(2);
+            $aUserData = Traveller::select(array_keys($aFiltersChecked))->paginate(5);
         }
         else {
-            $aUserData = Traveller::select(array_keys($aFiltersChecked))->paginate(2);;
+            $aUserData = Traveller::select(array_keys($aFiltersChecked))->paginate(5);;
         }
 
         if ($request->post('export') == 'exel') {
