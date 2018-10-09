@@ -27,7 +27,7 @@ class UserDataController extends Controller
             $aUserData = Traveller::select(array_keys($aFiltersChecked))->paginate(2);
         }
         else {
-            $aUserData = Traveller::select(DB::raw('lastname,firstname,phone'))->paginate(2);;
+            $aUserData = Traveller::select(array_keys($aFiltersChecked))->paginate(2);;
         }
 
         if ($request->post('export') == 'exel') {
