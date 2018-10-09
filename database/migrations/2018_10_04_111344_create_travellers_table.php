@@ -14,6 +14,7 @@ class CreateTravellersTable extends Migration
     public function up()
     {
         Schema::create('travellers', function (Blueprint $table) {
+
             $table->increments('traveller_id');
             $table->integer("user_id");
             $table->string("firstname");
@@ -31,12 +32,13 @@ class CreateTravellersTable extends Migration
             $table->string("medical_info")->nullable();
             $table->rememberToken();
             $table->timestamps();
-            $table->foreign("user_id")->references("id")->on("users");
+
 
 
 
 
         });
+
     }
 
     /**

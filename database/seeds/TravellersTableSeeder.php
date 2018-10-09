@@ -12,6 +12,7 @@ class TravellersTableSeeder extends Seeder
     public function run()
     {
         DB::table('travellers')->insert([
+            'user_id' => 1,
             'firstname' => 'Stefan',
             'lastname' => 'Segers',
             'country' => 'belgië',
@@ -28,6 +29,7 @@ class TravellersTableSeeder extends Seeder
         ]);
 
         DB::table('travellers')->insert([
+            'user_id' => 2,
             'firstname' => 'Robin',
             'lastname' => 'Machiels',
             'country' => 'belgië',
@@ -44,6 +46,7 @@ class TravellersTableSeeder extends Seeder
         ]);
 
         DB::table('travellers')->insert([
+            'user_id' => 3,
             'firstname' => 'Stef',
             'lastname' => 'Kerkhofs',
             'country' => 'belgië',
@@ -60,6 +63,7 @@ class TravellersTableSeeder extends Seeder
         ]);
 
         DB::table('travellers')->insert([
+            'user_id' => 4,
             'firstname' => 'Nico',
             'lastname' => 'Schelfhout',
             'country' => 'belgië',
@@ -76,6 +80,7 @@ class TravellersTableSeeder extends Seeder
         ]);
 
         DB::table('travellers')->insert([
+            'user_id' => 5,
             'firstname' => 'Michiel',
             'lastname' => 'Guilliaums',
             'country' => 'belgië',
@@ -92,6 +97,7 @@ class TravellersTableSeeder extends Seeder
         ]);
 
         DB::table('travellers')->insert([
+            'user_id' => 6,
             'firstname' => 'Yoeri',
             'lastname' => "Op't Roodt",
             'country' => 'belgië',
@@ -108,6 +114,7 @@ class TravellersTableSeeder extends Seeder
         ]);
 
         DB::table('travellers')->insert([
+            'user_id' => 7,
             'firstname' => 'Daan',
             'lastname' => 'Vandebosch',
             'country' => 'belgië',
@@ -124,6 +131,7 @@ class TravellersTableSeeder extends Seeder
         ]);
 
         DB::table('travellers')->insert([
+            'user_id' => 8,
             'firstname' => 'Joren',
             'lastname' => 'Meynen',
             'country' => 'belgië',
@@ -140,6 +148,7 @@ class TravellersTableSeeder extends Seeder
         ]);
 
         DB::table('travellers')->insert([
+            'user_id' => 9,
             'firstname' => 'Sasha',
             'lastname' => 'Vandevoorde',
             'country' => 'belgië',
@@ -156,6 +165,7 @@ class TravellersTableSeeder extends Seeder
         ]);
 
         DB::table('travellers')->insert([
+            'user_id' => 10,
             'firstname' => 'Kaan',
             'lastname' => 'Akpinar',
             'country' => 'belgië',
