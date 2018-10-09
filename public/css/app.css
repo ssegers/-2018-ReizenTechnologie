@@ -1,7 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Nunito");
 @import url("https://use.fontawesome.com/releases/v5.3.1/css/all.css");
 body {
-  background-color: red;
   background-color: #E9F3F8;
 }
 
@@ -22,12 +21,7 @@ body {
   margin: 0 auto;
 }
 
-.form_container {
-  background: #E9F3F8;
-}
-
 .table_container {
-  background: #E9F3F8;
   position: relative;
 }
 
@@ -62,31 +56,6 @@ body {
   height: 100%;
 }
 
-.gegTable {
-  width: 100%;
-  table-layout: fixed;
-}
-
-.gegTable, .gegTable th, .gegTable td {
-  border: 1px solid darkgray;
-  border-collapse: collapse;
-}
-
-.gegTable th {
-  text-align: center;
-  background-color: #e00049;
-  color: #E9F3F8;
-}
-
-.gegTable th {
-  height: 50px;
-}
-
-.gegTable td {
-  padding: 15px;
-  text-align: right;
-}
-
 .pagination_container {
   line-height: 20px;
   position: absolute;
@@ -113,8 +82,29 @@ body {
   padding-right: 5px;
 }
 
-table {
-  background-color: red;
+.gegTable {
+  width: 100%;
+  table-layout: fixed;
+}
+
+.gegTable, .gegTable th, .gegTable td {
+  border: 1px solid darkgray;
+  border-collapse: collapse;
+}
+
+.gegTable th {
+  text-align: center;
+  background-color: #e00049;
+  color: #E9F3F8;
+}
+
+.gegTable th {
+  height: 50px;
+}
+
+.gegTable td {
+  padding: 15px;
+  text-align: right;
 }
 
 /*# sourceMappingURL=app.css.map */
