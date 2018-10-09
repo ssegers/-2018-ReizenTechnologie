@@ -13,8 +13,8 @@ class TravellersTableSeeder extends Seeder
     {
         DB::table('travellers')->insert([
             'user_id' => 1,
-            'firstname' => 'Stefan',
-            'lastname' => 'Segers',
+            'first_name' => 'Stefan',
+            'last_name' => 'Segers',
             'country' => 'belgië',
             'address' => 'sprinkhaanstraat 15',
             'gender' => 'man',
@@ -30,8 +30,8 @@ class TravellersTableSeeder extends Seeder
 
         DB::table('travellers')->insert([
             'user_id' => 2,
-            'firstname' => 'Robin',
-            'lastname' => 'Machiels',
+            'first_name' => 'Robin',
+            'last_name' => 'Machiels',
             'country' => 'belgië',
             'address' => 'herenstraat 35',
             'gender' => 'man',
@@ -47,8 +47,8 @@ class TravellersTableSeeder extends Seeder
 
         DB::table('travellers')->insert([
             'user_id' => 3,
-            'firstname' => 'Stef',
-            'lastname' => 'Kerkhofs',
+            'first_name' => 'Stef',
+            'last_name' => 'Kerkhofs',
             'country' => 'belgië',
             'address' => 'stef zijn straat 15',
             'gender' => 'man',
@@ -64,8 +64,8 @@ class TravellersTableSeeder extends Seeder
 
         DB::table('travellers')->insert([
             'user_id' => 4,
-            'firstname' => 'Nico',
-            'lastname' => 'Schelfhout',
+            'first_name' => 'Nico',
+            'last_name' => 'Schelfhout',
             'country' => 'belgië',
             'address' => 'Nico zijn straat 15',
             'gender' => 'man',
@@ -81,8 +81,8 @@ class TravellersTableSeeder extends Seeder
 
         DB::table('travellers')->insert([
             'user_id' => 5,
-            'firstname' => 'Michiel',
-            'lastname' => 'Guilliaums',
+            'first_name' => 'Michiel',
+            'last_name' => 'Guilliaums',
             'country' => 'belgië',
             'address' => 'Michiel zijn straat 15',
             'gender' => 'man',
@@ -98,8 +98,8 @@ class TravellersTableSeeder extends Seeder
 
         DB::table('travellers')->insert([
             'user_id' => 6,
-            'firstname' => 'Yoeri',
-            'lastname' => "Op't Roodt",
+            'first_name' => 'Yoeri',
+            'last_name' => "Op't Roodt",
             'country' => 'belgië',
             'address' => 'Yoeri zijn straat 15',
             'gender' => 'man',
@@ -115,8 +115,8 @@ class TravellersTableSeeder extends Seeder
 
         DB::table('travellers')->insert([
             'user_id' => 7,
-            'firstname' => 'Daan',
-            'lastname' => 'Vandebosch',
+            'first_name' => 'Daan',
+            'last_name' => 'Vandebosch',
             'country' => 'belgië',
             'address' => 'Daan zijn straat 15',
             'gender' => 'man',
@@ -132,8 +132,8 @@ class TravellersTableSeeder extends Seeder
 
         DB::table('travellers')->insert([
             'user_id' => 8,
-            'firstname' => 'Joren',
-            'lastname' => 'Meynen',
+            'first_name' => 'Joren',
+            'last_name' => 'Meynen',
             'country' => 'belgië',
             'address' => 'Joren zijn straat 15',
             'gender' => 'man',
@@ -149,8 +149,8 @@ class TravellersTableSeeder extends Seeder
 
         DB::table('travellers')->insert([
             'user_id' => 9,
-            'firstname' => 'Sasha',
-            'lastname' => 'Vandevoorde',
+            'first_name' => 'Sasha',
+            'last_name' => 'Vandevoorde',
             'country' => 'belgië',
             'address' => 'Sasha zijn straat 15',
             'gender' => 'man',
@@ -166,8 +166,8 @@ class TravellersTableSeeder extends Seeder
 
         DB::table('travellers')->insert([
             'user_id' => 10,
-            'firstname' => 'Kaan',
-            'lastname' => 'Akpinar',
+            'first_name' => 'Kaan',
+            'last_name' => 'Akpinar',
             'country' => 'belgië',
             'address' => 'Kaan zijn straat 15',
             'gender' => 'man',
