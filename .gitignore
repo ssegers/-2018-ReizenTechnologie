@@ -3,4 +3,3 @@
 *.pdf
 .idea/inspectionProfiles/profiles_settings.xml
 node_modules/
-.env
