@@ -12,7 +12,15 @@ class UserDataController extends Controller
 {
     protected $aFilterList = [
         'email' => 'Email',
+        'country' => 'Land',
+        'address' => 'Adres',
+        'gender' => 'Geslacht',
         'phone' => 'Telefoon',
+        'emergency_phone_1' => 'Nood Contact 1',
+        'emergency_phone_2' => 'Nood Contact 2',
+        'nationality' => 'Nationaliteit',
+        'birthdate' => 'Geboortedatum',
+        'medical_info' => 'Medische Info',
     ];
     private $request;
 
