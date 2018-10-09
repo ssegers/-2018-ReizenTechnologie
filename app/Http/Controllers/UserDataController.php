@@ -56,12 +56,15 @@ class UserDataController extends Controller
         $sheet->fromArray($aUserFields, NULL, 'A1');
         $sheet->fromArray($data, NULL, 'A2');
         $writer = new Xlsx($spreadsheet);
-        $writer->save('travellers.xlsx');
+        header('Content-Disposition: attachment; filename="travellers.xlsx"');
+        $writer->save('php://output');
 
-        $sName = 'travellers.xlsx';
+        /*$sName = 'travellers.xlsx';
         $file= public_path() . '/'. $sName;
-        $response = response()->download($file);
-        echo $response;
+    */
+
+       /* $response = response()->download($file);
+        return $response;*/
         /*  $fileContents = Storage::disk('local')->get($file);
           echo $fileContents;*/
         /*    $fileContents = Storage::disk('local')->get($file);
