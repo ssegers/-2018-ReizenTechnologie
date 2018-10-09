@@ -34,8 +34,8 @@
             <table class="gegTable">
                 <thead>
                 <tr>
-                    @foreach($aFiltersChecked as $sFilterValue)
-                        <th>{{ $sFilterValue }}</th>
+                    @foreach($aFiltersChecked as $sFilterName=>$sFilterValue)
+                        <th class="{{$sFilterName}}">{{ $sFilterValue }}</th>
                     @endforeach
                 </tr>
                 </thead>
