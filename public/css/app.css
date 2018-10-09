@@ -51,10 +51,14 @@ body {
   padding: 20px;
 }
 
-.export_buttons input {
-  width: 25%;
-  height: 25%;
-  border: none;
+.export_buttons {
+  margin-top: 5px;
+  height: 40px;
+}
+
+.export_buttons button {
+  width: 49%;
+  height: 100%;
 }
 
 .gegTable {
@@ -69,7 +73,7 @@ body {
 
 .gegTable th {
   text-align: center;
-  background-color: #e0e049;
+  background-color: #e00049;
   color: #E9F3F8;
 }
 
