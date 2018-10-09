@@ -5,5 +5,4 @@
 node_modules/
 vendor/
 .env
-public/css/app.css
-
+public/css/
