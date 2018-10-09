@@ -2,17 +2,31 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Traveller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Storage;
 
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 class UserDataController extends Controller
 {
     protected $aFilterList = [
         'email' => 'Email',
         'phone' => 'Telefoon',
+        'country'=>'Land',
+        'address'=>'Adres',
+        'gender'=>'Geslacht',
+        'emergency_phone_1'=>'Noodnummer1',
+        'emergency_phone_2'=>'Noodnummer2',
+        'nationality'=>'Nationaliteit',
+        'birthdate'=>'Geboortedatum',
+        'birthplace'=>'Geboorteplaats',
+        'medical_issue'=>'Medisch probleem',
+        'medical_info'=>'Medische info'
+
     ];
     private $request;
 
@@ -24,10 +38,10 @@ class UserDataController extends Controller
         $aFiltersChecked = $this->getCheckedFilters();
 
         if ($request->post('button-filter')) {
-            $aUserData = Traveller::select(array_keys($aFiltersChecked))->paginate(2);
+            $aUserData = Traveller::select(array_keys($aFiltersChecked))->paginate(5);
         }
         else {
-            $aUserData = Traveller::select(array_keys($aFiltersChecked))->paginate(2);;
+            $aUserData = Traveller::select(array_keys($aFiltersChecked))->paginate(5);;
         }
 
         if ($request->post('export') == 'exel') {
@@ -46,15 +60,30 @@ class UserDataController extends Controller
      */
     private function downloadExcel() {
         $aUserFields = $this->getCheckedFilters();
-
         $data = Traveller::select(array_keys($aUserFields))->get()->toArray();
+        /** Create a new Spreadsheet Object **/
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+        $sheet->fromArray($aUserFields, NULL, 'A1');
+        $sheet->fromArray($data, NULL, 'A2');
+        $writer = new Xlsx($spreadsheet);
+        header('Content-Disposition: attachment; filename="travellers.xlsx"');
+        $writer->save('php://output');
 
-        return Excel::create('Gebruikers', function($excel) use ($data) {
-            $excel->sheet('mySheet', function($sheet) use ($data)
-            {
-                $sheet->fromArray($data);
-            });
-        })->download('xlsx');
+        /*$sName = 'travellers.xlsx';
+        $file= public_path() . '/'. $sName;
+    */
+
+       /* $response = response()->download($file);
+        return $response;*/
+        /*  $fileContents = Storage::disk('local')->get($file);
+          echo $fileContents;*/
+        /*    $fileContents = Storage::disk('local')->get($file);
+             $response = Response::make($fileContents, 200);
+             $response->header('Content-Type', Storage::disk('local')->mimeType($file));
+             return $response;*/
+       // return Storage::download($fileContents);
+
     }
 
     /**
