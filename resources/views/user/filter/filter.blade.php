@@ -97,6 +97,10 @@
         }
 
 
+        .gegTable{
+            width: 100%;
+            table-layout: fixed;
+        }
         .gegTable,.gegTable th,.gegTable td {
             border: 1px solid darkgray;
             border-collapse: collapse;
@@ -108,7 +112,6 @@
         }
         .gegTable th{
             height: 50px;
-            width: 350px;
         }
         .gegTable td{
             padding: 15px;
