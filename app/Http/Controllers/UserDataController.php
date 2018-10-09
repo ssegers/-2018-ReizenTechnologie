@@ -65,8 +65,8 @@ class UserDataController extends Controller
      */
     private function getCheckedFilters() {
         $aFiltersChecked = array(
-            'lastname' => 'Familienaam',
-            'firstname' => 'Voornaam'
+            'last_name' => 'Familienaam',
+            'first_name' => 'Voornaam'
         );
 
         foreach ($this->aFilterList as $sFilterName => $sFilterText) {
