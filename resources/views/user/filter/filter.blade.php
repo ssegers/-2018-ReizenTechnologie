@@ -50,7 +50,7 @@
                 </tbody>
             </table>
             <div class="pagination_container">
-                {{ $aUserData->links() }}
+                {{ $aUserData->appends($aFiltersChecked)->links() }}
             </div>
 
         </div>
