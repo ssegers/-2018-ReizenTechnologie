@@ -134,11 +134,13 @@ class UserDataController extends Controller
      * @return array
      */
     private function getCheckedFilters() {
+        /* Set the standard filters */
         $aFiltersChecked = array(
             'last_name' => 'Familienaam',
             'first_name' => 'Voornaam'
         );
 
+        /* Detect the applied filters and add to the list of standard filters */
         foreach ($this->aFilterList as $sFilterName => $sFilterText) {
             if ($this->request->post($sFilterName) != false) {
                 $aFiltersChecked[$sFilterName] = $sFilterText;
