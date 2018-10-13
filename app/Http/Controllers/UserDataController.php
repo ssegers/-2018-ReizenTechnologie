@@ -30,35 +30,56 @@ class UserDataController extends Controller
     ];
     private $request;
 
+    /**
+     * Generates a list of travellers based on the applied filters, current authenticated user and selected trip
+     *
+     * @author Yoeri op't Roodt
+     * @param Request $request
+     * @param $sUserName
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View|string
+     */
     public function showUsersAsMentor(Request $request, $sUserName)
     {
         $this->request = $request;
 
-//        $oUser = Auth::user();
+        /* Get user from Auth */
+        $oUser = Auth::user();
+
+        /* Get user from URL */
         $oUser = User::where('name', $sUserName)->first();
 
-//        return var_dump($oUser);
+        /* Check if user exist and is a organizer */
+        try {
+            if ($oUser->role != 'organizer') {
+                return 'Deze gebruiker is niet gemachtigd';
+            }
+        }
+        catch (\Exception $exception) {
+            return 'Deze gebruiker bestaat niet';
+        }
 
+        /* Get  list of checked filters */
         $aFiltersChecked = $this->getCheckedFilters();
 
-        if ($request->post('button-filter')) {
-            $aUserData = Traveller::select(array_keys($aFiltersChecked))->paginate(2);
-        }
-        else {
-            $aUserData = Traveller::select(array_keys($aFiltersChecked))->paginate(2);;
-        }
+        /* Get the travellers based on the applied filters */
+        $aUserData = Traveller::select(array_keys($aFiltersChecked))->paginate(2);
 
-        if ($request->post('export') == 'exel') {
-            $this->downloadExcel();
-        }
-        if ($request->post('export') == 'pdf') {
-            $this->downloadPDF();
+        /* Check witch download option is checked */
+        switch ($request->post('export')) {
+            case 'excel':
+                $this->downloadExcel();
+                break;
+            case 'pdf':
+                $this->downloadPDF();
+                break;
         }
 
         return view('user.filter.filter', [
             'aUserData' => $aUserData,
             'aFilterList' => $this->aFilterList,
-            'aFiltersChecked' => $aFiltersChecked
+            'aFiltersChecked' => $aFiltersChecked,
+            'sUserName' => $oUser->name,
         ]);
     }
 
@@ -109,6 +130,7 @@ class UserDataController extends Controller
      * Returns array of fields based on the current selected filters
      *
      * @author Yoeri op't Roodt
+     *
      * @return array
      */
     private function getCheckedFilters() {

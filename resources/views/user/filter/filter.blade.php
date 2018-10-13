@@ -4,7 +4,7 @@
     <div class="filter_container">
         <div class="form_container">
             <div class="options_container">
-                {{Form::open(array('action' => 'UserDataController@showUsersAsMentor', 'method' => 'post'))}}
+                {{Form::open(array('url' => "user/$sUserName/trip/travellers", 'method' => 'post'))}}
 
                 @foreach($aFilterList as $sFilterName => $sFilterText)
                     <div class="option_cell">
@@ -25,7 +25,7 @@
             </div>
             <div class="export_buttons">
                 <button type="submit" name="export" value="pdf"><i class="fas fa-2x fa-file-pdf"></i> </button>
-                <button type="submit" name="export" value="exel"><i class="fas fa-2x fa-file-excel"></i></button>
+                <button type="submit" name="export" value="excel"><i class="fas fa-2x fa-file-excel"></i></button>
             </div>
             {{ Form::close() }}
 

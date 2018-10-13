@@ -12,68 +12,18 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
+        /* Stefan Segers */
+        DB::table('users')->insert([
+            'name' => 'u0568928',
+            'password' => bcrypt('stefan'),
+            'role' => 'organizer',
+        ]);
+
+        /* Yoeri op't Roodt*/
         DB::table('users')->insert([
             'name' => 'r0663911',
             'password' => bcrypt('yoeri'),
             'role' => 'traveller',
-        ]);
-        DB::table('users')->insert([
-           'name' => 'Begeleider',
-           'password' => bcrypt('azertyuiop'),
-           'role' => 'Begeleider',
-        ]);
-
-        DB::table('users')->insert([
-            'name' => 'Organisator',
-            'password' => bcrypt('azertyuiop'),
-            'role' => 'Organisator',
-        ]);
-
-        DB::table('users')->insert([
-            'name' => 'Reiziger',
-            'password' => bcrypt('azertyuiop'),
-            'role' => 'Reiziger',
-        ]);
-
-        DB::table('users')->insert([
-            'name' => 'beheerder',
-            'password' => bcrypt('azertyuiop'),
-            'role' => 'Beheerder',
-        ]);
-
-        DB::table('users')->insert([
-            'name' => 'Reiziger',
-            'password' => bcrypt('azertyuiop'),
-            'role' => 'Reiziger',
-        ]);
-
-        DB::table('users')->insert([
-            'name' => 'Begeleider',
-            'password' => bcrypt('azertyuiop'),
-            'role' => 'Begeleider',
-        ]);
-
-        DB::table('users')->insert([
-            'name' => 'Reiziger',
-            'password' => bcrypt('azertyuiop'),
-            'role' => 'Reiziger',
-        ]);
-
-        DB::table('users')->insert([
-            'name' => 'Reiziger',
-            'password' => bcrypt('azertyuiop'),
-            'role' => 'Reiziger',
-        ]);
-
-        DB::table('users')->insert([
-            'name' => 'Reiziger',
-            'password' => bcrypt('azertyuiop'),
-            'role' => 'Reiziger',
-        ]);
-        DB::table('users')->insert([
-            'name' => 'Reiziger',
-            'password' => bcrypt('azertyuiop'),
-            'role' => 'Reiziger',
         ]);
     }
 }
