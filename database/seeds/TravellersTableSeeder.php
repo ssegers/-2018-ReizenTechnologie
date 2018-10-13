@@ -11,6 +11,7 @@ class TravellersTableSeeder extends Seeder
      */
     public function run()
     {
+        // Stefan Segers
         DB::table('travellers')->insert([
             'user_id' => 1,
             'trip_id' => 1,
@@ -18,7 +19,7 @@ class TravellersTableSeeder extends Seeder
             'major_id' =>3,
             'first_name' => 'Stefan',
             'last_name' => 'Segers',
-            'email' => 'r0123456@ucll.be',
+            'email' => 'stefan.segers@ucll.be',
             'country' => 'belgië',
             'address' => 'sprinkhaanstraat 15',
             'gender' => 'man',
@@ -32,14 +33,15 @@ class TravellersTableSeeder extends Seeder
             'medical_info' => null
         ]);
 
+        // Rudi Roox
         DB::table('travellers')->insert([
             'user_id' => 2,
-            'trip_id' => 1,
+            'trip_id' => 2,
             'zip_id' =>2,
             'major_id' =>1,
-            'first_name' => 'Robin',
-            'last_name' => 'Machiels',
-            'email' => 'r2123456@ucll.be',
+            'first_name' => 'Rudi',
+            'last_name' => 'Roox',
+            'email' => 'rudi.roox@ucll.be',
             'country' => 'belgië',
             'address' => 'herenstraat 35',
             'gender' => 'man',
@@ -53,16 +55,17 @@ class TravellersTableSeeder extends Seeder
             'medical_info' => null
         ]);
 
+        // Daan Vandebosch
         DB::table('travellers')->insert([
             'user_id' => 3,
             'trip_id' => 2,
             'zip_id' =>2,
             'major_id' =>1,
-            'first_name' => 'Stef',
-            'last_name' => 'Kerkhofs',
-            'email' => 'r3123456@ucll.be',
+            'first_name' => 'Daan',
+            'last_name' => 'Vandebosch',
+            'email' => 'daan.vandebosch@student.ucll.be',
             'country' => 'belgië',
-            'address' => 'stef zijn straat 15',
+            'address' => 'daan zijn straat 15',
             'gender' => 'man',
             'phone' => '0474567892',
             'emergency_phone_1' => '0471852963',
@@ -74,16 +77,17 @@ class TravellersTableSeeder extends Seeder
             'medical_info' => null
         ]);
 
+        // Kaan Akpinar
         DB::table('travellers')->insert([
             'user_id' => 4,
-            'trip_id' => 2,
+            'trip_id' => 1,
             'zip_id' =>4,
             'major_id' =>1,
-            'first_name' => 'Nico',
-            'last_name' => 'Schelfhout',
-            'email' => 'r4123456@ucll.be',
+            'first_name' => 'Kaan',
+            'last_name' => 'Akpinar',
+            'email' => 'kaan.akpinar@student.ucll.be',
             'country' => 'belgië',
-            'address' => 'Nico zijn straat 15',
+            'address' => 'kaan zijn straat 15',
             'gender' => 'man',
             'phone' => '0474567892',
             'emergency_phone_1' => '0471852963',
@@ -95,16 +99,17 @@ class TravellersTableSeeder extends Seeder
             'medical_info' => null
         ]);
 
+        // Joren Meynen
         DB::table('travellers')->insert([
             'user_id' => 5,
             'trip_id' => 1,
             'zip_id' =>3,
             'major_id' =>1,
-            'first_name' => 'Michiel',
-            'last_name' => 'Guilliaums',
-            'email' => 'r5123456@ucll.be',
+            'first_name' => 'Joren',
+            'last_name' => 'Meynen',
+            'email' => 'joren.meynen@student.ucll.be',
             'country' => 'belgië',
-            'address' => 'Michiel zijn straat 15',
+            'address' => 'joren zijn straat 15',
             'gender' => 'man',
             'phone' => '0474567892',
             'emergency_phone_1' => '0471852963',
@@ -116,16 +121,17 @@ class TravellersTableSeeder extends Seeder
             'medical_info' => null
         ]);
 
+        // Michiel Guilliams
         DB::table('travellers')->insert([
             'user_id' => 6,
             'trip_id' => 2,
             'zip_id' =>1,
             'major_id' =>1,
-            'first_name' => 'Yoeri',
-            'last_name' => "Op't Roodt",
-            'email' => 'r6123456@ucll.be',
+            'first_name' => 'Michiel',
+            'last_name' => 'Guilliams',
+            'email' => 'michiel.guilliams@student.ucll.be',
             'country' => 'belgië',
-            'address' => 'Yoeri zijn straat 15',
+            'address' => 'michiel zijn straat 15',
             'gender' => 'man',
             'phone' => '0474567892',
             'emergency_phone_1' => '0471852963',
@@ -137,16 +143,17 @@ class TravellersTableSeeder extends Seeder
             'medical_info' => null
         ]);
 
+        // Nicolaas Schelfhout
         DB::table('travellers')->insert([
             'user_id' => 7,
             'trip_id' => 1,
             'zip_id' =>3,
             'major_id' =>1,
-            'first_name' => 'Daan',
-            'last_name' => 'Vandebosch',
-            'email' => 'r7123456@ucll.be',
+            'first_name' => 'Nicolaas',
+            'last_name' => 'Schelfhout',
+            'email' => 'nicolaas.schelfhout@ucll.be',
             'country' => 'belgië',
-            'address' => 'Daan zijn straat 15',
+            'address' => 'nicolaas zijn straat 15',
             'gender' => 'man',
             'phone' => '0474567892',
             'emergency_phone_1' => '0471852963',
@@ -158,16 +165,17 @@ class TravellersTableSeeder extends Seeder
             'medical_info' => null
         ]);
 
+        // Robin Machiels
         DB::table('travellers')->insert([
             'user_id' => 8,
             'trip_id' => 2,
             'zip_id' =>3,
             'major_id' =>1,
-            'first_name' => 'Joren',
-            'last_name' => 'Meynen',
-            'email' => 'r823456@ucll.be',
+            'first_name' => 'Robin',
+            'last_name' => 'Machiels',
+            'email' => 'robin.machiels@student.ucll.be',
             'country' => 'belgië',
-            'address' => 'Joren zijn straat 15',
+            'address' => 'robin zijn straat 15',
             'gender' => 'man',
             'phone' => '0474567892',
             'emergency_phone_1' => '0471852963',
@@ -179,6 +187,7 @@ class TravellersTableSeeder extends Seeder
             'medical_info' => null
         ]);
 
+        // Sasha Van De Voorde
         DB::table('travellers')->insert([
             'user_id' => 9,
             'trip_id' => 1,
@@ -186,9 +195,9 @@ class TravellersTableSeeder extends Seeder
             'major_id' =>1,
             'first_name' => 'Sasha',
             'last_name' => 'Vandevoorde',
-            'email' => 'r9123456@ucll.be',
+            'email' => 'sasha.vandevoorde@student.ucll.be',
             'country' => 'belgië',
-            'address' => 'Sasha zijn straat 15',
+            'address' => 'sasha zijn straat 15',
             'gender' => 'man',
             'phone' => '0474567892',
             'emergency_phone_1' => '0471852963',
@@ -200,16 +209,39 @@ class TravellersTableSeeder extends Seeder
             'medical_info' => null
         ]);
 
+        // Stef Kerkhofs
         DB::table('travellers')->insert([
             'user_id' => 10,
             'trip_id' => 2,
             'zip_id' =>2,
             'major_id' =>1,
-            'first_name' => 'Kaan',
-            'last_name' => 'Akpinar',
-            'email' => 'r9923456@ucll.be',
+            'first_name' => 'Stef',
+            'last_name' => 'Kerkhofs',
+            'email' => 'stef.kerkhofs@student.ucll.be',
             'country' => 'belgië',
-            'address' => 'Kaan zijn straat 15',
+            'address' => 'stef zijn straat 15',
+            'gender' => 'man',
+            'phone' => '0474567892',
+            'emergency_phone_1' => '0471852963',
+            'emergency_phone_2' => '0471717171',
+            'nationality' => 'belg',
+            'birthdate' => '01/01/1995',
+            'birthplace' => 'Diest',
+            'medical_issue' => false,
+            'medical_info' => null
+        ]);
+
+        // Yoeri op't Roodt
+        DB::table('travellers')->insert([
+            'user_id' => 11,
+            'trip_id' => 2,
+            'zip_id' =>2,
+            'major_id' =>1,
+            'first_name' => 'Yoeri',
+            'last_name' => "op't Roodt",
+            'email' => 'yoeri.optroodt@student.ucll.be',
+            'country' => 'belgië',
+            'address' => 'yoeri zijn straat 15',
             'gender' => 'man',
             'phone' => '0474567892',
             'emergency_phone_1' => '0471852963',
