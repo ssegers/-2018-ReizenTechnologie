@@ -2,6 +2,11 @@ body {
   background-color: #E9F3F8;
 }
 
+* {
+  padding: 0;
+  margin: 0;
+}
+
 
 /*
  * Filter page
@@ -69,4 +74,14 @@ body {
   float: left;
   padding-left: 5px;
   padding-right: 5px;
+}
+.menu-left {
+  position: fixed;
+  background-color: $col-menu-left;
+  width: 200px;
+  height: 100vh;
+  box-shadow: 0 0 6px $col-accent;
+}
+.content-right {
+  margin: 0 0 0 200px;
 }

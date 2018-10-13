@@ -1,0 +1,50 @@
+ul.filters {
+  list-style: none;
+}
+ul.filters li.filter-option {
+  position: relative;
+  padding: 20px 20px;
+  display: block;
+  width: calc(100% - 20px*2);
+  border-top: 1px solid $col-accent;
+}
+ul.filters li.filter-option:first-child {
+  border-top: none;
+}
+ul.filters li input[type="checkbox"] {
+  position: absolute;
+  right: 20px;
+  top: 22px;
+}
+ul.filters li.apply button {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+ul.filter-buttons {
+  position: absolute;
+  bottom: 0;
+  list-style: none;
+  width: 100%;
+}
+ul.filter-buttons li.export button {
+  line-height: 45px;
+  position: relative;
+  padding: 0 20px;
+  border: none;
+  background-color: transparent;
+  width: 100%;
+  text-align: left;
+}
+ul.filter-buttons li.export button i {
+  position: absolute;
+  right: 20px;
+  top: 10px;
+}
+ul.filter-buttons li.apply button {
+  border: none;
+  background-color: $col-accent;
+  height: 50px;
+  color: white;
+  width: 100%;
+}

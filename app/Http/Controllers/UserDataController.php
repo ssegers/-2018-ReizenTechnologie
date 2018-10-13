@@ -4,10 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Traveller;
 use App\User;
-use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 use PhpOffice\PhpSpreadsheet\Exception;
 use PhpOffice\PhpSpreadsheet\IOFactory;
@@ -16,6 +14,7 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
 
 class UserDataController extends Controller
 {
+    /* List of all filters */
     protected $aFilterList = [
         'email' => 'Email',
         'country' => 'Land',
@@ -28,6 +27,7 @@ class UserDataController extends Controller
         'birthdate' => 'Geboortedatum',
         'medical_info' => 'Medische Info',
     ];
+    /* Temp request save */
     private $request;
 
     /**
