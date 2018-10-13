@@ -13,6 +13,9 @@ class TravellersTableSeeder extends Seeder
     {
         DB::table('travellers')->insert([
             'user_id' => 1,
+            'trip_id' => 1,
+            'zip_id' =>1,
+            'major_id' =>3,
             'first_name' => 'Stefan',
             'last_name' => 'Segers',
             'email' => 'r0123456@ucll.be',
@@ -31,6 +34,9 @@ class TravellersTableSeeder extends Seeder
 
         DB::table('travellers')->insert([
             'user_id' => 2,
+            'trip_id' => 1,
+            'zip_id' =>2,
+            'major_id' =>1,
             'first_name' => 'Robin',
             'last_name' => 'Machiels',
             'email' => 'r2123456@ucll.be',
@@ -49,6 +55,9 @@ class TravellersTableSeeder extends Seeder
 
         DB::table('travellers')->insert([
             'user_id' => 3,
+            'trip_id' => 2,
+            'zip_id' =>2,
+            'major_id' =>1,
             'first_name' => 'Stef',
             'last_name' => 'Kerkhofs',
             'email' => 'r3123456@ucll.be',
@@ -67,6 +76,9 @@ class TravellersTableSeeder extends Seeder
 
         DB::table('travellers')->insert([
             'user_id' => 4,
+            'trip_id' => 2,
+            'zip_id' =>4,
+            'major_id' =>1,
             'first_name' => 'Nico',
             'last_name' => 'Schelfhout',
             'email' => 'r4123456@ucll.be',
@@ -85,6 +97,9 @@ class TravellersTableSeeder extends Seeder
 
         DB::table('travellers')->insert([
             'user_id' => 5,
+            'trip_id' => 1,
+            'zip_id' =>3,
+            'major_id' =>1,
             'first_name' => 'Michiel',
             'last_name' => 'Guilliaums',
             'email' => 'r5123456@ucll.be',
@@ -103,6 +118,9 @@ class TravellersTableSeeder extends Seeder
 
         DB::table('travellers')->insert([
             'user_id' => 6,
+            'trip_id' => 2,
+            'zip_id' =>1,
+            'major_id' =>1,
             'first_name' => 'Yoeri',
             'last_name' => "Op't Roodt",
             'email' => 'r6123456@ucll.be',
@@ -121,6 +139,9 @@ class TravellersTableSeeder extends Seeder
 
         DB::table('travellers')->insert([
             'user_id' => 7,
+            'trip_id' => 1,
+            'zip_id' =>3,
+            'major_id' =>1,
             'first_name' => 'Daan',
             'last_name' => 'Vandebosch',
             'email' => 'r7123456@ucll.be',
@@ -139,6 +160,9 @@ class TravellersTableSeeder extends Seeder
 
         DB::table('travellers')->insert([
             'user_id' => 8,
+            'trip_id' => 2,
+            'zip_id' =>3,
+            'major_id' =>1,
             'first_name' => 'Joren',
             'last_name' => 'Meynen',
             'email' => 'r823456@ucll.be',
@@ -157,6 +181,9 @@ class TravellersTableSeeder extends Seeder
 
         DB::table('travellers')->insert([
             'user_id' => 9,
+            'trip_id' => 1,
+            'zip_id' =>5,
+            'major_id' =>1,
             'first_name' => 'Sasha',
             'last_name' => 'Vandevoorde',
             'email' => 'r9123456@ucll.be',
@@ -175,6 +202,9 @@ class TravellersTableSeeder extends Seeder
 
         DB::table('travellers')->insert([
             'user_id' => 10,
+            'trip_id' => 2,
+            'zip_id' =>2,
+            'major_id' =>1,
             'first_name' => 'Kaan',
             'last_name' => 'Akpinar',
             'email' => 'r9923456@ucll.be',
