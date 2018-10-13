@@ -13,6 +13,11 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert([
+            'name' => 'r0663911',
+            'password' => bcrypt('yoeri'),
+            'role' => 'traveller',
+        ]);
+        DB::table('users')->insert([
            'name' => 'Begeleider',
            'password' => bcrypt('azertyuiop'),
            'role' => 'Begeleider',
@@ -31,7 +36,7 @@ class UsersTableSeeder extends Seeder
         ]);
 
         DB::table('users')->insert([
-            'name' => 'Beheerder',
+            'name' => 'beheerder',
             'password' => bcrypt('azertyuiop'),
             'role' => 'Beheerder',
         ]);

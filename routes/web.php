@@ -15,6 +15,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('user/trip/travellers', 'UserDataController@showUsersAsMentor');
+Route::get('user/{sUserName}/trip/travellers', 'UserDataController@showUsersAsMentor');
 Route::post('user/trip/travellers', 'UserDataController@showUsersAsMentor');
 

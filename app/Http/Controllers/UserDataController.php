@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Traveller;
+use App\User;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -28,10 +30,14 @@ class UserDataController extends Controller
     ];
     private $request;
 
-    public function showUsersAsMentor(Request $request)
+    public function showUsersAsMentor(Request $request, $sUserName)
     {
         $this->request = $request;
-        $id = Auth::id();
+
+//        $oUser = Auth::user();
+        $oUser = User::where('name', $sUserName)->first();
+
+//        return var_dump($oUser);
 
         $aFiltersChecked = $this->getCheckedFilters();
 
