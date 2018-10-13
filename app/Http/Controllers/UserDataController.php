@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Traveller;
+use App\Trip;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -62,8 +63,11 @@ class UserDataController extends Controller
         /* Get  list of checked filters */
         $aFiltersChecked = $this->getCheckedFilters();
 
+        /* Get the trip where the organizer is involved with */
+        $iTrip = Traveller::select('trip_id')->where('user_id', $oUser->user_id)->first();
+
         /* Get the travellers based on the applied filters */
-        $aUserData = Traveller::select(array_keys($aFiltersChecked))->paginate(2);
+        $aUserData = Traveller::select(array_keys($aFiltersChecked))->where('trip_id', $iTrip->trip_id)->paginate(15);
 
         /* Check witch download option is checked */
         switch ($request->post('export')) {
