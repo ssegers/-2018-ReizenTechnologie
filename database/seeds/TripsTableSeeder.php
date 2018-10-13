@@ -28,6 +28,5 @@ class TripsTableSeeder extends Seeder
             'is_active' => false,
             'year' => 2018
         ]);
-
     }
 }
