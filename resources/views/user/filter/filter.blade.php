@@ -25,7 +25,7 @@
         {{ Form::close() }}
     </div>
     <div class="content-right">
-        <table>
+        <table class="filter-table">
             <thead>
             <tr>
                 @foreach($aFiltersChecked as $sFilterValue)

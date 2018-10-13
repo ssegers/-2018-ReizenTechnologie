@@ -96,6 +96,7 @@ body {
 }
 
 .content-right {
+  padding: 20px;
   margin: 0 0 0 200px;
 }
 
@@ -181,6 +182,54 @@ ul.filter-buttons li.apply button {
   height: 50px;
   color: white;
   width: 100%;
+}
+
+table.filter-table {
+  width: 100%;
+}
+
+table.filter-table * {
+  padding: 0;
+  margin: 0;
+  border: none;
+}
+
+table.filter-table thead {
+  background-color: #E00049;
+  color: white;
+  line-height: 40px;
+}
+
+table.filter-table tbody {
+  line-height: 30px;
+}
+
+table.filter-table tbody tr td {
+  border-bottom: 1px solid #003469;
+}
+
+ul.pagination {
+  list-style: none;
+  margin: 20px auto;
+  text-align: center;
+}
+
+ul.pagination li {
+  display: inline-block;
+  height: 22px;
+  width: 22px;
+  border: 1px solid #003469;
+  line-height: 22px;
+}
+
+ul.pagination li a {
+  text-decoration: none;
+  color: black;
+}
+
+ul.pagination li.page-item.active {
+  background-color: #003469;
+  color: white;
 }
 
 /*# sourceMappingURL=app.css.map */

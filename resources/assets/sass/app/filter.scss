@@ -48,3 +48,42 @@ ul.filter-buttons li.apply button {
   color: white;
   width: 100%;
 }
+table.filter-table {
+  width: 100%;
+}
+table.filter-table * {
+  padding: 0;
+  margin: 0;
+  border: none;
+}
+table.filter-table thead {
+  background-color: $col-primary;
+  color: white;
+  line-height: 40px;
+}
+table.filter-table tbody {
+  line-height: 30px;
+}
+table.filter-table tbody tr td{
+  border-bottom: 1px solid $col-accent;
+}
+ul.pagination {
+  list-style: none;
+  margin: 20px auto;
+  text-align: center;
+}
+ul.pagination li {
+  display: inline-block;
+  height: 22px;
+  width: 22px;
+  border: 1px solid $col-accent;
+  line-height: 22px;
+}
+ul.pagination li a {
+  text-decoration: none;
+  color: black;
+}
+ul.pagination li.page-item.active {
+  background-color: $col-accent;
+  color: white;
+}
