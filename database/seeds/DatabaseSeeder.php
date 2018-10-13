@@ -14,6 +14,10 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UsersTableSeeder::class,
             TravellersTableSeeder::class,
+            TripsTableSeeder::class,
+            ZipTableSeeder::class,
+            StudiesTableSeeder::class,
+            MajorsTableSeeder::class
         ]);
     }
 }
