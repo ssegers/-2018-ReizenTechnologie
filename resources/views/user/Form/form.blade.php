@@ -12,7 +12,7 @@
             <p><label>Opleiding</label><select id="dropOpleiding" name="opleidingen">
                     <option></option>
                 </select></p>
-            <p><label>Afstudeerrichting</label><select id="dropAfstudeerrichting" name="opleidingen">
+            <p><label>Afstudeerrichting</label><select id="dropAfstudeerrichting" name="afstudeerrichtingen">
                     <option></option>
                 </select></p>
         </div>
