@@ -108,21 +108,22 @@ class UserDataController extends Controller
      */
     private function downloadPDF(){
         $aUserFields = $this->getCheckedFilters();
-
+        $iCols = count($aUserFields);
+        $aAlphas = range('A', 'Z');
         $data = Traveller::select(array_keys($aUserFields))->get()->toArray();
 
         try {
             $spreadsheet = new Spreadsheet();  /*----Spreadsheet object-----*/
             $spreadsheet->getActiveSheet();
             $activeSheet = $spreadsheet->getActiveSheet();
-            $activeSheet->fromArray($aUserFields,NULL, 'A1');
+            $activeSheet->fromArray($aUserFields,NULL, 'A1')->getStyle('A1:'.$aAlphas[$iCols-1].'1')->getFont()->setBold(true)->setUnderline(true);
             $activeSheet->fromArray($data,NULL,'A2');
 
             IOFactory::registerWriter("PDF", Dompdf::class);
             $writer = IOFactory::createWriter($spreadsheet, 'PDF');
 
             header('Content-Disposition: attachment; filename="gefilterte_tabel.pdf"');
-            //$activeSheet->setCellValue('A1' , 'New file content')->getStyle('A1')->getFont()->setBold(true);
+
 
             $writer->save("php://output");
         } catch (Exception $e) {
