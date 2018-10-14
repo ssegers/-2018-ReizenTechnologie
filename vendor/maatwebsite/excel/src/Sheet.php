@@ -29,6 +29,7 @@ use Maatwebsite\Excel\Imports\ModelImporter;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithMappedCells;
+use Maatwebsite\Excel\Concerns\WithProgressBar;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use Maatwebsite\Excel\Imports\HeadingRowExtractor;
 use Maatwebsite\Excel\Concerns\WithCustomChunkSize;
@@ -202,6 +203,10 @@ class Sheet
 
         $this->raise(new BeforeSheet($this, $this->exportable));
 
+        if ($import instanceof WithProgressBar) {
+            $import->getConsoleOutput()->progressStart($this->worksheet->getHighestRow());
+        }
+
         $calculatesFormulas = $import instanceof WithCalculatedFormulas;
 
         if ($import instanceof WithMappedCells) {
@@ -224,10 +229,18 @@ class Sheet
             $headingRow = HeadingRowExtractor::extract($this->worksheet, $import);
             foreach ($this->worksheet->getRowIterator()->resetStart($startRow ?? 1) as $row) {
                 $import->onRow(new Row($row, $headingRow));
+
+                if ($import instanceof WithProgressBar) {
+                    $import->getConsoleOutput()->progressAdvance();
+                }
             }
         }
 
         $this->raise(new AfterSheet($this, $this->exportable));
+
+        if ($import instanceof WithProgressBar) {
+            $import->getConsoleOutput()->progressFinish();
+        }
     }
 
     /**
@@ -253,6 +266,10 @@ class Sheet
             }
 
             $rows[] = $row;
+
+            if ($import instanceof WithProgressBar) {
+                $import->getConsoleOutput()->progressAdvance();
+            }
         }
 
         return $rows;

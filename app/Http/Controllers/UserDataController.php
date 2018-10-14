@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Traveller;
+use App\Trip;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 use PhpOffice\PhpSpreadsheet\Exception;
 use PhpOffice\PhpSpreadsheet\IOFactory;
@@ -14,6 +15,7 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
 
 class UserDataController extends Controller
 {
+    /* List of all filters */
     protected $aFilterList = [
         'email' => 'Email',
         'country' => 'Land',
@@ -26,33 +28,62 @@ class UserDataController extends Controller
         'birthdate' => 'Geboortedatum',
         'medical_info' => 'Medische Info',
     ];
+    /* Temp request save */
     private $request;
 
-    public function showUsersAsMentor(Request $request)
+    /**
+     * Generates a list of travellers based on the applied filters, current authenticated user and selected trip
+     *
+     * @author Yoeri op't Roodt
+     * @param Request $request
+     * @param $sUserName
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View|string
+     */
+    public function showUsersAsMentor(Request $request, $sUserName)
     {
         $this->request = $request;
-        $id = Auth::id();
 
+        /* Get user from Auth */
+        $oUser = Auth::user();
+
+        /* Get user from URL */
+        $oUser = User::where('name', $sUserName)->first();
+
+        /* Check if user exist and is a organizer */
+        try {
+            if ($oUser->role != 'organizer') {
+                return 'Deze gebruiker is niet gemachtigd';
+            }
+        }
+        catch (\Exception $exception) {
+            return 'Deze gebruiker bestaat niet';
+        }
+
+        /* Get  list of checked filters */
         $aFiltersChecked = $this->getCheckedFilters();
 
-        if ($request->post('button-filter')) {
-            $aUserData = Traveller::select(array_keys($aFiltersChecked))->paginate(2);
-        }
-        else {
-            $aUserData = Traveller::select(array_keys($aFiltersChecked))->paginate(2);;
-        }
+        /* Get the trip where the organizer is involved with */
+        $iTrip = Traveller::select('trip_id')->where('user_id', $oUser->user_id)->first();
 
-        if ($request->post('export') == 'exel') {
-            $this->downloadExcel();
-        }
-        if ($request->post('export') == 'pdf') {
-            $this->downloadPDF();
+        /* Get the travellers based on the applied filters */
+        $aUserData = Traveller::select(array_keys($aFiltersChecked))->where('trip_id', $iTrip->trip_id)->paginate(15);
+
+        /* Check witch download option is checked */
+        switch ($request->post('export')) {
+            case 'excel':
+                $this->downloadExcel();
+                break;
+            case 'pdf':
+                $this->downloadPDF();
+                break;
         }
 
         return view('user.filter.filter', [
             'aUserData' => $aUserData,
             'aFilterList' => $this->aFilterList,
-            'aFiltersChecked' => $aFiltersChecked
+            'aFiltersChecked' => $aFiltersChecked,
+            'sUserName' => $oUser->name,
         ]);
     }
 
@@ -103,14 +134,17 @@ class UserDataController extends Controller
      * Returns array of fields based on the current selected filters
      *
      * @author Yoeri op't Roodt
+     *
      * @return array
      */
     private function getCheckedFilters() {
+        /* Set the standard filters */
         $aFiltersChecked = array(
             'last_name' => 'Familienaam',
             'first_name' => 'Voornaam'
         );
 
+        /* Detect the applied filters and add to the list of standard filters */
         foreach ($this->aFilterList as $sFilterName => $sFilterText) {
             if ($this->request->post($sFilterName) != false) {
                 $aFiltersChecked[$sFilterName] = $sFilterText;

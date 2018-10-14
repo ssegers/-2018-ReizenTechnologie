@@ -11,7 +11,7 @@ class User extends Authenticatable
 
     public function traveller()
     {
-        return $this->hasOne('App\Traveller', 'user_id', 'id');
+        return $this->hasOne('App\Traveller', 'user_id', 'user_id');
     }
 
 

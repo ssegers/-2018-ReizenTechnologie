@@ -1,0 +1,92 @@
+ul.filters {
+  list-style: none;
+  height: calc(100vh - 140px);
+  overflow-y: auto;
+  border-bottom: 1px solid $col-accent;
+}
+ul.filters li.filter-option {
+  position: relative;
+  padding: 20px 20px;
+  display: block;
+  width: calc(100% - 20px*2);
+  border-top: 1px solid $col-accent;
+}
+ul.filters li.filter-option:first-child {
+  border-top: none;
+}
+ul.filters li input[type="checkbox"] {
+  position: absolute;
+  right: 20px;
+  top: 22px;
+}
+ul.filters li.apply button {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+ul.filter-buttons {
+  position: absolute;
+  bottom: 0;
+  list-style: none;
+  width: 100%;
+}
+ul.filter-buttons li.export button {
+  line-height: 45px;
+  position: relative;
+  padding: 0 20px;
+  border: none;
+  background-color: transparent;
+  width: 100%;
+  text-align: left;
+}
+ul.filter-buttons li.export button i {
+  position: absolute;
+  right: 20px;
+  top: 10px;
+}
+ul.filter-buttons li.apply button {
+  border: none;
+  background-color: $col-accent;
+  height: 50px;
+  color: white;
+  width: 100%;
+}
+table.filter-table {
+  width: 100%;
+}
+table.filter-table * {
+  padding: 0;
+  margin: 0;
+  border: none;
+}
+table.filter-table thead {
+  background-color: $col-primary;
+  color: white;
+  line-height: 40px;
+}
+table.filter-table tbody {
+  line-height: 30px;
+}
+table.filter-table tbody tr td{
+  border-bottom: 1px solid $col-accent;
+}
+ul.pagination {
+  list-style: none;
+  margin: 20px auto;
+  text-align: center;
+}
+ul.pagination li {
+  display: inline-block;
+  height: 22px;
+  width: 22px;
+  border: 1px solid $col-accent;
+  line-height: 22px;
+}
+ul.pagination li a {
+  text-decoration: none;
+  color: black;
+}
+ul.pagination li.page-item.active {
+  background-color: $col-accent;
+  color: white;
+}

@@ -280,13 +280,11 @@ class Reader
             $reader->setInputEncoding($this->inputEncoding);
         }
 
-        $this->raise(new BeforeImport($this, $import));
-
         return $reader;
     }
 
     /**
-     * @param object $import
+     * @param object  $import
      * @param IReader $reader
      */
     private function beforeReading($import, IReader $reader)
@@ -300,5 +298,7 @@ class Reader
         if (!$import instanceof WithMultipleSheets) {
             $this->sheetImports = array_fill(0, $this->spreadsheet->getSheetCount(), $import);
         }
+
+        $this->raise(new BeforeImport($this, $import));
     }
 }

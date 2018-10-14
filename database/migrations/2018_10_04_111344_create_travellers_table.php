@@ -16,7 +16,10 @@ class CreateTravellersTable extends Migration
         Schema::create('travellers', function (Blueprint $table) {
 
             $table->increments('traveller_id');
-            $table->integer("user_id");
+            $table->integer("user_id")->unique();
+            $table->integer('trip_id');
+            $table->integer('zip_id');
+            $table->integer('major_id');
             $table->string("first_name");
             $table->string("last_name");
             $table->string('email')->unique();
