@@ -12,6 +12,7 @@ use PhpOffice\PhpSpreadsheet\Exception;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use \PhpOffice\PhpSpreadsheet\Writer\Pdf\Dompdf;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Worksheet\PageSetup;
 
 class UserDataController extends Controller
 {
@@ -116,6 +117,11 @@ class UserDataController extends Controller
             $spreadsheet = new Spreadsheet();  /*----Spreadsheet object-----*/
             $spreadsheet->getActiveSheet();
             $activeSheet = $spreadsheet->getActiveSheet();
+            if($iCols>8){
+                $spreadsheet->getActiveSheet()->getPageSetup()->setOrientation(PageSetup::ORIENTATION_LANDSCAPE);
+            }
+            $spreadsheet->getActiveSheet()->getPageMargins()->setLeft(0.2);
+            $spreadsheet->getActiveSheet()->getPageMargins()->setTop(0.5);
             $activeSheet->fromArray($aUserFields,NULL, 'A1')->getStyle('A1:'.$aAlphas[$iCols-1].'1')->getFont()->setBold(true)->setUnderline(true);
             $activeSheet->fromArray($data,NULL,'A2');
 
