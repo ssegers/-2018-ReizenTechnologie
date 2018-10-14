@@ -1,5 +1,8 @@
 ul.filters {
   list-style: none;
+  height: calc(100vh - 140px);
+  overflow-y: auto;
+  border-bottom: 1px solid $col-accent;
 }
 ul.filters li.filter-option {
   position: relative;

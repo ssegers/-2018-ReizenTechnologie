@@ -92,7 +92,7 @@ body {
   background-color: #fff;
   width: 200px;
   height: 100vh;
-  box-shadow: 0 0 6px #003469;
+  border-right: 1px solid #003469;
 }
 
 .content-right {
@@ -127,6 +127,9 @@ body {
 
 ul.filters {
   list-style: none;
+  height: calc(100vh - 140px);
+  overflow-y: auto;
+  border-bottom: 1px solid #003469;
 }
 
 ul.filters li.filter-option {

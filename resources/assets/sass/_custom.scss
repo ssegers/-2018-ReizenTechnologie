@@ -80,7 +80,7 @@ body {
   background-color: $col-menu-left;
   width: 200px;
   height: 100vh;
-  box-shadow: 0 0 6px $col-accent;
+  border-right: 1px solid $col-accent;
 }
 .content-right {
   padding: 20px;
