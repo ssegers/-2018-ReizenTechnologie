@@ -117,7 +117,11 @@ class UserDataController extends Controller
         $aUserFields = $this->getCheckedFilters();
         $iCols = count($aUserFields);
         $aAlphas = range('A', 'Z');
-        $data = Traveller::select(array_keys($aUserFields))->get()->toArray();
+        $data = Traveller::select(array_keys($aUserFields))
+            ->join('users','travellers.user_id','=','users.user_id')
+            ->join('zips','travellers.zip_id','=','zips.zip_id')
+            ->get()
+            ->toArray();
 
         try {
             $spreadsheet = new Spreadsheet();  /*----Spreadsheet object-----*/
