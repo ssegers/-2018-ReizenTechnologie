@@ -32,8 +32,14 @@ class UserDataController extends Controller
         'medical_info' => 'Medische Info',
     ];
 
+    /* List of standard filters */
+    protected $aFiltersChecked = array(
+        'last_name' => 'Familienaam',
+        'first_name' => 'Voornaam',
+    );
+
     /**
-     * Generates a list of travellers based on the applied filters, current authenticated user and selected trip
+     * Generates a list of travellers based on the applied filters, current authenticated user and selected trip.
      *
      * @author Yoeri op't Roodt
      *
@@ -59,18 +65,14 @@ class UserDataController extends Controller
             return 'Deze gebruiker bestaat niet';
         }
 
-        /* Set the standard filters */
-        $aFiltersChecked = array(
-            'last_name' => 'Familienaam',
-            'first_name' => 'Voornaam'
-        );
-
         /* Detect the applied filters and add to the list of standard filters */
         foreach ($this->aFilterList as $sFilterName => $sFilterText) {
             if ($request->post($sFilterName) != false) {
-                $aFiltersChecked[$sFilterName] = $sFilterText;
+                $this->aFiltersChecked[$sFilterName] = $sFilterText;
             }
         }
+
+        $aFiltersChecked = $this->aFiltersChecked;
 
         /* Get the trip where the organizer is involved with */
         $iTrip = Traveller::select('trip_id')->where('user_id', $oUser->user_id)->first();
