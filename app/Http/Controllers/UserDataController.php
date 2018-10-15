@@ -18,8 +18,11 @@ class UserDataController extends Controller
 {
     /* List of all filters */
     protected $aFilterList = [
+        'name'=>'Naam',
         'email' => 'Email',
         'country' => 'Land',
+        'zip_code'=>'Postcode',
+        'city'=>'Stad',
         'address' => 'Adres',
         'gender' => 'Geslacht',
         'phone' => 'Telefoon',
@@ -68,7 +71,10 @@ class UserDataController extends Controller
         $iTrip = Traveller::select('trip_id')->where('user_id', $oUser->user_id)->first();
 
         /* Get the travellers based on the applied filters */
-        $aUserData = Traveller::select(array_keys($aFiltersChecked))->where('trip_id', $iTrip->trip_id)->paginate(15);
+        $aUserData = Traveller::select(array_keys($aFiltersChecked))
+            ->join('users','travellers.user_id','=','users.user_id')
+            ->join('zips','travellers.zip_id','=','zips.zip_id')
+            ->where('trip_id', $iTrip->trip_id)->paginate(15);
 
         /* Check witch download option is checked */
         switch ($request->post('export')) {
