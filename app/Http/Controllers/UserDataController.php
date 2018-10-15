@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Traveller;
-use App\Trip;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -32,22 +31,18 @@ class UserDataController extends Controller
         'birthdate' => 'Geboortedatum',
         'medical_info' => 'Medische Info',
     ];
-    /* Temp request save */
-    private $request;
 
     /**
      * Generates a list of travellers based on the applied filters, current authenticated user and selected trip
      *
      * @author Yoeri op't Roodt
+     *
      * @param Request $request
      * @param $sUserName
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View|string
      */
-    public function showUsersAsMentor(Request $request, $sUserName)
-    {
-        $this->request = $request;
-
+    public function showUsersAsMentor(Request $request, $sUserName) {
         /* Get user from Auth */
         $oUser = Auth::user();
 
@@ -64,25 +59,32 @@ class UserDataController extends Controller
             return 'Deze gebruiker bestaat niet';
         }
 
-        /* Get  list of checked filters */
-        $aFiltersChecked = $this->getCheckedFilters();
+        /* Set the standard filters */
+        $aFiltersChecked = array(
+            'last_name' => 'Familienaam',
+            'first_name' => 'Voornaam'
+        );
+
+        /* Detect the applied filters and add to the list of standard filters */
+        foreach ($this->aFilterList as $sFilterName => $sFilterText) {
+            if ($request->post($sFilterName) != false) {
+                $aFiltersChecked[$sFilterName] = $sFilterText;
+            }
+        }
 
         /* Get the trip where the organizer is involved with */
         $iTrip = Traveller::select('trip_id')->where('user_id', $oUser->user_id)->first();
 
         /* Get the travellers based on the applied filters */
-        $aUserData = Traveller::select(array_keys($aFiltersChecked))
-            ->join('users','travellers.user_id','=','users.user_id')
-            ->join('zips','travellers.zip_id','=','zips.zip_id')
-            ->where('trip_id', $iTrip->trip_id)->paginate(15);
+        $aUserData = $this->getUserData($aFiltersChecked, $iTrip, 15);
 
         /* Check witch download option is checked */
         switch ($request->post('export')) {
             case 'excel':
-                $this->downloadExcel();
+                $this->downloadExcel($aFiltersChecked, $iTrip);
                 break;
             case 'pdf':
-                $this->downloadPDF();
+                $this->downloadPDF($aFiltersChecked, $iTrip);
                 break;
         }
 
@@ -97,10 +99,8 @@ class UserDataController extends Controller
     /**
      * downloadExcel : this will download an excel file based on the session data of filters (the checked fields)
      */
-    private function downloadExcel() {
-        $aUserFields = $this->getCheckedFilters();
-
-        $data = Traveller::select(array_keys($aUserFields))->get()->toArray();
+    private function downloadExcel($aFiltersChecked, $iTrip) {
+        $data = $this->getUserData($aFiltersChecked, $iTrip);
 
         return Excel::create('Gebruikers', function($excel) use ($data) {
             $excel->sheet('mySheet', function($sheet) use ($data)
@@ -113,15 +113,11 @@ class UserDataController extends Controller
     /**
      * downloadPDF: deze functie zorgt ervoor dat je een pdf van de gefilterde lijst download.
      */
-    private function downloadPDF(){
-        $aUserFields = $this->getCheckedFilters();
-        $iCols = count($aUserFields);
+    private function downloadPDF($aFiltersChecked, $iTrip){
+        $iCols = count($aUserFields = $aFiltersChecked);
         $aAlphas = range('A', 'Z');
-        $data = Traveller::select(array_keys($aUserFields))
-            ->join('users','travellers.user_id','=','users.user_id')
-            ->join('zips','travellers.zip_id','=','zips.zip_id')
-            ->get()
-            ->toArray();
+
+        $data = $this->getUserData($aFiltersChecked, $iTrip);
 
         try {
             $spreadsheet = new Spreadsheet();  /*----Spreadsheet object-----*/
@@ -148,26 +144,26 @@ class UserDataController extends Controller
     }
 
     /**
-     * Returns array of fields based on the current selected filters
+     * Returns the filtered users based on the applied filters and selected trip. The users will be paginated if an amount is specified.
      *
      * @author Yoeri op't Roodt
      *
-     * @return array
+     * @param $aFilters
+     * @param $iTrip
+     * @param bool $iPaginate
+     *
+     * @return mixed
      */
-    private function getCheckedFilters() {
-        /* Set the standard filters */
-        $aFiltersChecked = array(
-            'last_name' => 'Familienaam',
-            'first_name' => 'Voornaam'
-        );
-
-        /* Detect the applied filters and add to the list of standard filters */
-        foreach ($this->aFilterList as $sFilterName => $sFilterText) {
-            if ($this->request->post($sFilterName) != false) {
-                $aFiltersChecked[$sFilterName] = $sFilterText;
-            }
+    private function getUserData($aFilters, $iTrip, $iPaginate = false) {
+        if ($iPaginate) {
+            return Traveller::select(array_keys($aFilters))
+                ->join('users','travellers.user_id','=','users.user_id')
+                ->join('zips','travellers.zip_id','=','zips.zip_id')
+                ->where('trip_id', $iTrip->trip_id)->paginate($iPaginate);
         }
-
-        return $aFiltersChecked;
+        return Traveller::select(array_keys($aFilters))
+            ->join('users','travellers.user_id','=','users.user_id')
+            ->join('zips','travellers.zip_id','=','zips.zip_id')
+            ->where('trip_id', $iTrip->trip_id)->get()->toArray();
     }
 }
