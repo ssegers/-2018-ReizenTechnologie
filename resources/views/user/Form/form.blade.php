@@ -1,19 +1,21 @@
 @extends('layouts.app')
 
 @section('content')
-    <form id="registerForm" action="">
+    <form id="registerForm" action="{{ action('RegisterController@formPost') }}">
         <h1>Schrijf je hier in:</h1>
         <!-- One "tab" for each step in the form: -->
         <div class="tab">Kies je reis:
             <p><select id="dropReis" name="reizen">
-                    <option></option>
+                    <option>USA 2019</option>
+                    <option>Duitsland 2019</option>
                 </select></p>
             <p><label>Studentnummer</label><input id="txtStudentnummer" oninput="this.className=''"></p>
             <p><label>Opleiding</label><select id="dropOpleiding" name="opleidingen">
-                    <option></option>
+                    <option>Elo-ICT</option>
                 </select></p>
             <p><label>Afstudeerrichting</label><select id="dropAfstudeerrichting" name="afstudeerrichtingen">
-                    <option></option>
+                    <option>Elo</option>
+                    <option>ICT</option>
                 </select></p>
         </div>
 
