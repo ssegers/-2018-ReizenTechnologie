@@ -18,7 +18,7 @@ class UserDataController extends Controller
 {
     /* List of all filters */
     protected $aFilterList = [
-        'name'=>'Naam',
+        'name'=>'r-Nummer',
         'email' => 'Email',
         'country' => 'Land',
         'zip_code'=>'Postcode',
