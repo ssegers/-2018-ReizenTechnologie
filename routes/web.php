@@ -18,3 +18,4 @@ Route::get('/', function () {
 Route::get('user/{sUserName}/trip/travellers', 'UserDataController@showUsersAsMentor');
 Route::post('user/{sUserName}/trip/travellers', 'UserDataController@showUsersAsMentor');
 
+route::get('user/Form/form', 'RegisterController@form');
