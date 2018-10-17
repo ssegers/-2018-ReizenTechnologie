@@ -25,24 +25,26 @@
         {{ Form::close() }}
     </div>
     <div class="content-right">
-        <table class="filter-table">
-            <thead>
-            <tr>
-                @foreach($aFiltersChecked as $sFilterValue)
-                    <th>{{ $sFilterValue }}</th>
-                @endforeach
-            </tr>
-            </thead>
-            <tbody>
-            @foreach($aUserData as $oUserData)
+        <div class="table-container">
+            <table class="filter-table">
+                <thead>
                 <tr>
-                    @foreach($aFiltersChecked as $sFilterName => $sFilterText)
-                        <td>{{ $oUserData->$sFilterName }}</td>
+                    @foreach($aFiltersChecked as $sFilterValue)
+                        <th>{{ $sFilterValue }}</th>
                     @endforeach
                 </tr>
-            @endforeach
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                @foreach($aUserData as $oUserData)
+                    <tr>
+                        @foreach($aFiltersChecked as $sFilterName => $sFilterText)
+                            <td class="field {{ $sFilterName }}">{{ $oUserData->$sFilterName }}</td>
+                        @endforeach
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+        </div>
         {{ $aUserData->appends($aFiltersChecked)->links() }}
     </div>
 @endsection
