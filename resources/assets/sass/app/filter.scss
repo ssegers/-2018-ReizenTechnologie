@@ -14,9 +14,10 @@ ul.filters li.filter-option {
 ul.filters li.filter-option:first-child {
   border-top: none;
 }
-ul.filters li input[type="checkbox"] {
+ul.filters li.filter-option input[type="checkbox"] {
   position: absolute;
   right: 20px;
+  width: 10px;
   top: 22px;
 }
 ul.filters li.apply button {
