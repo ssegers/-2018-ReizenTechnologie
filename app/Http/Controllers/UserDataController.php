@@ -142,7 +142,7 @@ class UserDataController extends Controller
             IOFactory::registerWriter("PDF", Dompdf::class);
             $writer = IOFactory::createWriter($spreadsheet, 'PDF');
 
-            header('Content-Disposition: attachment; filename="'.$sTripNaam.'gefilterde_tabel.pdf"');
+            header('Content-Disposition: attachment; filename="'.$sTripNaam.'gefilterde_lijst.pdf"');
 
 
 
