@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Traveller;
+use App\Trip;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -118,6 +119,8 @@ class UserDataController extends Controller
     private function downloadPDF($aFiltersChecked, $iTrip){
         $iCols = count($aUserFields = $aFiltersChecked);
         $aAlphas = range('A', 'Z');
+        $oTrip = (string) Trip::select('name')->where('trip_id', $iTrip->trip_id)->first();
+        $sTripNaam =str_before(str_after($oTrip,":"),"}");
 
         $data = $this->getUserData($aFiltersChecked, $iTrip);
 
@@ -136,7 +139,8 @@ class UserDataController extends Controller
             IOFactory::registerWriter("PDF", Dompdf::class);
             $writer = IOFactory::createWriter($spreadsheet, 'PDF');
 
-            header('Content-Disposition: attachment; filename="gefilterte_tabel.pdf"');
+            header('Content-Disposition: attachment; filename="'.$sTripNaam.'gefilterde_tabel.pdf"');
+
 
 
             $writer->save("php://output");
