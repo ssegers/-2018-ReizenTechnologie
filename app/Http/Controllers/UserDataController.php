@@ -19,17 +19,19 @@ class UserDataController extends Controller
     /* List of all filters */
     protected $aFilterList = [
         'name'=>'r-Nummer',
-        'email' => 'Email',
-        'country' => 'Land',
+        'study_name'=>'Richting',
+        'major_name'=>'Afstudeerrichting',
+        'birthdate' => 'Geboortedatum',
+        'gender' => 'Geslacht',
+        'nationality' => 'Nationaliteit',
+        'address' => 'Adres',
         'zip_code'=>'Postcode',
         'city'=>'Stad',
-        'address' => 'Adres',
-        'gender' => 'Geslacht',
+        'country' => 'Land',
+        'email' => 'Email',
         'phone' => 'Telefoon',
         'emergency_phone_1' => 'Nood Contact 1',
         'emergency_phone_2' => 'Nood Contact 2',
-        'nationality' => 'Nationaliteit',
-        'birthdate' => 'Geboortedatum',
         'medical_info' => 'Medische Info',
     ];
 
@@ -148,9 +150,6 @@ class UserDataController extends Controller
             $writer = IOFactory::createWriter($spreadsheet, 'PDF');
 
             header('Content-Disposition: attachment; filename="'.$sTripNaam.'gefilterde_lijst.pdf"');
-
-
-
             $writer->save("php://output");
         } catch (Exception $e) {
         }
@@ -173,11 +172,15 @@ class UserDataController extends Controller
             return Traveller::select(array_keys($aFilters))
                 ->join('users','travellers.user_id','=','users.user_id')
                 ->join('zips','travellers.zip_id','=','zips.zip_id')
+                ->join('majors','travellers.major_id','=','majors.major_id')
+                ->join('studies','majors.study_id','=','studies.study_id')
                 ->where('trip_id', $iTrip->trip_id)->paginate($iPaginate);
         }
         return Traveller::select(array_keys($aFilters))
             ->join('users','travellers.user_id','=','users.user_id')
             ->join('zips','travellers.zip_id','=','zips.zip_id')
+            ->join('majors','travellers.major_id','=','majors.major_id')
+            ->join('studies','majors.study_id','=','studies.study_id')
             ->where('trip_id', $iTrip->trip_id)->get()->toArray();
     }
 }
