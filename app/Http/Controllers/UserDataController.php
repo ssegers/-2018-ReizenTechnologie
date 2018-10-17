@@ -7,19 +7,18 @@ use App\Trip;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Maatwebsite\Excel\Facades\Excel;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\Exception;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use \PhpOffice\PhpSpreadsheet\Writer\Pdf\Dompdf;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Worksheet\PageSetup;
-use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class UserDataController extends Controller
 {
     /* List of all filters */
     protected $aFilterList = [
-        'name'=>'Naam',
+        'name'=>'r-Nummer',
         'email' => 'Email',
         'country' => 'Land',
         'zip_code'=>'Postcode',
@@ -106,14 +105,20 @@ class UserDataController extends Controller
     private function downloadExcel($aFiltersChecked, $iTrip) {
         $aUserFields = $aFiltersChecked;
         $data = $this->getUserData($aFiltersChecked, $iTrip);
-        /** Create a new Spreadsheet Object **/
-        $spreadsheet = new Spreadsheet();
-        $sheet = $spreadsheet->getActiveSheet();
-        $sheet->fromArray($aUserFields, NULL, 'A1');
-        $sheet->fromArray($data, NULL, 'A2');
-        $writer = new Xlsx($spreadsheet);
-        header('Content-Disposition: attachment; filename="travellers.xlsx"');
-        $writer->save('php://output');
+        try {
+            /** Create a new Spreadsheet Object **/
+            $spreadsheet = new Spreadsheet();
+            $sheet = $spreadsheet->getActiveSheet();
+            $sheet->fromArray($aUserFields, '', 'A1');
+            $sheet->fromArray($data, '', 'A2');
+            $writer = new Xlsx($spreadsheet);
+            header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+            header('Content-Disposition: attachment; filename="travellers.xlsx"');
+            $writer->save("php://output");
+            exit;
+        } catch (Exception $e) {
+            return $e;
+        }
     }
 
     /**

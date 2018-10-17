@@ -12,10 +12,12 @@
             <p><label>Studentnummer</label><input id="txtStudentnummer" oninput="this.className=''"></p>
             <p><label>Opleiding</label><select id="dropOpleiding" name="opleidingen">
                     <option>Elo-ICT</option>
+                    <option>Docent</option>
                 </select></p>
             <p><label>Afstudeerrichting</label><select id="dropAfstudeerrichting" name="afstudeerrichtingen">
                     <option>Elo</option>
                     <option>ICT</option>
+                    <option>Begeleider</option>
                 </select></p>
         </div>
 
