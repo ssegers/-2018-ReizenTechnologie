@@ -12,6 +12,7 @@ use PhpOffice\PhpSpreadsheet\IOFactory;
 use \PhpOffice\PhpSpreadsheet\Writer\Pdf\Dompdf;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Worksheet\PageSetup;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class UserDataController extends Controller
 {
@@ -102,14 +103,16 @@ class UserDataController extends Controller
      * downloadExcel : this will download an excel file based on the session data of filters (the checked fields)
      */
     private function downloadExcel($aFiltersChecked, $iTrip) {
+        $aUserFields = $aFiltersChecked;
         $data = $this->getUserData($aFiltersChecked, $iTrip);
-
-        return Excel::create('Gebruikers', function($excel) use ($data) {
-            $excel->sheet('mySheet', function($sheet) use ($data)
-            {
-                $sheet->fromArray($data);
-            });
-        })->download('xlsx');
+        /** Create a new Spreadsheet Object **/
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+        $sheet->fromArray($aUserFields, NULL, 'A1');
+        $sheet->fromArray($data, NULL, 'A2');
+        $writer = new Xlsx($spreadsheet);
+        header('Content-Disposition: attachment; filename="travellers.xlsx"');
+        $writer->save('php://output');
     }
 
     /**
