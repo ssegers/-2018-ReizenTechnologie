@@ -22,3 +22,4 @@ Route::post('user/{sUserName}/trip/travellers', 'UserDataController@showUsersAsM
 //Route::post('user/trip/travellers', 'UserDataController@showUsersAsMentor');
 
 route::get('user/Form/form', 'RegisterController@form');
+route::post('user/Form/form', 'RegisterController@formPost');
