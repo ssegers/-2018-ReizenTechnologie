@@ -18,3 +18,5 @@ Route::get('/', function () {
 Route::get('user/{sUserName}/trip/travellers', 'UserDataController@showUsersAsMentor');
 Route::post('user/{sUserName}/trip/travellers', 'UserDataController@showUsersAsMentor');
 
+//Route::get('user/trip/travellers', 'UserDataController@showUsersAsMentor');
+//Route::post('user/trip/travellers', 'UserDataController@showUsersAsMentor');

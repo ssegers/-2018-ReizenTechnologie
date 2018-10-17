@@ -14,14 +14,14 @@ class UsersTableSeeder extends Seeder
     {
         // Stefan Segers
         DB::table('users')->insert([
-            'name' => 'u05986734',
+            'name' => 'u0598673',
             'password' => bcrypt('stefan'),
             'role' => 'organizer',
         ]);
 
         // Rudi Roox
         DB::table('users')->insert([
-            'name' => 'u05698024',
+            'name' => 'u0569802',
             'password' => bcrypt('rudi'),
             'role' => 'organizer',
         ]);
