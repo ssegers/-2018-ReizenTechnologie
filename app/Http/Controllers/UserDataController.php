@@ -143,9 +143,6 @@ class UserDataController extends Controller
             $writer = IOFactory::createWriter($spreadsheet, 'PDF');
 
             header('Content-Disposition: attachment; filename="'.$sTripNaam.'gefilterde_lijst.pdf"');
-
-
-
             $writer->save("php://output");
         } catch (Exception $e) {
         }
