@@ -277,11 +277,21 @@ body {
   min-width: 300px;
 }
 
-h1 {
+.formLabel {
+  font-size: 20px;
+  font-family: Raleway;
+  padding: 25px 50px 25px 0px;
+}
+
+.formTitel {
   text-align: center;
 }
 
-input {
+#radioGeslacht {
+  padding: 25px;
+}
+
+.tab[input] {
   padding: 10px;
   width: 100%;
   font-size: 17px;
@@ -299,7 +309,7 @@ input.invalid {
   display: none;
 }
 
-button {
+.formButton {
   background-color: #4CAF50;
   color: #ffffff;
   border: none;
@@ -309,7 +319,7 @@ button {
   cursor: pointer;
 }
 
-button:hover {
+.formButton:hover {
   opacity: 0.8;
 }
 
