@@ -260,16 +260,27 @@ ul.download-options li.export {
   display: inline-block;
 }
 
-/* Style the form */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #f1f1f1;
+}
+
 #registerForm {
   background-color: #ffffff;
   margin: 100px auto;
+  font-family: Raleway;
   padding: 40px;
   width: 70%;
   min-width: 300px;
 }
 
-/* Style the input fields */
+h1 {
+  text-align: center;
+}
+
 input {
   padding: 10px;
   width: 100%;
@@ -288,6 +299,24 @@ input.invalid {
   display: none;
 }
 
+button {
+  background-color: #4CAF50;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 17px;
+  font-family: Raleway;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+#prevBtn {
+  background-color: #bbbbbb;
+}
+
 /* Make circles that indicate the steps of the form: */
 .step {
   height: 15px;
@@ -300,7 +329,6 @@ input.invalid {
   opacity: 0.5;
 }
 
-/* Mark the active step: */
 .step.active {
   opacity: 1;
 }
