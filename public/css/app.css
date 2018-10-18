@@ -18,15 +18,21 @@ body {
 }
 
 .content-right {
-  padding: 20px;
+  padding: 0 20px 20px;
   margin: 0 0 0 200px;
 }
 
-.content-right h1 {
+.content-right h1.page-title {
   line-height: 50px;
   height: 50px;
+  margin: 0;
 }
 
+.content-center {
+  margin: 0 200px;
+}
+
+/* Navigation */
 nav {
   width: 100vw;
   height: 60px;
@@ -52,31 +58,6 @@ nav ul.nav-left {
 nav ul.nav-right {
   position: absolute;
   right: 0;
-}
-
-.gegTable {
-  width: 100%;
-  table-layout: fixed;
-}
-
-.gegTable, .gegTable th, .gegTable td {
-  border: 1px solid darkgray;
-  border-collapse: collapse;
-}
-
-.gegTable th {
-  text-align: center;
-  background-color: #e00049;
-  color: #E9F3F8;
-}
-
-.gegTable th {
-  height: 50px;
-}
-
-.gegTable td {
-  padding: 15px;
-  text-align: right;
 }
 
 div.table-container {
@@ -253,89 +234,34 @@ td.field.medical_info {
 ul.download-options {
   list-style: none;
   display: block;
-  text-align: right;
+  position: absolute;
+  top: 65px;
+  right: 20px;
+  padding: 0;
 }
 
-ul.download-options li.export {
+ul.download-options li {
   display: inline-block;
+  margin-left: 5px;
 }
 
-* {
-  box-sizing: border-box;
+ul.download-options li:first-child {
+  margin: 0;
 }
 
-body {
-  background-color: #f1f1f1;
+ul.download-options li.export button {
+  height: 40px;
+  align-content: center;
+  padding: 0 10px;
+  background-color: transparent;
+  border: 1px solid #003469;
+  transition: 0.1s ease-in-out all;
 }
 
-#registerForm {
-  background-color: #ffffff;
-  margin: 100px auto;
-  font-family: Raleway;
-  padding: 40px;
-  width: 70%;
-  min-width: 300px;
-}
-
-h1 {
-  text-align: center;
-}
-
-input {
-  padding: 10px;
-  width: 100%;
-  font-size: 17px;
-  font-family: Raleway;
-  border: 1px solid #aaaaaa;
-}
-
-/* Mark input boxes that gets an error on validation: */
-input.invalid {
-  background-color: #ffdddd;
-}
-
-/* Hide all steps by default: */
-.tab {
-  display: none;
-}
-
-button {
-  background-color: #4CAF50;
-  color: #ffffff;
-  border: none;
-  padding: 10px 20px;
-  font-size: 17px;
-  font-family: Raleway;
+ul.download-options li.export button:hover {
   cursor: pointer;
-}
-
-button:hover {
-  opacity: 0.8;
-}
-
-#prevBtn {
-  background-color: #bbbbbb;
-}
-
-/* Make circles that indicate the steps of the form: */
-.step {
-  height: 15px;
-  width: 15px;
-  margin: 0 2px;
-  background-color: #bbbbbb;
-  border: none;
-  border-radius: 50%;
-  display: inline-block;
-  opacity: 0.5;
-}
-
-.step.active {
-  opacity: 1;
-}
-
-/* Mark the steps that are finished and valid: */
-.step.finish {
-  background-color: #4CAF50;
+  background-color: #003469;
+  color: white;
 }
 
 /*# sourceMappingURL=app.css.map */

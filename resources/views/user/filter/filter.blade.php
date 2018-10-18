@@ -23,10 +23,17 @@
         </ul>
     </div>
     <div class="content-right">
-        <h1>Deelnemers {{ $oTrip->name }} {{ $oTrip->year }}</h1>
+        {{--<ul class="list-trip">--}}
+            {{--For--}}
+            {{--Actieve rijzen--}}
+            {{--Show title + deelnemers--}}
+        {{--</ul>--}}
+        <h1 class="page-title">Deelnemers {{ $oTrip->name }} {{ $oTrip->year }}</h1>
         <ul class="download-options">
-            <li class="export"><button type="submit" name="export" value="pdf">Download PDF<i class="fas fa-2x fa-file-pdf"></i></button></li>
-            <li class="export"><button type="submit" name="export" value="excel">Download Excel<i class="fas fa-2x fa-file-excel"></i></button></li>
+            <li>Download</li>
+            <li class="export"><button type="submit" name="export" value="pdf">PDF</button></li>
+            <li class="divider">/</li>
+            <li class="export"><button type="submit" name="export" value="excel">Excel</button></li>
         </ul>
         <div class="table-container">
             <table class="filter-table">
