@@ -1,14 +1,6 @@
-
-
-
-//----------------------------------------------------------------------------
-//DIT JAVASCRIPT BESTAND NIET WIJZIGEN, KIJK IN DE PUBLIC MAP VOOR WIJZIGINGEN
-//----------------------------------------------------------------------------
-
-
 var currentTab = 0; // Current tab is set to be the first tab (0)
 showTab(currentTab); // Display the current tab
-alert("test");
+
 function showTab(n) {
     // This function will display the specified tab of the form ...
     var x = document.getElementsByClassName("tab");

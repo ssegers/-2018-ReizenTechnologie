@@ -70,7 +70,7 @@
 
     </form>
 
-    Try  <script src="{{ URL::asset('/js/form.js') }}"></script>
+    <script src="{{ URL::asset('/js/form.js') }}"></script>
 
 
 @endsection
