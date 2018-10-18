@@ -10,7 +10,7 @@
                     <option>USA 2019</option>
                     <option>Duitsland 2019</option>
                 </select></p>
-            <p><label class="formLabel">Studentnummer</label><input id="txtStudentnummer" oninput="this.className=''"></p>
+            <p><label class="formLabel">Studentnummer</label>{{ Form::text('txtStudentnummer', '', ['id'=>'txtStudentnummer','oninput'=>'this.className'])}}</p>
             <p><label class="formLabel">Opleiding</label><select id="dropOpleiding" name="opleidingen">
                     <option>Elo-ICT</option>
                     <option>Docent</option>
@@ -23,27 +23,27 @@
         </div>
 
         <div class="tab">Persoonlijke gegevens:
-            <p><label class="formLabel">Naam</label><input id="txtNaam" oninput="this.className = ''"></p>
-            <p><label class="formLabel">Voornaam</label><input id="txtVoornaam" oninput="this.className = ''"></p>
+            <p><label class="formLabel">Naam</label>{{ Form::text('txtNaam', '', ['id'=>'txtNaam','oninput'=>'this.className'])}}</p>
+            <p><label class="formLabel">Voornaam</label>{{ Form::text('txtVoornaam', '', ['id'=>'txtVoornaam','oninput'=>'this.className'])}}</p>
             <p><label class="formLabel">Geslacht</label>
                 <input id="radioGeslacht" type="radio" name="gender" value="male" checked>Man
                 <input id="radioGeslacht"type="radio" name="gender" value="female"> Vrouw
                 <input id="radioGeslacht"type="radio" name="gender" value="other"> Andere</p>
-            <p><label class="formLabel">Nationaliteit</label><input id="txtNationaliteit oninput="this.className = ''"></p>
-            <p><label class="formLabel">Geboortedatum</label><input id="dateGeboorte" type="date" name="bday" oninput="this.className = ''"></p>
-            <p><label class="formLabel">Geboorteplaats</label><input id="txtGeboorteplaats oninput="this.className = ''"></p>
-            <p><label class="formLabel">Adres</label><input id="txtAdres" oninput="this.className = ''"></p>
-            <p><label class="formLabel">Land</label><input id="txtLand"oninput="this.className = ''"></p>
-            <p><label class="formLabel">Woonplaats</label><input id="dropGemeente" oninput="this.className = ''"></p>
-            <p><label class="formLabel">Bankrekeningnummer (IBAN)</label><input id="txtBank" oninput="this.className = ''"></p>
+            <p><label class="formLabel">Nationaliteit</label>{{ Form::text('txtNationaliteit', '', ['id'=>'txtNationaliteit','oninput'=>'this.className'])}}</p>
+            <p><label class="formLabel">Geboortedatum</label>{{ Form::text('dateGeboorte', '', ['id'=>'dateGeboorte','oninput'=>'this.className','type'=>'date'])}}</p>
+            <p><label class="formLabel">Geboorteplaats</label>{{ Form::text('txtGeboorteplaats', '', ['id'=>'txtGeboorteplaats','oninput'=>'this.className'])}}</p>
+            <p><label class="formLabel">Adres</label>{{ Form::text('txtAdres', '', ['id'=>'txtAdres','oninput'=>'this.className'])}}</p>
+            <p><label class="formLabel">Land</label>{{ Form::text('txtLand', '', ['id'=>'txtLand','oninput'=>'this.className'])}}</p>
+            <p><label class="formLabel">Woonplaats</label>{{ Form::text('dropGemeente', '', ['id'=>'dropGemeente','oninput'=>'this.className'])}}</p>
+            <p><label class="formLabel">Bankrekeningnummer (IBAN)</label>{{ Form::text('txtBank', '', ['id'=>'txtBank','oninput'=>'this.className'])}}</p>
 
         </div>
 
         <div class="tab">Contact gegevens:
             <p><label class="formLabel">E-mail adres (van de school)</label><input id="txtEmail" oninput="this.className = ''"></p>
-            <p><label class="formLabel">GSM-nummer</label><input id="txtGsm" oninput="this.className = ''"></p>
-            <p><label class="formLabel">Noodnummer 1</label><input id="txtNoodnummer1" oninput="this.className = ''"></p>
-            <p><label class="formLabel">Noodnummer 2</label><input id="txtNoodnummer2" oninput="this.className = ''"></p>
+            <p><label class="formLabel">GSM-nummer</label>{{ Form::text('txtGsm', '', ['id'=>'txtGsm','oninput'=>'this.className'])}}</p>
+            <p><label class="formLabel">Noodnummer 1</label>{{ Form::text('txtNoodnummer1', '', ['id'=>'txtNoodnummer1','oninput'=>'this.className'])}}</p>
+            <p><label class="formLabel">Noodnummer 2</label>{{ Form::text('txtNoodnummer2', '', ['id'=>'txtNoodnummer2','oninput'=>'this.className'])}}</p>
         </div>
 
         <div class="tab">Medische gegevens:
@@ -51,7 +51,7 @@
                 <input id="radioMedisch" type="radio" name="check" value="yes" >Ja
                 <input id="radioMedisch" type="radio" name="check" value="no" checked>Neen
             </p>
-            <p><label class="formLabel">Wat houden de medische aandoeningen in?</label><input id="txtMedisch" oninput="this.className = ''"></p>
+            <p><label class="formLabel">Wat houden de medische aandoeningen in?</label>{{ Form::text('txtMedisch', '', ['id'=>'txtMedisch','oninput'=>'this.className'])}}</p>
         </div>
 
         <div style="overflow:auto;">
