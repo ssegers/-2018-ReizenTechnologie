@@ -135,22 +135,19 @@ class UserDataController extends Controller
         $oTrip = Trip::where('trip_id', $iTrip->trip_id)->first();
 
         $data = $this->getUserData($aFiltersChecked, $iTrip);
-
         try {
             $spreadsheet = new Spreadsheet();  /*----Spreadsheet object-----*/
             $spreadsheet->getActiveSheet();
             $activeSheet = $spreadsheet->getActiveSheet();
             if($iCols>8){
-                $spreadsheet->getActiveSheet()->getPageSetup()->setOrientation(PageSetup::ORIENTATION_LANDSCAPE);
+                $activeSheet->getPageSetup()->setOrientation(PageSetup::ORIENTATION_LANDSCAPE);
             }
-            $activeSheet->setShowGridlines(true);
             $activeSheet->fromArray($aUserFields,NULL, 'A1')->getStyle('A1:'.$aAlphas[$iCols-1].'1')->getFont()->setBold(true)->setUnderline(true);
             $activeSheet->getStyle('A1:'.$aAlphas[$iCols-1]."1")->getBorders()->getOutline()->setBorderStyle(1);
             $activeSheet->fromArray($data,NULL,'A2');
             foreach ($data as $iRij=>$sValue){
                 $activeSheet->getStyle('A'.($iRij+2).':'.$aAlphas[$iCols-1].($iRij+2))->getBorders()->getOutline()->setBorderStyle(1);
             }
-
 
             IOFactory::registerWriter("PDF", Mpdf::class);
             $writer = IOFactory::createWriter($spreadsheet, 'PDF');
