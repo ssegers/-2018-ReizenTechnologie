@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\Exception;
 use PhpOffice\PhpSpreadsheet\IOFactory;
-use \PhpOffice\PhpSpreadsheet\Writer\Pdf\Dompdf;
+use \PhpOffice\PhpSpreadsheet\Writer\Pdf\Mpdf;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Worksheet\PageSetup;
 
@@ -132,27 +132,27 @@ class UserDataController extends Controller
     private function downloadPDF($aFiltersChecked, $iTrip){
         $iCols = count($aUserFields = $aFiltersChecked);
         $aAlphas = range('A', 'Z');
-        $oTrip = (string) Trip::select('name')->where('trip_id', $iTrip->trip_id)->first();
-        $sTripNaam =str_before(str_after($oTrip,":"),"}");
+        $oTrip = Trip::where('trip_id', $iTrip->trip_id)->first();
 
         $data = $this->getUserData($aFiltersChecked, $iTrip);
-
         try {
             $spreadsheet = new Spreadsheet();  /*----Spreadsheet object-----*/
             $spreadsheet->getActiveSheet();
             $activeSheet = $spreadsheet->getActiveSheet();
             if($iCols>8){
-                $spreadsheet->getActiveSheet()->getPageSetup()->setOrientation(PageSetup::ORIENTATION_LANDSCAPE);
+                $activeSheet->getPageSetup()->setOrientation(PageSetup::ORIENTATION_LANDSCAPE);
             }
-            $spreadsheet->getActiveSheet()->getPageMargins()->setLeft(0.2);
-            $spreadsheet->getActiveSheet()->getPageMargins()->setTop(0.5);
             $activeSheet->fromArray($aUserFields,NULL, 'A1')->getStyle('A1:'.$aAlphas[$iCols-1].'1')->getFont()->setBold(true)->setUnderline(true);
+            $activeSheet->getStyle('A1:'.$aAlphas[$iCols-1]."1")->getBorders()->getOutline()->setBorderStyle(1);
             $activeSheet->fromArray($data,NULL,'A2');
+            foreach ($data as $iRij=>$sValue){
+                $activeSheet->getStyle('A'.($iRij+2).':'.$aAlphas[$iCols-1].($iRij+2))->getBorders()->getOutline()->setBorderStyle(1);
+            }
 
-            IOFactory::registerWriter("PDF", Dompdf::class);
+            IOFactory::registerWriter("PDF", Mpdf::class);
             $writer = IOFactory::createWriter($spreadsheet, 'PDF');
 
-            header('Content-Disposition: attachment; filename="'.$sTripNaam.'gefilterde_lijst.pdf"');
+            header('Content-Disposition: attachment; filename="'.$oTrip->name.'_gefilterde_lijst.pdf"');
             $writer->save("php://output");
         } catch (Exception $e) {
         }

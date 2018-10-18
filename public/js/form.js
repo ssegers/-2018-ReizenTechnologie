@@ -1,6 +1,6 @@
 var currentTab = 0; // Current tab is set to be the first tab (0)
 showTab(currentTab); // Display the current tab
-alert("test");
+
 function showTab(n) {
     // This function will display the specified tab of the form ...
     var x = document.getElementsByClassName("tab");
@@ -32,7 +32,7 @@ function nextPrev(n) {
     // if you have reached the end of the form... :
     if (currentTab >= x.length) {
         //...the form gets submitted:
-        document.getElementById("regForm").submit();
+        document.getElementById("registerForm").submit();
         return false;
     }
     // Otherwise, display the correct tab:

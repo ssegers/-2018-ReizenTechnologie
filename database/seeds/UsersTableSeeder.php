@@ -12,6 +12,14 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
+
+        // Standaard Gebruiker
+        DB::table('users')->insert([
+            'name' => '',
+            'password' => '',
+            'role' => 'guest'
+        ]);
+
         // Stefan Segers
         DB::table('users')->insert([
             'name' => 'u0598673',
@@ -88,5 +96,7 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt('yoer'),
             'role' => 'traveller',
         ]);
+
+
     }
 }
