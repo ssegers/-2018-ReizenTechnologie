@@ -23,7 +23,7 @@ body {
   text-align: center;
 }
 
-#radioGeslacht{
+input[id='radioGeslacht']{
   padding: 25px;
 }
 
@@ -50,6 +50,7 @@ input.invalid {
   color: #ffffff;
   border: none;
   padding: 10px 20px;
+  margin: 10px 0px 10px 10px;
   font-size: 17px;
   font-family: Raleway;
   cursor: pointer;
