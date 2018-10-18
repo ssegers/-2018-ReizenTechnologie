@@ -16,7 +16,7 @@ class ActiveTripOrganizerController extends Controller
     public function showForm() {
         $oActiveTrips = Trip::Where('is_active', true)->get();
         $iTripId = $oActiveTrips[0]->trip_id;
-        
+
         $oCurrentMentorsId = TripOrganizer::Where('trip_id', $iTripId)->get()->toArray();
         $oCurrentMentors = Traveller::Where('traveller_id', $oCurrentMentorsId)->get();
         return view( 'user.ActiveTripOrganizer',

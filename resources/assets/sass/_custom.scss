@@ -11,10 +11,42 @@ body {
   position: fixed;
   background-color: $col-menu-left;
   width: 200px;
-  height: 100vh;
+  height: calc(100vh - 60px);
   border-right: 1px solid $col-accent;
 }
 .content-right {
-  padding: 20px;
+  padding: 0 20px 20px;
   margin: 0 0 0 200px;
+}
+.content-right h1.page-title {
+  line-height: 50px;
+  height: 50px;
+  margin: 0;
+}
+.content-center {
+  margin: 0 200px;
+}
+
+/* Navigation */
+nav {
+  width: 100vw;
+  height: 60px;
+  overflow: hidden;
+  position: relative;
+  background-color: $col-primary;
+}
+nav ul {
+  list-style: none;
+}
+nav ul li {
+  display: inline-block;
+  line-height: 60px;
+}
+nav ul.nav-left {
+  position: absolute;
+  left: 0;
+}
+nav ul.nav-right {
+  position: absolute;
+  right: 0;
 }

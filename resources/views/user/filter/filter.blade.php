@@ -1,8 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+    {{Form::open(array('url' => "user/$sUserName/trip/travellers", 'method' => 'post'))}}
     <div class="menu-left">
-        {{Form::open(array('url' => "user/$sUserName/trip/travellers", 'method' => 'post'))}}
+        <span class="filter-title">Selecteer gegevens</span>
         <ul class="filters">
             @foreach($aFilterList as $sFilterName => $sFilterText)
                 <li class="filter-option">
@@ -18,13 +19,22 @@
             @endForeach
         </ul>
         <ul class="filter-buttons">
-            <li class="export"><button type="submit" name="export" value="pdf">Download PDF<i class="fas fa-2x fa-file-pdf"></i></button></li>
-            <li class="export"><button type="submit" name="export" value="excel">Download Excel<i class="fas fa-2x fa-file-excel"></i></button></li>
-            <li class="apply"><button type="submit" name="button-filter" value="button-filter">Filter lijst</button></li>
+            <li class="apply"><button type="submit" name="button-filter" value="button-filter">Pas Gegevens Toe</button></li>
         </ul>
-        {{ Form::close() }}
     </div>
     <div class="content-right">
+        {{--<ul class="list-trip">--}}
+            {{--For--}}
+            {{--Actieve rijzen--}}
+            {{--Show title + deelnemers--}}
+        {{--</ul>--}}
+        <h1 class="page-title">Deelnemers {{ $oTrip->name }} {{ $oTrip->year }}</h1>
+        <ul class="download-options">
+            <li>Download</li>
+            <li class="export"><button type="submit" name="export" value="pdf">PDF</button></li>
+            <li class="divider">/</li>
+            <li class="export"><button type="submit" name="export" value="excel">Excel</button></li>
+        </ul>
         <div class="table-container">
             <table class="filter-table">
                 <thead>
@@ -47,4 +57,5 @@
         </div>
         {{ $aUserData->appends($aFiltersChecked)->links() }}
     </div>
+    {{ Form::close() }}
 @endsection

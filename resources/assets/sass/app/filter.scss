@@ -1,9 +1,16 @@
 div.table-container {
   overflow-x: auto;
 }
+span.filter-title {
+  display: block;
+  padding: 0 20px;
+  line-height: 50px;
+  background-color: $col-accent;
+  color: white;
+}
 ul.filters {
   list-style: none;
-  height: calc(100vh - 140px);
+  height: calc(100vh - 160px);
   overflow-y: auto;
   border-bottom: 1px solid $col-accent;
 }
@@ -33,20 +40,6 @@ ul.filter-buttons {
   bottom: 0;
   list-style: none;
   width: 100%;
-}
-ul.filter-buttons li.export button {
-  line-height: 45px;
-  position: relative;
-  padding: 0 20px;
-  border: none;
-  background-color: transparent;
-  width: 100%;
-  text-align: left;
-}
-ul.filter-buttons li.export button i {
-  position: absolute;
-  right: 20px;
-  top: 10px;
 }
 ul.filter-buttons li.apply button {
   border: none;
@@ -141,4 +134,32 @@ td[class^="field emergency"] {
 }
 td.field.medical_info {
   min-width: 200px;
+}
+ul.download-options {
+  list-style: none;
+  display: block;
+  position: absolute;
+  top: 65px;
+  right: 20px;
+  padding: 0;
+}
+ul.download-options li {
+  display: inline-block;
+  margin-left: 5px;
+}
+ul.download-options li:first-child {
+  margin: 0;
+}
+ul.download-options li.export button {
+  height: 40px;
+  align-content: center;
+  padding: 0 10px;
+  background-color: transparent;
+  border: 1px solid $col-accent;
+  transition: 0.1s ease-in-out all;
+}
+ul.download-options li.export button:hover {
+  cursor: pointer;
+  background-color: $col-accent;
+  color: white;
 }
