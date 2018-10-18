@@ -23,3 +23,7 @@ Route::post('user/{sUserName}/trip/travellers', 'UserDataController@showUsersAsM
 
 route::get('user/Form/form', 'RegisterController@form');
 route::post('user/Form/form', 'RegisterController@formPost');
+
+route::get('user/Create/create', 'CreateUserController@createForm');
+route::post('user/Create/create', 'CreateUserController@createUser');
+

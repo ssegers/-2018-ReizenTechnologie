@@ -1,9 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
+    {{ Form::open(array('action' => 'RegisterController@formPost', 'method' => 'post', 'id' => 'registerForm')) }}
 
+<<<<<<< HEAD
     <form id="registerForm" action="{{ action('RegisterController@formPost') }}">
         <h1 class="formTitel">Inschrijvings formulier</h1>
+=======
+        <h1 class="formTitel">Schrijf je hier in:</h1>
+>>>>>>> c753323465df909ab5fd4798f381c9684a213e27
         <!-- One "tab" for each step in the form: -->
         <div class="tab">Basisgegevens:
             <p><label class="formLabel">Reis:</label>
@@ -64,7 +69,7 @@
             <span class="step"></span>
         </div>
 
-    </form>
+    {{ Form::close() }}
 
     <script src="{{ URL::asset('/js/form.js') }}"></script>
 

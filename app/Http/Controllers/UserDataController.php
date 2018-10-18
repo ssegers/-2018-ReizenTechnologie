@@ -22,7 +22,7 @@ class UserDataController extends Controller
         'study_name'=>'Richting',
         'major_name'=>'Afstudeerrichting',
         'birthdate' => 'Geboortedatum',
-//        'birthplace' => 'Geboorteplaats',
+        'birthplace' => 'Geboorteplaats',
         'gender' => 'Geslacht',
         'nationality' => 'Nationaliteit',
         'address' => 'Adres',
