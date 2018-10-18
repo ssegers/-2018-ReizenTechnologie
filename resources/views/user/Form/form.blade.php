@@ -68,4 +68,8 @@
         </div>
 
     </form>
+
+    Try  <script src="{{ URL::asset('/js/form.js') }}"></script>
+
+
 @endsection

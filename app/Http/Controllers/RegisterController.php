@@ -96,12 +96,13 @@ class RegisterController extends Controller
                 'birthdate' => $aData['birthplace'],
                 'birthplace' => "Geboorteplaats",
                 'medical_info' => $aData['radioMedisch'],
+                'iban' => $aData['txtBank'],
                 'medical_issue' => $aData['txtMedischDetail'],
                 'email' => $aData['txtEmail'],
                 'major_id' => $aData['dropOpleiding']
             ]
         );
-        //BANK STUDY
+        //BANK
 
 
     }
