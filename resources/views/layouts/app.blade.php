@@ -10,6 +10,20 @@
     <link type="text/css" rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
 <body>
+    <nav>
+        <ul class="nav-left">
+            <li>Info</li>
+        </ul>
+        <ul class="nav-right">
+            <li>
+                {{--@if (Illuminate\Auth\Auth::check())--}}
+                    {{--{{ Illuminate\Auth\Auth::name }}--}}
+                    {{--@else--}}
+                    Aanmelden
+                {{--@endif--}}
+            </li>
+        </ul>
+    </nav>
     @yield('content')
 </body>
 </html>

@@ -22,6 +22,7 @@ class UserDataController extends Controller
         'study_name'=>'Richting',
         'major_name'=>'Afstudeerrichting',
         'birthdate' => 'Geboortedatum',
+//        'birthplace' => 'Geboorteplaats',
         'gender' => 'Geslacht',
         'nationality' => 'Nationaliteit',
         'address' => 'Adres',
@@ -76,9 +77,10 @@ class UserDataController extends Controller
         }
 
         $aFiltersChecked = $this->aFiltersChecked;
-
         /* Get the trip where the organizer is involved with */
-        $iTrip = Traveller::select('trip_id')->where('user_id', $oUser->user_id)->first();
+        $iTrip = Traveller::where('user_id', $oUser->user_id)->first();
+
+        $oTrip = Trip::where('trip_id', $iTrip->trip_id)->first();
 
         /* Get the travellers based on the applied filters */
         $aUserData = $this->getUserData($aFiltersChecked, $iTrip, 15);
@@ -98,6 +100,7 @@ class UserDataController extends Controller
             'aFilterList' => $this->aFilterList,
             'aFiltersChecked' => $aFiltersChecked,
             'sUserName' => $oUser->name,
+            'oTrip' => $oTrip,
         ]);
     }
 
