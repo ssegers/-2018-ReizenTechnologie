@@ -1,8 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+    {{Form::open(array('url' => "user/$sUserName/trip/travellers", 'method' => 'post'))}}
     <div class="menu-left">
-        {{Form::open(array('url' => "user/$sUserName/trip/travellers", 'method' => 'post'))}}
+        <span class="filter-title">Selecteer gegevens</span>
         <ul class="filters">
             @foreach($aFilterList as $sFilterName => $sFilterText)
                 <li class="filter-option">
@@ -18,13 +19,15 @@
             @endForeach
         </ul>
         <ul class="filter-buttons">
-            <li class="export"><button type="submit" name="export" value="pdf">Download PDF<i class="fas fa-2x fa-file-pdf"></i></button></li>
-            <li class="export"><button type="submit" name="export" value="excel">Download Excel<i class="fas fa-2x fa-file-excel"></i></button></li>
-            <li class="apply"><button type="submit" name="button-filter" value="button-filter">Filter lijst</button></li>
+            <li class="apply"><button type="submit" name="button-filter" value="button-filter">Pas Gegevens Toe</button></li>
         </ul>
-        {{ Form::close() }}
     </div>
     <div class="content-right">
+        <h1>Deelnemers {{ $oTrip->name }} {{ $oTrip->year }}</h1>
+        <ul class="download-options">
+            <li class="export"><button type="submit" name="export" value="pdf">Download PDF<i class="fas fa-2x fa-file-pdf"></i></button></li>
+            <li class="export"><button type="submit" name="export" value="excel">Download Excel<i class="fas fa-2x fa-file-excel"></i></button></li>
+        </ul>
         <div class="table-container">
             <table class="filter-table">
                 <thead>
@@ -47,4 +50,5 @@
         </div>
         {{ $aUserData->appends($aFiltersChecked)->links() }}
     </div>
+    {{ Form::close() }}
 @endsection

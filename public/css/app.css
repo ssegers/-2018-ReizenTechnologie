@@ -13,13 +13,45 @@ body {
   position: fixed;
   background-color: #fff;
   width: 200px;
-  height: 100vh;
+  height: calc(100vh - 60px);
   border-right: 1px solid #003469;
 }
 
 .content-right {
   padding: 20px;
   margin: 0 0 0 200px;
+}
+
+.content-right h1 {
+  line-height: 50px;
+  height: 50px;
+}
+
+nav {
+  width: 100vw;
+  height: 60px;
+  overflow: hidden;
+  position: relative;
+  background-color: #E00049;
+}
+
+nav ul {
+  list-style: none;
+}
+
+nav ul li {
+  display: inline-block;
+  line-height: 60px;
+}
+
+nav ul.nav-left {
+  position: absolute;
+  left: 0;
+}
+
+nav ul.nav-right {
+  position: absolute;
+  right: 0;
 }
 
 .gegTable {
@@ -51,9 +83,17 @@ div.table-container {
   overflow-x: auto;
 }
 
+span.filter-title {
+  display: block;
+  padding: 0 20px;
+  line-height: 50px;
+  background-color: #003469;
+  color: white;
+}
+
 ul.filters {
   list-style: none;
-  height: calc(100vh - 140px);
+  height: calc(100vh - 160px);
   overflow-y: auto;
   border-bottom: 1px solid #003469;
 }
@@ -88,22 +128,6 @@ ul.filter-buttons {
   bottom: 0;
   list-style: none;
   width: 100%;
-}
-
-ul.filter-buttons li.export button {
-  line-height: 45px;
-  position: relative;
-  padding: 0 20px;
-  border: none;
-  background-color: transparent;
-  width: 100%;
-  text-align: left;
-}
-
-ul.filter-buttons li.export button i {
-  position: absolute;
-  right: 20px;
-  top: 10px;
 }
 
 ul.filter-buttons li.apply button {
@@ -224,6 +248,16 @@ td[class^="field emergency"] {
 
 td.field.medical_info {
   min-width: 200px;
+}
+
+ul.download-options {
+  list-style: none;
+  display: block;
+  text-align: right;
+}
+
+ul.download-options li.export {
+  display: inline-block;
 }
 
 /* Style the form */
