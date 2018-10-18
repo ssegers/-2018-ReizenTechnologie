@@ -3,33 +3,35 @@
 namespace App\Http\Controllers;
 
 use App\Traveller;
+use App\Trip;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Maatwebsite\Excel\Facades\Excel;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\Exception;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use \PhpOffice\PhpSpreadsheet\Writer\Pdf\Dompdf;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Worksheet\PageSetup;
-use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class UserDataController extends Controller
 {
     /* List of all filters */
     protected $aFilterList = [
-        'name'=>'Naam',
-        'email' => 'Email',
-        'country' => 'Land',
+        'name'=>'r-Nummer',
+        'study_name'=>'Richting',
+        'major_name'=>'Afstudeerrichting',
+        'birthdate' => 'Geboortedatum',
+        'gender' => 'Geslacht',
+        'nationality' => 'Nationaliteit',
+        'address' => 'Adres',
         'zip_code'=>'Postcode',
         'city'=>'Stad',
-        'address' => 'Adres',
-        'gender' => 'Geslacht',
+        'country' => 'Land',
+        'email' => 'Email',
         'phone' => 'Telefoon',
         'emergency_phone_1' => 'Nood Contact 1',
         'emergency_phone_2' => 'Nood Contact 2',
-        'nationality' => 'Nationaliteit',
-        'birthdate' => 'Geboortedatum',
         'medical_info' => 'Medische Info',
     ];
 
@@ -105,14 +107,20 @@ class UserDataController extends Controller
     private function downloadExcel($aFiltersChecked, $iTrip) {
         $aUserFields = $aFiltersChecked;
         $data = $this->getUserData($aFiltersChecked, $iTrip);
-        /** Create a new Spreadsheet Object **/
-        $spreadsheet = new Spreadsheet();
-        $sheet = $spreadsheet->getActiveSheet();
-        $sheet->fromArray($aUserFields, NULL, 'A1');
-        $sheet->fromArray($data, NULL, 'A2');
-        $writer = new Xlsx($spreadsheet);
-        header('Content-Disposition: attachment; filename="travellers.xlsx"');
-        $writer->save('php://output');
+        try {
+            /** Create a new Spreadsheet Object **/
+            $spreadsheet = new Spreadsheet();
+            $sheet = $spreadsheet->getActiveSheet();
+            $sheet->fromArray($aUserFields, '', 'A1');
+            $sheet->fromArray($data, '', 'A2');
+            $writer = new Xlsx($spreadsheet);
+            header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+            header('Content-Disposition: attachment; filename="travellers.xlsx"');
+            $writer->save("php://output");
+            exit;
+        } catch (Exception $e) {
+            return $e;
+        }
     }
 
     /**
@@ -121,6 +129,8 @@ class UserDataController extends Controller
     private function downloadPDF($aFiltersChecked, $iTrip){
         $iCols = count($aUserFields = $aFiltersChecked);
         $aAlphas = range('A', 'Z');
+        $oTrip = (string) Trip::select('name')->where('trip_id', $iTrip->trip_id)->first();
+        $sTripNaam =str_before(str_after($oTrip,":"),"}");
 
         $data = $this->getUserData($aFiltersChecked, $iTrip);
 
@@ -139,9 +149,7 @@ class UserDataController extends Controller
             IOFactory::registerWriter("PDF", Dompdf::class);
             $writer = IOFactory::createWriter($spreadsheet, 'PDF');
 
-            header('Content-Disposition: attachment; filename="gefilterte_tabel.pdf"');
-
-
+            header('Content-Disposition: attachment; filename="'.$sTripNaam.'gefilterde_lijst.pdf"');
             $writer->save("php://output");
         } catch (Exception $e) {
         }
@@ -164,11 +172,15 @@ class UserDataController extends Controller
             return Traveller::select(array_keys($aFilters))
                 ->join('users','travellers.user_id','=','users.user_id')
                 ->join('zips','travellers.zip_id','=','zips.zip_id')
+                ->join('majors','travellers.major_id','=','majors.major_id')
+                ->join('studies','majors.study_id','=','studies.study_id')
                 ->where('trip_id', $iTrip->trip_id)->paginate($iPaginate);
         }
         return Traveller::select(array_keys($aFilters))
             ->join('users','travellers.user_id','=','users.user_id')
             ->join('zips','travellers.zip_id','=','zips.zip_id')
+            ->join('majors','travellers.major_id','=','majors.major_id')
+            ->join('studies','majors.study_id','=','studies.study_id')
             ->where('trip_id', $iTrip->trip_id)->get()->toArray();
     }
 }

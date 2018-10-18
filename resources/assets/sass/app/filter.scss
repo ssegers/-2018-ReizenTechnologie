@@ -1,3 +1,6 @@
+div.table-container {
+  overflow-x: auto;
+}
 ul.filters {
   list-style: none;
   height: calc(100vh - 140px);
@@ -90,4 +93,52 @@ ul.pagination li a {
 ul.pagination li.page-item.active {
   background-color: $col-accent;
   color: white;
+}
+td.field.last_name {
+  min-width: 120px;
+}
+td.field.first_name {
+  min-width: 120px;
+}
+td.field.name {
+  min-width: 100px;
+}
+td.field.study_name {
+  min-width: 100px;
+}
+td.field.major_name {
+  min-width: 140px;
+}
+td.field.birthdate {
+  min-width: 120px;
+}
+td.field.gender {
+  min-width: 80px;
+}
+td.field.nationality {
+  min-width: 100px;
+}
+td.field.address {
+  min-width: 200px;
+}
+td.field.zip_code {
+  min-width: 90px;
+}
+td.field.city {
+  min-width: 120px;
+}
+td.field.country {
+  min-width: 100px;
+}
+td.field.email {
+  min-width: 250px;
+}
+td.field.phone {
+  min-width: 100px;
+}
+td[class^="field emergency"] {
+  min-width: 130px;
+}
+td.field.medical_info {
+  min-width: 200px;
 }

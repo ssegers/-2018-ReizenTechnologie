@@ -10,7 +10,6 @@ class RegisterController extends Controller
     /**
      * @author Daan Vandebosch
      * @return \Exception|\Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
-     *
      * Get's register session data and saves it to database.
      */
     function __construct() {
@@ -22,85 +21,89 @@ class RegisterController extends Controller
     /*---------------------------------------------------------------------------FORM---------------------------------------*/
     /*----------------------------------------------------------------------------------------------------------------------*/
     public function formPost(Request $aRequest){
-        $aData["key"] = $aRequest->post('key');
+        //Eerste scherm
+        $aData["dropReis"] = $aRequest->post('dropReis');
+        $aData["txtStudentnummer"] = $aRequest->post('txtStudentnummer');
+        $aData["dropOpleiding"] = $aRequest->post('dropOpleiding');
+        $aData["dropAfstudeerrichting"] = $aRequest->post('dropAfstudeerrichting');
 
-        return redirect('map/naam');
+        //Tweede scherm
+        $aData["txtNaam"] = $aRequest->post('txtNaam');
+        $aData["txtVoornaam"] = $aRequest->post('txtVoornaam');
+        $aData["radioGeslacht"] = $aRequest->post('radioGeslacht');
+        $aData["txtNationaliteit"] = $aRequest->post('txtNationaliteit');
+        $aData["dateGeboorte"] = $aRequest->post('dateGeboorte');
+        $aData["txtAdres"] = $aRequest->post('txtAdres');
+        $aData["txtLand"] = $aRequest->post('txtLand');
+        $aData["dropGemeente"] = $aRequest->post('dropGemeente');
+        $aData["txtBank"] = $aRequest->post('txtBank');
+
+        //Derde scherm
+        $aData["txtGsm"] = $aRequest->post('txtGsm');
+        $aData["txtNoodnummer1"] = $aRequest->post('txtNoodnummer1');
+        $aData["txtNoodnummer2"] = $aRequest->post('txtNoodnummer2');
+        $aData["txtEmail"] = $aRequest->post('txtEmail');
+
+        //Vierde scherm
+        $aData["radioMedisch"] = $aRequest->post('radioMedisch');
+        $aData["txtMedischDetail"] = $aRequest->post('txtMedischDetail');
+
+        $this->SaveData($aData);
+
+        return redirect('welcome');
     }
+
     public function form(){
-        return view('user.register.form');
+        return view('user.Form.form');
     }
 
     /*----------------------------------------------------------------------------------------------------------------------*/
     /*--------------------------------------------------------------------SAVE COLLECTED DATA-------------------------------*/
     /*----------------------------------------------------------------------------------------------------------------------*/
     public function SaveData($aData){
-        try{
-            $sFunctie = "Dummy";
-            //Saving User
-            $sPassword = bcrypt($aData['txtWachtwoord']);
-            echo $sPassword;
-            User::insert(
-                [
-                    'name' => $aData['txtNummer'],
-                    'email' => $aData['email'],
-                    'password' => $sPassword,
-                    'function' => $sFunctie
-                ]
-            );
-            //Saving traveller
-            $iUserID = User::where('email',$aData['email']) ->value('id');
-            if ($aData['IsStudentOrDocent'] == "2"){
-                Traveller::insert(
-                    [
-                        'user_id' => $iUserID,
-                        'trip_id' => $aData['ReisKiezen'],
-                        'zip_id' => $aData['Postcode'],
-                        'firstname' => $aData['firstname'],
-                        'lastname' => $aData['lastname'],
-                        'country' => $aData['country'],
-                        'address' => $aData['address'],
-                        'sex' => $aData['gender'],
-                        'phone' => $aData['gsm'],
-                        'emergency_phone_1' => $aData['NoodNummer1'],
-                        'emergency_phone_2' => $aData['NoodNummer2'],
-                        'nationality' => $aData['nationality'],
-                        'birthdate' => $aData['birthdate'],
-                        'birthplace' => $aData['birthplace'],
-                        'medical_info' => $aData['MedischeInfo'],
-                        'medical_issue' => $aData['MedischeAandoening']
-                    ]
-                );
-            }
-            else{
-                Traveller::insert(
-                    [
-                        'user_id' => $iUserID,
-                        'trip_id' => $aData['ReisKiezen'],
-                        'major_id' => $aData['AfstudeerrichtingKiezen'],
-                        'zip_id' => $aData['Postcode'],
-                        'firstname' => $aData['firstname'],
-                        'lastname' => $aData['lastname'],
-                        'country' => $aData['country'],
-                        'address' => $aData['address'],
-                        'sex' => $aData['gender'],
-                        'phone' => $aData['gsm'],
-                        'emergency_phone_1' => $aData['NoodNummer1'],
-                        'emergency_phone_2' => $aData['NoodNummer2'],
-                        'nationality' => $aData['nationality'],
-                        'birthdate' => $aData['birthdate'],
-                        'birthplace' => $aData['birthplace'],
-                        'medical_info' => $aData['MedischeInfo'],
-                        'medical_issue' => $aData['MedischeAandoening']
-                    ]
-                );
-            }
-            //Returning completion screen
-            return redirect('reg/form7');
+        if($aData["txtStudentnummer"][0] = "r"){
+            $sFunctie = "Student";
         }
-        catch (Exception $exception) {
-            //If error is caught, redirect to first form
-            return redirect('reg');
+        else{
+            $sFunctie = "Begeleider";
         }
+        //Saving user
+        User::insert(
+            [
+                'name' => $aData["txtStudentnummer"],
+                'password' => 'abc',
+                'role' => $sFunctie
+            ]
+        );
+
+        $iUserID = User::where('name',$aData['txtStudentnummer']) ->value('user_id');
+
+        //Saving traveller
+        Travellers::insert(
+            [
+                'user_id' => $iUserID,
+                'trip_id' => $aData['dropReis'],
+                'zip_id' => $aData['dropGemeente'],
+                'first_name' => $aData['txtVooraam'],
+                'last_name' => $aData['txtNaam'],
+                'country' => $aData['txtLand'],
+                'address' => $aData['txtAdres'],
+                'gender' => $aData['radioGeslacht'],
+                'phone' => $aData['txtGsm'],
+                'emergency_phone_1' => $aData['txtNoodnummer1'],
+                'emergency_phone_2' => $aData['txtNoodnummer2'],
+                'nationality' => $aData['txtNationaliteit'],
+                'birthdate' => $aData['birthplace'],
+                'birthplace' => "Geboorteplaats",
+                'medical_info' => $aData['radioMedisch'],
+                'medical_issue' => $aData['txtMedischDetail'],
+                'email' => $aData['txtEmail'],
+                'major_id' => $aData['dropOpleiding']
+            ]
+        );
+        //BANK STUDY
+
+
     }
     /*----------------------------------------------------------------------------------------------------------------------*/
     /*--------------------------------------------------------------------------Collection of error messages----------------*/
@@ -136,4 +139,5 @@ class RegisterController extends Controller
         ];
     }
 }
+
 
