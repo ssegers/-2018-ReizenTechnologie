@@ -132,8 +132,7 @@ class UserDataController extends Controller
     private function downloadPDF($aFiltersChecked, $iTrip){
         $iCols = count($aUserFields = $aFiltersChecked);
         $aAlphas = range('A', 'Z');
-        $oTrip = (string) Trip::select('name')->where('trip_id', $iTrip->trip_id)->first();
-        $sTripNaam =str_before(str_after($oTrip,":"),"}");
+        $oTrip = Trip::where('trip_id', $iTrip->trip_id)->first();
 
         $data = $this->getUserData($aFiltersChecked, $iTrip);
 
@@ -156,7 +155,7 @@ class UserDataController extends Controller
             IOFactory::registerWriter("PDF", Mpdf::class);
             $writer = IOFactory::createWriter($spreadsheet, 'PDF');
 
-            header('Content-Disposition: attachment; filename="'.$sTripNaam.'gefilterde_lijst.pdf"');
+            header('Content-Disposition: attachment; filename="'.$oTrip->name.'_gefilterde_lijst.pdf"');
             $writer->save("php://output");
         } catch (Exception $e) {
         }
