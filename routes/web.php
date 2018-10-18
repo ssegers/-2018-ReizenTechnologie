@@ -23,3 +23,6 @@ Route::post('user/{sUserName}/trip/travellers', 'UserDataController@showUsersAsM
 
 route::get('user/Form/form', 'RegisterController@form');
 route::post('user/Form/form', 'RegisterController@formPost');
+
+//Get active trip to link to organizers
+route::get('admin/linkorganisator/', 'ActiveTripOrganizerController@showForm');
