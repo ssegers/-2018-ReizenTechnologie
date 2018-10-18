@@ -48,7 +48,7 @@ class RegisterController extends Controller
         $aData["radioMedisch"] = $aRequest->post('radioMedisch');
         $aData["txtMedischDetail"] = $aRequest->post('txtMedischDetail');
 
-        echo $aData["txtStudentnummer"];
+        echo serialize($aData);
 
         //$this->SaveData($aData);
         //return redirect('welcome');
