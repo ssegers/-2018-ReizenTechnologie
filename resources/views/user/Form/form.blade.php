@@ -31,6 +31,7 @@
                 <input id="radioGeslacht"type="radio" name="gender" value="other"> Andere</p>
             <p><label>Nationaliteit</label><input id="txtNationaliteit oninput="this.className = ''"></p>
             <p><label>Geboortedatum</label><input id="dateGeboorte" type="date" name="bday" oninput="this.className = ''"></p>
+            <p><label>Geboorteplaats</label><input id="txtGeboorteplaats oninput="this.className = ''"></p>
             <p><label>Adres</label><input id="txtAdres" oninput="this.className = ''"></p>
             <p><label>Land</label><input id="txtLand"oninput="this.className = ''"></p>
             <p><label>Woonplaats</label><input id="dropGemeente" oninput="this.className = ''"></p>
