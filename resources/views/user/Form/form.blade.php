@@ -70,4 +70,8 @@
         </div>
 
     </form>
+
+    <script src="{{ URL::asset('/js/form.js') }}"></script>
+
+
 @endsection
