@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\Exception;
 use PhpOffice\PhpSpreadsheet\IOFactory;
-use \PhpOffice\PhpSpreadsheet\Writer\Pdf\Dompdf;
+use \PhpOffice\PhpSpreadsheet\Writer\Pdf\Mpdf;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Worksheet\PageSetup;
 
@@ -141,12 +141,16 @@ class UserDataController extends Controller
             if($iCols>8){
                 $spreadsheet->getActiveSheet()->getPageSetup()->setOrientation(PageSetup::ORIENTATION_LANDSCAPE);
             }
-            $spreadsheet->getActiveSheet()->getPageMargins()->setLeft(0.2);
-            $spreadsheet->getActiveSheet()->getPageMargins()->setTop(0.5);
+            $activeSheet->setShowGridlines(true);
             $activeSheet->fromArray($aUserFields,NULL, 'A1')->getStyle('A1:'.$aAlphas[$iCols-1].'1')->getFont()->setBold(true)->setUnderline(true);
+            $activeSheet->getStyle('A1:'.$aAlphas[$iCols-1]."1")->getBorders()->getOutline()->setBorderStyle(1);
             $activeSheet->fromArray($data,NULL,'A2');
+            foreach ($data as $iRij=>$sValue){
+                $activeSheet->getStyle('A'.($iRij+2).':'.$aAlphas[$iCols-1].($iRij+2))->getBorders()->getOutline()->setBorderStyle(1);
+            }
 
-            IOFactory::registerWriter("PDF", Dompdf::class);
+
+            IOFactory::registerWriter("PDF", Mpdf::class);
             $writer = IOFactory::createWriter($spreadsheet, 'PDF');
 
             header('Content-Disposition: attachment; filename="'.$sTripNaam.'gefilterde_lijst.pdf"');
