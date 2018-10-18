@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
     <form id="registerForm" action="{{ action('RegisterController@formPost') }}">
         <h1>Schrijf je hier in:</h1>
         <!-- One "tab" for each step in the form: -->
