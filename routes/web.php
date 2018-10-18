@@ -30,4 +30,6 @@ route::get('admin/linkorganisator/', 'ActiveTripOrganizerController@showForm');
 route::get('user/Create/create', 'CreateUserController@createForm');
 route::post('user/Create/create', 'CreateUserController@createUser');
 
+Route::get('admin/info', 'AdminInfoController@getInfo');
+Route::post('admin/info', 'AdminInfoController@updateInfo');
 
