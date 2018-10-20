@@ -23,12 +23,18 @@
         </ul>
     </div>
     <div class="content-right">
-        {{--<ul class="list-trip">--}}
-            {{--For--}}
-            {{--Actieve rijzen--}}
-            {{--Show title + deelnemers--}}
-        {{--</ul>--}}
-        <h1 class="page-title">Deelnemers {{ $oTrip->name }} {{ $oTrip->year }}</h1>
+        <ul class="list-trip">
+            @foreach($aActiveTrips as $aTripData)
+                <li
+                @if($aTripData['oTrip']->trip_id == $oCurrentTrip->trip_id)
+                    class="active"
+                @endif
+                >
+                    {{ $aTripData['oTrip']->name }} {{ $aTripData['oTrip']->year }} ({{ $aTripData['iCount'] }})
+                </li>
+            @endforeach
+        </ul>
+        <h1 class="page-title">Deelnemers {{ $oCurrentTrip->name }} {{ $oCurrentTrip->year }}</h1>
         <ul class="download-options">
             <li>Download</li>
             <li class="export"><button type="submit" name="export" value="pdf">PDF</button></li>

@@ -139,7 +139,7 @@ ul.download-options {
   list-style: none;
   display: block;
   position: absolute;
-  top: 65px;
+  top: 115px;
   right: 20px;
   padding: 0;
 }
@@ -162,4 +162,27 @@ ul.download-options li.export button:hover {
   cursor: pointer;
   background-color: $col-accent;
   color: white;
+}
+ul.list-trip {
+  list-style: none;
+  line-height: 48px;
+  margin-left: -18px;
+  max-width: 100%;
+  overflow-x: auto;
+}
+ul.list-trip li {
+  display: inline-block;
+  padding: 0 20px;
+  background-color: $col-primary;
+  border: 1px solid white;
+  margin: 0 -3px;
+  color: white;
+  transition: 0.1s ease-in-out all;
+}
+ul.list-trip li.own:hover {
+  background-color: $col-accent;
+  cursor: pointer;
+}
+ul.list-trip li.active {
+  background-color: $col-accent;
 }
