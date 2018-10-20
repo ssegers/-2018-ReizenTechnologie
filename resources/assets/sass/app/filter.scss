@@ -75,6 +75,7 @@ table.filter-table tbody tr {
 table.filter-table tbody tr:hover {
   background-color: $col-accent;
   color: white;
+  cursor: pointer;
 }
 ul.pagination {
   list-style: none;

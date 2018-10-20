@@ -258,6 +258,7 @@ table.filter-table tbody tr {
 table.filter-table tbody tr:hover {
   background-color: #003469;
   color: white;
+  cursor: pointer;
 }
 
 ul.pagination {
