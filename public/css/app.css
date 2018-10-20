@@ -2,6 +2,7 @@
 @import url("https://use.fontawesome.com/releases/v5.3.1/css/all.css");
 body {
   background-color: #E9F3F8;
+  overflow: hidden;
 }
 
 * {
@@ -167,6 +168,8 @@ input.invalid {
 
 div.table-container {
   overflow-x: auto;
+  overflow-y: auto;
+  max-height: calc(100vh - 210px);
 }
 
 span.filter-title {
@@ -250,7 +253,6 @@ table.filter-table tbody tr td {
 
 ul.pagination {
   list-style: none;
-  margin: 20px auto;
   text-align: center;
 }
 
@@ -397,15 +399,15 @@ ul.list-trip li.active {
 }
 
 div.filter-footer {
-  margin-top: 20px;
   position: relative;
+  line-height: 50px;
 }
 
 div.filter-footer div.filter-per-page {
   position: absolute;
   top: 0;
   left: 0;
-  line-height: 22px;
+  line-height: 50px;
 }
 
 /*# sourceMappingURL=app.css.map */
