@@ -201,6 +201,7 @@ class UserDataController extends Controller
      */
     private function getUserData($aFilters, $iTrip, $iPaginate = false) {
         if ($iPaginate) {
+            /* For click event: Add name to selection */
             return Traveller::select(array_keys(array_add($aFilters, 'name', true)))
                 ->join('users','travellers.user_id','=','users.user_id')
                 ->join('zips','travellers.zip_id','=','zips.zip_id')
