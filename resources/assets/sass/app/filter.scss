@@ -186,3 +186,13 @@ ul.list-trip li.own:hover {
 ul.list-trip li.active {
   background-color: $col-accent;
 }
+div.filter-footer {
+  margin-top: 20px;
+  position: relative;
+}
+div.filter-footer div.filter-per-page {
+  position: absolute;
+  top: 0;
+  left: 0;
+  line-height: 22px;
+}

@@ -60,6 +60,93 @@ nav ul.nav-right {
   right: 0;
 }
 
+#registerForm {
+  background-color: #ffffff;
+  margin: 100px auto;
+  font-family: Raleway;
+  padding: 40px;
+  width: 70%;
+  min-width: 300px;
+  box-sizing: border-box;
+}
+
+.formLabel {
+  font-size: 20px;
+  font-family: Raleway;
+  padding: 25px 50px 25px 0px;
+}
+
+.formTitel {
+  text-align: center;
+}
+
+/* Hide all steps by default: */
+.tab {
+  display: none;
+  font-size: 20px;
+  font-family: Raleway;
+}
+
+.tab input {
+  margin: 10px;
+  padding: 10px;
+}
+
+.tab select {
+  margin: 10px;
+  padding: 10px;
+}
+
+.tab #radioGeslacht {
+  padding: 25px;
+  width: 10%;
+}
+
+/* Mark input boxes that gets an error on validation: */
+input.invalid {
+  background-color: #ffdddd;
+}
+
+.formButton {
+  background-color: #4CAF50;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  margin: 10px 0px 10px 10px;
+  font-size: 17px;
+  font-family: Raleway;
+  cursor: pointer;
+}
+
+.formButton:hover {
+  opacity: 0.8;
+}
+
+#prevBtn {
+  background-color: #bbbbbb;
+}
+
+/* Make circles that indicate the steps of the form: */
+.step {
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbbbbb;
+  border: none;
+  border-radius: 50%;
+  display: inline-block;
+  opacity: 0.5;
+}
+
+.step.active {
+  opacity: 1;
+}
+
+/* Mark the steps that are finished and valid: */
+.step.finish {
+  background-color: #4CAF50;
+}
+
 div.table-container {
   overflow-x: auto;
 }
@@ -289,6 +376,18 @@ ul.list-trip li.own:hover {
 
 ul.list-trip li.active {
   background-color: #003469;
+}
+
+div.filter-footer {
+  margin-top: 20px;
+  position: relative;
+}
+
+div.filter-footer div.filter-per-page {
+  position: absolute;
+  top: 0;
+  left: 0;
+  line-height: 22px;
 }
 
 /*# sourceMappingURL=app.css.map */

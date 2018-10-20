@@ -94,8 +94,23 @@ class UserDataController extends Controller
             ));
         }
 
+        /* Active pagination */
+        $aPaginate = array(
+            '5' => false,
+            '10' => false,
+            '15' => false,
+            '20' => false,
+            '25' => false,
+        );
+        if ($iPaginate = $request->post('per-page')) {
+            $aPaginate[$iPaginate] = true;
+        }
+        else {
+            $aPaginate[$iPaginate = 15] = true;
+        }
+
         /* Get the travellers based on the applied filters */
-        $aUserData = $this->getUserData($aFiltersChecked, $aOrganizerTrip, 15);
+        $aUserData = $this->getUserData($aFiltersChecked, $aOrganizerTrip, $iPaginate);
 
         /* Check witch download option is checked */
         switch ($request->post('export')) {
@@ -114,6 +129,7 @@ class UserDataController extends Controller
             'sUserName' => $oUser->name,
             'oCurrentTrip' => $aOrganizerTrip,
             'aActiveTrips' => $aActiveTrips,
+            'aPaginate' => $aPaginate,
         ]);
     }
 
