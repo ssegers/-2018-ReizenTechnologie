@@ -52,7 +52,7 @@
                 </thead>
                 <tbody>
                 @foreach($aUserData as $oUserData)
-                    <tr>
+                    <tr onclick="displayUser('<?php echo $oUserData->name ?>')">
                         @foreach($aFiltersChecked as $sFilterName => $sFilterText)
                             <td class="field {{ $sFilterName }}">{{ $oUserData->$sFilterName }}</td>
                         @endforeach
@@ -78,4 +78,9 @@
         </div>
     </div>
     {{ Form::close() }}
+    <script type="text/javascript">
+        function displayUser(userName) {
+            window.location.href = '<?php echo url('/') ?>/userinfo/' + userName;
+        }
+    </script>
 @endsection

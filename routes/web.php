@@ -33,3 +33,4 @@ route::post('user/Create/create', 'CreateUserController@createUser');
 Route::get('admin/info', 'AdminInfoController@getInfo');
 Route::post('admin/info', 'AdminInfoController@updateInfo');
 
+Route::get('userinfo/{sUserName}', 'UserDataController@showUserData');

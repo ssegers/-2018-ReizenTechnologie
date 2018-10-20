@@ -201,7 +201,7 @@ class UserDataController extends Controller
      */
     private function getUserData($aFilters, $iTrip, $iPaginate = false) {
         if ($iPaginate) {
-            return Traveller::select(array_keys($aFilters))
+            return Traveller::select(array_keys(array_add($aFilters, 'name', true)))
                 ->join('users','travellers.user_id','=','users.user_id')
                 ->join('zips','travellers.zip_id','=','zips.zip_id')
                 ->join('majors','travellers.major_id','=','majors.major_id')
@@ -214,5 +214,9 @@ class UserDataController extends Controller
             ->join('majors','travellers.major_id','=','majors.major_id')
             ->join('studies','majors.study_id','=','studies.study_id')
             ->where('trip_id', $iTrip->trip_id)->get()->toArray();
+    }
+
+    public function showUserData($sUserName) {
+
     }
 }

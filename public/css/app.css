@@ -251,6 +251,15 @@ table.filter-table tbody tr td {
   border-bottom: 1px solid #003469;
 }
 
+table.filter-table tbody tr {
+  transition: 0.1s ease-in-out all;
+}
+
+table.filter-table tbody tr:hover {
+  background-color: #003469;
+  color: white;
+}
+
 ul.pagination {
   list-style: none;
   text-align: center;
