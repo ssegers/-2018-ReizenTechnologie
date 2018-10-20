@@ -11,6 +11,7 @@
 </head>
 <body>
     <nav>
+        <img src="{{ asset('images/ucll.png') }}" />
         <ul class="nav-left">
             <li>Info</li>
         </ul>

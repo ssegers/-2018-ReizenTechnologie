@@ -62,7 +62,7 @@
             </table>
         </div>
         <div class="filter-footer">
-            {{ $aUserData->appends($aFiltersChecked)->links() }}
+            {{ $aUserData->appends(request()->input())->links() }}
             <div class="filter-per-page">
                 {{ Form::label('per-page', 'Reizigers per pagina:') }}
                 <select name="per-page" onchange="this.form.submit()">

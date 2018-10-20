@@ -41,18 +41,36 @@ nav {
   background-color: #E00049;
 }
 
+nav img {
+  height: 60px;
+  line-height: 60px;
+  display: inline;
+}
+
 nav ul {
   list-style: none;
+  display: inline-block;
 }
 
 nav ul li {
-  display: inline-block;
-  line-height: 60px;
+  line-height: 40px;
+  margin: 10px 0;
+  padding: 0 20px;
+  color: white;
 }
 
 nav ul.nav-left {
+  display: inline-block;
   position: absolute;
-  left: 0;
+  top: 0;
+}
+
+nav ul.nav-left li {
+  border-left: 1px solid white;
+}
+
+nav ul.nav-left li:first-child {
+  border: none;
 }
 
 nav ul.nav-right {
