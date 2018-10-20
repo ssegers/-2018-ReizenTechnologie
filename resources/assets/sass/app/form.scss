@@ -1,10 +1,3 @@
-* {
-  box-sizing: border-box;
-}
-
-body {
-  background-color: #f1f1f1;
-}
 
 #registerForm {
   background-color: #ffffff;
@@ -13,7 +6,9 @@ body {
   padding: 40px;
   width: 70%;
   min-width: 300px;
+  box-sizing: border-box;
 }
+
 .formLabel{
   font-size: 20px;
   font-family: Raleway;
@@ -22,28 +17,30 @@ body {
 .formTitel {
   text-align: center;
 }
-
-input[id='radioGeslacht']{
-  padding: 25px;
-}
-
-.tab[input]{
-  padding: 10px;
-  width: 100%;
-  font-size: 17px;
+/* Hide all steps by default: */
+.tab {
+  display: none;
+  font-size: 20px;
   font-family: Raleway;
-  border: 1px solid #aaaaaa;
 }
-
+.tab input{
+  margin:10px;
+  padding:10px;
+}
+.tab select{
+  margin:10px;
+  padding: 10px;
+}
+.tab #radioGeslacht{
+  padding: 25px;
+  width:10%;
+}
 /* Mark input boxes that gets an error on validation: */
 input.invalid {
   background-color: #ffdddd;
 }
 
-/* Hide all steps by default: */
-.tab {
-  display: none;
-}
+
 
 .formButton {
   background-color: #4CAF50;
