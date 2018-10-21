@@ -218,23 +218,21 @@ class UserDataController extends Controller
     }
 
     /**
-     * Shows the form of a selected traveller
-     * Find all details of selected traveller
-     * Show the view
+     * Shows the data of a selected user
      *
      * @author Joren Meynen
      *
-     * @param $sUserId
+     * @param $sUserName
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function showUserData($sUserId)
+    public function showUserData($sUserName)
     {
-        $aTraveller = Traveller::select()
-            ->join('users', 'travellers.user_id', '=', 'users.user_id')
+        $aUserData = User::select()
+            ->join('travellers', 'users.user_id', '=', 'travellers.user_id')
             ->join('zips', 'travellers.zip_id', '=', 'zips.zip_id')
-            ->where('travellers.user_id', '=', $sUserId)
+            ->where('users.name', '=', $sUserName) //r-nummer
             ->first();
 
-        return view('user.filter.individualTraveller', ['traveller' => $aTraveller]);
+        return view('user.filter.individualTraveller', ['aUserData' => $aUserData]);
     }
 }
