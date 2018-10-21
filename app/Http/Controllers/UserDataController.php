@@ -94,7 +94,7 @@ class UserDataController extends Controller
             ));
         }
 
-        /* Active pagination */
+        /* Save th active pagination */
         $aPaginate = array(
             '5' => false,
             '10' => false,
