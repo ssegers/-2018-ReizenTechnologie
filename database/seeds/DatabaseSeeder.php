@@ -17,7 +17,8 @@ class DatabaseSeeder extends Seeder
             TripsTableSeeder::class,
             ZipTableSeeder::class,
             StudiesTableSeeder::class,
-            MajorsTableSeeder::class
+            MajorsTableSeeder::class,
+            PagesTableSeeder::class
         ]);
     }
 }

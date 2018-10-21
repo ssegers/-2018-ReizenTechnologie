@@ -2,6 +2,7 @@
 @import url("https://use.fontawesome.com/releases/v5.3.1/css/all.css");
 body {
   background-color: #E9F3F8;
+  overflow: hidden;
 }
 
 * {
@@ -13,47 +14,175 @@ body {
   position: fixed;
   background-color: #fff;
   width: 200px;
-  height: 100vh;
+  height: calc(100vh - 60px);
   border-right: 1px solid #003469;
 }
 
 .content-right {
-  padding: 20px;
+  padding: 0 20px 20px;
   margin: 0 0 0 200px;
 }
 
-.gegTable {
-  width: 100%;
-  table-layout: fixed;
-}
-
-.gegTable, .gegTable th, .gegTable td {
-  border: 1px solid darkgray;
-  border-collapse: collapse;
-}
-
-.gegTable th {
-  text-align: center;
-  background-color: #e00049;
-  color: #E9F3F8;
-}
-
-.gegTable th {
+.content-right h1.page-title {
+  line-height: 50px;
   height: 50px;
+  margin: 0;
 }
 
-.gegTable td {
-  padding: 15px;
-  text-align: right;
+.content-center {
+  margin: 0 200px;
+}
+
+/* Navigation */
+nav {
+  width: 100vw;
+  height: 60px;
+  overflow: hidden;
+  position: relative;
+  background-color: #E00049;
+}
+
+nav img {
+  height: 60px;
+  line-height: 60px;
+  display: inline;
+}
+
+nav ul {
+  list-style: none;
+  display: inline-block;
+}
+
+nav ul li {
+  line-height: 40px;
+  margin: 10px 0;
+  padding: 0 20px;
+  color: white;
+}
+
+nav ul.nav-left {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+}
+
+nav ul.nav-left li {
+  border-left: 1px solid white;
+}
+
+nav ul.nav-left li:first-child {
+  border: none;
+}
+
+nav ul.nav-right {
+  position: absolute;
+  right: 0;
+}
+
+#registerForm {
+  background-color: #ffffff;
+  margin: 100px auto;
+  font-family: Raleway;
+  padding: 40px;
+  width: 70%;
+  min-width: 300px;
+  box-sizing: border-box;
+}
+
+.formLabel {
+  font-size: 20px;
+  font-family: Raleway;
+  padding: 25px 50px 25px 0px;
+}
+
+.formTitel {
+  text-align: center;
+}
+
+/* Hide all steps by default: */
+.tab {
+  display: none;
+  font-size: 20px;
+  font-family: Raleway;
+}
+
+.tab input {
+  margin: 10px;
+  padding: 10px;
+}
+
+.tab select {
+  margin: 10px;
+  padding: 10px;
+}
+
+.tab #radioGeslacht {
+  padding: 25px;
+  width: 10%;
+}
+
+/* Mark input boxes that gets an error on validation: */
+input.invalid {
+  background-color: #ffdddd;
+}
+
+.formButton {
+  background-color: #4CAF50;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  margin: 10px 0px 10px 10px;
+  font-size: 17px;
+  font-family: Raleway;
+  cursor: pointer;
+}
+
+.formButton:hover {
+  opacity: 0.8;
+}
+
+#prevBtn {
+  background-color: #bbbbbb;
+}
+
+/* Make circles that indicate the steps of the form: */
+.step {
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbbbbb;
+  border: none;
+  border-radius: 50%;
+  display: inline-block;
+  opacity: 0.5;
+}
+
+.step.active {
+  opacity: 1;
+}
+
+/* Mark the steps that are finished and valid: */
+.step.finish {
+  background-color: #4CAF50;
 }
 
 div.table-container {
   overflow-x: auto;
+  overflow-y: auto;
+  max-height: calc(100vh - 210px);
+}
+
+span.filter-title {
+  display: block;
+  padding: 0 20px;
+  line-height: 50px;
+  background-color: #003469;
+  color: white;
 }
 
 ul.filters {
   list-style: none;
-  height: calc(100vh - 140px);
+  height: calc(100vh - 160px);
   overflow-y: auto;
   border-bottom: 1px solid #003469;
 }
@@ -90,22 +219,6 @@ ul.filter-buttons {
   width: 100%;
 }
 
-ul.filter-buttons li.export button {
-  line-height: 45px;
-  position: relative;
-  padding: 0 20px;
-  border: none;
-  background-color: transparent;
-  width: 100%;
-  text-align: left;
-}
-
-ul.filter-buttons li.export button i {
-  position: absolute;
-  right: 20px;
-  top: 10px;
-}
-
 ul.filter-buttons li.apply button {
   border: none;
   background-color: #003469;
@@ -138,9 +251,18 @@ table.filter-table tbody tr td {
   border-bottom: 1px solid #003469;
 }
 
+table.filter-table tbody tr {
+  transition: 0.1s ease-in-out all;
+}
+
+table.filter-table tbody tr:hover {
+  background-color: #003469;
+  color: white;
+  cursor: pointer;
+}
+
 ul.pagination {
   list-style: none;
-  margin: 20px auto;
   text-align: center;
 }
 
@@ -226,54 +348,76 @@ td.field.medical_info {
   min-width: 200px;
 }
 
-/* Style the form */
-#registerForm {
-  background-color: #ffffff;
-  margin: 100px auto;
-  padding: 40px;
-  width: 70%;
-  min-width: 300px;
+ul.download-options {
+  list-style: none;
+  display: block;
+  position: absolute;
+  top: 115px;
+  right: 20px;
+  padding: 0;
 }
 
-/* Style the input fields */
-input {
-  padding: 10px;
-  width: 100%;
-  font-size: 17px;
-  font-family: Raleway;
-  border: 1px solid #aaaaaa;
-}
-
-/* Mark input boxes that gets an error on validation: */
-input.invalid {
-  background-color: #ffdddd;
-}
-
-/* Hide all steps by default: */
-.tab {
-  display: none;
-}
-
-/* Make circles that indicate the steps of the form: */
-.step {
-  height: 15px;
-  width: 15px;
-  margin: 0 2px;
-  background-color: #bbbbbb;
-  border: none;
-  border-radius: 50%;
+ul.download-options li {
   display: inline-block;
-  opacity: 0.5;
+  margin-left: 5px;
 }
 
-/* Mark the active step: */
-.step.active {
-  opacity: 1;
+ul.download-options li:first-child {
+  margin: 0;
 }
 
-/* Mark the steps that are finished and valid: */
-.step.finish {
-  background-color: #4CAF50;
+ul.download-options li.export button {
+  height: 40px;
+  align-content: center;
+  padding: 0 10px;
+  background-color: transparent;
+  border: 1px solid #003469;
+  transition: 0.1s ease-in-out all;
+}
+
+ul.download-options li.export button:hover {
+  cursor: pointer;
+  background-color: #003469;
+  color: white;
+}
+
+ul.list-trip {
+  list-style: none;
+  line-height: 48px;
+  margin-left: -18px;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+ul.list-trip li {
+  display: inline-block;
+  padding: 0 20px;
+  background-color: #E00049;
+  border: 1px solid white;
+  margin: 0 -3px;
+  color: white;
+  transition: 0.1s ease-in-out all;
+}
+
+ul.list-trip li.own:hover {
+  background-color: #003469;
+  cursor: pointer;
+}
+
+ul.list-trip li.active {
+  background-color: #003469;
+}
+
+div.filter-footer {
+  position: relative;
+  line-height: 50px;
+}
+
+div.filter-footer div.filter-per-page {
+  position: absolute;
+  top: 0;
+  left: 0;
+  line-height: 50px;
 }
 
 /*# sourceMappingURL=app.css.map */

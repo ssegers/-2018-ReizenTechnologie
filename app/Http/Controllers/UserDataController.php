@@ -7,10 +7,11 @@ use App\Trip;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Mpdf\Tag\Tr;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\Exception;
 use PhpOffice\PhpSpreadsheet\IOFactory;
-use \PhpOffice\PhpSpreadsheet\Writer\Pdf\Dompdf;
+use \PhpOffice\PhpSpreadsheet\Writer\Pdf\Mpdf;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Worksheet\PageSetup;
 
@@ -22,6 +23,7 @@ class UserDataController extends Controller
         'study_name'=>'Richting',
         'major_name'=>'Afstudeerrichting',
         'birthdate' => 'Geboortedatum',
+        'birthplace' => 'Geboorteplaats',
         'gender' => 'Geslacht',
         'nationality' => 'Nationaliteit',
         'address' => 'Adres',
@@ -74,22 +76,49 @@ class UserDataController extends Controller
                 $this->aFiltersChecked[$sFilterName] = $sFilterText;
             }
         }
-
         $aFiltersChecked = $this->aFiltersChecked;
 
         /* Get the trip where the organizer is involved with */
-        $iTrip = Traveller::select('trip_id')->where('user_id', $oUser->user_id)->first();
+        $aOrganizerTrip = Trip::where('user_id', $oUser->user_id)->where('is_active', true)
+            ->join('travellers', 'trips.trip_id', '=', 'travellers.trip_id')
+            ->first();
+
+        /* Get all active trips */
+        $aActiveTrips = array();
+        foreach (Trip::where('is_active', true)->get() as $oTrip) {
+            array_push($aActiveTrips, array(
+                'oTrip' => $oTrip,
+                'iCount' => Traveller::where('trip_id', $oTrip->trip_id)
+                    ->get()
+                    ->count(),
+            ));
+        }
+
+        /* Active pagination */
+        $aPaginate = array(
+            '5' => false,
+            '10' => false,
+            '15' => false,
+            '20' => false,
+            '25' => false,
+        );
+        if ($iPaginate = $request->post('per-page')) {
+            $aPaginate[$iPaginate] = true;
+        }
+        else {
+            $aPaginate[$iPaginate = 15] = true;
+        }
 
         /* Get the travellers based on the applied filters */
-        $aUserData = $this->getUserData($aFiltersChecked, $iTrip, 15);
+        $aUserData = $this->getUserData($aFiltersChecked, $aOrganizerTrip, $iPaginate);
 
         /* Check witch download option is checked */
         switch ($request->post('export')) {
             case 'excel':
-                $this->downloadExcel($aFiltersChecked, $iTrip);
+                $this->downloadExcel($aFiltersChecked, $aOrganizerTrip);
                 break;
             case 'pdf':
-                $this->downloadPDF($aFiltersChecked, $iTrip);
+                $this->downloadPDF($aFiltersChecked, $aOrganizerTrip);
                 break;
         }
 
@@ -98,6 +127,9 @@ class UserDataController extends Controller
             'aFilterList' => $this->aFilterList,
             'aFiltersChecked' => $aFiltersChecked,
             'sUserName' => $oUser->name,
+            'oCurrentTrip' => $aOrganizerTrip,
+            'aActiveTrips' => $aActiveTrips,
+            'aPaginate' => $aPaginate,
         ]);
     }
 
@@ -129,27 +161,27 @@ class UserDataController extends Controller
     private function downloadPDF($aFiltersChecked, $iTrip){
         $iCols = count($aUserFields = $aFiltersChecked);
         $aAlphas = range('A', 'Z');
-        $oTrip = (string) Trip::select('name')->where('trip_id', $iTrip->trip_id)->first();
-        $sTripNaam =str_before(str_after($oTrip,":"),"}");
+        $oTrip = Trip::where('trip_id', $iTrip->trip_id)->first();
 
         $data = $this->getUserData($aFiltersChecked, $iTrip);
-
         try {
             $spreadsheet = new Spreadsheet();  /*----Spreadsheet object-----*/
             $spreadsheet->getActiveSheet();
             $activeSheet = $spreadsheet->getActiveSheet();
             if($iCols>8){
-                $spreadsheet->getActiveSheet()->getPageSetup()->setOrientation(PageSetup::ORIENTATION_LANDSCAPE);
+                $activeSheet->getPageSetup()->setOrientation(PageSetup::ORIENTATION_LANDSCAPE);
             }
-            $spreadsheet->getActiveSheet()->getPageMargins()->setLeft(0.2);
-            $spreadsheet->getActiveSheet()->getPageMargins()->setTop(0.5);
             $activeSheet->fromArray($aUserFields,NULL, 'A1')->getStyle('A1:'.$aAlphas[$iCols-1].'1')->getFont()->setBold(true)->setUnderline(true);
+            $activeSheet->getStyle('A1:'.$aAlphas[$iCols-1]."1")->getBorders()->getOutline()->setBorderStyle(1);
             $activeSheet->fromArray($data,NULL,'A2');
+            foreach ($data as $iRij=>$sValue){
+                $activeSheet->getStyle('A'.($iRij+2).':'.$aAlphas[$iCols-1].($iRij+2))->getBorders()->getOutline()->setBorderStyle(1);
+            }
 
-            IOFactory::registerWriter("PDF", Dompdf::class);
+            IOFactory::registerWriter("PDF", Mpdf::class);
             $writer = IOFactory::createWriter($spreadsheet, 'PDF');
 
-            header('Content-Disposition: attachment; filename="'.$sTripNaam.'gefilterde_lijst.pdf"');
+            header('Content-Disposition: attachment; filename="'.$oTrip->name.'_gefilterde_lijst.pdf"');
             $writer->save("php://output");
         } catch (Exception $e) {
         }
@@ -169,7 +201,8 @@ class UserDataController extends Controller
      */
     private function getUserData($aFilters, $iTrip, $iPaginate = false) {
         if ($iPaginate) {
-            return Traveller::select(array_keys($aFilters))
+            /* For click event: Add name to selection */
+            return Traveller::select(array_keys(array_add($aFilters, 'name', true)))
                 ->join('users','travellers.user_id','=','users.user_id')
                 ->join('zips','travellers.zip_id','=','zips.zip_id')
                 ->join('majors','travellers.major_id','=','majors.major_id')
@@ -191,18 +224,17 @@ class UserDataController extends Controller
      *
      * @author Joren Meynen
      *
-     * @param $user_id
-     *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
+     * @param $sUserId
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function editTraveller($user_id)
+    public function showUserData($sUserId)
     {
         $aTraveller = Traveller::select()
             ->join('users', 'travellers.user_id', '=', 'users.user_id')
             ->join('zips', 'travellers.zip_id', '=', 'zips.zip_id')
-            ->where('travellers.user_id', '=', $user_id)
+            ->where('travellers.user_id', '=', $sUserId)
             ->first();
 
-       return view('user.filter.individualTraveller', ['traveller' => $aTraveller]);
+        return view('user.filter.individualTraveller', ['traveller' => $aTraveller]);
     }
 }

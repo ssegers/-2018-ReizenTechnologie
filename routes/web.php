@@ -24,3 +24,16 @@ Route::get('/editTraveller/{user_id}', 'UserDataController@editTraveller');
 
 route::get('user/Form/form', 'RegisterController@form');
 route::post('user/Form/form', 'RegisterController@formPost');
+
+//Get active trip to link to organizers
+route::get('admin/linkorganisator/', 'ActiveTripOrganizerController@showForm');
+
+route::get('user/Create/create', 'CreateUserController@createForm');
+route::post('user/Create/create', 'CreateUserController@createUser');
+
+Route::get('admin/info', 'AdminInfoController@getInfo');
+Route::post('admin/info', 'AdminInfoController@updateInfo');
+
+Route::get('/info','AdminInfoController@showInfo');
+
+Route::get('userinfo/{sUserName}', 'UserDataController@showUserData');
