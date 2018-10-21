@@ -7,7 +7,7 @@
         </div>
     @endif
     <div class="admin-form">
-        {{Form::open(array('action' => 'CreateUserController@createUser', 'method' => 'post' ))}}
+        {{Form::open(array('action' => 'AdminUserController@createUser', 'method' => 'post' ))}}
         {{Form::label('username', 'Gebruikersnaam: ')}}
         {{Form::text('username', '', ['class' => 'form-control', 'placeholder' => $sUserName, 'required'])}}
         {{Form::label('password', 'Paswoord: ')}}

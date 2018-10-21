@@ -6,7 +6,7 @@ use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class CreateUserController extends Controller
+class AdminUserController extends Controller
 {
 
 
