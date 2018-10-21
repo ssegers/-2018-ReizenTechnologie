@@ -183,4 +183,26 @@ class UserDataController extends Controller
             ->join('studies','majors.study_id','=','studies.study_id')
             ->where('trip_id', $iTrip->trip_id)->get()->toArray();
     }
+
+    /**
+     * Shows the form of a selected traveller
+     * Find all details of selected traveller
+     * Show the view
+     *
+     * @author Joren Meynen
+     *
+     * @param $user_id
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
+     */
+    public function editTraveller($user_id)
+    {
+        $aTraveller = Traveller::select()
+            ->join('users', 'travellers.user_id', '=', 'users.user_id')
+            ->join('zips', 'travellers.zip_id', '=', 'zips.zip_id')
+            ->where('travellers.user_id', '=', $user_id)
+            ->first();
+
+       return view('user.filter.individualTraveller', ['traveller' => $aTraveller]);
+    }
 }
