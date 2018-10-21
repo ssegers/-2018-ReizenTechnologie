@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-
-{!!$oContent->content!!}
-
+    <div class="content-center">
+        {!!$oContent->content!!}
+    </div>
 @endsection
