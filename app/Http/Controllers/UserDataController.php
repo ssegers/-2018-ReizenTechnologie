@@ -19,7 +19,7 @@ class UserDataController extends Controller
 {
     /* List of all filters */
     protected $aFilterList = [
-        'name'=>'r-Nummer',
+        'name'=>'Gebruikersnaam',
         'study_name'=>'Richting',
         'major_name'=>'Afstudeerrichting',
         'birthdate' => 'Geboortedatum',
