@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Page;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class AdminInfoController extends Controller
 {
@@ -28,5 +30,12 @@ class AdminInfoController extends Controller
         }
         Page::where('name', 'Info')->update(['content' => $sContentString]);
         return redirect()->back()->with('message', 'De info pagina is aangepast');
+    }
+
+    public function showInfo(){
+        $oContent=Page::where('name', 'Info')->first();
+        return view('guest.infopage', array(
+            'oContent' => $oContent,
+        ));
     }
 }
