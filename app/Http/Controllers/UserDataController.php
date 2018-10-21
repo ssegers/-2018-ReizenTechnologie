@@ -7,6 +7,7 @@ use App\Trip;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Mpdf\Tag\Tr;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\Exception;
 use PhpOffice\PhpSpreadsheet\IOFactory;
@@ -75,23 +76,49 @@ class UserDataController extends Controller
                 $this->aFiltersChecked[$sFilterName] = $sFilterText;
             }
         }
-
         $aFiltersChecked = $this->aFiltersChecked;
-        /* Get the trip where the organizer is involved with */
-        $iTrip = Traveller::where('user_id', $oUser->user_id)->first();
 
-        $oTrip = Trip::where('trip_id', $iTrip->trip_id)->first();
+        /* Get the trip where the organizer is involved with */
+        $aOrganizerTrip = Trip::where('user_id', $oUser->user_id)->where('is_active', true)
+            ->join('travellers', 'trips.trip_id', '=', 'travellers.trip_id')
+            ->first();
+
+        /* Get all active trips */
+        $aActiveTrips = array();
+        foreach (Trip::where('is_active', true)->get() as $oTrip) {
+            array_push($aActiveTrips, array(
+                'oTrip' => $oTrip,
+                'iCount' => Traveller::where('trip_id', $oTrip->trip_id)
+                    ->get()
+                    ->count(),
+            ));
+        }
+
+        /* Active pagination */
+        $aPaginate = array(
+            '5' => false,
+            '10' => false,
+            '15' => false,
+            '20' => false,
+            '25' => false,
+        );
+        if ($iPaginate = $request->post('per-page')) {
+            $aPaginate[$iPaginate] = true;
+        }
+        else {
+            $aPaginate[$iPaginate = 15] = true;
+        }
 
         /* Get the travellers based on the applied filters */
-        $aUserData = $this->getUserData($aFiltersChecked, $iTrip, 15);
+        $aUserData = $this->getUserData($aFiltersChecked, $aOrganizerTrip, $iPaginate);
 
         /* Check witch download option is checked */
         switch ($request->post('export')) {
             case 'excel':
-                $this->downloadExcel($aFiltersChecked, $iTrip);
+                $this->downloadExcel($aFiltersChecked, $aOrganizerTrip);
                 break;
             case 'pdf':
-                $this->downloadPDF($aFiltersChecked, $iTrip);
+                $this->downloadPDF($aFiltersChecked, $aOrganizerTrip);
                 break;
         }
 
@@ -100,7 +127,9 @@ class UserDataController extends Controller
             'aFilterList' => $this->aFilterList,
             'aFiltersChecked' => $aFiltersChecked,
             'sUserName' => $oUser->name,
-            'oTrip' => $oTrip,
+            'oCurrentTrip' => $aOrganizerTrip,
+            'aActiveTrips' => $aActiveTrips,
+            'aPaginate' => $aPaginate,
         ]);
     }
 
@@ -172,7 +201,8 @@ class UserDataController extends Controller
      */
     private function getUserData($aFilters, $iTrip, $iPaginate = false) {
         if ($iPaginate) {
-            return Traveller::select(array_keys($aFilters))
+            /* For click event: Add name to selection */
+            return Traveller::select(array_keys(array_add($aFilters, 'name', true)))
                 ->join('users','travellers.user_id','=','users.user_id')
                 ->join('zips','travellers.zip_id','=','zips.zip_id')
                 ->join('majors','travellers.major_id','=','majors.major_id')
@@ -185,5 +215,9 @@ class UserDataController extends Controller
             ->join('majors','travellers.major_id','=','majors.major_id')
             ->join('studies','majors.study_id','=','studies.study_id')
             ->where('trip_id', $iTrip->trip_id)->get()->toArray();
+    }
+
+    public function showUserData($sUserName) {
+
     }
 }
