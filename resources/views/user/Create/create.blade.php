@@ -6,11 +6,11 @@
             {{ session()->get('message') }}
         </div>
     @endif
-    <div class="content-center">
+    <div class="admin-form">
         {{Form::open(array('action' => 'CreateUserController@createUser', 'method' => 'post' ))}}
-        {{Form::label('username', 'Gebruikersnaam')}}
+        {{Form::label('username', 'Gebruikersnaam: ')}}
         {{Form::text('username', '', ['class' => 'form-control', 'placeholder' => $sUserName, 'required'])}}
-        {{Form::label('password', 'Paswoord')}}
+        {{Form::label('password', 'Paswoord: ')}}
         {{Form::password('password', ['required'])}}
        <div class="actions">
            {{Form::submit('Gebruiker Toevoegen')}}
