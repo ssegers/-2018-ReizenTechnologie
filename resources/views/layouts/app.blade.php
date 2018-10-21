@@ -13,7 +13,7 @@
     <nav>
         <img src="{{ asset('images/ucll.png') }}" />
         <ul class="nav-left">
-            <li>Info</li>
+            <a href="{{ route('info') }}"><li>Info</li></a>
         </ul>
         <ul class="nav-right">
             <li>

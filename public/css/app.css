@@ -79,6 +79,10 @@ nav ul.nav-right {
   right: 0;
 }
 
+nav a {
+  text-decoration: none;
+}
+
 #registerForm {
   background-color: #ffffff;
   margin: 100px auto;
@@ -293,7 +297,7 @@ td.field.first_name {
 }
 
 td.field.name {
-  min-width: 100px;
+  min-width: 130px;
 }
 
 td.field.study_name {

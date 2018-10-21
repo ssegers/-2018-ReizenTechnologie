@@ -19,7 +19,7 @@ class UserDataController extends Controller
 {
     /* List of all filters */
     protected $aFilterList = [
-        'name'=>'r-Nummer',
+        'name'=>'Gebruikersnaam',
         'study_name'=>'Richting',
         'major_name'=>'Afstudeerrichting',
         'birthdate' => 'Geboortedatum',
@@ -94,7 +94,7 @@ class UserDataController extends Controller
             ));
         }
 
-        /* Active pagination */
+        /* Save th active pagination */
         $aPaginate = array(
             '5' => false,
             '10' => false,

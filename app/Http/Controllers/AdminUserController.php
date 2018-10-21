@@ -6,7 +6,7 @@ use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class CreateUserController extends Controller
+class AdminUserController extends Controller
 {
 
 
@@ -14,7 +14,7 @@ class CreateUserController extends Controller
     {
         $sUserName = User::where('user_id', 1)->first();
 
-        return view('user.Create.create', ['sUserName' => $sUserName->name] );
+        return view('admin.users.default-user', ['sUserName' => $sUserName->name] );
     }
 
     //Creates a global user account and stores it into the database
@@ -27,6 +27,6 @@ class CreateUserController extends Controller
 
 
 
-         return redirect('user/Create/create')->with('message', 'De standaard gebruiker is ingesteld!');
+         return redirect()->back()->with('message', 'De standaard gebruiker is ingesteld!');
     }
 }
