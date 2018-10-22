@@ -175,7 +175,10 @@ class UserDataController extends Controller
             $activeSheet->getStyle('A1:'.$aAlphas[$iCols-1]."1")->getBorders()->getOutline()->setBorderStyle(1);
             $activeSheet->fromArray($data,NULL,'A2');
             foreach ($data as $iRij=>$sValue){
-                $activeSheet->getStyle('A'.($iRij+2).':'.$aAlphas[$iCols-1].($iRij+2))->getBorders()->getOutline()->setBorderStyle(1);
+                //$activeSheet->getStyle('A'.($iRij+2).':'.$aAlphas[$iCols-1].($iRij+2))->getBorders()->getOutline()->setBorderStyle(1);
+                for($iI = 0;$iI<$iCols;$iI++){
+                    $activeSheet->getStyle('A'.($iRij+2).':'.$aAlphas[$iI].($iRij+2))->getBorders()->getOutline()->setBorderStyle(1);
+                }
             }
 
             IOFactory::registerWriter("PDF", Mpdf::class);
