@@ -11,7 +11,7 @@
 
             <p><label class="formLabel">Studentnummer</label>{{ Form::text('txtStudentnummer', '', ['id'=>'txtStudentnummer','oninput'=>'this.className'])}}</p>
             <p><label class="formLabel">Opleiding</label>
-                {{ Form::select('dropReis', array('1' => 'ELO-ICT', '2' => 'Docent'), ['id'=>'dropOpleiding','oninput'=>'this.className'])}}</p>
+                {{ Form::select('dropOpleiding', array('1' => 'ELO-ICT', '2' => 'Docent'), ['id'=>'dropOpleiding','oninput'=>'this.className'])}}</p>
             <p><label class="formLabel">Afstudeerrichting</label>
                 {{ Form::select('dropAfstudeerrichtingen', array('1' => 'ELO', '2' => 'ICT', '3' => 'Begeleider'), ['id'=>'dropAfstudeerrichtingen','oninput'=>'this.className'])}}</p>
         </div>

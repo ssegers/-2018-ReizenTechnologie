@@ -6,6 +6,7 @@ use App\User;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 class RegisterController extends Controller
 {
     /**
@@ -50,16 +51,15 @@ class RegisterController extends Controller
         $aData["radioMedisch"] = $aRequest->post('check');
         $aData["txtMedischDetail"] = $aRequest->post('txtMedisch');
 
-        echo Traveller::all();
-
         $this->SaveData($aData);
+        echo Traveller::all();
+        echo User::all();
+
         //return redirect('welcome');
     }
 
     public function form(){
-        //return view('user.Form.form');
-        //echo User::all();
-        $this->sendMail(config('mail.username'),"Daan Vandebosch", $this->randomPassword());
+        return view('user.Form.form');
     }
 
     /*----------------------------------------------------------------------------------------------------------------------*/
@@ -83,7 +83,6 @@ class RegisterController extends Controller
         );
 
         $iUserID = User::where('name',$aData['txtStudentnummer']) ->value('user_id');
-
         //Saving traveller
         Traveller::insert(
             [
@@ -106,10 +105,10 @@ class RegisterController extends Controller
                 'iban' => $aData['txtBank'],
                 'medical_issue' => $aData['radioMedisch'],
                 'email' => $aData['txtEmail'],
-                'major_id' => $aData['dropOpleiding']
+                'major_id' => $aData["dropOpleiding"]
             ]
         );
-        //$this->sendMail($aData['txtEmail'],$aData['txtNaam'],$password);
+        $this->sendMail($aData['txtEmail'],$aData['txtNaam'],$password);
     }
 
     function randomPassword() {
@@ -126,7 +125,7 @@ class RegisterController extends Controller
     public function sendMail($email, $name, $password) {
         $aMailData = [
             'subject' => 'Your registration for the UCLL trip.',
-            'name_first' => $name,
+            'name' => $name,
             'email' => $email,
             'description' => "berichtje",
             'password' => $password
