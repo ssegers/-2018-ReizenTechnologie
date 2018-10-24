@@ -43,7 +43,7 @@
         </div>
 
     <div class="tab"><h2 class="tabTitle">Medische gegevens:</h2>
-            <p><label class="formLabel">Heeft u een operatie gehad in het afgelopen jaar of andere medische aandoening? (Allergie, ziekte, ...)</label>
+            <p><label class="formLabel">Heeft u een operatie gehad in het afgelopen jaar of andere medische aandoening? (Allergie, ziekte, ...)</label><br>
                 {{ Form::radio('check', 'yes', ['id'=>'radioMedisch','oninput'=>'this.className'])}}Ja
                 {{ Form::radio('check', 'no', ['id'=>'radioMedisch','oninput'=>'this.className'])}}Nee
 
