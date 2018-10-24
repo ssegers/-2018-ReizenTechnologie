@@ -30,7 +30,7 @@
 
             <p><label class="formLabel">Woonplaats</label>{{ Form::text('dropGemeente', '', ['id'=>'dropGemeente','oninput'=>'this.className'])}}</p>
             <p><label class="formLabel">Land</label>{{ Form::text('txtLand', '', ['id'=>'txtLand','oninput'=>'this.className'])}}</p>
-            <p><label class="formLabel">Bankrekeningnummer (IBAN)</label>{{ Form::text('txtBank', '', ['id'=>'txtBank','oninput'=>'this.className'])}}</p>
+            <p><label class="formLabel">Bankrekeningnummer (IBAN)</label>{{ Form::text('txtBank', '', ['id'=>'txtBank','oninput'=>'this.className', 'maxlength'=>34])}}</p>
 
         </div>
 
@@ -46,8 +46,8 @@
                 {{ Form::radio('check', 'yes', ['id'=>'radioMedisch','oninput'=>'this.className'])}}Ja
                 {{ Form::radio('check', 'no', ['id'=>'radioMedisch','oninput'=>'this.className'])}}Nee
 
-            </p>
-        <p><label class="formLabel">Wat houden deze in?</label></p><br>{{ Form::textarea('txtMedisch', '', ['id'=>'txtMedisch','oninput'=>'this.className','placeholder'=>'Niet verplicht'])}}
+            </p><br>
+        <p id="medischTextArea"><label class="formLabel">Indien ja, wat houden deze in?</label><br>{{ Form::textarea('txtMedisch', '', ['id'=>'txtMedisch','oninput'=>'this.className','placeholder'=>'Niet verplicht'])}}</p>
         </div>
 
         <div style="overflow:auto;">
