@@ -2,15 +2,9 @@
 
 @section('content')
     {{ Form::open(array('action' => 'RegisterController@formPost', 'method' => 'post', 'id' => 'registerForm')) }}
-
-<<<<<<< HEAD
-    <form id="registerForm" action="{{ action('RegisterController@formPost') }}">
         <h1 class="formTitel">Inschrijvings formulier</h1>
-=======
-        <h1 class="formTitel">Schrijf je hier in:</h1>
->>>>>>> c753323465df909ab5fd4798f381c9684a213e27
         <!-- One "tab" for each step in the form: -->
-        <div class="tab">Basisgegevens:
+        <div class="tab"><h2 class="tabTitle">Basisgegevens:</h2>
             <p><label class="formLabel">Reis:</label>
                 {{ Form::select('dropReis', array('1' => 'USA 2019', '2' => 'Duitsland 2019'), ['id'=>'dropReis','oninput'=>'this.className'])}}</p>
             <p><label class="formLabel">Studentnummer</label>{{ Form::text('txtStudentnummer', '', ['id'=>'txtStudentnummer','oninput'=>'this.className'])}}</p>
@@ -20,14 +14,14 @@
                 {{ Form::select('dropAfstudeerrichtingen', array('1' => 'ELO', '2' => 'ICT', '3' => 'Begeleider'), ['id'=>'dropAfstudeerrichtingen','oninput'=>'this.className'])}}</p>
         </div>
 
-        <div class="tab">Persoonlijke gegevens:
+    <div class="tab"><h2 class="tabTitle">Persoonlijke gegevens:</h2>
             <p><label class="formLabel">Naam</label>{{ Form::text('txtNaam', '', ['id'=>'txtNaam','oninput'=>'this.className'])}}</p>
             <p><label class="formLabel">Voornaam</label>{{ Form::text('txtVoornaam', '', ['id'=>'txtVoornaam','oninput'=>'this.className'])}}</p>
             <p><label class="formLabel">Geslacht</label>
-                <p>{{ Form::radio('gender', 'Man', ['id'=>'radioGeslacht','oninput'=>'this.className'])}}Man
+                {{ Form::radio('gender', 'Man', ['id'=>'radioGeslacht','oninput'=>'this.className'])}}Man
                 {{ Form::radio('gender', 'Vrouw', ['id'=>'radioGeslacht','oninput'=>'this.className'])}}Vrouw
                 {{ Form::radio('gender', 'Andere', ['id'=>'radioGeslacht','oninput'=>'this.className'])}}Andere
-            </p></p>
+            </p>
             <p><label class="formLabel">Nationaliteit</label>{{ Form::text('txtNationaliteit', '', ['id'=>'txtNationaliteit','oninput'=>'this.className'])}}</p>
             <p><label class="formLabel">Geboortedatum</label>{{ Form::date('dateGeboorte', '', ['id'=>'dateGeboorte','oninput'=>'this.className','type'=>'date'])}}</p>
             <p><label class="formLabel">Geboorteplaats</label>{{ Form::text('txtGeboorteplaats', '', ['id'=>'txtGeboorteplaats','oninput'=>'this.className'])}}</p>
@@ -38,20 +32,20 @@
 
         </div>
 
-        <div class="tab">Contact gegevens:
+    <div class="tab"><h2 class="tabTitle">Contact gegevens:</h2>
             <p><label class="formLabel">E-mail adres (van de school)</label><input id="txtEmail" oninput="this.className = ''"></p>
             <p><label class="formLabel">GSM-nummer</label>{{ Form::text('txtGsm', '', ['id'=>'txtGsm','oninput'=>'this.className'])}}</p>
             <p><label class="formLabel">Noodnummer 1</label>{{ Form::text('txtNoodnummer1', '', ['id'=>'txtNoodnummer1','oninput'=>'this.className'])}}</p>
             <p><label class="formLabel">Noodnummer 2</label>{{ Form::text('txtNoodnummer2', '', ['id'=>'txtNoodnummer2','oninput'=>'this.className'])}}</p>
         </div>
 
-        <div class="tab">Medische gegevens:
-            <p><label class="formLabel">Heeft u een operatie gehad in het afgelopen jaar?</label>
+    <div class="tab"><h2 class="tabTitle">Medische gegevens:</h2>
+            <p><label class="formLabel">Heeft u een operatie gehad in het afgelopen jaar of andere medische aandoening? (Allergie, ziekte, ...)</label>
                 {{ Form::radio('check', 'yes', ['id'=>'radioMedisch','oninput'=>'this.className'])}}Ja
                 {{ Form::radio('check', 'no', ['id'=>'radioMedisch','oninput'=>'this.className'])}}Nee
 
             </p>
-            <p><label class="formLabel">Wat houden de medische aandoeningen in?</label>{{ Form::text('txtMedisch', '', ['id'=>'txtMedisch','oninput'=>'this.className'])}}</p>
+            <p><label class="formLabel">Wat houden deze in?</label>{{ Form::textarea('txtMedisch', '', ['id'=>'txtMedisch','oninput'=>'this.className'])}}</p>
         </div>
 
         <div style="overflow:auto;">
@@ -72,6 +66,4 @@
     {{ Form::close() }}
 
     <script src="{{ URL::asset('/js/form.js') }}"></script>
-
-
 @endsection
