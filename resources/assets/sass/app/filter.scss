@@ -1,5 +1,7 @@
 div.table-container {
   overflow-x: auto;
+  overflow-y: auto;
+  max-height: calc(100vh - 210px);
 }
 span.filter-title {
   display: block;
@@ -67,9 +69,16 @@ table.filter-table tbody {
 table.filter-table tbody tr td{
   border-bottom: 1px solid $col-accent;
 }
+table.filter-table tbody tr {
+  transition: 0.1s ease-in-out all;
+}
+table.filter-table tbody tr:hover {
+  background-color: $col-accent;
+  color: white;
+  cursor: pointer;
+}
 ul.pagination {
   list-style: none;
-  margin: 20px auto;
   text-align: center;
 }
 ul.pagination li {
@@ -94,7 +103,7 @@ td.field.first_name {
   min-width: 120px;
 }
 td.field.name {
-  min-width: 100px;
+  min-width: 130px;
 }
 td.field.study_name {
   min-width: 100px;
@@ -138,8 +147,61 @@ td.field.medical_info {
 ul.download-options {
   list-style: none;
   display: block;
-  text-align: right;
+  position: absolute;
+  top: 115px;
+  right: 20px;
+  padding: 0;
 }
-ul.download-options li.export {
+ul.download-options li {
   display: inline-block;
+  margin-left: 5px;
+}
+ul.download-options li:first-child {
+  margin: 0;
+}
+ul.download-options li.export button {
+  height: 40px;
+  align-content: center;
+  padding: 0 10px;
+  background-color: transparent;
+  border: 1px solid $col-accent;
+  transition: 0.1s ease-in-out all;
+}
+ul.download-options li.export button:hover {
+  cursor: pointer;
+  background-color: $col-accent;
+  color: white;
+}
+ul.list-trip {
+  list-style: none;
+  line-height: 48px;
+  margin-left: -18px;
+  max-width: 100%;
+  overflow-x: auto;
+}
+ul.list-trip li {
+  display: inline-block;
+  padding: 0 20px;
+  background-color: $col-primary;
+  border: 1px solid white;
+  margin: 0 -3px;
+  color: white;
+  transition: 0.1s ease-in-out all;
+}
+ul.list-trip li.own:hover {
+  background-color: $col-accent;
+  cursor: pointer;
+}
+ul.list-trip li.active {
+  background-color: $col-accent;
+}
+div.filter-footer {
+  position: relative;
+  line-height: 50px;
+}
+div.filter-footer div.filter-per-page {
+  position: absolute;
+  top: 0;
+  left: 0;
+  line-height: 50px;
 }

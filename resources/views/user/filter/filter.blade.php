@@ -23,10 +23,23 @@
         </ul>
     </div>
     <div class="content-right">
-        <h1>Deelnemers {{ $oTrip->name }} {{ $oTrip->year }}</h1>
+        <ul class="list-trip">
+            @foreach($aActiveTrips as $aTripData)
+                <li
+                @if($aTripData['oTrip']->trip_id == $oCurrentTrip->trip_id)
+                    class="active"
+                @endif
+                >
+                    {{ $aTripData['oTrip']->name }} {{ $aTripData['oTrip']->year }} ({{ $aTripData['iCount'] }})
+                </li>
+            @endforeach
+        </ul>
+        <h1 class="page-title">Deelnemers {{ $oCurrentTrip->name }} {{ $oCurrentTrip->year }}</h1>
         <ul class="download-options">
-            <li class="export"><button type="submit" name="export" value="pdf">Download PDF<i class="fas fa-2x fa-file-pdf"></i></button></li>
-            <li class="export"><button type="submit" name="export" value="excel">Download Excel<i class="fas fa-2x fa-file-excel"></i></button></li>
+            <li>Download</li>
+            <li class="export"><button type="submit" name="export" value="pdf">PDF</button></li>
+            <li class="divider">/</li>
+            <li class="export"><button type="submit" name="export" value="excel">Excel</button></li>
         </ul>
         <div class="table-container">
             <table class="filter-table">
@@ -39,7 +52,7 @@
                 </thead>
                 <tbody>
                 @foreach($aUserData as $oUserData)
-                    <tr>
+                    <tr onclick="displayUser('<?php echo $oUserData->name ?>')">
                         @foreach($aFiltersChecked as $sFilterName => $sFilterText)
                             <td class="field {{ $sFilterName }}">{{ $oUserData->$sFilterName }}</td>
                         @endforeach
@@ -48,7 +61,26 @@
                 </tbody>
             </table>
         </div>
-        {{ $aUserData->appends($aFiltersChecked)->links() }}
+        <div class="filter-footer">
+            {{ $aUserData->appends(request()->input())->links() }}
+            <div class="filter-per-page">
+                {{ Form::label('per-page', 'Reizigers per pagina:') }}
+                <select name="per-page" onchange="this.form.submit()">
+                    @foreach($aPaginate as $iValue => $bActive)
+                        @if($bActive)
+                            <option selected value="{{ $iValue }}">{{ $iValue }}</option>
+                        @else
+                            <option value="{{ $iValue }}">{{ $iValue }}</option>
+                        @endif
+                    @endforeach
+                </select>
+            </div>
+        </div>
     </div>
     {{ Form::close() }}
+    <script type="text/javascript">
+        function displayUser(userName) {
+            window.location.href = '<?php echo url('/') ?>/userinfo/' + userName;
+        }
+    </script>
 @endsection
