@@ -11,7 +11,7 @@
 
             <p><label class="formLabel">Studentnummer</label>{{ Form::text('txtStudentnummer', '', ['id'=>'txtStudentnummer','oninput'=>'this.className'])}}</p>
             <p><label class="formLabel">Opleiding</label>
-                {{ Form::select('dropReis', array('1' => 'ELO-ICT', '2' => 'Docent'), ['id'=>'dropOpleiding','oninput'=>'this.className'])}}</p>
+                {{ Form::select('dropOpleiding', array('1' => 'ELO-ICT', '2' => 'Docent'), ['id'=>'dropOpleiding','oninput'=>'this.className'])}}</p>
             <p><label class="formLabel">Afstudeerrichting</label>
                 {{ Form::select('dropAfstudeerrichtingen', array('1' => 'ELO', '2' => 'ICT', '3' => 'Begeleider'), ['id'=>'dropAfstudeerrichtingen','oninput'=>'this.className'])}}</p>
         </div>
@@ -20,9 +20,9 @@
             <p><label class="formLabel">Naam</label>{{ Form::text('txtNaam', '', ['id'=>'txtNaam','oninput'=>'this.className'])}}</p>
             <p><label class="formLabel">Voornaam</label>{{ Form::text('txtVoornaam', '', ['id'=>'txtVoornaam','oninput'=>'this.className'])}}</p>
             <p><label class="formLabel">Geslacht</label>
-                {{ Form::radio('gender', 'Man', ['id'=>'radioGeslacht','oninput'=>'this.className'])}}Man
-                {{ Form::radio('gender', 'Vrouw', ['id'=>'radioGeslacht','oninput'=>'this.className'])}}Vrouw
-                {{ Form::radio('gender', 'Andere', ['id'=>'radioGeslacht','oninput'=>'this.className'])}}Andere
+                {{ Form::radio('gender', 'Man', ['id'=>'radioGeslacht','oninput'=>'this.className']) }}Man
+                {{ Form::radio('gender', 'Vrouw', ['id'=>'radioGeslacht','oninput'=>'this.className']) }}Vrouw
+                {{ Form::radio('gender', 'Andere', ['id'=>'radioGeslacht','oninput'=>'this.className']) }}Andere
             </p>
             <p><label class="formLabel">Nationaliteit</label>{{ Form::text('txtNationaliteit', '', ['id'=>'txtNationaliteit','oninput'=>'this.className'])}}</p>
             <p><label class="formLabel">Geboortedatum</label>{{ Form::date('dateGeboorte', '', ['id'=>'dateGeboorte','oninput'=>'this.className','type'=>'date'])}}</p>
@@ -44,8 +44,8 @@
 
     <div class="tab"><h2 class="tabTitle">Medische gegevens:</h2>
             <p><label class="formLabel">Heeft u een operatie gehad in het afgelopen jaar of andere medische aandoening? (Allergie, ziekte, ...)</label>
-                {{ Form::radio('check', 'yes', ['id'=>'radioMedisch','oninput'=>'this.className'])}}Ja
-                {{ Form::radio('check', 'no', ['id'=>'radioMedisch','oninput'=>'this.className'])}}Nee
+                {{ Form::radio('check', '1', ['id'=>'radioMedisch','oninput'=>'this.className'])}}Ja
+                {{ Form::radio('check', '0', ['id'=>'radioMedisch','oninput'=>'this.className'])}}Nee
 
             </p><br>
         <p id="medischTextArea"><label class="formLabel">Indien ja, wat houden deze in?</label><br>{{ Form::textarea('txtMedisch', '', ['id'=>'txtMedisch','oninput'=>'this.className','placeholder'=>'Niet verplicht'])}}</p>

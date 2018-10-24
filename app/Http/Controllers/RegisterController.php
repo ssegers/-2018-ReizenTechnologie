@@ -31,7 +31,7 @@ class RegisterController extends Controller
         //Tweede scherm
         $aData["txtNaam"] = $aRequest->post('txtNaam');
         $aData["txtVoornaam"] = $aRequest->post('txtVoornaam');
-        $aData["radioGeslacht"] = $aRequest->post('radioGeslacht');
+        $aData["radioGeslacht"] = $aRequest->post('gender');
         $aData["txtNationaliteit"] = $aRequest->post('txtNationaliteit');
         $aData["dateGeboorte"] = $aRequest->post('dateGeboorte');
         $aData["txtGeboorteplaats"] = $aRequest->post('txtGeboorteplaats');
@@ -47,17 +47,19 @@ class RegisterController extends Controller
         $aData["txtEmail"] = $aRequest->post('txtEmail');
 
         //Vierde scherm
-        $aData["radioMedisch"] = $aRequest->post('radioMedisch');
-        $aData["txtMedischDetail"] = $aRequest->post('txtMedischDetail');
+        $aData["radioMedisch"] = $aRequest->post('check');
+        $aData["txtMedischDetail"] = $aRequest->post('txtMedisch');
 
-        echo serialize($aData);
+        echo Traveller::all();
 
-        //$this->SaveData($aData);
+        $this->SaveData($aData);
         //return redirect('welcome');
     }
 
     public function form(){
-        return view('user.Form.form');
+        //return view('user.Form.form');
+        //echo User::all();
+        $this->sendMail(config('mail.username'),"Daan Vandebosch", $this->randomPassword());
     }
 
     /*----------------------------------------------------------------------------------------------------------------------*/
@@ -75,7 +77,7 @@ class RegisterController extends Controller
         User::insert(
             [
                 'name' => $aData["txtStudentnummer"],
-                'password' => $password,
+                'password' => bcrypt($password),
                 'role' => $sFunctie
             ]
         );
@@ -83,11 +85,12 @@ class RegisterController extends Controller
         $iUserID = User::where('name',$aData['txtStudentnummer']) ->value('user_id');
 
         //Saving traveller
-        Travellers::insert(
+        Traveller::insert(
             [
                 'user_id' => $iUserID,
                 'trip_id' => $aData['dropReis'],
-                'zip_id' => $aData['dropGemeente'],
+                //'zip_id' => $aData['dropGemeente'],
+                'zip_id' => 1,
                 'first_name' => $aData['txtVoornaam'],
                 'last_name' => $aData['txtNaam'],
                 'country' => $aData['txtLand'],
@@ -99,14 +102,14 @@ class RegisterController extends Controller
                 'nationality' => $aData['txtNationaliteit'],
                 'birthdate' => $aData['dateGeboorte'],
                 'birthplace' => $aData['txtGeboorteplaats'],
-                'medical_info' => $aData['radioMedisch'],
+                'medical_info' => $aData['txtMedischDetail'],
                 'iban' => $aData['txtBank'],
-                'medical_issue' => $aData['txtMedischDetail'],
+                'medical_issue' => $aData['radioMedisch'],
                 'email' => $aData['txtEmail'],
                 'major_id' => $aData['dropOpleiding']
             ]
         );
-        $this->sendMail($aData['txtEmail'],$aData['txtNaam'],$password);
+        //$this->sendMail($aData['txtEmail'],$aData['txtNaam'],$password);
     }
 
     function randomPassword() {
