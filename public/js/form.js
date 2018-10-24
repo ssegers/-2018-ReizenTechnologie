@@ -59,7 +59,6 @@ function validateForm() {
                     valid = true;
                 }
             }
-
     }
     // If the valid status is true, mark the step as finished and valid:
     if (valid) {

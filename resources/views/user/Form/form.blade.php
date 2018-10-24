@@ -6,6 +6,7 @@
         <!-- One "tab" for each step in the form: -->
         <div class="tab"><h2 class="tabTitle">Basisgegevens:</h2>
             <p><label class="formLabel">Reis:</label>
+
                 {{ Form::select('dropReis', array('1' => 'USA 2019', '2' => 'Duitsland 2019'), ['id'=>'dropReis','oninput'=>'this.className'])}}</p>
 
             <p><label class="formLabel">Studentnummer</label>{{ Form::text('txtStudentnummer', '', ['id'=>'txtStudentnummer','oninput'=>'this.className'])}}</p>
@@ -30,12 +31,12 @@
 
             <p><label class="formLabel">Woonplaats</label>{{ Form::text('dropGemeente', '', ['id'=>'dropGemeente','oninput'=>'this.className'])}}</p>
             <p><label class="formLabel">Land</label>{{ Form::text('txtLand', '', ['id'=>'txtLand','oninput'=>'this.className'])}}</p>
-            <p><label class="formLabel">Bankrekeningnummer (IBAN)</label>{{ Form::text('txtBank', '', ['id'=>'txtBank','oninput'=>'this.className'])}}</p>
+            <p><label class="formLabel">Bankrekeningnummer (IBAN)</label>{{ Form::text('txtBank', '', ['id'=>'txtBank','oninput'=>'this.className', 'maxlength'=>34])}}</p>
 
         </div>
 
     <div class="tab"><h2 class="tabTitle">Contact gegevens:</h2>
-            <p><label class="formLabel">E-mail adres (van de school)</label><input id="txtEmail" oninput="this.className = ''"></p>
+            <p><label class="formLabel">E-mail adres (van de school)</label>{{ Form::email('txtEmail', '', ['id'=>'txtEmail','oninput'=>'this.className'])}}</p>
             <p><label class="formLabel">GSM-nummer</label>{{ Form::text('txtGsm', '', ['id'=>'txtGsm','oninput'=>'this.className'])}}</p>
             <p><label class="formLabel">Noodnummer 1</label>{{ Form::text('txtNoodnummer1', '', ['id'=>'txtNoodnummer1','oninput'=>'this.className'])}}</p>
             <p><label class="formLabel">Noodnummer 2</label>{{ Form::text('txtNoodnummer2', '', ['id'=>'txtNoodnummer2','oninput'=>'this.className', 'placeholder'=>'Niet verplicht'])}}</p>
@@ -46,8 +47,8 @@
                 {{ Form::radio('check', 'yes', ['id'=>'radioMedisch','oninput'=>'this.className'])}}Ja
                 {{ Form::radio('check', 'no', ['id'=>'radioMedisch','oninput'=>'this.className'])}}Nee
 
-            </p>
-        <p><label class="formLabel">Wat houden deze in?</label></p><br>{{ Form::textarea('txtMedisch', '', ['id'=>'txtMedisch','oninput'=>'this.className','placeholder'=>'Niet verplicht'])}}
+            </p><br>
+        <p id="medischTextArea"><label class="formLabel">Indien ja, wat houden deze in?</label><br>{{ Form::textarea('txtMedisch', '', ['id'=>'txtMedisch','oninput'=>'this.className','placeholder'=>'Niet verplicht'])}}</p>
         </div>
 
         <div style="overflow:auto;">
