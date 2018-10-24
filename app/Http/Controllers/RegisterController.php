@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers;
+use App\Mail\RegisterComplete;
 use App\Traveller;
 use App\User;
 use Illuminate\Database\QueryException;
@@ -33,6 +34,7 @@ class RegisterController extends Controller
         $aData["radioGeslacht"] = $aRequest->post('radioGeslacht');
         $aData["txtNationaliteit"] = $aRequest->post('txtNationaliteit');
         $aData["dateGeboorte"] = $aRequest->post('dateGeboorte');
+        $aData["txtGeboorteplaats"] = $aRequest->post('txtGeboorteplaats');
         $aData["txtAdres"] = $aRequest->post('txtAdres');
         $aData["txtLand"] = $aRequest->post('txtLand');
         $aData["dropGemeente"] = $aRequest->post('dropGemeente');
@@ -69,10 +71,11 @@ class RegisterController extends Controller
             $sFunctie = "Begeleider";
         }
         //Saving user
+        $password = $this->randomPassword();
         User::insert(
             [
                 'name' => $aData["txtStudentnummer"],
-                'password' => 'abc',
+                'password' => $password,
                 'role' => $sFunctie
             ]
         );
@@ -85,7 +88,7 @@ class RegisterController extends Controller
                 'user_id' => $iUserID,
                 'trip_id' => $aData['dropReis'],
                 'zip_id' => $aData['dropGemeente'],
-                'first_name' => $aData['txtVooraam'],
+                'first_name' => $aData['txtVoornaam'],
                 'last_name' => $aData['txtNaam'],
                 'country' => $aData['txtLand'],
                 'address' => $aData['txtAdres'],
@@ -94,8 +97,8 @@ class RegisterController extends Controller
                 'emergency_phone_1' => $aData['txtNoodnummer1'],
                 'emergency_phone_2' => $aData['txtNoodnummer2'],
                 'nationality' => $aData['txtNationaliteit'],
-                'birthdate' => $aData['birthplace'],
-                'birthplace' => "Geboorteplaats",
+                'birthdate' => $aData['dateGeboorte'],
+                'birthplace' => $aData['txtGeboorteplaats'],
                 'medical_info' => $aData['radioMedisch'],
                 'iban' => $aData['txtBank'],
                 'medical_issue' => $aData['txtMedischDetail'],
@@ -103,9 +106,29 @@ class RegisterController extends Controller
                 'major_id' => $aData['dropOpleiding']
             ]
         );
-        //BANK
+        $this->sendMail($aData['txtEmail'],$aData['txtNaam'],$password);
+    }
 
+    function randomPassword() {
+        $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+        $pass = array(); //remember to declare $pass as an array
+        $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
+        for ($i = 0; $i < 8; $i++) {
+            $n = rand(0, $alphaLength);
+            $pass[] = $alphabet[$n];
+        }
+        return implode($pass); //turn the array into a string
+    }
 
+    public function sendMail($email, $name, $password) {
+        $aMailData = [
+            'subject' => 'Your registration for the UCLL trip.',
+            'name_first' => $name,
+            'email' => $email,
+            'description' => "berichtje",
+            'password' => $password
+        ];
+        Mail::to(config('mail.username'))->send(new RegisterComplete($aMailData));
     }
     /*----------------------------------------------------------------------------------------------------------------------*/
     /*--------------------------------------------------------------------------Collection of error messages----------------*/
