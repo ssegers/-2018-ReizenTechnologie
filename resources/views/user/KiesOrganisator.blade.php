@@ -26,6 +26,10 @@
             <div class="col"></div>
         </div>
     </div>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <script src="{{ asset('js/app.js') }}"></script>
+
     <script>
         $(document).ready(function() {
             console.log('teetst');
