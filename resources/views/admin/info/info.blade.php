@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
     @if(session()->has('message'))
@@ -6,17 +6,18 @@
             {{ session()->get('message') }}
         </div>
     @endif
-    <h2>Infopagina Aanpassen</h2>
+    <h2 class="text-center">Infopagina Aanpassen</h2>
 
-
+    <div class="form-group">
     <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=f1b7vjd1xordm1kfj32o5h93ox2x8i0dxr9capjyc1axdalb"></script>
     {{ Form::open(array('action' => 'AdminInfoController@updateInfo', 'method' => 'post')) }}
-    {{ Form::textArea('content', $oPageContent->content, ['class' => 'form-control']) }}
+    {{ Form::textArea('content', $oPageContent->content, ['class' => 'form-control','rows' => 2, 'cols' => 40]) }}
     <div class="actions">
         {{ Form::submit('Opslaan') }}
         <input type="button" onclick="history.go(0)" value="Annuleren"/>
     </div>
     {{ Form::close() }}
+    </div>
     <script type="text/javascript">
         tinymce.init({
             selector: 'textarea',
