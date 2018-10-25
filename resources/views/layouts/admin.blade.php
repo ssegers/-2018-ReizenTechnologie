@@ -11,6 +11,7 @@
 </head>
 
 <body>
+@section('menu-left')
 <nav class="admin-nav">
     <ul>
         <li>Standaard Gebruiker</li>
@@ -19,6 +20,7 @@
         <li>list-item 4</li>
     </ul>
 </nav>
+@endsection
 @yield('content')
 </body>
 </html>
