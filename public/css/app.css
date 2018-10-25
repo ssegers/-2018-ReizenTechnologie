@@ -28,8 +28,42 @@ body {
 }
 
 .side-nav {
-  flex: 0 0 230px;
-  background-color: greenyellow;
+  flex: 0 0 200px;
+  background-color: lightgray;
+  height: calc(100vh - 66px);
+  padding-right: 30px;
+  margin-right: -20px;
+}
+
+.side-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: calc(100vh - 66px - 50px);
+  overflow-y: auto;
+  display: block;
+  position: absolute;
+  width: 250px;
+  left: 0;
+  top: 50px;
+}
+
+.side-nav ul li {
+  margin-left: 15px;
+  padding: 10px 20px;
+  position: relative;
+}
+
+.side-nav ul li input[type="checkbox"] {
+  position: absolute;
+  right: 20px;
+}
+
+.side-nav button {
+  display: block;
+  height: 50px;
+  width: 235px;
+  margin-right: -30px;
 }
 
 #registerForm {
