@@ -57,6 +57,10 @@ body {
   border-bottom: 1px solid #003469;
 }
 
+.side-nav ul li:last-child {
+  border: none;
+}
+
 .side-nav ul li input[type="checkbox"] {
   position: absolute;
   right: 20px;
