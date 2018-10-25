@@ -6,12 +6,14 @@
             {{ session()->get('message') }}
         </div>
     @endif
-    <div class="admin-form">
-        {{Form::open(array('action' => 'AdminUserController@createUser', 'method' => 'post' ))}}
-        {{Form::label('username', 'Gebruikersnaam: ')}}
+    {{Form::open(array('action' => 'AdminUserController@createUser', 'method' => 'post' ))}}
+    <div class="form-group">
+        {{Form::label('username', 'Gebruikersnaam: ', ['class' => ''])}}
         {{Form::text('username', '', ['class' => 'form-control', 'placeholder' => $sUserName, 'required'])}}
+    </div>
+    <div class="form-group">
         {{Form::label('password', 'Paswoord: ')}}
-        {{Form::password('password', ['required'])}}
+        {{Form::password('password', ['required', "class" => "form-control"])}}
         <div class="actions">
             {{Form::submit('Gebruiker Toevoegen')}}
             <input type="button" onclick="history.go(0)" value="Annuleren"/>

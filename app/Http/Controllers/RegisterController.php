@@ -6,6 +6,7 @@ use App\User;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 class RegisterController extends Controller
 {
     /**
@@ -31,7 +32,7 @@ class RegisterController extends Controller
         //Tweede scherm
         $aData["txtNaam"] = $aRequest->post('txtNaam');
         $aData["txtVoornaam"] = $aRequest->post('txtVoornaam');
-        $aData["radioGeslacht"] = $aRequest->post('radioGeslacht');
+        $aData["radioGeslacht"] = $aRequest->post('gender');
         $aData["txtNationaliteit"] = $aRequest->post('txtNationaliteit');
         $aData["dateGeboorte"] = $aRequest->post('dateGeboorte');
         $aData["txtGeboorteplaats"] = $aRequest->post('txtGeboorteplaats');
@@ -47,12 +48,13 @@ class RegisterController extends Controller
         $aData["txtEmail"] = $aRequest->post('txtEmail');
 
         //Vierde scherm
-        $aData["radioMedisch"] = $aRequest->post('radioMedisch');
-        $aData["txtMedischDetail"] = $aRequest->post('txtMedischDetail');
+        $aData["radioMedisch"] = $aRequest->post('check');
+        $aData["txtMedischDetail"] = $aRequest->post('txtMedisch');
 
-        echo serialize($aData);
+        $this->SaveData($aData);
+        echo Traveller::all();
+        echo User::all();
 
-        //$this->SaveData($aData);
         //return redirect('welcome');
     }
 
@@ -75,19 +77,19 @@ class RegisterController extends Controller
         User::insert(
             [
                 'name' => $aData["txtStudentnummer"],
-                'password' => $password,
+                'password' => bcrypt($password),
                 'role' => $sFunctie
             ]
         );
 
         $iUserID = User::where('name',$aData['txtStudentnummer']) ->value('user_id');
-
         //Saving traveller
-        Travellers::insert(
+        Traveller::insert(
             [
                 'user_id' => $iUserID,
                 'trip_id' => $aData['dropReis'],
-                'zip_id' => $aData['dropGemeente'],
+                //'zip_id' => $aData['dropGemeente'],
+                'zip_id' => 1,
                 'first_name' => $aData['txtVoornaam'],
                 'last_name' => $aData['txtNaam'],
                 'country' => $aData['txtLand'],
@@ -99,11 +101,11 @@ class RegisterController extends Controller
                 'nationality' => $aData['txtNationaliteit'],
                 'birthdate' => $aData['dateGeboorte'],
                 'birthplace' => $aData['txtGeboorteplaats'],
-                'medical_info' => $aData['radioMedisch'],
+                'medical_info' => $aData['txtMedischDetail'],
                 'iban' => $aData['txtBank'],
-                'medical_issue' => $aData['txtMedischDetail'],
+                'medical_issue' => $aData['radioMedisch'],
                 'email' => $aData['txtEmail'],
-                'major_id' => $aData['dropOpleiding']
+                'major_id' => $aData["dropOpleiding"]
             ]
         );
         $this->sendMail($aData['txtEmail'],$aData['txtNaam'],$password);
@@ -123,7 +125,7 @@ class RegisterController extends Controller
     public function sendMail($email, $name, $password) {
         $aMailData = [
             'subject' => 'Your registration for the UCLL trip.',
-            'name_first' => $name,
+            'name' => $name,
             'email' => $email,
             'description' => "berichtje",
             'password' => $password
