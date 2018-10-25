@@ -38,10 +38,13 @@ Route::get('admin/trips/{tripid}', 'AdminTripController@getTripByID');
 
 Route::get('admin/organisator', 'KiesOrganisatorController@ShowForm');
 Route::post('admin/organisator', 'KiesOrganisatorController@ShowForm');
+Route::get('admin/get/organisators/{id}', 'KiesOrganisatorController@getOrganisators');
+
 
 Route::get('/info','AdminInfoController@showInfo')->name('info');
 
 Route::get('userinfo/{sUserName}', 'UserDataController@showUserData');
+
 
 Route::get('/', function () {
     return redirect('info');

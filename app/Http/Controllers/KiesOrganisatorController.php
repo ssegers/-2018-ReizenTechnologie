@@ -28,6 +28,14 @@ class KiesOrganisatorController extends Controller
             ->where('user_id', $selectedUserId)
             ->update(['votes' => 1]);
     }
+
+    public function getOrganisators($id) {
+        $organisators = DB::table('travellers')->where("trip_id",$id)->pluck("first_name", "last_name", "user_id");;
+        echo $organisators;
+        echo 'test';
+        return json_encode($organisators);
+
+    }
 }
 
 
