@@ -1,14 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
-
+{{ $aOrganizers }}
     <select name="selectedActiveTrip" class="travelChanged">
         @foreach ($aActiveTrips as $trip)
             <option value={{$trip->trip_id}}>{{$trip->name}}</option>
         @endforeach
     </select>
     <p>Organisators</p>
+    <button type="button" class="open" data-toggle="modal" data-target="#organizerPopup">
+
     <i class="fas fa-plus-circle"></i>
+    </button>
    <div>
         <table class="organizerTable">
             <thead>
@@ -25,7 +28,7 @@
     </div>
 
     <!-- MODAL POPUP -->
-    <div class="modal" tabindex="-1" role="dialog">
+    <div class="modal" id="organizerPopup" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -35,12 +38,30 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    {{--@foreach($aOrganizers as $organizer)--}}
-                        {{--<p>--}}
-                            {{--{{$organizer->$organizerName}}--}}
-                        {{--</p>--}}
-                        {{--<input type="checkbox" name="{{$organizer->$organizerId}}" value="{{$organizer->$organizerId}}">--}}
-                    {{--@endforeach--}}
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>
+                              Naam
+                            </th>
+                            <th>
+                              Toevoegen?
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($aOrganizers as $organizer)
+                            <tr>
+                            <td>
+                                {{$organizer->first_name}} {{ $organizer->last_name}}
+                            </td>
+                            <td>
+                            <input type="checkbox" name="{{$organizer->traveller_id}}" value="{{$organizer->traveller_id}}">
+                            </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary">Opslaan</button>
@@ -49,6 +70,5 @@
             </div>
         </div>
     </div>
-    <script src="{{ URL::asset('/js/jquery-3.3.1.min.js') }}"></script>
     <script src="{{ URL::asset('/js/activeTripOrganiser.js') }}"></script>
 @endsection

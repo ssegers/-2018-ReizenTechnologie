@@ -1,9 +1,8 @@
 $(document).ready(function() {
 
-
-        // Save the place increment and value of the select
-        var trip_id =  $('.travelChanged').val();
-        getActiveOrganizers(trip_id);
+    // Save the place increment and value of the select
+    var trip_id =  $('.travelChanged').val();
+    getActiveOrganizers(trip_id);
 
     // Monitor your selects for change by classname
     $('.travelChanged').on('change', function() {
@@ -21,12 +20,12 @@ $(document).ready(function() {
                 '<td>' + data[i].first_name + '</td>' +
                 '<td>' + data[i].last_name + '</td>' +
                 '<td>' +
-                '<a href="linkorganisator/trip_id=' + trip_id + '&traveller_id='+ data[i].traveller_id + '/" id=' + data[i].traveller_id + '>\n' +
-                '<i class="fas fa-minus-circle"></i></a></td>' +
+                '<button onclick="deleteActiveOrganizer(this,' + data[i].traveller_id + ')">' +
+                '<i class="fas fa-minus-circle"></i></button>' +
+                '</td>' +
                 '</tr>');
         }
     }
-
 
     function getActiveOrganizers(trip_id) {
         // Send this data to a script somewhere via AJAX
@@ -43,5 +42,24 @@ $(document).ready(function() {
                 buildTable(data);
             });
     }
+
+
 });
+
+function deleteActiveOrganizer(e,traveller_id) {
+    var trip_id =  $('.travelChanged').val();
+    $.ajax({
+        type: "DELETE",
+        url: "linkorganisator/delete",
+        data: {
+            trip_id: trip_id,
+            traveller_id: traveller_id,
+        },
+        success: function(msg){
+            e.parentElement.parentElement.remove();
+        }
+    });
+}
+//# sourceMappingURL=activeTripOrganiser.js.map
+
 //# sourceMappingURL=activeTripOrganiser.js.map
