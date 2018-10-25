@@ -28,7 +28,7 @@ body {
 }
 
 .side-nav {
-  flex: 0 0 200px;
+  flex: 0 0 250px;
   background-color: white;
   height: calc(100vh - 66px);
   padding-right: 30px;
@@ -57,6 +57,10 @@ body {
   border-bottom: 1px solid #003469;
 }
 
+.side-nav ul li:last-child {
+  border: none;
+}
+
 .side-nav ul li input[type="checkbox"] {
   position: absolute;
   right: 20px;
@@ -75,6 +79,16 @@ body {
 
 .side-nav button:hover {
   cursor: pointer;
+}
+
+.trip-overview ul {
+  list-style: none;
+  height: 60px;
+}
+
+.trip-overview ul li {
+  display: inline-block;
+  line-height: 60px;
 }
 
 #registerForm {

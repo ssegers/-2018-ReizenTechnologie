@@ -20,8 +20,8 @@ body {
   width: 100vw;
 }
 .side-nav {
-  -ms-flex: 0 0 200px;
-  flex: 0 0 200px;
+  -ms-flex: 0 0 250px;
+  flex: 0 0 250px;
   background-color: white;
   height: calc(100vh - 66px);
   padding-right: 30px;
@@ -47,6 +47,9 @@ body {
   line-height: 40px;
   border-bottom: 1px solid $col-accent;
 }
+.side-nav ul li:last-child {
+  border: none;
+}
 .side-nav ul li input[type="checkbox"] {
   position: absolute;
   right: 20px;
@@ -63,6 +66,16 @@ body {
 }
 .side-nav button:hover {
   cursor: pointer;
+}
+.trip-overview ul {
+  list-style: none;
+  height: 60px;
+}
+.trip-overview ul li {
+  display: inline-block;
+  line-height: 60px;
+}
+.container-fluid {
 }
 
 //body {
