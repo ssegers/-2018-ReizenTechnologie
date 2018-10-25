@@ -1,23 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Nunito");
 @import url("https://use.fontawesome.com/releases/v5.3.1/css/all.css");
 
-body{
-background-color: #6cb2eb;
 
-}
-
-.admin-form{
-    padding-left:25%;
-    position: fixed;
-}
-.admin-nav{
-    position: fixed;
-    background-color: #E00049;
-    width: 10%;
-
-
-
-
-}
 
 

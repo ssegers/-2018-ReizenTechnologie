@@ -7,23 +7,39 @@ use App\Trip;
 use App\TripOrganizer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\View;
 
 class ActiveTripOrganizerController extends Controller
 {
+    private $oActiveTrips;
     /*
      * This function will show the ActiveTripOrganizer view
      */
-    public function showForm() {
-        $oActiveTrips = Trip::Where('is_active', true)->get();
-        $firstActiveTrip = $oActiveTrips->first();
-        $iTripId = $firstActiveTrip->trip_id;
-        $aCurrentMentorsId = TripOrganizer::Where('trip_id', $iTripId)->get('traveller_id')->toArray();
-        $oCurrentMentors = Traveller::Where('traveller_id', $aCurrentMentorsId)->get();
-
+    public function showActiveTrips() {
+        $this->oActiveTrips = Trip::Where('is_active', true)->get();
         return view( 'user.ActiveTripOrganizer',
             [
-                'aActiveTrips' => $oActiveTrips,
-                'aCurrentMentors' => $oCurrentMentors,
+                'aActiveTrips' => $this->oActiveTrips,
                 ]);
+    }
+
+    public function showLinkedOrganisators(Request $request) {
+
+        $this->oActiveTrips = Trip::Where('is_active', true)->get();
+        $iTripId = $request->post('trip_id');
+
+        $aUserId = TripOrganizer::Select('traveller_id')->where('trip_id', $iTripId)->get();
+
+        $oMentors = Traveller::Select('traveller_id','first_name', 'last_name')
+            ->whereIn('traveller_id', $aUserId)
+            ->orderBy('first_name')
+            ->get();
+        return response()->json(['aMentors' => $oMentors]);
+    }
+
+    public function removeLinkedOrganisator($iTravellerId, $iTripId) {
+        //get trip id aswell
+        TripOrganizer::Where(['traveller_id', '=', $iTravellerId],['trip_id', '=', $iTripId])->delete();
+        return redirect()->back();
     }
 }
