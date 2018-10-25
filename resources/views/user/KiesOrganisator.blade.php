@@ -29,15 +29,16 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/jquery-3.3.1.js') }}"></script>
 
     <script>
         $(document).ready(function() {
-            console.log('teetst');
+            console.log('test');
             $('select[name="ReisKiezen"]').on('change', function(){
                 var tripId = $(this).val();
                 console.log(tripId);
                 if(tripId) {
-                    $.ajax({
+                    jQuery.ajax({
                         url: '/admin/get/organisators/'+tripId,
                         type:"GET",
                         dataType:"json",
