@@ -1,86 +1,69 @@
+@import url("https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css");
 @import url("https://fonts.googleapis.com/css?family=Nunito");
 @import url("https://use.fontawesome.com/releases/v5.3.1/css/all.css");
-body {
-  background-color: #E9F3F8;
-  overflow: hidden;
-}
-
-* {
-  padding: 0;
-  margin: 0;
-}
-
-.menu-left {
-  position: fixed;
-  background-color: #fff;
-  width: 200px;
-  height: calc(100vh - 60px);
-  border-right: 1px solid #003469;
-}
-
-.content-right {
-  padding: 0 20px 20px;
-  margin: 0 0 0 200px;
-}
-
-.content-right h1.page-title {
-  line-height: 50px;
-  height: 50px;
-  margin: 0;
-}
-
-.content-center {
-  margin: 0 200px;
-}
-
-/* Navigation */
-nav {
-  width: 100vw;
-  height: 60px;
-  overflow: hidden;
-  position: relative;
+nav.navbar {
   background-color: #E00049;
 }
 
-nav img {
-  height: 60px;
-  line-height: 60px;
-  display: inline;
+a.navbar-brand img {
+  height: 50px;
 }
 
-nav ul {
-  list-style: none;
-  display: inline-block;
+a.navbar-brand {
+  margin: 0;
+  padding: 0;
 }
 
-nav ul li {
-  line-height: 40px;
-  margin: 10px 0;
-  padding: 0 20px;
+a.nav-link {
   color: white;
 }
 
-nav ul.nav-left {
-  display: inline-block;
+a.nav-link:hover {
+  color: #003469;
+}
+
+body {
+  overflow-x: hidden;
+  width: 100vw;
+}
+
+.side-nav {
+  flex: 0 0 200px;
+  background-color: lightgray;
+  height: calc(100vh - 66px);
+  padding-right: 30px;
+  margin-right: -20px;
+}
+
+.side-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: calc(100vh - 66px - 50px);
+  overflow-y: auto;
+  display: block;
   position: absolute;
-  top: 0;
+  width: 250px;
+  left: 0;
+  top: 50px;
 }
 
-nav ul.nav-left li {
-  border-left: 1px solid white;
+.side-nav ul li {
+  margin-left: 15px;
+  padding: 10px 20px;
+  position: relative;
 }
 
-nav ul.nav-left li:first-child {
-  border: none;
-}
-
-nav ul.nav-right {
+.side-nav ul li input[type="checkbox"] {
   position: absolute;
-  right: 0;
+  right: 20px;
 }
 
-nav a {
-  text-decoration: none;
+.side-nav button {
+  display: block;
+  height: 50px;
+  width: 235px;
+  margin-right: -30px;
 }
 
 #registerForm {
@@ -168,310 +151,6 @@ input.invalid {
 /* Mark the steps that are finished and valid: */
 .step.finish {
   background-color: #4CAF50;
-}
-
-div.table-container {
-  overflow-x: auto;
-  overflow-y: auto;
-  max-height: calc(100vh - 210px);
-}
-
-span.filter-title {
-  display: block;
-  padding: 0 20px;
-  line-height: 50px;
-  background-color: #003469;
-  color: white;
-}
-
-ul.filters {
-  list-style: none;
-  height: calc(100vh - 160px);
-  overflow-y: auto;
-  border-bottom: 1px solid #003469;
-}
-
-ul.filters li.filter-option {
-  position: relative;
-  padding: 20px 20px;
-  display: block;
-  width: calc(100% - 20px*2);
-  border-top: 1px solid #003469;
-}
-
-ul.filters li.filter-option:first-child {
-  border-top: none;
-}
-
-ul.filters li.filter-option input[type="checkbox"] {
-  position: absolute;
-  right: 20px;
-  width: 10px;
-  top: 22px;
-}
-
-ul.filters li.apply button {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-}
-
-ul.filter-buttons {
-  position: absolute;
-  bottom: 0;
-  list-style: none;
-  width: 100%;
-}
-
-ul.filter-buttons li.apply button {
-  border: none;
-  background-color: #003469;
-  height: 50px;
-  color: white;
-  width: 100%;
-}
-
-table.filter-table {
-  width: 100%;
-}
-
-table.filter-table * {
-  padding: 0;
-  margin: 0;
-  border: none;
-}
-
-table.filter-table thead {
-  background-color: #E00049;
-  color: white;
-  line-height: 40px;
-}
-
-table.filter-table tbody {
-  line-height: 30px;
-}
-
-table.filter-table tbody tr td {
-  border-bottom: 1px solid #003469;
-}
-
-table.filter-table tbody tr {
-  transition: 0.1s ease-in-out all;
-}
-
-table.filter-table tbody tr:hover {
-  background-color: #003469;
-  color: white;
-  cursor: pointer;
-}
-
-ul.pagination {
-  list-style: none;
-  text-align: center;
-}
-
-ul.pagination li {
-  display: inline-block;
-  height: 22px;
-  width: 22px;
-  border: 1px solid #003469;
-  line-height: 22px;
-}
-
-ul.pagination li a {
-  text-decoration: none;
-  color: black;
-}
-
-ul.pagination li.page-item.active {
-  background-color: #003469;
-  color: white;
-}
-
-td.field.last_name {
-  min-width: 120px;
-}
-
-td.field.first_name {
-  min-width: 120px;
-}
-
-td.field.name {
-  min-width: 130px;
-}
-
-td.field.study_name {
-  min-width: 100px;
-}
-
-td.field.major_name {
-  min-width: 140px;
-}
-
-td.field.birthdate {
-  min-width: 120px;
-}
-
-td.field.gender {
-  min-width: 80px;
-}
-
-td.field.nationality {
-  min-width: 100px;
-}
-
-td.field.address {
-  min-width: 200px;
-}
-
-td.field.zip_code {
-  min-width: 90px;
-}
-
-td.field.city {
-  min-width: 120px;
-}
-
-td.field.country {
-  min-width: 100px;
-}
-
-td.field.email {
-  min-width: 250px;
-}
-
-td.field.phone {
-  min-width: 100px;
-}
-
-td[class^="field emergency"] {
-  min-width: 130px;
-}
-
-td.field.medical_info {
-  min-width: 200px;
-}
-
-ul.download-options {
-  list-style: none;
-  display: block;
-  position: absolute;
-  top: 115px;
-  right: 20px;
-  padding: 0;
-}
-
-ul.download-options li {
-  display: inline-block;
-  margin-left: 5px;
-}
-
-ul.download-options li:first-child {
-  margin: 0;
-}
-
-ul.download-options li.export button {
-  height: 40px;
-  align-content: center;
-  padding: 0 10px;
-  background-color: transparent;
-  border: 1px solid #003469;
-  transition: 0.1s ease-in-out all;
-}
-
-ul.download-options li.export button:hover {
-  cursor: pointer;
-  background-color: #003469;
-  color: white;
-}
-
-ul.list-trip {
-  list-style: none;
-  line-height: 48px;
-  margin-left: -18px;
-  max-width: 100%;
-  overflow-x: auto;
-}
-
-ul.list-trip li {
-  display: inline-block;
-  padding: 0 20px;
-  background-color: #E00049;
-  border: 1px solid white;
-  margin: 0 -3px;
-  color: white;
-  transition: 0.1s ease-in-out all;
-}
-
-ul.list-trip li.own:hover {
-  background-color: #003469;
-  cursor: pointer;
-}
-
-ul.list-trip li.active {
-  background-color: #003469;
-}
-
-div.filter-footer {
-  position: relative;
-  line-height: 50px;
-}
-
-div.filter-footer div.filter-per-page {
-  position: absolute;
-  top: 0;
-  left: 0;
-  line-height: 50px;
-}
-
-.individualUser_container {
-  background: white;
-  height: auto;
-  width: 50%;
-  font-weight: bold;
-  color: #003469;
-  overflow: hidden;
-  margin-top: 20px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.individualUser_container form p {
-  clear: both;
-  padding: 19px;
-}
-
-.individualUser_container form {
-  margin-bottom: 100px;
-}
-
-.individualUser_formContainer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-top: 20px;
-}
-
-.individualUser_leftForm {
-  height: 300px;
-  float: left;
-}
-
-.individualUser_rightForm {
-  height: 300px;
-  float: left;
-}
-
-.individualUser_formContainer label.field {
-  text-align: left;
-  width: 150px;
-  float: left;
-}
-
-.individualUser_formContainer span {
-  width: 250px;
-  float: left;
-  font-weight: normal;
 }
 
 /*# sourceMappingURL=app.css.map */
