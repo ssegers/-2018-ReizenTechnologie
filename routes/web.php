@@ -11,6 +11,9 @@
 |
 */
 
+Route::get('/', function () {
+    return view('welcome');
+});
 
 /* Show users per trip as an organizer */
 Route::get('user/{sUserName}/trip/travellers', 'UserDataController@showUsersAsMentor');
@@ -22,7 +25,9 @@ route::get('user/Form/form', 'RegisterController@form');
 route::post('user/Form/form', 'RegisterController@formPost');
 
 //Get active trip to link to organizers
-route::get('admin/linkorganisator/', 'ActiveTripOrganizerController@showForm');
+route::get('admin/linkorganisator/', 'ActiveTripOrganizerController@showActiveTrips');
+route::post('admin/linkorganisator/', 'ActiveTripOrganizerController@showLinkedOrganisators');
+route::get('admin/linkorganisator/{traveller_id}', 'ActiveTripOrganizerController@removeLinkedOrganisators');
 
 route::get('admin/user/default', 'AdminUserController@createForm');
 route::post('admin/user/default', 'AdminUserController@createUser');
@@ -33,9 +38,15 @@ Route::post('admin/info', 'AdminInfoController@updateInfo');
 Route::get('admin/trips', 'AdminTripController@getTrips');
 Route::get('admin/trips/{tripid}', 'AdminTripController@getTripByID');
 
+Route::get('admin/organisator', 'KiesOrganisatorController@ShowForm');
+Route::post('admin/organisator', 'KiesOrganisatorController@ShowForm');
+Route::get('admin/get/organisators/{id}', 'KiesOrganisatorController@getOrganisators');
+
+
 Route::get('/info','AdminInfoController@showInfo')->name('info');
 
 Route::get('userinfo/{sUserName}', 'UserDataController@showUserData');
+
 
 Route::get('/', function () {
     return redirect('info');
