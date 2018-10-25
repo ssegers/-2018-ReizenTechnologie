@@ -27,7 +27,7 @@ route::get('admin/linkorganisator/', 'ActiveTripOrganizerController@showForm');
 route::get('admin/user/default', 'AdminUserController@createForm');
 route::post('admin/user/default', 'AdminUserController@createUser');
 
-Route::get('admin/info', 'AdminInfoController@getInfo');
+Route::get('admin/info', 'AdminInfoController@getInfo')->name('adminInfo');
 Route::post('admin/info', 'AdminInfoController@updateInfo');
 
 Route::get('admin/trips', 'AdminTripController@getTrips');
