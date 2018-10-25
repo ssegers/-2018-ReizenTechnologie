@@ -9,7 +9,7 @@
     {{Form::open(array('action' => 'AdminUserController@createUser', 'method' => 'post' ))}}
     <div class="form-group">
         {{Form::label('username', 'Gebruikersnaam: ', ['class' => ''])}}
-        {{Form::text('username', '', ['class' => 'form-control', 'placeholder' => $sUserName, 'required'])}}
+        {{Form::text('username', '', ['class' => 'form-control', 'placeholder' => $sUserName, 'required' ,])}}
     </div>
     <div class="form-group">
         {{Form::label('password', 'Paswoord: ')}}
