@@ -21,17 +21,23 @@
         </div>
     </div>
 </nav>
-<nav id="sidebar">
-    <ul class="list-unstyled components">
-        <li>Standaard Gebruiker</li>
-        <li>list-item 2</li>
-        <li>list-item 3</li>
-        <li>list-item 4</li>
-    </ul>
-</nav>
+<div class="row">
+    <div class="col side-nav" >
+        <nav id="sidebar">
+            <ul class="left-side-nav">
+                <a href="{{route('adminInfo')}}"><li>Standaard Gebruiker</li></a>
+                <a href="{{route('adminInfo')}}"><li>list-item 2</li></a>
+                <a href="{{route('adminInfo')}}"><li>list-item 3</li></a>
+                <a href="{{route('adminInfo')}}"><li>list-item 4</li></a>
+            </ul>
+        </nav>
 
-<div class="container">
-    @yield('content')
+    </div>
+    <div class="col">
+        <div class="container-fluid">
+            @yield('content')
+        </div>
+    </div>
 </div>
 
 </body>

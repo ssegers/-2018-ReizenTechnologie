@@ -1,6 +1,7 @@
 var currentTab = 0; // Current tab is set to be the first tab (0)
 showTab(currentTab); // Display the current tab
-
+var jsAlert =document.getElementById('jsAlert');
+jsAlert.style.display= 'none';
 function showTab(n) {
     // This function will display the specified tab of the form ...
     var x = document.getElementsByClassName("tab");
@@ -51,16 +52,34 @@ function validateForm() {
 
             if (y[i].value == "") {
                 // add an "invalid" class to the field:
-
                 // and set the current valid status to false:
-
                 if(y[i].placeholder != "Niet verplicht"){
 
                     y[i].className += " invalid";
-                    // and set the current valid status to true:
                     valid = false;
                 }
             }
+            else{
+                y[i].className -= " invalid";
+            }
+
+            if(y[i].id == "txtBank"){
+
+                if(!IBAN.isValid(y[i].value)){
+                    y[i].className += " invalid";
+                    valid = false;
+                }
+            }
+
+            if(y[i].id == "txtEmail"){
+
+                if(!validateEmail(y[i].value)){
+
+                    y[i].className += " invalid";
+                    valid = false;
+                }
+            }
+
     }
     // If the valid status is true, mark the step as finished and valid:
     if (valid) {
@@ -68,7 +87,10 @@ function validateForm() {
     }
     return valid; // return the valid status
 }
-
+function validateEmail(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+}
 function fixStepIndicator(n) {
     // This function removes the "active" class of all steps...
     var i, x = document.getElementsByClassName("step");

@@ -3,17 +3,17 @@
 @section('content')
     {{ Form::open(array('action' => 'RegisterController@formPost', 'method' => 'post', 'id' => 'registerForm')) }}
         <h1 class="formTitel">Inschrijvings formulier</h1>
+        <h2 id="jsAlert" >Om deze formulier te kunnen gebruiken moet uw javascript aanstaan.</h2>
         <!-- One "tab" for each step in the form: -->
         <div class="tab"><h2 class="tabTitle">Basisgegevens:</h2>
             <p><label class="formLabel">Reis:</label>
-
-                {{ Form::select('dropReis', array('1' => 'USA 2019', '2' => 'Duitsland 2019'), ['id'=>'dropReis','oninput'=>'this.className'])}}</p>
+                {{ Form::select('dropReis', $aTrips, ['id'=>'dropReis','oninput'=>'this.className'])}}</p>
 
             <p><label class="formLabel">Studentnummer</label>{{ Form::text('txtStudentnummer', '', ['id'=>'txtStudentnummer','oninput'=>'this.className'])}}</p>
             <p><label class="formLabel">Opleiding</label>
-                {{ Form::select('dropOpleiding', array('1' => 'ELO-ICT', '2' => 'Docent'), ['id'=>'dropOpleiding','oninput'=>'this.className'])}}</p>
+                {{ Form::select('dropOpleiding', $aOpleidingen, ['id'=>'dropOpleiding','oninput'=>'this.className'])}}</p>
             <p><label class="formLabel">Afstudeerrichting</label>
-                {{ Form::select('dropAfstudeerrichtingen', array('1' => 'ELO', '2' => 'ICT', '3' => 'Begeleider'), ['id'=>'dropAfstudeerrichtingen','oninput'=>'this.className'])}}</p>
+                {{ Form::select('dropAfstudeerrichtingen', $aAfstudeerrichtingen, ['id'=>'dropAfstudeerrichtingen','oninput'=>'this.className'])}}</p>
         </div>
 
     <div class="tab"><h2 class="tabTitle">Persoonlijke gegevens:</h2>
@@ -43,11 +43,11 @@
         </div>
 
     <div class="tab"><h2 class="tabTitle">Medische gegevens:</h2>
-            <p><label class="formLabel">Heeft u een operatie gehad in het afgelopen jaar of andere medische aandoening? (Allergie, ziekte, ...)</label>
+            <p><label class="formLabel">Heeft u een operatie gehad in het afgelopen jaar of andere medische aandoening? (Allergie, ziekte, ...)</label><br>
                 {{ Form::radio('check', '1', ['id'=>'radioMedisch','oninput'=>'this.className'])}}Ja
                 {{ Form::radio('check', '0', ['id'=>'radioMedisch','oninput'=>'this.className'])}}Nee
 
-            </p>
+            </p><br>
             <p><label class="formLabel">Wat houden deze in?</label>{{ Form::textarea('txtMedisch', '', ['id'=>'txtMedisch','oninput'=>'this.className','placeholder'=>'Niet verplicht'])}}</p>
         </div>
 
@@ -68,5 +68,8 @@
 
     {{ Form::close() }}
 
-    <script src="{{ URL::asset('/js/form.js') }}"></script>
+    <script src="{{ URL::asset('/js/all.js') }}"></script>
+
+
+
 @endsection
