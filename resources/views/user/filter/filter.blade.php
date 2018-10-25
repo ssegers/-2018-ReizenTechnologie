@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @section('menu-left')
-    <div class="menu-left">
+    {{Form::open(array('url' => "user/$sUserName/trip/travellers", 'method' => 'post'))}}
+    <nav>
         <span class="filter-title">Selecteer gegevens</span>
         <ul class="filters">
             @foreach($aFilterList as $sFilterName => $sFilterText)
@@ -20,11 +21,10 @@
         <ul class="filter-buttons">
             <li class="apply"><button type="submit" name="button-filter" value="button-filter">Pas Gegevens Toe</button></li>
         </ul>
-    </div>
+    </nav>
 @endsection
 
 @section('content')
-    {{Form::open(array('url' => "user/$sUserName/trip/travellers", 'method' => 'post'))}}
     <div class="content-right">
         <ul class="list-trip">
             @foreach($aActiveTrips as $aTripData)
@@ -45,24 +45,34 @@
             <li class="export"><button type="submit" name="export" value="excel">Excel</button></li>
         </ul>
         <div class="table-container">
-            <table class="filter-table">
-                <thead>
-                <tr>
-                    @foreach($aFiltersChecked as $sFilterValue)
-                        <th>{{ $sFilterValue }}</th>
-                    @endforeach
-                </tr>
-                </thead>
-                <tbody>
-                @foreach($aUserData as $oUserData)
-                    <tr onclick="displayUser('<?php echo $oUserData->name ?>')">
-                        @foreach($aFiltersChecked as $sFilterName => $sFilterText)
-                            <td class="field {{ $sFilterName }}">{{ $oUserData->$sFilterName }}</td>
+            <div class="table-wrapper-scroll-y">
+                <style>
+                    .table-wrapper-scroll-y {
+                        display: block;
+                        max-height: 200px;
+                        overflow-y: auto;
+                        -ms-overflow-style: -ms-autohiding-scrollbar;
+                    }
+                </style>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        @foreach($aFiltersChecked as $sFilterValue)
+                            <th>{{ $sFilterValue }}</th>
                         @endforeach
                     </tr>
-                @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                    @foreach($aUserData as $oUserData)
+                        <tr onclick="displayUser('<?php echo $oUserData->name ?>')">
+                            @foreach($aFiltersChecked as $sFilterName => $sFilterText)
+                                <td class="field {{ $sFilterName }}">{{ $oUserData->$sFilterName }}</td>
+                            @endforeach
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
         <div class="filter-footer">
             {{ $aUserData->appends(request()->input())->links() }}

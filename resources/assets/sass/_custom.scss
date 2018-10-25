@@ -15,6 +15,16 @@ a.nav-link:hover {
   color: $col-accent;
 }
 
+body {
+  overflow-x: hidden;
+  width: 100vw;
+}
+
+.side-nav {
+  -ms-flex: 0 0 230px;
+  flex: 0 0 230px;
+  background-color: greenyellow;
+}
 
 
 
