@@ -5,13 +5,12 @@ console.log('teetst');
         console.log(tripId);
         if(tripId) {
             $.ajax({
-                url: '/admin/get/organisators/'+countryId,
+                url: '/admin/get/organisators/'+tripId,
                 type:"GET",
                 dataType:"json",
                 beforeSend: function(){
                     $('#loader').css("visibility", "visible");
                 },
-
                 success:function(data) {
 
                     $('select[name="OrganisatorKiezen"]').empty();
@@ -22,12 +21,16 @@ console.log('teetst');
 
                     });
                 },
+
+                error: function(req, err){ console.log('my message' + err);
+                },
+
                 complete: function(){
                     $('#loader').css("visibility", "hidden");
                 }
             });
         } else {
-            $('select[name="state"]').empty();
+            $('select[name="OrganisatorKiezen"]').append('<option value="Geen waarde gevonden">id</option>');
         }
 
     });

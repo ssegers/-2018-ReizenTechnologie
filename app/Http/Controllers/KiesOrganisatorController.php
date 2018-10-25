@@ -6,6 +6,11 @@ use App\User;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Trip;
+use App\Study;
+use App\Major;
+use Illuminate\Support\Facades\Mail;
+
 class KiesOrganisatorController extends Controller
 {
     /**
@@ -30,7 +35,7 @@ class KiesOrganisatorController extends Controller
     }
 
     public function getOrganisators($id) {
-        $organisators = DB::table('travellers')->where("trip_id",$id)->pluck("first_name", "last_name", "user_id");;
+        $organisators = Traveller::all()->where("trip_id",$id)->pluck("first_name", "last_name", "user_id");;
         echo $organisators;
         echo 'test';
         return json_encode($organisators);

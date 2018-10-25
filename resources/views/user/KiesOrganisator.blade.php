@@ -28,7 +28,6 @@
     </div>
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/jquery-3.3.1.js') }}"></script>
 
     <script>
