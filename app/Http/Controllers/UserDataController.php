@@ -226,10 +226,27 @@ class UserDataController extends Controller
      * @author Joren Meynen
      *
      * @param $sUserName
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View|string
      */
     public function showUserData($sUserName)
     {
+        /* Get user from Auth */
+        $oUser = Auth::user();
+
+        $sSegers = 'u0598673';
+        $sRoox = 'u0569802';
+
+        /* Get user from URL */
+        $oUser = User::where('name', $sSegers)->first();
+        try {
+            if ($oUser->role != 'organizer') {
+                return 'Deze gebruiker is niet gemachtigd';
+            }
+        }
+        catch (\Exception $exception) {
+            return 'Deze gebruiker bestaat niet';
+        }
+
         $aUserData = User::select()
             ->join('travellers', 'users.user_id', '=', 'travellers.user_id')
             ->join('zips', 'travellers.zip_id', '=', 'zips.zip_id')
