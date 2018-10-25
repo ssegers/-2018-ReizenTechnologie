@@ -13,10 +13,10 @@
     </div>
     <div class="form-group">
         {{Form::label('password', 'Paswoord: ')}}
-        {{Form::password('password', ['required', "class" => "form-control"])}}
+        {{Form::password('password', ['required', "class" => "form-control"])}}<br />
         <div class="actions">
-            {{Form::submit('Gebruiker Toevoegen')}}
-            <input type="button" onclick="history.go(0)" value="Annuleren"/>
+            {{Form::submit('Gebruiker Toevoegen', ['class' =>'btn btn-success' ])}}
+            <input type="button" class="btn btn-danger btn-sm" onclick="history.go(0)" value="Annuleren"/>
         </div>
 
     </div>
