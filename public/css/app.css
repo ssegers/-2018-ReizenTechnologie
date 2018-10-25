@@ -28,7 +28,7 @@ body {
 }
 
 .side-nav {
-  flex: 0 0 200px;
+  flex: 0 0 250px;
   background-color: white;
   height: calc(100vh - 66px);
   padding-right: 30px;
