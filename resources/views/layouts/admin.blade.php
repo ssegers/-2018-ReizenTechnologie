@@ -7,20 +7,32 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{config('app.name')}}</title>
 
-    <link type="text/css" rel="stylesheet" href="{{ asset('css/admin.app.css') }}">
+    <link type="text/css" rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
 
 <body>
-@section('menu-left')
-<nav class="admin-nav">
-    <ul>
+
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">
+                <img alt="UCLL" src="{{asset('images/ucll.png') }}"/>
+            </a>
+        </div>
+    </div>
+</nav>
+<nav id="sidebar">
+    <ul class="list-unstyled components">
         <li>Standaard Gebruiker</li>
         <li>list-item 2</li>
         <li>list-item 3</li>
         <li>list-item 4</li>
     </ul>
 </nav>
-@endsection
-@yield('content')
+
+<div class="container">
+    @yield('content')
+</div>
+
 </body>
 </html>
