@@ -1,38 +1,46 @@
 $(document).ready(function() {
-console.log('teetst');
-    $('select[name="ReisKiezen"]').on('change', function(){
-        var tripId = $(this).val();
-        console.log(tripId);
-        if(tripId) {
-            $.ajax({
-                url: '/admin/get/organisators/'+tripId,
-                type:"GET",
-                dataType:"json",
-                beforeSend: function(){
-                    $('#loader').css("visibility", "visible");
-                },
-                success:function(data) {
 
-                    $('select[name="OrganisatorKiezen"]').empty();
 
-                    $.each(data, function(fistname,lastname, id){
+    // Save the place increment and value of the select
+    var trip_id =  $('.ReisKiezen').val();
+    getTravellers();
 
-                        $('select[name="OrganisatorKiezen"]').append('<option value="'+ fistname+' '+lastname +'">' + id + '</option>');
+    // Monitor your selects for change by classname
+    $('.travelChanged').on('change', function() {
 
-                    });
-                },
-
-                error: function(req, err){ console.log('my message' + err);
-                },
-
-                complete: function(){
-                    $('#loader').css("visibility", "hidden");
-                }
-            });
-        } else {
-            $('select[name="OrganisatorKiezen"]').append('<option value="Geen waarde gevonden">id</option>');
-        }
-
+        // Save the place increment and value of the select
+        var trip_id = $(this).val();
+        $(".organizerTable tbody > tr").remove();
+        getTravellers(trip_id);
     });
 
+
+    function buildTable(data) {
+        for (let i = 0; i < data.length; i++) {
+            $(".organizerTable tbody").append('<tr>' +
+                '<td>' + data[i].first_name + '</td>' +
+                '<td>' + data[i].last_name + '</td>' +
+                '<td>' +
+                '<a href="linkorganisator/' + data[i].traveller_id + '/" id=' + data[i].traveller_id + '>\n' +
+                '<i class="fas fa-minus-circle"></i></a></td>' +
+                '</tr>');
+        }
+    }
+    function ChangeDrop(data) {
+
+    }
+
+
+    function getTravellers(trip_id = 1) {
+        // Send this data to a script somewhere via AJAX
+        $.ajax({
+            type: "GET",
+            url: "admin/get/organisators/"+trip_id
+        })
+            .done(function( result ) {
+                var data = result['aTravellers'];
+                console.log(data);
+                ChangeDrop(data);
+            });
+    }
 });
