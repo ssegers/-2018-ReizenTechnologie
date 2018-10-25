@@ -15,26 +15,27 @@
                     <h4 class="modal-title" id="tripModalLabel">Reis aanmaken/editeren</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
-                <form method="post" action="/admin/trips/">
+                {{ Form::open(array('action' => 'AdminTripController@UpdateOrCreateTrip', 'method' => 'post')) }}
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="trip-name" class="control-label">Reis:</label>
-                            <input type="text" class="form-control" id="trip-name">
+                            {{Form::label('trip-name','Naam:')}}
+                            {{Form::text('trip-name')}}
                         </div>
                         <div class="form-group">
-                            <label for="trip-year" class="control-label">Jaar:</label>
-                            <input type="text" class="form-control" id="trip-year"></input>
+                            {{Form::label('trip-year','Jaar:')}}
+                            {{Form::text('trip-year')}}
                         </div>
                         <div class="form-group">
-                            <label for="trip-is-active" class="control-label">Actief:</label>
-                            <input type="checkbox" class="form-control" id="trip-is-active"></input>
+                            {{Form::label('trip-is-active','Actief:')}}
+                            {{Form::checkbox('trip-is-active','1')}}
                         </div>
+                            {{ Form::hidden('trip-id','trip-id',array('id'=>'trip-id')) }}
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Sluiten</button>
                         <button type="submit" class="btn btn-primary">Opslaan</button>
                     </div>
-                </form>
+                {{ Form::close() }}
             </div>
         </div>
     </div>
@@ -85,6 +86,7 @@
         modal.find('.modal-body #trip-name').val(tripName);
         modal.find('.modal-body #trip-year').val(tripYear);
         modal.find('.modal-body #trip-active').val(tripActive);
+        modal.find('.modal-body #trip-id').val(tripId);
     })
 </script>
 
