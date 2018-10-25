@@ -22,12 +22,7 @@ class AdminTripController extends Controller
     //GET::/admin/trips/{id}
     function getTripByID($id)
     {
-        $oTrip = null;
-        if(is_int($id))
-        {
-            $oTrip = DB::table('trips')->find($id);
-        }
-
+        $oTrip = DB::table('trips')->where('trip_id', '=', $id)->first();
         return view('admin.trips.singleTrip', ['oTrip' =>$oTrip]); //moet naar een popup gaan, view target is niet juist
     }
     //POST::/admin/trips/{id}
