@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <select name="selectedActiveTrip">
+
+    <select name="selectedActiveTrip" class="travelChanged">
         @foreach ($aActiveTrips as $trip)
             <option value={{$trip->trip_id}}>{{$trip->name}}</option>
         @endforeach
@@ -9,19 +10,17 @@
     <p>Organisators</p>
     <i class="fas fa-plus-circle"></i>
    <div>
-        <table>
-            <tr>
-                @foreach($aCurrentMentors as $mentor)
-                        <td>
-                            {{$mentor->$name}}
-                        </td>
-                        <td>
-                            <a href={{url('ActiveTripOrganisatorController@deleteOrganizer')}} id="{{$organizer->$id}}">
-                                <i class="fas fa-minus-circle"></i></a>
-                        </td>
-                    @endif
-                @endforeach
-            </tr>
+        <table class="organizerTable">
+            <thead>
+                <tr>
+                    <th>Voornaam</th>
+                    <th>Achternaam</th>
+                    <th>Actie</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
         </table>
     </div>
 
@@ -50,4 +49,6 @@
             </div>
         </div>
     </div>
+    <script src="{{ URL::asset('/js/jquery-3.3.1.min.js') }}"></script>
+    <script src="{{ URL::asset('/js/activeTripOrganiser.js') }}"></script>
 @endsection

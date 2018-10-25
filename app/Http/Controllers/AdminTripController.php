@@ -26,7 +26,10 @@ class AdminTripController extends Controller
         return view('admin.trips.singleTrip', ['oTrip' =>$oTrip]); //moet naar een popup gaan, view target is niet juist
     }
     //POST::/admin/trips/{id}
+    function UpdateOrCreateTrip(Request $request)
+    {
 
+    }
 
 
 
