@@ -67,6 +67,16 @@ body {
 .side-nav button:hover {
   cursor: pointer;
 }
+.trip-overview ul {
+  list-style: none;
+  height: 60px;
+}
+.trip-overview ul li {
+  display: inline-block;
+  line-height: 60px;
+}
+.container-fluid {
+}
 
 //body {
 //  background-color: #E9F3F8;

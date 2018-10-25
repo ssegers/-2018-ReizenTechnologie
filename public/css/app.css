@@ -81,6 +81,16 @@ body {
   cursor: pointer;
 }
 
+.trip-overview ul {
+  list-style: none;
+  height: 60px;
+}
+
+.trip-overview ul li {
+  display: inline-block;
+  line-height: 60px;
+}
+
 #registerForm {
   background-color: #ffffff;
   margin: 100px auto;
