@@ -11,7 +11,7 @@
     <div class="form-group">
     <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=f1b7vjd1xordm1kfj32o5h93ox2x8i0dxr9capjyc1axdalb"></script>
     {{ Form::open(array('action' => 'AdminInfoController@updateInfo', 'method' => 'post')) }}
-    {{ Form::textArea('content', $oPageContent->content, ['class' => 'form-control','rows' => 2, 'cols' => 40]) }}
+    {{ Form::textArea('content', $oPageContent->content, ['class' => 'form-control']) }}
     <div class="actions">
         {{ Form::submit('Opslaan') }}
         <input type="button" onclick="history.go(0)" value="Annuleren"/>
@@ -21,7 +21,7 @@
     <script type="text/javascript">
         tinymce.init({
             selector: 'textarea',
-            height: 500,
+            height: 350,
             theme: 'modern',
             toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat',
             image_advtab: true,
