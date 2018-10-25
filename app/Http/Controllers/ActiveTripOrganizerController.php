@@ -37,9 +37,9 @@ class ActiveTripOrganizerController extends Controller
         return response()->json(['aMentors' => $oMentors]);
     }
 
-    public function removeLinkedOrganisator($iTravellerId) {
-        return response('Trying to delete ' + $iTravellerId);
-        TripOrganizer::Where('traveller_id', $iTravellerId)->delete();
-
+    public function removeLinkedOrganisator($iTravellerId, $iTripId) {
+        //get trip id aswell
+        TripOrganizer::Where(['traveller_id', '=', $iTravellerId],['trip_id', '=', $iTripId])->delete();
+        return redirect()->back();
     }
 }

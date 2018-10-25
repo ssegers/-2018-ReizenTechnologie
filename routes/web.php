@@ -27,7 +27,7 @@ route::post('user/Form/form', 'RegisterController@formPost');
 //Get active trip to link to organizers
 route::get('admin/linkorganisator/', 'ActiveTripOrganizerController@showActiveTrips');
 route::post('admin/linkorganisator/', 'ActiveTripOrganizerController@showLinkedOrganisators');
-route::get('admin/linkorganisator/{traveller_id}', 'ActiveTripOrganizerController@removeLinkedOrganisators');
+route::get('admin/linkorganisator/delete/{trip_id}{traveller_id}', 'ActiveTripOrganizerController@removeLinkedOrganisator');
 
 route::get('admin/user/default', 'AdminUserController@createForm');
 route::post('admin/user/default', 'AdminUserController@createUser');
