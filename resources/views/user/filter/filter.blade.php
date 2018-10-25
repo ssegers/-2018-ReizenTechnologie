@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
-@section('content')
-    {{Form::open(array('url' => "user/$sUserName/trip/travellers", 'method' => 'post'))}}
+@section('menu-left')
     <div class="menu-left">
         <span class="filter-title">Selecteer gegevens</span>
         <ul class="filters">
@@ -22,6 +21,10 @@
             <li class="apply"><button type="submit" name="button-filter" value="button-filter">Pas Gegevens Toe</button></li>
         </ul>
     </div>
+@endsection
+
+@section('content')
+    {{Form::open(array('url' => "user/$sUserName/trip/travellers", 'method' => 'post'))}}
     <div class="content-right">
         <ul class="list-trip">
             @foreach($aActiveTrips as $aTripData)
