@@ -2,8 +2,7 @@
 
 @section('menu-left')
     {{Form::open(array('url' => "user/$sUserName/trip/travellers", 'method' => 'post'))}}
-    <nav>
-        <span class="filter-title">Selecteer gegevens</span>
+        <button type="submit" name="button-filter" value="button-filter">Pas gegevens toe</button>
         <ul class="filters">
             @foreach($aFilterList as $sFilterName => $sFilterText)
                 <li class="filter-option">
@@ -18,14 +17,10 @@
                 </li>
             @endForeach
         </ul>
-        <ul class="filter-buttons">
-            <li class="apply"><button type="submit" name="button-filter" value="button-filter">Pas Gegevens Toe</button></li>
-        </ul>
-    </nav>
 @endsection
 
 @section('content')
-    <div class="content-right">
+    <div class="trip-overview">
         <ul class="list-trip">
             @foreach($aActiveTrips as $aTripData)
                 <li
@@ -37,6 +32,7 @@
                 </li>
             @endforeach
         </ul>
+    </div>
         <h1 class="page-title">Deelnemers {{ $oCurrentTrip->name }} {{ $oCurrentTrip->year }}</h1>
         <ul class="download-options">
             <li>Download</li>
