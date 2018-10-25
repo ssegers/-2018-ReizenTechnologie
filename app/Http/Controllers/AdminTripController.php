@@ -28,7 +28,21 @@ class AdminTripController extends Controller
     //POST::/admin/trips/{id}
     function UpdateOrCreateTrip(Request $request)
     {
+        //echo var_dump($request->post('trip-year'));
+        //echo var_dump($request->post('trip_id'));
 
+        $is_active=$request->post('trip-is-active');
+        if($is_active==null){
+            $is_active=0;
+        }
+        DB::table('trips')
+            ->where('trip_id','=',$request->post('trip-id'))
+            ->update([
+                'name' => $request->post('trip-name'),
+                'is_active' => $is_active,
+                'year' => $request->post('trip-year')
+            ]);
+        return redirect('/admin/trips');
     }
 
 

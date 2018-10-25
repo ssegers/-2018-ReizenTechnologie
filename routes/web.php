@@ -35,6 +35,8 @@ route::post('admin/user/default', 'AdminUserController@createUser');
 Route::get('admin/info', 'AdminInfoController@getInfo')->name('adminInfo');
 Route::post('admin/info', 'AdminInfoController@updateInfo');
 
+Route::post('admin/trips', 'AdminTripController@UpdateOrCreateTrip');
+
 Route::get('admin/trips', 'AdminTripController@getTrips');
 Route::get('admin/trips/{tripid}', 'AdminTripController@getTripByID');
 
