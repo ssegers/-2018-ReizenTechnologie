@@ -22,4 +22,13 @@ a.nav-link:hover {
   color: #003469;
 }
 
+body {
+  overflow-x: hidden;
+}
+
+.side-nav {
+  flex: 0 0 230px;
+  background-color: greenyellow;
+}
+
 /*# sourceMappingURL=app.css.map */
