@@ -9,7 +9,7 @@
 
     <link type="text/css" rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
-<body>
+<body class="background-light-blue">
     @include('layouts.inc.nav')
 
     @hasSection('menu-left')
