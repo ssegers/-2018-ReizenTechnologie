@@ -14,13 +14,11 @@
 
     @hasSection('menu-left')
         <div class="row">
-            <div class="col-lg-3 col-sm-4">
+            <div class="col side-nav">
                 @yield('menu-left')
             </div>
-            <div class="col-lg-9 col-sm-8">
-                <div class="container">
+            <div class="col">
                     @yield('content')
-                </div>
             </div>
         </div>
 
