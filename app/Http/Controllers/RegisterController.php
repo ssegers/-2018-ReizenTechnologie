@@ -3,6 +3,9 @@ namespace App\Http\Controllers;
 use App\Mail\RegisterComplete;
 use App\Traveller;
 use App\User;
+use App\Trip;
+use App\Study;
+use App\Major;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -59,7 +62,10 @@ class RegisterController extends Controller
     }
 
     public function form(){
-        return view('user.Form.form');
+        $aTrips = Trip::where('is_active', true)->orderBy('name')->pluck('name');
+        $aOpleidingen = Study::pluck('study_name');
+        $aAfstudeerrichtingen = Major::pluck('major_name');
+        return view('user.Form.form', ['aTrips'=>$aTrips, 'aOpleidingen'=>$aOpleidingen, 'aAfstudeerrichtingen'=>$aAfstudeerrichtingen]);
     }
 
     /*----------------------------------------------------------------------------------------------------------------------*/
