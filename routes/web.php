@@ -11,9 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 /* Show users per trip as an organizer */
 Route::get('user/{sUserName}/trip/travellers', 'UserDataController@showUsersAsMentor');
@@ -36,3 +33,7 @@ Route::post('admin/info', 'AdminInfoController@updateInfo');
 Route::get('/info','AdminInfoController@showInfo')->name('info');
 
 Route::get('userinfo/{sUserName}', 'UserDataController@showUserData');
+
+Route::get('/', function () {
+    return redirect('info');
+});
