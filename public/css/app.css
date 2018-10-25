@@ -424,4 +424,54 @@ div.filter-footer div.filter-per-page {
   line-height: 50px;
 }
 
+.individualUser_container {
+  background: white;
+  height: auto;
+  width: 50%;
+  font-weight: bold;
+  color: #003469;
+  overflow: hidden;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.individualUser_container form p {
+  clear: both;
+  padding: 19px;
+}
+
+.individualUser_container form {
+  margin-bottom: 100px;
+}
+
+.individualUser_formContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20px;
+}
+
+.individualUser_leftForm {
+  height: 300px;
+  float: left;
+}
+
+.individualUser_rightForm {
+  height: 300px;
+  float: left;
+}
+
+.individualUser_formContainer label.field {
+  text-align: left;
+  width: 150px;
+  float: left;
+}
+
+.individualUser_formContainer span {
+  width: 250px;
+  float: left;
+  font-weight: normal;
+}
+
 /*# sourceMappingURL=app.css.map */
