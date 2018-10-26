@@ -28,6 +28,7 @@ route::post('user/Form/form', 'RegisterController@formPost');
 route::get('admin/linkorganisator/', 'ActiveTripOrganizerController@showActiveTrips');
 route::post('admin/linkorganisator/', 'ActiveTripOrganizerController@showLinkedOrganisators');
 route::delete('admin/linkorganisator/delete', 'ActiveTripOrganizerController@removeLinkedOrganisator');
+route::post('admin/linkorganisator/add', 'ActiveTripOrganizerController@addLinkedOrganisator');
 
 route::get('admin/user/default', 'AdminUserController@createForm');
 route::post('admin/user/default', 'AdminUserController@createUser');

@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-{{ $aOrganizers }}
     <select name="selectedActiveTrip" class="travelChanged">
         @foreach ($aActiveTrips as $trip)
             <option value={{$trip->trip_id}}>{{$trip->name}}</option>
@@ -38,6 +37,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
+
                     <table>
                         <thead>
                         <tr>
@@ -56,7 +56,9 @@
                                 {{$organizer->first_name}} {{ $organizer->last_name}}
                             </td>
                             <td>
-                            <input type="checkbox" name="{{$organizer->traveller_id}}" value="{{$organizer->traveller_id}}">
+
+                            <input type="checkbox" class="organizersCheckbox" name="{{$organizer->traveller_id}}" value="{{$organizer->traveller_id}}">
+
                             </td>
                             </tr>
                         @endforeach
@@ -64,7 +66,7 @@
                     </table>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Opslaan</button>
+                    <button type="button" class="btn btn-primary" onclick="addActiveOrganizer()">Opslaan</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                 </div>
             </div>
