@@ -22,15 +22,11 @@
 @section('content')
     <div class="trip-overview">
         <ul class="list-trip">
-            @foreach($aActiveTrips as $aTripData)
-                <li
-                @if($aTripData['oTrip']->trip_id == $oCurrentTrip->trip_id)
-                    class="active"
-                @endif
-                >
-                    {{ $aTripData['oTrip']->name }} {{ $aTripData['oTrip']->year }} ({{ $aTripData['iCount'] }})
-                </li>
-            @endforeach
+            <ul>
+                @foreach($aActiveTrips as $aTripData)
+                    <li @if($aTripData['oTrip']->trip_id == $oCurrentTrip->trip_id) class="active" @endif>{{ $aTripData['oTrip']->name }} {{ $aTripData['oTrip']->year }} ({{ $aTripData['iCount'] }})</li>
+                @endforeach
+            </ul>
         </ul>
     </div>
         <h1 class="page-title">Deelnemers {{ $oCurrentTrip->name }} {{ $oCurrentTrip->year }}</h1>
