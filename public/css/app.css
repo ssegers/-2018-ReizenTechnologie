@@ -22,4 +22,177 @@ a.nav-link:hover {
   color: #003469;
 }
 
+body {
+  overflow-x: hidden;
+  width: 100vw;
+  background-color: #E9F3F8;
+}
+
+.side-nav {
+  flex: 0 0 250px;
+  background-color: white;
+  height: calc(100vh - 66px);
+  padding-right: 30px;
+  margin-right: -20px;
+  border-right: 1px solid #003469;
+}
+
+.side-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: calc(100vh - 66px - 60px);
+  overflow-y: auto;
+  display: block;
+  position: absolute;
+  width: 250px;
+  left: 0;
+  top: 60px;
+}
+
+.side-nav ul li {
+  margin-left: 15px;
+  padding: 5px 20px 0;
+  position: relative;
+  line-height: 40px;
+  border-bottom: 1px solid #003469;
+}
+
+.side-nav ul li:last-child {
+  border: none;
+}
+
+.side-nav ul li input[type="checkbox"] {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+}
+
+.side-nav button {
+  display: block;
+  height: 60px;
+  width: 235px;
+  margin-right: -30px;
+  background-color: #003469;
+  border: none;
+  color: white;
+}
+
+.side-nav button:hover {
+  cursor: pointer;
+}
+
+.trip-overview il * {
+  padding: 0;
+  margin: 0;
+}
+
+.trip-overview ul {
+  list-style: none;
+  height: 60px;
+  padding: 0;
+  margin: 0;
+  display: block;
+}
+
+.trip-overview ul li {
+  display: inline-block;
+  line-height: 60px;
+  padding: 0 20px;
+  background-color: lightblue;
+  margin-left: -5px;
+}
+
+.trip-overview ul li.active {
+  background-color: #003469;
+  color: white;
+}
+
+#registerForm {
+  background-color: #ffffff;
+  margin: 100px auto;
+  font-family: Raleway;
+  padding: 40px;
+  width: 70%;
+  min-width: 300px;
+  box-sizing: border-box;
+}
+
+.formLabel {
+  font-size: 20px;
+  font-family: Raleway;
+  padding: 25px 50px 25px 0px;
+}
+
+.formTitel {
+  text-align: center;
+}
+
+/* Hide all steps by default: */
+.tab {
+  display: none;
+  font-size: 20px;
+  font-family: Raleway;
+}
+
+.tab input {
+  margin: 10px;
+  padding: 10px;
+}
+
+.tab select {
+  margin: 10px;
+  padding: 10px;
+}
+
+.tab #radioGeslacht {
+  padding: 25px;
+  width: 10%;
+}
+
+/* Mark input boxes that gets an error on validation: */
+input.invalid {
+  background-color: #ffdddd;
+}
+
+.formButton {
+  background-color: #4CAF50;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  margin: 10px 0px 10px 10px;
+  font-size: 17px;
+  font-family: Raleway;
+  cursor: pointer;
+}
+
+.formButton:hover {
+  opacity: 0.8;
+}
+
+#prevBtn {
+  background-color: #bbbbbb;
+}
+
+/* Make circles that indicate the steps of the form: */
+.step {
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbbbbb;
+  border: none;
+  border-radius: 50%;
+  display: inline-block;
+  opacity: 0.5;
+}
+
+.step.active {
+  opacity: 1;
+}
+
+/* Mark the steps that are finished and valid: */
+.step.finish {
+  background-color: #4CAF50;
+}
+
 /*# sourceMappingURL=app.css.map */

@@ -6,6 +6,7 @@ use App\User;
 use App\Trip;
 use App\Study;
 use App\Major;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -63,9 +64,15 @@ class RegisterController extends Controller
 
     public function form(){
         $aTrips = Trip::where('is_active', true)->orderBy('name')->pluck('name');
-        $aOpleidingen = Study::pluck('study_name');
-        $aAfstudeerrichtingen = Major::pluck('major_name');
-        return view('user.Form.form', ['aTrips'=>$aTrips, 'aOpleidingen'=>$aOpleidingen, 'aAfstudeerrichtingen'=>$aAfstudeerrichtingen]);
+        $aOpleidingen = Study::pluck('study_name','study_id');
+        $aAfstudeerrichtingen = DB::table('majors')->get();
+        foreach($aAfstudeerrichtingen as $oAfstudeerrichting){
+            $aMajors[$oAfstudeerrichting->study_id][] = $oAfstudeerrichting->major_name;
+        }
+
+        //Major::pluck('major_name');
+
+        return view('user.Form.form', ['aTrips'=>$aTrips, 'aOpleidingen'=>$aOpleidingen, 'aMajors'=>$aMajors]);
     }
 
     /*----------------------------------------------------------------------------------------------------------------------*/
@@ -138,6 +145,7 @@ class RegisterController extends Controller
         ];
         Mail::to(config('mail.username'))->send(new RegisterComplete($aMailData));
     }
+
     /*----------------------------------------------------------------------------------------------------------------------*/
     /*--------------------------------------------------------------------------Collection of error messages----------------*/
     /*----------------------------------------------------------------------------------------------------------------------*/
