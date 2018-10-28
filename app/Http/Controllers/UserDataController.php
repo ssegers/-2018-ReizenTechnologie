@@ -253,6 +253,8 @@ class UserDataController extends Controller
             ->where('users.name', '=', $sUserName) //r-nummer
             ->first();
 
+        //print_r($aUserData);
+
         return view('user.filter.individualTraveller', ['aUserData' => $aUserData]);
     }
 }
