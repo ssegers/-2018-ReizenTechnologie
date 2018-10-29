@@ -16,9 +16,6 @@ class AdminTripController extends Controller
 
     }
 
-    //GET::/admin/trips/new
-    //POST::/admin/trips/new
-
     //GET::/admin/trips/{id}
     function getTripByID($id)
     {
@@ -70,7 +67,6 @@ class AdminTripController extends Controller
                     'year' => $request->input('trip-year')
                 ]);
         }
-
         return redirect('/admin/trips');
     }
 

@@ -84,5 +84,4 @@
         modal.find('.modal-body #trip-id').val(tripId);
     })
 </script>
-
 @endsection
