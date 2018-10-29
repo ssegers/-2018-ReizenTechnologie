@@ -114,11 +114,12 @@ body {
   line-height: 40px;
   position: relative;
 }
-.table-wrapper-scroll-y {
+.table-wrapper-scroll {
   display: block;
   max-height: calc(100vh - 60px - 60px - 60px - 50px);
+  max-width: 100%;
   overflow-y: auto;
-  -ms-overflow-style: -ms-autohiding-scrollbar;
+  overflow-x: auto;
 }
 .pagination {
   position: absolute;

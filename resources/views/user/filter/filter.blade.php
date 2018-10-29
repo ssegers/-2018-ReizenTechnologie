@@ -38,8 +38,7 @@
             <li class="export"><button type="submit" name="export" value="excel">Excel</button></li>
         </ul>
     </div>
-        <div class="table-container">
-            <div class="table-wrapper-scroll-y">
+            <div class="table-wrapper-scroll">
                 <table class="table table-striped">
                     <thead>
                     <tr>
@@ -59,7 +58,6 @@
                     </tbody>
                 </table>
             </div>
-        </div>
         <div class="filter-footer">
             {{ $aUserData->appends(request()->input())->links() }}
             <div class="filter-per-page">
@@ -85,6 +83,9 @@
         body {
             height: 100vh;
             overflow-y: hidden;
+        }
+        .container-fluid {
+            max-width: calc(100vw - 231px);
         }
     </style>
 @endsection
