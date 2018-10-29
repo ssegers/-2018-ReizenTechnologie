@@ -65,8 +65,8 @@
             <div class="filter-per-page">
                 {{ Form::label('per-page', 'Reizigers per pagina:') }}
                 <select name="per-page" onchange="this.form.submit()">
-                    @foreach($aPaginate as $iValue => $bActive)
-                        @if($bActive)
+                @foreach($aPaginate as $iValue => $bActive)
+                    @if($bActive)
                             <option selected value="{{ $iValue }}">{{ $iValue }}</option>
                         @else
                             <option value="{{ $iValue }}">{{ $iValue }}</option>

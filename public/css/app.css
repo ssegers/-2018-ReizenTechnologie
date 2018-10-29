@@ -134,6 +134,7 @@ body {
 .filter-footer {
   height: 40px;
   line-height: 40px;
+  position: relative;
 }
 
 .table-wrapper-scroll-y {
@@ -141,6 +142,37 @@ body {
   max-height: calc(100vh - 60px - 60px - 60px - 50px);
   overflow-y: auto;
   -ms-overflow-style: -ms-autohiding-scrollbar;
+}
+
+.pagination {
+  position: absolute;
+  top: 0;
+  display: block;
+  text-align: center;
+  width: 100%;
+  z-index: 1;
+}
+
+.page-item {
+  display: inline-block;
+}
+
+.page-link {
+  width: 25px;
+  line-height: 25px;
+  padding: 0;
+}
+
+.page-item.active .page-link {
+  background-color: #E00049;
+  border-color: #E00049;
+}
+
+.filter-per-page {
+  z-index: 10;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .background-white {
