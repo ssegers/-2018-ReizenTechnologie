@@ -108,6 +108,65 @@ body {
   color: white;
 }
 
+.table-header {
+  position: relative;
+  height: 60px;
+}
+
+.table-header ul {
+  position: absolute;
+  top: 0;
+  right: 0;
+  list-style: none;
+}
+
+.table-header ul li {
+  display: inline-block;
+  line-height: 30px;
+  padding: 15px 0;
+}
+
+.table-header ul button:hover {
+  background-color: #E00049;
+  color: white;
+}
+
+.filter-footer {
+  height: 40px;
+  line-height: 40px;
+}
+
+.table-wrapper-scroll-y {
+  display: block;
+  max-height: calc(100vh - 60px - 60px - 60px - 50px);
+  overflow-y: auto;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+}
+
+.background-white {
+  background-color: white;
+}
+
+.background-light-blue {
+  background-color: #E9F3F8;
+}
+
+.color-dark-blue {
+  color: #003469;
+}
+
+.margin-top-50 {
+  margin-top: 50px;
+}
+
+.padding-10 {
+  padding: 10px;
+}
+
+.padding-top-20 {
+  padding-top: 20px;
+}
+
 #registerForm {
   background-color: #ffffff;
   margin: 100px auto;

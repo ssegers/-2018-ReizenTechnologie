@@ -29,6 +29,7 @@
             </ul>
         </ul>
     </div>
+    <div class="table-header">
         <h1 class="page-title">Deelnemers {{ $oCurrentTrip->name }} {{ $oCurrentTrip->year }}</h1>
         <ul class="download-options">
             <li>Download</li>
@@ -36,16 +37,9 @@
             <li class="divider">/</li>
             <li class="export"><button type="submit" name="export" value="excel">Excel</button></li>
         </ul>
+    </div>
         <div class="table-container">
             <div class="table-wrapper-scroll-y">
-                <style>
-                    .table-wrapper-scroll-y {
-                        display: block;
-                        max-height: 200px;
-                        overflow-y: auto;
-                        -ms-overflow-style: -ms-autohiding-scrollbar;
-                    }
-                </style>
                 <table class="table table-striped">
                     <thead>
                     <tr>
@@ -81,11 +75,16 @@
                 </select>
             </div>
         </div>
-    </div>
     {{ Form::close() }}
     <script type="text/javascript">
         function displayUser(userName) {
             window.location.href = '<?php echo url('/') ?>/userinfo/' + userName;
         }
     </script>
+    <style>
+        body {
+            height: 100vh;
+            overflow-y: hidden;
+        }
+    </style>
 @endsection
