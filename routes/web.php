@@ -54,3 +54,7 @@ Route::get('userinfo/{sUserName}', 'UserDataController@showUserData');
 Route::get('/', function () {
     return redirect('info');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
