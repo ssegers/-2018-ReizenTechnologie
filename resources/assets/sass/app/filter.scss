@@ -1,100 +1,81 @@
-div.table-container {
-  overflow-x: auto;
-  overflow-y: auto;
-  max-height: calc(100vh - 210px);
-}
-span.filter-title {
-  display: block;
-  padding: 0 20px;
-  line-height: 50px;
-  background-color: $col-accent;
-  color: white;
-}
-ul.filters {
-  list-style: none;
-  height: calc(100vh - 160px);
-  overflow-y: auto;
-  border-bottom: 1px solid $col-accent;
-}
-ul.filters li.filter-option {
-  position: relative;
-  padding: 20px 20px;
-  display: block;
-  width: calc(100% - 20px*2);
-  border-top: 1px solid $col-accent;
-}
-ul.filters li.filter-option:first-child {
-  border-top: none;
-}
-ul.filters li.filter-option input[type="checkbox"] {
-  position: absolute;
-  right: 20px;
-  width: 10px;
-  top: 22px;
-}
-ul.filters li.apply button {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-}
-ul.filter-buttons {
-  position: absolute;
-  bottom: 0;
-  list-style: none;
-  width: 100%;
-}
-ul.filter-buttons li.apply button {
-  border: none;
-  background-color: $col-accent;
-  height: 50px;
-  color: white;
-  width: 100%;
-}
-table.filter-table {
-  width: 100%;
-}
-table.filter-table * {
+.trip-overview il * {
   padding: 0;
   margin: 0;
-  border: none;
 }
-table.filter-table thead {
+.trip-overview ul {
+  list-style: none;
+  height: 60px;
+  padding: 0;
+  margin: 0;
+  display: block;
+}
+.trip-overview ul li {
+  display: inline-block;
+  line-height: 60px;
+  padding: 0 20px;
+  background-color: lightblue;
+  margin-left: -5px;
+}
+.trip-overview ul li.active {
+  background-color: $col-accent;
+  color: white;
+}
+.table-header {
+  position: relative;
+  height: 60px;
+}
+.table-header ul {
+  position: absolute;
+  top: 0;
+  right: 0;
+  list-style: none;
+}
+.table-header ul li {
+  display: inline-block;
+  line-height: 30px;
+  padding: 15px 0;
+}
+.table-header ul button:hover{
   background-color: $col-primary;
   color: white;
+}
+.filter-footer {
+  height: 40px;
   line-height: 40px;
+  position: relative;
 }
-table.filter-table tbody {
-  line-height: 30px;
+.table-wrapper-scroll {
+  display: block;
+  max-height: calc(100vh - 60px - 60px - 60px - 50px);
+  max-width: 100%;
+  overflow-y: auto;
+  overflow-x: auto;
 }
-table.filter-table tbody tr td{
-  border-bottom: 1px solid $col-accent;
-}
-table.filter-table tbody tr {
-  transition: 0.1s ease-in-out all;
-}
-table.filter-table tbody tr:hover {
-  background-color: $col-accent;
-  color: white;
-  cursor: pointer;
-}
-ul.pagination {
-  list-style: none;
+.pagination {
+  position: absolute;
+  top: 0;
+  display: block;
   text-align: center;
+  width: 100%;
+  z-index: 1;
 }
-ul.pagination li {
+.page-item {
   display: inline-block;
-  height: 22px;
-  width: 22px;
-  border: 1px solid $col-accent;
-  line-height: 22px;
 }
-ul.pagination li a {
-  text-decoration: none;
-  color: black;
+.page-link {
+  width: 25px;
+  line-height: 25px;
+  padding: 0;
 }
-ul.pagination li.page-item.active {
-  background-color: $col-accent;
-  color: white;
+.page-item.active .page-link {
+  background-color: $col-primary;
+  border-color: $col-primary;
+}
+.filter-per-page {
+  z-index: 10;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 td.field.last_name {
   min-width: 120px;
@@ -143,65 +124,4 @@ td[class^="field emergency"] {
 }
 td.field.medical_info {
   min-width: 200px;
-}
-ul.download-options {
-  list-style: none;
-  display: block;
-  position: absolute;
-  top: 115px;
-  right: 20px;
-  padding: 0;
-}
-ul.download-options li {
-  display: inline-block;
-  margin-left: 5px;
-}
-ul.download-options li:first-child {
-  margin: 0;
-}
-ul.download-options li.export button {
-  height: 40px;
-  align-content: center;
-  padding: 0 10px;
-  background-color: transparent;
-  border: 1px solid $col-accent;
-  transition: 0.1s ease-in-out all;
-}
-ul.download-options li.export button:hover {
-  cursor: pointer;
-  background-color: $col-accent;
-  color: white;
-}
-ul.list-trip {
-  list-style: none;
-  line-height: 48px;
-  margin-left: -18px;
-  max-width: 100%;
-  overflow-x: auto;
-}
-ul.list-trip li {
-  display: inline-block;
-  padding: 0 20px;
-  background-color: $col-primary;
-  border: 1px solid white;
-  margin: 0 -3px;
-  color: white;
-  transition: 0.1s ease-in-out all;
-}
-ul.list-trip li.own:hover {
-  background-color: $col-accent;
-  cursor: pointer;
-}
-ul.list-trip li.active {
-  background-color: $col-accent;
-}
-div.filter-footer {
-  position: relative;
-  line-height: 50px;
-}
-div.filter-footer div.filter-per-page {
-  position: absolute;
-  top: 0;
-  left: 0;
-  line-height: 50px;
 }

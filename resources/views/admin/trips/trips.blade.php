@@ -1,13 +1,6 @@
 @extends('layouts.admin')
 
 @section('content')
-    <!-- TODO
-         Kleur toevoegen voor actief (groene tekst?)
-         Knop achter iedere reis om de reis aan te passen
-         Knop om een nieuwe reis toe te voegen
-    -->
-
-
     <div class="modal fade" id="tripModal" tabindex="-1" role="dialog" aria-labelledby="tripModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -15,54 +8,58 @@
                     <h4 class="modal-title" id="tripModalLabel">Reis aanmaken/editeren</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
-                <form method="post" action="/admin/trips/">
+                {{ Form::open(array('action' => 'AdminTripController@UpdateOrCreateTrip', 'method' => 'post')) }}
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="trip-name" class="control-label">Reis:</label>
-                            <input type="text" class="form-control" id="trip-name">
+                            {{Form::label('trip-name','Naam:')}}
+                            {{Form::text('trip-name')}}
                         </div>
                         <div class="form-group">
-                            <label for="trip-year" class="control-label">Jaar:</label>
-                            <input type="text" class="form-control" id="trip-year"></input>
+                            {{Form::label('trip-year','Jaar:')}}
+                            {{Form::text('trip-year')}}
                         </div>
                         <div class="form-group">
-                            <label for="trip-is-active" class="control-label">Actief:</label>
-                            <input type="checkbox" class="form-control" id="trip-is-active"></input>
+                            {{Form::label('trip-is-active','Actief:')}}
+                            {{Form::checkbox('trip-is-active','1')}}
                         </div>
+                            {{ Form::hidden('trip-id','trip-id',array('id'=>'trip-id')) }}
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Sluiten</button>
                         <button type="submit" class="btn btn-primary">Opslaan</button>
                     </div>
-                </form>
+                {{ Form::close() }}
             </div>
         </div>
     </div>
 
-    <p>Hier vind je alle reizen. Reizen die actief zijn daar kan men zich voor registreren</p>
+    <p>Hier vind je alle reizen. Reizen die actief zijn daar kan men zich voor registreren.</p>
 
     <div>
-        <table>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tripModal" data-trip-id="-1">
+            Voeg reis toe
+        </button>
+        <table style="margin-top:5px">
             <thead>
                 <tr>
-                    <th>Naam</th>
-                    <th>Jaar</th>
-                    <th>Inscrijvingen actief</th>
-                    <th>Edit</th>
+                    <th class="admin-table">Naam</th>
+                    <th class="admin-table">Jaar</th>
+                    <th class="admin-table">Inscrijvingen actief</th>
+                    <th class="admin-table"></th>
                 </tr>
             </thead>
 
             <tbody>
             @foreach($aTripData as $oTrip)
                 <tr>
-                    <td>{{$oTrip->name}}</td>
-                    <td>{{$oTrip->year}}</td>
+                    <td class="admin-table">{{$oTrip->name}}</td>
+                    <td class="admin-table">{{$oTrip->year}}</td>
                     @if($oTrip->is_active)
-                        <td>Actief</td>
+                        <td class="admin-table">Actief</td>
                     @else
-                        <td>Non-actief</td>
+                        <td class="admin-table">Non-actief</td>
                     @endif
-                    <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tripModal" data-trip-id="{{$oTrip->trip_id}}" data-trip-name="{{$oTrip->name}}" data-trip-year="{{$oTrip->year}}" data-trip-active="{{$oTrip->is_active}}">Edit</button>
+                    <td class="admin-table"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tripModal" data-trip-id="{{$oTrip->trip_id}}" data-trip-name="{{$oTrip->name}}" data-trip-year="{{$oTrip->year}}" data-trip-active="{{$oTrip->is_active}}">Edit</button>
                         <!--<form method="get" action="/admin/trips/$oTrip->trip_id"><button type="submit" >Edit</button></form></td>-->
                 </tr>
             @endForeach
@@ -80,12 +77,11 @@
         // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
         // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
         var modal = $(this);
-        console.log(modal);
-        console.log(modal.parent());
+
         modal.find('.modal-body #trip-name').val(tripName);
         modal.find('.modal-body #trip-year').val(tripYear);
         modal.find('.modal-body #trip-active').val(tripActive);
+        modal.find('.modal-body #trip-id').val(tripId);
     })
 </script>
-
 @endsection

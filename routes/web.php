@@ -27,13 +27,16 @@ route::post('user/Form/form', 'RegisterController@formPost');
 //Get active trip to link to organizers
 route::get('admin/linkorganisator/', 'ActiveTripOrganizerController@showActiveTrips');
 route::post('admin/linkorganisator/', 'ActiveTripOrganizerController@showLinkedOrganisators');
-route::get('admin/linkorganisator/{traveller_id}', 'ActiveTripOrganizerController@removeLinkedOrganisators');
+route::delete('admin/linkorganisator/delete', 'ActiveTripOrganizerController@removeLinkedOrganisator');
+route::post('admin/linkorganisator/add', 'ActiveTripOrganizerController@addLinkedOrganisator');
 
 route::get('admin/user/default', 'AdminUserController@createForm')->name('adminDefUser');
 route::post('admin/user/default', 'AdminUserController@createUser');
 
 Route::get('admin/info', 'AdminInfoController@getInfo')->name('adminInfo');
 Route::post('admin/info', 'AdminInfoController@updateInfo');
+
+Route::post('admin/trips', 'AdminTripController@UpdateOrCreateTrip');
 
 Route::get('admin/trips', 'AdminTripController@getTrips');
 Route::get('admin/trips/{tripid}', 'AdminTripController@getTripByID');
@@ -51,3 +54,7 @@ Route::get('userinfo/{sUserName}', 'UserDataController@showUserData');
 Route::get('/', function () {
     return redirect('info');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
