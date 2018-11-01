@@ -13,7 +13,7 @@
                     <h4>Algemeen</h4>
                     <label class="col-4 font-weight-bold" for="name">Naam: </label>            <span class="col-4">{{$aUserData['last_name']}}</span><br/>
                     <label class="col-4 font-weight-bold" for="name">Voornaam: </label>        <span class="col-4">{{$aUserData["first_name"]}}</span><br/>
-                    <label class="col-4 font-weight-bold" for="name">R-Nummer: </label>        <span class="col-4">{{$aUserData["name"]}}</span><br/>
+                    <label class="col-4 font-weight-bold" for="name">R-Nummer: </label>        <span class="col-4">{{$aUserData["username"]}}</span><br/>
                     <label class="col-4 font-weight-bold" for="name">Geslacht: </label>        <span class="col-4">{{$aUserData['gender']}}</span><br/>
                     <label class="col-4 font-weight-bold" for="name">IBAN: </label>            <span class="col-4">{{$aUserData['iban']}}</span><br/>
                     <label class="col-4 font-weight-bold" for="name">Behandeling:</label>      <span class="col-4">@if($aUserData['medical_issue'])Ja @else Nee @endif</span><br/>

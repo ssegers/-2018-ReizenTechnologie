@@ -19,7 +19,7 @@ class UserDataController extends Controller
 {
     /* List of all filters */
     protected $aFilterList = [
-        'name'=>'Gebruikersnaam',
+        'username'=>'Gebruikersnaam',
         'study_name'=>'Richting',
         'major_name'=>'Afstudeerrichting',
         'birthdate' => 'Geboortedatum',
@@ -58,7 +58,7 @@ class UserDataController extends Controller
         $oUser = Auth::user();
 
         /* Get user from URL */
-        $oUser = User::where('name', $sUserName)->first();
+        $oUser = User::where('username', $sUserName)->first();
 
         /* Check if user exist and is a organizer */
         try {
@@ -126,7 +126,7 @@ class UserDataController extends Controller
             'aUserData' => $aUserData,
             'aFilterList' => $this->aFilterList,
             'aFiltersChecked' => $aFiltersChecked,
-            'sUserName' => $oUser->name,
+            'sUserName' => $oUser->username,
             'oCurrentTrip' => $aOrganizerTrip,
             'aActiveTrips' => $aActiveTrips,
             'aPaginate' => $aPaginate,
@@ -205,7 +205,7 @@ class UserDataController extends Controller
     private function getUserData($aFilters, $iTrip, $iPaginate = false) {
         if ($iPaginate) {
             /* For click event: Add name to selection */
-            return Traveller::select(array_keys(array_add($aFilters, 'name', true)))
+            return Traveller::select(array_keys(array_add($aFilters, 'username', true)))
                 ->join('users','travellers.user_id','=','users.user_id')
                 ->join('zips','travellers.zip_id','=','zips.zip_id')
                 ->join('majors','travellers.major_id','=','majors.major_id')
@@ -237,7 +237,7 @@ class UserDataController extends Controller
         $sRoox = 'u0569802';
 
         /* Get user from URL */
-        $oUser = User::where('name', $sSegers)->first();
+        $oUser = User::where('username', $sSegers)->first();
         try {
             if ($oUser->role != 'organizer') {
                 return 'Deze gebruiker is niet gemachtigd';
@@ -250,7 +250,7 @@ class UserDataController extends Controller
         $aUserData = User::select()
             ->join('travellers', 'users.user_id', '=', 'travellers.user_id')
             ->join('zips', 'travellers.zip_id', '=', 'zips.zip_id')
-            ->where('users.name', '=', $sUserName) //r-nummer
+            ->where('users.username', '=', $sUserName) //r-nummer
             ->first();
 
         //print_r($aUserData);

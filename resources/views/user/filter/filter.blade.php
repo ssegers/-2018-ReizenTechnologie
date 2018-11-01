@@ -49,7 +49,7 @@
                     </thead>
                     <tbody>
                     @foreach($aUserData as $oUserData)
-                        <tr onclick="displayUser('<?php echo $oUserData->name ?>')">
+                        <tr onclick="displayUser('<?php echo $oUserData->username ?>')">
                             @foreach($aFiltersChecked as $sFilterName => $sFilterText)
                                 <td class="field {{ $sFilterName }}">{{ $oUserData->$sFilterName }}</td>
                             @endforeach
