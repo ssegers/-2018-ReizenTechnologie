@@ -33,10 +33,10 @@
         <nav id="sidebar">
             <a class="navbar-brand mb-0 h1" style="color:#0f0f0f;" href="#">Dashboard</a>
             <ul class="list-group">
-                <a class="nav-link mb-0" href="{{route('adminInfo')}}" style=""><li class="nav-item">Info</li></a>
-                <a class="nav-link" href="{{route('adminDefUser')}}" style=""><li class="nav-item">Standaard Gebruiker</li></a>
-                <a class="nav-link" href="{{route('adminInfo')}}" style=""><li class="nav-item">Item 3</li></a>
-                <a class="nav-link" href="{{route('adminInfo')}}" style=""><li class="nav-item">Item 4</li></a>
+                <a class="nav-link mb-0" href="{{route('adminInfo')}}" style="color:#0f0f0f;"><li class="nav-item">Info</li></a>
+                <a class="nav-link" href="{{route('adminDefUser')}}" style="color:#0f0f0f;"><li class="nav-item">Standaard Gebruiker</li></a>
+                <a class="nav-link" href="{{route('adminInfo')}}" style="color:#0f0f0f;"><li class="nav-item">Item 3</li></a>
+                <a class="nav-link" href="{{route('adminInfo')}}" style="color:#0f0f0f;"><li class="nav-item">Item 4</li></a>
             </ul>
         </nav>
     </div>
