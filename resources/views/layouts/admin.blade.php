@@ -30,19 +30,21 @@
 </nav>
 <div class="row">
     <div class="col side-nav" >
-        <h2>Dashboard</h2>
         <nav id="sidebar">
+            <a class="navbar-brand mb-0 h1" style="color:#0f0f0f;" href="#">Dashboard</a>
             <ul class="list-group">
-                <a  href="{{route('adminInfo')}}" style="color:#4cae4c;"><li class="list-group-item ">Standaard Gebruiker</li></a>
-                <a  href="{{route('adminInfo')}}" style="color:#4cae4c;"><li class="list-group-item ">Standaard Gebruiker</li></a>
-                <a  href="{{route('adminInfo')}}" style="color:#4cae4c;"><li class="list-group-item ">Standaard Gebruiker</li></a>
-                <a  href="{{route('adminInfo')}}" style="color:#4cae4c;"><li class="list-group-item ">Standaard Gebruiker</li></a>
+                <a class="nav-link mb-0" href="{{route('adminInfo')}}" style="color:#0f0f0f;"><li class="nav-item">Info</li></a>
+                <a class="nav-link" href="{{route('adminDefUser')}}" style="color:#0f0f0f;"><li class="nav-item">Standaard Gebruiker</li></a>
+                <a class="nav-link" href="{{route('adminInfo')}}" style="color:#0f0f0f;"><li class="nav-item">Item 3</li></a>
+                <a class="nav-link" href="{{route('adminInfo')}}" style="color:#0f0f0f;"><li class="nav-item">Item 4</li></a>
             </ul>
         </nav>
     </div>
     <div class="col">
         <div class="container-fluid">
-            @yield('content')
+            <div class="container">
+                @yield('content')
+            </div>
         </div>
     </div>
 </div>

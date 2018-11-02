@@ -68,30 +68,6 @@ body {
 .side-nav button:hover {
   cursor: pointer;
 }
-.trip-overview il * {
-  padding: 0;
-  margin: 0;
-}
-.trip-overview ul {
-  list-style: none;
-  height: 60px;
-  padding: 0;
-  margin: 0;
-  display: block;
-}
-.trip-overview ul li {
-  display: inline-block;
-  line-height: 60px;
-  padding: 0 20px;
-  background-color: lightblue;
-  margin-left: -5px;
-}
-.trip-overview ul li.active {
-  background-color: $col-accent;
-  color: white;
-}
-
-
 
 
 

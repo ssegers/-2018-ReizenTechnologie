@@ -30,7 +30,7 @@ route::post('admin/linkorganisator/', 'ActiveTripOrganizerController@showLinkedO
 route::delete('admin/linkorganisator/delete', 'ActiveTripOrganizerController@removeLinkedOrganisator');
 route::post('admin/linkorganisator/add', 'ActiveTripOrganizerController@addLinkedOrganisator');
 
-route::get('admin/user/default', 'AdminUserController@createForm');
+route::get('admin/user/default', 'AdminUserController@createForm')->name('adminDefUser');
 route::post('admin/user/default', 'AdminUserController@createUser');
 
 Route::get('admin/info', 'AdminInfoController@getInfo')->name('adminInfo');
@@ -54,3 +54,7 @@ Route::get('userinfo/{sUserName}', 'UserDataController@showUserData');
 Route::get('/', function () {
     return redirect('info');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
