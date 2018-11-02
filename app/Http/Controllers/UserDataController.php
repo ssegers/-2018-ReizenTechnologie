@@ -232,10 +232,8 @@ class UserDataController extends Controller
     {
         /* Get user from Auth */
         $oUser = Auth::user();
-
         $sSegers = 'u0598673';
         $sRoox = 'u0569802';
-
         /* Get user from URL */
         $oUser = User::where('username', $sSegers)->first();
         try {
@@ -247,14 +245,44 @@ class UserDataController extends Controller
             return 'Deze gebruiker bestaat niet';
         }
 
+
         $aUserData = User::select()
             ->join('travellers', 'users.user_id', '=', 'travellers.user_id')
             ->join('zips', 'travellers.zip_id', '=', 'zips.zip_id')
+            ->join('trips', 'travellers.trip_id', '=', 'trips.trip_id')
             ->where('users.username', '=', $sUserName) //r-nummer
             ->first();
-
-        var_dump($aUserData);
-
-        //return view('user.filter.individualTraveller', ['aUserData' => $aUserData]);
+        //var_dump($aUserData);
+        return view('user.filter.individualTraveller', ['aUserData' => $aUserData]);
     }
+
+    public function editUserData($sUserName)
+    {
+        /* Get user from Auth */
+        $oUser = Auth::user();
+        $sSegers = 'u0598673';
+        $sRoox = 'u0569802';
+        /* Get user from URL */
+        $oUser = User::where('username', $sSegers)->first();
+        try {
+            if ($oUser->role != 'organizer') {
+                return 'Deze gebruiker is niet gemachtigd';
+            }
+        }
+        catch (\Exception $exception) {
+            return 'Deze gebruiker bestaat niet';
+        }
+
+
+        $aUserData = User::select()
+            ->join('travellers', 'users.user_id', '=', 'travellers.user_id')
+            ->join('zips', 'travellers.zip_id', '=', 'zips.zip_id')
+            ->join('trips', 'travellers.trip_id', '=', 'trips.trip_id')
+            ->where('users.username', '=', $sUserName) //r-nummer
+            ->first();
+        //var_dump($aUserData);
+        return view('user.filter.individualTravellerEdit', ['aUserData' => $aUserData]);
+    }
+
+
 }
