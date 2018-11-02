@@ -7,6 +7,7 @@ use App\Trip;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Mpdf\Tag\Tr;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\Exception;
@@ -284,5 +285,26 @@ class UserDataController extends Controller
         return view('user.filter.individualTravellerEdit', ['aUserData' => $aUserData]);
     }
 
+    public function deleteUserData($sUserName){
+        /* Get user from Auth */
+        $oUser = Auth::user();
+        /* Get user from URL */
+        $oUser = User::where('username', "u0598673")->first();
+        try {
+            if ($oUser->role != 'organizer') {
+                return 'Deze gebruiker is niet gemachtigd';
+            }
+        }
+        catch (\Exception $exception) {
+            return 'Deze gebruiker bestaat niet';
+        }
+        /*
+         *
+         */
+        DB::table('users')
+            ->where('users.username', '=', $sUserName) //r-nummer
+            ->delete();
+        return redirect("user/" . $oUser->username . "/trip/travellers");
+    }
 
 }
