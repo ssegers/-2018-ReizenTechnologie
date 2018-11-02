@@ -7,6 +7,7 @@ use App\Trip;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Mpdf\Tag\Tr;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\Exception;
@@ -247,14 +248,33 @@ class UserDataController extends Controller
             return 'Deze gebruiker bestaat niet';
         }
 
-        $aUserData = User::select()
-            ->join('travellers', 'users.user_id', '=', 'travellers.user_id')
-            ->join('zips', 'travellers.zip_id', '=', 'zips.zip_id')
-            ->where('users.name', '=', $sUserName) //r-nummer
-            ->first();
+//        $first = User::select()
+//            ->join('travellers', 'users.user_id', '=', 'travellers.user_id')
+//            ->join('zips', 'travellers.zip_id', '=', 'zips.zip_id')
+//            ->join('trips', 'travellers.trip_id', '=', 'trips.trip_id')
+//            ->where('users.name', '=', $sUserName) //r-nummer
+//            ->toSql();
+//        dd($first);
 
-        //print_r($aUserData);
+        $oUserData = DB::select("
+                            SELECT
+                              users.*,
+                              travellers.*,
+                              trips.*,
+                              zips.*,
+                              users.name as user_name,
+                              trips.name as trip_name
+                            FROM users
+                            INNER JOIN travellers ON users.user_id = travellers.user_id
+                            INNER JOIN trips      ON travellers.trip_id = trips.trip_id
+                            INNER JOIN zips       ON travellers.zip_id = zips.zip_id
+                            WHERE users.name = :sUserName", ['sUserName' => $sUserName]);
 
-        return view('user.filter.individualTraveller', ['aUserData' => $aUserData]);
+        $aUserData = json_decode(json_encode($oUserData), true);
+
+
+        var_dump($aUserData);
+
+        //return view('user.filter.individualTraveller', ['aUserData' => $aUserData]);
     }
 }
