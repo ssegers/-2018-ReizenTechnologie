@@ -28,16 +28,19 @@
         </div>
     </div>
 </nav>
-<div class="row">
-    <div class="col side-nav" >
 
-            <a class="navbar-brand mb-0 h1" style="color:#0f0f0f;" href="#">Dashboard</a>
-            <ul class="filters">
-                <a class="border border-primary" href="{{route('adminInfo')}}"><li class="sidenav-item">Info</li></a>
-                <a class="border border-primary" href="{{route('adminDefUser')}}"><li class="sidenav-item">Standaard Gebruiker</li></a>
-                <a class="border border-primary" href="{{route('adminInfo')}}"><li class="sidenav-item">Item 3</li></a>
-                <a class="border border-primary" href="{{route('adminInfo')}}"><li class="sidenav-item">Item 4</li></a>
-            </ul>
+<div class="row">
+
+    <div class="col side-nav">
+
+        <a class="navbar-brand mb-0 h1" style="color:#0f0f0f;" href="#">Dashboard</a>
+        <ul class="filters">
+            <a href="{{route('adminInfo')}}"><li class="filter-option">Info</li></a>
+            <a href="{{route('adminDefUser')}}"><li class="filter-option">Standaard Gebruiker</li></a>
+            <a href="{{route('adminInfo')}}"><li class="filter-option">Item 3</li></a>
+            <a href="{{route('adminInfo')}}"><li class="filter-option">Item 4</li></a>
+        </ul>
+
     </div>
     <div class="col">
         <div class="container-fluid">
