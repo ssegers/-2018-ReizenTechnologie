@@ -33,12 +33,14 @@
 
     <div class="col side-nav">
 
-        <a class="navbar-brand mb-0 h1" style="color:#0f0f0f;" href="#">Dashboard</a>
-        <ul class="filters">
-            <a href="{{route('adminInfo')}}"><li class="filter-option">Info</li></a>
-            <a href="{{route('adminDefUser')}}"><li class="filter-option">Standaard Gebruiker</li></a>
-            <a href="{{route('adminInfo')}}"><li class="filter-option">Item 3</li></a>
-            <a href="{{route('adminInfo')}}"><li class="filter-option">Item 4</li></a>
+
+        <h3 style="text-align: center;">Dashboard</h3>
+        <ul class="">
+
+            <li class=""> <a href="{{route('adminInfo')}}"><label for="info">Info</label></a></li>
+           <li class=""> <a href="{{route('adminDefUser')}}"><label for="defuser">Standaard Gebruiker</label></a></li>
+           <li class=""> <a href="{{route('adminInfo')}}"><label for="item3">Item 3</label></a></li>
+            <li class=""> <a href="{{route('adminInfo')}}"><label for="item4">Item 4</label></a></li>
         </ul>
 
     </div>
