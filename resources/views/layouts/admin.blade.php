@@ -30,15 +30,14 @@
 </nav>
 <div class="row">
     <div class="col side-nav" >
-        <nav id="sidebar">
+
             <a class="navbar-brand mb-0 h1" style="color:#0f0f0f;" href="#">Dashboard</a>
-            <ul class="list-group">
-                <a class="nav-link mb-0" href="{{route('adminInfo')}}" style="color:#0f0f0f;"><li class="nav-item">Info</li></a>
-                <a class="nav-link" href="{{route('adminDefUser')}}" style="color:#0f0f0f;"><li class="nav-item">Standaard Gebruiker</li></a>
-                <a class="nav-link" href="{{route('adminInfo')}}" style="color:#0f0f0f;"><li class="nav-item">Item 3</li></a>
-                <a class="nav-link" href="{{route('adminInfo')}}" style="color:#0f0f0f;"><li class="nav-item">Item 4</li></a>
+            <ul class="filters">
+                <a class="border border-primary" href="{{route('adminInfo')}}"><li class="sidenav-item">Info</li></a>
+                <a class="border border-primary" href="{{route('adminDefUser')}}"><li class="sidenav-item">Standaard Gebruiker</li></a>
+                <a class="border border-primary" href="{{route('adminInfo')}}"><li class="sidenav-item">Item 3</li></a>
+                <a class="border border-primary" href="{{route('adminInfo')}}"><li class="sidenav-item">Item 4</li></a>
             </ul>
-        </nav>
     </div>
     <div class="col">
         <div class="container-fluid">
