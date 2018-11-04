@@ -39,7 +39,7 @@
 
             <li class=""> <a href="{{route('adminInfo')}}"><label for="info">Info</label></a></li>
            <li class=""> <a href="{{route('adminDefUser')}}"><label for="defuser">Standaard Gebruiker</label></a></li>
-           <li class=""> <a href="{{route('adminInfo')}}"><label for="item3">Item 3</label></a></li>
+           <li class=""> <a href="{{route('adminTrips')}}"><label for="trips">Actieve reizen</label></a></li>
             <li class=""> <a href="{{route('adminInfo')}}"><label for="item4">Item 4</label></a></li>
         </ul>
 

@@ -38,7 +38,7 @@ Route::post('admin/info', 'AdminInfoController@updateInfo');
 
 Route::post('admin/trips', 'AdminTripController@UpdateOrCreateTrip');
 
-Route::get('admin/trips', 'AdminTripController@getTrips');
+Route::get('admin/trips', 'AdminTripController@getTrips')->name('adminTrips');
 Route::get('admin/trips/{tripid}', 'AdminTripController@getTripByID');
 
 Route::get('admin/organisator', 'KiesOrganisatorController@ShowForm');
