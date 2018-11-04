@@ -49,8 +49,8 @@ Route::get('admin/get/organisators/{id}', 'KiesOrganisatorController@getOrganisa
 Route::get('/info','AdminInfoController@showInfo')->name('info');
 /* Individual Traveller */
 Route::get('userinfo/{sUserName}', 'UserDataController@showUserData');              //show
-Route::get('userinfo/{sUserName}/edit', 'UserDataController@editUserData');         //edit
-Route::post('userinfo/{sUserName}/edit', 'UserDataController@updateUserData');      //update
+Route::get('userinfo/{sUserName}/edit', 'UserDataController@showUserData');         //edit
+Route::post('userinfo/{sUserName}/update', 'UserDataController@updateUserData');    //update
 Route::get('userinfo/{sUserName}/delete', 'UserDataController@deleteUserData');     //delete
 
 Route::get('/', function () {

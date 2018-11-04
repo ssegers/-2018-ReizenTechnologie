@@ -25,7 +25,7 @@
 
                     <h4>Woonplaats</h4>
                     <label class="col-4 font-weight-bold" for="name">Adres:         </label>    <span class="col-4">{{$aUserData['address']}}</span><br/>
-                    <label class="col-4 font-weight-bold" for="name">Gemeente:      </label>    <span class="col-4">{{$aUserData['city']}} {{$aUserData[0]['zip_code']}}</span><br/>
+                    <label class="col-4 font-weight-bold" for="name">Gemeente:      </label>    <span class="col-4">{{$aUserData['city']}} {{$aUserData['zip_code']}}</span><br/>
                     <label class="col-4 font-weight-bold" for="name">Land:          </label>    <span class="col-4">{{$aUserData['country']}}</span><br/>
 
                     <h4>Contact Info</h4>
@@ -36,6 +36,7 @@
                 </div>
             </div>
             <div class="nav justify-content-center mb-3 font-weight-bold">
+                <a class="nav-link nav-link-white-hover bg-dark-blue d-inline-flex mr-1" href="/user/{{$sName}}/trip/travellers">Annuleren</a>
                 <a class="nav-link nav-link-white-hover bg-dark-blue d-inline-flex mr-1" href="/userinfo/{{$aUserData["username"]}}/edit">Aanpassen</a>
                 <a class="nav-link nav-link-white-hover bg-dark-blue d-inline-flex ml-1" href="/userinfo/{{$aUserData["username"]}}/delete">Verwijderen</a>
             </div>

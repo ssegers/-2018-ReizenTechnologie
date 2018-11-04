@@ -226,10 +226,11 @@ class UserDataController extends Controller
      *
      * @author Joren Meynen
      *
+     * @param Request $request
      * @param $sUserName
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View|string
      */
-    public function showUserData($sUserName)
+    public function showUserData(Request $request, $sUserName)
     {
         /* Get user from Auth */
         $oUser = Auth::user();
@@ -247,6 +248,7 @@ class UserDataController extends Controller
         }
 
 
+
         $aUserData = User::select()
             ->join('travellers', 'users.user_id', '=', 'travellers.user_id')
             ->join('zips', 'travellers.zip_id', '=', 'zips.zip_id')
@@ -254,37 +256,67 @@ class UserDataController extends Controller
             ->where('users.username', '=', $sUserName) //r-nummer
             ->first();
         //var_dump($aUserData);
-        return view('user.filter.individualTraveller', ['aUserData' => $aUserData]);
+        //var_dump($request->path());
+        if(str_contains($request->path(), 'edit')){
+            return view('user.filter.individualTravellerEdit', ['aUserData' => $aUserData]);
+        }
+        return view('user.filter.individualTraveller', ['aUserData' => $aUserData, 'sName' => $oUser->username]);
     }
 
-    public function editUserData($sUserName)
+    /**
+     * Updates the data of a selected user
+     *
+     * @author Joren Meynen
+     *
+     * @param Request $aRequest
+     * @param $sUserName
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function updateUserData(Request $aRequest, $sUserName)
     {
-        /* Get user from Auth */
-        $oUser = Auth::user();
-        $sSegers = 'u0598673';
-        $sRoox = 'u0569802';
-        /* Get user from URL */
-        $oUser = User::where('username', $sSegers)->first();
-        try {
-            if ($oUser->role != 'organizer') {
-                return 'Deze gebruiker is niet gemachtigd';
-            }
-        }
-        catch (\Exception $exception) {
-            return 'Deze gebruiker bestaat niet';
-        }
-
-
-        $aUserData = User::select()
+        DB::table('users')
             ->join('travellers', 'users.user_id', '=', 'travellers.user_id')
-            ->join('zips', 'travellers.zip_id', '=', 'zips.zip_id')
-            ->join('trips', 'travellers.trip_id', '=', 'trips.trip_id')
             ->where('users.username', '=', $sUserName) //r-nummer
-            ->first();
-        //var_dump($aUserData);
-        return view('user.filter.individualTravellerEdit', ['aUserData' => $aUserData]);
+            ->update(
+                [
+                    'last_name'         => $aRequest->post('LastName'),
+                    'first_name'        => $aRequest->post('FirstName'),
+                    'username'          => $aRequest->post('Username'),
+                    //'gender'            => $aRequest->post('Gender'),
+                    //'name'              => $aRequest->post('TripName'),
+
+                    'iban'              => $aRequest->post('IBAN'),
+
+                    //'medical_issue'     => $aRequest->post('MedicalIssue'),
+                    'medical_info'      => $aRequest->post('MedicalInfo'),
+
+                    'birthdate'         => $aRequest->post('BirthDate'),
+                    'birthplace'        => $aRequest->post('Birthplace'),
+                    'nationality'       => $aRequest->post('Nationality'),
+
+                    'address'           => $aRequest->post('Address'),
+                    //'city'              => $aRequest->post('City'),           //enkel zip_id, city zit in zips table
+                    //'zip_id'            => $aRequest->post('Postcode'),
+                    'country'           => $aRequest->post('Country'),
+
+                    'email'             => $aRequest->post('Email'),
+                    'phone'             => $aRequest->post('Phone'),
+                    'emergency_phone_1' => $aRequest->post('icePhone1'),
+                    'emergency_phone_2' => $aRequest->post('icePhone2'),
+                ]
+            );
+
+        return redirect('userinfo/'. $sUserName);
     }
 
+    /**
+     * Deletes the data of a selected user
+     *
+     * @author Joren Meynen
+     *
+     * @param $sUserName
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|string
+     */
     public function deleteUserData($sUserName){
         /* Get user from Auth */
         $oUser = Auth::user();
