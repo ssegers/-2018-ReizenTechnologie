@@ -28,17 +28,21 @@
         </div>
     </div>
 </nav>
+
 <div class="row">
-    <div class="col side-nav" >
-        <nav id="sidebar">
-            <a class="navbar-brand mb-0 h1" style="color:#0f0f0f;" href="#">Dashboard</a>
-            <ul class="list-group">
-                <a class="nav-link mb-0" href="{{route('adminInfo')}}" style="color:#0f0f0f;"><li class="nav-item">Info</li></a>
-                <a class="nav-link" href="{{route('adminDefUser')}}" style="color:#0f0f0f;"><li class="nav-item">Standaard Gebruiker</li></a>
-                <a class="nav-link" href="{{route('adminInfo')}}" style="color:#0f0f0f;"><li class="nav-item">Item 3</li></a>
-                <a class="nav-link" href="{{route('adminInfo')}}" style="color:#0f0f0f;"><li class="nav-item">Item 4</li></a>
-            </ul>
-        </nav>
+
+    <div class="col side-nav">
+
+
+        <h3 style="text-align: center;">Dashboard</h3>
+        <ul class="">
+
+            <li class=""> <a href="{{route('adminInfo')}}"><label for="info">Info</label></a></li>
+           <li class=""> <a href="{{route('adminDefUser')}}"><label for="defuser">Standaard Gebruiker</label></a></li>
+           <li class=""> <a href="{{route('adminTrips')}}"><label for="trips">Actieve reizen</label></a></li>
+            <li class=""> <a href="{{route('adminInfo')}}"><label for="item4">Item 4</label></a></li>
+        </ul>
+
     </div>
     <div class="col">
         <div class="container-fluid">

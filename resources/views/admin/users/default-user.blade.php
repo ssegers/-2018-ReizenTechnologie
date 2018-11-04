@@ -6,6 +6,7 @@
             {{ session()->get('message') }}
         </div>
     @endif
+    <h1>Pas hier het standaardaccount aan:</h1>
     {{Form::open(array('action' => 'AdminUserController@createUser', 'method' => 'post' ))}}
     <div class="form-group">
         {{Form::label('username', 'Gebruikersnaam: ', ['class' => ''])}}
