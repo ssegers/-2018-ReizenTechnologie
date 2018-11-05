@@ -89,13 +89,13 @@ class RegisterController extends Controller
         $password = $this->randomPassword();
         User::insert(
             [
-                'name' => $aData["txtStudentnummer"],
+                'username' => $aData["txtStudentnummer"],
                 'password' => bcrypt($password),
                 'role' => $sFunctie
             ]
         );
 
-        $iUserID = User::where('name',$aData['txtStudentnummer']) ->value('user_id');
+        $iUserID = User::where('username',$aData['txtStudentnummer']) ->value('user_id');
         //Saving traveller
         Traveller::insert(
             [
@@ -122,6 +122,7 @@ class RegisterController extends Controller
             ]
         );
         $this->sendMail($aData['txtEmail'],$aData['txtNaam'],$password);
+//        return redirect('info');
     }
 
     function randomPassword() {
@@ -136,14 +137,14 @@ class RegisterController extends Controller
     }
 
     public function sendMail($email, $name, $password) {
-        $aMailData = [
-            'subject' => 'Your registration for the UCLL trip.',
-            'name' => $name,
-            'email' => $email,
-            'description' => "berichtje",
-            'password' => $password
-        ];
-        Mail::to(config('mail.username'))->send(new RegisterComplete($aMailData));
+//        $aMailData = [
+//            'subject' => 'Your registration for the UCLL trip.',
+//            'username' => $name,
+//            'email' => $email,
+//            'description' => "berichtje",
+//            'password' => $password
+//        ];
+//        Mail::to(config('mail.username'))->send(new RegisterComplete($aMailData));
     }
 
     /*----------------------------------------------------------------------------------------------------------------------*/
