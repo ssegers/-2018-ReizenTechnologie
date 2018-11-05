@@ -1,6 +1,15 @@
 @extends("layouts.app")
 @section('content')
     <div class="container border rounded margin-top-50 background-white">
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         {{ Form::open(array('url' => "/userinfo/".$aUserData["username"]."/update", 'method' => 'post')) }}
             <div class="row padding-10">
                 <div class="col color-dark-blue">
