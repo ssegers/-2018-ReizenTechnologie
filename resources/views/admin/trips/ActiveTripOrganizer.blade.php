@@ -1,36 +1,56 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
-    <div class="flash-message" id="flash-message">
-        @foreach (['danger', 'warning', 'success', 'info'] as $msg)
-            @if(Session::has('alert-' . $msg))
-                <p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }}</p>
-            @endif
-        @endforeach
+    <div class="row">
+        <div class="col">
+            <h1 class="text-center mt-5">Koppel begeleiders aan actieve reizen.</h1>
+        </div>
     </div>
-    <select name="selectedActiveTrip" class="travelChanged">
-        @foreach ($aActiveTrips as $trip)
-            <option value={{$trip->trip_id}}>{{$trip->name}}</option>
-        @endforeach
-    </select>
-    <p>Organisators</p>
-    <button type="button" class="open" data-toggle="modal" data-target="#organizerPopup">
-
-    <i class="fas fa-plus-circle"></i>
-    </button>
-   <div>
-        <table class="organizerTable">
+    <div class="row">
+        <div class="col">
+            <div class="flash-message " id="flash-message">
+                @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+                    @if(Session::has('alert-' . $msg))
+                        <p class="p-3 mt-3 alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }}</p>
+                    @endif
+                @endforeach
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <select name="selectedActiveTrip" class="form-control-lg form-control mt-3 travelChanged">
+                @foreach ($aActiveTrips as $trip)
+                    <option class="dropdown-item" value={{$trip->trip_id}}>{{$trip->name}}</option>
+                @endforeach
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <h2 class="m-5">Organisators</h2>
+        </div>
+        <div class="col">
+            <button type="button" class="m-5 p-3 float-right open btn btn-primary" data-toggle="modal" data-target="#organizerPopup">
+                <i class="fas fa-plus-circle fa-2x"></i>
+            </button>
+        </div>
+    </div>
+   <div class="row">
+       <div class="col">
+        <table class="table organizerTable">
             <thead>
                 <tr>
-                    <th>Voornaam</th>
-                    <th>Achternaam</th>
-                    <th>Actie</th>
+                    <th scope="col">Voornaam</th>
+                    <th scope="col">Achternaam</th>
+                    <th scope="col">Actie</th>
                 </tr>
             </thead>
             <tbody>
 
             </tbody>
         </table>
+       </div>
     </div>
 
     <!-- MODAL POPUP -->
@@ -45,13 +65,13 @@
                 </div>
                 <div class="modal-body">
 
-                    <table>
+                    <table class="table">
                         <thead>
                         <tr>
-                            <th>
+                            <th scope="col">
                               Naam
                             </th>
-                            <th>
+                            <th scope="col">
                               Toevoegen?
                             </th>
                         </tr>
@@ -64,7 +84,7 @@
                             </td>
                             <td>
 
-                            <input type="checkbox" class="organizersCheckbox" name="{{$organizer->traveller_id}}" value="{{$organizer->traveller_id}}">
+                            <input type="checkbox" class="organizersCheckbox checkbox-lg"  name="{{$organizer->traveller_id}}" value="{{$organizer->traveller_id}}">
 
                             </td>
                             </tr>

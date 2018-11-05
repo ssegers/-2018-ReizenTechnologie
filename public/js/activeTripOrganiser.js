@@ -49,8 +49,8 @@ function buildTable(data) {
             '<td>' + data[i].first_name + '</td>' +
             '<td>' + data[i].last_name + '</td>' +
             '<td>' +
-            '<button onclick="deleteActiveOrganizer(this,' + data[i].traveller_id + ')">' +
-            '<i class="fas fa-minus-circle"></i></button>' +
+            '<button class="btn btn-primary p-2 mx-auto" onclick="deleteActiveOrganizer(this,' + data[i].traveller_id + ')">' +
+            '<i class="fas fa-minus-circle fa-2x"></i></button>' +
             '</td>' +
             '</tr>');
     }

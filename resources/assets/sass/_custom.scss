@@ -96,7 +96,15 @@ a.nav-link-white-hover:hover{
 .padding-top-20{
   padding-top: 20px;
 }
-
+.checkbox-lg
+{
+  /* Double-sized Checkboxes */
+  -ms-transform: scale(2); /* IE */
+  -moz-transform: scale(2); /* FF */
+  -webkit-transform: scale(2); /* Safari and Chrome */
+  -o-transform: scale(2); /* Opera */
+  padding: 10px;
+}
 //body {
 //  background-color: #E9F3F8;
 //  overflow: hidden;
