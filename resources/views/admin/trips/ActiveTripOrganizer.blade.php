@@ -3,11 +3,6 @@
 @section('content')
     <div class="row">
         <div class="col">
-            <h1 class="text-center mt-5">Koppel begeleiders aan actieve reizen.</h1>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
             <div class="flash-message " id="flash-message">
                 @foreach (['danger', 'warning', 'success', 'info'] as $msg)
                     @if(Session::has('alert-' . $msg))
@@ -15,6 +10,11 @@
                     @endif
                 @endforeach
             </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <h1 class="text-center mt-5">Koppel begeleiders aan actieve reizen.</h1>
         </div>
     </div>
     <div class="row">
