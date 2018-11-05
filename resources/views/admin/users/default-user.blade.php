@@ -6,7 +6,7 @@
             {{ session()->get('message') }}
         </div>
     @endif
-    <h1>Pas hier het standaardaccount aan:</h1>
+    <h1 class="my-5 text-center">Pas hier het standaardaccount aan:</h1>
     {{Form::open(array('action' => 'AdminUserController@createUser', 'method' => 'post' ))}}
     <div class="form-group">
         {{Form::label('username', 'Gebruikersnaam: ', ['class' => ''])}}
@@ -17,9 +17,9 @@
     <div class="form-group">
         {{Form::label('password', 'Paswoord: ')}}
         {{Form::password('password', ['required', "class" => "form-control"])}}<br />
-        <div class="actions">
-            {{Form::submit('Account Aanpassen', ['class' =>'btn btn-success' ])}}
-            <input type="button" class="btn btn-danger btn-sm" onclick="history.go(0)" value="Annuleren"/>
+        <div class="actions float-right">
+            {{Form::submit('Account Aanpassen', ['class' =>'btn btn-primary mr-5 p-3' ])}}
+            <input type="button" class="btn btn-danger p-3" onclick="history.go(0)" value="Annuleren"/>
         </div>
 
     </div>
