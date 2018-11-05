@@ -6,6 +6,11 @@
             {{ session()->get('message') }}
         </div>
     @endif
+    @if(session()->has('alert-message'))
+        <div class="alert alert-danger">
+            {{ session()->get('alert-message') }}
+        </div>
+    @endif
     <h1 class="my-5 text-center">Pas hier het standaardaccount aan:</h1>
     {{Form::open(array('action' => 'AdminUserController@createUser', 'method' => 'post' ))}}
     <div class="form-group">

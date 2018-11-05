@@ -41,7 +41,7 @@
             <li class=""><a href="{{route('adminInfo')}}"><label for="info">Info</label></a></li>
             <li class=""><a href="{{route('adminDefUser')}}"><label for="defuser">Standaard Gebruiker</label></a></li>
             <li class=""><a href="{{route('adminTrips')}}"><label for="trips">Actieve reizen</label></a></li>
-            <li class=""><a href="{{route('adminLinkorganisator')}}"><label for="linkorganisator">Koppel organisator aan actieve reis</label></a></li>
+            <li class=""><a href="{{route('adminLinkorganisator')}}"><label for="linkorganisator">Organisator Koppelen</label></a></li>
             <br />
         </ul>
 

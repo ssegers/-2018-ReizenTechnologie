@@ -24,11 +24,20 @@ class AdminUserController extends Controller
     public function createUser(Request $request)
     {
 
-            //Get the data from the view and update the table
+
+        try {
             User::where('user_id',1)->update(['username'=> $request->post('username'),'password'=>bcrypt($request->post('password'))]);
+            return redirect()->back()->with('message', 'Het standaardaccount is aangepast');
+        }
+        catch(\Illuminate\Database\QueryException $e){
+            return redirect()->back()->with('alert-message', 'Fout! De gebruikersnaam die je wilt ingeven bestaat al.');
+        }
+
+            //Get the data from the view and update the table
+
 
             //return the view with message
-            return redirect()->back()->with('message', 'De standaard gebruiker is ingesteld!');
+
 
 
 
