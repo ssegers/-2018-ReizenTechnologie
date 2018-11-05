@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="flash-message">
-        @foreach (['danger', 'warning', 'success', 'info'] as $msg)
-            @if(Session::has('alert-' . $msg))
-                <p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }}</p>
-            @endif
-        @endforeach
+    <div class="flash-message" id="flash-message">
+        {{--@foreach (['danger', 'warning', 'success', 'info'] as $msg)--}}
+            {{--@if(Session::has('alert-' . $msg))--}}
+                {{--<p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }}</p>--}}
+            {{--@endif--}}
+        {{--@endforeach--}}
     </div>
     <select name="selectedActiveTrip" class="travelChanged">
         @foreach ($aActiveTrips as $trip)

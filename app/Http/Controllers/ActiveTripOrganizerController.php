@@ -62,14 +62,14 @@ class ActiveTripOrganizerController extends Controller
             ->whereIn('traveller_id', $aUserId)
             ->orderBy('first_name')
             ->get();
-        $request->session()->flash('alert-success', 'Het opslaan van begeleiders is gelukt.');
+//        $request->session()->flash('alert-success', 'Het opslaan van begeleiders is gelukt.');
         return response()->json(['aMentors' => $oMentors]);
 
     }
     public function removeLinkedOrganisator(Request $request) {
         $iTripId = $request->post('trip_id');
         $iTravellerId = $request->post('traveller_id');
-        $request->session()->put('alert-success', 'success');
+//        $request->session()->put('alert-success', 'success');
         return response(TripOrganizer::Where('traveller_id', $iTravellerId)->where('trip_id', $iTripId)->delete());
     }
 }

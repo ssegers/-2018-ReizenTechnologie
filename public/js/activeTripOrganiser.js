@@ -10,6 +10,8 @@ $(document).ready(function() {
         // Save the place increment and value of the select
         trip_id = $(this).val();
         getActiveOrganizers(trip_id);
+
+        $('#flash-message').children().remove();
     });
 
 
@@ -63,8 +65,11 @@ function deleteActiveOrganizer(e,traveller_id) {
         },
         success: function(msg){
             e.parentElement.parentElement.remove();
+
+            $('#flash-message').children().remove();
+            $('#flash-message').append($('<p class="alert alert-success">').text('De organisator is succesvol verwijderd!'))
         }
-});
+    });
 }
 
 function addActiveOrganizer() {
@@ -89,6 +94,9 @@ function addActiveOrganizer() {
             var data = result['aMentors'];
             buildTable(data);
             $('.modal').modal('toggle');
+
+            $('#flash-message').children().remove();
+            $('#flash-message').append($('<p class="alert alert-success">').text('De organisator is succesvol toegevoegd!'))
         });
 }
 //# sourceMappingURL=activeTripOrganiser.js.map
