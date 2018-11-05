@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Traveller;
 use App\Trip;
 use App\User;
+use App\Zip;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -258,7 +259,11 @@ class UserDataController extends Controller
         //var_dump($aUserData);
         //var_dump($request->path());
         if(str_contains($request->path(), 'edit')){
-            return view('user.filter.individualTravellerEdit', ['aUserData' => $aUserData]);
+            $oTrips = Trip::select()->where('is_active', '=', true)->get();
+            $oZips = Zip::all();
+            //var_dump(json_decode(json_encode($oZips), true));
+            //var_dump(json_decode(json_encode($oTrips), true));
+            return view('user.filter.individualTravellerEdit', ['aUserData' => $aUserData, 'oTrips' => $oTrips, 'oZips' => $oZips]);
         }
         return view('user.filter.individualTraveller', ['aUserData' => $aUserData, 'sName' => $oUser->username]);
     }
@@ -282,12 +287,12 @@ class UserDataController extends Controller
                     'last_name'         => $aRequest->post('LastName'),
                     'first_name'        => $aRequest->post('FirstName'),
                     'username'          => $aRequest->post('Username'),
-                    //'gender'            => $aRequest->post('Gender'),
-                    //'name'              => $aRequest->post('TripName'),
+                    'gender'            => $aRequest->post('Gender'),
+                    'trip_id'              => $aRequest->post('Trip'),
 
                     'iban'              => $aRequest->post('IBAN'),
 
-                    //'medical_issue'     => $aRequest->post('MedicalIssue'),
+                    'medical_issue'     => $aRequest->post('MedicalIssue'),
                     'medical_info'      => $aRequest->post('MedicalInfo'),
 
                     'birthdate'         => $aRequest->post('BirthDate'),
@@ -295,8 +300,7 @@ class UserDataController extends Controller
                     'nationality'       => $aRequest->post('Nationality'),
 
                     'address'           => $aRequest->post('Address'),
-                    //'city'              => $aRequest->post('City'),           //enkel zip_id, city zit in zips table
-                    //'zip_id'            => $aRequest->post('Postcode'),
+                    'zip_id'            => $aRequest->post('City'),
                     'country'           => $aRequest->post('Country'),
 
                     'email'             => $aRequest->post('Email'),
