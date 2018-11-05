@@ -16,7 +16,7 @@
                         </div>
                         <div class="form-group">
                             {{Form::label('trip-year','Jaar:')}}
-                            {{Form::text('trip-year')}}
+                            {{Form::number('trip-year')}}
                         </div>
                         <div class="form-group">
                             {{Form::label('trip-is-active','Actief:')}}
@@ -33,38 +33,39 @@
         </div>
     </div>
 
-    <p>Hier vind je alle reizen. Reizen die actief zijn daar kan men zich voor registreren.</p>
+    <div class="row" style="margin-left: 2px; margin-top: 2px;">
+        <div class="col">
+            <p>Hier vind je alle reizen. Reizen die actief zijn daar kan men zich voor registreren.</p>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tripModal" data-trip-id="-1">
+                Voeg een reis toe
+            </button>
+            <table style="margin-top:5px">
+                <thead>
+                    <tr>
+                        <th class="admin-table">Naam</th>
+                        <th class="admin-table">Jaar</th>
+                        <th class="admin-table">Inscrijvingen actief</th>
+                        <th class="admin-table"></th>
+                    </tr>
+                </thead>
 
-    <div>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tripModal" data-trip-id="-1">
-            Voeg reis toe
-        </button>
-        <table style="margin-top:5px">
-            <thead>
-                <tr>
-                    <th class="admin-table">Naam</th>
-                    <th class="admin-table">Jaar</th>
-                    <th class="admin-table">Inscrijvingen actief</th>
-                    <th class="admin-table"></th>
-                </tr>
-            </thead>
-
-            <tbody>
-            @foreach($aTripData as $oTrip)
-                <tr>
-                    <td class="admin-table">{{$oTrip->name}}</td>
-                    <td class="admin-table">{{$oTrip->year}}</td>
-                    @if($oTrip->is_active)
-                        <td class="admin-table">Actief</td>
-                    @else
-                        <td class="admin-table">Non-actief</td>
-                    @endif
-                    <td class="admin-table"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tripModal" data-trip-id="{{$oTrip->trip_id}}" data-trip-name="{{$oTrip->name}}" data-trip-year="{{$oTrip->year}}" data-trip-active="{{$oTrip->is_active}}">Edit</button>
-                        <!--<form method="get" action="/admin/trips/$oTrip->trip_id"><button type="submit" >Edit</button></form></td>-->
-                </tr>
-            @endForeach
-            </tbody>
-        </table>
+                <tbody>
+                @foreach($aTripData as $oTrip)
+                    <tr>
+                        <td class="admin-table">{{$oTrip->name}}</td>
+                        <td class="admin-table">{{$oTrip->year}}</td>
+                        @if($oTrip->is_active)
+                            <td class="admin-table">Actief</td>
+                        @else
+                            <td class="admin-table">Non-actief</td>
+                        @endif
+                        <td class="admin-table"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tripModal" data-trip-id="{{$oTrip->trip_id}}" data-trip-name="{{$oTrip->name}}" data-trip-year="{{$oTrip->year}}" data-trip-active="{{$oTrip->is_active}}">Edit</button>
+                            <!--<form method="get" action="/admin/trips/$oTrip->trip_id"><button type="submit" >Edit</button></form></td>-->
+                    </tr>
+                @endForeach
+                </tbody>
+            </table>
+        </div>
     </div>
 <script>
     $('#tripModal').on('show.bs.modal', function (event) {
