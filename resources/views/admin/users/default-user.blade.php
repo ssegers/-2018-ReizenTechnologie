@@ -18,7 +18,7 @@
         {{Form::label('password', 'Paswoord: ')}}
         {{Form::password('password', ['required', "class" => "form-control"])}}<br />
         <div class="actions">
-            {{Form::submit('Gebruiker Aanpassen', ['class' =>'btn btn-success' ])}}
+            {{Form::submit('Account Aanpassen', ['class' =>'btn btn-success' ])}}
             <input type="button" class="btn btn-danger btn-sm" onclick="history.go(0)" value="Annuleren"/>
         </div>
 

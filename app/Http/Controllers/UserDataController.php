@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Traveller;
 use App\Trip;
 use App\User;
+use App\Zip;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -258,7 +259,11 @@ class UserDataController extends Controller
         //var_dump($aUserData);
         //var_dump($request->path());
         if(str_contains($request->path(), 'edit')){
-            return view('user.filter.individualTravellerEdit', ['aUserData' => $aUserData]);
+            $oTrips = Trip::select()->where('is_active', '=', true)->get();
+            $oZips = Zip::all();
+            //var_dump(json_decode(json_encode($oZips), true));
+            //var_dump(json_decode(json_encode($oTrips), true));
+            return view('user.filter.individualTravellerEdit', ['aUserData' => $aUserData, 'oTrips' => $oTrips, 'oZips' => $oZips]);
         }
         return view('user.filter.individualTraveller', ['aUserData' => $aUserData, 'sName' => $oUser->username]);
     }
@@ -274,6 +279,22 @@ class UserDataController extends Controller
      */
     public function updateUserData(Request $aRequest, $sUserName)
     {
+        $aRequest->validate([
+            'LastName'      => 'required',
+            'FirstName'     => 'required',
+            'Username'      => 'required',
+            'IBAN'          => 'required',
+
+            'BirthDate'     => 'required|date_format:d/m/Y',
+            'Birthplace'    => 'required',
+            'Nationality'   => 'required',
+            'Address'       => 'required',
+            'Country'       => 'required',
+            'Email'         => [ 'required', 'string', 'email', 'max:255' /*, 'unique:users,email' */],
+            'Phone'         => 'required',
+            'icePhone1'     => 'required'
+        ],$this->messages());
+
         DB::table('users')
             ->join('travellers', 'users.user_id', '=', 'travellers.user_id')
             ->where('users.username', '=', $sUserName) //r-nummer
@@ -282,23 +303,18 @@ class UserDataController extends Controller
                     'last_name'         => $aRequest->post('LastName'),
                     'first_name'        => $aRequest->post('FirstName'),
                     'username'          => $aRequest->post('Username'),
-                    //'gender'            => $aRequest->post('Gender'),
-                    //'name'              => $aRequest->post('TripName'),
-
+                    'gender'            => $aRequest->post('Gender'),
+                    'trip_id'           => $aRequest->post('Trip'),
                     'iban'              => $aRequest->post('IBAN'),
-
-                    //'medical_issue'     => $aRequest->post('MedicalIssue'),
+                    'medical_issue'     => $aRequest->post('MedicalIssue'),
                     'medical_info'      => $aRequest->post('MedicalInfo'),
 
                     'birthdate'         => $aRequest->post('BirthDate'),
                     'birthplace'        => $aRequest->post('Birthplace'),
                     'nationality'       => $aRequest->post('Nationality'),
-
                     'address'           => $aRequest->post('Address'),
-                    //'city'              => $aRequest->post('City'),           //enkel zip_id, city zit in zips table
-                    //'zip_id'            => $aRequest->post('Postcode'),
+                    'zip_id'            => $aRequest->post('City'),
                     'country'           => $aRequest->post('Country'),
-
                     'email'             => $aRequest->post('Email'),
                     'phone'             => $aRequest->post('Phone'),
                     'emergency_phone_1' => $aRequest->post('icePhone1'),
@@ -339,4 +355,26 @@ class UserDataController extends Controller
         return redirect("user/" . $oUser->username . "/trip/travellers");
     }
 
+    public function messages()
+    {
+        return [
+            'LastName.required'     => 'U heeft geen achternaam ingevuld.',
+            'FirstName.required'    => 'U heeft geen voornaam ingevuld.',
+            'Username.required'     => 'U heeft geen R-nummer ingevuld.',
+            'IBAN.required'         => 'U heeft geen IBAN-nummer ingevuld.',
+
+            'BirthDate.required'    => 'U heeft geen geboortedatum ingevuld. (d/m/y)',
+            'BirthDate.date_format' => 'De waarde die u heeft ingevuld bij geboortedatum is ongeldig. (d/m/y)',
+            'Birthplace.required'   => 'U heeft geen geboorteplaats ingevuld.',
+            'Nationality.required'  => 'U heeft geen nationaliteit ingevuld.',
+            'Address.required'      => 'U heeft geen adres ingevuld.',
+            'Country.required'      => 'U heeft geen land ingevuld.',
+
+            'Email.required'        => 'U heeft geen e-mailadres ingevuld.',
+            'Email.email'           => 'Het ingevulde e-mailadres is niet geldig.',
+            'Email.unique'          => 'Het ingevulde e-mailadres is al in gebruik.',
+            'Phone.required'        => 'U heeft geen GSM-nummer ingevuld.',
+            'icePhone1.required'    => 'U heeft bij \'noodnummer 1\' niets ingevuld.'
+        ];
+    }
 }
