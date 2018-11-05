@@ -1,13 +1,19 @@
 $(document).ready(function() {
 
+    var selectedItem = sessionStorage.getItem("SelectedItem");
+    if(selectedItem != null) {
+        $('.travelChanged').val(selectedItem);
+    }
     // Save the place increment and value of the select
     var trip_id =  $('.travelChanged').val();
     getActiveOrganizers(trip_id);
+
 
     // Monitor your selects for change by classname
     $('.travelChanged').on('change', function() {
 
         // Save the place increment and value of the select
+        sessionStorage.setItem("SelectedItem", $(this).val());
         trip_id = $(this).val();
         getActiveOrganizers(trip_id);
     });
@@ -26,6 +32,7 @@ $(document).ready(function() {
             }
         })
             .done(function( result ) {
+
                 var data = result['aMentors'];
                 buildTable(data);
             });
@@ -86,9 +93,9 @@ function addActiveOrganizer() {
         }
     })
         .done(function( result ) {
-            var data = result['aMentors'];
-            buildTable(data);
-            $('.modal').modal('toggle');
+            if(result) {
+                window.location.reload();
+            }
         });
 }
 //# sourceMappingURL=activeTripOrganiser.js.map
