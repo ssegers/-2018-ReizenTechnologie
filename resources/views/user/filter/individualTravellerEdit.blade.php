@@ -9,7 +9,11 @@
                     <label class="col-4 font-weight-bold" for="FirstName">Voornaam:         </label>    <input id="FirstName"    name="FirstName"    class="col-4" type="text" value={{$aUserData["first_name"]}}>  <br/>
                     <label class="col-4 font-weight-bold" for="Username">R-Nummer:          </label>    <input id="Username"     name="Username"     class="col-4" type="text" value={{$aUserData["username"]}}>    <br/>
                     <label class="col-4 font-weight-bold" for="Gender">Geslacht:            </label>{{--<input id="Gender"       name="Gender"       class="col-4" type="text" value={{$aUserData['gender']}}>  --}} <label class="col-4">radio buttons</label>  <br/>
-                    <label class="col-4 font-weight-bold" for="TripName">Reis:              </label>{{--<input id="TripName"     name="TripName"     class="col-4" type="text" value={{$aUserData['name']}}>    --}} <label class="col-4">drop down</label>  <br/>
+                    <label class="col-4 font-weight-bold" for="Trip">Reis:                  </label>    <select id="Trip"        name="Trip">
+                        @foreach($oTrips as $oTrip)
+                            <option value="{{ $oTrip->trip_id}}" @if($oTrip->trip_id == $aUserData["trip_id"]) selected @endif>    {{ $oTrip->name}}   </option>
+                        @endforeach
+                    </select>                                                                    <br/>
                     <h4>Financieel</h4>
                     <label class="col-4 font-weight-bold" for="IBAN">IBAN:                  </label>    <input id="IBAN"         name="IBAN"         class="col-4" type="text" value={{$aUserData['iban']}}>        <br/>
                     <h4>Medisch</h4>
@@ -23,7 +27,11 @@
                     <label class="col-4 font-weight-bold" for="Nationality">Nationaliteit:  </label>    <input id="Nationality"  name="Nationality"  class="col-4" type="text" value={{$aUserData['nationality']}}> <br/>
                     <h4>Woonplaats</h4>
                     <label class="col-4 font-weight-bold" for="Address">Adres:              </label>    <input id="Address"      name="Address"      class="col-4" type="text" value={{$aUserData['address']}}>     <br/>
-                    <label class="col-4 font-weight-bold" for="City">Gemeente:              </label>{{--<input id="City"         name="City"         class="col-4" type="text" value={{$aUserData['city']}}><input id="ZipCode" class="col-4" type="text" value={{$aUserData['zip_code']}}>--}}<label class="col-4">drop down</label><br/>
+                    <label class="col-4 font-weight-bold" for="City">Gemeente:              </label>    <select id="City"        name="City">
+                        @foreach($oZips as $oZip)
+                            <option value="{{ $oZip->zip_id}}" @if($oZip->zip_id == $aUserData["zip_id"]) selected @endif>{{$oZip->city}} {{$oZip->zip_code}}</option>
+                        @endforeach
+                    </select>                                                                    <br/>
                     <label class="col-4 font-weight-bold" for="Country">Land:               </label>    <input id="Country"      name="Country"      class="col-4" type="text" value={{$aUserData['country']}}>     <br/>
                     <h4>Contact Info</h4>
                     <label class="col-4 font-weight-bold" for="Email">Email:                </label>    <input id="Email"        name="Email"        class="col-4" type="text" value={{$aUserData['email']}}>       <br/>
