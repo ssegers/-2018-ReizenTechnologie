@@ -8,7 +8,7 @@
                     <label class="col-4 font-weight-bold" for="LastName">Naam:              </label>    <input id="LastName"     name="LastName"     class="col-4" type="text" value={{$aUserData["last_name"]}}>   <br/>
                     <label class="col-4 font-weight-bold" for="FirstName">Voornaam:         </label>    <input id="FirstName"    name="FirstName"    class="col-4" type="text" value={{$aUserData["first_name"]}}>  <br/>
                     <label class="col-4 font-weight-bold" for="Username">R-Nummer:          </label>    <input id="Username"     name="Username"     class="col-4" type="text" value={{$aUserData["username"]}}>    <br/>
-                    <label class="col-4 font-weight-bold" for="Gender">Geslacht:            </label>{{--<input id="Gender"       name="Gender"       class="col-4" type="text" value={{$aUserData['gender']}}>  --}} <label class="col-4">radio buttons</label>  <br/>
+                    <label class="col-4 font-weight-bold" for="Gender">Geslacht:            </label>    <input name="Gender" type="radio" value="man" @if($aUserData["gender"] == "man") checked @endif>Man <input name="Gender" type="radio" value="vrouw" @if($aUserData["gender"] == "vrouw") checked @endif>Vrouw <br/>
                     <label class="col-4 font-weight-bold" for="Trip">Reis:                  </label>    <select id="Trip"        name="Trip">
                         @foreach($oTrips as $oTrip)
                             <option value="{{ $oTrip->trip_id}}" @if($oTrip->trip_id == $aUserData["trip_id"]) selected @endif>    {{ $oTrip->name}}   </option>
@@ -17,8 +17,8 @@
                     <h4>Financieel</h4>
                     <label class="col-4 font-weight-bold" for="IBAN">IBAN:                  </label>    <input id="IBAN"         name="IBAN"         class="col-4" type="text" value={{$aUserData['iban']}}>        <br/>
                     <h4>Medisch</h4>
-                    <label class="col-4 font-weight-bold" for="MedicalIssue">Behandeling:   </label>{{--<input id="MedicalIssue" name="MedicalIssue" class="col-4" type="text" value=@if($aUserData['medical_issue'])Ja @else Nee @endif>--}}<label class="col-4">radio buttons</label><br/>
-                    <label class="col-4 font-weight-bold" for="MedicalInfo">Medische info:  </label>    <input id="MedicalInfo"  name="MedicalInfo"  class="col-4" type="text" value=@if($aUserData['medical_issue']){{$aUserData['medical_info']}} @else / @endif><br/>
+                    <label class="col-4 font-weight-bold" for="MedicalIssue">Behandeling:   </label>    <input name="MedicalIssue" type="radio" value="1" @if($aUserData["medical_issue"] == "1") checked @endif>Ja <input name="MedicalIssue" type="radio" value="0" @if($aUserData["medical_issue"] == "0") checked @endif>Nee <br/>
+                    <label class="col-4 font-weight-bold" for="MedicalInfo">Medische info:  </label>    <input id="MedicalInfo"  name="MedicalInfo"  class="col-4" type="text" value=@if($aUserData['medical_issue']){{$aUserData['medical_info']}} @endif><br/>
                 </div>
                 <div class="col color-dark-blue">
                     <h4>Geboorte</h4>
