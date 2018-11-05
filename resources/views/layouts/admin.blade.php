@@ -28,21 +28,27 @@
         </div>
     </div>
 </nav>
+
 <div class="row">
-    <div class="col side-nav" >
-        <h2>Dashboard</h2>
-        <nav id="sidebar">
-            <ul class="list-group">
-                <a  href="{{route('adminInfo')}}" style="color:#4cae4c;"><li class="list-group-item ">Standaard Gebruiker</li></a>
-                <a  href="{{route('adminInfo')}}" style="color:#4cae4c;"><li class="list-group-item ">Standaard Gebruiker</li></a>
-                <a  href="{{route('adminInfo')}}" style="color:#4cae4c;"><li class="list-group-item ">Standaard Gebruiker</li></a>
-                <a  href="{{route('adminInfo')}}" style="color:#4cae4c;"><li class="list-group-item ">Standaard Gebruiker</li></a>
-            </ul>
-        </nav>
+
+    <div class="col side-nav">
+
+
+        <h3 style="text-align: center;">Dashboard</h3>
+        <ul class="">
+
+            <li class=""> <a href="{{route('adminInfo')}}"><label for="info">Info</label></a></li>
+           <li class=""> <a href="{{route('adminDefUser')}}"><label for="defuser">Standaard Gebruiker</label></a></li>
+           <li class=""> <a href="{{route('adminTrips')}}"><label for="trips">Actieve reizen</label></a></li>
+            <li class=""> <a href="{{route('adminInfo')}}"><label for="item4">Item 4</label></a></li>
+        </ul>
+
     </div>
     <div class="col">
         <div class="container-fluid">
-            @yield('content')
+            <div class="container">
+                @yield('content')
+            </div>
         </div>
     </div>
 </div>

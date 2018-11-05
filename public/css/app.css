@@ -82,30 +82,37 @@ body {
   cursor: pointer;
 }
 
-.trip-overview il * {
-  padding: 0;
-  margin: 0;
+.background-white {
+  background-color: white;
 }
 
-.trip-overview ul {
-  list-style: none;
-  height: 60px;
-  padding: 0;
-  margin: 0;
-  display: block;
+.background-light-blue {
+  background-color: #E9F3F8;
 }
 
-.trip-overview ul li {
-  display: inline-block;
-  line-height: 60px;
-  padding: 0 20px;
-  background-color: lightblue;
-  margin-left: -5px;
+.color-dark-blue {
+  color: #003469;
 }
 
-.trip-overview ul li.active {
+.bg-dark-blue {
   background-color: #003469;
+}
+
+a.nav-link-white-hover:hover {
   color: white;
+  /*************************/
+}
+
+.margin-top-50 {
+  margin-top: 50px;
+}
+
+.padding-10 {
+  padding: 10px;
+}
+
+.padding-top-20 {
+  padding-top: 20px;
 }
 
 #registerForm {
@@ -193,6 +200,164 @@ input.invalid {
 /* Mark the steps that are finished and valid: */
 .step.finish {
   background-color: #4CAF50;
+}
+
+.trip-overview il * {
+  padding: 0;
+  margin: 0;
+}
+
+.trip-overview ul {
+  list-style: none;
+  height: 60px;
+  padding: 0;
+  margin: 0;
+  display: block;
+}
+
+.trip-overview ul li {
+  display: inline-block;
+  line-height: 60px;
+  padding: 0 20px;
+  background-color: lightblue;
+  margin-left: -5px;
+}
+
+.trip-overview ul li.active {
+  background-color: #003469;
+  color: white;
+}
+
+.table-header {
+  position: relative;
+  height: 60px;
+}
+
+.table-header ul {
+  position: absolute;
+  top: 0;
+  right: 0;
+  list-style: none;
+}
+
+.table-header ul li {
+  display: inline-block;
+  line-height: 30px;
+  padding: 15px 0;
+}
+
+.table-header ul button:hover {
+  background-color: #E00049;
+  color: white;
+}
+
+.filter-footer {
+  height: 40px;
+  line-height: 40px;
+  position: relative;
+}
+
+.table-wrapper-scroll {
+  display: block;
+  max-height: calc(100vh - 60px - 60px - 60px - 50px);
+  max-width: 100%;
+  overflow-y: auto;
+  overflow-x: auto;
+}
+
+.pagination {
+  position: absolute;
+  top: 0;
+  display: block;
+  text-align: center;
+  width: 100%;
+  z-index: 1;
+}
+
+.page-item {
+  display: inline-block;
+}
+
+.page-link {
+  width: 25px;
+  line-height: 25px;
+  padding: 0;
+}
+
+.page-item.active .page-link {
+  background-color: #E00049;
+  border-color: #E00049;
+}
+
+.filter-per-page {
+  z-index: 10;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+td.field.last_name {
+  min-width: 120px;
+}
+
+td.field.first_name {
+  min-width: 120px;
+}
+
+td.field.name {
+  min-width: 130px;
+}
+
+td.field.study_name {
+  min-width: 100px;
+}
+
+td.field.major_name {
+  min-width: 140px;
+}
+
+td.field.birthdate {
+  min-width: 120px;
+}
+
+td.field.gender {
+  min-width: 80px;
+}
+
+td.field.nationality {
+  min-width: 100px;
+}
+
+td.field.address {
+  min-width: 200px;
+}
+
+td.field.zip_code {
+  min-width: 90px;
+}
+
+td.field.city {
+  min-width: 120px;
+}
+
+td.field.country {
+  min-width: 100px;
+}
+
+td.field.email {
+  min-width: 250px;
+}
+
+td.field.phone {
+  min-width: 100px;
+}
+
+td[class^="field emergency"] {
+  min-width: 130px;
+}
+
+td.field.medical_info {
+  min-width: 200px;
 }
 
 /*# sourceMappingURL=app.css.map */

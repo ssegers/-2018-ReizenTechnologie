@@ -12,9 +12,11 @@ class AdminUserController extends Controller
 
     public function createForm()
     {
+        //get the username for the placeholder
         $sUserName = User::where('user_id', 1)->first();
 
-        return view('admin.users.default-user', ['sUserName' => $sUserName->name] );
+        //returns the view with the data for placeholder
+        return view('admin.users.default-user', ['sUserName' => $sUserName->username] );
     }
 
     //Creates a global user account and stores it into the database
@@ -22,11 +24,15 @@ class AdminUserController extends Controller
     public function createUser(Request $request)
     {
 
-            User::where('user_id',1)->update(['name'=> $request->post('username'),
-                'password'=>bcrypt($request->post('password'))]);
+            //Get the data from the view and update the table
+            User::where('user_id',1)->update(['username'=> $request->post('username'),'password'=>bcrypt($request->post('password'))]);
+
+            //return the view with message
+            return redirect()->back()->with('message', 'De standaard gebruiker is ingesteld!');
 
 
 
-         return redirect()->back()->with('message', 'De standaard gebruiker is ingesteld!');
+
+
     }
 }
