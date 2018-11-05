@@ -36,9 +36,9 @@
                 </div>
             </div>
             <div class="nav justify-content-center mb-3 font-weight-bold">
-                <a class="nav-link nav-link-white-hover bg-dark-blue d-inline-flex mr-1" href="/user/{{$sName}}/trip/travellers">Terug</a>
-                <a class="nav-link nav-link-white-hover bg-dark-blue d-inline-flex mr-1" href="/userinfo/{{$aUserData["username"]}}/edit">Aanpassen</a>
-                <a class="nav-link nav-link-white-hover bg-dark-blue d-inline-flex ml-1" href="/userinfo/{{$aUserData["username"]}}/delete">Verwijderen</a>
+                <a class="nav-link nav-link-white-hover bg-dark-blue d-inline-flex m-1" href="/user/{{$sName}}/trip/travellers">Terug</a>
+                <a class="nav-link nav-link-white-hover bg-dark-blue d-inline-flex m-1" href="/userinfo/{{$aUserData["username"]}}/edit">Aanpassen</a>
+                <a class="nav-link nav-link-white-hover bg-dark-blue d-inline-flex m-1" href="/userinfo/{{$aUserData["username"]}}/delete">Verwijderen</a>
             </div>
         </form>
     </div>

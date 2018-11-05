@@ -98,6 +98,10 @@ body {
   background-color: #003469;
 }
 
+input.nav-link {
+  color: white;
+}
+
 a.nav-link-white-hover:hover {
   color: white;
   /*************************/
