@@ -20,7 +20,8 @@
                         </div>
                         <div class="form-group">
                             {{Form::label('trip-is-active','Actief:')}}
-                            {{Form::checkbox('trip-is-active','1')}}
+                            <input type="checkbox" name="trip-is-active" value="1" id="trip-is-active"/>
+                            {{--{{Form::checkbox('trip-is-active','1' )}}--}}
                         </div>
                             {{ Form::hidden('trip-id','trip-id',array('id'=>'trip-id')) }}
                     </div>
@@ -73,6 +74,7 @@
         var tripName = button.data('trip-name');
         var tripYear = button.data('trip-year');
         var tripActive = button.data('trip-active');
+        console.log(tripActive);
         var tripId = button.data('trip-id');
         // Extract info from data-* attributes
         // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
@@ -83,6 +85,14 @@
         modal.find('.modal-body #trip-year').val(tripYear);
         modal.find('.modal-body #trip-active').val(tripActive);
         modal.find('.modal-body #trip-id').val(tripId);
+
+        var active = $('#trip-is-active');
+        if (tripActive == 1) {
+            active.prop('checked', true);
+        }
+        else {
+            active.prop('checked', false);
+        }
     })
 </script>
 @endsection
