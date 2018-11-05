@@ -88,6 +88,7 @@ function addActiveOrganizer() {
         .done(function( result ) {
             var data = result['aMentors'];
             buildTable(data);
+            $('.modal').modal('toggle');
         });
 }
 //# sourceMappingURL=activeTripOrganiser.js.map
