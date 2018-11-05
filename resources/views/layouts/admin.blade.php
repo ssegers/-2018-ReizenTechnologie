@@ -33,14 +33,14 @@
 
     <div class="col side-nav">
 
-
-        <h3 style="text-align: center;">Dashboard</h3>
+        <button type="submit" disabled name="button-admin" value="button-filter" >Dashboard</button>
         <ul class="">
 
-            <li class=""> <a href="{{route('adminInfo')}}"><label for="info">Info</label></a></li>
-           <li class=""> <a href="{{route('adminDefUser')}}"><label for="defuser">Standaard Gebruiker</label></a></li>
-           <li class=""> <a href="{{route('adminTrips')}}"><label for="trips">Actieve reizen</label></a></li>
-            <li class=""> <a href="{{route('adminInfo')}}"><label for="item4">Item 4</label></a></li>
+            <li class=""><a href="{{route('adminInfo')}}"><label for="info">Info</label></a></li>
+            <li class=""><a href="{{route('adminDefUser')}}"><label for="defuser">Standaard Gebruiker</label></a></li>
+            <li class=""><a href="{{route('adminTrips')}}"><label for="trips">Actieve reizen</label></a></li>
+            <li class=""><a href="{{route('adminInfo')}}"><label for="item4">Item 4</label></a></li>
+            <br />
         </ul>
 
     </div>
