@@ -140,14 +140,14 @@ class RegisterController extends Controller
     }
 
     public function sendMail($email, $name, $password) {
-//        $aMailData = [
-//            'subject' => 'Your registration for the UCLL trip.',
-//            'username' => $name,
-//            'email' => $email,
-//            'description' => "berichtje",
-//            'password' => $password
-//        ];
-//        Mail::to(config('mail.username'))->send(new RegisterComplete($aMailData));
+        $aMailData = [
+            'subject' => 'Your registration for the UCLL trip.',
+            'username' => $name,
+            'email' => $email,
+            'description' => "berichtje",
+            'password' => $password
+        ];
+        Mail::to(config('mail.username'))->send(new RegisterComplete($aMailData));
     }
 
     /*----------------------------------------------------------------------------------------------------------------------*/
