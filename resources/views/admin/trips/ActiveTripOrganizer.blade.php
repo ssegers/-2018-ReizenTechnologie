@@ -5,7 +5,7 @@
         <div class="col">
             <div class="flash-message " id="flash-message">
                 @foreach (['danger', 'warning', 'success', 'info'] as $msg)
-                    @if(Session::has('alert-' . $msg))
+                    @if(Session::has($msg))
                         <p class="p-3 mt-3 alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }}</p>
                     @endif
                 @endforeach
