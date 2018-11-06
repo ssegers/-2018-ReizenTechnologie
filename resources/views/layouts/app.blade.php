@@ -26,8 +26,8 @@
                 <div class="container-fluid">
 
                     @foreach (['danger', 'warning', 'success', 'info'] as $msg)
-                        @if(Session::has('alert-' . $msg))
-                            <p class="p-3 mt-3 alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }}</p>
+                        @if(Session::has($msg))
+                            <p class="p-3 mt-3 alert alert-{{ $msg }}">{{ Session::get($msg) }}</p>
                         @endif
                     @endforeach
 
