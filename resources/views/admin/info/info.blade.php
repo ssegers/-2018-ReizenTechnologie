@@ -6,7 +6,7 @@
             {{ session()->get('message') }}
         </div>
     @endif
-    <h2 class="text-center">Infopagina Aanpassen</h2>
+    <h1 class="my-5 text-center">Infopagina Aanpassen</h1>
 
     <div class="form-group">
     <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=f1b7vjd1xordm1kfj32o5h93ox2x8i0dxr9capjyc1axdalb"></script>

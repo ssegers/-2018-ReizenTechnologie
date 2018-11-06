@@ -39,7 +39,6 @@ function nextPrev(n) {
     // Otherwise, display the correct tab:
     showTab(currentTab);
 }
-
 function validateForm() {
     // This function deals with validation of the form fields
     var x, y, i, valid = true;

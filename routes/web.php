@@ -25,17 +25,20 @@ route::get('user/Form/form', 'RegisterController@form');
 route::post('user/Form/form', 'RegisterController@formPost');
 
 //Get active trip to link to organizers
-route::get('admin/linkorganisator/', 'ActiveTripOrganizerController@showActiveTrips');
+route::get('admin/linkorganisator/', 'ActiveTripOrganizerController@showActiveTrips')->name('adminLinkorganisator');
 route::post('admin/linkorganisator/', 'ActiveTripOrganizerController@showLinkedOrganisators');
-route::get('admin/linkorganisator/{traveller_id}', 'ActiveTripOrganizerController@removeLinkedOrganisators');
+route::delete('admin/linkorganisator/delete', 'ActiveTripOrganizerController@removeLinkedOrganisator');
+route::post('admin/linkorganisator/add', 'ActiveTripOrganizerController@addLinkedOrganisator');
 
-route::get('admin/user/default', 'AdminUserController@createForm');
+route::get('admin/user/default', 'AdminUserController@createForm')->name('adminDefUser');
 route::post('admin/user/default', 'AdminUserController@createUser');
 
 Route::get('admin/info', 'AdminInfoController@getInfo')->name('adminInfo');
 Route::post('admin/info', 'AdminInfoController@updateInfo');
 
-Route::get('admin/trips', 'AdminTripController@getTrips');
+Route::post('admin/trips', 'AdminTripController@UpdateOrCreateTrip');
+
+Route::get('admin/trips', 'AdminTripController@getTrips')->name('adminTrips');
 Route::get('admin/trips/{tripid}', 'AdminTripController@getTripByID');
 
 Route::get('admin/organisator', 'KiesOrganisatorController@ShowForm');
@@ -44,10 +47,16 @@ Route::get('admin/get/organisators/{id}', 'KiesOrganisatorController@getOrganisa
 
 
 Route::get('/info','AdminInfoController@showInfo')->name('info');
-
-Route::get('userinfo/{sUserName}', 'UserDataController@showUserData');
-
+/* Individual Traveller */
+Route::get('userinfo/{sUserName}', 'UserDataController@showUserData');              //show
+Route::get('userinfo/{sUserName}/edit', 'UserDataController@showUserData');         //edit
+Route::post('userinfo/{sUserName}/update', 'UserDataController@updateUserData');    //update
+Route::get('userinfo/{sUserName}/delete', 'UserDataController@deleteUserData');     //delete
 
 Route::get('/', function () {
     return redirect('info');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

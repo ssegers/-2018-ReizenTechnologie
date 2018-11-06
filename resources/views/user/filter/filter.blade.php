@@ -22,17 +22,14 @@
 @section('content')
     <div class="trip-overview">
         <ul class="list-trip">
-            @foreach($aActiveTrips as $aTripData)
-                <li
-                @if($aTripData['oTrip']->trip_id == $oCurrentTrip->trip_id)
-                    class="active"
-                @endif
-                >
-                    {{ $aTripData['oTrip']->name }} {{ $aTripData['oTrip']->year }} ({{ $aTripData['iCount'] }})
-                </li>
-            @endforeach
+            <ul>
+                @foreach($aActiveTrips as $aTripData)
+                    <li @if($aTripData['oTrip']->trip_id == $oCurrentTrip->trip_id) class="active" @endif>{{ $aTripData['oTrip']->name }} {{ $aTripData['oTrip']->year }} ({{ $aTripData['iCount'] }})</li>
+                @endforeach
+            </ul>
         </ul>
     </div>
+    <div class="table-header">
         <h1 class="page-title">Deelnemers {{ $oCurrentTrip->name }} {{ $oCurrentTrip->year }}</h1>
         <ul class="download-options">
             <li>Download</li>
@@ -40,16 +37,8 @@
             <li class="divider">/</li>
             <li class="export"><button type="submit" name="export" value="excel">Excel</button></li>
         </ul>
-        <div class="table-container">
-            <div class="table-wrapper-scroll-y">
-                <style>
-                    .table-wrapper-scroll-y {
-                        display: block;
-                        max-height: 200px;
-                        overflow-y: auto;
-                        -ms-overflow-style: -ms-autohiding-scrollbar;
-                    }
-                </style>
+    </div>
+            <div class="table-wrapper-scroll">
                 <table class="table table-striped">
                     <thead>
                     <tr>
@@ -60,7 +49,7 @@
                     </thead>
                     <tbody>
                     @foreach($aUserData as $oUserData)
-                        <tr onclick="displayUser('<?php echo $oUserData->name ?>')">
+                        <tr onclick="displayUser('<?php echo $oUserData->username ?>')">
                             @foreach($aFiltersChecked as $sFilterName => $sFilterText)
                                 <td class="field {{ $sFilterName }}">{{ $oUserData->$sFilterName }}</td>
                             @endforeach
@@ -69,14 +58,13 @@
                     </tbody>
                 </table>
             </div>
-        </div>
         <div class="filter-footer">
             {{ $aUserData->appends(request()->input())->links() }}
             <div class="filter-per-page">
                 {{ Form::label('per-page', 'Reizigers per pagina:') }}
                 <select name="per-page" onchange="this.form.submit()">
-                    @foreach($aPaginate as $iValue => $bActive)
-                        @if($bActive)
+                @foreach($aPaginate as $iValue => $bActive)
+                    @if($bActive)
                             <option selected value="{{ $iValue }}">{{ $iValue }}</option>
                         @else
                             <option value="{{ $iValue }}">{{ $iValue }}</option>
@@ -85,11 +73,19 @@
                 </select>
             </div>
         </div>
-    </div>
     {{ Form::close() }}
     <script type="text/javascript">
         function displayUser(userName) {
             window.location.href = '<?php echo url('/') ?>/userinfo/' + userName;
         }
     </script>
+    <style>
+        body {
+            height: 100vh;
+            overflow-y: hidden;
+        }
+        .container-fluid {
+            max-width: calc(100vw - 231px);
+        }
+    </style>
 @endsection

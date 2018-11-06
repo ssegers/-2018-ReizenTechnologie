@@ -6,10 +6,13 @@ use App\User;
 use App\Trip;
 use App\Study;
 use App\Major;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Session;
+
 class RegisterController extends Controller
 {
     /**
@@ -55,17 +58,25 @@ class RegisterController extends Controller
         $aData["txtMedischDetail"] = $aRequest->post('txtMedisch');
 
         $this->SaveData($aData);
-        echo Traveller::all();
-        echo User::all();
 
-        //return redirect('welcome');
+//        echo Traveller::all();
+//        echo User::all();
+        $aRequest->session()->flash('info', 'Om uw registratie te voltooien moet u inliggen met de gegevens die via email zijn verzonden');
+
+        return redirect('info')->with('info', 'Om uw registratie te voltooien moet u inliggen met de gegevens die via email zijn verzonden');
     }
 
     public function form(){
         $aTrips = Trip::where('is_active', true)->orderBy('name')->pluck('name');
-        $aOpleidingen = Study::pluck('study_name');
-        $aAfstudeerrichtingen = Major::pluck('major_name');
-        return view('user.Form.form', ['aTrips'=>$aTrips, 'aOpleidingen'=>$aOpleidingen, 'aAfstudeerrichtingen'=>$aAfstudeerrichtingen]);
+        $aOpleidingen = Study::pluck('study_name','study_id');
+        $aAfstudeerrichtingen = DB::table('majors')->get();
+        foreach($aAfstudeerrichtingen as $oAfstudeerrichting){
+            $aMajors[$oAfstudeerrichting->study_id][] = $oAfstudeerrichting->major_name;
+        }
+
+        //Major::pluck('major_name');
+
+        return view('user.Form.form', ['aTrips'=>$aTrips, 'aOpleidingen'=>$aOpleidingen, 'aMajors'=>$aMajors]);
     }
 
     /*----------------------------------------------------------------------------------------------------------------------*/
@@ -82,13 +93,13 @@ class RegisterController extends Controller
         $password = $this->randomPassword();
         User::insert(
             [
-                'name' => $aData["txtStudentnummer"],
+                'username' => $aData["txtStudentnummer"],
                 'password' => bcrypt($password),
                 'role' => $sFunctie
             ]
         );
 
-        $iUserID = User::where('name',$aData['txtStudentnummer']) ->value('user_id');
+        $iUserID = User::where('username',$aData['txtStudentnummer']) ->value('user_id');
         //Saving traveller
         Traveller::insert(
             [
@@ -131,7 +142,7 @@ class RegisterController extends Controller
     public function sendMail($email, $name, $password) {
         $aMailData = [
             'subject' => 'Your registration for the UCLL trip.',
-            'name' => $name,
+            'username' => $name,
             'email' => $email,
             'description' => "berichtje",
             'password' => $password

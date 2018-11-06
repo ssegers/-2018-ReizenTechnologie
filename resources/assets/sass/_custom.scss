@@ -1,9 +1,10 @@
 nav.navbar {
-  background-color: $col-primary;
+  background-color: $col-accent;
 }
 a.navbar-brand img {
   height: 50px;
 }
+
 a.navbar-brand {
   margin: 0;
   padding: 0;
@@ -18,10 +19,11 @@ a.nav-link:hover {
 body {
   overflow-x: hidden;
   width: 100vw;
+  background-color: #E9F3F8;
 }
 .side-nav {
-  -ms-flex: 0 0 200px;
-  flex: 0 0 200px;
+  -ms-flex: 0 0 250px;
+  flex: 0 0 250px;
   background-color: white;
   height: calc(100vh - 66px);
   padding-right: 30px;
@@ -68,6 +70,44 @@ body {
   cursor: pointer;
 }
 
+
+
+.background-white{
+  background-color: white;
+}
+.background-light-blue{
+  background-color: #E9F3F8;
+}
+.color-dark-blue{
+  color: #003469;
+}
+.bg-dark-blue{
+  background-color: #003469;
+}
+input.nav-link {
+  color: white;
+}
+a.nav-link-white-hover:hover{
+  color: white;   /*************************/
+}
+.margin-top-50{
+  margin-top: 50px;
+}
+.padding-10{
+  padding: 10px;
+}
+.padding-top-20{
+  padding-top: 20px;
+}
+.checkbox-lg
+{
+  /* Double-sized Checkboxes */
+  -ms-transform: scale(2); /* IE */
+  -moz-transform: scale(2); /* FF */
+  -webkit-transform: scale(2); /* Safari and Chrome */
+  -o-transform: scale(2); /* Opera */
+  padding: 10px;
+}
 //body {
 //  background-color: #E9F3F8;
 //  overflow: hidden;

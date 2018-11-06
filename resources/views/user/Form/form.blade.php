@@ -1,6 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
+    <style>
+        /*.tab {*/
+            /*display: block;*/
+            /*width: 100%;*/
+        /*}*/
+        /*.tab label {*/
+            /*width: 35%;*/
+        /*}*/
+    </style>
     {{ Form::open(array('action' => 'RegisterController@formPost', 'method' => 'post', 'id' => 'registerForm')) }}
         <h1 class="formTitel">Inschrijvings formulier</h1>
         <h2 id="jsAlert" >Om deze formulier te kunnen gebruiken moet uw javascript aanstaan.</h2>
@@ -11,9 +20,10 @@
 
             <p><label class="formLabel">Studentnummer</label>{{ Form::text('txtStudentnummer', '', ['id'=>'txtStudentnummer','oninput'=>'this.className'])}}</p>
             <p><label class="formLabel">Opleiding</label>
-                {{ Form::select('dropOpleiding', $aOpleidingen, ['id'=>'dropOpleiding','oninput'=>'this.className'])}}</p>
+            <span id="opleidingSelect" onclick="checkMajor()">{{ Form::select('dropOpleiding', $aOpleidingen, ['id'=>'dropOpleiding','oninput'=>'this.className'])}}</span></p>
             <p><label class="formLabel">Afstudeerrichting</label>
-                {{ Form::select('dropAfstudeerrichtingen', $aAfstudeerrichtingen, ['id'=>'dropAfstudeerrichtingen','oninput'=>'this.className'])}}</p>
+
+                {{ Form::select('dropAfstudeerrichtingen', $aMajors, ['id'=>'dropAfstudeerrichtingen','oninput'=>'this.className'])}}</p>
         </div>
 
     <div class="tab"><h2 class="tabTitle">Persoonlijke gegevens:</h2>
@@ -69,6 +79,31 @@
     {{ Form::close() }}
 
     <script src="{{ URL::asset('/js/all.js') }}"></script>
+    <script type="text/javascript">
+
+        function checkMajor(){
+            var study_id, major_name;
+            console.log("in check major functie");
+            @php {{$phpOpleidingen = $aOpleidingen;}} @endphp
+            var opleidingen = @php {{echo json_encode($aOpleidingen);}}  @endphp ;
+            console.log(opleidingen);
+            var ArrayNotDone =true;
+            var i=1;
+            var studySelect = document.getElementsByName('dropOpleiding');
+            console.log(studySelect);
+            while(ArrayNotDone){
+                if(opleidingen[i]==null){
+                    ArrayNotDone=false;
+
+                }
+                else{
+                    console.log(opleidingen[i]);
+                    i++
+                }
+            }
+        }
+
+    </script>
 
 
 

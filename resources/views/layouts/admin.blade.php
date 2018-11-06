@@ -7,11 +7,13 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <title>{{config('app.name')}}</title>
 
     <link type="text/css" rel="stylesheet" href="{{ asset('css/app.css') }}">
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
@@ -19,7 +21,7 @@
 
 <body>
 
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-default border-bottom border-secondary">
     <div class="container-fluid">
         <div class="navbar-header">
             <a class="navbar-brand" href="#">
@@ -28,24 +30,29 @@
         </div>
     </div>
 </nav>
+
 <div class="row">
-    <div class="col side-nav" >
-        <h2>Dashboard</h2>
-        <nav id="sidebar">
-            <ul class="list-group">
-                <a  href="{{route('adminInfo')}}" style="color:#4cae4c;"><li class="list-group-item ">Standaard Gebruiker</li></a>
-                <a  href="{{route('adminInfo')}}" style="color:#4cae4c;"><li class="list-group-item ">Standaard Gebruiker</li></a>
-                <a  href="{{route('adminInfo')}}" style="color:#4cae4c;"><li class="list-group-item ">Standaard Gebruiker</li></a>
-                <a  href="{{route('adminInfo')}}" style="color:#4cae4c;"><li class="list-group-item ">Standaard Gebruiker</li></a>
-            </ul>
-        </nav>
+    <div class="col side-nav" class="list-group">
+
+        <button type="submit" disabled name="button-admin"  value="button-filter" >Dashboard</button>
+        <ul>
+            <a href="{{route('adminInfo')}}"  class="list-group-item" style="height: 55px; color:black; padding: 0px;" onmouseover="this.style.backgroundColor='#E00049';" onmouseout="this.style.backgroundColor='';"><li>Info</li></a>
+            <a href="{{route('adminDefUser')}}"  class="list-group-item" style="height: 55px; color:black; padding: 0px;" onmouseover="this.style.backgroundColor='#E00049';" onmouseout="this.style.backgroundColor='';"><li>Standaard Gebruiker</li></a>
+            <a href="{{route('adminTrips')}}"  class="list-group-item" style="height: 55px; color:black; padding: 0px;" onmouseover="this.style.backgroundColor='#E00049';" onmouseout="this.style.backgroundColor='';"><li>Actieve reizen</li></a>
+            <a href="{{route('adminLinkorganisator')}}"  class="list-group-item" style="height: 55px; color:black; padding: 0px;" onmouseover="this.style.backgroundColor='#E00049';" onmouseout="this.style.backgroundColor='';"><li>Organisator Koppelen</li></a>
+            <br />
+        </ul>
+
     </div>
     <div class="col">
         <div class="container-fluid">
-            @yield('content')
+            <div class="container">
+                @yield('content')
+            </div>
         </div>
     </div>
 </div>
 
 </body>
+
 </html>

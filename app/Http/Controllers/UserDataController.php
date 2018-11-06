@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Traveller;
 use App\Trip;
 use App\User;
+use App\Zip;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Mpdf\Tag\Tr;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\Exception;
@@ -19,7 +21,7 @@ class UserDataController extends Controller
 {
     /* List of all filters */
     protected $aFilterList = [
-        'name'=>'Gebruikersnaam',
+        'username'=>'Gebruikersnaam',
         'study_name'=>'Richting',
         'major_name'=>'Afstudeerrichting',
         'birthdate' => 'Geboortedatum',
@@ -58,7 +60,7 @@ class UserDataController extends Controller
         $oUser = Auth::user();
 
         /* Get user from URL */
-        $oUser = User::where('name', $sUserName)->first();
+        $oUser = User::where('username', $sUserName)->first();
 
         /* Check if user exist and is a organizer */
         try {
@@ -126,7 +128,7 @@ class UserDataController extends Controller
             'aUserData' => $aUserData,
             'aFilterList' => $this->aFilterList,
             'aFiltersChecked' => $aFiltersChecked,
-            'sUserName' => $oUser->name,
+            'sUserName' => $oUser->username,
             'oCurrentTrip' => $aOrganizerTrip,
             'aActiveTrips' => $aActiveTrips,
             'aPaginate' => $aPaginate,
@@ -205,7 +207,7 @@ class UserDataController extends Controller
     private function getUserData($aFilters, $iTrip, $iPaginate = false) {
         if ($iPaginate) {
             /* For click event: Add name to selection */
-            return Traveller::select(array_keys(array_add($aFilters, 'name', true)))
+            return Traveller::select(array_keys(array_add($aFilters, 'username', true)))
                 ->join('users','travellers.user_id','=','users.user_id')
                 ->join('zips','travellers.zip_id','=','zips.zip_id')
                 ->join('majors','travellers.major_id','=','majors.major_id')
@@ -225,17 +227,154 @@ class UserDataController extends Controller
      *
      * @author Joren Meynen
      *
+     * @param Request $request
      * @param $sUserName
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View|string
      */
-    public function showUserData($sUserName)
+    public function showUserData(Request $request, $sUserName)
     {
+        /* Get user from Auth */
+        $oUser = Auth::user();
+        $sSegers = 'u0598673';
+        $sRoox = 'u0569802';
+        /* Get user from URL */
+        $oUser = User::where('username', $sSegers)->first();
+        try {
+            if ($oUser->role != 'organizer') {
+                return 'Deze gebruiker is niet gemachtigd';
+            }
+        }
+        catch (\Exception $exception) {
+            return 'Deze gebruiker bestaat niet';
+        }
+
+
+
         $aUserData = User::select()
             ->join('travellers', 'users.user_id', '=', 'travellers.user_id')
             ->join('zips', 'travellers.zip_id', '=', 'zips.zip_id')
-            ->where('users.name', '=', $sUserName) //r-nummer
+            ->join('trips', 'travellers.trip_id', '=', 'trips.trip_id')
+            ->where('users.username', '=', $sUserName) //r-nummer
             ->first();
+        //var_dump($aUserData);
+        //var_dump($request->path());
+        if(str_contains($request->path(), 'edit')){
+            $oTrips = Trip::select()->where('is_active', '=', true)->get();
+            $oZips = Zip::all();
+            //var_dump(json_decode(json_encode($oZips), true));
+            //var_dump(json_decode(json_encode($oTrips), true));
+            return view('user.filter.individualTravellerEdit', ['aUserData' => $aUserData, 'oTrips' => $oTrips, 'oZips' => $oZips]);
+        }
+        return view('user.filter.individualTraveller', ['aUserData' => $aUserData, 'sName' => $oUser->username]);
+    }
 
-        return view('user.filter.individualTraveller', ['aUserData' => $aUserData]);
+    /**
+     * Updates the data of a selected user
+     *
+     * @author Joren Meynen
+     *
+     * @param Request $aRequest
+     * @param $sUserName
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function updateUserData(Request $aRequest, $sUserName)
+    {
+        $aRequest->validate([
+            'LastName'      => 'required',
+            'FirstName'     => 'required',
+            'Username'      => 'required',
+            'IBAN'          => 'required',
+
+            'BirthDate'     => 'required|date_format:d/m/Y',
+            'Birthplace'    => 'required',
+            'Nationality'   => 'required',
+            'Address'       => 'required',
+            'Country'       => 'required',
+            'Email'         => [ 'required', 'string', 'email', 'max:255' /*, 'unique:users,email' */],
+            'Phone'         => 'required',
+            'icePhone1'     => 'required'
+        ],$this->messages());
+
+        DB::table('users')
+            ->join('travellers', 'users.user_id', '=', 'travellers.user_id')
+            ->where('users.username', '=', $sUserName) //r-nummer
+            ->update(
+                [
+                    'last_name'         => $aRequest->post('LastName'),
+                    'first_name'        => $aRequest->post('FirstName'),
+                    'username'          => $aRequest->post('Username'),
+                    'gender'            => $aRequest->post('Gender'),
+                    'trip_id'           => $aRequest->post('Trip'),
+                    'iban'              => $aRequest->post('IBAN'),
+                    'medical_issue'     => $aRequest->post('MedicalIssue'),
+                    'medical_info'      => $aRequest->post('MedicalInfo'),
+
+                    'birthdate'         => $aRequest->post('BirthDate'),
+                    'birthplace'        => $aRequest->post('Birthplace'),
+                    'nationality'       => $aRequest->post('Nationality'),
+                    'address'           => $aRequest->post('Address'),
+                    'zip_id'            => $aRequest->post('City'),
+                    'country'           => $aRequest->post('Country'),
+                    'email'             => $aRequest->post('Email'),
+                    'phone'             => $aRequest->post('Phone'),
+                    'emergency_phone_1' => $aRequest->post('icePhone1'),
+                    'emergency_phone_2' => $aRequest->post('icePhone2'),
+                ]
+            );
+
+        return redirect('userinfo/'. $sUserName);
+    }
+
+    /**
+     * Deletes the data of a selected user
+     *
+     * @author Joren Meynen
+     *
+     * @param $sUserName
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|string
+     */
+    public function deleteUserData($sUserName){
+        /* Get user from Auth */
+        $oUser = Auth::user();
+        /* Get user from URL */
+        $oUser = User::where('username', "u0598673")->first();
+        try {
+            if ($oUser->role != 'organizer') {
+                return 'Deze gebruiker is niet gemachtigd';
+            }
+        }
+        catch (\Exception $exception) {
+            return 'Deze gebruiker bestaat niet';
+        }
+        /*
+         *
+         */
+        DB::table('users')
+            ->where('users.username', '=', $sUserName) //r-nummer
+            ->delete();
+        return redirect("user/" . $oUser->username . "/trip/travellers");
+    }
+
+    public function messages()
+    {
+        return [
+            'LastName.required'     => 'U heeft geen achternaam ingevuld.',
+            'FirstName.required'    => 'U heeft geen voornaam ingevuld.',
+            'Username.required'     => 'U heeft geen R-nummer ingevuld.',
+            'IBAN.required'         => 'U heeft geen IBAN-nummer ingevuld.',
+
+            'BirthDate.required'    => 'U heeft geen geboortedatum ingevuld. (d/m/y)',
+            'BirthDate.date_format' => 'De waarde die u heeft ingevuld bij geboortedatum is ongeldig. (d/m/y)',
+            'Birthplace.required'   => 'U heeft geen geboorteplaats ingevuld.',
+            'Nationality.required'  => 'U heeft geen nationaliteit ingevuld.',
+            'Address.required'      => 'U heeft geen adres ingevuld.',
+            'Country.required'      => 'U heeft geen land ingevuld.',
+
+            'Email.required'        => 'U heeft geen e-mailadres ingevuld.',
+            'Email.email'           => 'Het ingevulde e-mailadres is niet geldig.',
+            'Email.unique'          => 'Het ingevulde e-mailadres is al in gebruik.',
+            'Phone.required'        => 'U heeft geen GSM-nummer ingevuld.',
+            'icePhone1.required'    => 'U heeft bij \'noodnummer 1\' niets ingevuld.'
+        ];
     }
 }
