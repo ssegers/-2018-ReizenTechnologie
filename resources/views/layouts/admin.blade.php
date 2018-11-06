@@ -24,7 +24,7 @@
 <nav class="navbar navbar-default border-bottom border-secondary">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="#" style="margin-left:-15px;">
                 <img alt="UCLL" src="{{asset('images/ucll.png') }}"/>
             </a>
         </div>
