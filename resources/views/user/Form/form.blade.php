@@ -1,6 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
+    <style>
+        /*.tab {*/
+            /*display: block;*/
+            /*width: 100%;*/
+        /*}*/
+        /*.tab label {*/
+            /*width: 35%;*/
+        /*}*/
+    </style>
     {{ Form::open(array('action' => 'RegisterController@formPost', 'method' => 'post', 'id' => 'registerForm')) }}
         <h1 class="formTitel">Inschrijvings formulier</h1>
         <h2 id="jsAlert" >Om deze formulier te kunnen gebruiken moet uw javascript aanstaan.</h2>

@@ -11,6 +11,8 @@ use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Session;
+
 class RegisterController extends Controller
 {
     /**
@@ -56,10 +58,12 @@ class RegisterController extends Controller
         $aData["txtMedischDetail"] = $aRequest->post('txtMedisch');
 
         $this->SaveData($aData);
-        echo Traveller::all();
-        echo User::all();
 
-        //return redirect('welcome');
+//        echo Traveller::all();
+//        echo User::all();
+        $aRequest->session()->flash('info', 'Om uw registratie te voltooien moet u inliggen met de gegevens die via email zijn verzonden');
+
+        return redirect('info')->with('info', 'Om uw registratie te voltooien moet u inliggen met de gegevens die via email zijn verzonden');
     }
 
     public function form(){
@@ -122,7 +126,6 @@ class RegisterController extends Controller
             ]
         );
         $this->sendMail($aData['txtEmail'],$aData['txtNaam'],$password);
-//        return redirect('info');
     }
 
     function randomPassword() {
@@ -137,14 +140,14 @@ class RegisterController extends Controller
     }
 
     public function sendMail($email, $name, $password) {
-//        $aMailData = [
-//            'subject' => 'Your registration for the UCLL trip.',
-//            'username' => $name,
-//            'email' => $email,
-//            'description' => "berichtje",
-//            'password' => $password
-//        ];
-//        Mail::to(config('mail.username'))->send(new RegisterComplete($aMailData));
+        $aMailData = [
+            'subject' => 'Your registration for the UCLL trip.',
+            'username' => $name,
+            'email' => $email,
+            'description' => "berichtje",
+            'password' => $password
+        ];
+        Mail::to(config('mail.username'))->send(new RegisterComplete($aMailData));
     }
 
     /*----------------------------------------------------------------------------------------------------------------------*/

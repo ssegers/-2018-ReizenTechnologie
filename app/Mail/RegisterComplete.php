@@ -38,7 +38,7 @@ class RegisterComplete extends Mailable
                 'subject' => $this->aMailData['subject'],
                 'description' => $this->aMailData['description'],
                 'email' => $this->aMailData['email'],
-                'name' => $this->aMailData['name'],
+                'name' => $this->aMailData['username'],
                 'password' => $this->aMailData['password'],
             ]);
     }

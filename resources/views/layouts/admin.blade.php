@@ -21,7 +21,7 @@
 
 <body>
 
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-default border-bottom border-secondary">
     <div class="container-fluid">
         <div class="navbar-header">
             <a class="navbar-brand" href="#">
@@ -32,16 +32,14 @@
 </nav>
 
 <div class="row">
+    <div class="col side-nav" class="list-group">
 
-    <div class="col side-nav">
-
-        <button type="submit" disabled name="button-admin" value="button-filter" >Dashboard</button>
-        <ul class="">
-
-            <li class=""><a href="{{route('adminInfo')}}"><label for="info">Info</label></a></li>
-            <li class=""><a href="{{route('adminDefUser')}}"><label for="defuser">Standaard Gebruiker</label></a></li>
-            <li class=""><a href="{{route('adminTrips')}}"><label for="trips">Actieve reizen</label></a></li>
-            <li class=""><a href="{{route('adminLinkorganisator')}}"><label for="linkorganisator">Koppel organisator aan actieve reis</label></a></li>
+        <button type="submit" disabled name="button-admin"  value="button-filter" >Dashboard</button>
+        <ul>
+            <a href="{{route('adminInfo')}}"  class="list-group-item" style="height: 55px; color:black; padding: 0px;" onmouseover="this.style.backgroundColor='#E00049';" onmouseout="this.style.backgroundColor='';"><li>Info</li></a>
+            <a href="{{route('adminDefUser')}}"  class="list-group-item" style="height: 55px; color:black; padding: 0px;" onmouseover="this.style.backgroundColor='#E00049';" onmouseout="this.style.backgroundColor='';"><li>Standaard Gebruiker</li></a>
+            <a href="{{route('adminTrips')}}"  class="list-group-item" style="height: 55px; color:black; padding: 0px;" onmouseover="this.style.backgroundColor='#E00049';" onmouseout="this.style.backgroundColor='';"><li>Actieve reizen</li></a>
+            <a href="{{route('adminLinkorganisator')}}"  class="list-group-item" style="height: 55px; color:black; padding: 0px;" onmouseover="this.style.backgroundColor='#E00049';" onmouseout="this.style.backgroundColor='';"><li>Organisator Koppelen</li></a>
             <br />
         </ul>
 
@@ -56,4 +54,5 @@
 </div>
 
 </body>
+
 </html>
