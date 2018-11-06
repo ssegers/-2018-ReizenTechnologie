@@ -26,47 +26,9 @@
             <div class="col"></div>
         </div>
     </div>
-    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <script src="{{ asset('js/jquery-3.3.1.js') }}"></script>
-
-    <script>
-        $(document).ready(function() {
-            console.log('test');
-            $('select[name="ReisKiezen"]').on('change', function(){
-                var tripId = $(this).val();
-                console.log(tripId);
-                if(tripId) {
-                    jQuery.ajax({
-                        url: '/admin/get/organisators/'+tripId,
-                        type:"GET",
-                        dataType:"json",
-                        beforeSend: function(){
-                            $('#loader').css("visibility", "visible");
-                        },
-
-                        success:function(data) {
-
-                            $('select[name="OrganisatorKiezen"]').empty();
-
-                            $.each(data, function(fistname,lastname, id){
-
-                                $('select[name="OrganisatorKiezen"]').append('<option value="'+ fistname+' '+lastname +'">' + id + '</option>');
-
-                            });
-                        },
-                        complete: function(){
-                            $('#loader').css("visibility", "hidden");
-                        }
-                    });
-                } else {
-                    $('select[name="OrganisatorKiezen"]').empty();
-                }
-
-            });
-
-        });
-    </script>
+    <script src="{{ URL::asset('/js/jquery-3.3.1.min.js') }}"></script>
+    <script src="{{ URL::asset('/js/dropswitch.js') }}"></script>
 
 
 @endsection
