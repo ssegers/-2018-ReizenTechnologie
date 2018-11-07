@@ -10,14 +10,16 @@
                 </ul>
             </div>
         @endif
+        <h3 class="font-weight-bold color-dark-blue m-1"><span>{{$aUserData["username"]}}</span></h3>
         {{ Form::open(array('url' => "/userinfo/".$aUserData["username"]."/update", 'method' => 'post')) }}
-            <div class="row padding-10">
+            <div class="row padding-10 pt-0">
                 <div class="col color-dark-blue">
                     <h4><u>Algemeen</u></h4>
                     <label class="col-4 font-weight-bold" for="LastName">Naam:              </label>    <input id="LastName"     name="LastName"     class="col-6" type="text" value={{$aUserData["last_name"]}}>   <br/>
                     <label class="col-4 font-weight-bold" for="FirstName">Voornaam:         </label>    <input id="FirstName"    name="FirstName"    class="col-6" type="text" value={{$aUserData["first_name"]}}>  <br/>
-                    <label class="col-4 font-weight-bold" for="Username">R-Nummer:          </label>    <input id="Username"     name="Username"     class="col-6" type="text" value={{$aUserData["username"]}}>    <br/>
                     <label class="col-4 font-weight-bold" for="Gender">Geslacht:            </label>    <input                   name="Gender"       class="" type="radio" value="man" @if($aUserData["gender"] == "man") checked @endif>Man <input name="Gender" class="" type="radio" value="vrouw" @if($aUserData["gender"] == "vrouw") checked @endif>Vrouw <br/>
+                    <label class="col-4 font-weight-bold" for="">Geslacht:            </label>
+                    <label class="col-4 font-weight-bold" for="Gender">Geslacht:            </label>
                     <label class="col-4 font-weight-bold" for="Trip">Reis:                  </label>    <select id="Trip"        name="Trip"         class="col-6">
                         @foreach($oTrips as $oTrip)
                             <option value="{{ $oTrip->trip_id}}" @if($oTrip->trip_id == $aUserData["trip_id"]) selected @endif>    {{ $oTrip->name}}   </option>
@@ -43,7 +45,7 @@
                     </select>                                              <br/>
                     <label class="col-4 font-weight-bold" for="Country">Land:               </label>    <input id="Country"      name="Country"      class="col-6" type="text" value={{$aUserData['country']}}>     <br/>
                     <h4><u>Contact Info</u></h4>
-                    <label class="col-4 font-weight-bold" for="Email">Email:                </label>    <input id="Email"        name="Email"        class="col-6" type="text" value={{$aUserData['email']}}>       <br/>
+                    <label class="col-4 font-weight-bold" for="Email">Email:                </label>    <span class="col-4">{{$aUserData['email']}}</span><br/>
                     <label class="col-4 font-weight-bold" for="Phone">Telefoon:             </label>    <input id="Phone"        name="Phone"        class="col-6" type="text" value={{$aUserData['phone']}}>       <br/>
                     <label class="col-4 font-weight-bold" for="icePhone1">Noodnummer 1:     </label>    <input id="icePhone1"    name="icePhone1"    class="col-6" type="text" value={{$aUserData['emergency_phone_1']}}><br/>
                     <label class="col-4 font-weight-bold" for="icePhone2">Noodnummer 2:     </label>    <input id="icePhone2"    name="icePhone2"    class="col-6" type="text" value={{$aUserData['emergency_phone_2']}}>

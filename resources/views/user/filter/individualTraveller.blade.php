@@ -1,13 +1,14 @@
 @extends("layouts.app")
 @section('content')
     <div class="container border rounded margin-top-50 background-white">
+        <h3 class="font-weight-bold color-dark-blue m-1"><span>{{$aUserData["username"]}}</span></h3>
         <form>
-            <div class="row padding-10">
+            <div class="row padding-10 pt-0">
                 <div class="col color-dark-blue">
                     <h4><u>Algemeen</u></h4>
                     <label class="col-4 font-weight-bold" for="name">Naam:          </label>    <span class="col-4">{{$aUserData['last_name']}} </span><br/>
                     <label class="col-4 font-weight-bold" for="name">Voornaam:      </label>    <span class="col-4">{{$aUserData["first_name"]}}</span><br/>
-                    <label class="col-4 font-weight-bold" for="name">R-Nummer:      </label>    <span class="col-4">{{$aUserData["username"]}}</span><br/>
+
                     <label class="col-4 font-weight-bold" for="name">Geslacht:      </label>    <span class="col-4">{{$aUserData['gender']}}</span><br/>
                     <label class="col-4 font-weight-bold" for="name">Reis:          </label>    <span class="col-4">{{$aUserData['name']}}</span><br/>
 
