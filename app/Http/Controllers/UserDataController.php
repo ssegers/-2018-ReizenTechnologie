@@ -6,6 +6,7 @@ use App\Traveller;
 use App\Trip;
 use App\User;
 use App\Zip;
+use Dotenv\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -254,6 +255,8 @@ class UserDataController extends Controller
             ->join('travellers', 'users.user_id', '=', 'travellers.user_id')
             ->join('zips', 'travellers.zip_id', '=', 'zips.zip_id')
             ->join('trips', 'travellers.trip_id', '=', 'trips.trip_id')
+            ->join('majors', 'travellers.major_id', '=', 'majors.major_id')
+            ->join('studies', 'majors.study_id', '=', 'studies.study_id')
             ->where('users.username', '=', $sUserName) //r-nummer
             ->first();
         //var_dump($aUserData);
@@ -279,6 +282,8 @@ class UserDataController extends Controller
      */
     public function updateUserData(Request $aRequest, $sUserName)
     {
+        $oTraveller = Traveller::select()->join('users', 'travellers.user_id', '=', 'users.user_id')->where('users.username', '=', $sUserName);
+
         $aRequest->validate([
             'LastName'      => 'required',
             'FirstName'     => 'required',
@@ -290,7 +295,8 @@ class UserDataController extends Controller
             'Nationality'   => 'required',
             'Address'       => 'required',
             'Country'       => 'required',
-            'Email'         => [ 'required', 'string', 'email', 'max:255' /*, 'unique:users,email' */],
+            'Email'         => ['required', 'string', 'email', 'max:255'],
+
             'Phone'         => 'required',
             'icePhone1'     => 'required'
         ],$this->messages());
@@ -364,7 +370,7 @@ class UserDataController extends Controller
             'IBAN.required'         => 'U heeft geen IBAN-nummer ingevuld.',
 
             'BirthDate.required'    => 'U heeft geen geboortedatum ingevuld. (d/m/y)',
-            'BirthDate.date_format' => 'De waarde die u heeft ingevuld bij geboortedatum is ongeldig. (d/m/y)',
+            'BirthDate.date_format' => 'De waarde die u heeft ingevuld bij geboortedatum is ongeldig. (d/m/Y)',
             'Birthplace.required'   => 'U heeft geen geboorteplaats ingevuld.',
             'Nationality.required'  => 'U heeft geen nationaliteit ingevuld.',
             'Address.required'      => 'U heeft geen adres ingevuld.',
