@@ -45,6 +45,7 @@ Route::get('admin/organisator', 'KiesOrganisatorController@ShowForm');
 Route::post('admin/organisator', 'KiesOrganisatorController@ShowForm');
 Route::get('admin/get/organisators/{id}', 'KiesOrganisatorController@getOrganisators');
 
+Route::get('admin/studies', 'AdminStudyController@index')->name('studies');
 
 Route::get('/info','AdminInfoController@showInfo')->name('info');
 
