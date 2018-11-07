@@ -282,7 +282,6 @@ class UserDataController extends Controller
      */
     public function updateUserData(Request $aRequest, $sUserName)
     {
-        $oTraveller = Traveller::select()->join('users', 'travellers.user_id', '=', 'users.user_id')->where('users.username', '=', $sUserName);
 
         $aRequest->validate([
             'LastName'      => 'required',

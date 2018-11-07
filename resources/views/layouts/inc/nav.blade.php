@@ -9,6 +9,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item"><a class="nav-link" href="{{ route('info') }}">Info</a></li>
+            <li class="nav-item"><a class="nav-link" href="/user/u0598673/trip/travellers">Filter Segers</a></li>
         </ul>
         <ul class="navbar-nav">
             @if(\Illuminate\Support\Facades\Auth::check())
