@@ -47,6 +47,9 @@ Route::get('admin/get/organisators/{id}', 'KiesOrganisatorController@getOrganisa
 
 Route::get('admin/studies', 'AdminStudyController@index')->name('studies');
 
+Route::get('/admin/pdf', 'AdminPdfController@index')->name('adminPdf');
+Route::post('/admin/pdf', 'AdminPdfController@updateContent');
+
 Route::get('/info','AdminInfoController@showInfo')->name('info');
 
 /* Individual Traveller */
