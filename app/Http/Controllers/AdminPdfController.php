@@ -26,4 +26,10 @@ class AdminPdfController extends Controller
 
         return redirect()->back()->with('message', 'De PDF is opgeslagen');
     }
+    function showPdf($page_name){
+        $aPdfPages= Page::where('type', 'pdf')->where('name',$page_name)->first();
+        return view('guest.pdfpage', array(
+            'aPdfPages' => $aPdfPages,
+        ));
+    }
 }
