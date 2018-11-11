@@ -11,16 +11,8 @@ class AdminTripController extends Controller
     //GET::/admin/trips
     function getTrips()
     {
-        $aTrips = DB::table('trips')->get();
+        $aTrips = DB::table('trips')->orderBy('year')->get();
         return view('admin.trips.trips', ['aTripData' => $aTrips]);
-
-    }
-
-    //GET::/admin/trips/{id}
-    function getTripByID($id)
-    {
-        $oTrip = DB::table('trips')->where('trip_id', '=', $id)->first();
-        return view('admin.trips.singleTrip', ['oTrip' =>$oTrip]); //moet naar een popup gaan, view target is niet juist
     }
 
     private function CreateTrip(Request $request)
@@ -69,10 +61,5 @@ class AdminTripController extends Controller
         }
         return redirect('/admin/trips');
     }
-
-
-
-
-
 
 }
