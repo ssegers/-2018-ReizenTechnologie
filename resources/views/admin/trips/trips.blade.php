@@ -47,6 +47,7 @@
                         <th scope="col">Jaar</th>
                         <th scope="col">Inscrijvingen actief</th>
                         <th scope="col">Bewerken</th>
+                        
                     </tr>
                 </thead>
 
