@@ -11,7 +11,7 @@ class ContactOrganizerController extends Controller
     function getInfo(){
         $oTrips = Trip::all();
         $oOrganizers = User::Where('role', 'organizer')
-            ->join('travellers','travellers.user_id','=','users.user_id')->select('first_name', 'last_name', 'traveller_id','email')->get();
+            ->join('travellers','travellers.user_id','=','users.user_id')->select('first_name', 'last_name', 'traveller_id','contact_mail')->get();
 
         return view( 'admin.contact.contact',
             [

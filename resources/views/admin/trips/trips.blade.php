@@ -46,6 +46,7 @@
                         <th scope="col">Naam</th>
                         <th scope="col">Jaar</th>
                         <th scope="col">Inscrijvingen actief</th>
+                        <th scope="col">Mail contactpersoon</th>
                         <th scope="col">Bewerken</th>
                         
                     </tr>
@@ -61,6 +62,7 @@
                         @else
                             <td >Non-actief</td>
                         @endif
+                        <td >{{$oTrip->contact_mail}}</td>
                         <td ><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tripModal" data-trip-id="{{$oTrip->trip_id}}" data-trip-name="{{$oTrip->name}}" data-trip-year="{{$oTrip->year}}" data-trip-active="{{$oTrip->is_active}}">Edit</button>
                             <!--<form method="get" action="/admin/trips/$oTrip->trip_id"><button type="submit" >Edit</button></form></td>-->
                     </tr>
