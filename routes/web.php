@@ -36,8 +36,6 @@ route::post('admin/user/default', 'AdminUserController@createUser');
 Route::get('admin/info', 'AdminInfoController@getInfo')->name('adminInfo');
 Route::post('admin/info', 'AdminInfoController@updateInfo');
 
-Route::get('admin/contact', 'ContactOrganizerController@getInfo')->name('adminInfo');
-Route::post('admin/contact', 'ContactOrganizerController@updateInfo');
 
 Route::post('admin/trips', 'AdminTripController@UpdateOrCreateTrip');
 
