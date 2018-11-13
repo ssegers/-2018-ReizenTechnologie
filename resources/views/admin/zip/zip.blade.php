@@ -15,8 +15,11 @@
     <h1 class="my-5 text-center">Voeg hier een nieuwe postcode toe:</h1>
     {{Form::open(array('action' => 'AdminZipController@createZip', 'method' => 'post' ))}}
     <div class="form-group">
-        {{Form::label('zip', 'Postcode: ', ['class' => ''])}}
-        {{ Form::text('zip', null, array("class" => "form-control", "required")) }}
+        {{Form::label('zip_code', 'Postcode: ', ['class' => ''])}}
+        {{ Form::number('zip_code', null, array("class" => "form-control", "required")) }}
+        <br/>
+        {{Form::label('city', 'Stad of Gemeente: ', ['class' => ''])}}
+        {{ Form::text('city', null, array("class" => "form-control", "required")) }}
     </div>
     <div class="actions float-right">
         {{Form::submit('Postcode Toevoegen', ['class' =>'btn btn-primary mr-5 p-3' ])}}
