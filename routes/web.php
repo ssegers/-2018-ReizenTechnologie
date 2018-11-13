@@ -54,6 +54,9 @@ Route::get('/info','AdminInfoController@showInfo')->name('info');
 
 Route::get('/pdf/{page_name}','AdminPdfController@showPdf');
 
+Route::get('admin/zip','AdminZipController@createForm')->name('adminZip');
+Route::post('admin/zip','AdminZipController@createZip');
+
 /* Individual Traveller */
 Route::get('userinfo/{sUserName}', 'UserDataController@showUserData');              //show
 Route::get('userinfo/{sUserName}/edit', 'UserDataController@showUserData');         //show editable

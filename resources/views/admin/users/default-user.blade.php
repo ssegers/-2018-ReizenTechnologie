@@ -22,6 +22,8 @@
     <div class="form-group">
         {{Form::label('password', 'Paswoord: ')}}
         {{Form::password('password', ['required', "class" => "form-control"])}}<br />
+        {{Form::label('password', 'Paswoord Bevestigen: ')}}
+        {{Form::password('password', ['required', "class" => "form-control"])}}<br />
         <div class="actions float-right">
             {{Form::submit('Account Aanpassen', ['class' =>'btn btn-primary mr-5 p-3' ])}}
             <input type="button" class="btn btn-danger p-3" onclick="history.go(0)" value="Annuleren"/>
