@@ -23,6 +23,10 @@
                             <input type="checkbox" class="checkbox-lg m-3" name="trip-is-active" value="1" id="trip-is-active"/>
                             {{--{{Form::checkbox('trip-is-active','1' )}}--}}
                         </div>
+                        <div class="form-group">
+                            {{Form::label('trip-mail','Mail contactpersoon:')}}
+                            {{Form::text('trip-mail', null, array('class' => 'form-control'))}}
+                        </div>
                             {{ Form::hidden('trip-id','trip-id',array('id'=>'trip-id')) }}
                     </div>
                     <div class="modal-footer">
@@ -77,6 +81,7 @@
         var tripName = button.data('trip-name');
         var tripYear = button.data('trip-year');
         var tripActive = button.data('trip-active');
+        var tripMail = button.data('trip-mail');
         console.log(tripActive);
         var tripId = button.data('trip-id');
         // Extract info from data-* attributes
@@ -88,6 +93,7 @@
         modal.find('.modal-body #trip-year').val(tripYear);
         modal.find('.modal-body #trip-active').val(tripActive);
         modal.find('.modal-body #trip-id').val(tripId);
+        modal.find('.modal-body #trip-mail').val(tripMail);
 
         var active = $('#trip-is-active');
         if (tripActive == 1) {
