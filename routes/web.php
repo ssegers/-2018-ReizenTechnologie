@@ -36,6 +36,7 @@ route::post('admin/user/default', 'AdminUserController@createUser');
 Route::get('admin/info', 'AdminInfoController@getInfo')->name('adminInfo');
 Route::post('admin/info', 'AdminInfoController@updateInfo');
 
+
 Route::post('admin/trips', 'AdminTripController@UpdateOrCreateTrip');
 
 Route::get('admin/trips', 'AdminTripController@getTrips')->name('adminTrips');
@@ -47,10 +48,19 @@ Route::get('admin/get/organisators/{id}', 'KiesOrganisatorController@getOrganisa
 
 Route::get('admin/studies', 'AdminStudyController@index')->name('studies');
 
+Route::get('/admin/pdf', 'AdminPdfController@index')->name('adminPdf');
+Route::post('/admin/pdf', 'AdminPdfController@updateContent');
+
 Route::get('/info','AdminInfoController@showInfo')->name('info');
+
+Route::get('/pdf/{page_name}','AdminPdfController@showPdf');
+
+Route::get('admin/zip','AdminZipController@createForm')->name('adminZip');
+Route::post('admin/zip','AdminZipController@createZip');
+
 /* Individual Traveller */
 Route::get('userinfo/{sUserName}', 'UserDataController@showUserData');              //show
-Route::get('userinfo/{sUserName}/edit', 'UserDataController@showUserData');         //edit
+Route::get('userinfo/{sUserName}/edit', 'UserDataController@showUserData');         //show editable
 Route::post('userinfo/{sUserName}/update', 'UserDataController@updateUserData');    //update
 Route::get('userinfo/{sUserName}/delete', 'UserDataController@deleteUserData');     //delete
 

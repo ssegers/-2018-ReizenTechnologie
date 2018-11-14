@@ -282,12 +282,10 @@ class UserDataController extends Controller
      */
     public function updateUserData(Request $aRequest, $sUserName)
     {
-        $oTraveller = Traveller::select()->join('users', 'travellers.user_id', '=', 'users.user_id')->where('users.username', '=', $sUserName);
 
         $aRequest->validate([
             'LastName'      => 'required',
             'FirstName'     => 'required',
-            'Username'      => 'required',
             'IBAN'          => 'required',
 
             'BirthDate'     => 'required|date_format:d/m/Y',
@@ -295,7 +293,6 @@ class UserDataController extends Controller
             'Nationality'   => 'required',
             'Address'       => 'required',
             'Country'       => 'required',
-            'Email'         => ['required', 'string', 'email', 'max:255'],
 
             'Phone'         => 'required',
             'icePhone1'     => 'required'
@@ -308,7 +305,6 @@ class UserDataController extends Controller
                 [
                     'last_name'         => $aRequest->post('LastName'),
                     'first_name'        => $aRequest->post('FirstName'),
-                    'username'          => $aRequest->post('Username'),
                     'gender'            => $aRequest->post('Gender'),
                     'trip_id'           => $aRequest->post('Trip'),
                     'iban'              => $aRequest->post('IBAN'),
@@ -321,7 +317,6 @@ class UserDataController extends Controller
                     'address'           => $aRequest->post('Address'),
                     'zip_id'            => $aRequest->post('City'),
                     'country'           => $aRequest->post('Country'),
-                    'email'             => $aRequest->post('Email'),
                     'phone'             => $aRequest->post('Phone'),
                     'emergency_phone_1' => $aRequest->post('icePhone1'),
                     'emergency_phone_2' => $aRequest->post('icePhone2'),
@@ -361,12 +356,16 @@ class UserDataController extends Controller
         return redirect("user/" . $oUser->username . "/trip/travellers");
     }
 
+    /**
+     * @author Joren Meynen
+     *
+     * @return array
+     */
     public function messages()
     {
         return [
             'LastName.required'     => 'U heeft geen achternaam ingevuld.',
             'FirstName.required'    => 'U heeft geen voornaam ingevuld.',
-            'Username.required'     => 'U heeft geen R-nummer ingevuld.',
             'IBAN.required'         => 'U heeft geen IBAN-nummer ingevuld.',
 
             'BirthDate.required'    => 'U heeft geen geboortedatum ingevuld. (d/m/y)',
@@ -376,9 +375,6 @@ class UserDataController extends Controller
             'Address.required'      => 'U heeft geen adres ingevuld.',
             'Country.required'      => 'U heeft geen land ingevuld.',
 
-            'Email.required'        => 'U heeft geen e-mailadres ingevuld.',
-            'Email.email'           => 'Het ingevulde e-mailadres is niet geldig.',
-            'Email.unique'          => 'Het ingevulde e-mailadres is al in gebruik.',
             'Phone.required'        => 'U heeft geen GSM-nummer ingevuld.',
             'icePhone1.required'    => 'U heeft bij \'noodnummer 1\' niets ingevuld.'
         ];
