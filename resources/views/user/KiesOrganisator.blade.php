@@ -7,20 +7,15 @@
             <div class="col"></div>
             <div class="col">
                 <br>
-                <label>Kies uw reis: </label>
-                <select name="ReisKiezen" class="select">
-                    <?php
-                    $aAllTrips = \App\Trip::all()->where('is_active','<>','true');
-                    echo $aAllTrips;
-                    foreach ($aAllTrips as $oTrip){
-                    ?>
-                    <option value="<?php echo $oTrip->trip_id ?>"><?php echo $oTrip->name ?></option>
-                <?php } ?>
-                    </select>
-                <br>
-                <label>Kies uw organisator: </label>
-                <select name="OrganisatorKiezen" class="select">
-                </select>
+                <div class="form-group">
+                    {!! Form::label('reis', 'Kies reis:')!!}
+                    {!! Form::select('reis', $categories, null, ['placeholder' => 'Reizen'])!!}
+                </div>
+
+                <div class="form-group">
+                    {!! Form::label('begeleider', 'Kies begeleider:')!!}
+                    {!! Form::select('begeleider', [], null, ['placeholder' => 'Begeleiders'])!!}
+                </div>
 
             </div>
             <div class="col"></div>
@@ -28,7 +23,20 @@
     </div>
 
     <script src="{{ URL::asset('/js/jquery-3.3.1.min.js') }}"></script>
-    <script src="{{ URL::asset('/js/dropswitch.js') }}"></script>
+    <script>
+        $('#parent').change(function(e) {
+            var parent = e.target.value;
+            $.get('/categories/children?parent=' + parent, function(data) {
+                $('#children').empty();
+                $.each(data, function(key, value) {
+                    var option = $("<option></option>")
+                        .attr("value", key)
+                        .text(value);
 
+                    $('#children').append(option);
+                });
+            });
+        });
+    </script>
 
 @endsection
