@@ -7,7 +7,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class RegisterComplete extends Mailable
+class ContactMail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -16,8 +16,6 @@ class RegisterComplete extends Mailable
      *
      * @return void
      */
-    public $aMailData;
-
     public function __construct($aMailData)
     {
         $this->aMailData = $aMailData;
@@ -38,8 +36,6 @@ class RegisterComplete extends Mailable
                 'subject' => $this->aMailData['subject'],
                 'description' => $this->aMailData['description'],
                 'email' => $this->aMailData['email'],
-                'name' => $this->aMailData['username'],
-                'password' => $this->aMailData['password'],
             ]);
     }
 }
