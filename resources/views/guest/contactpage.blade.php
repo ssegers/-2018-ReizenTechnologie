@@ -9,20 +9,21 @@
 @section('content')
     <div>
         <h1>Contactpagina:</h1>
+        <br>
         {{ Form::open(array('url' => 'user/contact', 'method' =>'post')) }}
 
         <?php use App\Trip;?>
         <?php $oActiveTrips = Trip::where('is_active',true)->where('contact_mail', '!=' , null)->pluck('name','trip_id')?>
 
-
-        {!! Form::select('reis', $oActiveTrips, null) !!}
+        <label for="reis">Reis: </label><br>
+        {!! Form::select('reis', $oActiveTrips, null,array("class" => "form-control")) !!}
 
             <br>
             <label for="onderwerp">Onderwerp :</label><br>
-            {{Form::text('onderwerp')}}
+            {{Form::text('onderwerp','',array("class" => "form-control", "required" ))}}
             <label for="bericht">Bericht: </label><br>
-            {{ Form::textarea('bericht') }}
-            {{ Form::submit('Click Me!') }}
+            {{ Form::textarea('bericht','',array("class" => "form-control", "required" )) }}<br>
+            {{ Form::submit('Verzend',array("class" => "btn")) }}
         {{ Form::close() }}
     </div>
 @endsection
