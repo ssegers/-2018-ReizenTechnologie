@@ -19,7 +19,12 @@ class DatabaseSeeder extends Seeder
             StudiesTableSeeder::class,
             MajorsTableSeeder::class,
             PagesTableSeeder::class,
-            TripOrganizerSeeder::class
+            TripOrganizerSeeder::class,
+            HotelsSeeder::class,
+            RoomsSeeder::class,
+            HotelsPerTripSeeder::class,
+            RoomsPerHotelPerTripSeeder::class,
+            TravellersPerRoomSeeder::class,
         ]);
     }
 }
