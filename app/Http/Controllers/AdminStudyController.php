@@ -10,7 +10,6 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class AdminStudyController extends Controller {
-
     /**
      * This function returns a view with all data from majors and studies
      *
@@ -21,10 +20,12 @@ class AdminStudyController extends Controller {
     public function index() {
 //        $aMajors = Major::get();
         $aStudies = Study::get();
+        $iStudyCount = Study::get()->count();
 
         return view('admin.studies.studies', array(
 //            'aMajors' => $aMajors,
             'aStudies' => $aStudies,
+            'iStudyCount' => $iStudyCount,
         ));
     }
 
@@ -80,7 +81,7 @@ class AdminStudyController extends Controller {
      * @author Yoeri op' Roodt
      *
      * @param Request $request
-     * 
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function saveMajor(Request $request) {
