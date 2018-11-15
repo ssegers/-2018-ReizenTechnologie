@@ -30,6 +30,7 @@ use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithMappedCells;
 use Maatwebsite\Excel\Concerns\WithProgressBar;
+use Maatwebsite\Excel\Concerns\WithChunkReading;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use Maatwebsite\Excel\Imports\HeadingRowExtractor;
 use Maatwebsite\Excel\Concerns\WithCustomChunkSize;
@@ -203,17 +204,17 @@ class Sheet
 
         $this->raise(new BeforeSheet($this, $this->exportable));
 
-        if ($import instanceof WithProgressBar) {
+        if ($import instanceof WithProgressBar && !$import instanceof WithChunkReading) {
             $import->getConsoleOutput()->progressStart($this->worksheet->getHighestRow());
         }
 
         $calculatesFormulas = $import instanceof WithCalculatedFormulas;
 
         if ($import instanceof WithMappedCells) {
-            resolve(MappedReader::class)->map($import, $this->worksheet);
+            app(MappedReader::class)->map($import, $this->worksheet);
         } else {
             if ($import instanceof ToModel) {
-                resolve(ModelImporter::class)->import($this->worksheet, $import, $startRow);
+                app(ModelImporter::class)->import($this->worksheet, $import, $startRow);
             }
 
             if ($import instanceof ToCollection) {
@@ -238,7 +239,7 @@ class Sheet
 
         $this->raise(new AfterSheet($this, $this->exportable));
 
-        if ($import instanceof WithProgressBar) {
+        if ($import instanceof WithProgressBar && !$import instanceof WithChunkReading) {
             $import->getConsoleOutput()->progressFinish();
         }
     }

@@ -11,13 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 /* Show users per trip as an organizer */
-Route::get('user/{sUserName}/trip/travellers', 'UserDataController@showUsersAsMentor');
-Route::post('user/{sUserName}/trip/travellers', 'UserDataController@showUsersAsMentor');
+Route::get('user/{sUserName}/trip/travellers', 'UserDataController@showUsersAsMentor'); // Manual organizer
+Route::post('user/{sUserName}/trip/travellers', 'UserDataController@showUsersAsMentor'); // Manual organize
 //Route::get('user/trip/travellers', 'UserDataController@showUsersAsMentor');
 //Route::post('user/trip/travellers', 'UserDataController@showUsersAsMentor');
 
@@ -54,6 +50,9 @@ Route::post('/admin/pdf', 'AdminPdfController@updateContent');
 Route::get('/info','AdminInfoController@showInfo')->name('info');
 
 Route::get('/pdf/{page_name}','AdminPdfController@showPdf');
+
+Route::get('admin/zip','AdminZipController@createForm')->name('adminZip');
+Route::post('admin/zip','AdminZipController@createZip');
 
 /* Individual Traveller */
 Route::get('userinfo/{sUserName}', 'UserDataController@showUserData');              //show
