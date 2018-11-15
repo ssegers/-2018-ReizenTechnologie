@@ -22,13 +22,11 @@ class ContactPageController extends Controller
 
     }
 
-    public function sendMailTo($email, $name, $password) {
+    public function sendMailTo($email,$subject, $bericht) {
         $aMailData = [
-            'subject' => 'Your registration for the UCLL trip.',
-            'username' => $name,
+            'subject' => $subject,
             'email' => $email,
-            'description' => "berichtje",
-            'password' => $password
+            'description' => $bericht,
         ];
         Mail::to($email)->send(new RegisterComplete($aMailData));
     }
