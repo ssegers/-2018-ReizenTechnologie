@@ -62,6 +62,7 @@ Route::post('admin/zip','AdminZipController@createZip');
 
 Route::get('admin/study', 'AdminStudyController@index')->name('adminStudy');
 Route::post('admin/study/getStudies', 'AdminStudyController@getStudies');
+Route::post('admin/study/getMajors', 'AdminStudyController@getMajorsByStudy');
 
 /* Individual Traveller */
 Route::get('userinfo/{sUserName}', 'UserDataController@showUserData');              //show

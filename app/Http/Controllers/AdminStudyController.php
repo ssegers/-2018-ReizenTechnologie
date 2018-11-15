@@ -46,11 +46,11 @@ class AdminStudyController extends Controller {
      * @return mixed
      */
     public function getMajorsByStudy(Request $request) {
-        $iStudyId = $request->post('study-id', 1);
+        $iStudyId = $request->post('study_id', 1);
         $aMajors = Major::where('study_id', $iStudyId)->get();
 
         return response()->json([
-            'aStudies' => $aMajors,
+            'aMajors' => $aMajors,
         ]);
     }
 

@@ -19,10 +19,11 @@
             var majorList = $('#majorList');
 
             var studies = [];
+            var majors = [];
 
             studySelect.change(function () {
                 var selectValue = studySelect.val();
-                alert(selectValue);
+                loadMajors(selectValue);
             });
 
             loadStudies();
@@ -60,7 +61,33 @@
             }
 
             function loadMajors(studyId) {
+                console.log('loadMajors()');
 
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    type: "POST",
+                    url: "study/getMajors",
+                    data: {
+                        study_id: studyId,
+                    },
+                }).done(function (result) {
+                    if (result) {
+                        majors = result['aMajors'];
+
+                        updateMajors();
+                    }
+                });
+
+                function updateMajors() {
+                    majorList.empty();
+
+                    for (var major of majors) {
+                        majorList.append($('<li>')
+                            .text(major.major_name));
+                    }
+                }
             }
         });
     </script>
