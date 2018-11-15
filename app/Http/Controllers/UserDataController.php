@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Major;
+use App\Study;
 use App\Traveller;
 use App\Trip;
 use App\User;
@@ -264,9 +266,11 @@ class UserDataController extends Controller
         if(str_contains($request->path(), 'edit')){
             $oTrips = Trip::select()->where('is_active', '=', true)->get();
             $oZips = Zip::all();
+            $oMajors = Major::all();
+            $oStudies = Study::all();
             //var_dump(json_decode(json_encode($oZips), true));
             //var_dump(json_decode(json_encode($oTrips), true));
-            return view('user.filter.individualTravellerEdit', ['aUserData' => $aUserData, 'oTrips' => $oTrips, 'oZips' => $oZips]);
+            return view('user.filter.individualTravellerEdit', ['aUserData' => $aUserData, 'oTrips' => $oTrips, 'oZips' => $oZips, 'oStudies' => $oStudies, 'oMajors' => $oMajors]);
         }
         return view('user.filter.individualTraveller', ['aUserData' => $aUserData, 'sName' => $oUser->username]);
     }

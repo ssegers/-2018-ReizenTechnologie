@@ -6,11 +6,12 @@
             <div class="row padding-10 pt-0">
                 <div class="col color-dark-blue">
                     <h4><u>Algemeen</u></h4>
-                    <label class="col-4 font-weight-bold" for="name">Naam:          </label>    <span class="col-4">{{$aUserData['last_name']}} </span><br/>
-                    <label class="col-4 font-weight-bold" for="name">Voornaam:      </label>    <span class="col-4">{{$aUserData["first_name"]}}</span><br/>
-
-                    <label class="col-4 font-weight-bold" for="name">Geslacht:      </label>    <span class="col-4">{{$aUserData['gender']}}</span><br/>
-                    <label class="col-4 font-weight-bold" for="name">Reis:          </label>    <span class="col-4">{{$aUserData['name']}}</span><br/>
+                    <label class="col-4 font-weight-bold">Naam:             </label>    <span class="col-4">{{$aUserData['last_name']}} </span><br/>
+                    <label class="col-4 font-weight-bold">Voornaam:         </label>    <span class="col-4">{{$aUserData["first_name"]}}</span><br/>
+                    <label class="col-4 font-weight-bold">Geslacht:         </label>    <span class="col-4">{{$aUserData['gender']}}</span><br/>
+                    <label class="col-4 font-weight-bold">Klas:             </label>    <span class="col-4">{{$aUserData['study_name']}}</span><br/>
+                    <label class="col-4 font-weight-bold">Afstuderrichting: </label>    <span class="col-4">{{$aUserData['major_name']}}</span><br/>
+                    <label class="col-4 font-weight-bold">Reis:          </label>    <span class="col-4">{{$aUserData['name']}}</span><br/>
 
                     <h4><u>Financieel</u></h4>
                     <label class="col-4 font-weight-bold" for="name">IBAN:          </label>    <span class="col-4">{{$aUserData['iban']}}</span><br/>

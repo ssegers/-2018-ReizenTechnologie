@@ -17,9 +17,17 @@
                     <h4><u>Algemeen</u></h4>
                     <label class="col-4 font-weight-bold" for="LastName">Naam:              </label>    <input id="LastName"     name="LastName"     class="col-6" type="text" value={{$aUserData["last_name"]}}>   <br/>
                     <label class="col-4 font-weight-bold" for="FirstName">Voornaam:         </label>    <input id="FirstName"    name="FirstName"    class="col-6" type="text" value={{$aUserData["first_name"]}}>  <br/>
-                    <label class="col-4 font-weight-bold" for="Gender">Geslacht:            </label>    <input                   name="Gender"       class="" type="radio" value="man" @if($aUserData["gender"] == "man") checked @endif>Man <input name="Gender" class="" type="radio" value="vrouw" @if($aUserData["gender"] == "vrouw") checked @endif>Vrouw <br/>
-                    <label class="col-4 font-weight-bold" for="">Geslacht:            </label>
-                    <label class="col-4 font-weight-bold" for="Gender">Geslacht:            </label>
+                    <label class="col-4 font-weight-bold" for="Gender">Geslacht:            </label>    <input id="Gender"       name="Gender"       class="" type="radio" value="man" @if($aUserData["gender"] == "man") checked @endif>Man <input name="Gender" class="" type="radio" value="vrouw" @if($aUserData["gender"] == "vrouw") checked @endif>Vrouw <br/>
+                    <label class="col-4 font-weight-bold" for="Major">Klas:                 </label>    <select id="Major"       name="Major"         class="col-6 dynamic" data-dependent = "major">
+                        @foreach($oStudies as $oStudy)
+                            <option value="{{ $oStudy->study_id}}" @if($oStudy->study_id == $aUserData["study_id"]) selected @endif>    {{ $oStudy->study_name}}   </option>
+                        @endforeach
+                    </select>                                             <br/>
+                    <label class="col-4 font-weight-bold" for="Gender">Afstudeerrichting:   </label>    <select id="Major"       name="Major"         class="col-6">
+                        @foreach($oMajors as $oMajor)
+                            <option value="{{ $oMajor->major_id}}" @if($oMajor->major_id == $aUserData["major_id"]) selected @endif>    {{ $oMajor->major_name}}   </option>
+                        @endforeach
+                    </select>                                             <br/>
                     <label class="col-4 font-weight-bold" for="Trip">Reis:                  </label>    <select id="Trip"        name="Trip"         class="col-6">
                         @foreach($oTrips as $oTrip)
                             <option value="{{ $oTrip->trip_id}}" @if($oTrip->trip_id == $aUserData["trip_id"]) selected @endif>    {{ $oTrip->name}}   </option>
@@ -58,3 +66,30 @@
         {{ Form::close() }}
     </div>
 @endsection
+{{--@section('script')--}}
+    {{----}}
+    {{--<script>--}}
+        {{--$(document).ready(function(){--}}
+            {{--$('.dynamic').change(function(){--}}
+                {{--if($(this).val() != ''){--}}
+                    {{--var select = $(this).attr("id");--}}
+                    {{--var value = $(this).val();--}}
+                    {{--var dependent = $(this).data('dependant');--}}
+                    {{--var _token = $('input[name="_token"]').val();--}}
+                    {{--$.ajax({--}}
+                        {{--url:"{{route('dynamicdependent.fetch')}}",--}}
+                        {{--method:"POST",--}}
+                        {{--data:{select:select, value:value, _token:_token, dependent:dependent},--}}
+                        {{--succes:function(result){--}}
+                            {{--$('#'+dependent).html(result);--}}
+                        {{--}--}}
+                    {{--})--}}
+                {{--}--}}
+            {{--});--}}
+        {{--});--}}
+    {{--</script>--}}
+
+
+
+
+{{--@endsection--}}
