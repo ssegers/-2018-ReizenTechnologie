@@ -18,14 +18,18 @@ class AdminZipController extends Controller
 
     public function createZip(Request $request)
     {
+try{
+        $request->validate([
+           'zip_code' => 'required|max:50',
+           'city' =>'required|numeric|max:50',
 
-            try {
+        ]);
                 $zip = new Zip;
                 $zip->zip_code =$request->post('zip_code');
                 $zip->city = $request->post('city');
                 $zip->save();
 
-                return redirect()->back()->with('message', 'De postcode is toegevoegd!');
+            return redirect()->back()->with('message', 'De postcode is toegevoegd!');
 
             }
             catch (\Illuminate\Database\QueryException $e) {
