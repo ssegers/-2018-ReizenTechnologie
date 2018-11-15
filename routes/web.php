@@ -16,6 +16,7 @@ Route::get('user/{sUserName}/trip/travellers', 'UserDataController@showUsersAsMe
 Route::post('user/{sUserName}/trip/travellers', 'UserDataController@showUsersAsMentor'); // Manual organize
 
 Route::get('user/contact','ContactPageController@getInfo');
+Route::post('user/contact', 'ContactPageController@sendMail');
 //Route::get('user/trip/travellers', 'UserDataController@showUsersAsMentor');
 //Route::post('user/trip/travellers', 'UserDataController@showUsersAsMentor');
 
