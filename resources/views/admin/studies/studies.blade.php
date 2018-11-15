@@ -1,12 +1,14 @@
 @extends('layouts.admin')
 
 @section('content')
+    @csrf
     <div id="messages"></div>
     <div class="row">
         <div class="col-xs-6">
-            <div class="field field-study">
-                <select id="studySelect"></select>
-            </div>
+            <select id="studySelect"></select>
+        </div>
+        <div class="col-xs-6">
+            <ul id="majorList"></ul>
         </div>
     </div>
 
@@ -14,9 +16,13 @@
         $(document).ready(function () {
             var messagesField = $('#messages');
             var studySelect = $('#studySelect');
+            var majorList = $('#majorList');
+
+            var studies = [];
 
             studySelect.change(function () {
-                alert('test');
+                var selectValue = studySelect.val();
+                alert(selectValue);
             });
 
             loadStudies();
@@ -29,11 +35,25 @@
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
                     type: "POST",
-                    url: "studies/",
+                    url: "study/getStudies",
+                    data: '',
                 }).done(function (result) {
-                    var studies = result['aStudies'];
-                    console.log(studies);
+                    if (result) {
+                        studies = result['aStudies'];
+
+                        updateStudies();
+                    }
                 });
+            }
+
+            function updateStudies() {
+                for (var study of studies) {
+                    studySelect.append($('<option>')
+                        .attr('value', study.study_id)
+                        .text(study.study_name));
+                }
+
+                studySelect.attr('size', studies.length);
             }
         });
     </script>
