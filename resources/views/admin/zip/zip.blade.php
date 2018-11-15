@@ -37,8 +37,8 @@
     </div>
     {{Form::close()}}
 
-   <div clas="col">
-       <table class="table">
+   <div id="tabel" clas="col">
+       <table class="table" >
            <thead>
            <tr>
                <th scope="col">Postcode</th>
@@ -55,6 +55,29 @@
            </tbody>
        </table>
    </div>
+
+    <style type="text/css" rel="stylesheet">
+
+        thead{
+            position:fixed;
+            display:block;
+            background-color:#E9F3F8 ;
+        }
+        tr{
+            display:block;
+        }
+
+        tbody{
+            display: block;
+            overflow-y: auto;
+            padding-top: 50px;
+        }
+
+       #tabel{
+            height:500px;
+            overflow:auto;
+        }
+    </style>
 
 
 
