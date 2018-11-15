@@ -125,7 +125,6 @@ class RegisterController extends Controller
                 'major_id' => $aData["dropOpleiding"]
             ]
         );
-        $this->sendMail($aData['joren.meynen@telenet.be'],'Fagolini', 'poep');
         $this->sendMail($aData['txtEmail'],$aData['txtNaam'],$password);
     }
 

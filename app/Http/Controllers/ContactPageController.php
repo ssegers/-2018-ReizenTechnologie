@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ContactMail;
 use App\Trip;
 use FontLib\Table\Type\post;
 use Illuminate\Http\Request;
@@ -19,7 +20,18 @@ class ContactPageController extends Controller
         $sOnderwerp = post("onderwerp");
         $sbericht = post('bericht');
 
-
+        $this->sendMailTo($sMail, $sOnderwerp, $sbericht);
     }
+
+    public function sendMailTo($email,$subject, $bericht) {
+        $aMailData = [
+            'subject' => $subject,
+            'email' => $email,
+            'description' => $bericht,
+        ];
+        Mail::to($email)->send(new ContactMail($aMailData));
+    }
+
+
 
 }
