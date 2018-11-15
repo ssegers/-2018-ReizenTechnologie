@@ -383,4 +383,8 @@ class UserDataController extends Controller
             'icePhone1.required'    => 'U heeft bij \'noodnummer 1\' niets ingevuld.'
         ];
     }
+
+    function fetch(Request $request){
+        $select = $request->get('select');
+    }
 }
