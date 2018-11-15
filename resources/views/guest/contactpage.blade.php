@@ -9,17 +9,20 @@
 @section('content')
     <div>
         <h1>Contactpagina:</h1>
-        <form>
-            <select class="form-control" name="reis" id="reis">
-                @foreach($oActiveTrips as $oActiveTrip)
-                    <option value="{{$oActiveTrip->trip_id}}">{{$oActiveTrip->name}}</option>
-                @endforeach
-            </select><br>
+        {{ Form::open(array('url' => 'user/contact', 'method' =>'post')) }}
+
+        <?php use App\Trip;?>
+        <?php $oActiveTrips = Trip::where('is_active',true)->where('contact_mail', '!=' , null)->pluck('name','trip_id')?>
+
+
+        {!! Form::select('reis', $oActiveTrips, null) !!}
+
+            <br>
             <label for="onderwerp">Onderwerp :</label><br>
-            <input class="form-control" type="text" id="onderwerp" name="onderwerp"><br>
+            {{Form::text('onderwerp')}}
             <label for="bericht">Bericht: </label><br>
-            <textarea rows="5" class="form-control" name="bericht" id="bericht"></textarea><br>
-            <input class="form-control" type="submit" value="Verzend">
-        </form>
+            {{ Form::textarea('bericht') }}
+            {{ Form::submit('Click Me!') }}
+        {{ Form::close() }}
     </div>
 @endsection

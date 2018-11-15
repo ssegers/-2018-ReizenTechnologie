@@ -6,6 +6,7 @@ use App\Mail\ContactMail;
 use App\Trip;
 use FontLib\Table\Type\post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class ContactPageController extends Controller
 {
@@ -15,11 +16,10 @@ class ContactPageController extends Controller
         return view('guest.contactpage',array('oActiveTrips'=>$oActiveTrips));
     }
     public function sendMail(Request $request){
-        $oTrip = Trip::where('trip_id',$request->post("reis"));
-        $sMail = $oTrip->contact_mail;
-        $sOnderwerp = post("onderwerp");
-        $sbericht = post('bericht');
-
+        $oTrip = Trip::where('trip_id',(int)$request->post("reis"))->pluck('contact_mail');
+        $sMail = $oTrip;
+        $sOnderwerp = $request->post("onderwerp");
+        $sbericht = $request->post('bericht');
         $this->sendMailTo($sMail, $sOnderwerp, $sbericht);
     }
 
