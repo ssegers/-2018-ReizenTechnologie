@@ -66,7 +66,7 @@ Route::get('admin/study', 'AdminStudyController@index')->name('adminStudy');
 Route::get('userinfo/{sUserName}', 'UserDataController@showUserData');              //show
 Route::get('userinfo/{sUserName}/edit', 'UserDataController@showUserData');         //show editable
 Route::post('userinfo/{sUserName}/update', 'UserDataController@updateUserData');    //update
-Route::get('userinfo/{sUserName}/delete', 'UserDataController@deleteUserData');     //delete
+Route::delete('userinfo/delete', 'UserDataController@deleteUserData');              //delete
 
 Route::get('/', function () {
     return redirect('info');
