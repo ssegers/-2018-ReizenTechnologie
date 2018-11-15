@@ -49,7 +49,6 @@ Route::post('admin/trips', 'AdminTripController@UpdateOrCreateTrip');
 Route::get('admin/trips', 'AdminTripController@getTrips')->name('adminTrips');
 Route::get('admin/trips/{tripid}', 'AdminTripController@getTripByID');
 
-Route::get('admin/studies', 'AdminStudyController@index')->name('studies');
 
 Route::get('/admin/pdf', 'AdminPdfController@index')->name('adminPdf');
 Route::post('/admin/pdf', 'AdminPdfController@updateContent');
@@ -62,6 +61,7 @@ Route::get('admin/zip','AdminZipController@createForm')->name('adminZip');
 Route::post('admin/zip','AdminZipController@createZip');
 
 Route::get('admin/study', 'AdminStudyController@index')->name('adminStudy');
+Route::post('admin/study/getStudies', 'AdminStudyController@getStudies');
 
 /* Individual Traveller */
 Route::get('userinfo/{sUserName}', 'UserDataController@showUserData');              //show
