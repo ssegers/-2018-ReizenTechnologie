@@ -1,4 +1,3 @@
-
 <?php
 
 namespace App\Mail;
@@ -38,7 +37,9 @@ class RegisterComplete extends Mailable
             ->with([
                 'subject' => $this->aMailData['subject'],
                 'description' => $this->aMailData['description'],
-                'email' => $this->aMailData['email']
+                'email' => $this->aMailData['email'],
+                'name' => $this->aMailData['username'],
+                'password' => $this->aMailData['password'],
             ]);
     }
 }
