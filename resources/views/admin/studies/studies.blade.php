@@ -1,24 +1,67 @@
 @extends('layouts.admin')
 
 @section('content')
+    @csrf
+    <div id="messages"></div>
     <div class="row">
         <div class="col-xs-6">
-            <div class="field field-study">
-                {{--{{var_dump($aStudies)}}--}}
-                <select id="studySelect" size="{{ $iStudyCount }}" style="overflow-y: -moz-hidde-unscrollable">
-                    @foreach($aStudies as $oStudie)
-                        <option value="{{$oStudie->study_id}}">{{ $oStudie->study_name }}</option>
-                    @endforeach
-                </select>
-            </div>
+            <select id="studySelect"></select>
+        </div>
+        <div class="col-xs-6">
+            <ul id="majorList"></ul>
         </div>
     </div>
 
     <script>
-        var studySelect = $('#studySelect');
+        $(document).ready(function () {
+            var messagesField = $('#messages');
+            var studySelect = $('#studySelect');
+            var majorList = $('#majorList');
 
-        studySelect.change(function () {
-            alert('test');
+            var studies = [];
+
+            studySelect.change(function () {
+                var selectValue = studySelect.val();
+                alert(selectValue);
+            });
+
+            loadStudies();
+            loadMajors();
+
+            function loadStudies() {
+                console.log('loadStudies()')
+
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    type: "POST",
+                    url: "study/getStudies",
+                    data: '',
+                }).done(function (result) {
+                    if (result) {
+                        studies = result['aStudies'];
+
+                        updateStudies();
+                    }
+                });
+
+                function updateStudies() {
+                    studySelect.empty();
+
+                    for (var study of studies) {
+                        studySelect.append($('<option>')
+                            .attr('value', study.study_id)
+                            .text(study.study_name));
+                    }
+
+                    studySelect.attr('size', studies.length);
+                }
+            }
+
+            function loadMajors(studyId) {
+
+            }
         });
     </script>
 @endsection

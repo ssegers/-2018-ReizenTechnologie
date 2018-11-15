@@ -11,22 +11,29 @@ use App\Http\Controllers\Controller;
 
 class AdminStudyController extends Controller {
     /**
-     * This function returns a view with all data from majors and studies
+     * This function shows the view
      *
      * @author Yoeri op't Roodt
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index() {
-//        $aMajors = Major::get();
-        $aStudies = Study::get();
-        $iStudyCount = Study::get()->count();
+        return view('admin.studies.studies');
+    }
 
-        return view('admin.studies.studies', array(
-//            'aMajors' => $aMajors,
+    /**
+     * This method returns the list of studies
+     *
+     * @author Yoeri op't Roodt
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getStudies() {
+        $aStudies = Study::get();
+
+        return response()->json([
             'aStudies' => $aStudies,
-            'iStudyCount' => $iStudyCount,
-        ));
+        ]);
     }
 
     /**
@@ -39,7 +46,7 @@ class AdminStudyController extends Controller {
      * @return mixed
      */
     public function getMajorsByStudy(Request $request) {
-        $iStudyId = $request->post('study-id');
+        $iStudyId = $request->post('study-id', 1);
         $aMajors = Major::where('study_id', $iStudyId)->get();
 
         return response()->json([
