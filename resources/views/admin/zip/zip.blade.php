@@ -37,5 +37,30 @@
     </div>
     {{Form::close()}}
 
+   <div clas="col">
+       <table class="table">
+           <thead>
+           <tr>
+               <th scope="col">Postcode</th>
+               <th scope="col">Gemeente</th>
+           </tr>
+           </thead>
+           <tbody>
+           @foreach($aZipData as $oZip)
+               <tr>
+                   <td>{{$oZip->zip_code}}</td>
+                   <td>{{$oZip->city}}</td>
+               </tr>
+           @endforeach
+           </tbody>
+       </table>
+   </div>
+
+
+
+
+
+
+
 
     @endsection
