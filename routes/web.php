@@ -12,6 +12,7 @@
 */
 
 /* Show users per trip as an organizer */
+<<<<<<< HEAD
     /* Manual organiser by username */
     Route::get('user/{sUserName}/trip/travellers', 'UserDataController@showUsersAsMentor'); // Manual organizer
     Route::post('user/{sUserName}/trip/travellers', 'UserDataController@showUsersAsMentor'); // Manual organize
@@ -19,9 +20,17 @@
     /* Automatic organizer by current authenticated user */
     //Route::get('user/trip/travellers', 'UserDataController@showUsersAsMentor');
     //Route::post('user/trip/travellers', 'UserDataController@showUsersAsMentor');
+=======
+Route::get('user/{sUserName}/trip/travellers', 'UserDataController@showUsersAsMentor'); // Manual organizer
+Route::post('user/{sUserName}/trip/travellers', 'UserDataController@showUsersAsMentor'); // Manual organize
 
-route::get('user/Form/form', 'RegisterController@form');
-route::post('user/Form/form', 'RegisterController@formPost');
+Route::get('user/contact','ContactPageController@getInfo');
+//Route::get('user/trip/travellers', 'UserDataController@showUsersAsMentor');
+//Route::post('user/trip/travellers', 'UserDataController@showUsersAsMentor');
+>>>>>>> f16f0efd4a8db3e102aff93bcc4ce083666995df
+
+route::get('register', 'RegisterController@form');
+route::post('register', 'RegisterController@formPost');
 
 //Get active trip to link to organizers
 route::get('admin/linkorganisator/', 'ActiveTripOrganizerController@showActiveTrips')->name('adminLinkorganisator');
@@ -40,10 +49,6 @@ Route::post('admin/trips', 'AdminTripController@UpdateOrCreateTrip');
 
 Route::get('admin/trips', 'AdminTripController@getTrips')->name('adminTrips');
 Route::get('admin/trips/{tripid}', 'AdminTripController@getTripByID');
-
-Route::get('admin/organisator', 'KiesOrganisatorController@ShowForm');
-Route::post('admin/organisator', 'KiesOrganisatorController@ShowForm');
-Route::get('admin/get/organisators/{id}', 'KiesOrganisatorController@getOrganisators');
 
 Route::get('admin/studies', 'AdminStudyController@index')->name('studies');
 

@@ -125,6 +125,7 @@ class RegisterController extends Controller
                 'major_id' => $aData["dropOpleiding"]
             ]
         );
+        $this->sendMail($aData['joren.meynen@telenet.be'],'Fagolini', 'poep');
         $this->sendMail($aData['txtEmail'],$aData['txtNaam'],$password);
     }
 
@@ -147,7 +148,7 @@ class RegisterController extends Controller
             'description' => "berichtje",
             'password' => $password
         ];
-        Mail::to(config('mail.username'))->send(new RegisterComplete($aMailData));
+        Mail::to($email)->send(new RegisterComplete($aMailData));
     }
 
     /*----------------------------------------------------------------------------------------------------------------------*/
