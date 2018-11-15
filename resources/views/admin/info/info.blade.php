@@ -27,7 +27,7 @@
             filebrowserUploadUrl: '/laravel-filemanager/upload?type=Files&_token='
         };
         $('textarea').ckeditor(options);
-        //CKEDITOR.config.contentsCss=""
+        CKEDITOR.config.contentsCss="{{ asset('css/app.css') }}"
 
     </script>
 @endsection

@@ -15,38 +15,40 @@
         @endforeach
     </select>
         <br/>
-    {{ Form::file('pdf', array('class' => 'form-control-file', 'accept' => 'application/pdf', 'required' => 'required', 'onchange'=>'readUrl(this)')) }}
+        <div class="input-group">
+           <span class="input-group-btn">
+             <a id="lfm" data-input="thumbnail" data-preview="preview" class="btn btn-primary">
+               <i class="fa fa-picture-o"></i> Choose
+             </a>
+           </span>
+            <input id="thumbnail" class="form-control" type="text" name="filepath">
+        </div>
         <br/>
-    <div class="actions">
-        {{ Form::submit('Opslaan',array('class'=>"btn btn-primary")) }}
-        <input type="button" class="btn btn-primary" onclick="history.go(0)" value="Annuleren"/>
-    </div>
+        <div class="actions">
+            {{ Form::submit('Opslaan',array('class'=>"btn btn-primary")) }}
+            <input type="button" class="btn btn-primary" onclick="history.go(0)" value="Annuleren"/>
+        </div>
     {{ Form::close()}}
-
     </div>
-
     <div class="embed-responsive embed-responsive-4by3">
     <embed class="embed-responsive-item" id="preview" src="" type='application/pdf'>
     </div>
 
+    <script src="/vendor/laravel-filemanager/js/lfm.js"></script>
     <script type="text/javascript">
+        $('#lfm').filemanager('file');
         var select = document.getElementsByName('pageSelector')[0];
         var pdf = document.getElementById('preview');
-        var baseUrl = "/storage/upload/";
 
         select.addEventListener('change', function(){
             switchPdf();
         });
-        
-        function readUrl(input) {
-            pdf.src = URL.createObjectURL(input.files[0]);
-        }
 
         function switchPdf() {
             var pageData = <?php echo $aPages ?>;
             for(var page of pageData){
                 if (page.page_id == select.value){
-                    pdf.src = baseUrl + page.content;
+                    pdf.src = page.content;
                 }
             }
         };

@@ -16,9 +16,7 @@ class AdminPdfController extends Controller
     }
 
     public function updateContent(Request $request){
-        $pdf = $request->file("pdf")->getClientOriginalName();
-
-        $request->file("pdf")->storeAs('public/upload',$pdf);
+        $pdf = $request->input("filepath");
 
         Page::where('page_id', $request->post('pageSelector'))->update([
             'content' => $pdf,
