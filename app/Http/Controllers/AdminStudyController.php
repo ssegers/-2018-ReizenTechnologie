@@ -10,7 +10,6 @@ use App\Http\Controllers\Controller;
 
 class AdminStudyController extends Controller
 {
-
     /**
      * This function returns a view with all data from majors and studies
      *
