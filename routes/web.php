@@ -12,7 +12,6 @@
 */
 
 /* Show users per trip as an organizer */
-<<<<<<< HEAD
     /* Manual organiser by username */
     Route::get('user/{sUserName}/trip/travellers', 'UserDataController@showUsersAsMentor'); // Manual organizer
     Route::post('user/{sUserName}/trip/travellers', 'UserDataController@showUsersAsMentor'); // Manual organize
@@ -20,7 +19,7 @@
     /* Automatic organizer by current authenticated user */
     //Route::get('user/trip/travellers', 'UserDataController@showUsersAsMentor');
     //Route::post('user/trip/travellers', 'UserDataController@showUsersAsMentor');
-=======
+
 Route::get('user/{sUserName}/trip/travellers', 'UserDataController@showUsersAsMentor'); // Manual organizer
 Route::post('user/{sUserName}/trip/travellers', 'UserDataController@showUsersAsMentor'); // Manual organize
 
@@ -28,7 +27,6 @@ Route::get('user/contact','ContactPageController@getInfo');
 Route::post('user/contact', 'ContactPageController@sendMail');
 //Route::get('user/trip/travellers', 'UserDataController@showUsersAsMentor');
 //Route::post('user/trip/travellers', 'UserDataController@showUsersAsMentor');
->>>>>>> f16f0efd4a8db3e102aff93bcc4ce083666995df
 
 route::get('register', 'RegisterController@form');
 route::post('register', 'RegisterController@formPost');
@@ -69,7 +67,7 @@ Route::get('admin/study', 'AdminStudyController@index')->name('adminStudy');
 Route::get('userinfo/{sUserName}', 'UserDataController@showUserData');              //show
 Route::get('userinfo/{sUserName}/edit', 'UserDataController@showUserData');         //show editable
 Route::post('userinfo/{sUserName}/update', 'UserDataController@updateUserData');    //update
-Route::get('userinfo/{sUserName}/delete', 'UserDataController@deleteUserData');     //delete
+Route::delete('userinfo/delete', 'UserDataController@deleteUserData');              //delete
 
 Route::get('/', function () {
     return redirect('info');

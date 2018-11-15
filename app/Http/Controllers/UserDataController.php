@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Major;
+use App\Study;
 use App\Traveller;
 use App\Trip;
 use App\User;
@@ -264,9 +266,11 @@ class UserDataController extends Controller
         if(str_contains($request->path(), 'edit')){
             $oTrips = Trip::select()->where('is_active', '=', true)->get();
             $oZips = Zip::all();
+            $oMajors = Major::all();
+            $oStudies = Study::all();
             //var_dump(json_decode(json_encode($oZips), true));
             //var_dump(json_decode(json_encode($oTrips), true));
-            return view('user.filter.individualTravellerEdit', ['aUserData' => $aUserData, 'oTrips' => $oTrips, 'oZips' => $oZips]);
+            return view('user.filter.individualTravellerEdit', ['aUserData' => $aUserData, 'oTrips' => $oTrips, 'oZips' => $oZips, 'oStudies' => $oStudies, 'oMajors' => $oMajors]);
         }
         return view('user.filter.individualTraveller', ['aUserData' => $aUserData, 'sName' => $oUser->username]);
     }
@@ -334,26 +338,10 @@ class UserDataController extends Controller
      * @param $sUserName
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|string
      */
-    public function deleteUserData($sUserName){
-        /* Get user from Auth */
-        $oUser = Auth::user();
-        /* Get user from URL */
-        $oUser = User::where('username', "u0598673")->first();
-        try {
-            if ($oUser->role != 'organizer') {
-                return 'Deze gebruiker is niet gemachtigd';
-            }
-        }
-        catch (\Exception $exception) {
-            return 'Deze gebruiker bestaat niet';
-        }
-        /*
-         *
-         */
-        DB::table('users')
-            ->where('users.username', '=', $sUserName) //r-nummer
-            ->delete();
-        return redirect("user/" . $oUser->username . "/trip/travellers");
+    public function deleteUserData(Request $request){
+        var_dump($request);
+        $sUserName = $request->post('username');
+        return response(User::where('username', $sUserName)->delete());
     }
 
     /**
@@ -378,5 +366,9 @@ class UserDataController extends Controller
             'Phone.required'        => 'U heeft geen GSM-nummer ingevuld.',
             'icePhone1.required'    => 'U heeft bij \'noodnummer 1\' niets ingevuld.'
         ];
+    }
+
+    public function GetMajorsByStudy(Request $request){
+
     }
 }

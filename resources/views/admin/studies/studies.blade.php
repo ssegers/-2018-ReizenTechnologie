@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-xs-6">
             <div class="field field-study">
-                {{ $aMajors }}
+{{--                {{ $aMajors }}--}}
             </div>
         </div>
         <div class="col-xs-6">

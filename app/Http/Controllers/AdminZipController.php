@@ -34,6 +34,8 @@ try{
             }
             catch (\Illuminate\Database\QueryException $e) {
                 return redirect()->back()->with('alert-message', 'Fout! De postcode die je wilt ingeven bestaat al.');
+
+                //test
             }
     }
 }
