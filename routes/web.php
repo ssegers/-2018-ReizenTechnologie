@@ -19,8 +19,8 @@ Route::get('user/contact','ContactPageController@getInfo');
 //Route::get('user/trip/travellers', 'UserDataController@showUsersAsMentor');
 //Route::post('user/trip/travellers', 'UserDataController@showUsersAsMentor');
 
-route::get('user/Form/form', 'RegisterController@form');
-route::post('user/Form/form', 'RegisterController@formPost');
+route::get('register', 'RegisterController@form');
+route::post('register', 'RegisterController@formPost');
 
 //Get active trip to link to organizers
 route::get('admin/linkorganisator/', 'ActiveTripOrganizerController@showActiveTrips')->name('adminLinkorganisator');
