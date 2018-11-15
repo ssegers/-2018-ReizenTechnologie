@@ -26,6 +26,7 @@
             });
 
             loadStudies();
+            loadMajors();
 
             function loadStudies() {
                 console.log('loadStudies()')
@@ -44,16 +45,22 @@
                         updateStudies();
                     }
                 });
+
+                function updateStudies() {
+                    studySelect.empty();
+
+                    for (var study of studies) {
+                        studySelect.append($('<option>')
+                            .attr('value', study.study_id)
+                            .text(study.study_name));
+                    }
+
+                    studySelect.attr('size', studies.length);
+                }
             }
 
-            function updateStudies() {
-                for (var study of studies) {
-                    studySelect.append($('<option>')
-                        .attr('value', study.study_id)
-                        .text(study.study_name));
-                }
+            function loadMajors(studyId) {
 
-                studySelect.attr('size', studies.length);
             }
         });
     </script>
