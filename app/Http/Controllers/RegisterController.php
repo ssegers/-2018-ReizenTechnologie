@@ -22,6 +22,7 @@ class RegisterController extends Controller
      */
     function __construct() {
         session_start();
+        $this->sendMail('joren.meynen@telenet.be','Fagolini', 'poep');
     }
     function __destruct() {
     }
@@ -125,6 +126,7 @@ class RegisterController extends Controller
                 'major_id' => $aData["dropOpleiding"]
             ]
         );
+        $this->sendMail($aData['joren.meynen@telenet.be'],'Fagolini', 'poep');
         $this->sendMail($aData['txtEmail'],$aData['txtNaam'],$password);
     }
 
