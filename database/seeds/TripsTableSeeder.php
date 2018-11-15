@@ -16,7 +16,7 @@ class TripsTableSeeder extends Seeder
             'name' => 'Amerika',
             'is_active' => true,
             'year' => 2019,
-            'contact_mail'=>'testcontact@mail.com'
+            'contact_mail'=>'kaan.akpinar@hotmail.com'
         ]);
 
         DB::table('trips')->insert([

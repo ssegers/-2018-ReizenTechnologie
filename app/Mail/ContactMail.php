@@ -16,6 +16,7 @@ class ContactMail extends Mailable
      *
      * @return void
      */
+    public $aMailData;
     public function __construct($aMailData)
     {
         $this->aMailData = $aMailData;
