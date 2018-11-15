@@ -12,7 +12,6 @@
 */
 
 /* Show users per trip as an organizer */
-<<<<<<< HEAD
     /* Manual organiser by username */
     Route::get('user/{sUserName}/trip/travellers', 'UserDataController@showUsersAsMentor'); // Manual organizer
     Route::post('user/{sUserName}/trip/travellers', 'UserDataController@showUsersAsMentor'); // Manual organize
@@ -20,14 +19,13 @@
     /* Automatic organizer by current authenticated user */
     //Route::get('user/trip/travellers', 'UserDataController@showUsersAsMentor');
     //Route::post('user/trip/travellers', 'UserDataController@showUsersAsMentor');
-=======
+
 Route::get('user/{sUserName}/trip/travellers', 'UserDataController@showUsersAsMentor'); // Manual organizer
 Route::post('user/{sUserName}/trip/travellers', 'UserDataController@showUsersAsMentor'); // Manual organize
 
 Route::get('user/contact','ContactPageController@getInfo');
 //Route::get('user/trip/travellers', 'UserDataController@showUsersAsMentor');
 //Route::post('user/trip/travellers', 'UserDataController@showUsersAsMentor');
->>>>>>> f16f0efd4a8db3e102aff93bcc4ce083666995df
 
 route::get('register', 'RegisterController@form');
 route::post('register', 'RegisterController@formPost');
