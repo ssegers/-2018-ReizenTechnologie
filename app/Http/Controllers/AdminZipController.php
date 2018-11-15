@@ -15,8 +15,11 @@ class AdminZipController extends Controller
      */
     public function createForm()
     {
+
+        $aZips = Zip::all();
+
         //Return the view
-        return view('admin.zip.zip');
+        return view('admin.zip.zip', ['aZipData' =>$aZips]);
     }
 
 
