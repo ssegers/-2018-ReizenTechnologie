@@ -30,6 +30,7 @@ class RegisterComplete extends Mailable
      */
     public function build()
     {
+        echo $this->aMailData['email'];
         return $this->from(['address' => config('mail.username'), 'name' => config('app.name')])
             ->replyTo(['address' => $this->aMailData['email']])
             ->subject($this->aMailData['subject'])
