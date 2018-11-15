@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Travellers_per_Room extends Model
 {
-    //
     //https://blog.maqe.com/solved-eloquent-doesnt-support-composite-primary-keys-62b740120f
     protected function setKeysForSaveQuery(Builder $query)
     {

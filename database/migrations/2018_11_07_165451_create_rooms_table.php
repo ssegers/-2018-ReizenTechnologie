@@ -17,6 +17,7 @@ class CreateRoomsTable extends Migration
             $table->increments('room_id');
             $table->integer('number_of_beds');
             $table->timestamps();
+
         });
     }
 

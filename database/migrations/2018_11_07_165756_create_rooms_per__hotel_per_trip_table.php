@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateHotelsPerTripsTable extends Migration
+class CreateRoomsPerHotelsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ class CreateHotelsPerTripsTable extends Migration
      */
     public function up()
     {
-        Schema::create('hotels_per__trips', function (Blueprint $table) {
-            $table->integer('trip_id')->unsigned();
+        Schema::create('rooms_per_hotel_per_trip', function (Blueprint $table) {
+            $table->increments('rooms_per_hotel_per_trip_id');
             $table->integer('hotel_id')->unsigned();
+            $table->integer('room_id')->unsigned();
             $table->timestamps();
 
-            $table->primary(['trip_id', 'hotel_id']);
-            $table->foreign('trip_id')->references('trip_id')->on('trips');
             $table->foreign('hotel_id')->references('hotel_id')->on('hotels');
+            $table->foreign('room_id')->references('room_id')->on('rooms');
         });
     }
 
@@ -31,6 +31,6 @@ class CreateHotelsPerTripsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('hotels_per__trips');
+        Schema::dropIfExists('rooms_per__hotels');
     }
 }

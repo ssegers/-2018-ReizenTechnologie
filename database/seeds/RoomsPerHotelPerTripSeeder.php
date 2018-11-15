@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class RoomsPerHotelSeeder extends Seeder
+class RoomsPerHotelPerTripSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,11 +12,11 @@ class RoomsPerHotelSeeder extends Seeder
     public function run()
     {
         //
-        DB::table('rooms_per__hotels')->insert(array(
+        DB::table('rooms_per_hotel_per_trip')->insert(array(
             'hotel_id' => 1,
             'room_id' => 1,
         ));
-        DB::table('rooms_per__hotels')->insert(array(
+        DB::table('rooms_per_hotel_per_trip')->insert(array(
             'hotel_id' => 1,
             'room_id' => 2,
         ));

@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
             HotelsSeeder::class,
             RoomsSeeder::class,
             HotelsPerTripSeeder::class,
-            RoomsPerHotelSeeder::class,
+            RoomsPerHotelPerTripSeeder::class,
             TravellersPerRoomSeeder::class,
         ]);
     }
