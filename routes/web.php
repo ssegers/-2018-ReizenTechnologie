@@ -38,10 +38,6 @@ Route::post('admin/trips', 'AdminTripController@UpdateOrCreateTrip');
 Route::get('admin/trips', 'AdminTripController@getTrips')->name('adminTrips');
 Route::get('admin/trips/{tripid}', 'AdminTripController@getTripByID');
 
-Route::get('admin/organisator', 'KiesOrganisatorController@ShowForm');
-Route::post('admin/organisator', 'KiesOrganisatorController@ShowForm');
-Route::get('admin/get/organisators/{id}', 'KiesOrganisatorController@getOrganisators');
-
 Route::get('admin/studies', 'AdminStudyController@index')->name('studies');
 
 Route::get('/admin/pdf', 'AdminPdfController@index')->name('adminPdf');
