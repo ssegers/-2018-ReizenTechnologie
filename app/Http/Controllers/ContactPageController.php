@@ -19,7 +19,7 @@ class ContactPageController extends Controller
         $sOnderwerp = post("onderwerp");
         $sbericht = post('bericht');
 
-        
+
     }
 
 }
