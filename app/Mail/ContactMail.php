@@ -31,7 +31,7 @@ class ContactMail extends Mailable
         return $this->from(['address' => config('mail.username'), 'name' => config('app.name')])
             ->replyTo(['address' => $this->aMailData['email']])
             ->subject($this->aMailData['subject'])
-            ->view('mails.registermail')
+            ->view('mails.contactmail')
             ->with([
                 'subject' => $this->aMailData['subject'],
                 'description' => $this->aMailData['description'],
