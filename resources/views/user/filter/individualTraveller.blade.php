@@ -2,15 +2,16 @@
 @section('content')
     <div class="container border rounded margin-top-50 background-white">
         <h3 class="font-weight-bold color-dark-blue m-1"><span>{{$aUserData["username"]}}</span></h3>
-        <form>
+        {{Form::open(array('url' => '/userinfo/delete', 'method' => 'delete', 'onsubmit' => 'return confirm("Are you sure?")'))}}
             <div class="row padding-10 pt-0">
                 <div class="col color-dark-blue">
                     <h4><u>Algemeen</u></h4>
-                    <label class="col-4 font-weight-bold" for="name">Naam:          </label>    <span class="col-4">{{$aUserData['last_name']}} </span><br/>
-                    <label class="col-4 font-weight-bold" for="name">Voornaam:      </label>    <span class="col-4">{{$aUserData["first_name"]}}</span><br/>
-
-                    <label class="col-4 font-weight-bold" for="name">Geslacht:      </label>    <span class="col-4">{{$aUserData['gender']}}</span><br/>
-                    <label class="col-4 font-weight-bold" for="name">Reis:          </label>    <span class="col-4">{{$aUserData['name']}}</span><br/>
+                    <label class="col-4 font-weight-bold">Naam:             </label>    <span class="col-4">{{$aUserData['last_name']}} </span><br/>
+                    <label class="col-4 font-weight-bold">Voornaam:         </label>    <span class="col-4">{{$aUserData["first_name"]}}</span><br/>
+                    <label class="col-4 font-weight-bold">Geslacht:         </label>    <span class="col-4">{{$aUserData['gender']}}</span><br/>
+                    <label class="col-4 font-weight-bold">Klas:             </label>    <span class="col-4">{{$aUserData['study_name']}}</span><br/>
+                    <label class="col-4 font-weight-bold">Afstuderrichting: </label>    <span class="col-4">{{$aUserData['major_name']}}</span><br/>
+                    <label class="col-4 font-weight-bold">Reis:          </label>    <span class="col-4">{{$aUserData['name']}}</span><br/>
 
                     <h4><u>Financieel</u></h4>
                     <label class="col-4 font-weight-bold" for="name">IBAN:          </label>    <span class="col-4">{{$aUserData['iban']}}</span><br/>
@@ -40,7 +41,8 @@
                 <a class="nav-link nav-link-white-hover bg-dark-blue d-inline-flex m-1" href="/user/{{$sName}}/trip/travellers">Terug</a>
                 <a class="nav-link nav-link-white-hover bg-dark-blue d-inline-flex m-1" href="/userinfo/{{$aUserData["username"]}}/edit">Aanpassen</a>
                 <a class="nav-link nav-link-white-hover bg-dark-blue d-inline-flex m-1" href="/userinfo/{{$aUserData["username"]}}/delete">Verwijderen</a>
+                {{ Form::submit('Verwijderen', ['class' => 'nav-link nav-link-white-hover bg-dark-blue d-inline-flex m-1 border-0 font-weight-bold'])}}
             </div>
-        </form>
+        {{ Form::close() }}
     </div>
 @endsection
