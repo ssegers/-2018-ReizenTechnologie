@@ -10,6 +10,9 @@ class AdminUserController extends Controller
 {
 
 
+    /**Author: Stef Kerkhofs
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function createForm()
     {
         //gets the username for the placeholder
@@ -20,7 +23,10 @@ class AdminUserController extends Controller
     }
 
 
-
+    /**Author: Stef Kerkhofs
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function createUser(Request $request)
     {
 
