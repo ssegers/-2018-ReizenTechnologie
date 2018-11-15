@@ -18,6 +18,8 @@ class AdminPdfController extends Controller
     public function updateContent(Request $request){
         $pdf = $request->input("filepath");
 
+        if($pdf==null){$pdf="";}
+
         Page::where('page_id', $request->post('pageSelector'))->update([
             'content' => $pdf,
         ]);
