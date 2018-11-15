@@ -1,24 +1,40 @@
 @extends('layouts.admin')
 
 @section('content')
+    <div id="messages"></div>
     <div class="row">
         <div class="col-xs-6">
             <div class="field field-study">
-                {{--{{var_dump($aStudies)}}--}}
-                <select id="studySelect" size="{{ $iStudyCount }}" style="overflow-y: -moz-hidde-unscrollable">
-                    @foreach($aStudies as $oStudie)
-                        <option value="{{$oStudie->study_id}}">{{ $oStudie->study_name }}</option>
-                    @endforeach
-                </select>
+                <select id="studySelect"></select>
             </div>
         </div>
     </div>
 
     <script>
-        var studySelect = $('#studySelect');
+        $(document).ready(function () {
+            var messagesField = $('#messages');
+            var studySelect = $('#studySelect');
 
-        studySelect.change(function () {
-            alert('test');
+            studySelect.change(function () {
+                alert('test');
+            });
+
+            loadStudies();
+
+            function loadStudies() {
+                console.log('loadStudies()')
+
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    type: "POST",
+                    url: "studies/",
+                }).done(function (result) {
+                    var studies = result['aStudies'];
+                    console.log(studies);
+                });
+            }
         });
     </script>
 @endsection
