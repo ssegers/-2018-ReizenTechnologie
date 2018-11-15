@@ -13,6 +13,7 @@
             @foreach(\App\Page::where('type','pdf')->get() as $page)
                 <li class="nav-item"><a class="nav-link" href='/pdf/{{$page->name}}'>{{$page->name}}</a></li>
             @endforeach
+            <li class="nav-item"><a class="nav-link" href="{{ route('contact') }}">Contact</a></li>
         </ul>
         <ul class="navbar-nav">
             @if(\Illuminate\Support\Facades\Auth::check())

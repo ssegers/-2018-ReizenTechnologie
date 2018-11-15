@@ -23,7 +23,7 @@
 Route::get('user/{sUserName}/trip/travellers', 'UserDataController@showUsersAsMentor'); // Manual organizer
 Route::post('user/{sUserName}/trip/travellers', 'UserDataController@showUsersAsMentor'); // Manual organize
 
-Route::get('user/contact','ContactPageController@getInfo');
+Route::get('user/contact','ContactPageController@getInfo')->name('contact');
 Route::post('user/contact', 'ContactPageController@sendMail');
 //Route::get('user/trip/travellers', 'UserDataController@showUsersAsMentor');
 //Route::post('user/trip/travellers', 'UserDataController@showUsersAsMentor');
