@@ -338,26 +338,10 @@ class UserDataController extends Controller
      * @param $sUserName
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|string
      */
-    public function deleteUserData($sUserName){
-        /* Get user from Auth */
-        $oUser = Auth::user();
-        /* Get user from URL */
-        $oUser = User::where('username', "u0598673")->first();
-        try {
-            if ($oUser->role != 'organizer') {
-                return 'Deze gebruiker is niet gemachtigd';
-            }
-        }
-        catch (\Exception $exception) {
-            return 'Deze gebruiker bestaat niet';
-        }
-        /*
-         *
-         */
-        DB::table('users')
-            ->where('users.username', '=', $sUserName) //r-nummer
-            ->delete();
-        return redirect("user/" . $oUser->username . "/trip/travellers");
+    public function deleteUserData(Request $request){
+        var_dump($request);
+        $sUserName = $request->post('username');
+        return response(User::where('username', $sUserName)->delete());
     }
 
     /**
@@ -384,7 +368,7 @@ class UserDataController extends Controller
         ];
     }
 
-    function fetch(Request $request){
-        $select = $request->get('select');
+    public function GetMajorsByStudy(Request $request){
+
     }
 }
