@@ -72,9 +72,7 @@ Route::prefix('admin')->group(function() {
 });
 
 Route::get('/info','AdminInfoController@showInfo')->name('info');
-
 Route::get('/pdf/{page_name}','AdminPdfController@showPdf');
-
 Route::get('/', function () {
     return redirect('info');
 });

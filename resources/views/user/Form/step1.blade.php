@@ -40,5 +40,4 @@
         {{ Form::submit('Volgende',['class' => 'btn btn-primary form-control col-sm-2 mb-4 mt-2 ']) }}
         {{ Form::close() }}
     </div>
-
-@endsection
+    @endsection
