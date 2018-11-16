@@ -1,10 +1,9 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-
     "content-hash": "076982444e432f289fa42f7acc57dc5a",
     "packages": [
         {
@@ -430,25 +429,7 @@
             "time": "2018-02-07T20:20:57+00:00"
         },
         {
-            "name": "intervention/validation",
-            "version": "1.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Intervention/validation.git",
-                "reference": "94fb31a5f6617119c0fd49c3cb58cf074bcd4aa9"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Intervention/validation/zipball/94fb31a5f6617119c0fd49c3cb58cf074bcd4aa9",
-                "reference": "94fb31a5f6617119c0fd49c3cb58cf074bcd4aa9",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/support": "~4|~5",
-                "illuminate/validation": "~4|~5",
-                "php": ">=5.3.0"
-
-				"name": "guzzlehttp/psr7",
+            "name": "guzzlehttp/psr7",
             "version": "1.4.2",
             "source": {
                 "type": "git",
@@ -473,11 +454,6 @@
             },
             "type": "library",
             "extra": {
-                "laravel": {
-                    "providers": [
-                        "Intervention\\Validation\\ValidationServiceProvider"
-                    ]
-
                 "branch-alias": {
                     "dev-master": "1.4-dev"
                 }
@@ -561,7 +537,6 @@
             },
             "autoload": {
                 "psr-4": {
-                    "Intervention\\Validation\\": "src/Intervention/Validation"
                     "Intervention\\Image\\": "src/Intervention/Image"
                 }
             },
@@ -572,22 +547,6 @@
             "authors": [
                 {
                     "name": "Oliver Vogel",
-                    "email": "oliver@olivervogel.net",
-                    "homepage": "http://olivervogel.net/"
-                }
-            ],
-            "description": "Additional Validator Functions for the Laravel Framework",
-            "keywords": [
-                "BIC",
-                "IBAN",
-                "ISBN",
-                "ISIN",
-                "creditcard",
-                "laravel",
-                "validation",
-                "validator"
-            ],
-            "time": "2017-06-29T17:58:28+00:00"
                     "email": "oliver@olivervogel.com",
                     "homepage": "http://olivervogel.com/"
                 }
