@@ -13,6 +13,7 @@ class ComposerStaticInitfaaaac5d6a6221cf37492ca47e1c3a30
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
         '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
+        'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
         'abede361264e2ae69ec1eee813a101af' => __DIR__ . '/..' . '/markbaker/complex/classes/src/functions/abs.php',
         '21a5860fbef5be28db5ddfbc3cca67c4' => __DIR__ . '/..' . '/markbaker/complex/classes/src/functions/acos.php',
         '1546e3f9d127f2a9bb2d1b6c31c26ef1' => __DIR__ . '/..' . '/markbaker/complex/classes/src/functions/acosh.php',
@@ -56,7 +57,6 @@ class ComposerStaticInitfaaaac5d6a6221cf37492ca47e1c3a30
         'f190e3308e6ca23234a2875edc985c03' => __DIR__ . '/..' . '/markbaker/complex/classes/src/operations/divideby.php',
         'ac9e33ce6841aa5bf5d16d465a2f03a7' => __DIR__ . '/..' . '/markbaker/complex/classes/src/operations/divideinto.php',
         '538ca81a9a966a6716601ecf48f4eaef' => __DIR__ . '/..' . '/opis/closure/functions.php',
-        'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
         'f0906e6318348a765ffb6eb24e0d0938' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/helpers.php',
         '58571171fd5812e6e447dce228f52f4d' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/helpers.php',
         '801c31d8ed748cfa537fa45402288c95' => __DIR__ . '/..' . '/psy/psysh/src/functions.php',
@@ -144,6 +144,7 @@ class ComposerStaticInitfaaaac5d6a6221cf37492ca47e1c3a30
         ),
         'I' => 
         array (
+            'Intervention\\Validation\\' => 24,
             'Intervention\\Image\\' => 19,
             'Illuminate\\' => 11,
         ),
@@ -339,6 +340,10 @@ class ComposerStaticInitfaaaac5d6a6221cf37492ca47e1c3a30
         'JakubOnderka\\PhpConsoleColor\\' => 
         array (
             0 => __DIR__ . '/..' . '/jakub-onderka/php-console-color/src',
+        ),
+        'Intervention\\Validation\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/intervention/validation/src/Intervention/Validation',
         ),
         'Intervention\\Image\\' => 
         array (
@@ -2226,6 +2231,11 @@ class ComposerStaticInitfaaaac5d6a6221cf37492ca47e1c3a30
         'Intervention\\Image\\Point' => __DIR__ . '/..' . '/intervention/image/src/Intervention/Image/Point.php',
         'Intervention\\Image\\Response' => __DIR__ . '/..' . '/intervention/image/src/Intervention/Image/Response.php',
         'Intervention\\Image\\Size' => __DIR__ . '/..' . '/intervention/image/src/Intervention/Image/Size.php',
+        'Intervention\\Validation\\ValidationServiceProvider' => __DIR__ . '/..' . '/intervention/validation/src/Intervention/Validation/ValidationServiceProvider.php',
+        'Intervention\\Validation\\ValidationServiceProviderLaravel4' => __DIR__ . '/..' . '/intervention/validation/src/Intervention/Validation/ValidationServiceProviderLaravel4.php',
+        'Intervention\\Validation\\ValidationServiceProviderLaravel5' => __DIR__ . '/..' . '/intervention/validation/src/Intervention/Validation/ValidationServiceProviderLaravel5.php',
+        'Intervention\\Validation\\Validator' => __DIR__ . '/..' . '/intervention/validation/src/Intervention/Validation/Validator.php',
+        'Intervention\\Validation\\ValidatorExtension' => __DIR__ . '/..' . '/intervention/validation/src/Intervention/Validation/ValidatorExtension.php',
         'JakubOnderka\\PhpConsoleColor\\ConsoleColor' => __DIR__ . '/..' . '/jakub-onderka/php-console-color/src/ConsoleColor.php',
         'JakubOnderka\\PhpConsoleColor\\InvalidStyleException' => __DIR__ . '/..' . '/jakub-onderka/php-console-color/src/InvalidStyleException.php',
         'JakubOnderka\\PhpConsoleHighlighter\\Highlighter' => __DIR__ . '/..' . '/jakub-onderka/php-console-highlighter/src/JakubOnderka/PhpConsoleHighlighter/Highlighter.php',
