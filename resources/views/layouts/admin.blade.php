@@ -24,7 +24,7 @@
 <nav class="navbar navbar-default border-bottom border-secondary">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="#" style="margin-left:-15px;">
                 <img alt="UCLL" src="{{asset('images/ucll.png') }}"/>
             </a>
         </div>
@@ -40,6 +40,9 @@
             <a href="{{route('adminDefUser')}}"  class="list-group-item" style="height: 55px; color:black; padding: 0px;" onmouseover="this.style.backgroundColor='#E00049';" onmouseout="this.style.backgroundColor='';"><li>Standaard Gebruiker</li></a>
             <a href="{{route('adminTrips')}}"  class="list-group-item" style="height: 55px; color:black; padding: 0px;" onmouseover="this.style.backgroundColor='#E00049';" onmouseout="this.style.backgroundColor='';"><li>Actieve reizen</li></a>
             <a href="{{route('adminLinkorganisator')}}"  class="list-group-item" style="height: 55px; color:black; padding: 0px;" onmouseover="this.style.backgroundColor='#E00049';" onmouseout="this.style.backgroundColor='';"><li>Organisator Koppelen</li></a>
+            <a href="{{route('adminPdf')}}"  class="list-group-item" style="height: 55px; color:black; padding: 0px;" onmouseover="this.style.backgroundColor='#E00049';" onmouseout="this.style.backgroundColor='';"><li>PDF</li></a>
+            <a href="{{route('adminZip')}}"  class="list-group-item" style="height: 55px; color:black; padding: 0px;" onmouseover="this.style.backgroundColor='#E00049';" onmouseout="this.style.backgroundColor='';"><li>Postcode Toevoegen</li></a>
+            <a href="{{route('adminStudy')}}"  class="list-group-item" style="height: 55px; color:black; padding: 0px;" onmouseover="this.style.backgroundColor='#E00049';" onmouseout="this.style.backgroundColor='';"><li>Postcode Toevoegen</li></a>
             <br />
         </ul>
 

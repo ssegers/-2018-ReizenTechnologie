@@ -94,7 +94,7 @@ class RegisterController extends Controller
             'description' => "berichtje",
             'password' => $password
         ];
-        Mail::to(config('mail.username'))->send(new RegisterComplete($aMailData));
+        Mail::to($email)->send(new RegisterComplete($aMailData));
     }
 
 

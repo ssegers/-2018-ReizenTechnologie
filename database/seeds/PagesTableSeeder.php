@@ -20,15 +20,15 @@ class PagesTableSeeder extends Seeder
 <p style="text-align: justify;">Onze studenten kunnen het volgende academiejaar kiezen tussen een studiereis naar Duitsland-Tsjechië of naar de Verenigde Staten van Amerika (USA) of een buitenlandse stage (Erasmus).</p>',
             'type' => 'html',
         ]);
-        DB::table('pages')->insert([
-            "name" => "Amerika 2017",
-            "content" => "Een lange text die de afgelopen reis naar Amerika beschrijft.",
-            "type" => "html",
-        ]);
+        DB::table('pages')->insert(array(
+            'name' => 'Amerika 2018',
+            'content' => '',
+            'type' => 'pdf',
+        ));
         DB::table('pages')->insert([
             "name" => "Duitsland 2017",
-            "content" => "Een lange text die de afgelopen reis naar Duitsland beschrijft.",
-            "type" => "html",
+            "content" => '',
+            "type" => "pdf",
         ]);
     }
 }

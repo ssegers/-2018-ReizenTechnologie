@@ -11,18 +11,25 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 /* Show users per trip as an organizer */
-Route::get('user/{sUserName}/trip/travellers', 'UserDataController@showUsersAsMentor');
-Route::post('user/{sUserName}/trip/travellers', 'UserDataController@showUsersAsMentor');
+    /* Manual organiser by username */
+    Route::get('user/{sUserName}/trip/travellers', 'UserDataController@showUsersAsMentor'); // Manual organizer
+    Route::post('user/{sUserName}/trip/travellers', 'UserDataController@showUsersAsMentor'); // Manual organize
+
+    /* Automatic organizer by current authenticated user */
+    //Route::get('user/trip/travellers', 'UserDataController@showUsersAsMentor');
+    //Route::post('user/trip/travellers', 'UserDataController@showUsersAsMentor');
+
+Route::get('user/{sUserName}/trip/travellers', 'UserDataController@showUsersAsMentor'); // Manual organizer
+Route::post('user/{sUserName}/trip/travellers', 'UserDataController@showUsersAsMentor'); // Manual organize
+
+Route::get('user/contact','ContactPageController@getInfo')->name('contact');
+Route::post('user/contact', 'ContactPageController@sendMail');
 //Route::get('user/trip/travellers', 'UserDataController@showUsersAsMentor');
 //Route::post('user/trip/travellers', 'UserDataController@showUsersAsMentor');
 
-route::get('user/Form/form', 'RegisterController@form');
-route::post('user/Form/form', 'RegisterController@formPost');
+route::get('user/register', 'RegisterController@form');
+route::post('user/register', 'RegisterController@formPost');
 
 route::get('user/Form/step-1', 'RegisterController@step1');
 route::post('user/Form/step-1', 'RegisterController@step1Post');
@@ -48,22 +55,32 @@ route::post('admin/user/default', 'AdminUserController@createUser');
 Route::get('admin/info', 'AdminInfoController@getInfo')->name('adminInfo');
 Route::post('admin/info', 'AdminInfoController@updateInfo');
 
+
 Route::post('admin/trips', 'AdminTripController@UpdateOrCreateTrip');
 
 Route::get('admin/trips', 'AdminTripController@getTrips')->name('adminTrips');
 Route::get('admin/trips/{tripid}', 'AdminTripController@getTripByID');
 
-Route::get('admin/organisator', 'KiesOrganisatorController@ShowForm');
-Route::post('admin/organisator', 'KiesOrganisatorController@ShowForm');
-Route::get('admin/get/organisators/{id}', 'KiesOrganisatorController@getOrganisators');
 
+Route::get('/admin/pdf', 'AdminPdfController@index')->name('adminPdf');
+Route::post('/admin/pdf', 'AdminPdfController@updateContent');
 
 Route::get('/info','AdminInfoController@showInfo')->name('info');
+
+Route::get('/pdf/{page_name}','AdminPdfController@showPdf');
+
+Route::get('admin/zip','AdminZipController@createForm')->name('adminZip');
+Route::post('admin/zip','AdminZipController@createZip');
+
+Route::get('admin/study', 'AdminStudyController@index')->name('adminStudy');
+Route::post('admin/study/getStudies', 'AdminStudyController@getStudies');
+Route::post('admin/study/getMajors', 'AdminStudyController@getMajorsByStudy');
+
 /* Individual Traveller */
 Route::get('userinfo/{sUserName}', 'UserDataController@showUserData');              //show
-Route::get('userinfo/{sUserName}/edit', 'UserDataController@showUserData');         //edit
+Route::get('userinfo/{sUserName}/edit', 'UserDataController@showUserData');         //show editable
 Route::post('userinfo/{sUserName}/update', 'UserDataController@updateUserData');    //update
-Route::get('userinfo/{sUserName}/delete', 'UserDataController@deleteUserData');     //delete
+Route::delete('userinfo/delete', 'UserDataController@deleteUserData');              //delete
 
 Route::get('/', function () {
     return redirect('info');

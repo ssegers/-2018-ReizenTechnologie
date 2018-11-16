@@ -20,6 +20,7 @@ class CreateTripsTable extends Migration
             $table->integer('year');
             $table->rememberToken();
             $table->timestamps();
+            $table->string('contact_mail')->nullable();
         });
     }
 

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Major;
+use App\Study;
 use App\Traveller;
 use App\Trip;
 use App\User;
@@ -269,9 +271,11 @@ class UserDataController extends Controller
         if(str_contains($request->path(), 'edit')){
             $oTrips = Trip::select()->where('is_active', '=', true)->get();
             $oZips = Zip::all();
+            $oMajors = Major::all();
+            $oStudies = Study::all();
             //var_dump(json_decode(json_encode($oZips), true));
             //var_dump(json_decode(json_encode($oTrips), true));
-            return view('user.filter.individualTravellerEdit', ['aUserData' => $aUserData, 'oTrips' => $oTrips, 'oZips' => $oZips]);
+            return view('user.filter.individualTravellerEdit', ['aUserData' => $aUserData, 'oTrips' => $oTrips, 'oZips' => $oZips, 'oStudies' => $oStudies, 'oMajors' => $oMajors]);
         }
         return view('user.filter.individualTraveller', ['aUserData' => $aUserData, 'sName' => $oUser->username]);
     }
@@ -287,12 +291,10 @@ class UserDataController extends Controller
      */
     public function updateUserData(Request $aRequest, $sUserName)
     {
-        $oTraveller = Traveller::select()->join('users', 'travellers.user_id', '=', 'users.user_id')->where('users.username', '=', $sUserName);
 
         $aRequest->validate([
             'LastName'      => 'required',
             'FirstName'     => 'required',
-            'Username'      => 'required',
             'IBAN'          => 'required',
 
             'BirthDate'     => 'required|date_format:d/m/Y',
@@ -300,7 +302,6 @@ class UserDataController extends Controller
             'Nationality'   => 'required',
             'Address'       => 'required',
             'Country'       => 'required',
-            'Email'         => ['required', 'string', 'email', 'max:255'],
 
             'Phone'         => 'required',
             'icePhone1'     => 'required'
@@ -313,7 +314,6 @@ class UserDataController extends Controller
                 [
                     'last_name'         => $aRequest->post('LastName'),
                     'first_name'        => $aRequest->post('FirstName'),
-                    'username'          => $aRequest->post('Username'),
                     'gender'            => $aRequest->post('Gender'),
                     'trip_id'           => $aRequest->post('Trip'),
                     'iban'              => $aRequest->post('IBAN'),
@@ -326,7 +326,6 @@ class UserDataController extends Controller
                     'address'           => $aRequest->post('Address'),
                     'zip_id'            => $aRequest->post('City'),
                     'country'           => $aRequest->post('Country'),
-                    'email'             => $aRequest->post('Email'),
                     'phone'             => $aRequest->post('Phone'),
                     'emergency_phone_1' => $aRequest->post('icePhone1'),
                     'emergency_phone_2' => $aRequest->post('icePhone2'),
@@ -344,34 +343,22 @@ class UserDataController extends Controller
      * @param $sUserName
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|string
      */
-    public function deleteUserData($sUserName){
-        /* Get user from Auth */
-        $oUser = Auth::user();
-        /* Get user from URL */
-        $oUser = User::where('username', "u0598673")->first();
-        try {
-            if ($oUser->role != 'organizer') {
-                return 'Deze gebruiker is niet gemachtigd';
-            }
-        }
-        catch (\Exception $exception) {
-            return 'Deze gebruiker bestaat niet';
-        }
-        /*
-         *
-         */
-        DB::table('users')
-            ->where('users.username', '=', $sUserName) //r-nummer
-            ->delete();
-        return redirect("user/" . $oUser->username . "/trip/travellers");
+    public function deleteUserData(Request $request){
+        var_dump($request);
+        $sUserName = $request->post('username');
+        return response(User::where('username', $sUserName)->delete());
     }
 
+    /**
+     * @author Joren Meynen
+     *
+     * @return array
+     */
     public function messages()
     {
         return [
             'LastName.required'     => 'U heeft geen achternaam ingevuld.',
             'FirstName.required'    => 'U heeft geen voornaam ingevuld.',
-            'Username.required'     => 'U heeft geen R-nummer ingevuld.',
             'IBAN.required'         => 'U heeft geen IBAN-nummer ingevuld.',
 
             'BirthDate.required'    => 'U heeft geen geboortedatum ingevuld. (d/m/y)',
@@ -381,11 +368,12 @@ class UserDataController extends Controller
             'Address.required'      => 'U heeft geen adres ingevuld.',
             'Country.required'      => 'U heeft geen land ingevuld.',
 
-            'Email.required'        => 'U heeft geen e-mailadres ingevuld.',
-            'Email.email'           => 'Het ingevulde e-mailadres is niet geldig.',
-            'Email.unique'          => 'Het ingevulde e-mailadres is al in gebruik.',
             'Phone.required'        => 'U heeft geen GSM-nummer ingevuld.',
             'icePhone1.required'    => 'U heeft bij \'noodnummer 1\' niets ingevuld.'
         ];
+    }
+
+    public function GetMajorsByStudy(Request $request){
+
     }
 }

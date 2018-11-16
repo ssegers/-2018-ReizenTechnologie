@@ -23,6 +23,10 @@
                             <input type="checkbox" class="checkbox-lg m-3" name="trip-is-active" value="1" id="trip-is-active"/>
                             {{--{{Form::checkbox('trip-is-active','1' )}}--}}
                         </div>
+                        <div class="form-group">
+                            {{Form::label('trip-mail','Mail contactpersoon:')}}
+                            {{Form::text('trip-mail', null, array('class' => 'form-control'))}}
+                        </div>
                             {{ Form::hidden('trip-id','trip-id',array('id'=>'trip-id')) }}
                     </div>
                     <div class="modal-footer">
@@ -46,7 +50,9 @@
                         <th scope="col">Naam</th>
                         <th scope="col">Jaar</th>
                         <th scope="col">Inscrijvingen actief</th>
+                        <th scope="col">Mail contactpersoon</th>
                         <th scope="col">Bewerken</th>
+                        
                     </tr>
                 </thead>
 
@@ -60,7 +66,8 @@
                         @else
                             <td >Non-actief</td>
                         @endif
-                        <td ><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tripModal" data-trip-id="{{$oTrip->trip_id}}" data-trip-name="{{$oTrip->name}}" data-trip-year="{{$oTrip->year}}" data-trip-active="{{$oTrip->is_active}}">Edit</button>
+                        <td >{{$oTrip->contact_mail}}</td>
+                        <td ><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tripModal" data-trip-id="{{$oTrip->trip_id}}" data-trip-name="{{$oTrip->name}}" data-trip-year="{{$oTrip->year}}" data-trip-active="{{$oTrip->is_active}}" data-trip-mail="{{$oTrip->contact_mail}}">Edit</button>
                             <!--<form method="get" action="/admin/trips/$oTrip->trip_id"><button type="submit" >Edit</button></form></td>-->
                     </tr>
                 @endForeach
@@ -74,6 +81,7 @@
         var tripName = button.data('trip-name');
         var tripYear = button.data('trip-year');
         var tripActive = button.data('trip-active');
+        var tripMail = button.data('trip-mail');
         console.log(tripActive);
         var tripId = button.data('trip-id');
         // Extract info from data-* attributes
@@ -85,6 +93,7 @@
         modal.find('.modal-body #trip-year').val(tripYear);
         modal.find('.modal-body #trip-active').val(tripActive);
         modal.find('.modal-body #trip-id').val(tripId);
+        modal.find('.modal-body #trip-mail').val(tripMail);
 
         var active = $('#trip-is-active');
         if (tripActive == 1) {
