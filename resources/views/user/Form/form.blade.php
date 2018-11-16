@@ -10,21 +10,35 @@
             /*width: 35%;*/
         /*}*/
     </style>
-    {{ Form::open(array('action' => 'RegisterController@formPost', 'method' => 'post', 'id' => 'registerForm')) }}
-        <h1 class="formTitel">Inschrijvings formulier</h1>
-        <h2 id="jsAlert" >Om deze formulier te kunnen gebruiken moet uw javascript aanstaan.</h2>
-        <!-- One "tab" for each step in the form: -->
-        <div class="tab"><h2 class="tabTitle">Basisgegevens:</h2>
-            <p><label class="formLabel">Reis:</label>
-                {{ Form::select('dropReis', $aTrips, ['id'=>'dropReis','oninput'=>'this.className'])}}</p>
 
-            <p><label class="formLabel">Studentnummer</label>{{ Form::text('txtStudentnummer', '', ['id'=>'txtStudentnummer','oninput'=>'this.className'])}}</p>
-            <p><label class="formLabel">Opleiding</label>
-            <span id="opleidingSelect" onclick="checkMajor()">{{ Form::select('dropOpleiding', $aOpleidingen, ['id'=>'dropOpleiding','oninput'=>'this.className'])}}</span></p>
-            <p><label class="formLabel">Afstudeerrichting</label>
+            {{ Form::open(array('action' => 'RegisterController@formPost', 'method' => 'post', 'id' => 'registerForm')) }}
+            <h1 class="formTitel">Inschrijvings formulier</h1>
+            <h2 id="jsAlert" >Om deze formulier te kunnen gebruiken moet uw javascript aanstaan.</h2>
 
-                {{ Form::select('dropAfstudeerrichtingen', $aMajors, ['id'=>'dropAfstudeerrichtingen','oninput'=>'this.className'])}}</p>
-        </div>
+
+            <!-- One "tab" for each step in the form: -->
+            <div class="tab"><h2 class="tabTitle">Basisgegevens:</h2>
+                <div class="form-inline">
+                    <div class="form-group row">
+                        <label for="dropReis" class="col-sm-2 col-form-label">Reis:</label>
+                        <div class="col-sm-10">
+                            {{ Form::select('dropReis', $aTrips, null ,['id'=>'dropReis','oninput'=>'this.className', 'class' => 'form-control'])}}
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="formLabel">Studentnummer</label>{{ Form::text('txtStudentnummer', '', ['id'=>'txtStudentnummer','oninput'=>'this.className', 'class' => 'form-control'])}}
+                    </div>
+                    <div class="form-group row">
+                        <label class="formLabel">Opleiding</label>
+                         <span id="opleidingSelect" onclick="checkMajor()">
+                             {{ Form::select('dropOpleiding', $aOpleidingen, null, ['id'=>'dropOpleiding','oninput'=>'this.className', 'class' => 'form-control'])}}</span>
+                    </div>
+                    <div class="form-group row">
+                    <label class="formLabel">Afstudeerrichting</label>
+                    {{ Form::select('dropAfstudeerrichtingen', $aMajors, null ,['id'=>'dropAfstudeerrichtingen','oninput'=>'this.className', 'class' => 'form-control'])}}
+                    </div>
+                </div>
+            </div>
 
     <div class="tab"><h2 class="tabTitle">Persoonlijke gegevens:</h2>
             <p><label class="formLabel">Naam</label>{{ Form::text('txtNaam', '', ['id'=>'txtNaam','oninput'=>'this.className'])}}</p>
@@ -77,7 +91,7 @@
         </div>
 
     {{ Form::close() }}
-
+    </table>
     <script src="{{ URL::asset('/js/all.js') }}"></script>
     <script type="text/javascript">
 

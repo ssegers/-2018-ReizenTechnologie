@@ -16,6 +16,18 @@ class ZipTableSeeder extends Seeder
             'zip_code' => '3590',
             'city' => 'Diepenbeek'
         ]);
+ DB::table('zips')->insert([
+            'zip_code' => '3590',
+            'city' => 'Djopenbeek'
+        ]);
+ DB::table('zips')->insert([
+            'zip_code' => '3590',
+            'city' => 'Djopeeeeeeeenbeeek'
+        ]);
+ DB::table('zips')->insert([
+            'zip_code' => '3590',
+            'city' => 'Hadouken'
+        ]);
 
 
         DB::table('zips')->insert([

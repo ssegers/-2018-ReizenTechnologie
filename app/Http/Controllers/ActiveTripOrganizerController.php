@@ -12,7 +12,10 @@ use Illuminate\Support\Facades\View;
 
 class ActiveTripOrganizerController extends Controller
 {
-    /*
+
+    /**
+     * @author Sasha Van de Voorde
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      * This function will show the ActiveTripOrganizer view
      */
     public function showActiveTrips() {
@@ -28,6 +31,12 @@ class ActiveTripOrganizerController extends Controller
                 ]);
     }
 
+    /**
+     * @author Sasha Van de Voorde
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * Gets request data and gets the linked organisators by means of the request data.
+     */
     public function showLinkedOrganisators(Request $request) {
         $iTripId = $request->post('trip_id');
         $aUserId = TripOrganizer::Select('traveller_id')->where('trip_id', $iTripId)->get();
@@ -38,6 +47,12 @@ class ActiveTripOrganizerController extends Controller
         return response()->json(['aMentors' => $oMentors]);
     }
 
+    /**
+     * @author Sasha Van de Voorde
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * Validates the request data and adds a linked organisator.
+     */
     public function addLinkedOrganisator(Request $request) {
         $validator = \Validator::make($request->all(), [
             'traveller_ids' => 'required',
@@ -65,6 +80,13 @@ class ActiveTripOrganizerController extends Controller
         $request->session()->flash('alert-success', 'Het opslaan van begeleiders is gelukt.');
         return response()->json(['succes' => true]);
     }
+
+    /**
+     * @author Sasha Van de Voorde
+     * @param Request $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     * Gets the request data and removes the linked organisator based on his id.
+     */
     public function removeLinkedOrganisator(Request $request) {
         $iTripId = $request->post('trip_id');
         $iTravellerId = $request->post('traveller_id');

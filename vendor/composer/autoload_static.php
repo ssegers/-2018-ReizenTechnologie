@@ -137,6 +137,7 @@ class ComposerStaticInitfaaaac5d6a6221cf37492ca47e1c3a30
         ),
         'I' => 
         array (
+            'Intervention\\Validation\\' => 24,
             'Illuminate\\' => 11,
         ),
         'F' => 
@@ -316,6 +317,10 @@ class ComposerStaticInitfaaaac5d6a6221cf37492ca47e1c3a30
         array (
             0 => __DIR__ . '/..' . '/jakub-onderka/php-console-color/src',
         ),
+        'Intervention\\Validation\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/intervention/validation/src/Intervention/Validation',
+        ),
         'Illuminate\\' => 
         array (
             0 => __DIR__ . '/..' . '/laravel/framework/src/Illuminate',
@@ -433,6 +438,7 @@ class ComposerStaticInitfaaaac5d6a6221cf37492ca47e1c3a30
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\ActiveTripOrganizerController' => __DIR__ . '/../..' . '/app/Http/Controllers/ActiveTripOrganizerController.php',
         'App\\Http\\Controllers\\AdminInfoController' => __DIR__ . '/../..' . '/app/Http/Controllers/AdminInfoController.php',
+        'App\\Http\\Controllers\\AdminTripController' => __DIR__ . '/../..' . '/app/Http/Controllers/AdminTripController.php',
         'App\\Http\\Controllers\\AdminUserController' => __DIR__ . '/../..' . '/app/Http/Controllers/AdminUserController.php',
         'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
         'App\\Http\\Controllers\\Auth\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/LoginController.php',
@@ -440,6 +446,8 @@ class ComposerStaticInitfaaaac5d6a6221cf37492ca47e1c3a30
         'App\\Http\\Controllers\\Auth\\ResetPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ResetPasswordController.php',
         'App\\Http\\Controllers\\Auth\\VerificationController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/VerificationController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
+        'App\\Http\\Controllers\\KiesOrganisatorController' => __DIR__ . '/../..' . '/app/Http/Controllers/KiesOrganisatorController.php',
         'App\\Http\\Controllers\\RegisterController' => __DIR__ . '/../..' . '/app/Http/Controllers/RegisterController.php',
         'App\\Http\\Controllers\\UserDataController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserDataController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
@@ -1487,6 +1495,7 @@ class ComposerStaticInitfaaaac5d6a6221cf37492ca47e1c3a30
         'Illuminate\\Database\\Eloquent\\RelationNotFoundException' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Database/Eloquent/RelationNotFoundException.php',
         'Illuminate\\Database\\Eloquent\\Relations\\BelongsTo' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Database/Eloquent/Relations/BelongsTo.php',
         'Illuminate\\Database\\Eloquent\\Relations\\BelongsToMany' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Database/Eloquent/Relations/BelongsToMany.php',
+        'Illuminate\\Database\\Eloquent\\Relations\\Concerns\\AsPivot' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Database/Eloquent/Relations/Concerns/AsPivot.php',
         'Illuminate\\Database\\Eloquent\\Relations\\Concerns\\InteractsWithPivotTable' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Database/Eloquent/Relations/Concerns/InteractsWithPivotTable.php',
         'Illuminate\\Database\\Eloquent\\Relations\\Concerns\\SupportsDefaultModels' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Database/Eloquent/Relations/Concerns/SupportsDefaultModels.php',
         'Illuminate\\Database\\Eloquent\\Relations\\HasMany' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Database/Eloquent/Relations/HasMany.php',
@@ -2031,6 +2040,11 @@ class ComposerStaticInitfaaaac5d6a6221cf37492ca47e1c3a30
         'Illuminate\\View\\ViewFinderInterface' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/View/ViewFinderInterface.php',
         'Illuminate\\View\\ViewName' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/View/ViewName.php',
         'Illuminate\\View\\ViewServiceProvider' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/View/ViewServiceProvider.php',
+        'Intervention\\Validation\\ValidationServiceProvider' => __DIR__ . '/..' . '/intervention/validation/src/Intervention/Validation/ValidationServiceProvider.php',
+        'Intervention\\Validation\\ValidationServiceProviderLaravel4' => __DIR__ . '/..' . '/intervention/validation/src/Intervention/Validation/ValidationServiceProviderLaravel4.php',
+        'Intervention\\Validation\\ValidationServiceProviderLaravel5' => __DIR__ . '/..' . '/intervention/validation/src/Intervention/Validation/ValidationServiceProviderLaravel5.php',
+        'Intervention\\Validation\\Validator' => __DIR__ . '/..' . '/intervention/validation/src/Intervention/Validation/Validator.php',
+        'Intervention\\Validation\\ValidatorExtension' => __DIR__ . '/..' . '/intervention/validation/src/Intervention/Validation/ValidatorExtension.php',
         'JakubOnderka\\PhpConsoleColor\\ConsoleColor' => __DIR__ . '/..' . '/jakub-onderka/php-console-color/src/ConsoleColor.php',
         'JakubOnderka\\PhpConsoleColor\\InvalidStyleException' => __DIR__ . '/..' . '/jakub-onderka/php-console-color/src/InvalidStyleException.php',
         'JakubOnderka\\PhpConsoleHighlighter\\Highlighter' => __DIR__ . '/..' . '/jakub-onderka/php-console-highlighter/src/JakubOnderka/PhpConsoleHighlighter/Highlighter.php',

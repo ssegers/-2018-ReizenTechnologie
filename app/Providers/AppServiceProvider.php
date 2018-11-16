@@ -4,7 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
-
+use Validator;
+use Intervention\Validation\ValidatorExtension;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -15,6 +16,10 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
+        Validator::resolver(function($translator, $data, $rules, $messages)
+        {
+            return new ValidatorExtension($translator, $data, $rules, $messages, []);
+        });
     }
 
     /**

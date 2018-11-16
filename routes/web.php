@@ -24,6 +24,18 @@ Route::post('user/{sUserName}/trip/travellers', 'UserDataController@showUsersAsM
 route::get('user/Form/form', 'RegisterController@form');
 route::post('user/Form/form', 'RegisterController@formPost');
 
+route::get('user/Form/step-1', 'RegisterController@step1');
+route::post('user/Form/step-1', 'RegisterController@step1Post');
+
+route::get('user/Form/step-2', 'RegisterController@step2');
+route::post('user/Form/step-2', 'RegisterController@step2Post');
+
+route::get('user/Form/step-3', 'RegisterController@step3');
+route::post('user/Form/step-3', 'RegisterController@step3Post');
+
+route::get('user/Form/step-4', 'RegisterController@step4');
+route::post('user/Form/step-4', 'RegisterController@step4Post');
+
 //Get active trip to link to organizers
 route::get('admin/linkorganisator/', 'ActiveTripOrganizerController@showActiveTrips')->name('adminLinkorganisator');
 route::post('admin/linkorganisator/', 'ActiveTripOrganizerController@showLinkedOrganisators');

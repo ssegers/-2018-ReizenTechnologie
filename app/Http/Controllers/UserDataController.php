@@ -136,8 +136,13 @@ class UserDataController extends Controller
         ]);
     }
 
+
     /**
-     * downloadExcel : this will download an excel file based on the session data of filters (the checked fields)
+     * @author Sasha Van de Voorde
+     * @param $aFiltersChecked
+     * @param $iTrip
+     * @return \Exception|Exception
+     * This will download an excel file based on the session data of filters (the checked fields)
      */
     private function downloadExcel($aFiltersChecked, $iTrip) {
         $aUserFields = $aFiltersChecked;
