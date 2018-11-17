@@ -21,7 +21,6 @@ class DatabaseSeeder extends Seeder
             PagesTableSeeder::class,
             TripOrganizerSeeder::class,
             HotelsSeeder::class,
-            RoomsSeeder::class,
             HotelsPerTripSeeder::class,
             RoomsPerHotelPerTripSeeder::class,
             TravellersPerRoomSeeder::class,
