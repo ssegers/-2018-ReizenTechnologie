@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-
+    protected $primaryKey = 'user_id';
     public function traveller()
     {
         return $this->hasOne('App\Traveller', 'user_id', 'user_id');

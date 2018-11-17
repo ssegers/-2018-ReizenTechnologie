@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Traveller extends Model
 {
     protected $guarded = [];
+    protected $primaryKey = 'traveller_id';
 
     public function user()
     {
