@@ -6,6 +6,7 @@ node_modules/
 .env
 vendor/*
 vendor/
+public/photos/
 composer.lock
 composer_BASE_1816.lock
 composer_BACKUP_1816.lock

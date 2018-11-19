@@ -47,6 +47,7 @@ Route::prefix('admin')->group(function() {
 
     Route::get('info', 'AdminInfoController@getInfo')->name('adminInfo');
     Route::post('info', 'AdminInfoController@updateInfo');
+    Route::post('upload_image','AdminInfoController@uploadImage')->name('upload');
 
     Route::post('trips', 'AdminTripController@UpdateOrCreateTrip');
     Route::get('trips', 'AdminTripController@getTrips')->name('adminTrips');

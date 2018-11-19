@@ -22,9 +22,9 @@
     <script>
         var options = {
             filebrowserImageBrowseUrl: '/laravel-filemanager?type=Images',
-            filebrowserImageUploadUrl: '/laravel-filemanager/upload?type=Images&_token=',
+            filebrowserImageUploadUrl: '{{ route('upload',['_token' => csrf_token() ]) }}',
             filebrowserBrowseUrl: '/laravel-filemanager?type=Files',
-            filebrowserUploadUrl: '/laravel-filemanager/upload?type=Files&_token='
+            filebrowserUploadUrl: '{{ route('upload',['_token' => csrf_token() ]) }}'
         };
         $('textarea').ckeditor(options);
         CKEDITOR.config.contentsCss="{{ asset('css/app.css') }}"
