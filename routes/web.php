@@ -34,6 +34,13 @@ Route::prefix('user')->group(function () {
 
 });
 
+Route::prefix('userinfo')->group(function() {
+    Route::get('{sUserName}', 'UserDataController@showUserData');
+    Route::get('{sUserName}/edit', 'UserDataController@showUserData');         //show editable
+    Route::post('{sUserName}/update', 'UserDataController@updateUserData');    //update
+    Route::delete('delete', 'UserDataController@deleteUserData');              //delete
+});
+
 Route::prefix('admin')->group(function() {
     Route::prefix('linkorganisator')->group(function() {
         route::get('/', 'ActiveTripOrganizerController@showActiveTrips')->name('adminLinkorganisator');
@@ -65,12 +72,6 @@ Route::prefix('admin')->group(function() {
         Route::post('getMajors', 'AdminStudyController@getMajorsByStudy');
         Route::post('addStudy', 'AdminStudyController@addStudy');
         Route::post('addMajor', 'AdminStudyController@addMajor');
-    });
-    Route::prefix('userinfo')->group(function() {
-        Route::get('{sUserName}', 'UserDataController@showUserData');              //show
-        Route::get('{sUserName}/edit', 'UserDataController@showUserData');         //show editable
-        Route::post('{sUserName}/update', 'UserDataController@updateUserData');    //update
-        Route::delete('delete', 'UserDataController@deleteUserData');              //delete
     });
 });
 
