@@ -63,12 +63,13 @@ class AdminStudyController extends Controller {
      */
     public function addStudy(Request $request) {
         $validator = \Validator::make($request->all(), array(
-            'study_name' => 'required',
-        ));
+            'study_name' => 'required|unique:studies',
+        ), $this->errors());
 
         if ($validator->fails()) {
             return response()->json([
-                'errors' => $validator->errors()->all(),
+                'success' => false,
+                'messages' => $validator->errors()->all(),
             ]);
         }
 
@@ -78,6 +79,9 @@ class AdminStudyController extends Controller {
 
         return response()->json([
             'success' => true,
+            'messages' => [
+                'De richting is toegevoegt',
+            ]
         ]);
     }
 
@@ -93,12 +97,13 @@ class AdminStudyController extends Controller {
     public function addMajor(Request $request) {
         $validator = \Validator::make($request->all(), array(
             'study_id' => 'required',
-            'major_name' => 'required',
-        ));
+            'major_name' => 'required|unique:majors',
+        ), $this->errors());
 
         if ($validator->fails()) {
             return response()->json([
-                'errors' => $validator->errors()->all(),
+                'success' => false,
+                'messages' => $validator->errors()->all(),
             ]);
         }
 
@@ -109,6 +114,20 @@ class AdminStudyController extends Controller {
 
         return response()->json([
             'success' => true,
+            'messages' => [
+                'De afstudeerrichting is toegevoegt',
+            ]
         ]);
+    }
+
+    private function errors() {
+        return [
+            'study_id.required' => 'Selecteer een richting',
+            'study_name.required' => 'De richting kan niet leeg zijn',
+            'study_name.unique' => 'Deze richting bestaat al',
+
+            'major_name.required' => 'De afstudeerrichting kan niet leeg zijn',
+            'major_name.unique' => 'Deze afstudeerrichting bestaat al',
+        ];
     }
 }

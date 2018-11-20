@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
+    <div id="alert" role="alert"></div>
     @csrf
     <div id="messages"></div>
     <div class="row">
@@ -125,6 +126,8 @@
                     },
                 }).done(function (result) {
                     if (result) {
+                        console.log(result);
+                        showAlert(result.messages, result.success);
                         loadStudies();
                     }
                 });
@@ -144,9 +147,42 @@
                     },
                 }).done(function (result) {
                     if (result) {
+                        console.log(result);
+                        showAlert(result.messages, result.success);
                         loadMajors(studyId);
                     }
                 });
+            }
+            
+            function showAlert(data, success) {
+                var message = $('#alert');
+
+                console.log(data);
+
+                message.empty();
+
+                if (!message.hasClass('alert')) message.addClass('alert');
+
+                if (success) {
+                    if (!message.hasClass('alert-success')) {
+                        message.removeClass('alert-danger');
+                        message.addClass('alert-success');
+                    }
+                }
+                else {
+                    if (!message.hasClass('alert-danger')) {
+                        message.removeClass('alert-success');
+                        message.addClass('alert-danger');
+                    }
+                }
+
+                message.append($('<ul id="messages">'));
+
+                $('#messages').empty();
+
+                for (var messageText of data) {
+                    $('#messages').append($('<li>' + messageText + '</li>'));
+                }
             }
         });
     </script>

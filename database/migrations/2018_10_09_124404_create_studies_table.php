@@ -15,7 +15,7 @@ class CreateStudiesTable extends Migration
     {
         Schema::create('studies', function (Blueprint $table) {
             $table->increments('study_id');
-            $table->string("study_name");
+            $table->string("study_name")->unique();
             $table->timestamps();
         });
     }
