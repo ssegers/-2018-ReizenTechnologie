@@ -315,6 +315,7 @@ class UserDataController extends Controller
                     'last_name'         => $aRequest->post('LastName'),
                     'first_name'        => $aRequest->post('FirstName'),
                     'gender'            => $aRequest->post('Gender'),
+                    'major_id'                  => $aRequest->post('Major'),
                     'trip_id'           => $aRequest->post('Trip'),
                     'iban'              => $aRequest->post('IBAN'),
                     'medical_issue'     => $aRequest->post('MedicalIssue'),
@@ -374,6 +375,16 @@ class UserDataController extends Controller
     }
 
     public function GetMajorsByStudy(Request $request){
+        $study = $request->get('study');
+        $majors = Major::select()
+            ->where("study_id", $study)
+            ->get();
 
+        $output = "";
+        foreach($majors as $major){
+            $output .= '<option value="'.$major->major_id.'">'.$major->major_name.'</option>';
+        }
+
+        echo $output;
     }
 }

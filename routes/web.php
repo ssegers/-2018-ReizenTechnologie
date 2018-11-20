@@ -37,6 +37,7 @@ Route::prefix('user')->group(function () {
 Route::prefix('userinfo')->group(function() {
     Route::get('{sUserName}', 'UserDataController@showUserData');
     Route::get('{sUserName}/edit', 'UserDataController@showUserData');         //show editable
+    Route::post('{sUserName}/cascade', 'UserDataController@GetMajorsByStudy');
     Route::post('{sUserName}/update', 'UserDataController@updateUserData');    //update
     Route::delete('delete', 'UserDataController@deleteUserData');              //delete
 });
