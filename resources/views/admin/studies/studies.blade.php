@@ -6,17 +6,31 @@
     <div class="row">
         <div class="col-xs-6">
             <select id="studySelect"></select>
+            <div>
+                <input id="studyInput" type="text">
+                <button id="studyAdd">Add</button>
+            </div>
         </div>
         <div class="col-xs-6">
             <ul id="majorList"></ul>
+            <div>
+                <input id="majorInput" type="text">
+                <button id="majorAdd">Add</button>
+            </div>
         </div>
     </div>
 
+
     <script>
         $(document).ready(function () {
-            var messagesField = $('#messages');
             var studySelect = $('#studySelect');
             var majorList = $('#majorList');
+
+            var studyField = $('#studyInput');
+            var majorField = $('#majorInput');
+
+            var studyButton = $('#studyAdd');
+            var majorButton = $('#majorAdd');
 
             var studies = [];
             var majors = [];
@@ -24,6 +38,14 @@
             studySelect.change(function () {
                 var selectValue = studySelect.val();
                 loadMajors(selectValue);
+            });
+
+            studyButton.click(function () {
+                addStudy(studyField.val());
+            });
+
+            majorButton.click(function () {
+                addMajor(studySelect.val(), majorField.val())
             });
 
             loadStudies();
@@ -88,6 +110,43 @@
                             .text(major.major_name));
                     }
                 }
+            }
+
+            function addStudy(studyName) {
+                console.log('addStudy(' + studyName + ')');
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    type: "POST",
+                    url: "study/addStudy",
+                    data: {
+                        study_name: studyName,
+                    },
+                }).done(function (result) {
+                    if (result) {
+                        loadStudies();
+                    }
+                });
+            }
+
+            function addMajor(studyId, majorName) {
+                console.log('addMajor(' + studyId + ',' + majorName + ')');
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    type: "POST",
+                    url: "study/addMajor",
+                    data: {
+                        study_id: studyId,
+                        major_name: majorName,
+                    },
+                }).done(function (result) {
+                    if (result) {
+                        loadMajors(studyId);
+                    }
+                });
             }
         });
     </script>

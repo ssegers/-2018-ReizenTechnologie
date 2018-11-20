@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Major;
 use App\Study;
-use Dotenv\Validator;
 use http\Env\Response;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -62,8 +61,8 @@ class AdminStudyController extends Controller {
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function saveStudy(Request $request) {
-        $validator = Validator::make($request->all(), array(
+    public function addStudy(Request $request) {
+        $validator = \Validator::make($request->all(), array(
             'study_name' => 'required',
         ));
 
@@ -74,7 +73,7 @@ class AdminStudyController extends Controller {
         }
 
         Study::insert([
-            'study_name' => $request->post('study-name'),
+            'study_name' => $request->post('study_name'),
         ]);
 
         return response()->json([
@@ -91,12 +90,11 @@ class AdminStudyController extends Controller {
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function saveMajor(Request $request) {
-        $validator = Validator::make($request->all(), array(
+    public function addMajor(Request $request) {
+        $validator = \Validator::make($request->all(), array(
             'study_id' => 'required',
             'major_name' => 'required',
         ));
-
 
         if ($validator->fails()) {
             return response()->json([
@@ -105,8 +103,8 @@ class AdminStudyController extends Controller {
         }
 
         Major::insert([
-            'study_id' => $request->post('study-id'),
-            'major_name' => $request->post('major-name'),
+            'study_id' => $request->post('study_id'),
+            'major_name' => $request->post('major_name'),
         ]);
 
         return response()->json([

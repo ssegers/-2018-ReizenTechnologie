@@ -63,6 +63,8 @@ Route::prefix('admin')->group(function() {
         Route::get('/', 'AdminStudyController@index')->name('adminStudy');
         Route::post('getStudies', 'AdminStudyController@getStudies');
         Route::post('getMajors', 'AdminStudyController@getMajorsByStudy');
+        Route::post('addStudy', 'AdminStudyController@addStudy');
+        Route::post('addMajor', 'AdminStudyController@addMajor');
     });
     Route::prefix('userinfo')->group(function() {
         Route::get('{sUserName}', 'UserDataController@showUserData');              //show
