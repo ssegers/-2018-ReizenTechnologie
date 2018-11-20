@@ -13,7 +13,6 @@ $(document).ready(function(){
                     dependent: dependent},
                 success:function(result){
                     $('#'+dependent).html(result);
-                    console.log(result);
                 }
             })
         }

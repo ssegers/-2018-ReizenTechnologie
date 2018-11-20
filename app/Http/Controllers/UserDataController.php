@@ -315,6 +315,7 @@ class UserDataController extends Controller
                     'last_name'         => $aRequest->post('LastName'),
                     'first_name'        => $aRequest->post('FirstName'),
                     'gender'            => $aRequest->post('Gender'),
+                    'major_id'                  => $aRequest->post('Major'),
                     'trip_id'           => $aRequest->post('Trip'),
                     'iban'              => $aRequest->post('IBAN'),
                     'medical_issue'     => $aRequest->post('MedicalIssue'),
