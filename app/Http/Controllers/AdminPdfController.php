@@ -15,6 +15,19 @@ class AdminPdfController extends Controller
         ));
     }
 
+    public function createPage(Request $request){
+        $page_name=$request->input('Name');
+
+        Page::insert([
+           'name'=>$page_name,
+           'content'=>'',
+           'is_visible'=>false,
+           'type'=>'pdf'
+        ]);
+
+        return redirect()->back()->with('message', 'De nieuwe pagina is aangemaakt');
+    }
+
     public function updateContent(Request $request){
         if($request->get('typeSelector')=='pdf') {
             $type=$request->get('typeSelector');
@@ -28,7 +41,7 @@ class AdminPdfController extends Controller
                 'type'=>$type
             ]);
 
-            return redirect()->back()->with('message', 'De PDF is opgeslagen');
+            return redirect()->back()->with('message', 'De pagina is aangepast');
         }
         else{
             $type=$request->get('typeSelector');

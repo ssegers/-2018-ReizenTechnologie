@@ -5,7 +5,30 @@
             {{ session()->get('message') }}
         </div>
     @endif
-    <h1 class="my-5 text-center">PDF Toevoegen</h1>
+    <h1 class="my-5 text-center">Pagina's Aanpassen/Toevoegen</h1>
+
+    <div class="modal fade" id="pageModal" tabindex="-1" role="dialog" aria-labelledby="pageModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="pageModalLabel">Pagina aanmaken</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                {{ Form::open(array('action' => 'AdminPdfController@createPage', 'method' => 'post')) }}
+                <div class="modal-body">
+                    <div class="form-group">
+                        {{Form::label('Name','Pagina Naam:')}}
+                        {{Form::text('Name', null, array('class' => 'form-control'))}}
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Sluiten</button>
+                    <button type="submit" class="btn btn-primary">Opslaan</button>
+                </div>
+                {{ Form::close() }}
+            </div>
+        </div>
+    </div>
 
     <div class="form-group">
     {{ Form::open(array('action' => 'AdminPdfController@updateContent', 'method' => 'post','files' => true)) }}
@@ -33,6 +56,9 @@
                         <label class="form-check-label" for="Zichtbaar">Zichtbaar</label>
                     </div>
                 </td>
+                <td style="padding-left: 100px">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#pageModal">Nieuwe Pagina Aanmaken</button>
+                </td>
             </tr>
         </table>
         <div id="pdf1">
@@ -51,6 +77,7 @@
             {{ Form::submit('Opslaan',array('class'=>"btn btn-primary")) }}
             <input type="button" class="btn btn-primary" onclick="history.go(0)" value="Annuleren"/>
         </div>
+        <br/>
         <div id="pdf2">
             <div class="embed-responsive embed-responsive-4by3">
                 <embed class="embed-responsive-item" id="preview" src="" type='application/pdf'>
@@ -67,6 +94,8 @@
     <script src="/vendor/unisharp/laravel-ckeditor/adapters/jquery.js"></script>
     <script src="/vendor/laravel-filemanager/js/lfm.js"></script>
     <script>
+        $('#pageModal').on('show.bs.modal', function (event) {
+        });
         var options = {
             filebrowserImageBrowseUrl: '/laravel-filemanager?type=Images',
             filebrowserImageUploadUrl: '{{ route('upload',['_token' => csrf_token() ]) }}',
@@ -75,7 +104,7 @@
         };
         $('textarea').ckeditor(options);
         CKEDITOR.config.contentsCss="{{ asset('css/app.css') }}";
-        CKEDITOR.config.height="380px";
+        CKEDITOR.config.height="360px";
     </script>
     <script type="text/javascript">
         $('#lfm').filemanager('file');
