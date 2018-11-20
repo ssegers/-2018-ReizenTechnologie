@@ -39,39 +39,44 @@
 
    <div id="tabel" clas="col">
        <table class="table" >
+           <thead>
            <tr>
-               <td>
-                   <table cellspacing="0"; cellpadding="0" border="0">
-                        <tr>
-                            <th scope="col">Postcode</th>
-                            <th scope="col">Gemeente</th>
-                        </tr>
-                   </table>
-               </td>
-
+               <th scope="col">Postcode</th>
+               <th scope="col">Gemeente</th>
            </tr>
-           <tr>
-             <td>
-                 <div style="width:100%; height:250px; overflow:auto;">
-                     <table cellspacing="0"; cellpadding="1" border="0" width="300">
-                         <tbody>
-                         @foreach($aZipData as $oZip)
-                             <tr>
-                                 <td  >{{$oZip->zip_code}}</td>
-                                 <td >{{$oZip->city}}</td>
-                             </tr>
-                         @endforeach
-                         </tbody>
-                     </table>
-                 </div>
-             </td>
-           </tr>
+           </thead>
+           <tbody>
+           @foreach($aZipData as $oZip)
+               <tr>
+                   <td>{{$oZip->zip_code}}</td>
+                   <td>{{$oZip->city}}</td>
+               </tr>
+           @endforeach
+           </tbody>
        </table>
    </div>
 
     <style type="text/css" rel="stylesheet">
 
+        thead{
+            position:fixed;
+            display:block;
+            background-color:#E9F3F8 ;
+        }
+        tr{
+            display:block;
+        }
 
+        tbody{
+            display: block;
+            overflow-y: auto;
+            padding-top: 50px;
+        }
+
+       #tabel{
+            height:500px;
+            overflow:auto;
+        }
     </style>
 
 
