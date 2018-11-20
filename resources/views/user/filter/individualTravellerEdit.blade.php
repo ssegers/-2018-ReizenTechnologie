@@ -63,8 +63,8 @@
                 <a class="nav-link nav-link-white-hover bg-dark-blue d-inline-flex m-1" href="/userinfo/{{$aUserData["username"]}}">Annuleren</a>
                 {{ Form::submit('Opslaan', ['class' => 'nav-link nav-link-white-hover bg-dark-blue d-inline-flex m-1 border-0 font-weight-bold'])}}
             </div>
+            {{csrf_field()}}
         {{ Form::close() }}
     </div>
-    {{csrf_field()}}
     <script src="{{ URL::asset('/js/cascadingDropDownStudyMajors.js') }}"></script>
 @endsection

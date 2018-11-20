@@ -266,15 +266,13 @@ class UserDataController extends Controller
             ->join('studies', 'majors.study_id', '=', 'studies.study_id')
             ->where('users.username', '=', $sUserName) //r-nummer
             ->first();
-        //var_dump($aUserData);
-        //var_dump($request->path());
+
+
         if(str_contains($request->path(), 'edit')){
             $oTrips = Trip::select()->where('is_active', '=', true)->get();
             $oZips = Zip::all();
             $oStudies = Study::all();
             $oMajors = Major::where("study_id", $aUserData->study_id)->get();
-            //var_dump(json_decode(json_encode($oZips), true));
-            //var_dump(json_decode(json_encode($oTrips), true));
             return view('user.filter.individualTravellerEdit', ['aUserData' => $aUserData, 'oTrips' => $oTrips, 'oZips' => $oZips, 'oStudies' => $oStudies, 'oMajors' => $oMajors]);
         }
         return view('user.filter.individualTraveller', ['aUserData' => $aUserData, 'sName' => $oUser->username]);
@@ -344,10 +342,10 @@ class UserDataController extends Controller
      * @param $sUserName
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|string
      */
-    public function deleteUserData(Request $request){
-        var_dump($request);
-        $sUserName = $request->post('username');
-        return response(User::where('username', $sUserName)->delete());
+    public function deleteUserData($sUserName){
+        $User = User::where('username', $sUserName)->firstOrFail();
+        $User->delete();
+        return redirect('/');
     }
 
     /**
