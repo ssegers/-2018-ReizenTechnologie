@@ -10,7 +10,7 @@
         <ul class="navbar-nav mr-auto">
             <li class="nav-item"><a class="nav-link" href="{{ route('info') }}">Info</a></li>
             <li class="nav-item"><a class="nav-link" href="/user/u0598673/trip/travellers">Filter Segers</a></li>
-            @foreach(\App\Page::where('type','pdf')->get() as $page)
+            @foreach(\App\Page::where('type','!=','info')->get() as $page)
                 <li class="nav-item"><a class="nav-link" href='/pdf/{{$page->name}}'>{{$page->name}}</a></li>
             @endforeach
             <li class="nav-item"><a class="nav-link" href="{{ route('contact') }}">Contact</a></li>

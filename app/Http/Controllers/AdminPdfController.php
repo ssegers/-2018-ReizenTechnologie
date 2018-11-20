@@ -48,9 +48,9 @@ class AdminPdfController extends Controller
 
     }
     function showPdf($page_name){
-        $aPdfPages= Page::where('type', 'pdf')->where('name',$page_name)->first();
+        $aPages= Page::where('type','!=','info')->where('name',$page_name)->first();
         return view('guest.pdfpage', array(
-            'aPdfPages' => $aPdfPages,
+            'aPages' => $aPages,
         ));
     }
 }
