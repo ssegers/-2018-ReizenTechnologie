@@ -271,8 +271,8 @@ class UserDataController extends Controller
         if(str_contains($request->path(), 'edit')){
             $oTrips = Trip::select()->where('is_active', '=', true)->get();
             $oZips = Zip::all();
-            $oMajors = Major::all();
             $oStudies = Study::all();
+            $oMajors = Major::where("study_id", $aUserData->study_id)->get();
             //var_dump(json_decode(json_encode($oZips), true));
             //var_dump(json_decode(json_encode($oTrips), true));
             return view('user.filter.individualTravellerEdit', ['aUserData' => $aUserData, 'oTrips' => $oTrips, 'oZips' => $oZips, 'oStudies' => $oStudies, 'oMajors' => $oMajors]);
@@ -315,7 +315,7 @@ class UserDataController extends Controller
                     'last_name'         => $aRequest->post('LastName'),
                     'first_name'        => $aRequest->post('FirstName'),
                     'gender'            => $aRequest->post('Gender'),
-                    'major_id'                  => $aRequest->post('Major'),
+                    'major_id'          => $aRequest->post('Major'),
                     'trip_id'           => $aRequest->post('Trip'),
                     'iban'              => $aRequest->post('IBAN'),
                     'medical_issue'     => $aRequest->post('MedicalIssue'),
