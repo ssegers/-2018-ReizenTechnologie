@@ -27,7 +27,8 @@
             filebrowserUploadUrl: '{{ route('upload',['_token' => csrf_token() ]) }}'
         };
         $('textarea').ckeditor(options);
-        CKEDITOR.config.contentsCss="{{ asset('css/app.css') }}"
+        CKEDITOR.config.contentsCss="{{ asset('css/app.css') }}";
+        CKEDITOR.config.height="380px";
 
     </script>
 @endsection
