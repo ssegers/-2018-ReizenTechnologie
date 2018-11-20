@@ -17,10 +17,13 @@
 
         <label for="reis">Reis: </label><br>
         {!! Form::select('reis', $oActiveTrips, null,array("class" => "form-control")) !!}
-
+            <br>
+            <label for="email">E-mail :</label><br>
+            {{Form::email('email','',array("class" => "form-control", "required" ))}}
             <br>
             <label for="onderwerp">Onderwerp :</label><br>
             {{Form::text('onderwerp','',array("class" => "form-control", "required" ))}}
+            <br>
             <label for="bericht">Bericht: </label><br>
             {{ Form::textarea('bericht','',array("class" => "form-control", "required" )) }}<br>
             {{ Form::submit('Verzend',array("class" => "btn")) }}
