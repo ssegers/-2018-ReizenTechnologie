@@ -27,3 +27,18 @@ tbody{
   height:500px;
   overflow:auto;
 }
+
+#inlineFormTable table{
+  height: auto;
+}
+
+#inlineFormTable td:first-child{
+  width: 300px;
+  padding-left: 0px;
+}
+#inlineFormTable tbody{
+  padding: 0px;
+}
+#inlineFormTable td{
+  padding-left: 100px;
+}
