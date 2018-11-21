@@ -135,8 +135,10 @@ class UserProfileController extends Controller
             'Country.required'      => 'U heeft geen land ingevuld.',
 
             'Phone.required'        => 'U heeft geen GSM-nummer ingevuld.',
+            'Phone.phone'        => 'U heeft geen GSM-nummer ingevuld.',
             'icePhone1.required'    => 'U heeft bij \'noodnummer 1\' niets ingevuld.',
-            'phone'                 => 'The :attribute field contains an invalid number.'
+            'icePhone1.phone'    => 'U heeft bij \'noodnummer 1\' niets ingevuld.',
+            'icePhone2.phone'    => 'U heeft bij \'noodnummer 1\' niets ingevuld.',
         ];
     }
 }
