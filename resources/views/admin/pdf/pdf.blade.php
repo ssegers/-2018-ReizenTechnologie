@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('content')
     @if(session()->has('message'))
-        <div class="alert alert-success">
+        <div id="removeTimer" class="alert alert-success">
             {{ session()->get('message') }}
         </div>
     @endif
@@ -117,6 +117,12 @@
         var pdfDiv2=document.getElementById('pdf2');
         var htmlDiv=document.getElementById('html');
         var filepath=document.getElementById('thumbnail');
+
+        setTimeout(function(){
+            if ($('#removeTimer').length > 0) {
+                $('#removeTimer').remove();
+            }
+        }, 5000)
 
         select.addEventListener('change', function(){
             switchPage();
