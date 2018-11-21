@@ -87,7 +87,7 @@ Route::get('/listrooms/{hotels_per_trip_id}', 'HotelRoomController@getRooms');
 Route::get('/listtravellers/{room_hotel_trip_id}', 'HotelRoomController@getTravellers');
 //EndWIP
 
-//cascade API
+//API calls
 Route::post('cascade', 'UserDataController@GetMajorsByStudy');
 
 Route::get('/info','AdminInfoController@showInfo')->name('info');
