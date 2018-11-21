@@ -39,7 +39,7 @@
         </ul>
     </div>
             <div class="table-wrapper-scroll">
-                <table class="table table-striped">
+                <table class="table table-striped table-hover">
                     <thead>
                     <tr>
                         @foreach($aFiltersChecked as $sFilterValue)
