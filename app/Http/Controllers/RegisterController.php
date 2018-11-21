@@ -180,8 +180,8 @@ class RegisterController extends Controller
     public function step3Post(Request $request) {
         $validator = Validator::make($request->all(), [
             'txtEmail' => 'required',
-            'txtGsm' => 'required|numeric',
-            'txtNoodnummer1' => 'required',
+            'txtGsm' => 'required|phone:BE',
+            'txtNoodnummer1' => 'required | phone:BE',
             'txtNoodnummer2' => '',
             'radioMedisch' => 'required',
             'txtMedisch' => '',
@@ -264,7 +264,8 @@ class RegisterController extends Controller
             'txtAdres.required' => 'Je moet je adres ingeven.',
             'txtBank.required' => 'Je moet je IBAN nummer ingeven.',
             'iban' => 'Je moet een geldig IBAN nummer ingeven.!',
-            'gsm.required' => 'Je moet je GSM nummer invullen.',
+            'txtGsm.required' => 'Je moet je GSM nummer invullen.',
+            'txtGsm.phone' => 'Je moet een geldig GSM nummer invullen.',
             'NoodNummer1.required' => 'Je moet minstens 1 noodnummer invullen.',
             'MedischeAandoening.required' => 'Je moet aanduiden indien je een medische behandeling volgt of niet.',
         ];
