@@ -97,7 +97,7 @@
 
     </div>
 
-    <a class = "btn btn-secondary form-control col-sm-2 mb-4 mt-2" href="{{url()->previous()}}">Vorige</a>
+    <a class = "btn btn-secondary form-control col-sm-2 mb-4 mt-2" href="/user/form/step-1">Vorige</a>
     {{ Form::submit('Volgende',['class' => 'btn btn-primary form-control col-sm-2 mb-4 mt-2 ']) }}
     {{ Form::close() }}
 </div>

@@ -56,7 +56,7 @@
     </div>
     <div class="form-row">
         <div class="form-group col-md-12 float-right">
-            <a class = "btn btn-secondary form-control col-sm-2 mb-4 mt-2" href="{{url()->previous()}}">Vorige</a>
+            <a class = "btn btn-secondary form-control col-sm-2 mb-4 mt-2" href="/user/form/step-2">Vorige</a>
             {{ Form::submit('Registreer',['class' => 'btn btn-primary form-control col-sm-2 mb-4 mt-2 ']) }}
         </div>
     </div>
