@@ -37,7 +37,7 @@ class ContactMail extends Mailable
                 'subject' => $this->aMailData['subject'],
                 'description' => $this->aMailData['description'],
                 'email' => $this->aMailData['email'],
-                'contactmail'=>$this->aMailData['contactmail'],
+                'cmail'=>$this->aMailData['cmail'],
             ]);
     }
 }

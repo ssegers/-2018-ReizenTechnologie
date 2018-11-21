@@ -29,7 +29,7 @@ class ContactPageController extends Controller
             'subject' => $subject,
             'email' => $email,
             'description' => $bericht,
-            'contactmail'=>$contactMail,
+            'cmail'=>$contactMail,
         ];
         Mail::to($email)->send(new ContactMail($aMailData));
     }
