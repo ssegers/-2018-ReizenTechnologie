@@ -2,7 +2,6 @@
 @section('content')
     <div class="container border rounded margin-top-50 background-white">
         <h3 class="font-weight-bold color-dark-blue m-1"><span>{{$aUserData["username"]}}</span></h3>
-        <form method="POST" action="{{ route('user.destroy', $aUserData["username"]) }}" onsubmit="return confirm('Are you sure?')">
             <div class="row padding-10 pt-0">
                 <div class="col color-dark-blue">
                     <h4><u>Algemeen</u></h4>
@@ -38,11 +37,7 @@
                 </div>
             </div>
             <div class="nav justify-content-center mb-3 font-weight-bold">
-                <a class="nav-link nav-link-white-hover bg-dark-blue d-inline-flex m-1" href="/user/{{$sName}}/trip/travellers">Terug</a>
-                <a class="nav-link nav-link-white-hover bg-dark-blue d-inline-flex m-1" href="/userinfo/{{$aUserData["username"]}}/edit">Aanpassen</a>
-                {{ csrf_field() }}
-                {{ method_field('DELETE') }}
-                <button class="nav-link nav-link-white-hover bg-dark-blue d-inline-flex m-1 border-0 font-weight-bold text-white" type="submit">Verwijderen</button>
+                <a class="nav-link nav-link-white-hover bg-dark-blue d-inline-flex m-1" href="/profile/edit">Aanpassen</a>
             </div>
         </form>
     </div>

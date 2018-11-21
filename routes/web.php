@@ -34,6 +34,21 @@ Route::prefix('user')->group(function () {
 
 });
 
+Route::prefix('userinfo')->group(function() {
+    Route::get('{sUserName}', 'UserDataController@showUserData');
+    Route::get('{sUserName}/edit', 'UserDataController@showUserData');
+    Route::post('{sUserName}/cascade', 'UserDataController@GetMajorsByStudy');
+    Route::post('{sUserName}/update', 'UserDataController@updateUserData');
+    Route::delete('{sUserName}/delete', 'UserDataController@deleteUserData')->name('user.destroy');
+});
+
+Route::prefix('profile')->group(function() {
+    Route::get('', 'UserProfileController@showUserData')->name('profile');
+    Route::get('/edit', 'UserProfileController@showUserData');
+    Route::post('{sUserName}/cascade', 'UserProfileController@GetMajorsByStudy');
+    Route::post('{sUserName}/update', 'UserProfileController@updateUserData');
+});
+
 Route::prefix('admin')->group(function() {
     Route::prefix('linkorganisator')->group(function() {
         route::get('/', 'ActiveTripOrganizerController@showActiveTrips')->name('adminLinkorganisator');
@@ -54,7 +69,8 @@ Route::prefix('admin')->group(function() {
     Route::get('trips/{tripid}', 'AdminTripController@getTripByID');
 
     Route::get('pdf', 'AdminPdfController@index')->name('adminPdf');
-    Route::post('pdf', 'AdminPdfController@updateContent');
+    Route::post('updatePdf', 'AdminPdfController@updateContent');
+    Route::post('createPage', 'AdminPdfController@createPage');
 
     Route::get('zip','AdminZipController@createForm')->name('adminZip');
     Route::post('zip','AdminZipController@createZip');
@@ -66,13 +82,13 @@ Route::prefix('admin')->group(function() {
         Route::post('addStudy', 'AdminStudyController@addStudy');
         Route::post('addMajor', 'AdminStudyController@addMajor');
     });
-    Route::prefix('userinfo')->group(function() {
-        Route::get('{sUserName}', 'UserDataController@showUserData');              //show
-        Route::get('{sUserName}/edit', 'UserDataController@showUserData');         //show editable
-        Route::post('{sUserName}/update', 'UserDataController@updateUserData');    //update
-        Route::delete('delete', 'UserDataController@deleteUserData');              //delete
-    });
 });
+
+//WIP
+Route::get('/listhotels', 'HotelRoomController@getHotelsPerTrip');
+Route::get('/listrooms/{hotels_per_trip_id}', 'HotelRoomController@getRooms');
+Route::get('/listtravellers/{room_hotel_trip_id}', 'HotelRoomController@getTravellers');
+//EndWIP
 
 Route::get('/info','AdminInfoController@showInfo')->name('info');
 Route::get('/pdf/{page_name}','AdminPdfController@showPdf');
