@@ -54,8 +54,8 @@ Route::prefix('admin')->group(function() {
         route::post('/add', 'ActiveTripOrganizerController@addLinkedOrganisator');
     });
 
-    route::get('user/default', 'AdminUserController@createForm')->name('adminDefUser');
-    route::post('user/default', 'AdminUserController@createUser');
+    route::get('user/register', 'AdminUserController@createForm')->name('adminRegUser');
+    route::post('user/register', 'AdminUserController@createUser');
 
     Route::get('info', 'AdminInfoController@getInfo')->name('adminInfo');
     Route::post('info', 'AdminInfoController@updateInfo');

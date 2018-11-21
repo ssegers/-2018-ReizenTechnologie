@@ -39,7 +39,7 @@
         </ul>
     </div>
             <div class="table-wrapper-scroll">
-                <table class="table table-striped">
+                <table class="table table-striped table-hover">
                     <thead>
                     <tr>
                         @foreach($aFiltersChecked as $sFilterValue)
@@ -49,7 +49,7 @@
                     </thead>
                     <tbody>
                     @foreach($aUserData as $oUserData)
-                        <tr onclick="displayUser('<?php echo $oUserData->username ?>')">
+                        <tr class="cursor-pointer" onclick="displayUser('<?php echo $oUserData->username ?>')">
                             @foreach($aFiltersChecked as $sFilterName => $sFilterText)
                                 <td class="field {{ $sFilterName }}">{{ $oUserData->$sFilterName }}</td>
                             @endforeach

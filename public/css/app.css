@@ -376,6 +376,10 @@ td.field.medical_info {
   min-width: 200px;
 }
 
+.cursor-pointer:hover {
+  cursor: pointer;
+}
+
 .admin-table {
   text-align: center;
   border: 3px solid black;
