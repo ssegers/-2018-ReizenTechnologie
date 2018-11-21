@@ -69,8 +69,9 @@ class UserProfileController extends Controller
             'Address'       => 'required',
             'Country'       => 'required',
 
-            'Phone'         => 'required',
-            'icePhone1'     => 'required'
+            'Phone'         => 'required|phone:BE',
+            'icePhone1'     => 'required|phone:BE',
+            'icePhone2'     => 'phone:BE'
         ],$this->messages());
 
         User::where('users.username', '=', $sUserName) //r-nummer
@@ -134,7 +135,8 @@ class UserProfileController extends Controller
             'Country.required'      => 'U heeft geen land ingevuld.',
 
             'Phone.required'        => 'U heeft geen GSM-nummer ingevuld.',
-            'icePhone1.required'    => 'U heeft bij \'noodnummer 1\' niets ingevuld.'
+            'icePhone1.required'    => 'U heeft bij \'noodnummer 1\' niets ingevuld.',
+            'phone'                 => 'The :attribute field contains an invalid number.'
         ];
     }
 }
