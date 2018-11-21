@@ -288,7 +288,6 @@ class UserDataController extends Controller
      */
     public function updateUserData(Request $aRequest, $sUserName)
     {
-
         $aRequest->validate([
             'LastName'      => 'required',
             'FirstName'     => 'required',
@@ -305,7 +304,7 @@ class UserDataController extends Controller
         ],$this->messages());
 
         User::where('users.username', '=', $sUserName) //r-nummer
-        ->join('travellers', 'users.user_id', '=', 'travellers.user_id')
+            ->join('travellers', 'users.user_id', '=', 'travellers.user_id')
             ->update(
                 [
                     'last_name'         => $aRequest->post('LastName'),
