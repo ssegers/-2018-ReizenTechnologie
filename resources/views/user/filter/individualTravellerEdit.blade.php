@@ -36,7 +36,7 @@
                     <h4><u>Financieel</u></h4>
                     <label class="col-4 font-weight-bold" for="IBAN">IBAN:                  </label>    <input id="IBAN"         name="IBAN"         class="col-6" type="text" value="{{$aUserData['iban']}}">        <br/>
                     <h4><u>Medisch</u></h4>
-                    <label class="col-4 font-weight-bold" for="MedicalIssue">Behandeling:   </label>    <input                   name="MedicalIssue" class="" type="radio" value="1" @if($aUserData["medical_issue"] == "1") checked @endif>Ja <input name="MedicalIssue" type="radio" value="0" @if($aUserData["medical_issue"] == "0") checked @endif>Nee <br/>
+                    <label class="col-4 font-weight-bold" for="MedicalIssue">Behandeling:   </label>    <input id="MedicalIssue" name="MedicalIssue" class="" type="radio" value="1" @if($aUserData["medical_issue"] == "1") checked @endif>Ja <input name="MedicalIssue" type="radio" value="0" @if($aUserData["medical_issue"] == "0") checked @endif>Nee <br/>
                     <label class="col-4 font-weight-bold" for="MedicalInfo">Medische info:  </label>    <input id="MedicalInfo"  name="MedicalInfo"  class="col-6" type="text" value=@if($aUserData['medical_issue'])"{{$aUserData['medical_info']}}" @endif><br/>
                 </div>
                 <div class="col color-dark-blue">

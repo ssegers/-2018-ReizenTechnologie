@@ -61,9 +61,9 @@ class UserProfileController extends Controller
         $aRequest->validate([
             'LastName'      => 'required',
             'FirstName'     => 'required',
-            'IBAN'          => 'required',
+            'IBAN'          => 'required|iban',
 
-            'BirthDate'     => 'required|date_format:d/m/Y',
+            'BirthDate'     => 'required',
             'Birthplace'    => 'required',
             'Nationality'   => 'required',
             'Address'       => 'required',
@@ -126,9 +126,8 @@ class UserProfileController extends Controller
             'LastName.required'     => 'U heeft geen achternaam ingevuld.',
             'FirstName.required'    => 'U heeft geen voornaam ingevuld.',
             'IBAN.required'         => 'U heeft geen IBAN-nummer ingevuld.',
-
-            'BirthDate.required'    => 'U heeft geen geboortedatum ingevuld. (d/m/y)',
-            'BirthDate.date_format' => 'De waarde die u heeft ingevuld bij geboortedatum is ongeldig. (d/m/Y)',
+            'iban'                  => 'U heeft geen geldig IBAN-nummer ingevuld.',
+            'BirthDate.required'    => 'U heeft geen geboortedatum ingevuld.',
             'Birthplace.required'   => 'U heeft geen geboorteplaats ingevuld.',
             'Nationality.required'  => 'U heeft geen nationaliteit ingevuld.',
             'Address.required'      => 'U heeft geen adres ingevuld.',
@@ -137,19 +136,5 @@ class UserProfileController extends Controller
             'Phone.required'        => 'U heeft geen GSM-nummer ingevuld.',
             'icePhone1.required'    => 'U heeft bij \'noodnummer 1\' niets ingevuld.'
         ];
-    }
-
-    public function GetMajorsByStudy(Request $request){
-        $study = $request->get('study');
-        $majors = Major::select()
-            ->where("study_id", $study)
-            ->get();
-
-        $output = "";
-        foreach($majors as $major){
-            $output .= '<option value="'.$major->major_id.'">'.$major->major_name.'</option>';
-        }
-
-        echo $output;
     }
 }
