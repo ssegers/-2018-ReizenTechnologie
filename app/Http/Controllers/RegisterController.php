@@ -205,7 +205,6 @@ class RegisterController extends Controller
 
         $user = $request->session()->get('user');
         $user->password = $this->randomPassword();
-        return $traveller->phone;
         $user->save();
         $traveller->fill(['user_id' => $user->user_id]);
         $traveller->save();
