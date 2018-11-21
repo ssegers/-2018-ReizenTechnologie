@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Traveller extends Model
 {
-    protected $guarded = [];
+    protected $guarded = ['traveller_id'];
     protected $primaryKey = 'traveller_id';
 
     public function user()
@@ -23,4 +23,6 @@ class Traveller extends Model
     {
         return $this->belongsTo('App\Zip');
     }
+
+    public $timestamps = false;
 }

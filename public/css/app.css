@@ -73,13 +73,15 @@ body {
   height: 60px;
   width: 235px;
   margin-right: -30px;
-  background-color: #003469;
-  border: none;
-  color: white;
+  /*background-color: #003469;*/
+  /*border: none;*/
+  /*color: white;*/
 }
 
 .side-nav button:hover {
   cursor: pointer;
+  background-color: #E00049;
+  color: white;
 }
 
 .background-white {
@@ -382,6 +384,28 @@ td.field.medical_info {
   border: 3px solid black;
   padding-left: 3px;
   padding-right: 3px;
+}
+
+thead {
+  position: fixed;
+  display: block;
+  background-color: #E9F3F8;
+}
+
+tr {
+  display: table;
+}
+
+tbody {
+  display: block;
+  overflow-y: auto;
+  padding-top: 50px;
+  padding-left: 25px;
+}
+
+#tabel {
+  height: 500px;
+  overflow: auto;
 }
 
 /*# sourceMappingURL=app.css.map */

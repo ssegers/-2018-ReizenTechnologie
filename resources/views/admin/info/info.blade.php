@@ -2,7 +2,7 @@
 
 @section('content')
     @if(session()->has('message'))
-        <div class="alert alert-success">
+        <div id="removeTimer" class="alert alert-success">
             {{ session()->get('message') }}
         </div>
     @endif
@@ -20,6 +20,11 @@
     <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
     <script src="/vendor/unisharp/laravel-ckeditor/adapters/jquery.js"></script>
     <script>
+        setTimeout(function(){
+            if ($('#removeTimer').length > 0) {
+                $('#removeTimer').remove();
+            }
+        }, 5000)
         var options = {
             filebrowserImageBrowseUrl: '/laravel-filemanager?type=Images',
             filebrowserImageUploadUrl: '{{ route('upload',['_token' => csrf_token() ]) }}',

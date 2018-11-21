@@ -28,9 +28,9 @@ class TravellersTableSeeder extends Seeder
             'emergency_phone_1' => '0471852963',
             'emergency_phone_2' => '0471717171',
             'nationality' => 'belg',
-            'birthdate' => '01/01/2000',
+            'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -51,9 +51,9 @@ class TravellersTableSeeder extends Seeder
             'emergency_phone_1' => '011335526',
             'emergency_phone_2' => null,
             'nationality' => 'belg',
-            'birthdate' => '01/05/1996',
+            'birthdate' => '2000-01-01',
             'birthplace' => 'Genk',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -74,9 +74,9 @@ class TravellersTableSeeder extends Seeder
             'emergency_phone_1' => '0471852963',
             'emergency_phone_2' => '0471717171',
             'nationality' => 'belg',
-            'birthdate' => '01/01/1998',
+            'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -97,9 +97,9 @@ class TravellersTableSeeder extends Seeder
             'emergency_phone_1' => '0471852963',
             'emergency_phone_2' => '0471717171',
             'nationality' => 'belg',
-            'birthdate' => '01/01/1995',
+            'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -120,9 +120,9 @@ class TravellersTableSeeder extends Seeder
             'emergency_phone_1' => '0471852963',
             'emergency_phone_2' => '0471717171',
             'nationality' => 'belg',
-            'birthdate' => '01/01/1995',
+            'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -143,9 +143,9 @@ class TravellersTableSeeder extends Seeder
             'emergency_phone_1' => '0471852963',
             'emergency_phone_2' => '0471717171',
             'nationality' => 'belg',
-            'birthdate' => '01/01/1995',
+            'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -166,9 +166,9 @@ class TravellersTableSeeder extends Seeder
             'emergency_phone_1' => '0471852963',
             'emergency_phone_2' => '0471717171',
             'nationality' => 'belg',
-            'birthdate' => '01/01/1995',
+            'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -189,9 +189,9 @@ class TravellersTableSeeder extends Seeder
             'emergency_phone_1' => '0471852963',
             'emergency_phone_2' => '0471717171',
             'nationality' => 'belg',
-            'birthdate' => '01/01/1995',
+            'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -212,9 +212,9 @@ class TravellersTableSeeder extends Seeder
             'emergency_phone_1' => '0471852963',
             'emergency_phone_2' => '0471717171',
             'nationality' => 'belg',
-            'birthdate' => '01/01/1995',
+            'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -235,9 +235,9 @@ class TravellersTableSeeder extends Seeder
             'emergency_phone_1' => '0471852963',
             'emergency_phone_2' => '0471717171',
             'nationality' => 'belg',
-            'birthdate' => '01/01/1995',
+            'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -258,9 +258,9 @@ class TravellersTableSeeder extends Seeder
             'emergency_phone_1' => '0471852963',
             'emergency_phone_2' => '0471717171',
             'nationality' => 'belg',
-            'birthdate' => '01/01/1995',
+            'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -281,9 +281,9 @@ class TravellersTableSeeder extends Seeder
             'emergency_phone_1' => '0471852963',
             'emergency_phone_2' => '0471717171',
             'nationality' => 'belg',
-            'birthdate' => '01/01/1995',
+            'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -304,9 +304,9 @@ class TravellersTableSeeder extends Seeder
             'emergency_phone_1' => '0471852963',
             'emergency_phone_2' => '0471717171',
             'nationality' => 'belg',
-            'birthdate' => '01/01/1995',
+            'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -327,9 +327,9 @@ class TravellersTableSeeder extends Seeder
             'emergency_phone_1' => '0471852963',
             'emergency_phone_2' => '0471717171',
             'nationality' => 'belg',
-            'birthdate' => '01/01/1995',
+            'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -350,9 +350,9 @@ class TravellersTableSeeder extends Seeder
             'emergency_phone_1' => '0471852963',
             'emergency_phone_2' => '0471717171',
             'nationality' => 'belg',
-            'birthdate' => '01/01/1995',
+            'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -374,9 +374,9 @@ class TravellersTableSeeder extends Seeder
             'emergency_phone_1' => '0471852963',
             'emergency_phone_2' => '0471717171',
             'nationality' => 'belg',
-            'birthdate' => '01/01/1995',
+            'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -398,9 +398,9 @@ class TravellersTableSeeder extends Seeder
             'emergency_phone_1' => '0471852963',
             'emergency_phone_2' => '0471717171',
             'nationality' => 'belg',
-            'birthdate' => '01/01/1995',
+            'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -422,9 +422,9 @@ class TravellersTableSeeder extends Seeder
             'emergency_phone_1' => '0471852963',
             'emergency_phone_2' => '0471717171',
             'nationality' => 'belg',
-            'birthdate' => '01/01/1995',
+            'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -446,9 +446,9 @@ class TravellersTableSeeder extends Seeder
             'emergency_phone_1' => '0471852963',
             'emergency_phone_2' => '0471717171',
             'nationality' => 'belg',
-            'birthdate' => '01/01/1995',
+            'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -470,9 +470,9 @@ class TravellersTableSeeder extends Seeder
             'emergency_phone_1' => '0471852963',
             'emergency_phone_2' => '0471717171',
             'nationality' => 'belg',
-            'birthdate' => '01/01/1995',
+            'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -494,9 +494,9 @@ class TravellersTableSeeder extends Seeder
             'emergency_phone_1' => '0471852963',
             'emergency_phone_2' => '0471717171',
             'nationality' => 'belg',
-            'birthdate' => '01/01/1995',
+            'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -518,9 +518,9 @@ class TravellersTableSeeder extends Seeder
             'emergency_phone_1' => '0471852963',
             'emergency_phone_2' => '0471717171',
             'nationality' => 'belg',
-            'birthdate' => '01/01/1995',
+            'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -543,9 +543,9 @@ class TravellersTableSeeder extends Seeder
             'emergency_phone_1' => '0471852963',
             'emergency_phone_2' => '0471717171',
             'nationality' => 'belg',
-            'birthdate' => '01/01/1995',
+            'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -568,9 +568,9 @@ class TravellersTableSeeder extends Seeder
             'emergency_phone_1' => '0471852963',
             'emergency_phone_2' => '0471717171',
             'nationality' => 'belg',
-            'birthdate' => '01/01/1995',
+            'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -593,9 +593,9 @@ class TravellersTableSeeder extends Seeder
             'emergency_phone_1' => '0471852963',
             'emergency_phone_2' => '0471717171',
             'nationality' => 'belg',
-            'birthdate' => '01/01/1995',
+            'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -616,9 +616,9 @@ class TravellersTableSeeder extends Seeder
             'emergency_phone_1' => '0471852963',
             'emergency_phone_2' => '0471717171',
             'nationality' => 'belg',
-            'birthdate' => '01/01/1995',
+            'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -639,9 +639,9 @@ class TravellersTableSeeder extends Seeder
             'emergency_phone_1' => '0471852963',
             'emergency_phone_2' => '0471717171',
             'nationality' => 'belg',
-            'birthdate' => '01/01/1995',
+            'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -662,9 +662,9 @@ class TravellersTableSeeder extends Seeder
             'emergency_phone_1' => '0471852963',
             'emergency_phone_2' => '0471717171',
             'nationality' => 'belg',
-            'birthdate' => '01/01/1995',
+            'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -685,9 +685,9 @@ class TravellersTableSeeder extends Seeder
             'emergency_phone_1' => '0471852963',
             'emergency_phone_2' => '0471717171',
             'nationality' => 'belg',
-            'birthdate' => '01/01/1995',
+            'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -708,9 +708,9 @@ class TravellersTableSeeder extends Seeder
             'emergency_phone_1' => '0471852963',
             'emergency_phone_2' => '0471717171',
             'nationality' => 'belg',
-            'birthdate' => '01/01/1995',
+            'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -733,9 +733,9 @@ class TravellersTableSeeder extends Seeder
             'emergency_phone_1' => '0471852963',
             'emergency_phone_2' => '0471717171',
             'nationality' => 'belg',
-            'birthdate' => '01/01/1995',
+            'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -754,9 +754,9 @@ class TravellersTableSeeder extends Seeder
             'emergency_phone_1' => '0471852963',
             'emergency_phone_2' => '0471717171',
             'nationality' => 'belg',
-            'birthdate' => '01/01/1995',
+            'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -775,9 +775,9 @@ class TravellersTableSeeder extends Seeder
             'emergency_phone_1' => '0471852963',
             'emergency_phone_2' => '0471717171',
             'nationality' => 'belg',
-            'birthdate' => '01/01/1995',
+            'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -796,9 +796,9 @@ class TravellersTableSeeder extends Seeder
             'emergency_phone_1' => '0471852963',
             'emergency_phone_2' => '0471717171',
             'nationality' => 'belg',
-            'birthdate' => '01/01/1995',
+            'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -817,9 +817,9 @@ class TravellersTableSeeder extends Seeder
             'emergency_phone_1' => '0471852963',
             'emergency_phone_2' => '0471717171',
             'nationality' => 'belg',
-            'birthdate' => '01/01/1995',
+            'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -838,9 +838,9 @@ class TravellersTableSeeder extends Seeder
             'emergency_phone_1' => '0471852963',
             'emergency_phone_2' => '0471717171',
             'nationality' => 'belg',
-            'birthdate' => '01/01/1995',
+            'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -859,9 +859,9 @@ class TravellersTableSeeder extends Seeder
             'emergency_phone_1' => '0471852963',
             'emergency_phone_2' => '0471717171',
             'nationality' => 'belg',
-            'birthdate' => '01/01/1995',
+            'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -880,9 +880,9 @@ class TravellersTableSeeder extends Seeder
             'emergency_phone_1' => '0471852963',
             'emergency_phone_2' => '0471717171',
             'nationality' => 'belg',
-            'birthdate' => '01/01/1995',
+            'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -901,9 +901,9 @@ class TravellersTableSeeder extends Seeder
             'emergency_phone_1' => '0471852963',
             'emergency_phone_2' => '0471717171',
             'nationality' => 'belg',
-            'birthdate' => '01/01/1995',
+            'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -922,9 +922,9 @@ class TravellersTableSeeder extends Seeder
             'emergency_phone_1' => '0471852963',
             'emergency_phone_2' => '0471717171',
             'nationality' => 'belg',
-            'birthdate' => '01/01/1995',
+            'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -943,9 +943,9 @@ class TravellersTableSeeder extends Seeder
             'emergency_phone_1' => '0471852963',
             'emergency_phone_2' => '0471717171',
             'nationality' => 'belg',
-            'birthdate' => '01/01/1995',
+            'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -964,9 +964,9 @@ class TravellersTableSeeder extends Seeder
             'emergency_phone_1' => '0471852963',
             'emergency_phone_2' => '0471717171',
             'nationality' => 'belg',
-            'birthdate' => '01/01/1995',
+            'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -985,9 +985,9 @@ class TravellersTableSeeder extends Seeder
             'emergency_phone_1' => '0471852963',
             'emergency_phone_2' => '0471717171',
             'nationality' => 'belg',
-            'birthdate' => '01/01/1995',
+            'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -1006,9 +1006,9 @@ class TravellersTableSeeder extends Seeder
             'emergency_phone_1' => '0471852963',
             'emergency_phone_2' => '0471717171',
             'nationality' => 'belg',
-            'birthdate' => '01/01/1995',
+            'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -1027,9 +1027,9 @@ class TravellersTableSeeder extends Seeder
             'emergency_phone_1' => '0471852963',
             'emergency_phone_2' => '0471717171',
             'nationality' => 'belg',
-            'birthdate' => '01/01/1995',
+            'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -1048,9 +1048,9 @@ class TravellersTableSeeder extends Seeder
             'emergency_phone_1' => '0471852963',
             'emergency_phone_2' => '0471717171',
             'nationality' => 'belg',
-            'birthdate' => '01/01/1995',
+            'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -1069,9 +1069,9 @@ class TravellersTableSeeder extends Seeder
             'emergency_phone_1' => '0471852963',
             'emergency_phone_2' => '0471717171',
             'nationality' => 'belg',
-            'birthdate' => '01/01/1995',
+            'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -1090,9 +1090,9 @@ class TravellersTableSeeder extends Seeder
             'emergency_phone_1' => '0471852963',
             'emergency_phone_2' => '0471717171',
             'nationality' => 'belg',
-            'birthdate' => '01/01/1995',
+            'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -1111,9 +1111,9 @@ class TravellersTableSeeder extends Seeder
             'emergency_phone_1' => '0471852963',
             'emergency_phone_2' => '0471717171',
             'nationality' => 'belg',
-            'birthdate' => '01/01/1995',
+            'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);

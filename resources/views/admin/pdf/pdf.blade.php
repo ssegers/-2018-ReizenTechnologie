@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('content')
     @if(session()->has('message'))
-        <div class="alert alert-success">
+        <div id="removeTimer" class="alert alert-success">
             {{ session()->get('message') }}
         </div>
     @endif
@@ -32,16 +32,16 @@
 
     <div class="form-group">
     {{ Form::open(array('action' => 'AdminPdfController@updateContent', 'method' => 'post','files' => true)) }}
-        <table>
+        <table id="inlineFormTable">
             <tr>
-                <td width="300px">
+                <td>
                     <select class="form-control" id="pageSelector" name="pageSelector">
                         @foreach($aPages as $oPage)
                             <option value="{{ $oPage->page_id }}">{{ $oPage->name }}</option>
                         @endforeach
                     </select>
                 </td>
-                <td style="padding-left: 100px">
+                <td>
                     <div class="form-inline">
                         <label class="control-label" for="typeSelector" style="padding-right: 10px">Type:</label>
                         <select name="typeSelector" id="typeSelector" class="form-control">
@@ -50,13 +50,13 @@
                         </select>
                     </div>
                 </td>
-                <td style="padding-left: 100px">
+                <td>
                     <div class="form-check">
                         <input type="checkbox" class="form-check-input" name="Zichtbaar" id="Zichtbaar">
                         <label class="form-check-label" for="Zichtbaar">Zichtbaar</label>
                     </div>
                 </td>
-                <td style="padding-left: 100px">
+                <td>
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#pageModal">Nieuwe Pagina Aanmaken</button>
                 </td>
             </tr>
@@ -117,6 +117,12 @@
         var pdfDiv2=document.getElementById('pdf2');
         var htmlDiv=document.getElementById('html');
         var filepath=document.getElementById('thumbnail');
+
+        setTimeout(function(){
+            if ($('#removeTimer').length > 0) {
+                $('#removeTimer').remove();
+            }
+        }, 5000)
 
         select.addEventListener('change', function(){
             switchPage();

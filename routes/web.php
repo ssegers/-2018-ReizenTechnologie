@@ -28,18 +28,23 @@ Route::prefix('user')->group(function () {
         route::get('step-3', 'RegisterController@step3');
         route::post('step-3', 'RegisterController@step3Post');
 
-        route::get('step-4', 'RegisterController@step4');
-        route::post('step-4', 'RegisterController@step4Post');
     });
 
 });
 
 Route::prefix('userinfo')->group(function() {
     Route::get('{sUserName}', 'UserDataController@showUserData');
-    Route::get('{sUserName}/edit', 'UserDataController@showUserData');         //show editable
+    Route::get('{sUserName}/edit', 'UserDataController@showUserData');
     Route::post('{sUserName}/cascade', 'UserDataController@GetMajorsByStudy');
-    Route::post('{sUserName}/update', 'UserDataController@updateUserData');    //update
-    Route::delete('delete', 'UserDataController@deleteUserData');              //delete
+    Route::post('{sUserName}/update', 'UserDataController@updateUserData');
+    Route::delete('{sUserName}/delete', 'UserDataController@deleteUserData')->name('user.destroy');
+});
+
+Route::prefix('profile')->group(function() {
+    Route::get('', 'UserProfileController@showUserData')->name('profile');
+    Route::get('/edit', 'UserProfileController@showUserData');
+    Route::post('{sUserName}/cascade', 'UserProfileController@GetMajorsByStudy');
+    Route::post('{sUserName}/update', 'UserProfileController@updateUserData');
 });
 
 Route::prefix('admin')->group(function() {
@@ -76,6 +81,12 @@ Route::prefix('admin')->group(function() {
         Route::post('addMajor', 'AdminStudyController@addMajor');
     });
 });
+
+//WIP
+Route::get('/listhotels', 'HotelRoomController@getHotelsPerTrip');
+Route::get('/listrooms/{hotels_per_trip_id}', 'HotelRoomController@getRooms');
+Route::get('/listtravellers/{room_hotel_trip_id}', 'HotelRoomController@getTravellers');
+//EndWIP
 
 Route::get('/info','AdminInfoController@showInfo')->name('info');
 Route::get('/pdf/{page_name}','AdminPdfController@showPdf');

@@ -11,7 +11,6 @@ use App\Zip;
 use Dotenv\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Mpdf\Tag\Tr;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\Exception;
@@ -266,15 +265,13 @@ class UserDataController extends Controller
             ->join('studies', 'majors.study_id', '=', 'studies.study_id')
             ->where('users.username', '=', $sUserName) //r-nummer
             ->first();
-        //var_dump($aUserData);
-        //var_dump($request->path());
+
+
         if(str_contains($request->path(), 'edit')){
             $oTrips = Trip::select()->where('is_active', '=', true)->get();
             $oZips = Zip::all();
-            $oMajors = Major::all();
             $oStudies = Study::all();
-            //var_dump(json_decode(json_encode($oZips), true));
-            //var_dump(json_decode(json_encode($oTrips), true));
+            $oMajors = Major::where("study_id", $aUserData->study_id)->get();
             return view('user.filter.individualTravellerEdit', ['aUserData' => $aUserData, 'oTrips' => $oTrips, 'oZips' => $oZips, 'oStudies' => $oStudies, 'oMajors' => $oMajors]);
         }
         return view('user.filter.individualTraveller', ['aUserData' => $aUserData, 'sName' => $oUser->username]);
@@ -295,9 +292,9 @@ class UserDataController extends Controller
         $aRequest->validate([
             'LastName'      => 'required',
             'FirstName'     => 'required',
-            'IBAN'          => 'required',
+            'IBAN'          => 'required|iban',
 
-            'BirthDate'     => 'required|date_format:d/m/Y',
+            'BirthDate'     => 'required',
             'Birthplace'    => 'required',
             'Nationality'   => 'required',
             'Address'       => 'required',
@@ -307,15 +304,14 @@ class UserDataController extends Controller
             'icePhone1'     => 'required'
         ],$this->messages());
 
-        DB::table('users')
-            ->join('travellers', 'users.user_id', '=', 'travellers.user_id')
-            ->where('users.username', '=', $sUserName) //r-nummer
+        User::where('users.username', '=', $sUserName) //r-nummer
+        ->join('travellers', 'users.user_id', '=', 'travellers.user_id')
             ->update(
                 [
                     'last_name'         => $aRequest->post('LastName'),
                     'first_name'        => $aRequest->post('FirstName'),
                     'gender'            => $aRequest->post('Gender'),
-                    'major_id'                  => $aRequest->post('Major'),
+                    'major_id'          => $aRequest->post('Major'),
                     'trip_id'           => $aRequest->post('Trip'),
                     'iban'              => $aRequest->post('IBAN'),
                     'medical_issue'     => $aRequest->post('MedicalIssue'),
@@ -344,10 +340,10 @@ class UserDataController extends Controller
      * @param $sUserName
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|string
      */
-    public function deleteUserData(Request $request){
-        var_dump($request);
-        $sUserName = $request->post('username');
-        return response(User::where('username', $sUserName)->delete());
+    public function deleteUserData($sUserName){
+        $User = User::where('username', $sUserName)->firstOrFail();
+        $User->delete();
+        return redirect('/');
     }
 
     /**
@@ -361,9 +357,8 @@ class UserDataController extends Controller
             'LastName.required'     => 'U heeft geen achternaam ingevuld.',
             'FirstName.required'    => 'U heeft geen voornaam ingevuld.',
             'IBAN.required'         => 'U heeft geen IBAN-nummer ingevuld.',
-
-            'BirthDate.required'    => 'U heeft geen geboortedatum ingevuld. (d/m/y)',
-            'BirthDate.date_format' => 'De waarde die u heeft ingevuld bij geboortedatum is ongeldig. (d/m/Y)',
+            'iban'                  => 'U heeft geen geldig IBAN-nummer ingevuld.',
+            'BirthDate.required'    => 'U heeft geen geboortedatum ingevuld.',
             'Birthplace.required'   => 'U heeft geen geboorteplaats ingevuld.',
             'Nationality.required'  => 'U heeft geen nationaliteit ingevuld.',
             'Address.required'      => 'U heeft geen adres ingevuld.',
