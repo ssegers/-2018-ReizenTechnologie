@@ -5,7 +5,7 @@ $(document).ready(function(){
             var dependent = $(this).data('dependent');
             var _token = $('input[name="_token"]').val();
             $.ajax({
-                url:"/userinfo/{{$aUserData['username']}}/cascade",
+                url:"/cascade",
                 method:"POST",
                 data:{
                     study: study,
@@ -17,6 +17,8 @@ $(document).ready(function(){
             })
         }
     });
+    $('.cascadingMajor').trigger("change");
+
     $('#Study').change(function(){
         $('#Major').val('');
     });

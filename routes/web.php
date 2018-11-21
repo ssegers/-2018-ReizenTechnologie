@@ -35,7 +35,6 @@ Route::prefix('user')->group(function () {
 Route::prefix('userinfo')->group(function() {
     Route::get('{sUserName}', 'UserDataController@showUserData');
     Route::get('{sUserName}/edit', 'UserDataController@showUserData');
-    Route::post('{sUserName}/cascade', 'UserDataController@GetMajorsByStudy');
     Route::post('{sUserName}/update', 'UserDataController@updateUserData');
     Route::delete('{sUserName}/delete', 'UserDataController@deleteUserData')->name('user.destroy');
 });
@@ -87,6 +86,9 @@ Route::get('/listhotels', 'HotelRoomController@getHotelsPerTrip');
 Route::get('/listrooms/{hotels_per_trip_id}', 'HotelRoomController@getRooms');
 Route::get('/listtravellers/{room_hotel_trip_id}', 'HotelRoomController@getTravellers');
 //EndWIP
+
+//cascade API
+Route::post('cascade', 'UserDataController@GetMajorsByStudy');
 
 Route::get('/info','AdminInfoController@showInfo')->name('info');
 Route::get('/pdf/{page_name}','AdminPdfController@showPdf');

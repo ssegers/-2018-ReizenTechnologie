@@ -58,8 +58,7 @@ class RegisterController extends Controller
         $traveller = $request->session()->get('traveller');
         $aTrips = Trip::where('is_active', true)->orderBy('name')->pluck('name');
         $aStudies = Study::pluck('study_name','study_id');
-        $aMajors = Major::pluck('major_name', 'major_id');
-        return view('user.form.step1',['traveller' => $traveller,'aTrips'=>$aTrips, 'aStudies'=>$aStudies, 'aMajors'=>$aMajors]);
+        return view('user.form.step1',['traveller' => $traveller,'aTrips'=>$aTrips, 'aStudies'=>$aStudies]);
     }
 
     /**
@@ -71,7 +70,7 @@ class RegisterController extends Controller
     public function step1Post(Request $request) {
         $validator = Validator::make($request->all(), [
             'dropReis' => 'required',
-            'txtStudentNummer' => 'required | filled |regex:^[ruRU]^ | min:8 | max:8',
+            'txtStudentNummer' => 'required | filled | regex:^[ruRU]^ | min:8 | max:8',
             'dropOpleiding' => 'required',
             'dropAfstudeerrichtingen' => 'required',
         ],$this->messages());
@@ -219,6 +218,13 @@ class RegisterController extends Controller
         }
     }
 
+    public function GetMajorsByStudy(Request $request){
+        $study = $request->get('study');
+        $majors = Major::select()
+            ->where("study_id", $study)
+            ->get();
+
+    }
     /**
      * @author Nico Schelfhout & Kaan
      * @return array
