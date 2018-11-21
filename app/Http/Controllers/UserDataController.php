@@ -11,7 +11,6 @@ use App\Zip;
 use Dotenv\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Mpdf\Tag\Tr;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\Exception;
@@ -305,9 +304,8 @@ class UserDataController extends Controller
             'icePhone1'     => 'required'
         ],$this->messages());
 
-        DB::table('users')
-            ->join('travellers', 'users.user_id', '=', 'travellers.user_id')
-            ->where('users.username', '=', $sUserName) //r-nummer
+        User::where('users.username', '=', $sUserName) //r-nummer
+        ->join('travellers', 'users.user_id', '=', 'travellers.user_id')
             ->update(
                 [
                     'last_name'         => $aRequest->post('LastName'),

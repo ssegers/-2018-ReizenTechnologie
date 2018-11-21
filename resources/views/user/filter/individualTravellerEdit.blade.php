@@ -42,8 +42,8 @@
                 <div class="col color-dark-blue">
                     <h4><u>Geboorte</u></h4>
                     <label class="col-4 font-weight-bold" for="BirthDate">Geboortedatum:    </label>    <input id="BirthDate"    name="BirthDate"    class="col-6" type="text" value="{{$aUserData['birthdate']}}">   <br/>
-                    <label class="col-4 font-weight-bold" for="Birthplace">Geboorteplaats:  </label>    <input id="Birthplace"   name="Birthplace"   class="col-6" type="text" value="{{$aUserData['birthplace']}}"">  <br/>
-                    <label class="col-4 font-weight-bold" for="Nationality">Nationaliteit:  </label>    <input id="Nationality"  name="Nationality"  class="col-6" type="text" value="{{$aUserData['nationality']}}""> <br/>
+                    <label class="col-4 font-weight-bold" for="Birthplace">Geboorteplaats:  </label>    <input id="Birthplace"   name="Birthplace"   class="col-6" type="text" value="{{$aUserData['birthplace']}}">  <br/>
+                    <label class="col-4 font-weight-bold" for="Nationality">Nationaliteit:  </label>    <input id="Nationality"  name="Nationality"  class="col-6" type="text" value="{{$aUserData['nationality']}}"> <br/>
                     <h4><u>Woonplaats</u></h4>
                     <label class="col-4 font-weight-bold" for="Address">Adres:              </label>    <input id="Address"      name="Address"      class="col-6" type="text" value="{{$aUserData['address']}}">     <br/>
                     <label class="col-4 font-weight-bold" for="City">Gemeente:              </label>    <select id="City"        name="City"         class="col-6">
@@ -51,7 +51,7 @@
                             <option value="{{ $oZip->zip_id}}" @if($oZip->zip_id == $aUserData["zip_id"]) selected @endif>{{$oZip->city}} {{$oZip->zip_code}}</option>
                         @endforeach
                     </select>                                              <br/>
-                    <label class="col-4 font-weight-bold" for="Country">Land:               </label>    <input id="Country"      name="Country"      class="col-6" type="text" value="{{$aUserData['country']}}"">     <br/>
+                    <label class="col-4 font-weight-bold" for="Country">Land:               </label>    <input id="Country"      name="Country"      class="col-6" type="text" value="{{$aUserData['country']}}">     <br/>
                     <h4><u>Contact Info</u></h4>
                     <label class="col-4 font-weight-bold" for="Email">Email:                </label>    <span class="col-4">{{$aUserData['email']}}</span><br/>
                     <label class="col-4 font-weight-bold" for="Phone">Telefoon:             </label>    <input id="Phone"        name="Phone"        class="col-6" type="text" value="{{$aUserData['phone']}}">       <br/>

@@ -23,4 +23,6 @@ class Traveller extends Model
     {
         return $this->belongsTo('App\Zip');
     }
+
+    public $timestamps = false;
 }

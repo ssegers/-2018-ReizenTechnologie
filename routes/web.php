@@ -42,6 +42,13 @@ Route::prefix('userinfo')->group(function() {
     Route::delete('{sUserName}/delete', 'UserDataController@deleteUserData')->name('user.destroy');
 });
 
+Route::prefix('profile')->group(function() {
+    Route::get('', 'UserProfileController@showUserData')->name('profile');
+    Route::get('/edit', 'UserProfileController@showUserData');
+    Route::post('{sUserName}/cascade', 'UserProfileController@GetMajorsByStudy');
+    Route::post('{sUserName}/update', 'UserProfileController@updateUserData');
+});
+
 Route::prefix('admin')->group(function() {
     Route::prefix('linkorganisator')->group(function() {
         route::get('/', 'ActiveTripOrganizerController@showActiveTrips')->name('adminLinkorganisator');
