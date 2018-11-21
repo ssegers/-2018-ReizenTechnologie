@@ -56,10 +56,11 @@ class RegisterController extends Controller
      */
     public function step1(Request $request) {
         $traveller = $request->session()->get('traveller');
+        $user = $request->session()->get('user');
         $aTrips = Trip::where('is_active', true)->orderBy('name')->pluck('name');
         $aStudies = Study::pluck('study_name','study_id');
         $aMajors = Major::pluck('major_name', 'major_id');
-        return view('user.form.step1',['traveller' => $traveller,'aTrips'=>$aTrips, 'aStudies'=>$aStudies, 'aMajors'=>$aMajors]);
+        return view('user.form.step1',['traveller' => $traveller, 'user' => $user, 'aTrips'=>$aTrips, 'aStudies'=>$aStudies, 'aMajors'=>$aMajors]);
     }
 
     /**
@@ -154,6 +155,7 @@ class RegisterController extends Controller
             'country' => $validatedData['txtLand'],
             'iban' => $validatedData['txtBank'],
                 ]);
+
 
         $request->session()->put('traveller', $traveller);
 
