@@ -367,8 +367,8 @@ class UserDataController extends Controller
             'Phone.required'        => 'U heeft geen GSM-nummer ingevuld.',
             'Phone.phone'        => 'U heeft geen GSM-nummer ingevuld.',
             'icePhone1.required'    => 'U heeft bij \'noodnummer 1\' niets ingevuld.',
-            'icePhone1.phone'    => 'U heeft bij \'noodnummer 1\' niets geldig ingevuld.',
-            'icePhone2.phone'    => 'U heeft bij \'noodnummer 2\' niets geldig ingevuld.',
+            'icePhone1.phone'    => 'U heeft bij \'noodnummer 1\' geen geldig nummer ingevuld.',
+            'icePhone2.phone'    => 'U heeft bij \'noodnummer 2\' geen geldig nummer ingevuld.',
         ];
     }
 
