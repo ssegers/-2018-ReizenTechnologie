@@ -84,6 +84,12 @@ Route::prefix('admin')->group(function() {
     });
 });
 
+//WIP
+Route::get('/listhotels', 'HotelRoomController@getHotelsPerTrip');
+Route::get('/listrooms/{hotels_per_trip_id}', 'HotelRoomController@getRooms');
+Route::get('/listtravellers/{room_hotel_trip_id}', 'HotelRoomController@getTravellers');
+//EndWIP
+
 Route::get('/info','AdminInfoController@showInfo')->name('info');
 Route::get('/pdf/{page_name}','AdminPdfController@showPdf');
 Route::get('/', function () {
