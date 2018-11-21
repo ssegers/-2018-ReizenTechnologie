@@ -185,7 +185,7 @@ class RegisterController extends Controller
             'txtEmail' => 'required',
             'txtGsm' => 'required|phone:BE',
             'txtNoodnummer1' => 'required|phone:BE',
-            //'txtNoodnummer2' => 'phone:BE',
+            'txtNoodnummer2' => 'nullable|phone:BE',
             'radioMedisch' => 'required',
             'txtMedisch' => '',
         ],$this->messages());

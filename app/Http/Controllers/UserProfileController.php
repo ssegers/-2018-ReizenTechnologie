@@ -71,7 +71,7 @@ class UserProfileController extends Controller
 
             'Phone'         => 'required|phone:BE',
             'icePhone1'     => 'required|phone:BE',
-            //'icePhone2'     => 'phone:BE'
+            'icePhone2'     => 'nullable|phone:BE'
         ],$this->messages());
 
         User::where('users.username', '=', $sUserName) //r-nummer
