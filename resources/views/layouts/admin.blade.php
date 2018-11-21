@@ -36,7 +36,7 @@
 
         <button type="submit" disabled name="button-admin"  value="button-filter" >Dashboard</button>
         <ul>
-            <a href="{{route('adminInfo')}}"  class="list-group-item" style="height: 55px; color:black; padding: 0px;" onmouseover="this.style.backgroundColor='#E00049';" onmouseout="this.style.backgroundColor='';"><li>Info</li></a>
+            <a href="{{route('adminInfo')}}"  class="list-group-item" style="height: 55px; color:black; padding: 0px;" onmouseover="this.style.backgroundColor='#E00049';" onmouseout="this.style.backgroundColor='';"><li>Info Aanpassen</li></a>
             <a href="{{route('adminDefUser')}}"  class="list-group-item" style="height: 55px; color:black; padding: 0px;" onmouseover="this.style.backgroundColor='#E00049';" onmouseout="this.style.backgroundColor='';"><li>Standaard Gebruiker</li></a>
             <a href="{{route('adminTrips')}}"  class="list-group-item" style="height: 55px; color:black; padding: 0px;" onmouseover="this.style.backgroundColor='#E00049';" onmouseout="this.style.backgroundColor='';"><li>Actieve reizen</li></a>
             <a href="{{route('adminLinkorganisator')}}"  class="list-group-item" style="height: 55px; color:black; padding: 0px;" onmouseover="this.style.backgroundColor='#E00049';" onmouseout="this.style.backgroundColor='';"><li>Organisator Koppelen</li></a>
