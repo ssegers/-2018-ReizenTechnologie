@@ -40,7 +40,8 @@
 
     <div class="row" style="margin-left: 2px; margin-top: 2px;">
         <div class="col">
-            <h1 class="my-5">Hier vind je alle reizen. Reizen die actief zijn daar kan men zich voor registreren.</h1>
+            <h1 class="my-5">Beheer reizen</h1>
+            <p>Hier vind je alle reizen. Reizen die actief zijn daar kan men zich voor registreren.</p>
             <button type="button" class="mb-5 p-3 float-right btn btn-primary" data-toggle="modal" data-target="#tripModal" data-trip-id="-1">
                 Voeg een reis toe
             </button>

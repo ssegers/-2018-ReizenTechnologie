@@ -5,13 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use App\Trip;
 
 class AdminTripController extends Controller
 {
     //GET::/admin/trips
     function getTrips()
     {
-        $aTrips = DB::table('trips')->orderBy('year')->get();
+        //$aTrips = DB::table('trips')->orderBy('year')->get();
+        $aTrips = Trip::orderby('year', 'desc')->get();
         return view('admin.trips.trips', ['aTripData' => $aTrips]);
     }
 
@@ -43,25 +45,21 @@ class AdminTripController extends Controller
     {
         if($request->post('trip-id') == -1)
         {
-            //CreateTrip($request); De functie aanroepen geeft een function not defined error
-            DB::table('trips')
-                ->insert([
-                    'name' => $request->input('trip-name'),
-                    'is_active' => $request->input('trip-is-active', false),
-                    'year' => $request->input('trip-year'),
-                    'contact_mail' =>$request->input('trip-mail')
-                ]);
+            $oTrip = new Trip();
+            $oTrip->name = $request->input('trip-name');
+            $oTrip->is_active = $request->input('trip-is-active', false);
+            $oTrip->year = $request->input('trip-year');
+            $oTrip->contact_mail = $request->input('trip-mail');
+            $oTrip->save();
         }
         else{
             //UpdateTrip($request); De functie aanroepen geeft een function not defined error
-            DB::table('trips')
-                ->where('trip_id','=',$request->input('trip-id'))
-                ->update([
-                    'name' => $request->input('trip-name'),
-                    'is_active' => $request->post('trip-is-active', false),
-                    'year' => $request->input('trip-year'),
-                    'contact_mail' =>$request->input('trip-mail')
-                ]);
+            $oTrip = Trip::find($request->input('trip-id'));
+            $oTrip->name = $request->input('trip-name');
+            $oTrip->is_active = $request->input('trip-is-active', false);
+            $oTrip->year = $request->input('trip-year');
+            $oTrip->contact_mail = $request->input('trip-mail');
+            $oTrip->save();
         }
         return redirect('/admin/trips');
     }
