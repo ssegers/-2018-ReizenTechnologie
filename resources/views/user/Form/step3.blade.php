@@ -18,18 +18,18 @@
 
     <div class="form-row border-bottom pt-2">
         <div class="form-group col-md-8">
-            <label class="form-label">E-mail adres (van de school)</label>
-            {{ Form::email('txtEmail', '', ['id'=>'txtEmail','oninput'=>'this.className', 'class' => 'mb-2 form-control '])}}
+            <label class="form-label">E-mail adres (van de school)*</label>
+            {{ Form::email('txtEmail', '', ['required', 'id'=>'txtEmail','oninput'=>'this.className', 'class' => 'mb-2 form-control '])}}
         </div>
         <div class="form-group col-md-4">
-            <label class="form-label">GSM-nummer</label>
-            {{ Form::text('txtGsm', '', ['id'=>'txtGsm','oninput'=>'this.className', 'class' => 'mb-2 form-control '])}}
+            <label class="form-label">GSM-nummer*</label>
+            {{ Form::text('txtGsm', '', ['required', 'id'=>'txtGsm','oninput'=>'this.className', 'class' => 'mb-2 form-control '])}}
         </div>
     </div>
     <div class="form-row border-bottom pt-2">
         <div class="form-group col-md-6">
-            <label class="form-label">Noodnummer 1</label>
-            {{ Form::text('txtNoodnummer1', '', ['id'=>'txtNoodnummer1','oninput'=>'this.className', 'class' => 'mb-2 form-control '])}}
+            <label class="form-label">Noodnummer 1*</label>
+            {{ Form::text('txtNoodnummer1', '', ['required', 'id'=>'txtNoodnummer1','oninput'=>'this.className', 'class' => 'mb-2 form-control '])}}
         </div>
 
         <div class="form-group col-md-6">
