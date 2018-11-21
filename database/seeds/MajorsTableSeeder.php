@@ -22,7 +22,6 @@ class MajorsTableSeeder extends Seeder
             'major_name' => "ELO"
         ));
 
-
         DB::table('majors')->insert(array(
 
             'study_id' => 2,

@@ -19,21 +19,21 @@
 
         <div class="form-row border-bottom pt-2">
             <div class="form-group col-md-6">
-                <label for="dropReis" class="form-label ">Reis</label>
+                <label for="dropReis" class="form-label ">Reis*</label>
                 {{ Form::select('dropReis', $aTrips, null ,['id'=>'dropReis','oninput'=>'this.className', 'class' => 'mb-2 form-control '])}}
             </div>
             <div class="form-group col-md-6">
-                <label for="txtStudentNummer" class="form-label ">Studentnummer</label>
+                <label for="txtStudentNummer" class="form-label ">Studentnummer*</label>
                 {{ Form::text('txtStudentNummer', '', ['required','id'=>'txtStudentnummer','oninput'=>'this.className', 'class' => ' mb-2 form-control'])}}
             </div>
         </div>
         <div class="form-row pt-2">
             <div class="form-group col-md-6">
-                <label class="form-label  ">Opleiding</label>
+                <label class="form-label  ">Opleiding*</label>
                 {{ Form::select('dropOpleiding', $aStudies, null, ['id'=>'dropOpleiding','oninput'=>'this.className', 'class' => 'mb-2 form-control'])}}
             </div>
             <div class="form-group col-md-6">
-                <label class="form-label ">Afstudeerrichting</label>
+                <label class="form-label ">Afstudeerrichting*</label>
                 {{ Form::select('dropAfstudeerrichtingen', $aMajors, null ,['id'=>'dropAfstudeerrichtingen','oninput'=>'this.className', 'class' => 'mb-2 form-control'])}}
             </div>
         </div>

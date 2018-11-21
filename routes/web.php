@@ -28,8 +28,6 @@ Route::prefix('user')->group(function () {
         route::get('step-3', 'RegisterController@step3');
         route::post('step-3', 'RegisterController@step3Post');
 
-        route::get('step-4', 'RegisterController@step4');
-        route::post('step-4', 'RegisterController@step4Post');
     });
 
 });
