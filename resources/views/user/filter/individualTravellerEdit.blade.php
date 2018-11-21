@@ -41,7 +41,7 @@
                 </div>
                 <div class="col color-dark-blue">
                     <h4><u>Geboorte</u></h4>
-                    <label class="col-4 font-weight-bold" for="BirthDate">Geboortedatum:    </label>    <input id="BirthDate"    name="BirthDate"    class="col-6" type="text" value="{{$aUserData['birthdate']}}">   <br/>
+                    <label class="col-4 font-weight-bold" for="BirthDate">Geboortedatum:    </label>    {{ Form::date('BirthDate', $aUserData["birthdate"], ['id'=>'BirthDate','oninput'=>'this.className','type'=>'date', 'class' => 'col-6'])}}   <br/>
                     <label class="col-4 font-weight-bold" for="Birthplace">Geboorteplaats:  </label>    <input id="Birthplace"   name="Birthplace"   class="col-6" type="text" value="{{$aUserData['birthplace']}}">  <br/>
                     <label class="col-4 font-weight-bold" for="Nationality">Nationaliteit:  </label>    <input id="Nationality"  name="Nationality"  class="col-6" type="text" value="{{$aUserData['nationality']}}"> <br/>
                     <h4><u>Woonplaats</u></h4>

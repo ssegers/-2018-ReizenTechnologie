@@ -294,7 +294,7 @@ class UserDataController extends Controller
             'FirstName'     => 'required',
             'IBAN'          => 'required',
 
-            'BirthDate'     => 'required|date_format:d/m/Y',
+            'BirthDate'     => 'required',
             'Birthplace'    => 'required',
             'Nationality'   => 'required',
             'Address'       => 'required',
@@ -358,8 +358,7 @@ class UserDataController extends Controller
             'FirstName.required'    => 'U heeft geen voornaam ingevuld.',
             'IBAN.required'         => 'U heeft geen IBAN-nummer ingevuld.',
 
-            'BirthDate.required'    => 'U heeft geen geboortedatum ingevuld. (d/m/y)',
-            'BirthDate.date_format' => 'De waarde die u heeft ingevuld bij geboortedatum is ongeldig. (d/m/Y)',
+            'BirthDate.required'    => 'U heeft geen geboortedatum ingevuld.',
             'Birthplace.required'   => 'U heeft geen geboorteplaats ingevuld.',
             'Nationality.required'  => 'U heeft geen nationaliteit ingevuld.',
             'Address.required'      => 'U heeft geen adres ingevuld.',

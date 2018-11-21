@@ -21,4 +21,3 @@ $(document).ready(function(){
         $('#Major').val('');
     });
 });
-//# sourceMappingURL=cascadingDropDownStudyMajors.js.map
