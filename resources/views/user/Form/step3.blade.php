@@ -19,7 +19,11 @@
     <div class="form-row border-bottom pt-2">
         <div class="form-group col-md-8">
             <label class="form-label">E-mail adres (van de school)*</label>
-            {{ Form::email('txtEmail', '', ['required', 'id'=>'txtEmail','oninput'=>'this.className', 'class' => 'mb-2 form-control '])}}
+            @if($user['role'] == "Student")
+            {{ Form::email('txtEmail', $traveller['first_name'] . '.' . str_replace(' ', '', $traveller['last_name']) . '@student.ucll.be', ['required', 'id'=>'txtEmail','oninput'=>'this.className', 'class' => 'mb-2 form-control '])}}
+            @else
+                {{ Form::email('txtEmail', $traveller['first_name'] . '.' . str_replace(' ', '', $traveller['last_name']) . '@ucll.be', ['required', 'id'=>'txtEmail','oninput'=>'this.className', 'class' => 'mb-2 form-control '])}}
+            @endif
         </div>
         <div class="form-group col-md-4">
             <label class="form-label">GSM-nummer*</label>

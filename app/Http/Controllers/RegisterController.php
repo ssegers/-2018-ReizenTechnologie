@@ -167,7 +167,8 @@ class RegisterController extends Controller
      */
     public function step3(Request $request) {
         $traveller = $request->session()->get('traveller');
-        return view('user.form.step3',compact('traveller', $traveller));
+        $user = $request->session()->get('user');
+        return view('user.form.step3',['traveller'=> $traveller, 'user' => $user]);
     }
 
     /**
