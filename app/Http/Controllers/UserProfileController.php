@@ -101,21 +101,6 @@ class UserProfileController extends Controller
 
         return redirect('profile');
     }
-
-    /**
-     * Deletes the data of a selected user
-     *
-     * @author Joren Meynen
-     *
-     * @param $sUserName
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|string
-     */
-    public function deleteUserData($sUserName){
-        $User = User::where('username', $sUserName)->firstOrFail();
-        $User->delete();
-        return redirect('/');
-    }
-
     /**
      * @author Joren Meynen
      *
