@@ -90,8 +90,15 @@
         </div>
         <div class="form-group col-md-4">
             <label class="form-label">Woonplaats</label>
-            {{ Form::select('dropGemeentes', $aZips, null ,['id'=>'dropGemeentes','oninput'=>'this.className', 'class' => 'mb-2 form-control '])}}
-            {{--{{ Form::text('dropGemeente', '', ['id'=>'dropGemeente','oninput'=>'this.className', 'class' => 'mb-2 form-control'])}}--}}
+            <select id="dropGemeentes" name="dropGemeentes" class="mb-2 form-control">
+            @foreach($aZips as $zipKey => $zipValue)
+                    <optgroup label="{{ $zipKey }}">
+                    @foreach($zipValue as $city)
+                        <option value={{ $city }}> {{ $city }}</option>
+                    @endforeach
+                    </optgroup>
+                @endforeach
+            </select>
         </div>
         <div class="form-group col-md-4">
             <label class="form-label">Land</label>

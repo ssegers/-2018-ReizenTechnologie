@@ -4,6 +4,18 @@
 
 <div class="container bg-white rounded shadow-sm">
     <h2 class="my-2 pb-2 border-bottom border-dark">Contact gegevens</h2>
+    {{ Form::open(array('action' => 'RegisterController@step3', 'method' => 'post')) }}
+    {{ csrf_field() }}
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
     <div class="form-row border-bottom pt-2">
         <div class="form-group col-md-8">
             <label class="form-label">E-mail adres (van de school)</label>
@@ -30,8 +42,8 @@
         <div class="form-group col-md-12">
         <label class="form-label">Heeft u een operatie gehad in het afgelopen jaar of andere medische aandoening? (Allergie, ziekte, ...)</label><br>
         <div>
-            {{ Form::radio('check', '1', ['id'=>'radioMedisch','oninput'=>'this.className'])}}Ja
-            {{ Form::radio('check', '0', ['id'=>'radioMedisch','oninput'=>'this.className'])}}Nee
+            {{ Form::radio('radioMedisch', '1', ['id'=>'radioMedisch','oninput'=>'this.className'])}}Ja
+            {{ Form::radio('radioMedisch', '0', ['id'=>'radioMedisch','oninput'=>'this.className'])}}Nee
         </div>
         </div>
     </div>
