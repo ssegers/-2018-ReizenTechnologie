@@ -73,7 +73,7 @@ class AdminZipController extends Controller
     /**Author: Stef Kerkhofs
      * @return array
      *
-     * Returns the custom error messages
+     * Returns an array with custom error messages
      */
     private function messages(){
         return [
