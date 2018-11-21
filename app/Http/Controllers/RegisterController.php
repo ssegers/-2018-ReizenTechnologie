@@ -205,13 +205,12 @@ class RegisterController extends Controller
 
         $user = $request->session()->get('user');
         $user->password = $this->randomPassword();
-
+        return $traveller->phone;
         $user->save();
-
         $traveller->fill(['user_id' => $user->user_id]);
         $traveller->save();
         $this->sendMail($traveller->email, $user->username, $user->password);
-        return redirect('/info')->with('succes', 'Je hebt je succesvol geregistreert voor een reis!');
+        return redirect('/info')->with('message', 'Je hebt je succesvol geregistreert voor een reis!');
     }
 
     private function checkRole($sUsername) {
@@ -270,6 +269,7 @@ class RegisterController extends Controller
             'txtGsm.required' => 'Je moet je GSM nummer invullen.',
             'txtGsm.phone' => 'Je moet een geldig GSM nummer invullen.',
             'NoodNummer1.required' => 'Je moet minstens 1 noodnummer invullen.',
+            'NoodNummer1.phone' => 'Je moet een geldig noodnummer invullen.',
             'MedischeAandoening.required' => 'Je moet aanduiden indien je een medische behandeling volgt of niet.',
         ];
     }
