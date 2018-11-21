@@ -62,12 +62,14 @@ body {
   height: 60px;
   width: 235px;
   margin-right: -30px;
-  background-color: $col-accent;
-  border: none;
-  color: white;
+  //background-color: $col-accent;
+  //border: none;
+  //color: white;
 }
 .side-nav button:hover {
   cursor: pointer;
+  background-color: $col-primary;
+  color: white;
 }
 
 
