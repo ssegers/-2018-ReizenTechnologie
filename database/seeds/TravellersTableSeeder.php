@@ -30,7 +30,7 @@ class TravellersTableSeeder extends Seeder
             'nationality' => 'belg',
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -53,7 +53,7 @@ class TravellersTableSeeder extends Seeder
             'nationality' => 'belg',
             'birthdate' => '2000-01-01',
             'birthplace' => 'Genk',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -76,7 +76,7 @@ class TravellersTableSeeder extends Seeder
             'nationality' => 'belg',
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -99,7 +99,7 @@ class TravellersTableSeeder extends Seeder
             'nationality' => 'belg',
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -122,7 +122,7 @@ class TravellersTableSeeder extends Seeder
             'nationality' => 'belg',
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -145,7 +145,7 @@ class TravellersTableSeeder extends Seeder
             'nationality' => 'belg',
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -168,7 +168,7 @@ class TravellersTableSeeder extends Seeder
             'nationality' => 'belg',
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -191,7 +191,7 @@ class TravellersTableSeeder extends Seeder
             'nationality' => 'belg',
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -214,7 +214,7 @@ class TravellersTableSeeder extends Seeder
             'nationality' => 'belg',
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -237,7 +237,7 @@ class TravellersTableSeeder extends Seeder
             'nationality' => 'belg',
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -260,7 +260,7 @@ class TravellersTableSeeder extends Seeder
             'nationality' => 'belg',
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -283,7 +283,7 @@ class TravellersTableSeeder extends Seeder
             'nationality' => 'belg',
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -306,7 +306,7 @@ class TravellersTableSeeder extends Seeder
             'nationality' => 'belg',
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -329,7 +329,7 @@ class TravellersTableSeeder extends Seeder
             'nationality' => 'belg',
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -352,7 +352,7 @@ class TravellersTableSeeder extends Seeder
             'nationality' => 'belg',
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -376,7 +376,7 @@ class TravellersTableSeeder extends Seeder
             'nationality' => 'belg',
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -400,7 +400,7 @@ class TravellersTableSeeder extends Seeder
             'nationality' => 'belg',
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -424,7 +424,7 @@ class TravellersTableSeeder extends Seeder
             'nationality' => 'belg',
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -448,7 +448,7 @@ class TravellersTableSeeder extends Seeder
             'nationality' => 'belg',
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -472,7 +472,7 @@ class TravellersTableSeeder extends Seeder
             'nationality' => 'belg',
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -496,7 +496,7 @@ class TravellersTableSeeder extends Seeder
             'nationality' => 'belg',
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -520,7 +520,7 @@ class TravellersTableSeeder extends Seeder
             'nationality' => 'belg',
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -545,7 +545,7 @@ class TravellersTableSeeder extends Seeder
             'nationality' => 'belg',
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -570,7 +570,7 @@ class TravellersTableSeeder extends Seeder
             'nationality' => 'belg',
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -595,7 +595,7 @@ class TravellersTableSeeder extends Seeder
             'nationality' => 'belg',
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -618,7 +618,7 @@ class TravellersTableSeeder extends Seeder
             'nationality' => 'belg',
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -641,7 +641,7 @@ class TravellersTableSeeder extends Seeder
             'nationality' => 'belg',
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -664,7 +664,7 @@ class TravellersTableSeeder extends Seeder
             'nationality' => 'belg',
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -687,7 +687,7 @@ class TravellersTableSeeder extends Seeder
             'nationality' => 'belg',
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -710,7 +710,7 @@ class TravellersTableSeeder extends Seeder
             'nationality' => 'belg',
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -735,7 +735,7 @@ class TravellersTableSeeder extends Seeder
             'nationality' => 'belg',
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -756,7 +756,7 @@ class TravellersTableSeeder extends Seeder
             'nationality' => 'belg',
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -777,7 +777,7 @@ class TravellersTableSeeder extends Seeder
             'nationality' => 'belg',
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -798,7 +798,7 @@ class TravellersTableSeeder extends Seeder
             'nationality' => 'belg',
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -819,7 +819,7 @@ class TravellersTableSeeder extends Seeder
             'nationality' => 'belg',
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -840,7 +840,7 @@ class TravellersTableSeeder extends Seeder
             'nationality' => 'belg',
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -861,7 +861,7 @@ class TravellersTableSeeder extends Seeder
             'nationality' => 'belg',
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -882,7 +882,7 @@ class TravellersTableSeeder extends Seeder
             'nationality' => 'belg',
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -903,7 +903,7 @@ class TravellersTableSeeder extends Seeder
             'nationality' => 'belg',
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -924,7 +924,7 @@ class TravellersTableSeeder extends Seeder
             'nationality' => 'belg',
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -945,7 +945,7 @@ class TravellersTableSeeder extends Seeder
             'nationality' => 'belg',
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -966,7 +966,7 @@ class TravellersTableSeeder extends Seeder
             'nationality' => 'belg',
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -987,7 +987,7 @@ class TravellersTableSeeder extends Seeder
             'nationality' => 'belg',
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -1008,7 +1008,7 @@ class TravellersTableSeeder extends Seeder
             'nationality' => 'belg',
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -1029,7 +1029,7 @@ class TravellersTableSeeder extends Seeder
             'nationality' => 'belg',
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -1050,7 +1050,7 @@ class TravellersTableSeeder extends Seeder
             'nationality' => 'belg',
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -1071,7 +1071,7 @@ class TravellersTableSeeder extends Seeder
             'nationality' => 'belg',
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -1092,7 +1092,7 @@ class TravellersTableSeeder extends Seeder
             'nationality' => 'belg',
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -1113,7 +1113,7 @@ class TravellersTableSeeder extends Seeder
             'nationality' => 'belg',
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
-            'iban' => 'BE001111222233334',
+            'iban' => 'BE68539007547034',
             'medical_issue' => false,
             'medical_info' => null
         ]);

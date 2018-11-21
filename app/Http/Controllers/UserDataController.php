@@ -292,7 +292,7 @@ class UserDataController extends Controller
         $aRequest->validate([
             'LastName'      => 'required',
             'FirstName'     => 'required',
-            'IBAN'          => 'required',
+            'IBAN'          => 'required|iban',
 
             'BirthDate'     => 'required',
             'Birthplace'    => 'required',
@@ -357,7 +357,7 @@ class UserDataController extends Controller
             'LastName.required'     => 'U heeft geen achternaam ingevuld.',
             'FirstName.required'    => 'U heeft geen voornaam ingevuld.',
             'IBAN.required'         => 'U heeft geen IBAN-nummer ingevuld.',
-
+            'iban'                  => 'U heeft geen geldig IBAN-nummer ingevuld.',
             'BirthDate.required'    => 'U heeft geen geboortedatum ingevuld.',
             'Birthplace.required'   => 'U heeft geen geboorteplaats ingevuld.',
             'Nationality.required'  => 'U heeft geen nationaliteit ingevuld.',
