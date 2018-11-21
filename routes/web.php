@@ -31,19 +31,17 @@ Route::prefix('user')->group(function () {
     });
 
 });
-
+//IndividualTraveller profile
 Route::prefix('userinfo')->group(function() {
     Route::get('{sUserName}', 'UserDataController@showUserData');
     Route::get('{sUserName}/edit', 'UserDataController@showUserData');
-    Route::post('{sUserName}/cascade', 'UserDataController@GetMajorsByStudy');
     Route::post('{sUserName}/update', 'UserDataController@updateUserData');
     Route::delete('{sUserName}/delete', 'UserDataController@deleteUserData')->name('user.destroy');
 });
-
+//User profile
 Route::prefix('profile')->group(function() {
     Route::get('', 'UserProfileController@showUserData')->name('profile');
     Route::get('/edit', 'UserProfileController@showUserData');
-    Route::post('{sUserName}/cascade', 'UserProfileController@GetMajorsByStudy');
     Route::post('{sUserName}/update', 'UserProfileController@updateUserData');
 });
 
@@ -87,6 +85,9 @@ Route::get('/listhotels', 'HotelRoomController@getHotelsPerTrip');
 Route::get('/listrooms/{hotels_per_trip_id}', 'HotelRoomController@getRooms');
 Route::get('/listtravellers/{room_hotel_trip_id}', 'HotelRoomController@getTravellers');
 //EndWIP
+
+//API calls
+Route::post('cascade', 'UserDataController@GetMajorsByStudy');
 
 Route::get('/info','AdminInfoController@showInfo')->name('info');
 Route::get('/pdf/{page_name}','AdminPdfController@showPdf');

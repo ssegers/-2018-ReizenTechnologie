@@ -34,14 +34,17 @@
         <div class="form-row pt-2">
             <div class="form-group col-md-6">
                 <label class="form-label  ">Opleiding*</label>
-                {{ Form::select('dropOpleiding', $aStudies, null, ['id'=>'dropOpleiding','oninput'=>'this.className', 'class' => 'mb-2 form-control'])}}
+                {{ Form::select('dropOpleiding',  $aStudies, null , [ 'data-dependent' => 'dropAfstudeerrichtingen', 'id'=>'dropOpleiding','oninput'=>'this.className', 'class' => 'cascadingMajor mb-2 form-control'])}}
             </div>
             <div class="form-group col-md-6">
                 <label class="form-label ">Afstudeerrichting*</label>
-                {{ Form::select('dropAfstudeerrichtingen', $aMajors, $traveller['major_id'] ,['id'=>'dropAfstudeerrichtingen','oninput'=>'this.className', 'class' => 'mb-2 form-control'])}}
+
+                {{ Form::select('dropAfstudeerrichtingen', [null => 'Selecteer eerst een opleiding'], $traveller['major_id'] ,['id'=>'dropAfstudeerrichtingen','oninput'=>'this.className', 'class' => 'mb-2 form-control'])}}
             </div>
         </div>
         {{ Form::submit('Volgende',['class' => 'btn btn-primary form-control col-sm-2 mb-4 mt-2 ']) }}
         {{ Form::close() }}
     </div>
-    @endsection
+    <script src="{{ URL::asset('/js/cascadingDropDownStudyMajors.js') }}"></script>
+
+@endsection

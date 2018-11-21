@@ -17,7 +17,7 @@
                 <h4><u>Algemeen</u></h4>
                 <label class="col-4 font-weight-bold" for="LastName">Naam:              </label>    <input id="LastName"     name="LastName"     class="col-6" type="text" value="{{$aUserData["last_name"]}}">   <br/>
                 <label class="col-4 font-weight-bold" for="FirstName">Voornaam:         </label>    <input id="FirstName"    name="FirstName"    class="col-6" type="text" value="{{$aUserData["first_name"]}}">  <br/>
-                <label class="col-4 font-weight-bold" for="Gender">Geslacht:            </label>    <input id="Gender"       name="Gender"       class="" type="radio" value="man" @if($aUserData["gender"] == "man") checked @endif>Man <input name="Gender" class="" type="radio" value="vrouw" @if($aUserData["gender"] == "vrouw") checked @endif>Vrouw <br/>
+                <label class="col-4 font-weight-bold" for="Gender">Geslacht:            </label>    <input id="Gender"       name="Gender"       <input id="Gender"       name="Gender"       class="" type="radio" value="Man" @if($aUserData["gender"] == "Man") checked @endif>Man <input name="Gender" class="" type="radio" value="Vrouw" @if($aUserData["gender"] == "Vrouw") checked @endif>Vrouw <input name="Gender" class="" type="radio" value="Andere" @if($aUserData["gender"] == "Andere") checked @endif>Andere <br/>
                 <label class="col-4 font-weight-bold" for="Study">Klas:                 </label>    <select id="Study"       name="Study"         class="col-6 cascadingMajor" data-dependent="Major">
                     @foreach($oStudies as $oStudy)
                         <option value="{{ $oStudy->study_id}}" @if($oStudy->study_id == $aUserData["study_id"]) selected @endif>    {{ $oStudy->study_name}}   </option>
@@ -36,12 +36,12 @@
                 <h4><u>Financieel</u></h4>
                 <label class="col-4 font-weight-bold" for="IBAN">IBAN:                  </label>    <input id="IBAN"         name="IBAN"         class="col-6" type="text" value="{{$aUserData['iban']}}">        <br/>
                 <h4><u>Medisch</u></h4>
-                <label class="col-4 font-weight-bold" for="MedicalIssue">Behandeling:   </label>    <input                   name="MedicalIssue" class="" type="radio" value="1" @if($aUserData["medical_issue"] == "1") checked @endif>Ja <input name="MedicalIssue" type="radio" value="0" @if($aUserData["medical_issue"] == "0") checked @endif>Nee <br/>
+                <label class="col-4 font-weight-bold" for="MedicalIssue">Behandeling:   </label>    <input id="MedicalIssue" name="MedicalIssue" class="" type="radio" value="1" @if($aUserData["medical_issue"] == "1") checked @endif>Ja <input name="MedicalIssue" type="radio" value="0" @if($aUserData["medical_issue"] == "0") checked @endif>Nee <br/>
                 <label class="col-4 font-weight-bold" for="MedicalInfo">Medische info:  </label>    <input id="MedicalInfo"  name="MedicalInfo"  class="col-6" type="text" value=@if($aUserData['medical_issue'])"{{$aUserData['medical_info']}}" @endif><br/>
             </div>
             <div class="col color-dark-blue">
                 <h4><u>Geboorte</u></h4>
-                <label class="col-4 font-weight-bold" for="BirthDate">Geboortedatum:    </label>    <input id="BirthDate"    name="BirthDate"    class="col-6" type="text" value="{{$aUserData['birthdate']}}">   <br/>
+                <label class="col-4 font-weight-bold" for="BirthDate">Geboortedatum:    </label>    {{ Form::date('BirthDate', $aUserData["birthdate"], ['id'=>'BirthDate','oninput'=>'this.className','type'=>'date', 'class' => 'col-6'])}}   <br/>
                 <label class="col-4 font-weight-bold" for="Birthplace">Geboorteplaats:  </label>    <input id="Birthplace"   name="Birthplace"   class="col-6" type="text" value="{{$aUserData['birthplace']}}">  <br/>
                 <label class="col-4 font-weight-bold" for="Nationality">Nationaliteit:  </label>    <input id="Nationality"  name="Nationality"  class="col-6" type="text" value="{{$aUserData['nationality']}}"> <br/>
                 <h4><u>Woonplaats</u></h4>

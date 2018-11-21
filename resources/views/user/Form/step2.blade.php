@@ -7,6 +7,16 @@
     {{ csrf_field() }}
 
     <h2 class="my-2 pb-2 border-bottom border-dark">Persoonlijke gegevens</h2>
+    @if(session()->has('message'))
+        <div class="alert alert-success">
+            {{ session()->get('message') }}
+        </div>
+    @endif
+    @if(session()->has('alert-message'))
+        <div class="alert alert-danger">
+            {{ session()->get('alert-message') }}
+        </div>
+    @endif
     @if ($errors->any())
         <div class="alert alert-danger">
             <ul>
@@ -110,8 +120,10 @@
         </div>
         <div class="form-group col-md-4">
             <label class="form-label">Woonplaats*</label>
-            <select id="dropGemeentes" name="dropGemeentes" required class="mb-2 form-control" >
-
+            <button type="button" class="open btn-primary rounded btn-xs float-right  " data-toggle="modal" data-target="#zipPopup">
+                <i class="fas fa-plus-circle "></i>
+            </button>
+            <select id="dropGemeentes" name="dropGemeentes" required class="mb-2 form-control">
             @foreach($aZips as $zipKey => $zipValue)
                     <optgroup label="{{ $zipKey }}">
                     @foreach($zipValue as $city)
@@ -121,6 +133,7 @@
                 @endforeach
             </select>
         </div>
+
         <div class="form-group col-md-4">
             <label class="form-label">Land*</label>
             @if(isset($traveller['country']))
@@ -140,12 +153,41 @@
             {{ Form::text('txtBank', '', ['required', 'id'=>'txtBank','oninput'=>'this.className', 'maxlength'=>34, 'class' => 'mb-2 form-control'])}}
             @endif
         </div>
-
     </div>
-
-    <a class = "btn btn-secondary form-control col-sm-2 mb-4 mt-2" href="{{url()->previous()}}">Vorige</a>
+    <a class = "btn btn-secondary form-control col-sm-2 mb-4 mt-2" href="/user/form/step-1">Vorige</a>
     {{ Form::submit('Volgende',['class' => 'btn btn-primary form-control col-sm-2 mb-4 mt-2 ']) }}
     {{ Form::close() }}
+
+<!-- MODAL POPUP -->
+    <div class="modal" id="zipPopup" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Organisators</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {{Form::open(array('action' => 'AdminZipController@createZip', 'method' => 'post' ))}}
+                    <div class="form-group col">
+                        {{Form::label('zip_code', 'Postcode: ', ['class' => ''])}}
+                        {{ Form::number('zip_code', null, array("class" => "form-control", "required", "min" => "1000", "max" => "9999", "oninvalid" => "this.setCustomValidity('Deze postcode is ongeldig')", "oninput" => "this.setCustomValidity('')", "placeholder" => "bv. 3660" )) }}
+                    </div>
+                    <div class="form-group col">
+                        {{Form::label('city', 'Stad of Gemeente: ', ['class' => ''])}}
+                        {{ Form::text('city', null, array("class" => "form-control", "required","maxlength" => "50", "oninvalid" => "this.setCustomValidity('Deze gemeente is ongeldig')", "oninput" => "this.setCustomValidity('')", "placeholder" => "bv: Opglabbeek")) }}
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    {{Form::submit('Postcode Toevoegen', ['class' =>'btn btn-primary' ])}}
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                </div>
+                {{ Form::close() }}
+            </div>
+        </div>
+        </div>
 </div>
 
 @endsection

@@ -19,12 +19,11 @@
     <div class="form-row border-bottom pt-2">
         <div class="form-group col-md-8">
             <label class="form-label">E-mail adres (van de school)*</label>
-            @if(isset($traveller['email']))
-            {{ Form::email('txtEmail', $traveller['email'], ['required', 'id'=>'txtEmail','oninput'=>'this.className', 'class' => 'mb-2 form-control '])}}
+            @if($user['role'] == "Student")
+            {{ Form::email('txtEmail', $traveller['first_name'] . '.' . str_replace(' ', '', $traveller['last_name']) . '@student.ucll.be', ['required', 'id'=>'txtEmail','oninput'=>'this.className', 'class' => 'mb-2 form-control '])}}
             @else
-            {{ Form::email('txtEmail', '', ['required', 'id'=>'txtEmail','oninput'=>'this.className', 'class' => 'mb-2 form-control '])}}
+                {{ Form::email('txtEmail', $traveller['first_name'] . '.' . str_replace(' ', '', $traveller['last_name']) . '@ucll.be', ['required', 'id'=>'txtEmail','oninput'=>'this.className', 'class' => 'mb-2 form-control '])}}
             @endif
-
         </div>
         <div class="form-group col-md-4">
             <label class="form-label">GSM-nummer*</label>
@@ -85,7 +84,7 @@
     </div>
     <div class="form-row">
         <div class="form-group col-md-12 float-right">
-            <a class = "btn btn-secondary form-control col-sm-2 mb-4 mt-2" href="{{url()->previous()}}">Vorige</a>
+            <a class = "btn btn-secondary form-control col-sm-2 mb-4 mt-2" href="/user/form/step-2">Vorige</a>
             {{ Form::submit('Registreer',['class' => 'btn btn-primary form-control col-sm-2 mb-4 mt-2 ']) }}
         </div>
     </div>
