@@ -185,7 +185,7 @@ class RegisterController extends Controller
             'txtEmail' => 'required',
             'txtGsm' => 'required|phone:BE',
             'txtNoodnummer1' => 'required|phone:BE',
-            'txtNoodnummer2' => 'phone:BE',
+            //'txtNoodnummer2' => 'phone:BE',
             'radioMedisch' => 'required',
             'txtMedisch' => '',
         ],$this->messages());
@@ -269,7 +269,7 @@ class RegisterController extends Controller
             'txtGsm.phone' => 'Je moet een geldig GSM nummer invullen.',
             'txtNoodnummer1.required' => 'Je moet minstens 1 noodnummer invullen.',
             'txtNoodnummer1.phone' => 'Je moet een geldig noodnummer 1 invullen.',
-            //'txtNoodnummer2.phone' => 'Je moet een geldig noodnummer 2 invullen.',
+            'txtNoodnummer2.phone' => 'Je moet een geldig noodnummer 2 invullen.',
             'medical_issue.required' => 'Je moet aanduiden indien je een medische behandeling volgt of niet.',
         ];
     }
