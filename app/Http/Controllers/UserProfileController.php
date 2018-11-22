@@ -120,7 +120,7 @@ class UserProfileController extends Controller
             'Country.required'      => 'U heeft geen land ingevuld.',
 
             'Phone.required'        => 'U heeft geen GSM-nummer ingevuld.',
-            'Phone.phone'        => 'U heeft geen GSM-nummer ingevuld.',
+            'Phone.phone'           => 'U heeft geen geldig GSM-nummer ingevuld.',
             'icePhone1.required'    => 'U heeft bij \'noodnummer 1\' niets ingevuld.',
             'icePhone1.phone'    => 'U heeft bij \'noodnummer 1\' niets geldig ingevuld.',
             'icePhone2.phone'    => 'U heeft bij \'noodnummer 2\' niets geldig ingevuld.',
