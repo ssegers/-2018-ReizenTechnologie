@@ -23,6 +23,9 @@
         </div>
     @endif
     <h1 class="my-5 text-center">Registreer hier het  standaardaccount:</h1>
+    <h4>Huidige account: {{$sUserName}}</h4><br />
+
+
     {{Form::open(array('action' => 'AdminUserController@createUser', 'method' => 'post' ))}}
     <div class="form-group">
         {{Form::label('username', 'Gebruikersnaam: ', ['class' => ''])}}
