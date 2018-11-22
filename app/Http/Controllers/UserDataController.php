@@ -301,7 +301,7 @@ class UserDataController extends Controller
 
             'Phone'         => 'required|phone:BE',
             'icePhone1'     => 'required|phone:BE',
-            //'icePhone2'     => 'phone:BE'
+            'icePhone2'     => 'nullable|phone:BE'
         ],$this->messages());
 
         User::where('users.username', '=', $sUserName) //r-nummer
@@ -365,7 +365,7 @@ class UserDataController extends Controller
             'Country.required'      => 'U heeft geen land ingevuld.',
 
             'Phone.required'        => 'U heeft geen GSM-nummer ingevuld.',
-            'Phone.phone'        => 'U heeft geen GSM-nummer ingevuld.',
+            'Phone.phone'        => 'U heeft geen geldig GSM-nummer ingevuld.',
             'icePhone1.required'    => 'U heeft bij \'noodnummer 1\' niets ingevuld.',
             'icePhone1.phone'    => 'U heeft bij \'noodnummer 1\' geen geldig nummer ingevuld.',
             'icePhone2.phone'    => 'U heeft bij \'noodnummer 2\' geen geldig nummer ingevuld.',

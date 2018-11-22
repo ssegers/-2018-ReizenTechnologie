@@ -185,7 +185,7 @@ class RegisterController extends Controller
             'txtEmail' => 'required',
             'txtGsm' => 'required|phone:BE',
             'txtNoodnummer1' => 'required|phone:BE',
-            //'txtNoodnummer2' => 'phone:BE',
+            'txtNoodnummer2' => 'nullable|phone:BE',
             'radioMedisch' => 'required',
             'txtMedisch' => '',
         ],$this->messages());
@@ -196,10 +196,12 @@ class RegisterController extends Controller
         $traveller->fill(['email' => $validatedData['txtEmail'],
             'phone' => $validatedData['txtGsm'],
             'emergency_phone_1' => $validatedData['txtNoodnummer1'],
-            'emergency_phone_2' => $validatedData['txtNoodnummer2'],
             'medical_issue' => $validatedData['radioMedisch'],
             'medical_info' => $validatedData['txtMedisch'],
         ]);
+        if(isset($validatedData['txtNoodnummer2'])) {
+            $traveller->fill(['emergency_phone_2' => $validatedData['txtNoodnummer2']]);
+        }
 
         $request->session()->put('traveller', $traveller);
 
