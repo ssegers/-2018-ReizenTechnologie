@@ -20,6 +20,7 @@ class ContactPageController extends Controller
         $sMail = $oTrip;
         $sOnderwerp = $request->post("onderwerp");
         $sbericht = $request->post('bericht');
+        $sMail = substr($sMail,2,strlen($sMail)-4);
         $this->sendMailTo($sMail, $sOnderwerp, $sbericht);
     }
 
