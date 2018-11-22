@@ -2,7 +2,7 @@
 @section('content')
     <div class="container border rounded margin-top-50 background-white">
         <h3 class="font-weight-bold color-dark-blue m-1"><span>{{$aUserData["username"]}}</span></h3>
-        {{Form::open(array('url' => '/userinfo/delete', 'method' => 'delete', 'onsubmit' => 'return confirm("Are you sure?")'))}}
+        <form method="POST" action="{{ route('user.destroy', $aUserData["username"]) }}" onsubmit="return confirm('Are you sure?')">
             <div class="row padding-10 pt-0">
                 <div class="col color-dark-blue">
                     <h4><u>Algemeen</u></h4>
@@ -40,9 +40,10 @@
             <div class="nav justify-content-center mb-3 font-weight-bold">
                 <a class="nav-link nav-link-white-hover bg-dark-blue d-inline-flex m-1" href="/user/{{$sName}}/trip/travellers">Terug</a>
                 <a class="nav-link nav-link-white-hover bg-dark-blue d-inline-flex m-1" href="/userinfo/{{$aUserData["username"]}}/edit">Aanpassen</a>
-                <a class="nav-link nav-link-white-hover bg-dark-blue d-inline-flex m-1" href="/userinfo/{{$aUserData["username"]}}/delete">Verwijderen</a>
-                {{ Form::submit('Verwijderen', ['class' => 'nav-link nav-link-white-hover bg-dark-blue d-inline-flex m-1 border-0 font-weight-bold'])}}
+                {{ csrf_field() }}
+                {{ method_field('DELETE') }}
+                <button class="nav-link nav-link-white-hover bg-dark-blue d-inline-flex m-1 border-0 font-weight-bold text-white" type="submit">Verwijderen</button>
             </div>
-        {{ Form::close() }}
+        </form>
     </div>
 @endsection

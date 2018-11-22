@@ -19,25 +19,32 @@
 
         <div class="form-row border-bottom pt-2">
             <div class="form-group col-md-6">
-                <label for="dropReis" class="form-label ">Reis</label>
-                {{ Form::select('dropReis', $aTrips, null ,['id'=>'dropReis','oninput'=>'this.className', 'class' => 'mb-2 form-control '])}}
+                <label for="dropReis" class="form-label ">Reis*</label>
+                {{ Form::select('dropReis', $aTrips, $traveller['trip_id'] ,['id'=>'dropReis','oninput'=>'this.className', 'class' => 'mb-2 form-control '])}}
             </div>
             <div class="form-group col-md-6">
-                <label for="txtStudentNummer" class="form-label ">Studentnummer</label>
+                <label for="txtStudentNummer" class="form-label ">Studentnummer*</label>
+                @if(isset($user['username']))
+                {{ Form::text('txtStudentNummer', $user['username'], ['required','id'=>'txtStudentnummer','oninput'=>'this.className', 'class' => ' mb-2 form-control'])}}
+                @else
                 {{ Form::text('txtStudentNummer', '', ['required','id'=>'txtStudentnummer','oninput'=>'this.className', 'class' => ' mb-2 form-control'])}}
+                @endif
             </div>
         </div>
         <div class="form-row pt-2">
             <div class="form-group col-md-6">
-                <label class="form-label  ">Opleiding</label>
-                {{ Form::select('dropOpleiding', $aStudies, null, ['id'=>'dropOpleiding','oninput'=>'this.className', 'class' => 'mb-2 form-control'])}}
+                <label class="form-label  ">Opleiding*</label>
+                {{ Form::select('dropOpleiding',  $aStudies, null , [ 'data-dependent' => 'dropAfstudeerrichtingen', 'id'=>'dropOpleiding','oninput'=>'this.className', 'class' => 'cascadingMajor mb-2 form-control'])}}
             </div>
             <div class="form-group col-md-6">
-                <label class="form-label ">Afstudeerrichting</label>
-                {{ Form::select('dropAfstudeerrichtingen', $aMajors, null ,['id'=>'dropAfstudeerrichtingen','oninput'=>'this.className', 'class' => 'mb-2 form-control'])}}
+                <label class="form-label ">Afstudeerrichting*</label>
+
+                {{ Form::select('dropAfstudeerrichtingen', [null => 'Selecteer eerst een opleiding'], $traveller['major_id'] ,['id'=>'dropAfstudeerrichtingen','oninput'=>'this.className', 'class' => 'mb-2 form-control'])}}
             </div>
         </div>
         {{ Form::submit('Volgende',['class' => 'btn btn-primary form-control col-sm-2 mb-4 mt-2 ']) }}
         {{ Form::close() }}
     </div>
-    @endsection
+    <script src="{{ URL::asset('/js/cascadingDropDownStudyMajors.js') }}"></script>
+
+@endsection

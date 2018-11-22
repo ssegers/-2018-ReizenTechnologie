@@ -28,10 +28,21 @@ Route::prefix('user')->group(function () {
         route::get('step-3', 'RegisterController@step3');
         route::post('step-3', 'RegisterController@step3Post');
 
-        route::get('step-4', 'RegisterController@step4');
-        route::post('step-4', 'RegisterController@step4Post');
     });
 
+});
+//IndividualTraveller profile
+Route::prefix('userinfo')->group(function() {
+    Route::get('{sUserName}', 'UserDataController@showUserData');
+    Route::get('{sUserName}/edit', 'UserDataController@showUserData');
+    Route::post('{sUserName}/update', 'UserDataController@updateUserData');
+    Route::delete('{sUserName}/delete', 'UserDataController@deleteUserData')->name('user.destroy');
+});
+//User profile
+Route::prefix('profile')->group(function() {
+    Route::get('', 'UserProfileController@showUserData')->name('profile');
+    Route::get('/edit', 'UserProfileController@showUserData');
+    Route::post('{sUserName}/update', 'UserProfileController@updateUserData');
 });
 
 Route::prefix('admin')->group(function() {
@@ -42,8 +53,8 @@ Route::prefix('admin')->group(function() {
         route::post('/add', 'ActiveTripOrganizerController@addLinkedOrganisator');
     });
 
-    route::get('user/default', 'AdminUserController@createForm')->name('adminDefUser');
-    route::post('user/default', 'AdminUserController@createUser');
+    route::get('user/register', 'AdminUserController@createForm')->name('adminRegUser');
+    route::post('user/register', 'AdminUserController@createUser');
 
     Route::get('info', 'AdminInfoController@getInfo')->name('adminInfo');
     Route::post('info', 'AdminInfoController@updateInfo');
@@ -54,7 +65,8 @@ Route::prefix('admin')->group(function() {
     Route::get('trips/{tripid}', 'AdminTripController@getTripByID');
 
     Route::get('pdf', 'AdminPdfController@index')->name('adminPdf');
-    Route::post('pdf', 'AdminPdfController@updateContent');
+    Route::post('updatePdf', 'AdminPdfController@updateContent');
+    Route::post('createPage', 'AdminPdfController@createPage');
 
     Route::get('zip','AdminZipController@createForm')->name('adminZip');
     Route::post('zip','AdminZipController@createZip');
@@ -66,13 +78,16 @@ Route::prefix('admin')->group(function() {
         Route::post('addStudy', 'AdminStudyController@addStudy');
         Route::post('addMajor', 'AdminStudyController@addMajor');
     });
-    Route::prefix('userinfo')->group(function() {
-        Route::get('{sUserName}', 'UserDataController@showUserData');              //show
-        Route::get('{sUserName}/edit', 'UserDataController@showUserData');         //show editable
-        Route::post('{sUserName}/update', 'UserDataController@updateUserData');    //update
-        Route::delete('delete', 'UserDataController@deleteUserData');              //delete
-    });
 });
+
+//WIP
+Route::get('/listhotels', 'HotelRoomController@getHotelsPerTrip');
+Route::get('/listrooms/{hotels_per_trip_id}', 'HotelRoomController@getRooms');
+Route::get('/listtravellers/{room_hotel_trip_id}', 'HotelRoomController@getTravellers');
+//EndWIP
+
+//API calls
+Route::post('cascade', 'UserDataController@GetMajorsByStudy');
 
 Route::get('/info','AdminInfoController@showInfo')->name('info');
 Route::get('/pdf/{page_name}','AdminPdfController@showPdf');

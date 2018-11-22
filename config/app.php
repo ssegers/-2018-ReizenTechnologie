@@ -160,6 +160,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         'Intervention\Validation\ValidationServiceProvider',
+        Propaganistas\LaravelPhone\PhoneServiceProvider::class,
 
         /*
          * Package Service Providers...

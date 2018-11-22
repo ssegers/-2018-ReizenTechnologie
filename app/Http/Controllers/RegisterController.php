@@ -25,56 +25,6 @@ class RegisterController extends Controller
     function __destruct() {
     }
 
-
-    /*----------------------------------------------------------------------------------------------------------------------*/
-    /*--------------------------------------------------------------------SAVE COLLECTED DATA-------------------------------*/
-    /*----------------------------------------------------------------------------------------------------------------------*/
-//    public function SaveData($aData){
-//        if($aData["txtStudentnummer"][0] = "r"){
-//            $sFunctie = "Student";
-//        }
-//        else{
-//            $sFunctie = "Begeleider";
-//        }
-//        Saving user
-//        $password = $this->randomPassword();
-//        User::insert(
-//            [
-//                'username' => $aData["txtStudentnummer"],
-//                'password' => bcrypt($password),
-//                'role' => $sFunctie
-//            ]
-//        );
-//
-//        $iUserID = User::where('username',$aData['txtStudentnummer']) ->value('user_id');
-//        Saving traveller
-//        Traveller::insert(
-//            [
-//                'user_id' => $iUserID,
-//                'trip_id' => $aData['dropReis'],
-//                'zip_id' => $aData['dropGemeente'],
-//                'zip_id' => 1,
-//                'first_name' => $aData['txtVoornaam'],
-//                'last_name' => $aData['txtNaam'],
-//                'country' => $aData['txtLand'],
-//                'address' => $aData['txtAdres'],
-//                'gender' => $aData['radioGeslacht'],
-//                'phone' => $aData['txtGsm'],
-//                'emergency_phone_1' => $aData['txtNoodnummer1'],
-//                'emergency_phone_2' => $aData['txtNoodnummer2'],
-//                'nationality' => $aData['txtNationaliteit'],
-//                'birthdate' => $aData['dateGeboorte'],
-//                'birthplace' => $aData['txtGeboorteplaats'],
-//                'medical_info' => $aData['txtMedischDetail'],
-//                'iban' => $aData['txtBank'],
-//                'medical_issue' => $aData['radioMedisch'],
-//                'email' => $aData['txtEmail'],
-//                'major_id' => $aData["dropOpleiding"]
-//            ]
-//        );
-//        $this->sendMail($aData['txtEmail'],$aData['txtNaam'],$password);
-//    }
-
     function randomPassword() {
         $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
         $pass = array(); //remember to declare $pass as an array
@@ -106,10 +56,11 @@ class RegisterController extends Controller
      */
     public function step1(Request $request) {
         $traveller = $request->session()->get('traveller');
+        $user = $request->session()->get('user');
         $aTrips = Trip::where('is_active', true)->orderBy('name')->pluck('name');
         $aStudies = Study::pluck('study_name','study_id');
-        $aMajors = Major::pluck('major_name', 'study_id');
-        return view('user.Form.step1',['traveller' => $traveller,'aTrips'=>$aTrips, 'aStudies'=>$aStudies, 'aMajors'=>$aMajors]);
+        return view('user.form.step1',['traveller' => $traveller, 'user' => $user, 'aTrips'=>$aTrips, 'aStudies'=>$aStudies]);
+
     }
 
     /**
@@ -121,23 +72,34 @@ class RegisterController extends Controller
     public function step1Post(Request $request) {
         $validator = Validator::make($request->all(), [
             'dropReis' => 'required',
-            'txtStudentNummer' => 'required | filled',
+            'txtStudentNummer' => 'required | filled | regex:^[ruRU]^ | min:8 | max:8',
             'dropOpleiding' => 'required',
             'dropAfstudeerrichtingen' => 'required',
         ],$this->messages());
         $validatedData = $validator->validate();
+        $sUserRole = $this->checkRole($validatedData['txtStudentNummer']);
 
-        if(empty($request->session()->get('travellers'))){
+        if((empty($request->session()->get('traveller')) || empty($request->session()->get('user')))) {
             $traveller = new Traveller();
-            $traveller->fill($validatedData);
-            $request->session()->put('traveller', $traveller);
-        }else{
-            $traveller = $request->session()->get('traveller');
-            $traveller->fill($validatedData);
-            $request->session()->put('traveller', $traveller);
-        }
+            $traveller->fill(['trip_id' => $validatedData['dropReis'],
+                'major_id' => $validatedData['dropAfstudeerrichtingen']]);
 
-        return redirect('/user/Form/step-2');
+            $user = new User();
+            $user->fill(['username' => $validatedData['txtStudentNummer'], 'role' => $sUserRole]);
+            $request->session()->put('traveller', $traveller);
+            $request->session()->put('user', $user);
+        } else {
+            $traveller = $request->session()->get('traveller');
+            $traveller->fill(['trip_id' => $validatedData['dropReis'],
+            'major_id' => $validatedData['dropAfstudeerrichtingen']]);
+
+            $user = $request->session()->get('user');
+            $user->fill(['username' => $validatedData['txtStudentNummer'], 'role' => $sUserRole]);
+
+            $request->session()->put('traveller', $traveller);
+            $request->session()->put('user', $user);
+        }
+        return redirect('/user/form/step-2');
 
     }
 
@@ -149,11 +111,11 @@ class RegisterController extends Controller
      */
     public function step2(Request $request) {
         $traveller = $request->session()->get('traveller');
-        $aZips = Zip::select('zip_code', 'city')->get();
+        $aZips = Zip::select('zip_code', 'city')->orderBy('city')->get();
         foreach($aZips as $zip){
             $aGroupedZips[$zip->zip_code][] = $zip->city;
         }
-        return view('user.Form.step2',['traveller' => $traveller,'aZips' => $aGroupedZips]);
+        return view('user.form.step2',['traveller' => $traveller,'aZips' => $aGroupedZips]);
     }
 
     /**
@@ -180,17 +142,24 @@ class RegisterController extends Controller
 
         $validatedData = $validator->validate();
 
-        if(empty($request->session()->get('travellers'))){
-            $traveller = new Traveller();
-            $traveller->fill($validatedData);
-            $request->session()->put('traveller', $traveller);
-        }else{
-            $traveller = $request->session()->get('traveller');
-            $traveller->fill($validatedData);
-            $request->session()->put('traveller', $traveller);
-        }
+        $traveller = $request->session()->get('traveller');
+        $iZipId = Zip::where('city', $validatedData['dropGemeentes'])->pluck('zip_id')->first();
+        $traveller->fill(['first_name' => $validatedData['txtVoornaam'],
+            'last_name' => $validatedData['txtNaam'],
+            'gender' => $validatedData['gender'],
+            'nationality' => $validatedData['txtNationaliteit'],
+            'birthdate' => $validatedData['dateGeboorte'],
+            'birthplace' => $validatedData['txtGeboorteplaats'],
+            'address' => $validatedData['txtAdres'],
+            'zip_id' => $iZipId,
+            'country' => $validatedData['txtLand'],
+            'iban' => $validatedData['txtBank'],
+                ]);
 
-        return redirect('/user/Form/step-3');
+
+        $request->session()->put('traveller', $traveller);
+
+        return redirect('/user/form/step-3');
     }
 
     /**
@@ -201,7 +170,8 @@ class RegisterController extends Controller
      */
     public function step3(Request $request) {
         $traveller = $request->session()->get('traveller');
-        return view('user.Form.step3',compact('traveller', $traveller));
+        $user = $request->session()->get('user');
+        return view('user.form.step3',['traveller'=> $traveller, 'user' => $user]);
     }
 
     /**
@@ -211,79 +181,52 @@ class RegisterController extends Controller
      * Validates request data and redirects to the next step in the form
      */
     public function step3Post(Request $request) {
-        $validatedData = $request->validate([
-            'name' => 'required|unique:products',
-            'amount' => 'required|numeric',
-            'company' => 'required',
-            'available' => 'required',
-            'description' => 'required',
+        $validator = Validator::make($request->all(), [
+            'txtEmail' => 'required',
+            'txtGsm' => 'required|phone:BE',
+            'txtNoodnummer1' => 'required|phone:BE',
+            //'txtNoodnummer2' => 'phone:BE',
+            'radioMedisch' => 'required',
+            'txtMedisch' => '',
+        ],$this->messages());
+
+        $validatedData = $validator->validate();
+
+        $traveller = $request->session()->get('traveller');
+        $traveller->fill(['email' => $validatedData['txtEmail'],
+            'phone' => $validatedData['txtGsm'],
+            'emergency_phone_1' => $validatedData['txtNoodnummer1'],
+            'emergency_phone_2' => $validatedData['txtNoodnummer2'],
+            'medical_issue' => $validatedData['radioMedisch'],
+            'medical_info' => $validatedData['txtMedisch'],
         ]);
 
-        if(empty($request->session()->get('travellers'))){
-            $traveller = new Traveller();
-            $traveller->fill($validatedData);
-            $request->session()->put('traveller', $traveller);
-        }else{
-            $traveller = $request->session()->get('traveller');
-            $traveller->fill($validatedData);
-            $request->session()->put('traveller', $traveller);
-        }
+        $request->session()->put('traveller', $traveller);
 
-        return redirect('/user/Form/step-4');
-    }
-
-    /**
-     * @author Sasha Van de Voorde & Nico Schelfhout
-     * @param Request $request
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     * Gets the traveller from the session and returns the step4 view with it
-     */
-    public function step4(Request $request) {
-        $traveller = $request->session()->get('traveller');
-        return view('user.Form.step4',compact('traveller', $traveller));
-
-    }
-
-    /**
-     * @author Sasha Van de Voorde & Nico Schelfhout
-     * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
-     * Validates the request data and redirects to the next step in the form
-     */
-    public function step4Post(Request $request) {
-        $validatedData = $request->validate([
-            'name' => 'required|unique:products',
-            'amount' => 'required|numeric',
-            'company' => 'required',
-            'available' => 'required',
-            'description' => 'required',
-        ]);
-
-        if(empty($request->session()->get('travellers'))){
-            $traveller = new Traveller();
-            $traveller->fill($validatedData);
-            $request->session()->put('traveller', $traveller);
-        }else{
-            $traveller = $request->session()->get('traveller');
-            $traveller->fill($validatedData);
-            $request->session()->put('traveller', $traveller);
-        }
-
-        return redirect('/user/Form/step-4');
-    }
-
-    /**
-     * @author Nico Schelfhout
-     * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
-     * Gets the traveller from the session and saves it to the database, then redirects to the home page
-     */
-    public function store(Request $request) {
-        $traveller = $request->session()->get('traveller');
+        $user = $request->session()->get('user');
+        $user->password = $this->randomPassword();
+        $user->save();
+        $traveller->fill(['user_id' => $user->user_id]);
         $traveller->save();
-        return redirect('/info');
+        $this->sendMail($traveller->email, $user->username, $user->password);
+        return redirect('/info')->with('message', 'Je hebt je succesvol geregistreert voor een reis!');
     }
 
+    private function checkRole($sUsername) {
+        if(substr($sUsername,0,1) == 'r' || substr($sUsername,0,1) == 'R') {
+            return "Student";
+        } else {
+            return "Docent";
+        }
+    }
+
+    public function GetMajorsByStudy(Request $request){
+        $study = $request->get('study');
+        $majors = Major::select()
+            ->where("study_id", $study)
+            ->get();
+
+    }
     /**
      * @author Nico Schelfhout & Kaan
      * @return array
@@ -294,6 +237,9 @@ class RegisterController extends Controller
         return [
             'required' => 'The :attribute field must be filled in',
             'txtStudentNummer.required' => 'Je Studenten-/docentennummer moet ingevuld worden.',
+            'txtStudentNummer.regex' => 'Een studenten-/docentennummer moet beginnen met een r of een u',
+            'txtStudentNummer.min' => 'Een studenten-/docentennummer heeft 1 letter en 7 cijfers',
+            'txtStudentNummer.max' => 'Een studenten-/docentennummer heeft 1 letter en 7 cijfers',
             'txtWachtwoord.required'  => 'Je moet een wachtwoord invullen.',
             'txtWachtwoord_confirmation.required'  => 'Je moet je wachtwoord bevestigen.',
             'txtWachtwoord.min' => 'Je wachtwoord moet minsten uit 8 tekens bestaan.',
@@ -317,10 +263,14 @@ class RegisterController extends Controller
             'dropGemeente.required' => 'Je moet je gemeente ingeven.',
             'txtLand.required' => 'Je moet je land ingeven',
             'txtAdres.required' => 'Je moet je adres ingeven.',
+            'txtBank.required' => 'Je moet je IBAN nummer ingeven.',
             'iban' => 'Je moet een geldig IBAN nummer ingeven.!',
-            'gsm.required' => 'Je moet je GSM nummer invullen.',
-            'NoodNummer1.required' => 'Je moet minstens 1 noodnummer invullen.',
-            'MedischeAandoening.required' => 'Je moet aanduiden indien je een medische behandeling volgt of niet.',
+            'txtGsm.required' => 'Je moet je GSM nummer invullen.',
+            'txtGsm.phone' => 'Je moet een geldig GSM nummer invullen.',
+            'txtNoodnummer1.required' => 'Je moet minstens 1 noodnummer invullen.',
+            'txtNoodnummer1.phone' => 'Je moet een geldig noodnummer 1 invullen.',
+            'txtNoodnummer2.phone' => 'Je moet een geldig noodnummer 2 invullen.',
+            'medical_issue.required' => 'Je moet aanduiden indien je een medische behandeling volgt of niet.',
         ];
     }
 }

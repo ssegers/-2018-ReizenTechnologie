@@ -73,13 +73,12 @@ body {
   height: 60px;
   width: 235px;
   margin-right: -30px;
-  background-color: #003469;
-  border: none;
-  color: white;
 }
 
 .side-nav button:hover {
   cursor: pointer;
+  background-color: #E00049;
+  color: white;
 }
 
 .background-white {
@@ -377,11 +376,37 @@ td.field.medical_info {
   min-width: 200px;
 }
 
+.cursor-pointer:hover {
+  cursor: pointer;
+}
+
 .admin-table {
   text-align: center;
   border: 3px solid black;
   padding-left: 3px;
   padding-right: 3px;
+}
+
+#tabel {
+  height: 500px;
+  overflow: auto;
+}
+
+#inlineFormTable table {
+  height: auto;
+}
+
+#inlineFormTable td:first-child {
+  width: 300px;
+  padding-left: 0px;
+}
+
+#inlineFormTable tbody {
+  padding: 0px;
+}
+
+#inlineFormTable td {
+  padding-left: 100px;
 }
 
 /*# sourceMappingURL=app.css.map */

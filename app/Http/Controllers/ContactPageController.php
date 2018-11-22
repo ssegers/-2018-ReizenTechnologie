@@ -18,17 +18,18 @@ class ContactPageController extends Controller
     public function sendMail(Request $request){
         $oTrip = Trip::where('trip_id',(int)$request->post("reis"))->pluck('contact_mail');
         $sMail = $oTrip;
+        $sContactMail = $request->post("email");
         $sOnderwerp = $request->post("onderwerp");
         $sbericht = $request->post('bericht');
-        $sMail = substr($sMail,2,strlen($sMail)-4);
-        $this->sendMailTo($sMail, $sOnderwerp, $sbericht);
+        $this->sendMailTo($sMail, $sOnderwerp, $sbericht, $sContactMail);
     }
 
-    public function sendMailTo($email,$subject, $bericht) {
+    public function sendMailTo($email,$subject, $bericht,$contactMail) {
         $aMailData = [
             'subject' => $subject,
             'email' => $email,
             'description' => $bericht,
+            'cmail'=>$contactMail,
         ];
         Mail::to($email)->send(new ContactMail($aMailData));
     }
