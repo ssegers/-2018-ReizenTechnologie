@@ -25,24 +25,36 @@ class HomeController extends Controller
     {
         return view('home');
     }
-    public function store()
+    public function store(Request $request)
     {
+        return redirect('info');
+        $x = "test";
+        return var_dump($x);
         try
         {
-            $user = User::where(['email'=> request('email'), 'password' => request('password')])->get();
-            if (! auth()->attempt(request(['email', 'password'])))
-            {
-                if (! auth()->loginUsingId($user->id))
-                {
-                    return back()->with('message', 'Gebruikersnaam of passwoord is fout.');
-                }
+            if (Auth::attempt(['email' => $request->get('username'), 'password' => $request->get('password')])) {
+                echo Auth::user();
             }
-            if (Auth::user()) {
-                echo 'ingelogd';
+            else{
+                echo "blup";
             }
         }
         catch (\Exception $e) {
             return back()->with('message', 'Gebruikersnaam of passwoord is fout.');
         }
+
+
+    }
+    /**
+     *
+     *
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     *
+     * Logout the user and sends him back to the info page.
+     */
+    public function destroy()
+    {
+        Auth::logout();
+        return redirect('/info');
     }
 }

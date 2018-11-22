@@ -23,7 +23,7 @@ class ContactPageController extends Controller
         $sbericht = $request->post('bericht');
         $sMail = substr($sMail,2,strlen($sMail)-4);
         $this->sendMailTo($sMail, $sOnderwerp, $sbericht, $sContactMail);
-        return redirect('info');
+        return redirect('info')->with("Uw bericht is verzonden.");
     }
 
     public function sendMailTo($email,$subject, $bericht,$contactMail) {

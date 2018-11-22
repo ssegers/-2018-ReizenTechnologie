@@ -56,6 +56,11 @@ Route::prefix('admin')->group(function() {
     route::get('user/register', 'AdminUserController@createForm')->name('adminRegUser');
     route::post('user/register', 'AdminUserController@createUser');
 
+    //login routes
+    Route::post('/logInUser', 'HomeController@store');
+    Route::get('/logoutUser', 'HomeController@destroy');
+    Auth::routes();
+
     Route::get('info', 'AdminInfoController@getInfo')->name('adminInfo');
     Route::post('info', 'AdminInfoController@updateInfo');
     Route::post('upload_image','AdminInfoController@uploadImage')->name('upload');
