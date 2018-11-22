@@ -21,7 +21,9 @@ class ContactPageController extends Controller
         $sContactMail = $request->post("email");
         $sOnderwerp = $request->post("onderwerp");
         $sbericht = $request->post('bericht');
+        $sMail = substr($sMail,2,strlen($sMail)-4);
         $this->sendMailTo($sMail, $sOnderwerp, $sbericht, $sContactMail);
+        return redirect('info');
     }
 
     public function sendMailTo($email,$subject, $bericht,$contactMail) {
