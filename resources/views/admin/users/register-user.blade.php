@@ -22,14 +22,12 @@
             {{ session()->get('alert-message') }}
         </div>
     @endif
-    <h1 class="my-5 text-center">Registreer hier een account:</h1>
+    <h1 class="my-5 text-center">Registreer hier het  standaardaccount:</h1>
     {{Form::open(array('action' => 'AdminUserController@createUser', 'method' => 'post' ))}}
     <div class="form-group">
         {{Form::label('username', 'Gebruikersnaam: ', ['class' => ''])}}
         {{ Form::text('username', null, array("class" => "form-control", "required" )) }}
-        <br />
-        {{Form::label('role', 'Rol: ', ['class' => ''])}}
-        {{Form::select('role',$aRoleList,null, array('class' => 'form-control')  )}}
+
     </div>
     <div class="form-group">
         {{Form::label('password', 'Wachtwoord: ')}}

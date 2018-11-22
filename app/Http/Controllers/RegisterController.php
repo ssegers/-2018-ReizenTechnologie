@@ -184,8 +184,8 @@ class RegisterController extends Controller
         $validator = Validator::make($request->all(), [
             'txtEmail' => 'required',
             'txtGsm' => 'required|phone:BE',
-            'txtNoodnummer1' => 'required | phone:BE',
-            'txtNoodnummer2' => '',
+            'txtNoodnummer1' => 'required|phone:BE',
+            //'txtNoodnummer2' => 'phone:BE',
             'radioMedisch' => 'required',
             'txtMedisch' => '',
         ],$this->messages());
@@ -205,13 +205,11 @@ class RegisterController extends Controller
 
         $user = $request->session()->get('user');
         $user->password = $this->randomPassword();
-
         $user->save();
-
         $traveller->fill(['user_id' => $user->user_id]);
         $traveller->save();
         $this->sendMail($traveller->email, $user->username, $user->password);
-        return redirect('/info')->with('succes', 'Je hebt je succesvol geregistreert voor een reis!');
+        return redirect('/info')->with('message', 'Je hebt je succesvol geregistreert voor een reis!');
     }
 
     private function checkRole($sUsername) {
@@ -269,8 +267,10 @@ class RegisterController extends Controller
             'iban' => 'Je moet een geldig IBAN nummer ingeven.!',
             'txtGsm.required' => 'Je moet je GSM nummer invullen.',
             'txtGsm.phone' => 'Je moet een geldig GSM nummer invullen.',
-            'NoodNummer1.required' => 'Je moet minstens 1 noodnummer invullen.',
-            'MedischeAandoening.required' => 'Je moet aanduiden indien je een medische behandeling volgt of niet.',
+            'txtNoodnummer1.required' => 'Je moet minstens 1 noodnummer invullen.',
+            'txtNoodnummer1.phone' => 'Je moet een geldig noodnummer 1 invullen.',
+            'txtNoodnummer2.phone' => 'Je moet een geldig noodnummer 2 invullen.',
+            'medical_issue.required' => 'Je moet aanduiden indien je een medische behandeling volgt of niet.',
         ];
     }
 }

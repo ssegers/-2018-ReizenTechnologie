@@ -55,22 +55,8 @@ class AdminUserController extends Controller
                 return redirect()->back()->withErrors($validator)->withInput();
             }
 
-            //create a new user
-            $user = new User;
-            $user->username = $request->post('username');
-            $user->password = bcrypt($request->post('password'));
-            $select =(integer) $request->post('role');
-            if($select == 0){
-                $user->role = 'traveller';
-
-            }
-            else if($select == 1){
-                $user->role = 'mentor';
-            }
-            else{
-                $user->role = 'organiser';
-            }
-            $user->save();
+            //Change standard user
+            User::where('user_id',1)->update(['username'=> $request->post('username'),'password'=>bcrypt($request->post('password'))]);
 
             //return with success message
             return redirect()->back()->with('message', 'De gebruiker is geregistreerd!');
@@ -91,9 +77,9 @@ class AdminUserController extends Controller
     private function messages(){
         return [
             'password.min' => 'Fout! Het wachtwoord is te kort.',
-            'password.required_with' => 'Fout! Het paswoord moet ingevuld worden.',
+            'password.required_with' => 'Fout! Het wachtwoord moet ingevuld worden.',
             'password_confirmation.min' => 'Fout! De bevestiging van het wachtwoord is te kort.',
-            'password.required_with' => 'Fout! Het paswoord moet ook nog bevestigd worden.',
+            'password.required_with' => 'Fout! Het wachtwoord moet ook nog bevestigd worden.',
             'password.same' => 'Fout! De wachtwoorden komen niet overeen.',
         ];
     }
