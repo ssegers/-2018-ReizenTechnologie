@@ -19,7 +19,7 @@ class AdminInfoController extends Controller
             if ($file->isValid()) {
                 $filename = $file->getClientOriginalName();
                 $file->move(public_path() .'/photos/shares', $filename);
-                $url = 'http://ictprojects.test/photos/shares/' . $filename;
+                $url = '/photos/shares/' . $filename;
             } else {
                 $message = 'An error occured while uploading the file.';
             }

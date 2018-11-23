@@ -46,11 +46,15 @@ Route::prefix('profile')->group(function() {
 });
 
 Route::prefix('admin')->group(function() {
+    Route::get('/',function(){
+        return redirect()->route('adminInfo');
+    });
     Route::prefix('linkorganisator')->group(function() {
         route::get('/', 'ActiveTripOrganizerController@showActiveTrips')->name('adminLinkorganisator');
         route::post('/', 'ActiveTripOrganizerController@showLinkedOrganisators');
         route::delete('/delete', 'ActiveTripOrganizerController@removeLinkedOrganisator');
         route::post('/add', 'ActiveTripOrganizerController@addLinkedOrganisator');
+
     });
 
     route::get('user/register', 'AdminUserController@createForm')->name('adminRegUser');
@@ -70,6 +74,8 @@ Route::prefix('admin')->group(function() {
 
     Route::get('zip','AdminZipController@createForm')->name('adminZip');
     Route::post('zip','AdminZipController@createZip');
+
+
 
     Route::prefix('study')->group(function() {
         Route::get('/', 'AdminStudyController@index')->name('adminStudy');
@@ -92,7 +98,7 @@ Route::post('cascade', 'UserDataController@GetMajorsByStudy');
 Route::get('/info','AdminInfoController@showInfo')->name('info');
 Route::get('/pdf/{page_name}','AdminPdfController@showPdf');
 Route::get('/', function () {
-    return redirect('info');
+    return redirect()->route('info');
 });
 
 Auth::routes();
