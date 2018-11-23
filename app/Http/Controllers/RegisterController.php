@@ -183,9 +183,9 @@ class RegisterController extends Controller
     public function step3Post(Request $request) {
         $validator = Validator::make($request->all(), [
             'txtEmail' => 'required',
-            'txtGsm' => 'required|phone:BE',
-            'txtNoodnummer1' => 'required|phone:BE',
-            'txtNoodnummer2' => 'nullable|phone:BE',
+            'txtGsm' => 'required|phone:BE | phone:NL',
+            'txtNoodnummer1' => 'required|phone:BE | phone:NL',
+            'txtNoodnummer2' => 'nullable|phone:BE | phone:NL',
             'radioMedisch' => 'required',
             'txtMedisch' => '',
         ],$this->messages());
