@@ -8,7 +8,7 @@
     <h1 class="my-5 text-center">Pagina's Aanpassen/Toevoegen</h1>
 
     <div class="form-group">
-    {{ Form::open(array('action' => 'AdminPdfController@updateContent', 'method' => 'post','files' => true)) }}
+    {{ Form::open(array('action' => 'AdminPagesController@updateContent', 'method' => 'post','files' => true)) }}
         <table id="inlineFormTable">
             <tr>
                 <td>{{$aPage->name}}</td>

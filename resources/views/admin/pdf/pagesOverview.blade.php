@@ -15,7 +15,7 @@
                 <h4 class="modal-title" id="pageModalLabel">Pagina aanmaken</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
-            {{ Form::open(array('action' => 'AdminPdfController@createPage', 'method' => 'post')) }}
+            {{ Form::open(array('action' => 'AdminPagesController@createPage', 'method' => 'post')) }}
             <div class="modal-body">
                 <div class="form-group">
                     {{Form::label('Name','Pagina Naam:')}}
@@ -53,7 +53,7 @@
                 <td>Niet Zichtbaar</td>
             @endif
             <td>
-                {{ Form::open(array('action' => 'AdminPdfController@editPage', 'method' => 'post')) }}
+                {{ Form::open(array('action' => 'AdminPagesController@editPage', 'method' => 'post')) }}
                 {{ Form::hidden('pageId', $oPage->page_id) }}
                 {{ Form::submit('Edit',array('class'=>"btn btn-primary")) }}
                 {{ Form::close()}}

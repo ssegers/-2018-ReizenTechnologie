@@ -4,9 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Page;
-use Illuminate\Support\Facades\Storage;
 
-class AdminPdfController extends Controller
+class AdminPagesController extends Controller
 {
     public function index(){
         $aPages = Page::where('type','!=', 'info')->get();
@@ -18,7 +17,7 @@ class AdminPdfController extends Controller
     public function editPage(Request $request){
         $pageId=$request->input('pageId');
         $aPage = Page::where('page_id',$pageId)->first();
-        return view('admin.pdf.pdf', array(
+        return view('admin.pdf.editPage', array(
             'aPage' => $aPage,
         ));
     }
@@ -50,7 +49,7 @@ class AdminPdfController extends Controller
                 'type'=>$type
             ]);
 
-            return redirect()->route("adminPdf")->with('message', 'De pagina is aangepast');
+            return redirect()->route("adminPages")->with('message', 'De pagina is aangepast');
         }
         else{
             $type=$request->get('typeSelector');
@@ -65,13 +64,13 @@ class AdminPdfController extends Controller
                 'type'=>$type
             ]);
 
-            return redirect()->route("adminPdf")->with('message', 'De pagina is aangepast');
+            return redirect()->route("adminPages")->with('message', 'De pagina is aangepast');
         }
 
     }
     function showPdf($page_name){
         $aPages= Page::where('type','!=','info')->where('name',$page_name)->first();
-        return view('guest.pdfpage', array(
+        return view('guest.contentpage', array(
             'aPages' => $aPages,
         ));
     }

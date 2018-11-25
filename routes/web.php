@@ -68,10 +68,10 @@ Route::prefix('admin')->group(function() {
     Route::get('trips', 'AdminTripController@getTrips')->name('adminTrips');
     Route::get('trips/{tripid}', 'AdminTripController@getTripByID');
 
-    Route::get('pdf', 'AdminPdfController@index')->name('adminPdf');
-    Route::post('editPage', 'AdminPdfController@editPage');
-    Route::post('updatePdf', 'AdminPdfController@updateContent');
-    Route::post('createPage', 'AdminPdfController@createPage');
+    Route::get('pdf', 'AdminPagesController@index')->name('adminPages');
+    Route::post('editPage', 'AdminPagesController@editPage');
+    Route::post('updatePdf', 'AdminPagesController@updateContent');
+    Route::post('createPage', 'AdminPagesController@createPage');
 
     Route::get('zip','AdminZipController@createForm')->name('adminZip');
     Route::post('zip','AdminZipController@createZip');
@@ -97,7 +97,7 @@ Route::get('/listtravellers/{room_hotel_trip_id}', 'HotelRoomController@getTrave
 Route::post('cascade', 'UserDataController@GetMajorsByStudy');
 
 Route::get('/info','AdminInfoController@showInfo')->name('info');
-Route::get('/pdf/{page_name}','AdminPdfController@showPdf');
+Route::get('/pdf/{page_name}','AdminPagesController@showPdf');
 Route::get('/', function () {
     return redirect()->route('info');
 });
