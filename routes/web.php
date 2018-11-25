@@ -69,6 +69,7 @@ Route::prefix('admin')->group(function() {
     Route::get('trips/{tripid}', 'AdminTripController@getTripByID');
 
     Route::get('pdf', 'AdminPdfController@index')->name('adminPdf');
+    Route::post('editPage', 'AdminPdfController@editPage');
     Route::post('updatePdf', 'AdminPdfController@updateContent');
     Route::post('createPage', 'AdminPdfController@createPage');
 
