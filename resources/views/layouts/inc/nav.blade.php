@@ -16,6 +16,7 @@
             <li class="nav-item"><a class="nav-link" href="{{ route('contact') }}">Contact</a></li>
         </ul>
         <ul class="navbar-nav">
+            <li class="nav-item"><a class="nav-link" href="{{ route('registerTrip') }}">Registreren</a></li>
             <li class="nav-item"><a class="nav-link" href="{{ route('profile') }}">Profiel</a></li>
             @if(\Illuminate\Support\Facades\Auth::check())
                 <li class="nav-item"><a class="nav-link" href="{{ route('lougout') }}">Afmelden</a></li>

@@ -19,7 +19,7 @@ Route::prefix('user')->group(function () {
     Route::post('contact', 'ContactPageController@sendMail');
 
     Route::prefix('form')->group(function() {
-        route::get('step-1', 'RegisterController@step1');
+        route::get('step-1', 'RegisterController@step1')->name('registerTrip');
         route::post('step-1', 'RegisterController@step1Post');
 
         route::get('step-2', 'RegisterController@step2');
