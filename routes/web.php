@@ -18,6 +18,9 @@ Route::prefix('user')->group(function () {
     Route::get('contact','ContactPageController@getInfo')->name('contact');
     Route::post('contact', 'ContactPageController@sendMail');
 
+    Route::get('updatemail','UpdateMailController@createForm')->name('updatemail');
+    Route::post('updatemail', 'UpdateMailController@createMail');
+
     Route::prefix('form')->group(function() {
         route::get('step-1', 'RegisterController@step1');
         route::post('step-1', 'RegisterController@step1Post');

@@ -14,6 +14,7 @@
                 <li class="nav-item"><a class="nav-link" href='/pdf/{{$page->name}}'>{{$page->name}}</a></li>
             @endforeach
             <li class="nav-item"><a class="nav-link" href="{{ route('contact') }}">Contact</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ route('updatemail') }}">Updatemail </a></li>
         </ul>
         <ul class="navbar-nav">
             <li class="nav-item"><a class="nav-link" href="{{ route('profile') }}">Profiel</a></li>
