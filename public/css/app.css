@@ -380,33 +380,4 @@ td.field.medical_info {
   cursor: pointer;
 }
 
-.admin-table {
-  text-align: center;
-  border: 3px solid black;
-  padding-left: 3px;
-  padding-right: 3px;
-}
-
-#tabel {
-  height: 500px;
-  overflow: auto;
-}
-
-#inlineFormTable table {
-  height: auto;
-}
-
-#inlineFormTable td:first-child {
-  width: 300px;
-  padding-left: 0px;
-}
-
-#inlineFormTable tbody {
-  padding: 0px;
-}
-
-#inlineFormTable td {
-  padding-left: 100px;
-}
-
 /*# sourceMappingURL=app.css.map */
