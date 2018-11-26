@@ -20,7 +20,7 @@
         <div class="form-row border-bottom pt-2">
             <div class="form-group col-md-6">
                 <label for="dropReis" class="form-label ">Reis*</label>
-                {{ Form::select('dropReis', $aTrips, $traveller['trip_id'] ,['id'=>'dropReis','oninput'=>'this.className', 'class' => 'mb-2 form-control '])}}
+                {{ Form::select('dropReis', $aTrips, $traveller['trip_id'] ,['id'=>'dropReis', 'placeholder' => 'Selecteer een reis','oninput'=>'this.className', 'class' => 'mb-2 form-control '])}}
             </div>
             <div class="form-group col-md-6">
                 <label for="txtStudentNummer" class="form-label ">Studentnummer*</label>
@@ -34,7 +34,7 @@
         <div class="form-row pt-2">
             <div class="form-group col-md-6">
                 <label class="form-label  ">Opleiding*</label>
-                {{ Form::select('dropOpleiding',  $aStudies, null , [ 'data-dependent' => 'dropAfstudeerrichtingen', 'id'=>'dropOpleiding','oninput'=>'this.className', 'class' => 'cascadingMajor mb-2 form-control'])}}
+                {{ Form::select('dropOpleiding',  $aStudies, null , [ 'data-dependent' => 'dropAfstudeerrichtingen', 'id'=>'dropOpleiding', 'placeholder' => 'Selecteer een opleiding','oninput'=>'this.className', 'class' => 'cascadingMajor mb-2 form-control'])}}
             </div>
             <div class="form-group col-md-6">
                 <label class="form-label ">Afstudeerrichting*</label>
