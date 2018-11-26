@@ -16,6 +16,12 @@ class ContactPageController extends Controller
         return view('guest.contactpage',array('oActiveTrips'=>$oActiveTrips));
     }
     public function sendMail(Request $request){
+        $request->validate([
+            'email' => 'required',
+            'onderwerp' => 'required|max:160',
+            'bericht' => 'required',
+        ]);
+
         $oTrip = Trip::where('trip_id',(int)$request->post("reis"))->pluck('contact_mail');
         $sMail = $oTrip;
         $sContactMail = $request->post("email");
