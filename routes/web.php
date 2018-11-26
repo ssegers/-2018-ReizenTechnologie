@@ -18,9 +18,6 @@ Route::prefix('user')->group(function () {
     Route::get('contact','ContactPageController@getInfo')->name('contact');
     Route::post('contact', 'ContactPageController@sendMail');
 
-    Route::get('updatemail','UpdateMailController@createForm')->name('updatemail');
-    Route::post('updatemail', 'UpdateMailController@createMail');
-
     Route::prefix('form')->group(function() {
         route::get('step-1', 'RegisterController@step1');
         route::post('step-1', 'RegisterController@step1Post');
@@ -32,6 +29,10 @@ Route::prefix('user')->group(function () {
         route::post('step-3', 'RegisterController@step3Post');
 
     });
+
+    /* Update Mail as Organizer */
+    Route::get('updatemail','MailController@getUpdateForm')->name('updatemail');
+    Route::post('updatemail', 'MailController@sendUpdateMail');
 
 });
 //IndividualTraveller profile
@@ -78,8 +79,6 @@ Route::prefix('admin')->group(function() {
 
     Route::get('zip','AdminZipController@createForm')->name('adminZip');
     Route::post('zip','AdminZipController@createZip');
-
-
 
     Route::prefix('study')->group(function() {
         Route::get('/', 'AdminStudyController@index')->name('adminStudy');
