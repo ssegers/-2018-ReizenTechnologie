@@ -39,9 +39,6 @@ class Update extends Mailable
             ->subject($this->aData['subject'])
             ->view('mails.update.html')
             ->text('mails.update.text')
-            ->with([
-                'subject' => $this->aData['subject'],
-                'message' => $this->aData['message'],
-            ]);
+            ->with(['aData' => $this->aData]);
     }
 }

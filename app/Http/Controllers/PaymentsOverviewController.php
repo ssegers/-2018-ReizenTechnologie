@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Mail\PaymentStatus;
 use App\Traveller;
+use App\Trip;
 use Illuminate\Http\Request;
 
 class PaymentsOverviewController extends Controller
 {
+
     protected $aFiltersChecked = array(
         'last_name' => 'Familienaam',
         'first_name' => 'Voornaam',
@@ -85,25 +87,31 @@ class PaymentsOverviewController extends Controller
         ]);
     }
 
-    public function sendMailToStudentsInTrip($sTripId){
-        $oStudents = Traveller::where('trip_id',$sTripId)->get();
-        $iPrijs=0;
-        foreach ($oStudents as $oStudent){
+    public function sendMailToStudentsInTrip($sTripId,$sBegeleider){
 
+        $oStudents = Traveller::where('trip_id',$sTripId)->get();
+        $sTripNaam = Trip::where('trip_id',$sTripId)->first()->pluck('name');
+        $iPrijs=Trip::where('trip_id',$sTripId)->first()->pluck('price');
+        $iBetaald = 0;
+        foreach ($oStudents as $oStudent){
+            $this->sendMailTo($oStudent->email,$oStudent->first_name,$iBetaald, $iPrijs-$iBetaald,$sTripNaam,$sBegeleider);
         }
 
     }
 
-    public function sendMailTo($email, $studentNaam,$betaald,$teBetalen,$reisNaam) {
+    public function sendMailTo($email, $studentNaam,$betaald,$teBetalen,$reisNaam,$begeleider) {
         $aMailData = [
             'studentNaam' => $studentNaam,
             'email' => $email,
             'betaald' => $betaald,
             'teBetalen'=>$teBetalen,
-            'reisNaam'=>$reisNaam
+            'reisNaam'=>$reisNaam,
+            'begeleider'=>$begeleider
         ];
         Mail::to($email)->send(new PaymentStatus($aMailData));
+
     }
+  
     private function getUserData($aFilters, $iTrip, $iPaginate = false) {
         if ($iPaginate) {
             /* For click event: Add name to selection */
@@ -112,7 +120,7 @@ class PaymentsOverviewController extends Controller
                 ->join('majors','travellers.major_id','=','majors.major_id')
                 ->join('studies','majors.study_id','=','studies.study_id')
                 ->where('trip_id', $iTrip->trip_id)->paginate($iPaginate);
-        }
+        
         return Traveller::select(array_keys($aFilters))
             ->join('users','travellers.user_id','=','users.user_id')
             ->join('majors','travellers.major_id','=','majors.major_id')

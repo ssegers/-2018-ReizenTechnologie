@@ -29,6 +29,16 @@ class PaymentStatus extends Mailable
      */
     public function build()
     {
-        return $this->view('view.name');
+        return $this->from(['address' => config('mail.username'), 'name' => config('app.name')])
+            ->replyTo(['address' => $this->aMailData['email']])
+            ->subject($this->aMailData['subject'])
+            ->view('mails.paymentStatusMail')
+            ->with([
+                'sStudentNaam' => $this->aMailData['studentNaam'],
+                'sReisNaam' => $this->aMailData['reisNaam'],
+                'iBetaald' => $this->aMailData['betaald'],
+                'iTeBetalen'=>$this->aMailData['teBetalen'],
+                'sBegeleiderNaam'=>$this->aMailData['begeleider'],
+            ]);
     }
 }
