@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\PaymentStatus;
+use App\Payment;
 use App\Traveller;
 use App\Trip;
 use Illuminate\Http\Request;
@@ -92,8 +93,12 @@ class PaymentsOverviewController extends Controller
         $oStudents = Traveller::where('trip_id',$sTripId)->get();
         $sTripNaam = Trip::where('trip_id',$sTripId)->first()->pluck('name');
         $iPrijs=Trip::where('trip_id',$sTripId)->first()->pluck('price');
-        $iBetaald = 0;
         foreach ($oStudents as $oStudent){
+            $aBetalingen = Payment::where('traveller_id',$oStudent->traveller_id)->get()->pluck('amount');
+            $iBetaald = 0;
+            foreach ($aBetalingen as $iAmount){
+                $iBetaald+=$iAmount;
+            }
             $this->sendMailTo($oStudent->email,$oStudent->first_name,$iBetaald, $iPrijs-$iBetaald,$sTripNaam,$sBegeleider);
         }
 
