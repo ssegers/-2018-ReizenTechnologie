@@ -60,16 +60,20 @@ class MailController extends Controller
             'message' => $request->post('message')
         ];
 
-        /* Get the mail list and chunk them by 10 */
-       $aMail = Traveller::where('user_id', 4)->pluck('email')->toArray();
-        // $aMailList = Traveller::pluck('email')->toArray();
 
-        Mail::to($aMail)->send(new Update($aMailData));
+//        $aMail = Traveller::where('user_id', 11)->pluck('email');
+//        Mail::to($aMail)->send(new Update($aMailData));
+
+        /* Get the mail list and chunk them by 10 */
+
+           $aMailList = Traveller::where('trip_id',$request->post('trip'))->pluck('email')->toArray();
+           $aChunkedMailList = array_chunk($aMailList, 10);
+
 
         /* Send the mail to each recipient */
-       // foreach ($aMailList as $aMail) {
-        //    Mail::to($aMail)->send(new Update($aMailData));
-       // }
+        foreach ($aChunkedMailList as $aChunk) {
+            Mail::to($aChunk)->send(new Update($aMailData));
+        }
 
         return redirect()->back()->with('message', 'De email is succesvol verstuurd!');
     }
@@ -83,8 +87,8 @@ class MailController extends Controller
      */
     private function messages() {
         return [
-            'subject.required' => 'Het onderwerp moet ingevult zijn',
-            'message.required' => 'Het bericht moet ingevult zijn',
+            'subject.required' => 'Het onderwerp moet ingevuld zijn',
+            'message.required' => 'Het bericht moet ingevuld zijn',
             'trip.required' => 'De reis moet geselecteerd zijn'
         ];
     }
