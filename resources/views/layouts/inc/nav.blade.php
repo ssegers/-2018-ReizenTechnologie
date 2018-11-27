@@ -6,21 +6,46 @@
         <span id="toggle" class="navbar-toggler-icon"></span>
     </button>
 
+    <?php
+    use \Illuminate\Support\Facades;
+
+    if (Auth::check()){
+        $username = Auth::user()->username;
+        $role = Auth::user()->role;
+    }
+
+
+    ?>
+
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item"><a class="nav-link" href="{{ route('info') }}">Info</a></li>
-            <li class="nav-item"><a class="nav-link" href="/user/u0598673/trip/travellers">Filter Segers</a></li>
-            @foreach(\App\Page::where('type','!=','info')->where('is_visible',true)->get() as $page)
-                <li class="nav-item"><a class="nav-link" href='/page/{{$page->name}}'>{{$page->name}}</a></li>
-            @endforeach
-            <li class="nav-item"><a class="nav-link" href="{{ route('contact') }}">Contact</a></li>
-            <li class="nav-item"><a class="nav-link" href="{{ route('updatemail') }}">Updatemail </a></li>
+            <?php if (! Auth::check()){
+                $role = "visitor";
+            }
+            switch ($role){
+                case "organizer":?>
+                <li class="nav-item"><a class="nav-link" href="/user/<?php echo $username ?>/trip/travellers">Reizigers</a></li>
+
+                    <?php
+                case "guide":?>
+
+                    <?php
+                case "traveller":?>
+
+                    <?php
+                default:?>
+                <li class="nav-item"><a class="nav-link" href="{{ route('info') }}">Info</a></li>
+                @foreach(\App\Page::where('type','!=','info')->where('is_visible',true)->get() as $page)
+                    <li class="nav-item"><a class="nav-link" href='/pdf/{{$page->name}}'>{{$page->name}}</a></li>
+                @endforeach
+                <li class="nav-item"><a class="nav-link" href="{{ route('contact') }}">Contact</a></li>
+                <?php break;
+                }?>
         </ul>
         <ul class="navbar-nav">
-            <li class="nav-item"><a class="nav-link" href="{{ route('registerTrip') }}">Registreren</a></li>
-            <li class="nav-item"><a class="nav-link" href="{{ route('profile') }}">Profiel</a></li>
             @if(\Illuminate\Support\Facades\Auth::check())
-                <li class="nav-item"><a class="nav-link" href="{{ route('lougout') }}">Afmelden</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('profile') }}">Profiel</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('logout') }}">Afmelden</a></li>
             @else
                 <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Inloggen</a></li>
             @endif

@@ -38,6 +38,15 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
+    public function authenticate(Request $request)
+    {
+        if (Auth::attempt(['email' => $request->get('username'), 'password' => $request->get('password')])) {
+
+        }
+        else{
+            echo "blup";
+        }
+    }
     /**
      * @author Yoeri op't Roodt
      *
@@ -46,7 +55,7 @@ class LoginController extends Controller
      */
     protected function credentials(Request $request)
     {
-        echo 'test';
+        return 'test';
         $field = filter_var($request->get($this->username()), FILTER_VALIDATE_EMAIL)
             ? $this->username()
             : 'username';

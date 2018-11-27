@@ -11,6 +11,7 @@
 |
 */
 
+
 Route::prefix('user')->group(function () {
     Route::get('{sUserName}/trip/travellers', 'UserDataController@showUsersAsMentor');
     Route::post('{sUserName}/trip/travellers', 'UserDataController@showUsersAsMentor'); // Manual organizer
@@ -90,6 +91,11 @@ Route::prefix('admin')->group(function() {
     });
 });
 
+//login routes
+Route::post('/auth', 'AuthController@login');
+Route::get('/logout','AuthController@logout')->name("logout");
+Auth::routes();
+
 //WIP
 Route::get('/listhotels', 'HotelRoomController@getHotelsPerTrip');
 Route::get('/listrooms/{hotels_per_trip_id}', 'HotelRoomController@getRooms');
@@ -104,7 +110,5 @@ Route::get('/page/{page_name}','AdminPagesController@showPdf');
 Route::get('/', function () {
     return redirect()->route('info');
 });
-
-Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
