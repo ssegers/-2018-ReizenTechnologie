@@ -54,7 +54,7 @@ class AdminZipController extends Controller
         foreach(Zip::where('zip_code', $request->post('zip_code'))->get() as $tempZip)
         {
             if($tempZip->city == $request->post('city')){
-                return redirect()->back()->with('alert-message', 'Deze is gemeente voor deze postcode bestaat al!');
+                return redirect()->back()->with('alert-message', 'Fout! Deze gemeente voor deze postcode bestaat al!');
             }
         }
 

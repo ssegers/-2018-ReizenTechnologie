@@ -76,8 +76,6 @@
         </div>
     </div>
 
-
-
     <!-- Birth info -->
 
     <div class="form-row border-top pt-2">
@@ -124,7 +122,8 @@
                 <i class="fas fa-plus-circle "></i>
             </button>
             <select id="dropGemeentes" name="dropGemeentes" required class="mb-2 form-control">
-            @foreach($aZips as $zipKey => $zipValue)
+                <option value="" disabled selected>Selecteer een woonplaats</option>
+                @foreach($aZips as $zipKey => $zipValue)
                     <optgroup label="{{ $zipKey }}">
                     @foreach($zipValue as $city)
                         <option value={{ $city }}> {{ $city }}</option>

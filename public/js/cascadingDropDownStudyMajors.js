@@ -17,10 +17,5 @@ $(document).ready(function(){
             })
         }
     });
-    $('.cascadingMajor').trigger("change");
-
-    $('#Study').change(function(){
-        $('#Major').val('');
-    });
 });
 //# sourceMappingURL=cascadingDropDownStudyMajors.js.map

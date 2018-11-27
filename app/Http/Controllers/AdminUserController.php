@@ -18,9 +18,8 @@ class AdminUserController extends Controller
     {
         //gets the username for the placeholder
         $sUserName = User::where('user_id', 1)->first();
-        $aRoleList = ['Reiziger', 'Begeleider', 'Organisator'];
         //returns the view with the data for placeholder
-        return view('admin.users.register-user', ['sUserName' => $sUserName->username, 'aRoleList'=>$aRoleList] );
+        return view('admin.users.register-user', ['sUserName' => $sUserName->username] );
     }
 
 
@@ -76,7 +75,7 @@ class AdminUserController extends Controller
      */
     private function messages(){
         return [
-            'password.min' => 'Fout! Het wachtwoord is te kort.',
+            'password.min' => 'Fout! Het wachtwoord is te kort, vul minstens 6 tekens in.',
             'password.required_with' => 'Fout! Het wachtwoord moet ingevuld worden.',
             'password_confirmation.min' => 'Fout! De bevestiging van het wachtwoord is te kort.',
             'password.required_with' => 'Fout! Het wachtwoord moet ook nog bevestigd worden.',

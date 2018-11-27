@@ -4,14 +4,21 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Page;
-use Illuminate\Support\Facades\Storage;
 
-class AdminPdfController extends Controller
+class AdminPagesController extends Controller
 {
     public function index(){
         $aPages = Page::where('type','!=', 'info')->get();
-        return view('admin.pdf.pdf', array(
+        return view('admin.pdf.pagesOverview', array(
             'aPages' => $aPages,
+        ));
+    }
+
+    public function editPage(Request $request){
+        $pageId=$request->input('pageId');
+        $aPage = Page::where('page_id',$pageId)->first();
+        return view('admin.pdf.editPage', array(
+            'aPage' => $aPage,
         ));
     }
 
@@ -24,24 +31,36 @@ class AdminPdfController extends Controller
            'is_visible'=>false,
            'type'=>'pdf'
         ]);
+        $aPage= Page::where('name',$page_name)->first();
 
-        return redirect()->back()->with('message', 'De nieuwe pagina is aangemaakt');
+        return view('admin.pdf.editPage', array(
+            'aPage' => $aPage,
+        ))->with('message', 'De pagina is aangemaakt');
+    }
+
+    public function verwijderPage(Request $request){
+
+        $pageId=$request->input('pageId');
+
+        Page::where('page_id',$pageId)->delete();
+        return redirect()->back()->with('message', 'De pagina is verwijderd');
     }
 
     public function updateContent(Request $request){
+        $pageId=$request->input('pageId');
         if($request->get('typeSelector')=='pdf') {
             $type=$request->get('typeSelector');
             $pdf = $request->input("filepath");
             $is_visible=(bool)$request->input("Zichtbaar");
             if($pdf==null){$pdf="";}
 
-            Page::where('page_id', $request->post('pageSelector'))->update([
+            Page::where('page_id', $pageId)->update([
                 'content' => $pdf,
                 'is_visible'=>$is_visible,
                 'type'=>$type
             ]);
 
-            return redirect()->back()->with('message', 'De pagina is aangepast');
+            return redirect()->route("adminPages")->with('message', 'De pagina is aangepast');
         }
         else{
             $type=$request->get('typeSelector');
@@ -50,19 +69,19 @@ class AdminPdfController extends Controller
             if (strlen($sContentString) == 0){
                 $sContentString = "";
             }
-            Page::where('page_id', $request->post('pageSelector'))->update([
+            Page::where('page_id', $pageId)->update([
                 'content' => $sContentString,
                 'is_visible'=>$is_visible,
                 'type'=>$type
             ]);
 
-            return redirect()->back()->with('message', 'De pagina is aangepast');
+            return redirect()->route("adminPages")->with('message', 'De pagina is aangepast');
         }
 
     }
     function showPdf($page_name){
         $aPages= Page::where('type','!=','info')->where('name',$page_name)->first();
-        return view('guest.pdfpage', array(
+        return view('guest.contentpage', array(
             'aPages' => $aPages,
         ));
     }

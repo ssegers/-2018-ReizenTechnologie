@@ -7,6 +7,6 @@
     </ul>
 </div>
 <div>
-    <p><b>Berricht:</b></p>
+    <p><b>Bericht:</b></p>
     <p>{{ $description }}</p>
 </div>
