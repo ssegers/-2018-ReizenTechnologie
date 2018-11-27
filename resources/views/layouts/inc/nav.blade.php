@@ -47,7 +47,7 @@
                 <li class="nav-item"><a class="nav-link" href="{{ route('profile') }}">Profiel</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('logout') }}">Afmelden</a></li>
             @else
-                <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Inloggen</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('log') }}">Inloggen</a></li>
             @endif
         </ul>
     </div>

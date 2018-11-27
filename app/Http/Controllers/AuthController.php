@@ -45,4 +45,8 @@ class AuthController extends controller
         Auth::logout();
         return redirect('/info');
     }
+
+    public function showView(){
+        return view("auth.Authenticate");
+    }
 }
