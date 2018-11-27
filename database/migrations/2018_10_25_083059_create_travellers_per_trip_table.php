@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTripOrganizersTable extends Migration
+class CreateTravellersPerTripTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateTripOrganizersTable extends Migration
      */
     public function up()
     {
-        Schema::create('trip_organizers', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedSmallInteger('trip_id')->nullable(false);
-            $table->unsignedSmallInteger('traveller_id')->nullable(false);
+        Schema::create('travellers_per_trip', function (Blueprint $table) {
+            $table->integer('trip_id')->unsigned();
+            $table->integer('traveller_id')->unsigned();
             $table->timestamps();
+            $table->foreign('trip_id')->references('trip_id')->on('trips');
+            $table->foreign('traveller_id')->references('traveller_id')->on('travellers');
         });
     }
 
