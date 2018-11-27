@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class TripOrganizerSeeder extends Seeder
+class TravellersPerTripSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,19 +12,19 @@ class TripOrganizerSeeder extends Seeder
     public function run()
     {
         //koppel Mr. Segers aan Amerika
-        DB::table('trip_organizers')->insert([
+        DB::table('travellers_per_trip')->insert([
             'trip_id' => 1,
             'traveller_id' => 1,
         ]);
 
         //koppel Mr. Roox aan Duitsland
-        DB::table('trip_organizers')->insert([
+        DB::table('travellers_per_trip')->insert([
             'trip_id' => 2,
             'traveller_id' => 2,
         ]);
 
         //koppel Mr. Segers aan Duitsland
-        DB::table('trip_organizers')->insert([
+        DB::table('travellers_per_trip')->insert([
             'trip_id' => 2,
             'traveller_id' => 1,
         ]);
