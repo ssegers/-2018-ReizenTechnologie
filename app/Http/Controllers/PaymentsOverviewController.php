@@ -116,11 +116,11 @@ class PaymentsOverviewController extends Controller
         if ($iPaginate) {
             /* For click event: Add name to selection */
             return Traveller::select(array_keys(array_add($aFilters, 'username', true)))
-                ->join('users','travellers.user_id','=','users.user_id')
-                ->join('majors','travellers.major_id','=','majors.major_id')
-                ->join('studies','majors.study_id','=','studies.study_id')
+                ->join('users', 'travellers.user_id', '=', 'users.user_id')
+                ->join('majors', 'travellers.major_id', '=', 'majors.major_id')
+                ->join('studies', 'majors.study_id', '=', 'studies.study_id')
                 ->where('trip_id', $iTrip->trip_id)->paginate($iPaginate);
-        
+        }
         return Traveller::select(array_keys($aFilters))
             ->join('users','travellers.user_id','=','users.user_id')
             ->join('majors','travellers.major_id','=','majors.major_id')
