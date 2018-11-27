@@ -16,6 +16,12 @@ class ContactPageController extends Controller
         return view('guest.contactpage',array('oActiveTrips'=>$oActiveTrips));
     }
     public function sendMail(Request $request){
+        $request->validate([
+            'email' => 'required',
+            'onderwerp' => 'required|max:160',
+            'bericht' => 'required',
+        ]);
+
         $oTrip = Trip::where('trip_id',(int)$request->post("reis"))->pluck('contact_mail');
         $sMail = $oTrip;
         $sContactMail = $request->post("email");
@@ -23,7 +29,7 @@ class ContactPageController extends Controller
         $sbericht = $request->post('bericht');
         $sMail = substr($sMail,2,strlen($sMail)-4);
         $this->sendMailTo($sMail, $sOnderwerp, $sbericht, $sContactMail);
-        return redirect('info');
+        return redirect('info')->with('message', 'De e-mail is succesvol verzonden.');
     }
 
     public function sendMailTo($email,$subject, $bericht,$contactMail) {

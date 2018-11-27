@@ -19,7 +19,7 @@ Route::prefix('user')->group(function () {
     Route::post('contact', 'ContactPageController@sendMail');
 
     Route::prefix('form')->group(function() {
-        route::get('step-1', 'RegisterController@step1');
+        route::get('step-1', 'RegisterController@step1')->name('registerTrip');
         route::post('step-1', 'RegisterController@step1Post');
 
         route::get('step-2', 'RegisterController@step2');
@@ -29,6 +29,10 @@ Route::prefix('user')->group(function () {
         route::post('step-3', 'RegisterController@step3Post');
 
     });
+
+    /* Update Mail as Organizer */
+    Route::get('updatemail','MailController@getUpdateForm')->name('updatemail');
+    Route::post('updatemail', 'MailController@sendUpdateMail');
 
 });
 //IndividualTraveller profile
@@ -68,14 +72,13 @@ Route::prefix('admin')->group(function() {
     Route::get('trips', 'AdminTripController@getTrips')->name('adminTrips');
     Route::get('trips/{tripid}', 'AdminTripController@getTripByID');
 
-    Route::get('pdf', 'AdminPdfController@index')->name('adminPdf');
-    Route::post('updatePdf', 'AdminPdfController@updateContent');
-    Route::post('createPage', 'AdminPdfController@createPage');
+    Route::get('pdf', 'AdminPagesController@index')->name('adminPages');
+    Route::post('editPage', 'AdminPagesController@editPage');
+    Route::post('updatePdf', 'AdminPagesController@updateContent');
+    Route::post('createPage', 'AdminPagesController@createPage');
 
     Route::get('zip','AdminZipController@createForm')->name('adminZip');
     Route::post('zip','AdminZipController@createZip');
-
-
 
     Route::prefix('study')->group(function() {
         Route::get('/', 'AdminStudyController@index')->name('adminStudy');
@@ -96,7 +99,7 @@ Route::get('/listtravellers/{room_hotel_trip_id}', 'HotelRoomController@getTrave
 Route::post('cascade', 'UserDataController@GetMajorsByStudy');
 
 Route::get('/info','AdminInfoController@showInfo')->name('info');
-Route::get('/pdf/{page_name}','AdminPdfController@showPdf');
+Route::get('/pdf/{page_name}','AdminPagesController@showPdf');
 Route::get('/', function () {
     return redirect()->route('info');
 });

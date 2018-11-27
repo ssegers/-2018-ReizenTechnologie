@@ -8,6 +8,15 @@
 
 @section('content')
     <div>
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <h1>Contactpagina:</h1>
         <br>
         {{ Form::open(array('url' => 'user/contact', 'method' =>'post')) }}
@@ -28,5 +37,6 @@
             {{ Form::textarea('bericht','',array("class" => "form-control", "required" )) }}<br>
             {{ Form::submit('Verzend',array("class" => "btn")) }}
         {{ Form::close() }}
+        <br>
     </div>
 @endsection

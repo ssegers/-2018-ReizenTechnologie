@@ -1,6 +1,7 @@
 $(document).ready(function(){
     $('.cascadingMajor').change(function(){
         if($(this).val() != ''){
+            var username = $("#username").text();
             var study = $(this).val();
             var dependent = $(this).data('dependent');
             var _token = $('input[name="_token"]').val();
@@ -12,15 +13,13 @@ $(document).ready(function(){
                     _token: _token,
                     dependent: dependent},
                 success:function(result){
+                    console.log(username);
+                    console.log(1);
                     $('#'+dependent).html(result);
+
                 }
             })
         }
-    });
-    $('.cascadingMajor').trigger("change");
-
-    $('#Study').change(function(){
-        $('#Major').val('');
     });
 });
 //# sourceMappingURL=cascadingDropDownStudyMajors.js.map
