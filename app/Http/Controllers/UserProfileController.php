@@ -24,7 +24,7 @@ class UserProfileController extends Controller
      */
     public function showUserData(Request $request)
     {
-        $sUserName = 'r0674424';
+        $sUserName = Auth::user()->username;
 
         $aUserData = User::select()
             ->join('travellers', 'users.user_id', '=', 'travellers.user_id')
