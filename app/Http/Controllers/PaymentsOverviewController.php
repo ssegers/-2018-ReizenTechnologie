@@ -18,13 +18,14 @@ class PaymentsOverviewController extends Controller
 
         }
 
-        public function sendMailTo($email, $studentNaam,$betaald,$teBetalen,$reisNaam) {
+        public function sendMailTo($email, $studentNaam,$betaald,$teBetalen,$reisNaam,$begeleider) {
             $aMailData = [
                 'studentNaam' => $studentNaam,
                 'email' => $email,
                 'betaald' => $betaald,
                 'teBetalen'=>$teBetalen,
-                'reisNaam'=>$reisNaam
+                'reisNaam'=>$reisNaam,
+                'begeleider'=>$begeleider
             ];
             Mail::to($email)->send(new PaymentStatus($aMailData));
         }
