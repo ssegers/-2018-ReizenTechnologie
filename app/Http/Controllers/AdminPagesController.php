@@ -31,8 +31,19 @@ class AdminPagesController extends Controller
            'is_visible'=>false,
            'type'=>'pdf'
         ]);
+        $aPage= Page::where('name',$page_name)->first();
 
-        return redirect()->back()->with('message', 'De nieuwe pagina is aangemaakt');
+        return view('admin.pdf.editPage', array(
+            'aPage' => $aPage,
+        ))->with('message', 'De pagina is aangemaakt');
+    }
+
+    public function verwijderPage(Request $request){
+
+        $pageId=$request->input('pageId');
+
+        Page::where('page_id',$pageId)->delete();
+        return redirect()->back()->with('message', 'De pagina is verwijderd');
     }
 
     public function updateContent(Request $request){

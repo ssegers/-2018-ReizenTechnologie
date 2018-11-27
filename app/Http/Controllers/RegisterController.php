@@ -216,9 +216,9 @@ class RegisterController extends Controller
 
     private function checkRole($sUsername) {
         if(substr($sUsername,0,1) == 'r' || substr($sUsername,0,1) == 'R') {
-            return "Student";
+            return "traveller";
         } else {
-            return "Docent";
+            return "guide";
         }
     }
 

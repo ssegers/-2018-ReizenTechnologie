@@ -19,6 +19,10 @@
                             {{Form::number('trip-year', null, array('class' => 'form-control'))}}
                         </div>
                         <div class="form-group">
+                            {{Form::label('trip-price','Prijs in Euro:')}}
+                            {{Form::number('trip-price', null, array('class' => 'form-control'))}}
+                        </div>
+                        <div class="form-group">
                             {{Form::label('trip-is-active','Actief:')}}
                             <input type="checkbox" class="checkbox-lg m-3" name="trip-is-active" value="1" id="trip-is-active"/>
                             {{--{{Form::checkbox('trip-is-active','1' )}}--}}
@@ -50,6 +54,7 @@
                     <tr>
                         <th scope="col">Naam</th>
                         <th scope="col">Jaar</th>
+                        <th scope="col">Prijs</th>
                         <th scope="col">Inscrijvingen actief</th>
                         <th scope="col">Mail contactpersoon</th>
                         <th scope="col">Bewerken</th>
@@ -62,13 +67,14 @@
                     <tr>
                         <td >{{$oTrip->name}}</td>
                         <td >{{$oTrip->year}}</td>
+                        <td>&euro; {{$oTrip->price}}</td>
                         @if($oTrip->is_active)
                             <td >Actief</td>
                         @else
                             <td >Non-actief</td>
                         @endif
                         <td >{{$oTrip->contact_mail}}</td>
-                        <td ><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tripModal" data-trip-id="{{$oTrip->trip_id}}" data-trip-name="{{$oTrip->name}}" data-trip-year="{{$oTrip->year}}" data-trip-active="{{$oTrip->is_active}}" data-trip-mail="{{$oTrip->contact_mail}}">Edit</button>
+                        <td ><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tripModal" data-trip-id="{{$oTrip->trip_id}}" data-trip-name="{{$oTrip->name}}" data-trip-year="{{$oTrip->year}}" data-trip-active="{{$oTrip->is_active}}" data-trip-price="{{$oTrip->price}}" data-trip-mail="{{$oTrip->contact_mail}}">Edit</button>
                             <!--<form method="get" action="/admin/trips/$oTrip->trip_id"><button type="submit" >Edit</button></form></td>-->
                     </tr>
                 @endForeach
@@ -82,6 +88,7 @@
         var tripName = button.data('trip-name');
         var tripYear = button.data('trip-year');
         var tripActive = button.data('trip-active');
+        var tripPrice = button.data('trip-price');
         var tripMail = button.data('trip-mail');
         console.log(tripActive);
         var tripId = button.data('trip-id');
@@ -93,6 +100,7 @@
         modal.find('.modal-body #trip-name').val(tripName);
         modal.find('.modal-body #trip-year').val(tripYear);
         modal.find('.modal-body #trip-active').val(tripActive);
+        modal.find('.modal-body #trip-price').val(tripPrice);
         modal.find('.modal-body #trip-id').val(tripId);
         modal.find('.modal-body #trip-mail').val(tripMail);
 

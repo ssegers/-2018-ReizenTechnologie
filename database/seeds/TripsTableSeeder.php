@@ -16,18 +16,21 @@ class TripsTableSeeder extends Seeder
             'name' => 'Amerika',
             'is_active' => true,
             'year' => 2019,
+            'price'=>2000,
             'contact_mail'=>'kaan.akpinar@hotmail.com'
         ]);
 
         DB::table('trips')->insert([
             'name' => 'Duitsland',
             'is_active' => true,
+            'price'=>1000,
             'year' => 2019
         ]);
 
         DB::table('trips')->insert([
             'name' => 'Amerika',
             'is_active' => false,
+            'price'=>1999,
             'year' => 2018
         ]);
     }

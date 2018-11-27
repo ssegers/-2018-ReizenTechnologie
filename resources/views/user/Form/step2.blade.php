@@ -76,8 +76,6 @@
         </div>
     </div>
 
-
-
     <!-- Birth info -->
 
     <div class="form-row border-top pt-2">

@@ -44,7 +44,7 @@
         <div class="actions">
             {{ Form::hidden('pageId', $aPage->page_id) }}
             {{ Form::submit('Opslaan',array('class'=>"btn btn-primary")) }}
-            <input type="button" class="btn btn-primary" onclick="history.go(0)" value="Annuleren"/>
+            <input type="button" class="btn btn-primary" onclick="if(ConfirmDelete()){window.location='{{ url("admin/overviewPages") }}'}" value="Annuleren"/>
         </div>
         <br/>
         <div id="pdf2">
@@ -63,6 +63,9 @@
     <script src="/vendor/unisharp/laravel-ckeditor/adapters/jquery.js"></script>
     <script src="/vendor/laravel-filemanager/js/lfm.js"></script>
     <script>
+        function ConfirmDelete(){
+            return confirm('Are you sure? If you leave before saving, your changes will be lost.');
+        }
 
         var options = {
             filebrowserImageBrowseUrl: '/laravel-filemanager?type=Images',
