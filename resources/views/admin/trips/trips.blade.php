@@ -19,7 +19,7 @@
                             {{Form::number('trip-year', null, array('class' => 'form-control'))}}
                         </div>
                         <div class="form-group">
-                            {{Form::label('trip-price','Prijs:')}}
+                            {{Form::label('trip-price','Prijs in Euro:')}}
                             {{Form::number('trip-price', null, array('class' => 'form-control'))}}
                         </div>
                         <div class="form-group">
@@ -67,7 +67,7 @@
                     <tr>
                         <td >{{$oTrip->name}}</td>
                         <td >{{$oTrip->year}}</td>
-                        <td>{{$oTrip->price}}</td>
+                        <td>&euro; {{$oTrip->price}}</td>
                         @if($oTrip->is_active)
                             <td >Actief</td>
                         @else
