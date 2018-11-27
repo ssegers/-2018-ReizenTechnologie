@@ -15,9 +15,11 @@ class CreateMajorsTable extends Migration
     {
         Schema::create('majors', function (Blueprint $table) {
             $table->increments('major_id');
-            $table->integer('study_id');
+            $table->integer('study_id')->unsigned();
             $table->string('major_name')->unique();
             $table->timestamps();
+
+            $table->foreign('study_id')->references('study_id')->on('studies');
         });
     }
 

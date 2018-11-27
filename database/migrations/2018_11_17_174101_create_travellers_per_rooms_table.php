@@ -13,13 +13,13 @@ class CreateTravellersPerRoomsTable extends Migration
      */
     public function up()
     {
-        Schema::create('travellers_per_rooms', function (Blueprint $table) {
+        Schema::create('travellers_per_room', function (Blueprint $table) {
             $table->integer('rooms_hotel_trip_id')->unsigned();
             $table->integer('traveller_id')->unsigned();
             $table->timestamps();
 
             $table->primary(array('rooms_hotel_trip_id', 'traveller_id'));
-            $table->foreign('rooms_hotel_trip_id')->references('rooms_hotel_trip_id')->on('rooms_per_hotel_per_trips');
+            $table->foreign('rooms_hotel_trip_id')->references('rooms_hotel_trip_id')->on('rooms_per_hotel_per_trip');
             $table->foreign('traveller_id')->references('traveller_id')->on('travellers');
         });
     }
@@ -31,6 +31,6 @@ class CreateTravellersPerRoomsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('travellers_per_rooms');
+        Schema::dropIfExists('travellers_per_room');
     }
 }

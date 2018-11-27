@@ -24,5 +24,15 @@ class Traveller extends Model
         return $this->belongsTo('App\Major');
     }
 
+    public function travellersPerTrip()
+    {
+        return $this->hasMany('App\TravellersPerTrip');
+
+    }
+    public function travellersPerRoom()
+    {
+        return $this->hasMany('App\TravellersPerRoom');
+
+    }
     public $timestamps = false;
 }

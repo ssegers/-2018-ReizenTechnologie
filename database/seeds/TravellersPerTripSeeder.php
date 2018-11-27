@@ -29,5 +29,4 @@ class TravellersPerTripSeeder extends Seeder
             'traveller_id' => 1,
         ]);
     }
-
 }
