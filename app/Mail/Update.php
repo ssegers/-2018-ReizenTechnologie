@@ -37,7 +37,6 @@ class Update extends Mailable
         return $this->from(['address' => config('mail.username')])
             ->replyTo(['address' => config('mail.username')])
             ->subject($this->aData['subject'])
-            ->view('mails.update.html')
             ->text('mails.update.text')
             ->with(['aData' => $this->aData]);
     }
