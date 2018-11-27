@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\Update;
 use App\Traveller;
+use App\Trip;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
@@ -18,7 +19,15 @@ class MailController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function getUpdateForm(){
-        return view('organiser.updatemail');
+
+        $aTrips = Trip::where('is_active', true)->get();
+        $aNewTrips = array();
+        foreach ($aTrips as $oTrip) {
+            $aNewTrips[$oTrip->trip_id] = $oTrip->name . ' ' . $oTrip->year;
+        }
+
+
+        return view('organiser.updatemail', ['aTrips' => $aNewTrips]);
     }
 
 
@@ -35,10 +44,11 @@ class MailController extends Controller
         /* Validate the request */
         $validator = \Validator::make($request->all(), [
             'subject' => 'required',
+            'trip' => 'required',
             'message' => 'required',
         ], $this->messages());
 
-        /* If the return the errors if the validator fails */
+        /* Return the errors if the validator fails */
         if ($validator->fails()) {
             return redirect()->back()->withInput()->with(['message' => $validator->errors()]);
         }
@@ -46,18 +56,20 @@ class MailController extends Controller
         /* Set the mail data */
         $aMailData = [
             'subject' => $request->post('subject'),
-            'message' => $request->post('message'),
+            'trip' => Trip::where('trip_id',$request->post('trip'))->first(),
+            'message' => $request->post('message')
         ];
 
         /* Get the mail list and chunk them by 10 */
-        $aMailList = Traveller::pluck('email')->toArray();
-        $aChuckedMailList = array_chunk($aMailList, 10);
+       $aMail = Traveller::where('user_id', 4)->pluck('email')->toArray();
+        // $aMailList = Traveller::pluck('email')->toArray();
 
+        Mail::to($aMail)->send(new Update($aMailData));
 
         /* Send the mail to each recipient */
-        foreach ($aChuckedMailList as $aChunk) {
-            Mail::to($aChunk)->send(new Update($aMailData));
-        }
+       // foreach ($aMailList as $aMail) {
+        //    Mail::to($aMail)->send(new Update($aMailData));
+       // }
 
         return redirect()->back()->with('message', 'De email is succesvol verstuurd!');
     }
@@ -73,6 +85,7 @@ class MailController extends Controller
         return [
             'subject.required' => 'Het onderwerp moet ingevult zijn',
             'message.required' => 'Het bericht moet ingevult zijn',
+            'trip.required' => 'De reis moet geselecteerd zijn'
         ];
     }
 }
