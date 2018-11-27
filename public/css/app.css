@@ -380,4 +380,21 @@ td.field.medical_info {
   cursor: pointer;
 }
 
+#inlineFormTable table {
+  height: auto;
+}
+
+#inlineFormTable td:first-child {
+  width: 200px;
+  padding-left: 0px;
+}
+
+#inlineFormTable tbody {
+  padding: 0px;
+}
+
+#inlineFormTable td {
+  padding-left: 100px;
+}
+
 /*# sourceMappingURL=app.css.map */

@@ -11,7 +11,7 @@
             <li class="nav-item"><a class="nav-link" href="{{ route('info') }}">Info</a></li>
             <li class="nav-item"><a class="nav-link" href="/user/u0598673/trip/travellers">Filter Segers</a></li>
             @foreach(\App\Page::where('type','!=','info')->where('is_visible',true)->get() as $page)
-                <li class="nav-item"><a class="nav-link" href='/pdf/{{$page->name}}'>{{$page->name}}</a></li>
+                <li class="nav-item"><a class="nav-link" href='/page/{{$page->name}}'>{{$page->name}}</a></li>
             @endforeach
             <li class="nav-item"><a class="nav-link" href="{{ route('contact') }}">Contact</a></li>
             <li class="nav-item"><a class="nav-link" href="{{ route('updatemail') }}">Updatemail </a></li>
