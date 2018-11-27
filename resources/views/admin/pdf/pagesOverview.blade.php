@@ -40,6 +40,7 @@
             <th scope="col">Type</th>
             <th scope="col">Pagina Zichtbaar</th>
             <th scope="col">Bewerken</th>
+            <th scope="col">Verwijderen</th>
         </tr>
     </thead>
     <tbody>
@@ -58,6 +59,12 @@
                 {{ Form::submit('Edit',array('class'=>"btn btn-primary")) }}
                 {{ Form::close()}}
             </td>
+            <td>
+                {{ Form::open(array('action' => 'AdminPagesController@verwijderPage', 'method' => 'post','onsubmit' => 'return ConfirmDelete()')) }}
+                {{ Form::hidden('pageId', $oPage->page_id) }}
+                {{ Form::submit('Delete',array('class'=>"btn btn-primary")) }}
+                {{ Form::close()}}
+            </td>
         </tr>
     @endForeach
     </tbody>
@@ -68,5 +75,9 @@
             $('#removeTimer').remove();
         }
     }, 5000);
+
+    function ConfirmDelete(){
+        return confirm('Are you sure?');
+    }
 </script>
 @endsection
