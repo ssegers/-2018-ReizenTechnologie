@@ -27,23 +27,6 @@ class HomeController extends Controller
     }
     public function store(Request $request)
     {
-        return redirect('info');
-        $x = "test";
-        return var_dump($x);
-        try
-        {
-            if (Auth::attempt(['email' => $request->get('username'), 'password' => $request->get('password')])) {
-                echo Auth::user();
-            }
-            else{
-                echo "blup";
-            }
-        }
-        catch (\Exception $e) {
-            return back()->with('message', 'Gebruikersnaam of passwoord is fout.');
-        }
-
-
     }
     /**
      *

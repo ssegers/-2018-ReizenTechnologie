@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title') <title>Login</title>
+@section('title') <title>Login</title>@endsection
 @section('content')
     <div class="container">
         <h1>Log in</h1>
@@ -10,8 +10,8 @@
             </div>
         @endif
 
-        {{ Form::open(array('action' => 'HomeController@store', 'method' => 'post')) }}
-        {{ csrf_field() }}
+        {{ Form::open(array('action' => 'AuthController@login', 'method' => 'post')) }}
+            {{ csrf_field() }}
 
             <div class="form-group">
                 <label>Email: </label>

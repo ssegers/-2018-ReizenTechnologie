@@ -11,6 +11,7 @@
 |
 */
 
+
 Route::prefix('user')->group(function () {
     Route::get('{sUserName}/trip/travellers', 'UserDataController@showUsersAsMentor');
     Route::post('{sUserName}/trip/travellers', 'UserDataController@showUsersAsMentor'); // Manual organizer
@@ -56,11 +57,6 @@ Route::prefix('admin')->group(function() {
     route::get('user/register', 'AdminUserController@createForm')->name('adminRegUser');
     route::post('user/register', 'AdminUserController@createUser');
 
-    //login routes
-    Route::post('/logInUser', 'HomeController@store');
-    Route::get('/logoutUser', 'HomeController@destroy');
-    Auth::routes();
-
     Route::get('info', 'AdminInfoController@getInfo')->name('adminInfo');
     Route::post('info', 'AdminInfoController@updateInfo');
     Route::post('upload_image','AdminInfoController@uploadImage')->name('upload');
@@ -85,6 +81,11 @@ Route::prefix('admin')->group(function() {
     });
 });
 
+//login routes
+Route::post('/auth', 'AuthController@login');
+Route::get('/logout','AuthController@logout')->name("logout");
+Auth::routes();
+
 //WIP
 Route::get('/listhotels', 'HotelRoomController@getHotelsPerTrip');
 Route::get('/listrooms/{hotels_per_trip_id}', 'HotelRoomController@getRooms');
@@ -99,7 +100,5 @@ Route::get('/pdf/{page_name}','AdminPdfController@showPdf');
 Route::get('/', function () {
     return redirect('info');
 });
-
-Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

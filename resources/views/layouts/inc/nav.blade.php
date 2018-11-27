@@ -18,7 +18,7 @@
         <ul class="navbar-nav">
             <li class="nav-item"><a class="nav-link" href="{{ route('profile') }}">Profiel</a></li>
             @if(\Illuminate\Support\Facades\Auth::check())
-                <li class="nav-item"><a class="nav-link" href="{{ route('lougout') }}">Afmelden</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('logout') }}">Afmelden</a></li>
             @else
                 <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Inloggen</a></li>
             @endif
