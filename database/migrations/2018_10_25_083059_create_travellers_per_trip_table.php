@@ -29,6 +29,6 @@ class CreateTravellersPerTripTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('trip_organizers');
+        Schema::dropIfExists('travellers_per_trip');
     }
 }
