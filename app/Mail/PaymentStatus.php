@@ -16,9 +16,10 @@ class PaymentStatus extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public $aMailData;
+    public function __construct($aMailData)
     {
-        //
+        $this->aMailData = $aMailData;
     }
 
     /**
