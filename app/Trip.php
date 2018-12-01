@@ -8,12 +8,12 @@ class Trip extends Model
 {
     protected $primaryKey = 'trip_id';
 
-    public function trips()
+    public function travellerIdsForThisTrip()
     {
         return $this->hasMany('App\TravellersPerTrip', 'trip_id', 'trip_id');
     }
 
-    public function hotels()
+    public function hotelIdsForThisTrip()
     {
         return $this->hasMany('App\HotelsPerTrip', 'trip_id', 'trip_id');
     }
