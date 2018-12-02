@@ -14,17 +14,14 @@
                 <td>{{$aPage->name}}</td>
                 <td>
                     <div class="form-inline">
-                        <label class="control-label" for="typeSelector" style="padding-right: 10px">Type:</label>
-                        <select name="typeSelector" id="typeSelector" class="form-control">
-                            <option value="pdf">PDF</option>
-                            <option value="html">HTML</option>
-                        </select>
+                        {{Form::label('typeSelector','Type:',array('style'=>'padding-right:10px'))}}
+                        {{Form::select('typeSelector', array('pdf' => 'PDF', 'html' => 'HTML'),null,array('id'=>'typeSelector','class'=>'form-control'))}}
                     </div>
                 </td>
                 <td>
                     <div class="form-check">
-                        <input type="checkbox" class="form-check-input" name="Zichtbaar" id="Zichtbaar">
-                        <label class="form-check-label" for="Zichtbaar">Zichtbaar</label>
+                        {{Form::checkbox('Zichtbaar', 'Zichtbaar',null,array('class'=>'form-check-input','id'=>'Zichtbaar'))}}
+                        {{Form::label('Zichtbaar','Zichtbaar',array('class'=>'form-check-label'))}}
                     </div>
                 </td>
             </tr>
@@ -37,7 +34,8 @@
                    <i class="fa fa-picture-o"></i> Kies Pdf
                  </a>
                </span>
-                <input id="thumbnail" class="form-control" type="text" name="filepath">
+                {{--<input id="thumbnail" class="form-control" type="text" name="filepath">--}}
+                {{Form::text('filepath', null, array('class' => 'form-control','id'=>'thumbnail'))}}
             </div>
         </div>
         <br/>

@@ -75,7 +75,7 @@ Route::prefix('admin')->group(function() {
 
     Route::get('overviewPages', 'AdminPagesController@index')->name('adminPages');
     Route::post('editPage', 'AdminPagesController@editPage');
-    Route::post('verwijderPage', 'AdminPagesController@verwijderPage');
+    Route::post('verwijderPage', 'AdminPagesController@deletePage');
     Route::post('updateContent', 'AdminPagesController@updateContent');
     Route::post('createPage', 'AdminPagesController@createPage');
 
@@ -106,7 +106,7 @@ Route::get('/listtravellers/{room_hotel_trip_id}', 'HotelRoomController@getTrave
 Route::post('cascade', 'UserDataController@GetMajorsByStudy');
 
 Route::get('/info','AdminInfoController@showInfo')->name('info');
-Route::get('/page/{page_name}','AdminPagesController@showPdf');
+Route::get('/page/{page_name}','AdminPagesController@showPage');
 Route::get('/', function () {
     return redirect()->route('info');
 });
