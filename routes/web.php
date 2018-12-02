@@ -30,7 +30,8 @@ Route::prefix('user')->group(function () {
         route::post('step-3', 'RegisterController@step3Post');
 
     });
-
+    Route::get('payment', 'PaymentsOverviewController@showTable')->name('paymentOverview');
+    Route::get('payment', 'PaymentsOverviewController@showTable');
     /* Update Mail as Organizer */
     Route::get('updatemail','MailController@getUpdateForm')->name('updatemail');
     Route::post('updatemail', 'MailController@sendUpdateMail');
@@ -75,7 +76,7 @@ Route::prefix('admin')->group(function() {
 
     Route::get('overviewPages', 'AdminPagesController@index')->name('adminPages');
     Route::post('editPage', 'AdminPagesController@editPage');
-    Route::post('verwijderPage', 'AdminPagesController@verwijderPage');
+    Route::post('verwijderPage', 'AdminPagesController@deletePage');
     Route::post('updateContent', 'AdminPagesController@updateContent');
     Route::post('createPage', 'AdminPagesController@createPage');
 
@@ -106,7 +107,7 @@ Route::get('/listtravellers/{room_hotel_trip_id}', 'HotelRoomController@getTrave
 Route::post('cascade', 'UserDataController@GetMajorsByStudy');
 
 Route::get('/info','AdminInfoController@showInfo')->name('info');
-Route::get('/page/{page_name}','AdminPagesController@showPdf');
+Route::get('/page/{page_name}','AdminPagesController@showPage');
 Route::get('/', function () {
     return redirect()->route('info');
 });

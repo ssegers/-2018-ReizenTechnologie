@@ -7,6 +7,13 @@ use App\Page;
 
 class AdminPagesController extends Controller
 {
+    /**
+     * This function shows the pagesOverview view
+     *
+     * @author Michiel Guilliams
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index(){
         $aPages = Page::where('type','!=', 'info')->get();
         return view('admin.pdf.pagesOverview', array(
@@ -14,6 +21,14 @@ class AdminPagesController extends Controller
         ));
     }
 
+    /**
+     * This function shows the editPage view
+     *
+     * @author Michiel Guilliams
+     *
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function editPage(Request $request){
         $pageId=$request->input('pageId');
         $aPage = Page::where('page_id',$pageId)->first();
@@ -22,6 +37,14 @@ class AdminPagesController extends Controller
         ));
     }
 
+    /**
+     * This function creates a new page and shows the editPage view of the new page
+     *
+     * @author Michiel Guilliams
+     *
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function createPage(Request $request){
         $page_name=$request->input('Name');
 
@@ -38,7 +61,15 @@ class AdminPagesController extends Controller
         ))->with('message', 'De pagina is aangemaakt');
     }
 
-    public function verwijderPage(Request $request){
+    /**
+     * This function deletes the related view
+     *
+     * @author Michiel Guilliams
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function deletePage(Request $request){
 
         $pageId=$request->input('pageId');
 
@@ -46,6 +77,14 @@ class AdminPagesController extends Controller
         return redirect()->back()->with('message', 'De pagina is verwijderd');
     }
 
+    /**
+     * This function updates a page
+     *
+     * @author Michiel Guilliams
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function updateContent(Request $request){
         $pageId=$request->input('pageId');
         if($request->get('typeSelector')=='pdf') {
@@ -79,10 +118,24 @@ class AdminPagesController extends Controller
         }
 
     }
-    function showPdf($page_name){
+
+    /**
+     * This function shows a page in the front-end
+     *
+     * @author Michiel Guilliams
+     *
+     * @param $page_name
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    function showPage($page_name){
         $aPages= Page::where('type','!=','info')->where('name',$page_name)->first();
-        return view('guest.contentpage', array(
-            'aPages' => $aPages,
-        ));
+        if($aPages!=null) {
+            return view('guest.contentpage', array(
+                'aPages' => $aPages,
+            ));
+        }
+        else{
+            return "pagina bestaat niet";
+        }
     }
 }

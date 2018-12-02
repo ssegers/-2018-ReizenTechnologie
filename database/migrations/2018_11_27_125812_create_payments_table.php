@@ -19,7 +19,6 @@ class CreatePaymentsTable extends Migration
             $table->integer('traveller_id')->unsigned();
             $table->integer('amount');
             $table->timestamps();
-
             $table->foreign('traveller_id')->references('traveller_id')->on('travellers');
         });
     }
