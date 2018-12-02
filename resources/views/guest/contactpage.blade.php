@@ -7,7 +7,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div>
+    <div class="container">
         @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
