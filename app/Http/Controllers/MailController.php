@@ -34,7 +34,7 @@ class MailController extends Controller
     /**
      * This method validates and sends the update mail
      *
-     * @author Yoeri op't Roodt
+     * @author Yoeri op't Roodt & Stef Kerkhofs
      *
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
@@ -61,9 +61,6 @@ class MailController extends Controller
         ];
 
 
-//        $aMail = Traveller::where('user_id', 11)->pluck('email');
-//        Mail::to($aMail)->send(new Update($aMailData));
-
         /* Get the mail list and chunk them by 10 */
 
            $aMailList = Traveller::where('trip_id',$request->post('trip'))->pluck('email')->toArray();
@@ -81,7 +78,7 @@ class MailController extends Controller
     /**
      * This method generates the error messages displayed when the validation fails
      *
-     * @author Yoeri op't Roodt
+     * @author Yoeri op't Roodt & Stef Kerkhofs
      *
      * @return array
      */

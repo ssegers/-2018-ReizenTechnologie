@@ -24,14 +24,15 @@
     <h1>Verstuur hier een mail naar de deelnemers van een reis:</h1>
     {{ Form::open(array('action' => 'MailController@sendUpdateMail', 'method' =>'post')) }}
         <div class="form-group">
-            {{ Form::label('subject', 'Onderwerp') }}
+            {{ Form::label('subject', 'Onderwerp:') }}
             {{ Form::text('subject', '', ['class' => 'form-control', 'required']) }}
-        </div>  <div class="form-group">
-            {{ Form::label('trip', 'Reis') }}
+        </div>
+        <div class="form-group">
+            {{ Form::label('trip', 'Reis:') }}
             {{ Form::select('trip',$aTrips,'' ,array('class' => 'form-control', 'required'))}}
         </div>
         <div class="form-group">
-            {{ Form::label('message', 'Bericht') }}
+            {{ Form::label('message', 'Bericht:') }}
             {{ Form::textArea('message', '', ['class' => 'form-control', 'required']) }}
         </div>
         {{ Form::submit('Verzend',array("class" => "btn btn-primary")) }}

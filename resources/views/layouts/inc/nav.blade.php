@@ -25,7 +25,7 @@
             switch ($role){
                 case "organizer":?>
                 <li class="nav-item"><a class="nav-link" href="/user/<?php echo $username ?>/trip/travellers">Reizigers</a></li>
-
+                <li class="nav-item"><a class="nav-link" href="{{ route('updatemail') }}">Updatemail</a></li>
                     <?php
                 case "guide":?>
 
