@@ -30,7 +30,8 @@ Route::prefix('user')->group(function () {
         route::post('step-3', 'RegisterController@step3Post');
 
     });
-
+    Route::get('payment', 'PaymentsOverviewController@showTable')->name('paymentOverview');
+    Route::get('payment', 'PaymentsOverviewController@showTable');
     /* Update Mail as Organizer */
     Route::get('updatemail','MailController@getUpdateForm')->name('updatemail');
     Route::post('updatemail', 'MailController@sendUpdateMail');
