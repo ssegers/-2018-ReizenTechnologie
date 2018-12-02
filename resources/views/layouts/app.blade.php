@@ -16,33 +16,16 @@
 
 </head>
 <body class="background-light-blue">
-    @include('layouts.inc.nav')
+    <div id="app">
+        @include('layouts.inc.nav')
 
-    @hasSection('menu-left')
-        <div class="row">
-            <div class="col side-nav">
-                @yield('menu-left')
-            </div>
-            <div class="col">
+        @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+            @if(Session::has($msg))
+                <p class="p-3 mt-3 alert alert-{{ $msg }}">{{ Session::get($msg) }}</p>
+            @endif
+        @endforeach
 
-                <div class="container-fluid">
-
-                    @foreach (['danger', 'warning', 'success', 'info'] as $msg)
-                        @if(Session::has($msg))
-                            <p class="p-3 mt-3 alert alert-{{ $msg }}">{{ Session::get($msg) }}</p>
-                        @endif
-                    @endforeach
-
-                    @yield('content')
-                </div>
-            </div>
-        </div>
-
-    @else
-        <div class="container">
-            @yield('content')
-        </div>
-    @endif
-
+        @yield('content')
+    </div>
 </body>
 </html>
