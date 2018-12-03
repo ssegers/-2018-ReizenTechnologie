@@ -32,6 +32,10 @@ Route::prefix('user')->group(function () {
     });
     Route::get('payment', 'PaymentsOverviewController@showTable')->name('paymentOverview');
     Route::get('payment', 'PaymentsOverviewController@showTable');
+
+
+    Route::post('addPayment','PaymentsOverviewController@addPayment');
+
     /* Update Mail as Organizer */
     Route::get('updatemail','MailController@getUpdateForm')->name('updatemail');
     Route::post('updatemail', 'MailController@sendUpdateMail');
