@@ -16,7 +16,7 @@ class Organisator
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::check() && Auth::user()->role == 'organisator') {
+        if (Auth::check() && Auth::user()->role == 'organizer') {
             return $next($request);
         } else {
             return redirect('info');
