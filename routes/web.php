@@ -33,6 +33,9 @@ Route::middleware(['auth','admin'])->group(function () {
         route::get('user/register', 'AdminUserController@createForm')->name('adminRegUser');
         route::post('user/register', 'AdminUserController@createUser');
 
+        Route::get('/info','AdminInfoController@showInfo')->name('info');
+        Route::get('/page/{page_name}','AdminPagesController@showPdf');
+
         Route::get('info', 'AdminInfoController@getInfo')->name('adminInfo');
         Route::post('info', 'AdminInfoController@updateInfo');
         Route::post('upload_image','AdminInfoController@uploadImage')->name('upload');
@@ -58,6 +61,7 @@ Route::middleware(['auth','admin'])->group(function () {
             Route::post('addMajor', 'AdminStudyController@addMajor');
         });
     });
+
 });
 //--------------------------------------END---------------------------------------
 
@@ -68,7 +72,12 @@ Route::middleware(['auth','admin'])->group(function () {
  * -------------------------------------------------------------------------------
  */
 Route::middleware(['auth','organisator'])->group(function () {
-
+    Route::prefix('user')->group(function () {
+        Route::get('{sUserName}/trip/travellers', 'UserDataController@showUsersAsMentor');
+        Route::post('{sUserName}/trip/travellers', 'UserDataController@showUsersAsMentor');
+        Route::get('updatemail','MailController@getUpdateForm')->name('updatemail');
+        Route::post('updatemail', 'MailController@sendUpdateMail');
+    });
 });
 //--------------------------------------END---------------------------------------
 
@@ -83,11 +92,6 @@ Route::middleware(['auth','guide'])->group(function () {
 });
 //--------------------------------------END---------------------------------------
 
-Route::group(['middleware' => 'auth','admin'], function(){
-
-});
-
-
 
 /*
  * -------------------------------------------------------------------------------
@@ -95,7 +99,18 @@ Route::group(['middleware' => 'auth','admin'], function(){
  * -------------------------------------------------------------------------------
  */
 Route::middleware(['auth.traveller'])->group(function () {
+    Route::prefix('user')->group(function () {
 
+    });
+});
+//--------------------------------------END---------------------------------------
+
+/*
+ * -------------------------------------------------------------------------------
+ * ---------------------------------   Guest   -----------------------------------
+ * -------------------------------------------------------------------------------
+ */
+Route::middleware(['auth','guest'])->group(function () {
     Route::prefix('user')->group(function () {
         Route::prefix('form')->group(function() {
             route::get('step-1', 'RegisterController@step1')->name('registerTrip');
@@ -106,54 +121,40 @@ Route::middleware(['auth.traveller'])->group(function () {
 
             route::get('step-3', 'RegisterController@step3');
             route::post('step-3', 'RegisterController@step3Post');
-
         });
     });
-
 });
 //--------------------------------------END---------------------------------------
+
 
 /*
  * -------------------------------------------------------------------------------
- * ---------------------------------   Guest   -----------------------------------
+ * --------------------------   Generally logged in   ----------------------------
  * -------------------------------------------------------------------------------
  */
-Route::middleware(['auth','guest'])->group(function () {
-
-
-
+Route::middleware(['auth','loggedIn'])->group(function () {
+//User profile
+    Route::prefix('profile')->group(function() {
+        Route::get('', 'UserProfileController@showUserData')->name('profile');
+        Route::get('/edit', 'UserProfileController@showUserData');
+        Route::post('{sUserName}/update', 'UserProfileController@updateUserData');
     });
-//--------------------------------------END---------------------------------------
+    Route::get('/logout','AuthController@logout')->name("logout");
+});
 
 
-
-
-
-
+/*
+ * -------------------------------------------------------------------------------
+ * ---------------------------   Always available   ------------------------------
+ * -------------------------------------------------------------------------------
+ */
 Route::prefix('user')->group(function () {
-    Route::get('{sUserName}/trip/travellers', 'UserDataController@showUsersAsMentor');
-    Route::post('{sUserName}/trip/travellers', 'UserDataController@showUsersAsMentor'); // Manual organizer
-
     Route::get('contact','ContactPageController@getInfo')->name('contact');
     Route::post('contact', 'ContactPageController@sendMail');
 
-    Route::prefix('form')->group(function() {
-        route::get('step-1', 'RegisterController@step1')->name('registerTrip');
-        route::post('step-1', 'RegisterController@step1Post');
-
-        route::get('step-2', 'RegisterController@step2');
-        route::post('step-2', 'RegisterController@step2Post');
-
-        route::get('step-3', 'RegisterController@step3');
-        route::post('step-3', 'RegisterController@step3Post');
-
-    });
-
-    /* Update Mail as Organizer */
-    Route::get('updatemail','MailController@getUpdateForm')->name('updatemail');
-    Route::post('updatemail', 'MailController@sendUpdateMail');
-
 });
+//--------------------------------------END---------------------------------------
+
 //IndividualTraveller profile
 Route::prefix('userinfo')->group(function() {
     Route::get('{sUserName}', 'UserDataController@showUserData');
@@ -161,18 +162,14 @@ Route::prefix('userinfo')->group(function() {
     Route::post('{sUserName}/update', 'UserDataController@updateUserData');
     Route::delete('{sUserName}/delete', 'UserDataController@deleteUserData')->name('user.destroy');
 });
-//User profile
-Route::prefix('profile')->group(function() {
-    Route::get('', 'UserProfileController@showUserData')->name('profile');
-    Route::get('/edit', 'UserProfileController@showUserData');
-    Route::post('{sUserName}/update', 'UserProfileController@updateUserData');
-});
+
+
 
 Auth::routes();
 //login routes
 Route::post('/auth', 'AuthController@login');
 Route::get('/logout','AuthController@logout')->name("logout");
-Route::get('log','AuthController@showView')->name("log");
+Route::get('/log','AuthController@showView')->name("log");
 
 
 //WIP
@@ -184,8 +181,6 @@ Route::get('/listtravellers/{room_hotel_trip_id}', 'HotelRoomController@getTrave
 //API calls
 Route::post('cascade', 'UserDataController@GetMajorsByStudy');
 
-Route::get('/info','AdminInfoController@showInfo')->name('info');
-Route::get('/page/{page_name}','AdminPagesController@showPdf');
 Route::get('/', function () {
     return redirect()->route('info');
 });

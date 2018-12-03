@@ -65,6 +65,7 @@ class Kernel extends HttpKernel
         'guide' => 'App\Http\Middleware\Guide',
         'traveller' => 'App\Http\Middleware\Traveller',
         'guest' => 'App\Http\Middleware\guest',
+        'loggedIn' =>'App\http\Middleware\checkloggedin'
     ];
 
     /**
