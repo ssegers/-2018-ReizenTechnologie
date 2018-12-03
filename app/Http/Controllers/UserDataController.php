@@ -378,7 +378,7 @@ class UserDataController extends Controller
             ->where("study_id", $study)
             ->get();
 
-        $output = "";
+        $output = '<option value="">Selecteer een afstudeerrichting</option>';
         foreach($majors as $major){
             $output .= '<option value="'.$major->major_id.'">'.$major->major_name.'</option>';
         }
