@@ -10,8 +10,18 @@
   top: 45%;
   left: 45%;
   display: none;
+  z-index: 9999;
 }
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+.loaderBackground{
+  position: absolute;
+  top: 40px; /* Header Height */
+  width: 100%;
+  bottom: 0px;
+  background-color: rgba(0,0,0,0.7);
+  z-index: 1000;
+  display: none;
 }

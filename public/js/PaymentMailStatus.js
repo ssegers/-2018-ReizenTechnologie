@@ -1,3 +1,6 @@
 $(document).ready(function () {
-    $(".loader").fadeOut("slow");
+    $('.loadButton').click(function() {
+        $('.loader').css("display","block");
+        $('.loaderBackground').css("display","block");
+    $.post(window.location,{sendMail: true});})
 });
