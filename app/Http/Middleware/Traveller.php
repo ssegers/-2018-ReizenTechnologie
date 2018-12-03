@@ -16,7 +16,7 @@ class Traveller
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::check() && Auth::user()->role == 'traveller') {
+        if (Auth::check() && Auth::user()->role == 'traveller' || Auth::user()->role == 'admin') {
             return $next($request);
         } else {
             return redirect('info');
