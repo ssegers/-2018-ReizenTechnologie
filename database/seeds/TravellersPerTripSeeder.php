@@ -17,6 +17,26 @@ class TravellersPerTripSeeder extends Seeder
             'traveller_id' => 1,
         ]);
 
+        DB::table('travellers_per_trips')->insert([
+            'trip_id' => 1,
+            'traveller_id' => 2,
+        ]);
+
+        DB::table('travellers_per_trips')->insert([
+            'trip_id' => 1,
+            'traveller_id' => 3,
+        ]);
+
+        DB::table('travellers_per_trips')->insert([
+            'trip_id' => 1,
+            'traveller_id' => 4,
+        ]);
+
+        DB::table('travellers_per_trips')->insert([
+            'trip_id' => 1,
+            'traveller_id' => 5,
+        ]);
+
         //koppel Mr. Roox aan Duitsland
         DB::table('travellers_per_trips')->insert([
             'trip_id' => 2,
