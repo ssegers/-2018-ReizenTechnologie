@@ -99,5 +99,5 @@
             </div>
         </div>
     </div>
-    <script src="{{ URL::asset('/js/activeTripOrganiser.js') }}"></script>
+    <script src="{{ URL::asset('js/activeTripOrganiser.js') }}"></script>
 @endsection

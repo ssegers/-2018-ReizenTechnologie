@@ -149,6 +149,7 @@ Route::middleware(['auth','loggedIn'])->group(function () {
  * -------------------------------------------------------------------------------
  */
 Route::prefix('user')->group(function () {
+    Route::get('payment','PaymentsOverviewController@showTable')->name('payments');
     Route::get('contact','ContactPageController@getInfo')->name('contact');
     Route::post('contact', 'ContactPageController@sendMail');
 
