@@ -11,6 +11,6 @@ class RoomsPerHotelPerTrip extends Model
 
     public function hotelsPerTrip()
     {
-        return $this->belongsTo('App\HotelsPerTrip');
+        return $this->belongsTo('App\HotelsPerTrip', 'hotels_per_trip_id', 'hotels_per_trip_id');
     }
 }

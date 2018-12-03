@@ -17,11 +17,11 @@ class TravellersPerRoom extends Model
 
     public function traveller()
     {
-        return $this->belongsTo('App\Traveller');
+        return $this->belongsTo('App\Traveller', 'traveller_id', 'traveller_id');
     }
 
     public function roomPerHotelPerTrip()
     {
-        return $this->belongsTo('App\RoomsPerHotelPerTrip');
+        return $this->belongsTo('App\RoomsPerHotelPerTrip', 'rooms_hotel_trip_id', 'rooms_hotel_trip_id');
     }
 }
