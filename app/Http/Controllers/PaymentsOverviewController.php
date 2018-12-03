@@ -24,7 +24,11 @@ class PaymentsOverviewController extends Controller
         return view('user.payment.pay_overview',['userdata' => $userdata]);
     }
 
-
+    public function sendMail(Request $request){
+        $bsendMail = $request->post("sendMail");
+        dd($bsendMail);
+        $this->sendMailToStudentsInTrip(1,"Rudi");
+    }
     public function sendMailToStudentsInTrip($sTripId,$sBegeleider){
         $oStudents = Traveller::where('trip_id',$sTripId)->get();
         $sTrip = Trip::where('trip_id',$sTripId)->first();
