@@ -153,6 +153,10 @@ Route::prefix('user')->group(function () {
     Route::post('contact', 'ContactPageController@sendMail');
 
 });
+Route::get('/', function () {
+    return redirect()->route('info');
+});
+Route::get('info', 'AdminInfocontroller@showInfo')->name('info');
 //--------------------------------------END---------------------------------------
 
 //IndividualTraveller profile
@@ -180,8 +184,6 @@ Route::get('/listtravellers/{room_hotel_trip_id}', 'HotelRoomController@getTrave
 //API calls
 Route::post('cascade', 'UserDataController@GetMajorsByStudy');
 
-Route::get('/', function () {
-    return redirect()->route('info');
-});
 
-Route::get('/home', 'HomeController@index')->name('home');
+
+//Route::get('/home', 'HomeController@index')->name('home');
