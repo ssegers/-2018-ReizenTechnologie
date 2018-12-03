@@ -10,6 +10,16 @@ $(document).ready(function () {
             url: "payment/",
             data: {
                 sendMail: true,
+            },
+            success:function () {
+                $('.loader').css("display","none");
+                $('.loaderBackground').css("display","none");
+                $('.success-mail').css("display","block");
+            },
+            error: function(){
+                $('.loader').css("display","none");
+                $('.loaderBackground').css("display","none");
+                $('.success-mail').css("display","block");
             }
         })
     })

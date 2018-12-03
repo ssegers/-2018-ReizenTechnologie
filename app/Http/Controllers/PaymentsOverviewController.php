@@ -27,7 +27,7 @@ class PaymentsOverviewController extends Controller
     public function sendMail(Request $request){
         $bsendMail = $request->post("sendMail");
         $this->sendMailToStudentsInTrip(1,"Rudi");
-        return redirect('info')->with('message', 'De e-mails zijn succesvol verzonden.');
+        //return redirect('info')->with('message', 'De e-mails zijn succesvol verzonden.');
     }
     public function sendMailToStudentsInTrip($sTripId,$sBegeleider){
         $oStudents = Traveller::where('trip_id',$sTripId)->get();
