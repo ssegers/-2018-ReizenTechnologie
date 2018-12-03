@@ -31,4 +31,5 @@
             </table>
         </div>
     </div>
+    <script src="{{ URL::asset('/js/PaymentMailStatus.js') }}"></script>
 @endsection

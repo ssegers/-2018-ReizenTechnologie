@@ -43,7 +43,7 @@ Route::middleware(['auth','admin'])->group(function () {
 
         Route::get('overviewPages', 'AdminPagesController@index')->name('adminPages');
         Route::post('editPage', 'AdminPagesController@editPage');
-        Route::post('verwijderPage', 'AdminPagesController@verwijderPage');
+        Route::post('deletePage', 'AdminPagesController@deletePage');
         Route::post('updateContent', 'AdminPagesController@updateContent');
         Route::post('createPage', 'AdminPagesController@createPage');
 
@@ -146,6 +146,7 @@ Route::middleware(['auth','loggedIn'])->group(function () {
  * -------------------------------------------------------------------------------
  */
 Route::prefix('user')->group(function () {
+    Route::get('payment','PaymentsOverviewController@showTable')->name('payments');
     Route::get('contact','ContactPageController@getInfo')->name('contact');
     Route::post('contact', 'ContactPageController@sendMail');
 
