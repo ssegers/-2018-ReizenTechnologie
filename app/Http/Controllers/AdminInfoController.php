@@ -10,6 +10,14 @@ use Illuminate\Support\Facades\Input;
 
 class AdminInfoController extends Controller
 {
+    /**
+     * This function enables the CKEditor to upload a image
+     *
+     * @author Michiel Guilliams
+     *
+     * @param Request $request
+     * @return string
+     */
     public function uploadImage(Request $request) {
         $CKEditor = Input::get('CKEditor');
         $funcNum = Input::get('CKEditorFuncNum');
@@ -28,21 +36,30 @@ class AdminInfoController extends Controller
         }
         return '<script>window.parent.CKEDITOR.tools.callFunction('.$funcNum.', "'.$url.'", "'.$message.'")</script>';
     }
+
+    /**
+     * This function fills the editor with its saved content
+     *
+     * @author Michiel Guilliams
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function getInfo(){
-        /*if (DB::table('users')->where('id', Auth::id())->value('function') !== 'admin')
-        {
-            return redirect('/');
-        }*/
         $oPageContent = Page::where('name', 'Info')->first();
         return view('admin.info.info', array(
             'oPageContent' => $oPageContent,
         ));
     }
+
+    /**
+     * This function updates the content of the infoPage
+     *
+     * @author Michiel Guilliams
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function updateInfo(Request $request){
-        /*if (DB::table('users')->where('id', Auth::id())->value('function') !== 'admin')
-        {
-            return redirect('/');
-        }*/
         $sContentString = $request->post('content');
         if (strlen($sContentString) == 0){
             $sContentString = "";
@@ -51,6 +68,13 @@ class AdminInfoController extends Controller
         return redirect()->back()->with('message', 'De info pagina is aangepast');
     }
 
+    /**
+     * This function shows the infoPage in the front-end
+     *
+     * @author Michiel Guilliams
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function showInfo(){
         $oContent=Page::where('name', 'Info')->first();
         return view('guest.infopage', array(

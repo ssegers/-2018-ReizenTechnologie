@@ -24,7 +24,8 @@ class AdminTripController extends Controller
                 'name' => $request->post('trip-name'),
                 'is_active' => $request->input('trip-is-active', false),
                 'year' => $request->post('trip-year'),
-                'contact_mail' =>$request->post('trip-mail')
+                'contact_mail' =>$request->post('trip-mail'),
+                'price'=>$request->post('trip-price')
             ]);
     }
 
@@ -36,7 +37,8 @@ class AdminTripController extends Controller
                 'name' => $request->input('trip-name'),
                 'is_active' => $request->input('trip-is-active', false),
                 'year' => $request->input('trip-year'),
-                'contact_mail' =>$request->input('trip-mail')
+                'contact_mail' =>$request->input('trip-mail'),
+                'price'=>$request->post('trip-price')
             ]);
     }
 
@@ -50,6 +52,7 @@ class AdminTripController extends Controller
             $oTrip->is_active = $request->input('trip-is-active', false);
             $oTrip->year = $request->input('trip-year');
             $oTrip->contact_mail = $request->input('trip-mail');
+            $oTrip->price = $request->post('trip-price');
             $oTrip->save();
         }
         else{
@@ -59,6 +62,7 @@ class AdminTripController extends Controller
             $oTrip->is_active = $request->input('trip-is-active', false);
             $oTrip->year = $request->input('trip-year');
             $oTrip->contact_mail = $request->input('trip-mail');
+            $oTrip->price = $request->post('trip-price');
             $oTrip->save();
         }
         return redirect('/admin/trips');

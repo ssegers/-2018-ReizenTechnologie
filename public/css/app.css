@@ -1,6 +1,10 @@
 @import url("https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css");
 @import url("https://fonts.googleapis.com/css?family=Nunito");
 @import url("https://use.fontawesome.com/releases/v5.3.1/css/all.css");
+#app {
+  padding-top: 66px;
+}
+
 nav.navbar {
   background-color: #003469;
 }
@@ -378,6 +382,23 @@ td.field.medical_info {
 
 .cursor-pointer:hover {
   cursor: pointer;
+}
+
+#inlineFormTable table {
+  height: auto;
+}
+
+#inlineFormTable td:first-child {
+  width: 200px;
+  padding-left: 0px;
+}
+
+#inlineFormTable tbody {
+  padding: 0px;
+}
+
+#inlineFormTable td {
+  padding-left: 100px;
 }
 
 /*# sourceMappingURL=app.css.map */

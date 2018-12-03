@@ -6,7 +6,7 @@
             <embed class="embed-responsive-item" id="preview" src="{{$aPages->content}}" type='application/pdf'>
         </div>
     @else
-        <div class="content-center">
+        <div class="container">
             {!!$aPages->content!!}
         </div>
     @endif

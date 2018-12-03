@@ -14,17 +14,14 @@
                 <td>{{$aPage->name}}</td>
                 <td>
                     <div class="form-inline">
-                        <label class="control-label" for="typeSelector" style="padding-right: 10px">Type:</label>
-                        <select name="typeSelector" id="typeSelector" class="form-control">
-                            <option value="pdf">PDF</option>
-                            <option value="html">HTML</option>
-                        </select>
+                        {{Form::label('typeSelector','Type:',array('style'=>'padding-right:10px'))}}
+                        {{Form::select('typeSelector', array('pdf' => 'PDF', 'html' => 'HTML'),null,array('id'=>'typeSelector','class'=>'form-control'))}}
                     </div>
                 </td>
                 <td>
                     <div class="form-check">
-                        <input type="checkbox" class="form-check-input" name="Zichtbaar" id="Zichtbaar">
-                        <label class="form-check-label" for="Zichtbaar">Zichtbaar</label>
+                        {{Form::checkbox('Zichtbaar', 'Zichtbaar',null,array('class'=>'form-check-input','id'=>'Zichtbaar'))}}
+                        {{Form::label('Zichtbaar','Zichtbaar',array('class'=>'form-check-label'))}}
                     </div>
                 </td>
             </tr>
@@ -37,14 +34,15 @@
                    <i class="fa fa-picture-o"></i> Kies Pdf
                  </a>
                </span>
-                <input id="thumbnail" class="form-control" type="text" name="filepath">
+                {{--<input id="thumbnail" class="form-control" type="text" name="filepath">--}}
+                {{Form::text('filepath', null, array('class' => 'form-control','id'=>'thumbnail'))}}
             </div>
         </div>
         <br/>
         <div class="actions">
             {{ Form::hidden('pageId', $aPage->page_id) }}
             {{ Form::submit('Opslaan',array('class'=>"btn btn-primary")) }}
-            <input type="button" class="btn btn-primary" onclick="history.go(0)" value="Annuleren"/>
+            <input type="button" class="btn btn-primary" onclick="if(ConfirmDelete()){window.location='{{ url("admin/overviewPages") }}'}" value="Annuleren"/>
         </div>
         <br/>
         <div id="pdf2">
@@ -63,6 +61,9 @@
     <script src="/vendor/unisharp/laravel-ckeditor/adapters/jquery.js"></script>
     <script src="/vendor/laravel-filemanager/js/lfm.js"></script>
     <script>
+        function ConfirmDelete(){
+            return confirm('Are you sure? If you leave before saving, your changes will be lost.');
+        }
 
         var options = {
             filebrowserImageBrowseUrl: '/laravel-filemanager?type=Images',

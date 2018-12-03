@@ -62,7 +62,7 @@ class UserDataController extends Controller
         $oUser = Auth::user();
 
         /* Get user from URL */
-        $oUser = User::where('username', $sUserName)->first();
+        //$oUser = User::where('username', $sUserName)->first();
 
         /* Check if user exist and is a organizer */
         try {

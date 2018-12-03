@@ -56,6 +56,8 @@ $(document).ready(function () {
             }
 
             studySelect.attr('size', studies.length);
+
+            studySelect.prop("selectedIndex", -1);
         }
     }
 
