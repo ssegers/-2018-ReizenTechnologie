@@ -13,7 +13,7 @@ class CreateTravellersPerTripsTable extends Migration
      */
     public function up()
     {
-        Schema::create('travellers_per_trip', function (Blueprint $table) {
+        Schema::create('travellers_per_trips', function (Blueprint $table) {
             $table->integer('trip_id')->unsigned();
             $table->integer('traveller_id')->unsigned();
             $table->timestamps();
@@ -30,6 +30,6 @@ class CreateTravellersPerTripsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('travellers_per_trip');
+        Schema::dropIfExists('travellers_per_trips');
     }
 }

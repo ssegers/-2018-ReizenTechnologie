@@ -26,7 +26,7 @@ class Traveller extends Model
 
     public function travellersPerTrip()
     {
-        return $this->hasMany('App\TravellersPerTrip');
+        return $this->hasMany('App\TravellersPerTrip', 'traveller_id', 'traveller_id');
 
     }
     public function travellersPerRoom()

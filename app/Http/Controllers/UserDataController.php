@@ -83,9 +83,18 @@ class UserDataController extends Controller
         $aFiltersChecked = $this->aFiltersChecked;
 
         /* Get the trip where the organizer is involved with */
-        $aOrganizerTrip = Trip::where('user_id', $oUser->user_id)->where('is_active', true)
+       /* $aOrganizerTrip = Trip::where('user_id', $oUser->user_id)->where('is_active', true)
             ->join('travellers', 'trips.trip_id', '=', 'travellers.trip_id')
-            ->first();
+            ->first();*/
+
+       // Pak de traveller_id van de user
+        // Pak de trip_id van de traveller in travellers_per_trip
+        // pak de trip info van de trip
+
+        $oSelectedTraveller = Traveller::with(['travellersPerTrip'])->where('user_id', $oUser->user_id)->first();
+        $oTravellersPerTrips = $oSelectedTraveller->travellersPerTrip()->first();
+        $aOrganizerTrip = $oTravellersPerTrips->trip()->first();
+        return var_dump($aOrganizerTrip);
 
         /* Get all active trips */
         $aActiveTrips = array();
