@@ -33,9 +33,6 @@ Route::middleware(['auth','admin'])->group(function () {
         route::get('user/register', 'AdminUserController@createForm')->name('adminRegUser');
         route::post('user/register', 'AdminUserController@createUser');
 
-        Route::get('/info','AdminInfoController@showInfo')->name('info');
-        Route::get('/page/{page_name}','AdminPagesController@showPdf');
-
         Route::get('info', 'AdminInfoController@getInfo')->name('adminInfo');
         Route::post('info', 'AdminInfoController@updateInfo');
         Route::post('upload_image','AdminInfoController@uploadImage')->name('upload');
@@ -73,8 +70,8 @@ Route::middleware(['auth','admin'])->group(function () {
  */
 Route::middleware(['auth','organisator'])->group(function () {
     Route::prefix('user')->group(function () {
-        Route::get('{sUserName}/trip/travellers', 'UserDataController@showUsersAsMentor');
-        Route::post('{sUserName}/trip/travellers', 'UserDataController@showUsersAsMentor');
+        Route::get('trip/travellers', 'UserDataController@showUsersAsMentor');
+        Route::post('trip/travellers', 'UserDataController@showUsersAsMentor');
         Route::get('updatemail','MailController@getUpdateForm')->name('updatemail');
         Route::post('updatemail', 'MailController@sendUpdateMail');
     });
@@ -156,8 +153,12 @@ Route::prefix('user')->group(function () {
 Route::get('/', function () {
     return redirect()->route('info');
 });
-Route::get('info', 'AdminInfocontroller@showInfo')->name('info');
+
+Route::get('/info','AdminInfoController@showInfo')->name('info');
+Route::get('/page/{page_name}','AdminPagesController@showPage');
+
 //--------------------------------------END---------------------------------------
+
 
 //IndividualTraveller profile
 Route::prefix('userinfo')->group(function() {
