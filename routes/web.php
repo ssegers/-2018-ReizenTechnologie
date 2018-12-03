@@ -168,7 +168,6 @@ Route::prefix('userinfo')->group(function() {
 Auth::routes();
 //login routes
 Route::post('/auth', 'AuthController@login');
-Route::get('/logout','AuthController@logout')->name("logout");
 Route::get('/log','AuthController@showView')->name("log");
 
 
