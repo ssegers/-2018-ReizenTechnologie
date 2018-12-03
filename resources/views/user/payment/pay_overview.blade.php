@@ -2,7 +2,9 @@
 
 @section('content')
     <div class="container">
-        <h1 class="page-title">Betalingsoverzicht</h1>
+        <div class="loader">
+        </div>
+        <div class="row"><h1 class="page-title">Betalingsoverzicht</h1> <button type="button" class="btn float-right btn-primary" onclick="addActiveOrganizer()">Studenten herhalingsmail verzenden</button></div>
 
         <div class="table-wrapper-scroll">
             <table class="table table-striped table-hover">
