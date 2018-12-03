@@ -21,8 +21,9 @@
         </div>
     @endif
 
-    <h1>Verstuur hier een mail naar de deelnemers van een reis:</h1>
-    {{ Form::open(array('action' => 'MailController@sendUpdateMail', 'method' =>'post')) }}
+    <div class="container">
+        <h1>Verstuur hier een mail naar de deelnemers van een reis:</h1><br />
+        {{ Form::open(array('action' => 'MailController@sendUpdateMail', 'method' =>'post')) }}
         <div class="form-group">
             {{ Form::label('subject', 'Onderwerp:') }}
             {{ Form::text('subject', '', ['class' => 'form-control', 'required']) }}
@@ -36,6 +37,8 @@
             {{ Form::textArea('message', '', ['class' => 'form-control', 'required']) }}
         </div>
         {{ Form::submit('Verzend',array("class" => "btn btn-primary")) }}
-    <input type="button" class="btn btn-danger" onclick="history.go(0)" value="Annuleren"/>
-    {{ Form::close() }}
+        <input type="button" class="btn btn-danger" onclick="history.go(0)" value="Annuleren"/>
+        {{ Form::close() }}
+    </div>
+
 @endsection
