@@ -11,6 +11,6 @@ class Hotel extends Model
 
     public function hotelsPerTrip()
     {
-        return $this->hasMany('App\HotelsPerTrip');
+        return $this->hasMany('App\HotelsPerTrip', 'hotel_id', 'hotel_id');
     }
 }

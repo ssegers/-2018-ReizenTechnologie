@@ -11,17 +11,17 @@ class Traveller extends Model
 
     public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\User', 'user_id', 'user_id');
     }
 
     public function zip()
     {
-        return $this->belongsTo('App\Zip');
+        return $this->belongsTo('App\Zip', 'zip_id', 'zip_id');
     }
 
     public function major()
     {
-        return $this->belongsTo('App\Major');
+        return $this->belongsTo('App\Major', 'major_id', 'major_id');
     }
 
     public function travellersPerTrip()
@@ -31,7 +31,7 @@ class Traveller extends Model
     }
     public function travellersPerRoom()
     {
-        return $this->hasMany('App\TravellersPerRoom');
+        return $this->hasMany('App\TravellersPerRoom', 'traveller_id', 'traveller_id');
 
     }
     public $timestamps = false;
