@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div>
+<div class="container">
     <!--Indien organisator
         Toon pop-up via bootstrap modal
     -->

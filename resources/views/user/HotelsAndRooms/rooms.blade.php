@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div>
+    <div class="container">
         <!--Indien organisator -->
         <button>Voeg kamer toe</button>
 

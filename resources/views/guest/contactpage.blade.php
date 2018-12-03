@@ -7,7 +7,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div>
+    <div class="container">
         @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
@@ -35,8 +35,9 @@
             <br>
             <label for="bericht">Bericht: </label><br>
             {{ Form::textarea('bericht','',array("class" => "form-control", "required" )) }}<br>
-            {{ Form::submit('Verzend',array("class" => "btn")) }}
-        {{ Form::close() }}
+            {{ Form::submit('Verzend',array("class" => "btn btn-primary")) }}
+            <input type="button" class="btn btn-danger" onclick="history.go(0)" value="Annuleren"/>
+            {{ Form::close() }}
         <br>
     </div>
 @endsection

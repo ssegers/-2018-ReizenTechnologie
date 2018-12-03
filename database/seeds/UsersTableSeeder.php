@@ -12,7 +12,6 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-
         // Standaard Gebruiker
         DB::table('users')->insert([
             'username' => '',

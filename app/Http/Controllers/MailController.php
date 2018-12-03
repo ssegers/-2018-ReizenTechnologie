@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\Update;
 use App\Traveller;
+use App\Trip;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
@@ -18,14 +19,22 @@ class MailController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function getUpdateForm(){
-        return view('organiser.updatemail');
+
+        $aTrips = Trip::where('is_active', true)->get();
+        $aNewTrips = array();
+        foreach ($aTrips as $oTrip) {
+            $aNewTrips[$oTrip->trip_id] = $oTrip->name . ' ' . $oTrip->year;
+        }
+
+
+        return view('organiser.updatemail', ['aTrips' => $aNewTrips]);
     }
 
 
     /**
      * This method validates and sends the update mail
      *
-     * @author Yoeri op't Roodt
+     * @author Yoeri op't Roodt & Stef Kerkhofs
      *
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
@@ -35,10 +44,11 @@ class MailController extends Controller
         /* Validate the request */
         $validator = \Validator::make($request->all(), [
             'subject' => 'required',
+            'trip' => 'required',
             'message' => 'required',
         ], $this->messages());
 
-        /* If the return the errors if the validator fails */
+        /* Return the errors if the validator fails */
         if ($validator->fails()) {
             return redirect()->back()->withInput()->with(['message' => $validator->errors()]);
         }
@@ -46,16 +56,19 @@ class MailController extends Controller
         /* Set the mail data */
         $aMailData = [
             'subject' => $request->post('subject'),
-            'message' => $request->post('message'),
+            'trip' => Trip::where('trip_id',$request->post('trip'))->first(),
+            'message' => $request->post('message')
         ];
 
+
         /* Get the mail list and chunk them by 10 */
-        $aMailList = Traveller::pluck('email')->toArray();
-        $aChuckedMailList = array_chunk($aMailList, 10);
+
+           $aMailList = Traveller::where('trip_id',$request->post('trip'))->pluck('email')->toArray();
+           $aChunkedMailList = array_chunk($aMailList, 10);
 
 
         /* Send the mail to each recipient */
-        foreach ($aChuckedMailList as $aChunk) {
+        foreach ($aChunkedMailList as $aChunk) {
             Mail::to($aChunk)->send(new Update($aMailData));
         }
 
@@ -65,14 +78,15 @@ class MailController extends Controller
     /**
      * This method generates the error messages displayed when the validation fails
      *
-     * @author Yoeri op't Roodt
+     * @author Yoeri op't Roodt & Stef Kerkhofs
      *
      * @return array
      */
     private function messages() {
         return [
-            'subject.required' => 'Het onderwerp moet ingevult zijn',
-            'message.required' => 'Het bericht moet ingevult zijn',
+            'subject.required' => 'Het onderwerp moet ingevuld zijn',
+            'message.required' => 'Het bericht moet ingevuld zijn',
+            'trip.required' => 'De reis moet geselecteerd zijn'
         ];
     }
 }

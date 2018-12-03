@@ -13,7 +13,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="pageModalLabel">Pagina aanmaken</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                {{Form::button('<span aria-hidden="true">&times;</span>',array('class' => 'close', 'type' => 'button','data-dismiss'=>'modal','aria-label'=>'close'))}}
             </div>
             {{ Form::open(array('action' => 'AdminPagesController@createPage', 'method' => 'post')) }}
             <div class="modal-body">
@@ -23,16 +23,14 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Sluiten</button>
-                <button type="submit" class="btn btn-primary">Opslaan</button>
+                {{Form::button('Sluiten',array('class' => 'btn btn-default', 'type' => 'button','data-dismiss'=>'modal'))}}
+                {{Form::button('Opslaan',array('class' => 'btn btn-primary', 'type' => 'submit'))}}
             </div>
             {{ Form::close() }}
         </div>
     </div>
 </div>
-
-<button type="button" class="mb-5 p-3 float-right btn btn-primary" data-toggle="modal" data-target="#pageModal">Nieuwe Pagina Aanmaken</button>
-
+    {{Form::button('Nieuwe Pagina Aanmaken',array('class' => 'mb-5 p-3 float-right btn btn-primary', 'type' => 'button','data-toggle'=>'modal','data-target'=>'#pageModal'))}}
 <table class="table">
     <thead>
         <tr>
@@ -60,7 +58,7 @@
                 {{ Form::close()}}
             </td>
             <td>
-                {{ Form::open(array('action' => 'AdminPagesController@verwijderPage', 'method' => 'post','onsubmit' => 'return ConfirmDelete()')) }}
+                {{ Form::open(array('action' => 'AdminPagesController@deletePage', 'method' => 'post','onsubmit' => 'return ConfirmDelete()')) }}
                 {{ Form::hidden('pageId', $oPage->page_id) }}
                 {{ Form::submit('Delete',array('class'=>"btn btn-primary")) }}
                 {{ Form::close()}}

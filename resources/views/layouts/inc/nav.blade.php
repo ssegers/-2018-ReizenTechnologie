@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <a class="navbar-brand" href="{{ route('info') }}">
         <img src="{{ asset('images/ucll.png') }}" alt="">
     </a>
@@ -25,7 +25,7 @@
             switch ($role){
                 case "organizer":?>
                 <li class="nav-item"><a class="nav-link" href="/user/<?php echo $username ?>/trip/travellers">Reizigers</a></li>
-
+                <li class="nav-item"><a class="nav-link" href="{{ route('updatemail') }}">Updatemail</a></li>
                     <?php
                 case "guide":?>
 
@@ -36,7 +36,7 @@
                 default:?>
                 <li class="nav-item"><a class="nav-link" href="{{ route('info') }}">Info</a></li>
                 @foreach(\App\Page::where('type','!=','info')->where('is_visible',true)->get() as $page)
-                    <li class="nav-item"><a class="nav-link" href='/pdf/{{$page->name}}'>{{$page->name}}</a></li>
+                    <li class="nav-item"><a class="nav-link" href='/page/{{$page->name}}'>{{$page->name}}</a></li>
                 @endforeach
                 <li class="nav-item"><a class="nav-link" href="{{ route('contact') }}">Contact</a></li>
                 <?php break;
