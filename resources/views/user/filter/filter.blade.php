@@ -6,7 +6,7 @@
 
 @section('content')
 
-    {{Form::open(array('url' => "user/trip/travellers", 'method' => 'post'))}}
+    {{Form::open(array('url' => "user/trip/$oCurrentTrip->trip_id", 'method' => 'post'))}}
 
     <div id="menu-left">
         <div class="container-fluid d-flex h-100 flex-column">
@@ -38,10 +38,17 @@
         <div class="container-fluid d-flex h-100 flex-column">
             <div class="row flex-shrink-0">
                 @foreach($aActiveTrips as $aTripData)
-                    <a href="#" class="btn btn-danger badge-custom">
-                        {{ $aTripData['oTrip']->name }} {{ $aTripData['oTrip']->year }}
-                        <span class="badge badge-light">{{ $aTripData['iCount'] }}</span>
-                    </a>
+                    @if(array_has($aAuthenticatedTripId, $aTripData['oTrip']->trip_id))
+                        <a href="/user/trip/{{ $aTripData['oTrip']->trip_id }}" class="btn btn-success badge-custom">
+                            {{ $aTripData['oTrip']->name }} {{ $aTripData['oTrip']->year }}
+                            <span class="badge badge-light">{{ $aTripData['iCount'] }}</span>
+                        </a>
+                    @else
+                        <div class="btn btn-danger badge-custom">
+                            {{ $aTripData['oTrip']->name }} {{ $aTripData['oTrip']->year }}
+                            <span class="badge badge-light">{{ $aTripData['iCount'] }}</span>
+                        </div>
+                    @endif
                 @endforeach
             </div>
 

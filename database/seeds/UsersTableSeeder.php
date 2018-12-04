@@ -19,7 +19,6 @@ class UsersTableSeeder extends Seeder
             'role' => 'guest'
         ]);
 
-
         // Admin
         DB::table('users')->insert([
             'username' => 'u1234567',
