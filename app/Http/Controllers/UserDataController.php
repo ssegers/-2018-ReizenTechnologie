@@ -57,7 +57,7 @@ class UserDataController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View|string
      */
-    public function showUsersAsMentor(Request $request, $sUserName) {
+    public function showUsersAsMentor(Request $request) {
         /* Get user from Auth */
         $oUser = Auth::user();
 
@@ -380,7 +380,7 @@ class UserDataController extends Controller
             ->where("study_id", $study)
             ->get();
 
-        $output = "";
+        $output = '<option value="">Selecteer een afstudeerrichting</option>';
         foreach($majors as $major){
             $output .= '<option value="'.$major->major_id.'">'.$major->major_name.'</option>';
         }

@@ -20,12 +20,15 @@ class PaymentsOverviewController extends Controller
             ->join('payments', 'travellers.traveller_id','=','payments.traveller_id')
             ->select('travellers.*','studies.study_name', 'majors.major_name', 'payments.*')
             ->get();
-            $this->sendMailToStudentsInTrip(1, "Rudi");
 
         return view('user.payment.pay_overview',['userdata' => $userdata]);
     }
 
-
+    public function sendMail(Request $request){
+        $bsendMail = $request->post("sendMail");
+        $this->sendMailToStudentsInTrip(1,"Rudi");
+        return redirect('info')->with('message', 'De e-mails zijn succesvol verzonden.');
+    }
     public function sendMailToStudentsInTrip($sTripId,$sBegeleider){
         $oStudents = Traveller::where('trip_id',$sTripId)->get();
         $sTrip = Trip::where('trip_id',$sTripId)->first();
@@ -39,7 +42,7 @@ class PaymentsOverviewController extends Controller
             }
             $this->sendMailTo($oStudent->email,$oStudent->first_name,$iBetaald, $iPrijs-$iBetaald,$sTripNaam,$sBegeleider);
         }
-
+        return Redirect::back()->withMessage('Alle mails zijn succesvol verzonden!');
     }
 
     public function sendMailTo($email, $studentNaam,$betaald,$teBetalen,$reisNaam,$begeleider) {

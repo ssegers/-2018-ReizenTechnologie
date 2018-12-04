@@ -1,9 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <h1 class="page-title">Betalingsoverzicht</h1>
 
+    <div class="loader">
+    </div>
+    <div class="loaderBackground"></div>
+    <div class="container">
+        <div class="row"><h1 class="page-title">Betalingsoverzicht</h1> <button type="button" class="loadButton btn pull-right btn-primary">Studenten betalingsstatus mailen</button></div>
         <div class="table-wrapper-scroll">
             <table class="table table-striped table-hover">
                 <thead>
@@ -31,4 +34,5 @@
             </table>
         </div>
     </div>
+    <script src="{{ URL::asset('/js/PaymentMailStatus.js') }}"></script>
 @endsection
