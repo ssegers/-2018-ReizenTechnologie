@@ -67,7 +67,9 @@ class UserDataController extends Controller
         /* Check if user exist and is a organizer */
         try {
             if ($oUser->role != 'organizer') {
-                return 'Deze gebruiker is niet gemachtigd';
+                if ($oUser->role != 'admin') {
+                    return 'Deze gebruiker is niet gemachtigd';
+                }
             }
         }
         catch (\Exception $exception) {
