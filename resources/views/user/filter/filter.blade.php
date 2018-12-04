@@ -2,104 +2,37 @@
 
 @section('content')
     <style>
-        /*#app {*/
-            /*padding-top: 66px;*/
-        /*}*/
-        #trips {
-            height: 60px;
-        }
-        #trips .badge {
-            margin: 1em 0.5em;
-            line-height: 2em;
-        }
         body {
             height: 100vh;
             overflow: hidden;
         }
-        #menu-left {
-            width: 250px;
-            height: calc(100vh - 66px);
-            display: inline-block;
-            padding: 0;
-            background-color: white;
-        }
-        #content-right {
-            width: calc(100% - 250px);
-            height: calc(100vh - 66px);
-            float: right;
-        }
-        .menu-header {
-            height: 70px;
-            padding: 1em 1em;
-            border-bottom: 1px solid black;
-        }
-        .menu-header button {
-            width: 100%;
-            height: 100%;
-        }
-        /*.menu-header button:hover {*/
-            /*background-color: #E00049;*/
-            /*color: white;*/
-        /*}*/
-        .menu-container {
-            height: calc(100% - 70px);
-            overflow-y: auto;
-        }
-        .menu-container ul {
-            list-style: none;
-            margin: 0;
-            padding: 0 1em;
-        }
-        .menu-container li {
-            width: 100%;
-            display: block;
-            position: relative;
-            padding: calc(0.5em + 5px) 1em 0.5em;
-            border-top: 1px solid black;
-        }
-        .menu-container li:first-child {
-            border: none;
-        }
-        .menu-container li input {
-            position: absolute;
-            right: 1em;
-            top: calc(50% - 5px);
-        }
-        /*.filter-footer {*/
-            /*position: absolute;*/
-            /*bottom: 0;*/
-            /*display: block;*/
-            /*width: calc(100% - 250px - 2em);*/
-            /*height: 3em;*/
-        /*}*/
-        .overflow-auto {
-            overflow: auto;
-        }
-        .row {
-        }
     </style>
 
-    {{Form::open(array('url' => "user/$sUserName/trip/travellers", 'method' => 'post'))}}
+    {{Form::open(array('url' => "user/trip/travellers", 'method' => 'post'))}}
 
     <div id="menu-left">
-        <div class="menu-header">
-            <button type="submit" name="button-filter" value="button-filter" class="btn btn-primary">Selectie toepassen</button>
-        </div>
-        <div class="menu-container">
-            <ul>
-                @foreach($aFilterList as $sFilterName => $sFilterText)
-                    <li>
-                        <label for="{{ $sFilterName }}">
-                            {{ $sFilterText }}
-                            @if(array_key_exists($sFilterName, $aFiltersChecked))
-                                {{ Form::checkbox($sFilterName, null, true) }}
-                            @else
-                                {{ Form::checkbox($sFilterName, null, false) }}
-                            @endif
-                        </label>
-                    </li>
-                @endForeach
-            </ul>
+        <div class="container-fluid d-flex h-100 flex-column">
+            <div class="row flex-shrink-0">
+                <div class="col">
+                    <button type="submit" name="button-filter" value="button-filter" class="btn btn-primary">Selectie toepassen</button>
+                </div>
+            </div>
+            <div class="row flex-fill d-flex overflow-auto">
+                <div class="col">
+                    @foreach($aFilterList as $sFilterName => $sFilterText)
+                        <div class="form-group">
+                            <label for="{{ $sFilterName }}">
+                                {{ $sFilterText }}
+                                @if(array_key_exists($sFilterName, $aFiltersChecked))
+                                    {{ Form::checkbox($sFilterName, null, true) }}
+                                @else
+                                    {{ Form::checkbox($sFilterName, null, false) }}
+                                @endif
+                            </label>
+                        </div>
+                    @endForeach
+                </div>
+            </div>
         </div>
     </div>
 
@@ -107,7 +40,7 @@
         <div class="container-fluid d-flex h-100 flex-column">
             <div class="row flex-shrink-0">
                 @foreach($aActiveTrips as $aTripData)
-                    <a href="#" class="btn btn-primary badge-custom">
+                    <a href="#" class="btn btn-danger badge-custom">
                         {{ $aTripData['oTrip']->name }} {{ $aTripData['oTrip']->year }}
                         <span class="badge badge-light">{{ $aTripData['iCount'] }}</span>
                     </a>
@@ -118,15 +51,10 @@
                 <div class="col-lg">
                     <h1>Deelnemers {{ $oCurrentTrip->name }} {{ $oCurrentTrip->year }}</h1>
                 </div>
-                <div class="col-lg-3">
+                <div class="col-lg-3 text-right">
                     <button class="btn btn-primary" type="submit" name="export" value="pdf">PDF</button>
                     <button class="btn btn-primary" type="submit" name="export" value="excel">Excel</button>
                 </div>
-                <style>
-                    .badge-custom {
-                        margin: 1em .5em;
-                    }
-                </style>
             </div>
 
             <div class="row flex-fill d-flex overflow-auto">
@@ -153,7 +81,7 @@
             </div>
 
             <div class="row flex-shrink-0">
-                <div class="col">
+                <div id="pagination" class="col">
                     {{ $aUserData->appends(request()->input())->links() }}
                     {{ Form::label('per-page', 'Reizigers per pagina:') }}
                         <select name="per-page" onchange="this.form.submit()">

@@ -1,6 +1,9 @@
 #app {
   padding-top: 66px;
 }
+.overflow-auto {
+  overflow: auto;
+}
 nav.navbar {
   background-color: $col-accent;
 }
