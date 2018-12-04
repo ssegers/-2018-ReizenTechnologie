@@ -1,12 +1,10 @@
 @extends('layouts.app')
 
+@section('styles')
+    <style>body{height:100vh;overflow:hidden;}</style>
+@endsection
+
 @section('content')
-    <style>
-        body {
-            height: 100vh;
-            overflow: hidden;
-        }
-    </style>
 
     {{Form::open(array('url' => "user/trip/travellers", 'method' => 'post'))}}
 
