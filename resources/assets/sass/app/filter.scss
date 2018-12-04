@@ -1,23 +1,23 @@
-.pagination {
-  position: absolute;
-  top: 0;
-  display: block;
-  text-align: center;
-  width: 100%;
-  z-index: 1;
-}
-.page-item {
-  display: inline-block;
-}
-.page-link {
-  width: 25px;
-  line-height: 25px;
-  padding: 0;
-}
-.page-item.active .page-link {
-  background-color: $col-primary;
-  border-color: $col-primary;
-}
+//.pagination {
+//  position: absolute;
+//  top: 0;
+//  display: block;
+//  text-align: center;
+//  width: 100%;
+//  z-index: 1;
+//}
+//.page-item {
+//  display: inline-block;
+//}
+//.page-link {
+//  width: 25px;
+//  line-height: 25px;
+//  padding: 0;
+//}
+//.page-item.active .page-link {
+//  background-color: $col-primary;
+//  border-color: $col-primary;
+//}
 td.field.last_name {
   min-width: 120px;
 }
@@ -97,7 +97,4 @@ td.field.medical_info {
 }
 .badge-custom {
   margin: 1em .5em;
-}
-#pagination {
-  line-height: 3em;
 }

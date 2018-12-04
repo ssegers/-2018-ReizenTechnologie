@@ -81,8 +81,10 @@
             </div>
 
             <div class="row flex-shrink-0">
-                <div id="pagination" class="col">
+                <div class="col text-left">
                     {{ $aUserData->appends(request()->input())->links() }}
+                </div>
+                <div class="col text-right">
                     {{ Form::label('per-page', 'Reizigers per pagina:') }}
                         <select name="per-page" onchange="this.form.submit()">
                             @foreach($aPaginate as $iValue => $bActive)
