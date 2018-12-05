@@ -21,13 +21,13 @@ class ActiveTripOrganizerController extends Controller
     public function showActiveTrips() {
         $oActiveTrips = Trip::Where('is_active', true)->get();
         //$oOrganizers = User::Where('role', 'organizer')->get();
-        $oOrganizers = User::Where('role', 'organizer')
+        $oGuides = User::Where('role', 'guide')
             ->join('travellers','travellers.user_id','=','users.user_id')->select('first_name', 'last_name', 'traveller_id')->get();
 
         return view( 'admin.trips.ActiveTripOrganizer',
             [
                 'aActiveTrips' => $oActiveTrips,
-                'aOrganizers' => $oOrganizers,
+                'aOrganizers' => $oGuides,
                 ]);
     }
 
@@ -101,9 +101,12 @@ class ActiveTripOrganizerController extends Controller
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      * Gets the request data and removes the linked organisator based on his id.
      */
-    public function removeLinkedOrganisator(Request $request) {
+    public function removeLinkedOrganisator(Request $request)
+    {
         $iTripId = $request->post('trip_id');
         $iTravellerId = $request->post('traveller_id');
-        return response(TripOrganizer::Where('traveller_id', $iTravellerId)->where('trip_id', $iTripId)->delete());
+        $oUser = Traveller::with('user')->find($iTravellerId)->user;
+        $oUser->role = 'guide';
+        $oUser->save();
     }
 }
