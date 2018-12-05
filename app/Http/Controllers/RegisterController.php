@@ -20,6 +20,10 @@ class RegisterController extends Controller
      * Get's register session data and saves it to database.
      */
     function __construct() {
+        $this->middleware('auth');
+        $this->middleware('guest');
+
+
         session_start();
     }
     function __destruct() {

@@ -1,150 +1,109 @@
 @extends('layouts.app')
 
-@section('menu-left')
-
+@section('styles')
+    <style>body{height:100vh;overflow:hidden;}</style>
 @endsection
 
 @section('content')
-    <style>
-        #app {
-            padding-top: 66px;
-        }
-        body {
-            height: 100vh;
-            overflow: hidden;
-        }
-        #menu-left {
-            width: 250px;
-            height: calc(100vh - 66px);
-            display: inline-block;
-            padding: 0;
-            background-color: white;
-        }
-        #content-right {
-            width: calc(100% - 250px);
-            height: calc(100vh - 66px);
-            padding: 0 1em;
-            float: right;
-        }
-        .menu-header {
-            height: 70px;
-            padding: 1em 1em;
-            border-bottom: 1px solid black;
-        }
-        .menu-header button {
-            width: 100%;
-            height: 100%;
-        }
-        .menu-header button:hover {
-            background-color: #E00049;
-            color: white;
-        }
-        .menu-container {
-            height: calc(100% - 70px);
-            overflow-y: auto;
-        }
-        .menu-container ul {
-            list-style: none;
-            margin: 0;
-            padding: 0 1em;
-        }
-        .menu-container li {
-            width: 100%;
-            display: block;
-            position: relative;
-            padding: calc(0.5em + 5px) 1em 0.5em;
-            border-top: 1px solid black;
-        }
-        .menu-container li:first-child {
-            border: none;
-        }
-        .menu-container li input {
-            position: absolute;
-            right: 1em;
-            top: calc(50% - 5px);
-        }
 
-    </style>
-
-    {{Form::open(array('url' => "user/$sUserName/trip/travellers", 'method' => 'post'))}}
+    {{Form::open(array('url' => "user/trip/$oCurrentTrip->trip_id", 'method' => 'post'))}}
 
     <div id="menu-left">
-        <div class="menu-header">
-            <button type="submit" name="button-filter" value="button-filter">Selectie toepassen</button>
-        </div>
-        <div class="menu-container">
-            <ul>
-                @foreach($aFilterList as $sFilterName => $sFilterText)
-                    <li>
-                        <label for="{{ $sFilterName }}">
-                            {{ $sFilterText }}
-                            @if(array_key_exists($sFilterName, $aFiltersChecked))
-                                {{ Form::checkbox($sFilterName, null, true) }}
-                            @else
-                                {{ Form::checkbox($sFilterName, null, false) }}
-                            @endif
-                        </label>
-                    </li>
-                @endForeach
-            </ul>
+        <div class="container-fluid d-flex h-100 flex-column">
+            <div class="row flex-shrink-0">
+                <div class="col">
+                    <button type="submit" name="button-filter" value="button-filter" class="btn btn-primary">Selectie toepassen</button>
+                </div>
+            </div>
+            <div class="row flex-fill d-flex overflow-auto">
+                <div class="col">
+                    @foreach($aFilterList as $sFilterName => $sFilterText)
+                        <div class="form-group">
+                            <label for="{{ $sFilterName }}">
+                                {{ $sFilterText }}
+                                @if(array_key_exists($sFilterName, $aFiltersChecked))
+                                    {{ Form::checkbox($sFilterName, null, true) }}
+                                @else
+                                    {{ Form::checkbox($sFilterName, null, false) }}
+                                @endif
+                            </label>
+                        </div>
+                    @endForeach
+                </div>
+            </div>
         </div>
     </div>
 
     <div id="content-right">
-        <div class="trip-overview">
-            <ul class="list-trip">
-                <ul>
-                    @foreach($aActiveTrips as $aTripData)
-                        <li @if($aTripData['oTrip']->trip_id == $oCurrentTrip->trip_id) class="active" @endif>{{ $aTripData['oTrip']->name }} {{ $aTripData['oTrip']->year }} ({{ $aTripData['iCount'] }})</li>
-                    @endforeach
-                </ul>
-            </ul>
-        </div>
-        <div class="table-header">
-            <h1 class="page-title">Deelnemers {{ $oCurrentTrip->name }} {{ $oCurrentTrip->year }}</h1>
-            <ul class="download-options">
-                <li>Download</li>
-                <li class="export"><button type="submit" name="export" value="pdf">PDF</button></li>
-                <li class="divider">/</li>
-                <li class="export"><button type="submit" name="export" value="excel">Excel</button></li>
-            </ul>
-        </div>
-        <div class="table-wrapper-scroll">
-            <table class="table table-striped table-hover">
-                <thead>
-                <tr>
-                    @foreach($aFiltersChecked as $sFilterValue)
-                        <th>{{ $sFilterValue }}</th>
-                    @endforeach
-                </tr>
-                </thead>
-                <tbody>
-                @foreach($aUserData as $oUserData)
-                    <tr class="cursor-pointer" onclick="displayUser('<?php echo $oUserData->username ?>')">
-                        @foreach($aFiltersChecked as $sFilterName => $sFilterText)
-                            <td class="field {{ $sFilterName }}">{{ $oUserData->$sFilterName }}</td>
-                        @endforeach
-                    </tr>
+        <div class="container-fluid d-flex h-100 flex-column">
+            <div class="row flex-shrink-0">
+                @foreach($aActiveTrips as $aTripData)
+                    @if(array_has($aAuthenticatedTripId, $aTripData['oTrip']->trip_id))
+                        <a href="/user/trip/{{ $aTripData['oTrip']->trip_id }}" class="btn btn-success badge-custom">
+                            {{ $aTripData['oTrip']->name }} {{ $aTripData['oTrip']->year }}
+                            <span class="badge badge-light">{{ $aTripData['iCount'] }}</span>
+                        </a>
+                    @else
+                        <div class="btn btn-danger badge-custom">
+                            {{ $aTripData['oTrip']->name }} {{ $aTripData['oTrip']->year }}
+                            <span class="badge badge-light">{{ $aTripData['iCount'] }}</span>
+                        </div>
+                    @endif
                 @endforeach
-                </tbody>
-            </table>
-        </div>
-        <div class="filter-footer">
-            {{ $aUserData->appends(request()->input())->links() }}
-            <div class="filter-per-page">
-                {{ Form::label('per-page', 'Reizigers per pagina:') }}
-                <select name="per-page" onchange="this.form.submit()">
-                    @foreach($aPaginate as $iValue => $bActive)
-                        @if($bActive)
-                            <option selected value="{{ $iValue }}">{{ $iValue }}</option>
-                        @else
-                            <option value="{{ $iValue }}">{{ $iValue }}</option>
-                        @endif
-                    @endforeach
-                </select>
+            </div>
+
+            <div class="row flex-shrink-0">
+                <div class="col-lg">
+                    <h1>Deelnemers {{ $oCurrentTrip->name }} {{ $oCurrentTrip->year }}</h1>
+                </div>
+                <div class="col-lg-3 text-right">
+                    <button class="btn btn-primary" type="submit" name="export" value="pdf">PDF</button>
+                    <button class="btn btn-primary" type="submit" name="export" value="excel">Excel</button>
+                </div>
+            </div>
+
+            <div class="row flex-fill d-flex overflow-auto">
+                <div class="col">
+                    <table class="table table-striped table-hover">
+                        <thead>
+                        <tr>
+                            @foreach($aFiltersChecked as $sFilterValue)
+                                <th>{{ $sFilterValue }}</th>
+                            @endforeach
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($aUserData as $oUserData)
+                            <tr class="cursor-pointer" onclick="displayUser('<?php echo $oUserData->username ?>')">
+                                @foreach($aFiltersChecked as $sFilterName => $sFilterText)
+                                    <td class="field {{ $sFilterName }}">{{ $oUserData->$sFilterName }}</td>
+                                @endforeach
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="row flex-shrink-0">
+                <div class="col text-left">
+                    {{ $aUserData->appends(request()->input())->links() }}
+                </div>
+                <div class="col text-right">
+                    {{ Form::label('per-page', 'Reizigers per pagina:') }}
+                        <select name="per-page" onchange="this.form.submit()">
+                            @foreach($aPaginate as $iValue => $bActive)
+                                @if($bActive)
+                                    <option selected value="{{ $iValue }}">{{ $iValue }}</option>
+                                @else
+                                    <option value="{{ $iValue }}">{{ $iValue }}</option>
+                                @endif
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
             </div>
         </div>
-
     </div>
 
     {{ Form::close() }}

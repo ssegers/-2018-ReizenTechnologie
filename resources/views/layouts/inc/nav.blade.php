@@ -23,8 +23,9 @@
                 $role = "visitor";
             }
             switch ($role){
+                case "admin":
                 case "organizer":?>
-                <li class="nav-item"><a class="nav-link" href="/user/<?php echo $username ?>/trip/travellers">Reizigers</a></li>
+                <li class="nav-item"><a class="nav-link" href="/user/trip/travellers">Reizigers</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('updatemail') }}">Updatemail</a></li>
                     <?php
                 case "guide":?>
@@ -47,7 +48,7 @@
                 <li class="nav-item"><a class="nav-link" href="{{ route('profile') }}">Profiel</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('logout') }}">Afmelden</a></li>
             @else
-                <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Inloggen</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('log') }}">Inloggen</a></li>
             @endif
         </ul>
     </div>

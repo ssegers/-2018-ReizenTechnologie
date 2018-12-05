@@ -9,6 +9,7 @@ use App\Trip;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class PaymentsOverviewController extends Controller
 {
@@ -84,10 +85,17 @@ class PaymentsOverviewController extends Controller
         ];
     }
 
+    public function sendMail(Request $request){
+        $bsendMail = $request->post("sendMail");
+        $this->sendMailToStudentsInTrip(2,"Rudi");
+        return response()->json(['mailsSent' => true]);
+    }
+
     public function sendMailToStudentsInTrip($sTripId,$sBegeleider){
         $oStudents = Traveller::where('trip_id',$sTripId)->get();
-        $sTripNaam = Trip::where('trip_id',$sTripId)->first()->pluck('name');
-        $iPrijs=Trip::where('trip_id',$sTripId)->first()->pluck('price');
+        $sTrip = Trip::where('trip_id',$sTripId)->first();
+        $sTripNaam = $sTrip->naam;
+        $iPrijs=$sTrip->price;
         foreach ($oStudents as $oStudent){
             $aBetalingen = Payment::where('traveller_id',$oStudent->traveller_id)->get()->pluck('amount');
             $iBetaald = 0;
@@ -96,7 +104,6 @@ class PaymentsOverviewController extends Controller
             }
             $this->sendMailTo($oStudent->email,$oStudent->first_name,$iBetaald, $iPrijs-$iBetaald,$sTripNaam,$sBegeleider);
         }
-
     }
 
     public function sendMailTo($email, $studentNaam,$betaald,$teBetalen,$reisNaam,$begeleider) {

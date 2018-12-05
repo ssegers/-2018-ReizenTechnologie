@@ -31,7 +31,7 @@ class PaymentStatus extends Mailable
     {
         return $this->from(['address' => config('mail.username'), 'name' => config('app.name')])
             ->replyTo(['address' => $this->aMailData['email']])
-            ->subject($this->aMailData['subject'])
+            ->subject("Betaalstatus reis ".$this->aMailData['reisNaam'])
             ->view('mails.paymentStatusMail')
             ->with([
                 'sStudentNaam' => $this->aMailData['studentNaam'],
