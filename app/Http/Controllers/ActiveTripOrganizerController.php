@@ -104,8 +104,10 @@ class ActiveTripOrganizerController extends Controller
 
         $iTripId = $request->post('trip_id');
         $iTravellerId = $request->post('traveller_id');
-        $oTravellerPerTrip = TravellersPerTrip::where('traveller_id','=' , $iTravellerId)->where('trip_id','=' , $iTripId)->first();
-        $oTravellerPerTrip->is_organizer = true;
+        $oTravellerPerTrip = TravellersPerTrip::where(['traveller_id' => $iTravellerId, 'trip_id'=> $iTripId])->first();
+        $oTravellerPerTrip->is_organizer = false;
         $oTravellerPerTrip->save();
+        $request->session()->flash('alert-success', 'Het verwijderen van de begeleider is gelukt.');
+
     }
 }

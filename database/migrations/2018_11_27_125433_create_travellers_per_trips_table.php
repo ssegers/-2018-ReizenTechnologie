@@ -14,11 +14,11 @@ class CreateTravellersPerTripsTable extends Migration
     public function up()
     {
         Schema::create('travellers_per_trips', function (Blueprint $table) {
+            $table->increments('travellers_per_trip_id')->unsigned();
             $table->integer('trip_id')->unsigned();
             $table->integer('traveller_id')->unsigned();
             $table->boolean('is_organizer');
             $table->timestamps();
-            $table->primary(array('trip_id', 'traveller_id'));
             $table->foreign('trip_id')->references('trip_id')->on('trips');
             $table->foreign('traveller_id')->references('traveller_id')->on('travellers');
         });
