@@ -88,8 +88,8 @@ class ActiveTripOrganizerController extends Controller
             ->orderBy('first_name')
             ->get();
         */
-        $request->session()->flash('alert-success', 'Het opslaan van begeleiders is gelukt.');
-        return response()->json(['succes' => true]);
+       $request->session()->flash('alert-success', 'Het opslaan van begeleiders is gelukt.');
+        return response()->json(['success' => true]);
     }
 
     /**
