@@ -106,8 +106,8 @@ class ActiveTripOrganizerController extends Controller
 
         $iTripId = $request->post('trip_id');
         $iTravellerId = $request->post('traveller_id');
-        $oUser = Traveller::with('user')->find($iTravellerId)->user;
-        $oUser->role = 'guide';
-        $oUser->save();
+        $oTravellerPerTrip = TravellersPerTrip::where('traveller_id','=' , $iTravellerId)->where('trip_id','=' , $iTripId)->first();
+        $oTravellerPerTrip->is_organizer = true;
+        $oTravellerPerTrip->save();
     }
 }
