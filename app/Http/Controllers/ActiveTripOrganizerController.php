@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Traveller;
+use App\TravellersPerTrip;
 use App\Trip;
-use App\TripOrganizer;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -38,13 +38,26 @@ class ActiveTripOrganizerController extends Controller
      * Gets request data and gets the linked organisators by means of the request data.
      */
     public function showLinkedOrganisators(Request $request) {
+        /*
+         * Pak de reis, haal de users op , filter de users op rol organisator
+         *
+         * Pak de reis, haal de users op , filter de users op rol begeleider
+         */
         $iTripId = $request->post('trip_id');
-        $aUserId = TripOrganizer::Select('traveller_id')->where('trip_id', $iTripId)->get();
+       /* $aUserId = TravellersPerTrip::Select('traveller_id')->where('trip_id', $iTripId)->get();
         $oMentors = Traveller::Select('traveller_id','first_name', 'last_name')
             ->whereIn('traveller_id', $aUserId)
             ->orderBy('first_name')
-            ->get();
-        return response()->json(['aMentors' => $oMentors]);
+            ->get();*/
+
+       $aTravellers = TravellersPerTrip::with('traveller')->where('trip_id', $iTripId)->get();
+       $aMentors = [];
+       foreach($aTravellers as $traveller) {
+            if($traveller->traveller->user->role == 'organizer') {
+                array_push($aMentors, $traveller->traveller);
+            }
+        }
+        return response()->json(['aMentors' => $aMentors]);
     }
 
     /**
@@ -62,6 +75,7 @@ class ActiveTripOrganizerController extends Controller
         {
             return response()->json(['errors'=>$validator->errors()->all()]);
         }
+
         $aTravellerId = $request->post('traveller_ids');
         $iTripId = $request->post('trip_id');
         for ($i = 0; $i < count($aTravellerId); $i++) {

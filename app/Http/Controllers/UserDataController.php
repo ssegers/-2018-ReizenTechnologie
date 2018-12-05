@@ -230,8 +230,9 @@ class UserDataController extends Controller
                 ->join('studies','majors.study_id','=','studies.study_id')
                 ->whereIn('traveller_id', $aTravellerIds)
                 ->paginate($iPaginate);
-        }
 
+
+        }
         return Traveller::select(array_keys($aFilters))
             ->join('users','travellers.user_id','=','users.user_id')
             ->join('zips','travellers.zip_id','=','zips.zip_id')
