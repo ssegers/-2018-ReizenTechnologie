@@ -74,6 +74,7 @@ Route::middleware(['auth','organisator'])->group(function () {
         Route::post('trip/{trip?}', 'UserDataController@showUsersAsMentor');
         Route::get('updatemail','MailController@getUpdateForm')->name('updatemail');
         Route::post('updatemail', 'MailController@sendUpdateMail');
+        Route::post('updatemail/getEmail', 'MailController@getContactPersonByTripId');
     });
 });
 //--------------------------------------END---------------------------------------

@@ -35,5 +35,7 @@
     <div style="padding-top:200px">
         @yield('content')
     </div>
+
+    @yield('scripts')
 </body>
 </html>

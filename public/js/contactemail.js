@@ -1,39 +1,29 @@
 $(document).ready(function () {
-    var contactSelect = $('#contactSelect');
+    var contactSelect = $('#contact-select');
+    var emailField = $('#email-field');
 
-    var trips = [];
-
-    loadTrips();
-
-function loadTrips() {
-
-
-    $.ajax({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        type: "POST",
-        url: "mail/getUpdateForm",
-        data: '',
-    }).done(function (result) {
-        if (result) {
-           trips  = result['aTrips'];
-
-            updateContactMail();
-        }
+    contactSelect.change(function () {
+        loadContact(contactSelect.val())
     });
 
-    function updateContactMail() {
-        contactSelect.empty();
+    loadContact(contactSelect.val());
+    
+    function loadContact(tripId) {
+        console.log(tripId);
 
-        for (var trip of trips) {
-            contactSelect.append($('<option>')
-                .attr('value', trip.trip_id)
-                .text(trip.contact_mail));
-        }
-
-        contactSelect.attr('size', trips.length);
-
-        contactSelect.prop("selectedIndex", -1);
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            type: "POST",
+            url: "updatemail/getEmail",
+            data: {
+                trip_id: tripId,
+            },
+        }).done(function (result) {
+            if (result) {
+                emailField.val(result['sContactMail']);
+            }
+        });
     }
-}
+});
