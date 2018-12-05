@@ -78,19 +78,18 @@ class ActiveTripOrganizerController extends Controller
 
         $aTravellerId = $request->post('traveller_ids');
         $iTripId = $request->post('trip_id');
+
         for ($i = 0; $i < count($aTravellerId); $i++) {
-            if (!(TripOrganizer::where('traveller_id', '=', $aTravellerId[$i])->where('trip_id', $iTripId)->exists())) {
-                $linkedOrganizer = new TripOrganizer();
-                $linkedOrganizer->traveller_id = $aTravellerId[$i];
-                $linkedOrganizer->trip_id = $iTripId;
-                $linkedOrganizer->save();
-            }
+            $oOrganizer = TravellersPerTrip::where('traveller_id', '=', $aTravellerId[$i])->where('trip_id', '=', $iTripId)->first();
+            $oOrganizer->is_organizer = true;
+            $oOrganizer->save();
         }
-        $aUserId = TripOrganizer::Select('traveller_id')->where('trip_id', $iTripId)->get();
+        /*$aUserId = TripOrganizer::Select('traveller_id')->where('trip_id', $iTripId)->get();
         $oMentors = Traveller::Select('traveller_id','first_name', 'last_name')
             ->whereIn('traveller_id', $aUserId)
             ->orderBy('first_name')
             ->get();
+        */
         $request->session()->flash('alert-success', 'Het opslaan van begeleiders is gelukt.');
         return response()->json(['succes' => true]);
     }
@@ -103,6 +102,8 @@ class ActiveTripOrganizerController extends Controller
      */
     public function removeLinkedOrganisator(Request $request)
     {
+        //is_organizer veld op false zetten in TravellersPerTrip
+
         $iTripId = $request->post('trip_id');
         $iTravellerId = $request->post('traveller_id');
         $oUser = Traveller::with('user')->find($iTravellerId)->user;
