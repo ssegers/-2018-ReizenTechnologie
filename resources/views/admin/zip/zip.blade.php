@@ -36,7 +36,6 @@
         <input type="button" class="btn btn-danger p-3" onclick="history.go(0)" value="Annuleren"/>
     </div>
     {{Form::close()}}
-
    <div id="tabel" clas="col">
        <table class="table" >
            <tr>
@@ -68,17 +67,4 @@
            </tr>
        </table>
    </div>
-
-    <style type="text/css" rel="stylesheet">
-
-
-    </style>
-
-
-
-
-
-
-
-
     @endsection

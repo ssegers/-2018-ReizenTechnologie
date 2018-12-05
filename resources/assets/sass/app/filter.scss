@@ -45,7 +45,7 @@ td.field.email {
 /* Menu left styling */
 #menu-left {
   width: 250px;
-  height: calc(100vh - 66px);
+  height: calc(100vh - 210px);
   display: inline-block;
   padding: 0;
   background-color: white;
@@ -66,6 +66,6 @@ td.field.email {
 /* Content right styling */
 #content-right {
   width: calc(100% - 250px);
-  height: calc(100vh - 66px);
+  height: calc(100vh - 210px);
   float: right;
 }

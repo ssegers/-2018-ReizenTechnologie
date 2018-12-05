@@ -53,13 +53,18 @@ class MailController extends Controller
             return redirect()->back()->withInput()->with(['message' => $validator->errors()]);
         }
 
+
+        $sContactMail = Trip::where('trip_id', $request->post('trip'))->first()->contact_mail;
+
         /* Set the mail data */
         $aMailData = [
             'subject' => $request->post('subject'),
             'trip' => Trip::where('trip_id',$request->post('trip'))->first(),
-            'message' => $request->post('message')
+            'message' => $request->post('message'),
+            'contactMail' => $sContactMail
         ];
 
+      //return var_dump($aMailData);
 
         /* Get the mail list and chunk them by 10 */
 

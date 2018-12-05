@@ -1,9 +1,5 @@
-Beste Reiziger,
-U hebt een update gekregen over uw reis {{$aData['trip']->name}} {{$aData['trip']->year}}:
+Beste Reiziger, u heeft een update gekregen over uw reis {{$aData['trip']->name}} {{$aData['trip']->year}}:
 
 {{$aData['message']}}
 
-
-
-
-Opgelet! Dit is een automatisch gegenereerd bericht, gelieve hier niet op te antwoorden.
+Mailadres van de betreffende contactpersoon: {{$aData["contactMail"]}}

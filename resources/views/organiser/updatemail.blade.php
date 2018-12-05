@@ -20,7 +20,7 @@
             {{ session()->get('alert-message') }}
         </div>
     @endif
-
+    @csrf
     <div class="container">
         <h1>Verstuur hier een mail naar de deelnemers van een reis:</h1><br />
         {{ Form::open(array('action' => 'MailController@sendUpdateMail', 'method' =>'post')) }}
@@ -33,6 +33,10 @@
             {{ Form::select('trip',$aTrips,'' ,array('class' => 'form-control', 'required'))}}
         </div>
         <div class="form-group">
+            {{ Form::label('contactMail', 'Email Contactpersoon:') }}
+            <select class="form-control" id="contactSelect"></select>
+        </div>
+        <div class="form-group">
             {{ Form::label('message', 'Bericht:') }}
             {{ Form::textArea('message', '', ['class' => 'form-control', 'required']) }}
         </div>
@@ -40,5 +44,10 @@
         <input type="button" class="btn btn-danger" onclick="history.go(0)" value="Annuleren"/>
         {{ Form::close() }}
     </div>
+
+
+@endsection
+@section('scripts')
+    <script type="text/javascript" src="{{ asset('js/contactemail.js') }}"></script>
 
 @endsection

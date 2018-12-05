@@ -1,4 +1,8 @@
-#app {
+:root {
+    --main-bg-color: #E9F3F8; //lightblue;
+}
+
+app {
   padding-top: 66px;
 }
 .overflow-auto {
@@ -25,7 +29,7 @@ a.nav-link:hover {
 body {
   overflow-x: hidden;
   width: 100vw;
-  background-color: #E9F3F8;
+  background-color: var(--main-bg-color);
 }
 .side-nav {
   -ms-flex: 0 0 250px;
@@ -77,7 +81,6 @@ body {
   background-color: $col-primary;
   color: white;
 }
-
 
 
 .background-white{
