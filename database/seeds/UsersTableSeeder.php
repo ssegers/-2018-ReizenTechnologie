@@ -22,7 +22,7 @@ class UsersTableSeeder extends Seeder
         // Admin
         DB::table('users')->insert([
             'username' => 'u1234567',
-            'password' => bcrypt('administrator'),
+            'password' => bcrypt('admin'),
             'role' => 'admin',
         ]);
 
