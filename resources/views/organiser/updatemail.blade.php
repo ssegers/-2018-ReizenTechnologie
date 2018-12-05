@@ -30,11 +30,11 @@
         </div>
         <div class="form-group">
             {{ Form::label('trip', 'Reis:') }}
-            {{ Form::select('trip',$aTrips,'' ,array('class' => 'form-control', 'required'))}}
+            {{ Form::select('trip',$aTrips,'' ,array('id' => 'contact-select', 'class' => 'form-control', 'required'))}}
         </div>
         <div class="form-group">
             {{ Form::label('contactMail', 'Email Contactpersoon:') }}
-            <select class="form-control" id="contactSelect"></select>
+            <input class="form-control" disabled="disabled" id="email-field"/>
         </div>
         <div class="form-group">
             {{ Form::label('message', 'Bericht:') }}
@@ -49,5 +49,4 @@
 @endsection
 @section('scripts')
     <script type="text/javascript" src="{{ asset('js/contactemail.js') }}"></script>
-
 @endsection
