@@ -14,7 +14,7 @@ class CreateTravellersPerTripsTable extends Migration
     public function up()
     {
         Schema::create('travellers_per_trips', function (Blueprint $table) {
-            $table->increments('travellers_per_trip_id')->unsigned();
+            $table->increments('travellers_per_trip_id')->unsigned(); //wordt alleen gebruikt door eloquent zelf
             $table->integer('trip_id')->unsigned();
             $table->integer('traveller_id')->unsigned();
             $table->boolean('is_organizer');
