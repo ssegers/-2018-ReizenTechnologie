@@ -42,6 +42,7 @@ class Traveller extends Model
             ->get();
         return $userdata;
     }
+
     /*
      * Returns the traveller data based on the trip id and requested datafields. Will return a paginated list if requested
      *

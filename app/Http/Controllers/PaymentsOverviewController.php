@@ -21,7 +21,12 @@ class PaymentsOverviewController extends Controller
      */
     public function showTable(){
         $userdata = Traveller::getTravellersWithPayment();
-        return view('user.payment.pay_overview',['userdata' => $userdata]);
+        foreach($userdata as $oUserData){
+            $paymentsum[$oUserData['traveller_id']] = DB::table('payments')->where('traveller_id', '=', $oUserData['traveller_id'])->sum('amount');
+        }
+
+
+        return view('user.payment.pay_overview',['userdata' => $userdata, 'paymentsum' => $paymentsum ]);
     }
 
     /**
@@ -52,23 +57,21 @@ class PaymentsOverviewController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        //Check for duplication cities with equal zip numbers, if the city is a duplicate, return back to the view with the error message
-
-
-        //Insert new record into zips table
+        //Insert new record into table
         Payment::insert([
             'amount' => $request->post('amount'),
-            'payment_date' => $request->post('payment_date')
+            'payment_date' => $request->post('payment_date'),
+            'traveller_id' => $request->post('traveller_id')
 
         ]);
-
         //return back to the view with the succes message
-        return redirect()->back()->with('message', 'De betaling is toegevoegd.');
+
+        return back();
 
     }
 
 
-    /**Author: Stef Kerkhofs
+    /**Author: Nico Schelfhout
      * @return array
      *
      * Returns an array with custom error messages
