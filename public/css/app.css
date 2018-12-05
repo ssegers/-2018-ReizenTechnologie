@@ -362,4 +362,12 @@ td.field.email {
   display: none;
 }
 
+.success-mail {
+  display: none;
+}
+
+.error-mail {
+  display: none;
+}
+
 /*# sourceMappingURL=app.css.map */
