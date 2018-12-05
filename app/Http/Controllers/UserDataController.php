@@ -220,7 +220,7 @@ class UserDataController extends Controller
      * @return mixed
      */
     private function getUserData($aFilters, $oTrip, $iPaginate = false) {
-        $aTravellerIds = TravellersPerTrip::where('trip_id', $oTrip->trip_id)->get();
+        $aTravellerIds = TravellersPerTrip::select('traveller_id')->where('trip_id', $oTrip->trip_id)->get();
         if ($iPaginate) {
             /* For click event: Add name to selection */
             return Traveller::select(array_keys(array_add($aFilters, 'username', true)))
@@ -231,6 +231,7 @@ class UserDataController extends Controller
                 ->whereIn('traveller_id', $aTravellerIds)
                 ->paginate($iPaginate);
         }
+
         return Traveller::select(array_keys($aFilters))
             ->join('users','travellers.user_id','=','users.user_id')
             ->join('zips','travellers.zip_id','=','zips.zip_id')
