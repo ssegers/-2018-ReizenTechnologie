@@ -50,12 +50,10 @@ class ActiveTripOrganizerController extends Controller
             ->orderBy('first_name')
             ->get();*/
 
-       $aTravellers = TravellersPerTrip::with('traveller')->where('trip_id', $iTripId)->get();
+       $aTravellers = TravellersPerTrip::with('traveller')->where('trip_id', $iTripId)->where('is_organizer', true)->get();
        $aMentors = [];
        foreach($aTravellers as $traveller) {
-            if($traveller->traveller->user->role == 'organizer') {
                 array_push($aMentors, $traveller->traveller);
-            }
         }
         return response()->json(['aMentors' => $aMentors]);
     }
