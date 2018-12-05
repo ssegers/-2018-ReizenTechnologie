@@ -72,7 +72,12 @@ class UserDataController extends Controller
                 $aAuthenticatedTrips = TripOrganizer::where('traveller_id', $iTravellerId)->get();
             }
 
-            $iTripId = $aAuthenticatedTrips[0]->trip_id;
+            try {
+                $iTripId = $aAuthenticatedTrips[0]->trip_id;
+            }
+            catch (\Exception $exception) {
+                return 'U heeft geen actieve reizen';
+            }
         }
         else {
             if (($aAuthenticatedTrips = $this->checkUserPermissions($oUser, $iTripId)) == false) {
