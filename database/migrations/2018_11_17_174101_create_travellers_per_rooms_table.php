@@ -14,7 +14,7 @@ class CreateTravellersPerRoomsTable extends Migration
     public function up()
     {
         Schema::create('travellers_per_room', function (Blueprint $table) {
-            $table->increments('travellers_per_room_id')->unsigned();
+            $table->increments('travellers_per_room_id')->unsigned(); //wordt alleen gebruikt door eloquent zelf
             $table->integer('rooms_hotel_trip_id')->unsigned();
             $table->integer('traveller_id')->unsigned();
             $table->timestamps();

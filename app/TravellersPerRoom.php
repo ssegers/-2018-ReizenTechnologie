@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class TravellersPerRoom extends Model
 {
     //https://blog.maqe.com/solved-eloquent-doesnt-support-composite-primary-keys-62b740120f
-    protected $primaryKey = 'travellers_per_room_id';
+    protected $primaryKey = 'travellers_per_room_id'; //word alleen door eloquent zelf gebruikt
 
     public function traveller()
     {
