@@ -1,7 +1,11 @@
 @import url("https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css");
 @import url("https://fonts.googleapis.com/css?family=Nunito");
 @import url("https://use.fontawesome.com/releases/v5.3.1/css/all.css");
-#app {
+:root {
+  --main-bg-color: #E9F3F8;
+}
+
+app {
   padding-top: 66px;
 }
 
@@ -33,7 +37,7 @@ a.nav-link:hover {
 body {
   overflow-x: hidden;
   width: 100vw;
-  background-color: #E9F3F8;
+  background-color: var(--main-bg-color);
 }
 
 .side-nav {
@@ -280,7 +284,7 @@ td.field.email {
 /* Menu left styling */
 #menu-left {
   width: 250px;
-  height: calc(100vh - 66px);
+  height: calc(100vh - 210px);
   display: inline-block;
   padding: 0;
   background-color: white;
@@ -304,7 +308,7 @@ td.field.email {
 /* Content right styling */
 #content-right {
   width: calc(100% - 250px);
-  height: calc(100vh - 66px);
+  height: calc(100vh - 210px);
   float: right;
 }
 

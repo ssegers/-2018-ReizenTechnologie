@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             HotelsPerTripSeeder::class,
             RoomsPerHotelPerTripSeeder::class,
             TravellersPerRoomSeeder::class,
+            PaymentsTableSeeder::class,
         ]);
     }
 }
