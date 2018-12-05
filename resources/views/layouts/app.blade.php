@@ -15,8 +15,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
 </head>
-<body class="background-light-blue">
-    
+<body>
+    <div class= "fixed-top">
         <div class="d-flex flex-row bg-light">
             <div class="p-2"> <img src="{{ asset('images/ucll_logo.png') }}" class="rounded" alt="logo ucll"></div>
             <div class="d-flex flex-column">
@@ -31,8 +31,9 @@
                 <p class="p-3 mt-3 alert alert-{{ $msg }}">{{ Session::get($msg) }}</p>
             @endif
         @endforeach
-
+    </div>
+    <div style="padding-top:200px">
         @yield('content')
-   
+    </div>
 </body>
 </html>
