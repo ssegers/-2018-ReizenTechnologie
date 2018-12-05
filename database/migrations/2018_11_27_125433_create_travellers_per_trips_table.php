@@ -16,6 +16,7 @@ class CreateTravellersPerTripsTable extends Migration
         Schema::create('travellers_per_trips', function (Blueprint $table) {
             $table->integer('trip_id')->unsigned();
             $table->integer('traveller_id')->unsigned();
+            $table->boolean('is_organizer');
             $table->timestamps();
             $table->primary(array('trip_id', 'traveller_id'));
             $table->foreign('trip_id')->references('trip_id')->on('trips');
