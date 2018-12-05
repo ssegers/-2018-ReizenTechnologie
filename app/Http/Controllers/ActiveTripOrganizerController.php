@@ -38,19 +38,8 @@ class ActiveTripOrganizerController extends Controller
      * Gets request data and gets the linked organisators by means of the request data.
      */
     public function showLinkedOrganisators(Request $request) {
-        /*
-         * Pak de reis, haal de users op , filter de users op rol organisator
-         *
-         * Pak de reis, haal de users op , filter de users op rol begeleider
-         */
         $iTripId = $request->post('trip_id');
-       /* $aUserId = TravellersPerTrip::Select('traveller_id')->where('trip_id', $iTripId)->get();
-        $oMentors = Traveller::Select('traveller_id','first_name', 'last_name')
-            ->whereIn('traveller_id', $aUserId)
-            ->orderBy('first_name')
-            ->get();*/
-
-       $aTravellers = TravellersPerTrip::with('traveller')->where('trip_id', $iTripId)->get();
+        $aTravellers = TravellersPerTrip::with('traveller')->where('trip_id', $iTripId)->get();
        $aMentors = [];
        foreach($aTravellers as $traveller) {
             if($traveller->traveller->user->role == 'organizer') {
@@ -78,8 +67,11 @@ class ActiveTripOrganizerController extends Controller
 
         $aTravellerId = $request->post('traveller_ids');
         $iTripId = $request->post('trip_id');
+        /*
+         * Pak de traveller bij die trip id en zet isOrganiser op true
+         * */
         for ($i = 0; $i < count($aTravellerId); $i++) {
-            if (!(TripOrganizer::where('traveller_id', '=', $aTravellerId[$i])->where('trip_id', $iTripId)->exists())) {
+            if (!(TravellersPerTrip::where('traveller_id', '=', $aTravellerId[$i])->where('trip_id', $iTripId)->exists())) {
                 $linkedOrganizer = new TripOrganizer();
                 $linkedOrganizer->traveller_id = $aTravellerId[$i];
                 $linkedOrganizer->trip_id = $iTripId;
@@ -105,8 +97,11 @@ class ActiveTripOrganizerController extends Controller
     {
         $iTripId = $request->post('trip_id');
         $iTravellerId = $request->post('traveller_id');
-        $oUser = Traveller::with('user')->find($iTravellerId)->user;
+        $oTravellerInTrip = TravellersPerTrip::where('traveller_id', '=', $iTravellerId)->where('trip_id', $iTripId)->first();
+        $oTravellerInTrip->isOrganizer = true;
+        $oTravellerInTrip->save();
+        /*$oUser = Traveller::with('user')->find($iTravellerId)->user;
         $oUser->role = 'guide';
-        $oUser->save();
+        $oUser->save();*/
     }
 }
