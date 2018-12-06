@@ -6,4 +6,5 @@
 <br>
 <p>Met vriendelijke groeten,</p>
 <br>
+<p>je reisbegeleider</p>
 <p>{{$sBegeleiderNaam}}</p>

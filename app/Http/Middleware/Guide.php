@@ -16,8 +16,10 @@ class Guide
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::check() && Auth::user()->role == 'guide' || Auth::user()->role == 'admin') {
-            return $next($request);
+        if (Auth::check()) {
+            if (Auth::user()->role == 'guide' || Auth::user()->role == 'admin'){
+                return $next($request);
+            }
         } else {
             return redirect('info');
         }    }

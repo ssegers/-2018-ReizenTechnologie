@@ -22,11 +22,15 @@ class RegisterController extends Controller
     function __construct() {
         $this->middleware('auth');
         $this->middleware('guest');
-
-
-        session_start();
+        try{
+            session_start();
+        }
+        catch (\Exception $ex){
+            session_reset();
+        }
     }
     function __destruct() {
+        session_abort();
     }
 
     function randomPassword() {
