@@ -118,6 +118,8 @@ Route::middleware(['auth.traveller'])->group(function () {
 Route::middleware(['auth','guest'])->group(function () {
     Route::prefix('user')->group(function () {
         Route::prefix('form')->group(function() {
+            route::get('step-0', 'RegisterController@step0')->name('registerTripMessage');
+            route::post('step-0', 'RegisterController@step0Post');
             route::get('step-1', 'RegisterController@step1')->name('registerTrip');
             route::post('step-1', 'RegisterController@step1Post');
 
