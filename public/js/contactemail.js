@@ -9,8 +9,6 @@ $(document).ready(function () {
     loadContact(contactSelect.val());
     
     function loadContact(tripId) {
-        console.log(tripId);
-
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
