@@ -24,17 +24,22 @@
         <?php use App\Trip;?>
         <?php $oActiveTrips = Trip::where('is_active',true)->where('contact_mail', '!=' , null)->pluck('name','trip_id')?>
 
+            <div class="form-group">
         <label for="reis">Reis: </label><br>
         {!! Form::select('reis', $oActiveTrips, null,array("class" => "form-control")) !!}
-            <br>
+            </div>
+            <div class="form-group">
             <label for="email">Jouw E-mailadres :</label><br>
             {{Form::email('email','',array("class" => "form-control", "required" ))}}
-            <br>
+            </div>
+            <div class="form-group">
             <label for="onderwerp">Onderwerp :</label><br>
             {{Form::text('onderwerp','',array("class" => "form-control", "required" ))}}
-            <br>
+            </div>
+            <div class="form-group">
             <label for="bericht">Bericht: </label><br>
             {{ Form::textarea('bericht','',array("class" => "form-control", "required" )) }}<br>
+            </div>
             {{ Form::submit('Verzend',array("class" => "btn btn-primary")) }}
             <input type="button" class="btn btn-danger" onclick="history.go(0)" value="Annuleren"/>
             {{ Form::close() }}
