@@ -6,6 +6,7 @@ use App\Major;
 use App\Study;
 use App\Traveller;
 use App\Trip;
+use App\TripOrganizer;
 use App\User;
 use App\Zip;
 use Dotenv\Validator;
@@ -57,21 +58,40 @@ class UserDataController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View|string
      */
-    public function showUsersAsMentor(Request $request) {
-        /* Get user from Auth */
+    public function showUsersAsMentor(Request $request, $iTripId = null) {
         $oUser = Auth::user();
 
-        /* Get user from URL */
-        //$oUser = User::where('username', $sUserName)->first();
+        $aAuthenticatedTrips = array();
 
-        /* Check if user exist and is a organizer */
-        try {
-            if ($oUser->role != 'organizer') {
-                return 'Deze gebruiker is niet gemachtigd';
+        if ($iTripId == null) {
+            if ($oUser->role == 'admin') {
+                $aAuthenticatedTrips = Trip::where('is_active', true)->get();
+            }
+            else if ($oUser->role == 'organizer') {
+                $iTravellerId = Traveller::where('user_id', $oUser->user_id)->first()->traveller_id;
+                $aAuthenticatedTrips = TripOrganizer::where('traveller_id', $iTravellerId)->get();
+            }
+
+            try {
+                $iTripId = $aAuthenticatedTrips[0]->trip_id;
+            }
+            catch (\Exception $exception) {
+                return 'U heeft geen actieve reizen';
             }
         }
-        catch (\Exception $exception) {
-            return 'Deze gebruiker bestaat niet';
+        else {
+            if (($aAuthenticatedTrips = $this->checkUserPermissions($oUser, $iTripId)) == false) {
+                return 'Deze gebruiker is niet gemachtigd!';
+            }
+        }
+
+        if ($aAuthenticatedTrips == null) {
+            return 'U heeft geen actieve reizen';
+        }
+
+        $aAuthenticatedTripId = array();
+        foreach ($aAuthenticatedTrips as $oTrip) {
+            $aAuthenticatedTripId[$oTrip->trip_id] = $oTrip->trip_id;
         }
 
         /* Detect the applied filters and add to the list of standard filters */
@@ -83,9 +103,7 @@ class UserDataController extends Controller
         $aFiltersChecked = $this->aFiltersChecked;
 
         /* Get the trip where the organizer is involved with */
-        $aOrganizerTrip = Trip::where('user_id', $oUser->user_id)->where('is_active', true)
-            ->join('travellers', 'trips.trip_id', '=', 'travellers.trip_id')
-            ->first();
+        $aOrganizerTrip = Trip::where('trip_id', $iTripId)->first();
 
         /* Get all active trips */
         $aActiveTrips = array();
@@ -114,7 +132,7 @@ class UserDataController extends Controller
         }
 
         /* Get the travellers based on the applied filters */
-        $aUserData = $this->getUserData($aFiltersChecked, $aOrganizerTrip, $iPaginate);
+        $aUserData = Traveller::getTravellersDataByTrip($iTripId, $aFiltersChecked, $iPaginate);
 
         /* Check witch download option is checked */
         switch ($request->post('export')) {
@@ -134,7 +152,30 @@ class UserDataController extends Controller
             'oCurrentTrip' => $aOrganizerTrip,
             'aActiveTrips' => $aActiveTrips,
             'aPaginate' => $aPaginate,
+            'aAuthenticatedTripId' => $aAuthenticatedTripId,
         ]);
+    }
+
+    private function checkUserPermissions($oUser, $iTripId) {
+        switch ($oUser->role) {
+            case 'organizer':
+                $iTravellerId = Traveller::where('user_id', $oUser->user_id)->first()->traveller_id;
+                $aAuthenticatedTrips = TripOrganizer::where('traveller_id', $iTravellerId)->get();
+
+//                return var_dump($aTripOrganizers);
+                foreach ($aAuthenticatedTrips as $oTrip) {
+                    if ($oTrip->trip_id == $iTripId) {
+                        return $aAuthenticatedTrips;
+                    }
+                }
+
+                return false;
+            case 'admin':
+                return Trip::where('is_active', true)->get();
+
+            default:
+                return false;
+        }
     }
 
 
@@ -147,7 +188,8 @@ class UserDataController extends Controller
      */
     private function downloadExcel($aFiltersChecked, $iTrip) {
         $aUserFields = $aFiltersChecked;
-        $data = $this->getUserData($aFiltersChecked, $iTrip);
+        $data = Traveller::getTravellersDataByTrip($iTrip->trip_id, $aFiltersChecked);
+//        $data = $this->getUserData($aFiltersChecked, $iTrip);
         try {
             /** Create a new Spreadsheet Object **/
             $spreadsheet = new Spreadsheet();
@@ -172,7 +214,7 @@ class UserDataController extends Controller
         $aAlphas = range('A', 'Z');
         $oTrip = Trip::where('trip_id', $iTrip->trip_id)->first();
 
-        $data = $this->getUserData($aFiltersChecked, $iTrip);
+        $data = Traveller::getTravellersDataByTrip($iTrip->trip_id, $aFiltersChecked);
         try {
             $spreadsheet = new Spreadsheet();  /*----Spreadsheet object-----*/
             $spreadsheet->getActiveSheet();
@@ -198,35 +240,6 @@ class UserDataController extends Controller
         } catch (Exception $e) {
         }
 
-    }
-
-    /**
-     * Returns the filtered users based on the applied filters and selected trip. The users will be paginated if an amount is specified.
-     *
-     * @author Yoeri op't Roodt
-     *
-     * @param $aFilters
-     * @param $iTrip
-     * @param bool $iPaginate
-     *
-     * @return mixed
-     */
-    private function getUserData($aFilters, $iTrip, $iPaginate = false) {
-        if ($iPaginate) {
-            /* For click event: Add name to selection */
-            return Traveller::select(array_keys(array_add($aFilters, 'username', true)))
-                ->join('users','travellers.user_id','=','users.user_id')
-                ->join('zips','travellers.zip_id','=','zips.zip_id')
-                ->join('majors','travellers.major_id','=','majors.major_id')
-                ->join('studies','majors.study_id','=','studies.study_id')
-                ->where('trip_id', $iTrip->trip_id)->paginate($iPaginate);
-        }
-        return Traveller::select(array_keys($aFilters))
-            ->join('users','travellers.user_id','=','users.user_id')
-            ->join('zips','travellers.zip_id','=','zips.zip_id')
-            ->join('majors','travellers.major_id','=','majors.major_id')
-            ->join('studies','majors.study_id','=','studies.study_id')
-            ->where('trip_id', $iTrip->trip_id)->get()->toArray();
     }
 
     /**

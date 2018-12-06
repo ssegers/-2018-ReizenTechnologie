@@ -14,7 +14,7 @@ class TravellersTableSeeder extends Seeder
     {
         // Stefan Segers
         DB::table('travellers')->insert([
-            'user_id' => 2,
+            'user_id' => 3,
             'trip_id' => 1,
             'zip_id' =>1,
             'major_id' =>3,
@@ -37,7 +37,7 @@ class TravellersTableSeeder extends Seeder
 
         // Rudi Roox
         DB::table('travellers')->insert([
-            'user_id' => 3,
+            'user_id' => 4,
             'trip_id' => 2,
             'zip_id' =>2,
             'major_id' =>1,
@@ -60,7 +60,7 @@ class TravellersTableSeeder extends Seeder
 
         // Daan Vandebosch
         DB::table('travellers')->insert([
-            'user_id' => 4,
+            'user_id' => 5,
             'trip_id' => 2,
             'zip_id' =>2,
             'major_id' =>1,
@@ -83,7 +83,7 @@ class TravellersTableSeeder extends Seeder
 
         // Kaan Akpinar
         DB::table('travellers')->insert([
-            'user_id' => 5,
+            'user_id' => 6,
             'trip_id' => 1,
             'zip_id' =>4,
             'major_id' =>1,
@@ -106,7 +106,7 @@ class TravellersTableSeeder extends Seeder
 
         // Joren Meynen
         DB::table('travellers')->insert([
-            'user_id' => 6,
+            'user_id' => 7,
             'trip_id' => 1,
             'zip_id' =>3,
             'major_id' =>1,
@@ -129,7 +129,7 @@ class TravellersTableSeeder extends Seeder
 
         // Michiel Guilliams
         DB::table('travellers')->insert([
-            'user_id' => 7,
+            'user_id' => 8,
             'trip_id' => 2,
             'zip_id' =>1,
             'major_id' =>1,
@@ -152,7 +152,7 @@ class TravellersTableSeeder extends Seeder
 
         // Nicolaas Schelfhout
         DB::table('travellers')->insert([
-            'user_id' => 8,
+            'user_id' => 9,
             'trip_id' => 1,
             'zip_id' =>3,
             'major_id' =>1,
@@ -175,7 +175,7 @@ class TravellersTableSeeder extends Seeder
 
         // Robin Machiels
         DB::table('travellers')->insert([
-            'user_id' => 9,
+            'user_id' => 10,
             'trip_id' => 2,
             'zip_id' =>3,
             'major_id' =>1,
@@ -198,7 +198,7 @@ class TravellersTableSeeder extends Seeder
 
         // Sasha Van De Voorde
         DB::table('travellers')->insert([
-            'user_id' => 10,
+            'user_id' => 11,
             'trip_id' => 1,
             'zip_id' =>5,
             'major_id' =>1,
@@ -221,7 +221,7 @@ class TravellersTableSeeder extends Seeder
 
         // Stef Kerkhofs
         DB::table('travellers')->insert([
-            'user_id' => 11,
+            'user_id' => 12,
             'trip_id' => 2,
             'zip_id' =>2,
             'major_id' =>1,
@@ -244,7 +244,7 @@ class TravellersTableSeeder extends Seeder
 
         // Yoeri op't Roodt
         DB::table('travellers')->insert([
-            'user_id' => 12,
+            'user_id' => 13,
             'trip_id' => 2,
             'zip_id' =>2,
             'major_id' =>1,
@@ -267,7 +267,7 @@ class TravellersTableSeeder extends Seeder
 
         // Jan Modaal
         DB::table('travellers')->insert([
-            'user_id' => 13,
+            'user_id' => 14,
             'trip_id' => 1,
             'zip_id' =>2,
             'major_id' =>1,
@@ -290,7 +290,7 @@ class TravellersTableSeeder extends Seeder
 
         //Piet Janssen
         DB::table('travellers')->insert([
-            'user_id' => 14,
+            'user_id' => 15,
             'trip_id' => 2,
             'zip_id' =>2,
             'major_id' =>1,
@@ -313,7 +313,7 @@ class TravellersTableSeeder extends Seeder
 
         //Toon Peeters
         DB::table('travellers')->insert([
-            'user_id' => 15,
+            'user_id' => 16,
             'trip_id' => 1,
             'zip_id' =>2,
             'major_id' =>1,
@@ -336,7 +336,7 @@ class TravellersTableSeeder extends Seeder
 
         //Gert Nullens
         DB::table('travellers')->insert([
-            'user_id' => 16,
+            'user_id' => 17,
             'trip_id' => 2,
             'zip_id' =>2,
             'major_id' =>1,
@@ -360,7 +360,7 @@ class TravellersTableSeeder extends Seeder
 
         //Bram Bongers
         DB::table('travellers')->insert([
-            'user_id' => 17,
+            'user_id' => 18,
             'trip_id' => 1,
             'zip_id' =>2,
             'major_id' =>1,
@@ -384,7 +384,7 @@ class TravellersTableSeeder extends Seeder
 
         //Tom Moons
         DB::table('travellers')->insert([
-            'user_id' => 18,
+            'user_id' => 19,
             'trip_id' => 2,
             'zip_id' =>2,
             'major_id' =>1,
@@ -408,7 +408,7 @@ class TravellersTableSeeder extends Seeder
 
         //Jens Janssen
         DB::table('travellers')->insert([
-            'user_id' => 19,
+            'user_id' => 20,
             'trip_id' => 1,
             'zip_id' =>2,
             'major_id' =>1,
@@ -432,7 +432,7 @@ class TravellersTableSeeder extends Seeder
 
         //Martijn Theunissen
         DB::table('travellers')->insert([
-            'user_id' => 20,
+            'user_id' => 21,
             'trip_id' => 2,
             'zip_id' =>2,
             'major_id' =>1,
@@ -456,7 +456,7 @@ class TravellersTableSeeder extends Seeder
 
         //Steve Stevens
         DB::table('travellers')->insert([
-            'user_id' => 21,
+            'user_id' => 22,
             'trip_id' => 1,
             'zip_id' =>2,
             'major_id' =>1,
@@ -480,7 +480,7 @@ class TravellersTableSeeder extends Seeder
 
         //Dario Thielens
         DB::table('travellers')->insert([
-            'user_id' => 22,
+            'user_id' => 23,
             'trip_id' => 2,
             'zip_id' =>2,
             'major_id' =>1,
@@ -504,7 +504,7 @@ class TravellersTableSeeder extends Seeder
 
         //Bert Bertens
         DB::table('travellers')->insert([
-            'user_id' => 23,
+            'user_id' => 24,
             'trip_id' => 1,
             'zip_id' =>2,
             'major_id' =>1,
@@ -529,7 +529,7 @@ class TravellersTableSeeder extends Seeder
 
         //Piet Pieters
         DB::table('travellers')->insert([
-            'user_id' => 24,
+            'user_id' => 25,
             'trip_id' => 2,
             'zip_id' =>2,
             'major_id' =>1,
@@ -554,7 +554,7 @@ class TravellersTableSeeder extends Seeder
 
         //Rudy Verboven
         DB::table('travellers')->insert([
-            'user_id' => 25,
+            'user_id' => 26,
             'trip_id' => 1,
             'zip_id' =>2,
             'major_id' =>1,
@@ -579,7 +579,7 @@ class TravellersTableSeeder extends Seeder
 
         //Johnny Bravo
         DB::table('travellers')->insert([
-            'user_id' => 26,
+            'user_id' => 27,
             'trip_id' => 2,
             'zip_id' =>2,
             'major_id' =>1,
@@ -602,7 +602,7 @@ class TravellersTableSeeder extends Seeder
 
         //Bjorn Mertens
         DB::table('travellers')->insert([
-            'user_id' => 27,
+            'user_id' => 28,
             'trip_id' => 1,
             'zip_id' =>2,
             'major_id' =>1,
@@ -625,7 +625,7 @@ class TravellersTableSeeder extends Seeder
 
         //Jan Tomassen
         DB::table('travellers')->insert([
-            'user_id' => 28,
+            'user_id' => 29,
             'trip_id' => 2,
             'zip_id' =>2,
             'major_id' =>1,
@@ -648,7 +648,7 @@ class TravellersTableSeeder extends Seeder
 
         //Vincent Ramaekers
         DB::table('travellers')->insert([
-            'user_id' => 29,
+            'user_id' => 30,
             'trip_id' => 1,
             'zip_id' =>2,
             'major_id' =>1,
@@ -671,7 +671,7 @@ class TravellersTableSeeder extends Seeder
 
         //Glenn Vanaken
         DB::table('travellers')->insert([
-            'user_id' => 30,
+            'user_id' => 31,
             'trip_id' => 2,
             'zip_id' =>2,
             'major_id' =>1,
@@ -694,7 +694,7 @@ class TravellersTableSeeder extends Seeder
 
         //Roel Aegten
         DB::table('travellers')->insert([
-            'user_id' => 31,
+            'user_id' => 32,
             'trip_id' => 1,
             'zip_id' =>2,
             'major_id' =>1,
@@ -719,7 +719,7 @@ class TravellersTableSeeder extends Seeder
 
         //More Dummy Data
         DB::table('travellers')->insert([
-            'user_id' => 32,
+            'user_id' => 33,
             'trip_id' => 1,
             'zip_id' =>2,
             'major_id' =>1,
@@ -740,7 +740,7 @@ class TravellersTableSeeder extends Seeder
             'medical_info' => null
         ]);
         DB::table('travellers')->insert([
-            'user_id' => 33,
+            'user_id' => 34,
             'trip_id' => 1,
             'zip_id' =>2,
             'major_id' =>1,
@@ -761,7 +761,7 @@ class TravellersTableSeeder extends Seeder
             'medical_info' => null
         ]);
         DB::table('travellers')->insert([
-            'user_id' => 34,
+            'user_id' => 35,
             'trip_id' => 1,
             'zip_id' =>2,
             'major_id' =>1,
@@ -782,7 +782,7 @@ class TravellersTableSeeder extends Seeder
             'medical_info' => null
         ]);
         DB::table('travellers')->insert([
-            'user_id' => 35,
+            'user_id' => 36,
             'trip_id' => 1,
             'zip_id' =>2,
             'major_id' =>1,
@@ -803,7 +803,7 @@ class TravellersTableSeeder extends Seeder
             'medical_info' => null
         ]);
         DB::table('travellers')->insert([
-            'user_id' => 36,
+            'user_id' => 37,
             'trip_id' => 1,
             'zip_id' =>2,
             'major_id' =>1,
@@ -824,7 +824,7 @@ class TravellersTableSeeder extends Seeder
             'medical_info' => null
         ]);
         DB::table('travellers')->insert([
-            'user_id' => 37,
+            'user_id' => 38,
             'trip_id' => 1,
             'zip_id' =>2,
             'major_id' =>1,
@@ -845,7 +845,7 @@ class TravellersTableSeeder extends Seeder
             'medical_info' => null
         ]);
         DB::table('travellers')->insert([
-            'user_id' => 38,
+            'user_id' => 39,
             'trip_id' => 1,
             'zip_id' =>2,
             'major_id' =>1,
@@ -866,7 +866,7 @@ class TravellersTableSeeder extends Seeder
             'medical_info' => null
         ]);
         DB::table('travellers')->insert([
-            'user_id' => 39,
+            'user_id' => 40,
             'trip_id' => 1,
             'zip_id' =>2,
             'major_id' =>1,
@@ -887,7 +887,7 @@ class TravellersTableSeeder extends Seeder
             'medical_info' => null
         ]);
         DB::table('travellers')->insert([
-            'user_id' => 40,
+            'user_id' => 41,
             'trip_id' => 1,
             'zip_id' =>2,
             'major_id' =>1,
@@ -908,7 +908,7 @@ class TravellersTableSeeder extends Seeder
             'medical_info' => null
         ]);
         DB::table('travellers')->insert([
-            'user_id' => 41,
+            'user_id' => 42,
             'trip_id' => 1,
             'zip_id' =>2,
             'major_id' =>1,
@@ -929,7 +929,7 @@ class TravellersTableSeeder extends Seeder
             'medical_info' => null
         ]);
         DB::table('travellers')->insert([
-            'user_id' => 42,
+            'user_id' => 43,
             'trip_id' => 2,
             'zip_id' =>2,
             'major_id' =>1,
@@ -950,7 +950,7 @@ class TravellersTableSeeder extends Seeder
             'medical_info' => null
         ]);
         DB::table('travellers')->insert([
-            'user_id' => 43,
+            'user_id' => 44,
             'trip_id' => 2,
             'zip_id' =>2,
             'major_id' =>1,
@@ -971,7 +971,7 @@ class TravellersTableSeeder extends Seeder
             'medical_info' => null
         ]);
         DB::table('travellers')->insert([
-            'user_id' => 44,
+            'user_id' => 45,
             'trip_id' => 2,
             'zip_id' =>2,
             'major_id' =>1,
@@ -992,7 +992,7 @@ class TravellersTableSeeder extends Seeder
             'medical_info' => null
         ]);
         DB::table('travellers')->insert([
-            'user_id' => 45,
+            'user_id' => 46,
             'trip_id' => 2,
             'zip_id' =>2,
             'major_id' =>1,
@@ -1013,7 +1013,7 @@ class TravellersTableSeeder extends Seeder
             'medical_info' => null
         ]);
         DB::table('travellers')->insert([
-            'user_id' => 46,
+            'user_id' => 47,
             'trip_id' => 2,
             'zip_id' =>2,
             'major_id' =>1,
@@ -1034,7 +1034,7 @@ class TravellersTableSeeder extends Seeder
             'medical_info' => null
         ]);
         DB::table('travellers')->insert([
-            'user_id' => 47,
+            'user_id' => 48,
             'trip_id' => 2,
             'zip_id' =>2,
             'major_id' =>1,
@@ -1055,7 +1055,7 @@ class TravellersTableSeeder extends Seeder
             'medical_info' => null
         ]);
         DB::table('travellers')->insert([
-            'user_id' => 48,
+            'user_id' => 49,
             'trip_id' => 2,
             'zip_id' =>2,
             'major_id' =>1,
@@ -1076,7 +1076,7 @@ class TravellersTableSeeder extends Seeder
             'medical_info' => null
         ]);
         DB::table('travellers')->insert([
-            'user_id' => 49,
+            'user_id' => 50,
             'trip_id' => 2,
             'zip_id' =>2,
             'major_id' =>1,
@@ -1097,7 +1097,7 @@ class TravellersTableSeeder extends Seeder
             'medical_info' => null
         ]);
         DB::table('travellers')->insert([
-            'user_id' => 50,
+            'user_id' => 51,
             'trip_id' => 2,
             'zip_id' =>2,
             'major_id' =>1,

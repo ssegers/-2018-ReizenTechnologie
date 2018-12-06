@@ -26,7 +26,6 @@ class MailController extends Controller
             $aNewTrips[$oTrip->trip_id] = $oTrip->name . ' ' . $oTrip->year;
         }
 
-
         return view('organiser.updatemail', ['aTrips' => $aNewTrips]);
     }
 
@@ -53,13 +52,16 @@ class MailController extends Controller
             return redirect()->back()->withInput()->with(['message' => $validator->errors()]);
         }
 
+
+        $sContactMail = Trip::where('trip_id', $request->post('trip'))->first()->contact_mail;
+
         /* Set the mail data */
         $aMailData = [
             'subject' => $request->post('subject'),
             'trip' => Trip::where('trip_id',$request->post('trip'))->first(),
-            'message' => $request->post('message')
+            'message' => $request->post('message'),
+            'contactMail' => $sContactMail
         ];
-
 
         /* Get the mail list and chunk them by 10 */
 
@@ -73,6 +75,23 @@ class MailController extends Controller
         }
 
         return redirect()->back()->with('message', 'De email is succesvol verstuurd!');
+    }
+
+    /**
+     * This function returns the contact form a given trip
+     *
+     * @author Yoeri op't Roodt
+     *
+     * @param Request $request
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getContactPersonByTripId(Request $request) {
+        $sContactMail = Trip::where('trip_id', $request->post('trip_id'))->first()->contact_mail;
+
+        return response()->json([
+            'sContactMail' => $sContactMail,
+        ]);
     }
 
     /**

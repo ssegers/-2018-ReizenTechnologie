@@ -24,14 +24,16 @@ class TripsTableSeeder extends Seeder
             'name' => 'Duitsland',
             'is_active' => true,
             'price'=>1000,
-            'year' => 2019
+            'year' => 2019,
+            'contact_mail'=>'kaan.akpinar@hotmail.com'
         ]);
 
         DB::table('trips')->insert([
             'name' => 'Amerika',
             'is_active' => false,
             'price'=>1999,
-            'year' => 2018
+            'year' => 2018,
+            'contact_mail'=>'kaan.akpinar@hotmail.com'
         ]);
     }
 }

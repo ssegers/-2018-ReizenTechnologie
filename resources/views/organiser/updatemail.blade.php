@@ -20,7 +20,7 @@
             {{ session()->get('alert-message') }}
         </div>
     @endif
-
+    @csrf
     <div class="container">
         <h1>Verstuur hier een mail naar de deelnemers van een reis:</h1><br />
         {{ Form::open(array('action' => 'MailController@sendUpdateMail', 'method' =>'post')) }}
@@ -30,7 +30,11 @@
         </div>
         <div class="form-group">
             {{ Form::label('trip', 'Reis:') }}
-            {{ Form::select('trip',$aTrips,'' ,array('class' => 'form-control', 'required'))}}
+            {{ Form::select('trip',$aTrips,'' ,array('id' => 'contact-select', 'class' => 'form-control', 'required'))}}
+        </div>
+        <div class="form-group">
+            {{ Form::label('contactMail', 'Email Contactpersoon:') }}
+            <input class="form-control" disabled="disabled" id="email-field"/>
         </div>
         <div class="form-group">
             {{ Form::label('message', 'Bericht:') }}
@@ -41,4 +45,8 @@
         {{ Form::close() }}
     </div>
 
+
+@endsection
+@section('scripts')
+    <script type="text/javascript" src="{{ asset('js/contactemail.js') }}"></script>
 @endsection

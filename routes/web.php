@@ -70,10 +70,11 @@ Route::middleware(['auth','admin'])->group(function () {
  */
 Route::middleware(['auth','organisator'])->group(function () {
     Route::prefix('user')->group(function () {
-        Route::get('trip/travellers', 'UserDataController@showUsersAsMentor');
-        Route::post('trip/travellers', 'UserDataController@showUsersAsMentor');
+        Route::get('trip/{trip?}', 'UserDataController@showUsersAsMentor');
+        Route::post('trip/{trip?}', 'UserDataController@showUsersAsMentor');
         Route::get('updatemail','MailController@getUpdateForm')->name('updatemail');
         Route::post('updatemail', 'MailController@sendUpdateMail');
+        Route::post('updatemail/getEmail', 'MailController@getContactPersonByTripId');
     });
 });
 //--------------------------------------END---------------------------------------
@@ -147,6 +148,8 @@ Route::middleware(['auth','loggedIn'])->group(function () {
  */
 Route::prefix('user')->group(function () {
     Route::get('payment','PaymentsOverviewController@showTable')->name('payments');
+    Route::post('AddPayment', 'PaymentsOverviewController@addPayment');
+    Route::post('payment', 'PaymentsOverviewController@sendMail');
     Route::get('contact','ContactPageController@getInfo')->name('contact');
     Route::post('contact', 'ContactPageController@sendMail');
 

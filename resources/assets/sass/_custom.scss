@@ -1,5 +1,12 @@
-#app {
+:root {
+    --main-bg-color: #E9F3F8; //lightblue;
+}
+
+app {
   padding-top: 66px;
+}
+.overflow-auto {
+  overflow: auto;
 }
 nav.navbar {
   background-color: $col-accent;
@@ -22,7 +29,7 @@ a.nav-link:hover {
 body {
   overflow-x: hidden;
   width: 100vw;
-  background-color: #E9F3F8;
+  background-color: var(--main-bg-color);
 }
 .side-nav {
   -ms-flex: 0 0 250px;
@@ -76,7 +83,6 @@ body {
 }
 
 
-
 .background-white{
   background-color: white;
 }
@@ -113,74 +119,3 @@ a.nav-link-white-hover:hover{
   -o-transform: scale(2); /* Opera */
   padding: 10px;
 }
-//body {
-//  background-color: #E9F3F8;
-//  overflow: hidden;
-//}
-//
-//* {
-//  padding: 0;
-//  margin: 0;
-//}
-//
-//.menu-left {
-//  position: fixed;
-//  background-color: $col-menu-left;
-//  width: 200px;
-//  height: calc(100vh - 60px);
-//  border-right: 1px solid $col-accent;
-//}
-//.content-right {
-//  padding: 0 20px 20px;
-//  margin: 0 0 0 200px;
-//}
-//.content-right h1.page-title {
-//  line-height: 50px;
-//  height: 50px;
-//  margin: 0;
-//}
-//.content-center {
-//  margin: 0 200px;
-//}
-//
-///* Navigation */
-//nav {
-//  width: 100vw;
-//  height: 60px;
-//  overflow: hidden;
-//  position: relative;
-//  background-color: $col-primary;
-//}
-//nav img {
-//  height: 60px;
-//  line-height: 60px;
-//  display: inline;
-//}
-//nav ul {
-//  list-style: none;
-//  display: inline-block;
-//}
-//nav ul li {
-//  line-height: 40px;
-//  margin: 10px 0;
-//  padding: 0 20px;
-//  color: white;
-//}
-//nav ul.nav-left {
-//  display: inline-block;
-//  position: absolute;
-//  top: 0;
-//}
-//nav ul.nav-left li {
-//  border-left: 1px solid white;
-//}
-//nav ul.nav-left li:first-child {
-//  border: none;
-//}
-//nav ul.nav-right {
-//  position: absolute;
-//  right: 0;
-//}
-//nav a {
-//  text-decoration: none;
-//}
