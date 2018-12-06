@@ -43,11 +43,24 @@
         </ul>
         <ul class="navbar-nav">
             @if(\Illuminate\Support\Facades\Auth::check())
-                <li class="nav-item"><a class="nav-link" href="{{ route('profile') }}">Profiel</a></li>
+                <?php
+                if ($role == "guest"){
+                ?>
+                <li class="nav-item"><a class="nav-link" href="{{ route('registerTrip') }}">Registreren</a></li>
+                <?php
+                }
+                else{
+                    ?>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('profile') }}">Profiel</a></li>
+
+                <?php
+                }
+                ?>
                 <li class="nav-item"><a class="nav-link" href="{{ route('logout') }}">Afmelden</a></li>
             @else
                 <li class="nav-item"><a class="nav-link" href="{{ route('log') }}">Inloggen</a></li>
             @endif
+
         </ul>
     </div>
 </nav>
