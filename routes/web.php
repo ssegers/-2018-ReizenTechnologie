@@ -142,9 +142,9 @@ Route::middleware(['auth','guest'])->group(function () {
 Route::middleware(['auth','loggedIn'])->group(function () {
 //User profile
     Route::prefix('profile')->group(function() {
-        Route::get('', 'UserProfileController@showUserData')->name('profile');
-        Route::get('/edit', 'UserProfileController@showUserData');
-        Route::post('{sUserName}/update', 'UserProfileController@updateUserData');
+        Route::get('', 'UserDataController@showUserData')->name('profile');
+        Route::get('/edit', 'UserDataController@showUserData');
+        Route::post('{sUserName}/update', 'UserDataController@updateUserData');
     });
     Route::get('/logout','AuthController@logout')->name("logout");
 });

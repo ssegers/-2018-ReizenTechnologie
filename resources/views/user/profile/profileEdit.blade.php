@@ -10,8 +10,16 @@
                 </ul>
             </div>
         @endif
+
+            @if(str_contains($sPath, 'profile'))
+                {{ Form::open(array('url' => "/profile/".$aUserData["username"]."/update", 'method' => 'post')) }}
+            @endif
+
+            @if(!str_contains($sPath, 'profile'))
+                {{ Form::open(array('url' => "/userinfo/".$aUserData["username"]."/update", 'method' => 'post')) }}
+            @endif
+
         <h3 class="font-weight-bold color-dark-blue m-1"><span>{{$aUserData["username"]}}</span></h3>
-        {{ Form::open(array('url' => "/profile/".$aUserData["username"]."/update", 'method' => 'post')) }}
         <div class="row padding-10 pt-0">
             <div class="col color-dark-blue">
                 <h4><u>Algemeen</u></h4>

@@ -1,6 +1,11 @@
 @extends("layouts.app")
 @section('content')
     <div class="container border rounded margin-top-50 background-white">
+
+    @if(!str_contains($sPath, 'profile'))
+    <form method="POST" action="{{ route('user.destroy', $aUserData["username"]) }}" onsubmit="return confirm('Are you sure?')">
+    @endif
+
         <h3 class="font-weight-bold color-dark-blue m-1"><span>{{$aUserData["username"]}}</span></h3>
             <div class="row padding-10 pt-0">
                 <div class="col color-dark-blue">
@@ -36,8 +41,21 @@
                     <label class="col-4 font-weight-bold" for="name">Noodnummer 2:  </label>    <span class="col-4">{{$aUserData['emergency_phone_2']}}</span>
                 </div>
             </div>
+
             <div class="nav justify-content-center mb-3 font-weight-bold">
-                <a class="nav-link nav-link-white-hover bg-dark-blue d-inline-flex m-1" href="/profile/edit">Aanpassen</a>
+
+                @if(!str_contains($sPath, 'profile'))
+                    <a class="nav-link nav-link-white-hover bg-dark-blue d-inline-flex m-1" href="{{route("filter")}}">Terug</a>
+                    <a class="nav-link nav-link-white-hover bg-dark-blue d-inline-flex m-1" href="/userinfo/{{$aUserData["username"]}}/edit">Aanpassen</a>
+                    {{ csrf_field() }}
+                    {{ method_field('DELETE') }}
+                    <button class="nav-link nav-link-white-hover bg-dark-blue d-inline-flex m-1 border-0 font-weight-bold text-white" type="submit">Verwijderen</button>
+                @endif
+
+                @if(str_contains($sPath, 'profile'))
+                    <a class="nav-link nav-link-white-hover bg-dark-blue d-inline-flex m-1" href="/profile/edit">Aanpassen</a>
+                @endif
+
             </div>
         </form>
     </div>

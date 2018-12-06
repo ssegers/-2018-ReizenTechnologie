@@ -251,25 +251,11 @@ class UserDataController extends Controller
      * @param $sUserName
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View|string
      */
-    public function showUserData(Request $request, $sUserName)
+    public function showUserData(Request $request, $sUserName = 'undefined')
     {
-        /* Get user from Auth */
-        $oUser = Auth::user();
-        $sSegers = 'u0598673';
-        $sRoox = 'u0569802';
-        /* Get user from URL */
-        $oUser = User::where('username', $sSegers)->first();
-        try {
-            if ($oUser->role != 'organizer') {
-                return 'Deze gebruiker is niet gemachtigd';
-            }
+        if($sUserName == 'undefined'){
+            $sUserName = Auth::user()->username;
         }
-        catch (\Exception $exception) {
-            return 'Deze gebruiker bestaat niet';
-        }
-
-
-
         $aUserData = User::select()
             ->join('travellers', 'users.user_id', '=', 'travellers.user_id')
             ->join('zips', 'travellers.zip_id', '=', 'zips.zip_id')
@@ -279,15 +265,17 @@ class UserDataController extends Controller
             ->where('users.username', '=', $sUserName) //r-nummer
             ->first();
 
+        //var_dump($request);
 
         if(str_contains($request->path(), 'edit')){
             $oTrips = Trip::select()->where('is_active', '=', true)->get();
             $oZips = Zip::all();
             $oStudies = Study::all();
             $oMajors = Major::where("study_id", $aUserData->study_id)->get();
-            return view('user.filter.individualTravellerEdit', ['aUserData' => $aUserData, 'oTrips' => $oTrips, 'oZips' => $oZips, 'oStudies' => $oStudies, 'oMajors' => $oMajors]);
+
+            return view('user.profile.profileEdit', ['sPath' => $request->path(),'aUserData' => $aUserData, 'oTrips' => $oTrips, 'oZips' => $oZips, 'oStudies' => $oStudies, 'oMajors' => $oMajors]);
         }
-        return view('user.filter.individualTraveller', ['aUserData' => $aUserData, 'sName' => $oUser->username]);
+        return view('user.profile.profile', ['sPath' => $request->path(),'aUserData' => $aUserData]);
     }
 
     /**
@@ -342,6 +330,9 @@ class UserDataController extends Controller
                 ]
             );
 
+        if(str_contains($aRequest->path(), 'profile')){
+            return redirect('profile');
+        }
         return redirect('userinfo/'. $sUserName);
     }
 
