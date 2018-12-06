@@ -29,6 +29,11 @@
                 <img alt="UCLL" src="{{asset('images/ucll.png') }}"/>
             </a>
         </div>
+        <div>
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="{{ route('logout') }}">Afmelden</a></li>
+            </ul>
+        </div>
     </div>
 </nav>
 
