@@ -44,6 +44,13 @@
         <ul class="navbar-nav">
             @if(\Illuminate\Support\Facades\Auth::check())
                 <?php
+                if ($role == "admin"){
+                ?>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('adminInfo') }}">AdminPanel</a></li>
+                <?php
+                }
+                ?>
+                <?php
                 if ($role == "guest"){
                 ?>
                 <li class="nav-item"><a class="nav-link" href="{{ route('registerTripMessage') }}">Registreren</a></li>

@@ -70,7 +70,7 @@ Route::middleware(['auth','admin'])->group(function () {
  */
 Route::middleware(['auth','organisator'])->group(function () {
     Route::prefix('user')->group(function () {
-        Route::get('trip/{trip?}', 'UserDataController@showUsersAsMentor');
+        Route::get('trip/{trip?}', 'UserDataController@showUsersAsMentor')->name("filter");
         Route::post('trip/{trip?}', 'UserDataController@showUsersAsMentor');
         Route::get('updatemail','MailController@getUpdateForm')->name('updatemail');
         Route::post('updatemail', 'MailController@sendUpdateMail');

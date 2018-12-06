@@ -360,8 +360,9 @@ class UserDataController extends Controller
     }
 
     /**
-     * @author Joren Meynen
+     * Error messages
      *
+     * @author Joren Meynen
      * @return array
      */
     public function messages()
@@ -385,6 +386,12 @@ class UserDataController extends Controller
         ];
     }
 
+    /**
+     * Cascading dropdown
+     *
+     * @author Joren Meynen
+     * @param Request $request
+     */
     public function GetMajorsByStudy(Request $request){
         $study = $request->get('study');
         $majors = Major::select()
