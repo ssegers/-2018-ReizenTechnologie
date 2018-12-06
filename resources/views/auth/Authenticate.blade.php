@@ -1,8 +1,10 @@
 @extends('layouts.app')
 @section('title') <title>Login</title>@endsection
 @section('content')
-    <div class="container">
+    <br>
+    <div class="container col-md-4 background-white" style="padding-bottom: 15px; border-radius: 10px;">
         <h1>Log in</h1>
+        <hr/>
 
         @if(session()->has('message'))
             <div class="alert alert-danger">
@@ -12,18 +14,18 @@
 
         {{ Form::open(array('action' => 'AuthController@login', 'method' => 'post')) }}
             {{ csrf_field() }}
-
-            <div class="form-group">
-                <label>Email: </label>
+            <div class="form-group col-md-12">
+                <label>Username: </label>
                 <input type="text" class="form-control" id="username" name="username">
             </div>
-
-            <div class="form-group">
+        </br>
+            <div class="form-group col-md-12">
                 <label>Password: </label>
                 <input type="password" class="form-control" id="password" name="password">
             </div>
-
-        {{ Form::submit('Volgende',['class' => 'btn btn-primary form-control col-sm-2 mb-4 mt-2 ']) }}
+        <hr/>
+        {{ Form::submit('Volgende',['class' => 'btn btn-primary form-control mb-12 ']) }}
         {{ Form::close() }}
+        </div>
     </div>
 @endsection()
