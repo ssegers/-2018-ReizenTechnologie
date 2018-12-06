@@ -30,7 +30,9 @@
             </a>
         </div>
         <div>
-            <li class="nav-item"><a class="nav-link" href="{{ route('logout') }}">Afmelden</a></li>
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="{{ route('logout') }}">Afmelden</a></li>
+            </ul>
         </div>
     </div>
 </nav>
