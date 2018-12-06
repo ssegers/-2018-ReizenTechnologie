@@ -17,6 +17,5 @@ class PaymentsTableSeeder extends Seeder
                 'amount' => 200
             ]);
         }
-
     }
 }
