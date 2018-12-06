@@ -36,7 +36,7 @@
 
                     <h4><u>Contact Info</u></h4>
                     <label class="col-4 font-weight-bold" for="name">Email:         </label>    <span class="col-4">{{$aUserData['email']}}</span><br/>
-                    <label class="col-4 font-weight-bold" for="name">Telefoon:      </label>    <span class="col-4">{{$aUserData['phone']}}</span><br/>
+                    <label class="col-4 font-weight-bold" for="name">GSM-nummer:    </label>    <span class="col-4">{{$aUserData['phone']}}</span><br/>
                     <label class="col-4 font-weight-bold" for="name">Noodnummer 1:  </label>    <span class="col-4">{{$aUserData['emergency_phone_1']}}</span><br/>
                     <label class="col-4 font-weight-bold" for="name">Noodnummer 2:  </label>    <span class="col-4">{{$aUserData['emergency_phone_2']}}</span>
                 </div>

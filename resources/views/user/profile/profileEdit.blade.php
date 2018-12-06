@@ -62,7 +62,7 @@
                 <label class="col-4 font-weight-bold" for="Country">Land:               </label>    <input id="Country"      name="Country"      required class="col-6" type="text" value="{{$aUserData['country']}}">     <br/>
                 <h4><u>Contact Info</u></h4>
                 <label class="col-4 font-weight-bold" for="Email">Email:                </label>    <span class="col-4">{{$aUserData['email']}}</span><br/>
-                <label class="col-4 font-weight-bold" for="Phone">Telefoon:             </label>    <input id="Phone"        name="Phone"        required class="col-6" type="text" value="{{$aUserData['phone']}}">       <br/>
+                <label class="col-4 font-weight-bold" for="Phone">GSM-nummer:           </label>    <input id="Phone"        name="Phone"        required class="col-6" type="text" value="{{$aUserData['phone']}}">       <br/>
                 <label class="col-4 font-weight-bold" for="icePhone1">Noodnummer 1:     </label>    <input id="icePhone1"    name="icePhone1"    required class="col-6" type="text" value="{{$aUserData['emergency_phone_1']}}"><br/>
                 <label class="col-4 font-weight-bold" for="icePhone2">Noodnummer 2:     </label>    <input id="icePhone2"    name="icePhone2"    class="col-6" type="text" value="{{$aUserData['emergency_phone_2']}}">
             </div>
