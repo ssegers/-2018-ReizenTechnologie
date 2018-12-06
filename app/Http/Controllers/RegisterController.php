@@ -70,6 +70,16 @@ class RegisterController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      * Gets the travellers, trip, majors and studies and returns them with the step1 view
      */
+    public function step0(){
+        return view('user.form.step0');
+
+    }
+
+    public function step0Post() {
+        return redirect('/user/form/step-1');
+
+    }
+
     public function step1(Request $request) {
 //        $traveller = $request->session()->get('traveller');
 //        $user = $request->session()->get('user');

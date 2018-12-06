@@ -102,8 +102,9 @@ class UserProfileController extends Controller
         return redirect('profile');
     }
     /**
-     * @author Joren Meynen
+     * Cascading dropdown
      *
+     * @author Joren Meynen
      * @return array
      */
     public function messages()

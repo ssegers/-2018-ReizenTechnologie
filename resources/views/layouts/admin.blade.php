@@ -29,6 +29,12 @@
                 <img alt="UCLL" src="{{asset('images/ucll.png') }}"/>
             </a>
         </div>
+        <div>
+            <ul class="list-inline" style="margin: 0px">
+                <li class="list-inline-item"><a style="color: white" class="nav-link" href="{{route('info')}}">Front-end</a></li>
+                <li class="list-inline-item"><a style="color: white" class="nav-link" href="{{ route('logout') }}">Afmelden</a></li>
+            </ul>
+        </div>
     </div>
 </nav>
 
@@ -37,7 +43,6 @@
 
         <button type="submit" disabled name="button-admin"  value="button-filter" >Dashboard</button>
         <ul>
-            <a href="{{route('info')}}"  class="list-group-item" style="height: 55px; color:black; padding: 0px;" onmouseover="this.style.backgroundColor='#E00049';" onmouseout="this.style.backgroundColor='';"><li>Front-end</li></a>
             <a href="{{route('adminInfo')}}"  class="list-group-item" style="height: 55px; color:black; padding: 0px;" onmouseover="this.style.backgroundColor='#E00049';" onmouseout="this.style.backgroundColor='';"><li>Info Aanpassen</li></a>
             <a href="{{route('adminRegUser')}}"  class="list-group-item" style="height: 55px; color:black; padding: 0px;" onmouseover="this.style.backgroundColor='#E00049';" onmouseout="this.style.backgroundColor='';"><li>Account Registreren</li></a>
             <a href="{{route('adminTrips')}}"  class="list-group-item" style="height: 55px; color:black; padding: 0px;" onmouseover="this.style.backgroundColor='#E00049';" onmouseout="this.style.backgroundColor='';"><li>Beheer reizen</li></a>
