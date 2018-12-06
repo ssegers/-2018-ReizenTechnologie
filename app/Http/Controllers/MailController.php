@@ -8,6 +8,7 @@ use App\Trip;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Auth;
 
 class MailController extends Controller
 {
@@ -20,13 +21,17 @@ class MailController extends Controller
      */
     public function getUpdateForm(){
 
+        $currentUserId = Auth::id();
+       // $iTravellerId = Traveller::where('user_id', $currentUserId)->pluck('traveller_id')->first();
+        $sEmail = Traveller::where('user_id', $currentUserId)->pluck('email')->first();
         $aTrips = Trip::where('is_active', true)->get();
+
         $aNewTrips = array();
         foreach ($aTrips as $oTrip) {
             $aNewTrips[$oTrip->trip_id] = $oTrip->name . ' ' . $oTrip->year;
         }
 
-        return view('organiser.updatemail', ['aTrips' => $aNewTrips]);
+        return view('organiser.updatemail', ['aTrips' => $aNewTrips, 'sEmail' => $sEmail]);
     }
 
 
@@ -52,6 +57,10 @@ class MailController extends Controller
             return redirect()->back()->withInput()->with(['message' => $validator->errors()]);
         }
 
+
+
+
+      
 
         $sContactMail = Trip::where('trip_id', $request->post('trip'))->first()->contact_mail;
 
