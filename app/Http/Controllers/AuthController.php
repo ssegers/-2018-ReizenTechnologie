@@ -36,6 +36,9 @@ class AuthController extends controller
                 if ($role == "admin"){
                     return redirect('/admin');
                 }
+                if ($role == "guest"){
+                    return redirect('/user/form/step-1');
+                }
                 return redirect('/info');
             }
         }
