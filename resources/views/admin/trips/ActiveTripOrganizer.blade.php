@@ -21,7 +21,7 @@
         <div class="col">
             <select name="selectedActiveTrip" class="form-control-lg form-control mt-3 travelChanged">
                 @foreach ($aActiveTrips as $trip)
-                    <option class="dropdown-item" value={{$trip->trip_id}}>{{$trip->name}}</option>
+                    <option class="dropdown-item" value={{$trip->trip_id}}>{{$trip->name}} {{$trip->year}}</option>
                 @endforeach
             </select>
         </div>
