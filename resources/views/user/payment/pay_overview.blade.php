@@ -2,8 +2,6 @@
 
 @section('content')
 
-    <div class="container">
-{{----}}
     <div class="loader">
     </div>
     <div class="loaderBackground"></div>
@@ -79,7 +77,6 @@
             </div>
         </div>
         @endforeach
-    </div>
     </div>
 
 

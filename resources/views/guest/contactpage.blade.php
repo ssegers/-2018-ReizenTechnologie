@@ -27,7 +27,7 @@
         <label for="reis">Reis: </label><br>
         {!! Form::select('reis', $oActiveTrips, null,array("class" => "form-control")) !!}
             <br>
-            <label for="email">E-mail :</label><br>
+            <label for="email">Jouw E-mailadres :</label><br>
             {{Form::email('email','',array("class" => "form-control", "required" ))}}
             <br>
             <label for="onderwerp">Onderwerp :</label><br>
