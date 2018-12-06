@@ -72,25 +72,26 @@ class RegisterController extends Controller
      */
     public function step0(){
         return view('user.form.step0');
-
     }
 
     public function step0Post() {
         return redirect('/user/form/step-1');
-
     }
 
     public function step1(Request $request) {
 //        $traveller = $request->session()->get('traveller');
 //        $user = $request->session()->get('user');
+
         $aTrips = Trip::where('is_active', true)->orderBy('name')->pluck('name', 'trip_id');
         $aStudies = Study::pluck('study_name','study_id');
 
+        /* Read all data from session */
         $sEnteredUsername = $request->session()->get('sEnteredUsername', '');
         $iSelectedTripId = $request->session()->get('iSelectedTripId', '');
         $iSelectedStudyId = $request->session()->get('iSelectedStudyId', '');
         $iSelectedMajorId = $request->session()->get('iSelectedMajorId', '');
 
+        /* Combine Major list with default value */
         $aMajors = array_merge([null => 'Selecteer eerst een opleiding'],
             Major::where('study_id', $iSelectedStudyId)->pluck('major_name', 'major_id')->toArray()
         );
@@ -170,12 +171,48 @@ class RegisterController extends Controller
      * Gets the traveller from the session, gets zip codes, cities and returns the step 2 view
      */
     public function step2(Request $request) {
-        $traveller = $request->session()->get('traveller');
-        $aZips = Zip::select('zip_code', 'city')->orderBy('city')->get();
-        foreach($aZips as $zip){
-            $aGroupedZips[$zip->zip_code][] = $zip->city;
-        }
-        return view('user.form.step2',['traveller' => $traveller,'aZips' => $aGroupedZips]);
+        /* Read all data from session */
+        $sEnteredLastName = $request->session()->get('sEnteredLastName', '');
+        $sEnteredFirstName = $request->session()->get('sEnteredFirstName', '');
+        $sCheckedGender = $request->session()->get('sCheckedGender', '');
+        $sEnteredNationality = $request->session()->get('sEnteredNationality', '');
+        $sEnteredBirthDate = $request->session()->get('sEnteredBirthDate', '');
+        $sEnteredBirthPlace = $request->session()->get('sEnteredBirthPlace', '');
+        $sEnteredAddress = $request->session()->get('sEnteredAddress', '');
+        $iSelectedCityId = $request->session()->get('iSelectedCityId', 0);
+        $sEnteredCountry = $request->session()->get('sEnteredCountry', '');
+        $sEnteredIban = $request->session()->get('sEnteredIban', '');
+        $sEnteredBic = $request->session()->get('sEnteredBic', '');
+
+//        $traveller = $request->session()->get('traveller');
+        $aCities = Zip::orderBy('zip_code')->get();
+
+        $aGenderOptions = array(
+            'man' => 'Man',
+            'vrouw' => 'Vrouw',
+            'anders' => 'Anders',
+        );
+
+//        return var_dump($aGenderOptions);
+//        return var_dump($request->session());
+
+        return view('user.form.step2',[
+//            'traveller' => $traveller,
+            'aCities' => $aCities,
+            'aGenderOptions' => $aGenderOptions,
+
+            'sEnteredLastName' => $sEnteredLastName,
+            'sEnteredFirstName' => $sEnteredFirstName,
+            'sCheckedGender' => $sCheckedGender,
+            'sEnteredNationality' => $sEnteredNationality,
+            'sEnteredBirthDate' => $sEnteredBirthDate,
+            'sEnteredBirthPlace' => $sEnteredBirthPlace,
+            'sEnteredAddress' => $sEnteredAddress,
+            'iSelectedCityId' => $iSelectedCityId,
+            'sEnteredCountry' => $sEnteredCountry,
+            'sEnteredIban' => $sEnteredIban,
+            'sEnteredBic' => $sEnteredBic,
+        ]);
     }
 
     /**
@@ -200,24 +237,48 @@ class RegisterController extends Controller
             'txtBank' => 'required | iban',
         ],$this->messages());
 
+        /* Put all the data in the session */
+        $request->session()->put('sEnteredLastName', $request->post('txtNaam'));
+        $request->session()->put('sEnteredFirstName', $request->post('txtVoornaam'));
+        $request->session()->put('sCheckedGender', $request->post('gender'));
+        $request->session()->put('sEnteredNationality', $request->post('txtNationaliteit'));
+        $request->session()->put('sEnteredBirthDate', $request->post('dateGeboorte'));
+        $request->session()->put('sEnteredBirthPlace', $request->post('txtGeboorteplaats'));
+        $request->session()->put('sEnteredAddress', $request->post('txtAdres'));
+        $request->session()->put('iSelectedCityId', $request->post('dropGemeentes'));
+        $request->session()->put('sEnteredCountry', $request->post('txtLand'));
+        $request->session()->put('sEnteredIban', $request->post('txtBank'));
+//        $request->session()->put('sEnteredBic', $request->post('txtBank'));
+
+
+        /* Before validator runs, reset page validation */
+        $request->session()->put('validated-step-2', false);
+
+        /* Validate the request */
         $validatedData = $validator->validate();
 
-        $traveller = $request->session()->get('traveller');
-        $iZipId = Zip::where('city', $validatedData['dropGemeentes'])->pluck('zip_id')->first();
-        $traveller->fill(['first_name' => $validatedData['txtVoornaam'],
-            'last_name' => $validatedData['txtNaam'],
-            'gender' => $validatedData['gender'],
-            'nationality' => $validatedData['txtNationaliteit'],
-            'birthdate' => $validatedData['dateGeboorte'],
-            'birthplace' => $validatedData['txtGeboorteplaats'],
-            'address' => $validatedData['txtAdres'],
-            'zip_id' => $iZipId,
-            'country' => $validatedData['txtLand'],
-            'iban' => $validatedData['txtBank'],
-                ]);
+        /* When validator succeed save validation */
+        $request->session()->put('validated-step-2', true);
+
+//        return var_dump($request->session());
 
 
-        $request->session()->put('traveller', $traveller);
+//        $traveller = $request->session()->get('traveller');
+//        $iZipId = Zip::where('city', $validatedData['dropGemeentes'])->pluck('zip_id')->first();
+//        $traveller->fill(['first_name' => $validatedData['txtVoornaam'],
+//            'last_name' => $validatedData['txtNaam'],
+//            'gender' => $validatedData['gender'],
+//            'nationality' => $validatedData['txtNationaliteit'],
+//            'birthdate' => $validatedData['dateGeboorte'],
+//            'birthplace' => $validatedData['txtGeboorteplaats'],
+//            'address' => $validatedData['txtAdres'],
+//            'zip_id' => $iZipId,
+//            'country' => $validatedData['txtLand'],
+//            'iban' => $validatedData['txtBank'],
+//                ]);
+//
+//
+//        $request->session()->put('traveller', $traveller);
 
         return redirect('/user/form/step-3');
     }
