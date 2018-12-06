@@ -36,6 +36,7 @@
                 @foreach(\App\Page::where('type','!=','info')->where('is_visible',true)->get() as $page)
                     <li class="nav-item"><a class="nav-link" href='/page/{{$page->name}}'>{{$page->name}}</a></li>
                 @endforeach
+                <li class="nav-item"><a class="nav-link" href="{{ route('payments') }}">Betalingen</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('contact') }}">Contact</a></li>
                 <?php break;
                 }?>
