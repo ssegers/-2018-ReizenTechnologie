@@ -17,9 +17,8 @@ class CreateTravellersTable extends Migration
 
             $table->increments('traveller_id');
             $table->integer("user_id")->unique()->unsigned();       //foreign key moet unsigned zijn    -JM
-            $table->integer('trip_id');
-            $table->integer('zip_id');
-            $table->integer('major_id');
+            $table->integer('zip_id')->unsigned();
+            $table->integer('major_id')->unsigned();
             $table->string("first_name");
             $table->string("last_name");
             $table->string('email')->unique();
@@ -39,6 +38,8 @@ class CreateTravellersTable extends Migration
             $table->timestamps();
 
             $table->foreign('user_id')->references('user_id')->on('users')->onDelete("cascade");
+            $table->foreign('zip_id')->references('zip_id')->on('zips');
+            $table->foreign('major_id')->references('major_id')->on('majors');
         });
 
     }

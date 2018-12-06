@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateHotelsPerTripsTable extends Migration
+class CreateTravellersPerTripsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,14 @@ class CreateHotelsPerTripsTable extends Migration
      */
     public function up()
     {
-        Schema::create('hotels_per_trip', function (Blueprint $table) {
-            $table->increments('hotels_per_trip_id');
+        Schema::create('travellers_per_trips', function (Blueprint $table) {
+            $table->increments('travellers_per_trip_id')->unsigned(); //wordt alleen gebruikt door eloquent zelf
             $table->integer('trip_id')->unsigned();
-            $table->integer('hotel_id')->unsigned();
+            $table->integer('traveller_id')->unsigned();
+            $table->boolean('is_organizer');
             $table->timestamps();
             $table->foreign('trip_id')->references('trip_id')->on('trips');
-            $table->foreign('hotel_id')->references('hotel_id')->on('hotels');
+            $table->foreign('traveller_id')->references('traveller_id')->on('travellers');
         });
     }
 
@@ -30,6 +31,6 @@ class CreateHotelsPerTripsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('hotels_per_trip');
+        Schema::dropIfExists('travellers_per_trips');
     }
 }

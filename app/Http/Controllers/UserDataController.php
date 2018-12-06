@@ -9,6 +9,7 @@ use App\Trip;
 use App\TripOrganizer;
 use App\User;
 use App\Zip;
+use App\TravellersPerTrip;
 use Dotenv\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -67,7 +68,7 @@ class UserDataController extends Controller
             if ($oUser->role == 'admin') {
                 $aAuthenticatedTrips = Trip::where('is_active', true)->get();
             }
-            else if ($oUser->role == 'organizer') {
+            else if ($oUser->role == 'guide' && $oUser->traveller->travellersPerTrip->is_organizer) {
                 $iTravellerId = Traveller::where('user_id', $oUser->user_id)->first()->traveller_id;
                 $aAuthenticatedTrips = TripOrganizer::where('traveller_id', $iTravellerId)->get();
             }
@@ -103,14 +104,15 @@ class UserDataController extends Controller
         $aFiltersChecked = $this->aFiltersChecked;
 
         /* Get the trip where the organizer is involved with */
-        $aOrganizerTrip = Trip::where('trip_id', $iTripId)->first();
-
+        $oSelectedTraveller = Traveller::where('user_id', $oUser->user_id)->first();
+        $oTravellersPerTrips = $oSelectedTraveller->travellersPerTrip()->first();
+        $aOrganizerTrip = $oTravellersPerTrips->trip()->orderBy('year', 'desc')->first();
         /* Get all active trips */
         $aActiveTrips = array();
         foreach (Trip::where('is_active', true)->get() as $oTrip) {
             array_push($aActiveTrips, array(
                 'oTrip' => $oTrip,
-                'iCount' => Traveller::where('trip_id', $oTrip->trip_id)
+                'iCount' => TravellersPerTrip::where('trip_id', $oTrip->trip_id)
                     ->get()
                     ->count(),
             ));
@@ -240,6 +242,40 @@ class UserDataController extends Controller
         } catch (Exception $e) {
         }
 
+    }
+
+    /**
+     * Returns the filtered users based on the applied filters and selected trip. The users will be paginated if an amount is specified.
+     *
+     * @author Yoeri op't Roodt
+     *
+     * @param $aFilters
+     * @param $oTrip
+     * @param bool $iPaginate
+     *
+     * @return mixed
+     */
+    private function getUserData($aFilters, $oTrip, $iPaginate = false) {
+        $aTravellerIds = TravellersPerTrip::select('traveller_id')->where('trip_id', $oTrip->trip_id)->get();
+        if ($iPaginate) {
+            /* For click event: Add name to selection */
+            return Traveller::select(array_keys(array_add($aFilters, 'username', true)))
+                ->join('users','travellers.user_id','=','users.user_id')
+                ->join('zips','travellers.zip_id','=','zips.zip_id')
+                ->join('majors','travellers.major_id','=','majors.major_id')
+                ->join('studies','majors.study_id','=','studies.study_id')
+                ->whereIn('traveller_id', $aTravellerIds)
+                ->paginate($iPaginate);
+
+
+        }
+        return Traveller::select(array_keys($aFilters))
+            ->join('users','travellers.user_id','=','users.user_id')
+            ->join('zips','travellers.zip_id','=','zips.zip_id')
+            ->join('majors','travellers.major_id','=','majors.major_id')
+            ->join('studies','majors.study_id','=','studies.study_id')
+            ->whereIn('traveller_id', $aTravellerIds)
+            ->get()->toArray();
     }
 
     /**

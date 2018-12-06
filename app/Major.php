@@ -11,4 +11,8 @@ class Major extends Model
     {
         return $this->belongsTo('App\Study');
     }
+
+    public function traveller(){
+        return $this->hasMany('App\Travellers', 'major_id', 'major_id');
+    }
 }

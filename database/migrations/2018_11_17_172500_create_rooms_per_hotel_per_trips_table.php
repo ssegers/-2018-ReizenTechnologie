@@ -13,13 +13,13 @@ class CreateRoomsPerHotelPerTripsTable extends Migration
      */
     public function up()
     {
-        Schema::create('rooms_per_hotel_per_trips', function (Blueprint $table) {
+        Schema::create('rooms_per_hotel_per_trip', function (Blueprint $table) {
             $table->increments('rooms_hotel_trip_id');
             $table->integer('hotels_per_trip_id')->unsigned();
             $table->integer('size');
             $table->timestamps();
 
-            $table->foreign('hotels_per_trip_id')->references('hotels_per_trip_id')->on('hotels_per_trips');
+            $table->foreign('hotels_per_trip_id')->references('hotels_per_trip_id')->on('hotels_per_trip');
         });
     }
 
@@ -30,6 +30,6 @@ class CreateRoomsPerHotelPerTripsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rooms_per_hotel_per_trips');
+        Schema::dropIfExists('rooms_per_hotel_per_trip');
     }
 }

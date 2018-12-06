@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Traveller;
+use App\TravellersPerTrip;
 use App\Trip;
-use App\TripOrganizer;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -21,13 +21,13 @@ class ActiveTripOrganizerController extends Controller
     public function showActiveTrips() {
         $oActiveTrips = Trip::Where('is_active', true)->get();
         //$oOrganizers = User::Where('role', 'organizer')->get();
-        $oOrganizers = User::Where('role', 'organizer')
+        $oGuides = User::Where('role', 'guide')
             ->join('travellers','travellers.user_id','=','users.user_id')->select('first_name', 'last_name', 'traveller_id')->get();
 
         return view( 'admin.trips.ActiveTripOrganizer',
             [
                 'aActiveTrips' => $oActiveTrips,
-                'aOrganizers' => $oOrganizers,
+                'aOrganizers' => $oGuides,
                 ]);
     }
 
@@ -38,13 +38,24 @@ class ActiveTripOrganizerController extends Controller
      * Gets request data and gets the linked organisators by means of the request data.
      */
     public function showLinkedOrganisators(Request $request) {
+        /*
+         * Pak de reis, haal de users op , filter de users op rol organisator
+         *
+         * Pak de reis, haal de users op , filter de users op rol begeleider
+         */
         $iTripId = $request->post('trip_id');
-        $aUserId = TripOrganizer::Select('traveller_id')->where('trip_id', $iTripId)->get();
+       /* $aUserId = TravellersPerTrip::Select('traveller_id')->where('trip_id', $iTripId)->get();
         $oMentors = Traveller::Select('traveller_id','first_name', 'last_name')
             ->whereIn('traveller_id', $aUserId)
             ->orderBy('first_name')
-            ->get();
-        return response()->json(['aMentors' => $oMentors]);
+            ->get();*/
+
+       $aTravellers = TravellersPerTrip::with('traveller')->where('trip_id', $iTripId)->where('is_organizer', true)->get();
+       $aMentors = [];
+       foreach($aTravellers as $traveller) {
+                array_push($aMentors, $traveller->traveller);
+        }
+        return response()->json(['aMentors' => $aMentors]);
     }
 
     /**
@@ -62,23 +73,23 @@ class ActiveTripOrganizerController extends Controller
         {
             return response()->json(['errors'=>$validator->errors()->all()]);
         }
+
         $aTravellerId = $request->post('traveller_ids');
         $iTripId = $request->post('trip_id');
+
         for ($i = 0; $i < count($aTravellerId); $i++) {
-            if (!(TripOrganizer::where('traveller_id', '=', $aTravellerId[$i])->where('trip_id', $iTripId)->exists())) {
-                $linkedOrganizer = new TripOrganizer();
-                $linkedOrganizer->traveller_id = $aTravellerId[$i];
-                $linkedOrganizer->trip_id = $iTripId;
-                $linkedOrganizer->save();
-            }
+            $oOrganizer = TravellersPerTrip::where('traveller_id', '=', $aTravellerId[$i])->where('trip_id', '=', $iTripId)->first();
+            $oOrganizer->is_organizer = true;
+            $oOrganizer->save();
         }
-        $aUserId = TripOrganizer::Select('traveller_id')->where('trip_id', $iTripId)->get();
+        /*$aUserId = TripOrganizer::Select('traveller_id')->where('trip_id', $iTripId)->get();
         $oMentors = Traveller::Select('traveller_id','first_name', 'last_name')
             ->whereIn('traveller_id', $aUserId)
             ->orderBy('first_name')
             ->get();
-        $request->session()->flash('alert-success', 'Het opslaan van begeleiders is gelukt.');
-        return response()->json(['succes' => true]);
+        */
+       $request->session()->flash('alert-success', 'Het opslaan van begeleiders is gelukt.');
+        return response()->json(['success' => true]);
     }
 
     /**
@@ -87,9 +98,16 @@ class ActiveTripOrganizerController extends Controller
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      * Gets the request data and removes the linked organisator based on his id.
      */
-    public function removeLinkedOrganisator(Request $request) {
+    public function removeLinkedOrganisator(Request $request)
+    {
+        //is_organizer veld op false zetten in TravellersPerTrip
+
         $iTripId = $request->post('trip_id');
         $iTravellerId = $request->post('traveller_id');
-        return response(TripOrganizer::Where('traveller_id', $iTravellerId)->where('trip_id', $iTripId)->delete());
+        $oTravellerPerTrip = TravellersPerTrip::where(['traveller_id' => $iTravellerId, 'trip_id'=> $iTripId])->first();
+        $oTravellerPerTrip->is_organizer = false;
+        $oTravellerPerTrip->save();
+        $request->session()->flash('alert-success', 'Het verwijderen van de begeleider is gelukt.');
+
     }
 }

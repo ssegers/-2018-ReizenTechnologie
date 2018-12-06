@@ -6,6 +6,7 @@ use App\Major;
 use App\Study;
 use App\Trip;
 use App\User;
+use App\Traveller;
 use App\Zip;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -25,11 +26,11 @@ class UserProfileController extends Controller
     public function showUserData(Request $request)
     {
         $sUserName = Auth::user()->username;
-
         $aUserData = User::select()
             ->join('travellers', 'users.user_id', '=', 'travellers.user_id')
             ->join('zips', 'travellers.zip_id', '=', 'zips.zip_id')
-            ->join('trips', 'travellers.trip_id', '=', 'trips.trip_id')
+            ->join('travellersPerTrip', 'travellers.traveller_id', '=', 'travellersPerTrip.traveller_id')
+            ->join('trips', 'travellerPerTrip.trip_id', 'trips.trip_id')
             ->join('majors', 'travellers.major_id', '=', 'majors.major_id')
             ->join('studies', 'majors.study_id', '=', 'studies.study_id')
             ->where('users.username', '=', $sUserName) //r-nummer
