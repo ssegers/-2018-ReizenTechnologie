@@ -22,6 +22,7 @@ class RegisterController extends Controller
     function __construct() {
         $this->middleware('auth');
         $this->middleware('guest');
+
         try{
             session_start();
         }
@@ -33,7 +34,14 @@ class RegisterController extends Controller
         session_abort();
     }
 
-    function randomPassword() {
+    /**
+     * This function returns a random password
+     *
+     * @author Daan Vandebosch
+     *
+     * @return string
+     */
+    private function randomPassword() {
         $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
         $pass = array(); //remember to declare $pass as an array
         $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
@@ -63,12 +71,32 @@ class RegisterController extends Controller
      * Gets the travellers, trip, majors and studies and returns them with the step1 view
      */
     public function step1(Request $request) {
-        $traveller = $request->session()->get('traveller');
-        $user = $request->session()->get('user');
-        $aTrips = Trip::where('is_active', true)->orderBy('name')->pluck('name');
+//        $traveller = $request->session()->get('traveller');
+//        $user = $request->session()->get('user');
+        $aTrips = Trip::where('is_active', true)->orderBy('name')->pluck('name', 'trip_id');
         $aStudies = Study::pluck('study_name','study_id');
-        return view('user.form.step1',['traveller' => $traveller, 'user' => $user, 'aTrips'=>$aTrips, 'aStudies'=>$aStudies]);
 
+        $sEnteredUsername = $request->session()->get('sEnteredUsername', '');
+        $iSelectedTripId = $request->session()->get('iSelectedTripId', '');
+        $iSelectedStudyId = $request->session()->get('iSelectedStudyId', '');
+        $iSelectedMajorId = $request->session()->get('iSelectedMajorId', '');
+
+        $aMajors = array_merge([null => 'Selecteer eerst een opleiding'],
+            Major::where('study_id', $iSelectedStudyId)->pluck('major_name', 'major_id')->toArray()
+        );
+
+        return view('user.form.step1', [
+//            'traveller' => $traveller,
+//            'user' => $user,
+            'aTrips' => $aTrips,
+            'aStudies' => $aStudies,
+            'aMajors' => $aMajors,
+
+            'sEnteredUsername' => $sEnteredUsername,
+            'iSelectedTripId' => $iSelectedTripId,
+            'iSelectedStudyId' => $iSelectedStudyId,
+            'iSelectedMajorId' => $iSelectedMajorId,
+        ]);
     }
 
     /**
@@ -84,31 +112,45 @@ class RegisterController extends Controller
             'dropOpleiding' => 'required',
             'dropAfstudeerrichtingen' => 'required',
         ],$this->messages());
+
+        /* Put all user input in the session */
+        $request->session()->put('sEnteredUsername', $request->post('txtStudentNummer'));
+        $request->session()->put('iSelectedTripId', $request->post('dropReis'));
+        $request->session()->put('iSelectedStudyId', $request->post('dropOpleiding'));
+        $request->session()->put('iSelectedMajorId', $request->post('dropAfstudeerrichtingen'));
+
+        /* Before validator runs, reset page validation */
+        $request->session()->put('validated-step-1', false);
+
+        /* Validate the request */
         $validatedData = $validator->validate();
-        $sUserRole = $this->checkRole($validatedData['txtStudentNummer']);
 
-        if((empty($request->session()->get('traveller')) || empty($request->session()->get('user')))) {
-            $traveller = new Traveller();
-            $traveller->fill(['trip_id' => $validatedData['dropReis'],
-                'major_id' => $validatedData['dropAfstudeerrichtingen']]);
+        /* When validator succeed save validation */
+        $request->session()->put('validated-step-1', true);
 
-            $user = new User();
-            $user->fill(['username' => $validatedData['txtStudentNummer'], 'role' => $sUserRole]);
-            $request->session()->put('traveller', $traveller);
-            $request->session()->put('user', $user);
-        } else {
-            $traveller = $request->session()->get('traveller');
-            $traveller->fill(['trip_id' => $validatedData['dropReis'],
-            'major_id' => $validatedData['dropAfstudeerrichtingen']]);
+//        $sUserRole = $this->checkRole($validatedData['txtStudentNummer']);
 
-            $user = $request->session()->get('user');
-            $user->fill(['username' => $validatedData['txtStudentNummer'], 'role' => $sUserRole]);
-
-            $request->session()->put('traveller', $traveller);
-            $request->session()->put('user', $user);
-        }
+//        if((empty($request->session()->get('traveller')) || empty($request->session()->get('user')))) {
+//            $traveller = new Traveller();
+//            $traveller->fill(['trip_id' => $validatedData['dropReis'],
+//                'major_id' => $validatedData['dropAfstudeerrichtingen']]);
+//
+//            $user = new User();
+//            $user->fill(['username' => $validatedData['txtStudentNummer'], 'role' => $sUserRole]);
+//            $request->session()->put('traveller', $traveller);
+//            $request->session()->put('user', $user);
+//        } else {
+//            $traveller = $request->session()->get('traveller');
+//            $traveller->fill(['trip_id' => $validatedData['dropReis'],
+//            'major_id' => $validatedData['dropAfstudeerrichtingen']]);
+//
+//            $user = $request->session()->get('user');
+//            $user->fill(['username' => $validatedData['txtStudentNummer'], 'role' => $sUserRole]);
+//
+//            $request->session()->put('traveller', $traveller);
+//            $request->session()->put('user', $user);
+//        }
         return redirect('/user/form/step-2');
-
     }
 
     /**
