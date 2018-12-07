@@ -12,15 +12,15 @@ class HotelsPerTripSeeder extends Seeder
     public function run()
     {
         //
-        DB::table('hotels_per_trips')->insert(array(
+        DB::table('hotels_per_trip')->insert(array(
             'hotel_id' => 1,
             'trip_id' => 1,
         ));
-        DB::table('hotels_per_trips')->insert(array(
+        DB::table('hotels_per_trip')->insert(array(
             'hotel_id' => 2,
             'trip_id' => 1,
         ));
-        DB::table('hotels_per_trips')->insert(array(
+        DB::table('hotels_per_trip')->insert(array(
             'hotel_id' => 3,
             'trip_id' => 2,
         ));
