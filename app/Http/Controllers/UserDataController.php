@@ -295,7 +295,8 @@ class UserDataController extends Controller
         $aUserData = User::select()
             ->join('travellers', 'users.user_id', '=', 'travellers.user_id')
             ->join('zips', 'travellers.zip_id', '=', 'zips.zip_id')
-            ->join('trips', 'travellers.trip_id', '=', 'trips.trip_id')
+            ->join('travellers_per_trips', 'travellers.traveller_id', '=', 'travellers_per_trips.traveller_id')
+            ->join('trips', 'travellers_per_trips.trip_id', '=', 'trips.trip_id')
             ->join('majors', 'travellers.major_id', '=', 'majors.major_id')
             ->join('studies', 'majors.study_id', '=', 'studies.study_id')
             ->where('users.username', '=', $sUserName) //r-nummer
@@ -340,8 +341,8 @@ class UserDataController extends Controller
             'icePhone1'     => 'required|phone:BE',
             'icePhone2'     => 'nullable|phone:BE'
         ],$this->messages());
-
-        User::where('users.username', '=', $sUserName) //r-nummer
+        $oUser = User::where('users.username', $sUserName)->first();
+        $oUser::where('users.username', '=', $sUserName) //r-nummer
             ->join('travellers', 'users.user_id', '=', 'travellers.user_id')
             ->update(
                 [
@@ -349,7 +350,6 @@ class UserDataController extends Controller
                     'first_name'        => $aRequest->post('FirstName'),
                     'gender'            => $aRequest->post('Gender'),
                     'major_id'          => $aRequest->post('Major'),
-                    'trip_id'           => $aRequest->post('Trip'),
                     'iban'              => $aRequest->post('IBAN'),
                     'medical_issue'     => $aRequest->post('MedicalIssue'),
                     'medical_info'      => $aRequest->post('MedicalInfo'),
@@ -365,7 +365,7 @@ class UserDataController extends Controller
                     'emergency_phone_2' => $aRequest->post('icePhone2'),
                 ]
             );
-
+        TravellersPerTrip::where('traveller_id', $oUser->traveller->traveller_id)->update(['trip_id' => $aRequest->post('Trip')]);
         if(str_contains($aRequest->path(), 'profile')){
             return redirect('profile');
         }
