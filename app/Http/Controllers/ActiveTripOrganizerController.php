@@ -79,6 +79,7 @@ class ActiveTripOrganizerController extends Controller
 
         for ($i = 0; $i < count($aTravellerId); $i++) {
             $oOrganizer = TravellersPerTrip::where('traveller_id', '=', $aTravellerId[$i])->where('trip_id', '=', $iTripId)->first();
+           // return response()->json(['organizer' => $oOrganizer]);
             $oOrganizer->is_organizer = true;
             $oOrganizer->save();
         }
