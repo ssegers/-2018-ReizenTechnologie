@@ -1,5 +1,11 @@
 @extends('layouts.app')
 
+@section('styles')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/css/bootstrap-select.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/js/bootstrap-select.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/js/i18n/defaults-*.min.js"></script>
+@endsection
+
 @section('content')
 <div class="container bg-white rounded shadow-sm">
 
@@ -81,10 +87,10 @@
             <button type="button" class="open btn-primary rounded btn-xs float-right  " data-toggle="modal" data-target="#zipPopup">
                 <i class="fas fa-plus-circle "></i>
             </button>
-            <select id="dropGemeentes" name="dropGemeentes" required class="mb-2 form-control">
+            <select id="dropGemeentes" name="dropGemeentes" data-live-search="true" required class="mb-2 selectpicker">
                 <option value="0" disabled selected>Selecteer een woonplaats</option>
                 @foreach($aCities as $oCity)
-                    <option value={{ $oCity->zip_id }}> {{ $oCity->zip_code }} {{ $oCity->city }}</option>
+                    <option data-tokens="{{ $oCity->zip_code }} {{ $oCity->city }}" value={{ $oCity->zip_id }}> {{ $oCity->zip_code }} {{ $oCity->city }}</option>
                 @endforeach
             </select>
         </div>
