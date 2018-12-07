@@ -87,7 +87,7 @@
             <button type="button" class="open btn-primary rounded btn-xs float-right  " data-toggle="modal" data-target="#zipPopup">
                 <i class="fas fa-plus-circle "></i>
             </button>
-            <select id="dropGemeentes" name="dropGemeentes" data-live-search="true" required class="mb-2 selectpicker">
+            <select style="z-index: 1000" id="dropGemeentes" name="dropGemeentes" data-live-search="true" required class="mb-2 form-control selectpicker">
                 <option value="0" disabled selected>Selecteer een woonplaats</option>
                 @foreach($aCities as $oCity)
                     <option data-tokens="{{ $oCity->zip_code }} {{ $oCity->city }}" value={{ $oCity->zip_id }}> {{ $oCity->zip_code }} {{ $oCity->city }}</option>

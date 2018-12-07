@@ -16,7 +16,7 @@
 
 </head>
 <body>
-    <div class= "fixed-top">
+    <div class= "fixed-top" style="z-index: 100">
         <div class="d-flex flex-row bg-light">
             <div class="p-2"> <img src="{{ asset('images/ucll_logo.png') }}" class="rounded" alt="logo ucll"></div>
             <div class="d-flex flex-column">
