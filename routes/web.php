@@ -68,7 +68,7 @@ Route::middleware(['auth','admin'])->group(function () {
  * -------------------------------   Organisator   -------------------------------
  * -------------------------------------------------------------------------------
  */
-Route::middleware(['auth','organisator'])->group(function () {
+Route::middleware(['auth','guide'])->group(function () {
     Route::prefix('user')->group(function () {
         Route::get('trip/{trip?}', 'UserDataController@showUsersAsMentor')->name("filter");
         Route::post('trip/{trip?}', 'UserDataController@showUsersAsMentor');

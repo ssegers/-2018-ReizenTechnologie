@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\Update;
 use App\Traveller;
+use App\TravellersPerTrip;
 use App\Trip;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -73,8 +74,11 @@ class MailController extends Controller
         ];
 
         /* Get the mail list and chunk them by 10 */
-
-           $aMailList = Traveller::where('trip_id',$request->post('trip'))->pluck('email')->toArray();
+            $aMailList = array();
+           $aAllTravellersPerTrip = TravellersPerTrip::where('trip_id',$request->post('trip'))->get();
+           foreach($aAllTravellersPerTrip as $traveller) {
+               array_push($aMailList,$traveller->traveller->email);
+           }
            $aChunkedMailList = array_chunk($aMailList, 10);
 
 

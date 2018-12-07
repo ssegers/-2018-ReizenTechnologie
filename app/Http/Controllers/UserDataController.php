@@ -61,16 +61,19 @@ class UserDataController extends Controller
      */
     public function showUsersAsMentor(Request $request, $iTripId = null) {
         $oUser = Auth::user();
-
         $aAuthenticatedTrips = array();
 
         if ($iTripId == null) {
             if ($oUser->role == 'admin') {
                 $aAuthenticatedTrips = Trip::where('is_active', true)->get();
             }
-            else if ($oUser->role == 'guide' && $oUser->traveller->travellersPerTrip->is_organizer) {
-                $iTravellerId = Traveller::where('user_id', $oUser->user_id)->first()->traveller_id;
-                $aAuthenticatedTrips = TripOrganizer::where('traveller_id', $iTravellerId)->get();
+            else if ($oUser->role == 'guide') {
+                foreach($oUser->traveller->travellersPerTrip as $travellersPerTrip) {
+                    if($travellersPerTrip->is_organizer) {
+                        $iTravellerId = Traveller::where('user_id', $oUser->user_id)->first()->traveller_id;
+                        $aAuthenticatedTrips = TravellersPerTrip::where('traveller_id', $iTravellerId)->get();
+                    }
+                }
             }
 
             try {
@@ -104,9 +107,10 @@ class UserDataController extends Controller
         $aFiltersChecked = $this->aFiltersChecked;
 
         /* Get the trip where the organizer is involved with */
-        $oSelectedTraveller = Traveller::where('user_id', $oUser->user_id)->first();
+       /* $oSelectedTraveller = Traveller::where('user_id', $oUser->user_id)->first();
         $oTravellersPerTrips = $oSelectedTraveller->travellersPerTrip()->first();
-        $aOrganizerTrip = $oTravellersPerTrips->trip()->orderBy('year', 'desc')->first();
+        $aOrganizerTrip = $oTravellersPerTrips->trip()->orderBy('year', 'desc')->first();*/
+       $aOrganizerTrip = Trip::where('trip_id', $iTripId)->first();
         /* Get all active trips */
         $aActiveTrips = array();
         foreach (Trip::where('is_active', true)->get() as $oTrip) {
@@ -160,9 +164,9 @@ class UserDataController extends Controller
 
     private function checkUserPermissions($oUser, $iTripId) {
         switch ($oUser->role) {
-            case 'organizer':
+            case 'guide':
                 $iTravellerId = Traveller::where('user_id', $oUser->user_id)->first()->traveller_id;
-                $aAuthenticatedTrips = TripOrganizer::where('traveller_id', $iTravellerId)->get();
+                $aAuthenticatedTrips = TravellersPerTrip::where('traveller_id', $iTravellerId)->where('is_organizer',true)->get();
 
 //                return var_dump($aTripOrganizers);
                 foreach ($aAuthenticatedTrips as $oTrip) {

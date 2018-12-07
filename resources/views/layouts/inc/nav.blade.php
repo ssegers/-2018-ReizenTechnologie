@@ -21,12 +21,11 @@
             }
             switch ($role){
                 case "admin":
-                case "organizer":?>
+                case "guide":?>
                 <li class="nav-item"><a class="nav-link" href="/user/trip">Reizigers</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('updatemail') }}">Verstuur mail</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('payments') }}">Betalingen</a></li>
-            <?php
-                case "guide":?>
+
 
                     <?php
                 case "traveller":?>
