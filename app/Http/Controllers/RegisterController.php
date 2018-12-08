@@ -144,6 +144,10 @@ class RegisterController extends Controller
      * Gets the traveller from the session, gets zip codes, cities and returns the step 2 view
      */
     public function step2(Request $request) {
+        if ($request->session()->get('validated-step-1' != true)) {
+            return redirect('user/form/step-1');
+        }
+
         /* Read all data from session */
         $sEnteredLastName = $request->session()->get('sEnteredLastName', '');
         $sEnteredFirstName = $request->session()->get('sEnteredFirstName', '');
@@ -241,6 +245,10 @@ class RegisterController extends Controller
      * Gets the traveller from the session and returns it with the step3 view
      */
     public function step3(Request $request) {
+        if ($request->session()->get('validated-step-2' != true)) {
+            return redirect('user/form/step-2');
+        }
+
         $sEnteredEmail = $request->session()->get('sEnteredEmail', '');
         $sEnteredMobile = $request->session()->get('sEnteredMobile', '');
         $sEnteredEmergency1 = $request->session()->get('sEnteredEmergency1', '');
@@ -354,7 +362,7 @@ class RegisterController extends Controller
         $oTravellerPerTrip->is_organizer = false;
         $oTravellerPerTrip->save();
 
-        return redirect('/info')->with('message', 'Je hebt je succesvol geregistreert voor een reis!');
+        return redirect('/info')->with('message', 'Je hebt je succesvol geregistreerd voor een reis!');
     }
 
 //    private function checkRole($sUsername) {
