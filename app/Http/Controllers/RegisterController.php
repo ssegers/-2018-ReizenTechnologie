@@ -79,9 +79,6 @@ class RegisterController extends Controller
     }
 
     public function step1(Request $request) {
-//        $traveller = $request->session()->get('traveller');
-//        $user = $request->session()->get('user');
-
         $aTrips = Trip::where('is_active', true)->orderBy('name')->pluck('name', 'trip_id');
         $aStudies = Study::pluck('study_name','study_id');
 
@@ -91,10 +88,7 @@ class RegisterController extends Controller
         $iSelectedStudyId = $request->session()->get('iSelectedStudyId', '');
         $iSelectedMajorId = $request->session()->get('iSelectedMajorId', '');
 
-        /* Combine Major list with default value */
-        $aMajors = array_merge([null => 'Selecteer eerst een opleiding'],
-            Major::where('study_id', $iSelectedStudyId)->pluck('major_name', 'major_id')->toArray()
-        );
+            $aMajors = Major::where('study_id', $iSelectedStudyId)->pluck('major_name', 'major_id');
 
         return view('user.form.step1', [
 //            'traveller' => $traveller,
@@ -139,28 +133,6 @@ class RegisterController extends Controller
         /* When validator succeed save validation */
         $request->session()->put('validated-step-1', true);
 
-//        $sUserRole = $this->checkRole($validatedData['txtStudentNummer']);
-
-//        if((empty($request->session()->get('traveller')) || empty($request->session()->get('user')))) {
-//            $traveller = new Traveller();
-//            $traveller->fill(['trip_id' => $validatedData['dropReis'],
-//                'major_id' => $validatedData['dropAfstudeerrichtingen']]);
-//
-//            $user = new User();
-//            $user->fill(['username' => $validatedData['txtStudentNummer'], 'role' => $sUserRole]);
-//            $request->session()->put('traveller', $traveller);
-//            $request->session()->put('user', $user);
-//        } else {
-//            $traveller = $request->session()->get('traveller');
-//            $traveller->fill(['trip_id' => $validatedData['dropReis'],
-//            'major_id' => $validatedData['dropAfstudeerrichtingen']]);
-//
-//            $user = $request->session()->get('user');
-//            $user->fill(['username' => $validatedData['txtStudentNummer'], 'role' => $sUserRole]);
-//
-//            $request->session()->put('traveller', $traveller);
-//            $request->session()->put('user', $user);
-//        }
         return redirect('/user/form/step-2');
     }
 
@@ -184,7 +156,6 @@ class RegisterController extends Controller
         $sEnteredIban = $request->session()->get('sEnteredIban', '');
         $sEnteredBic = $request->session()->get('sEnteredBic', '');
 
-//        $traveller = $request->session()->get('traveller');
         $aCities = Zip::orderBy('zip_code')->get();
 
         $aGenderOptions = array(
@@ -193,11 +164,7 @@ class RegisterController extends Controller
             'anders' => 'Anders',
         );
 
-//        return var_dump($aGenderOptions);
-//        return var_dump($request->session());
-
         return view('user.form.step2',[
-//            'traveller' => $traveller,
             'aCities' => $aCities,
             'aGenderOptions' => $aGenderOptions,
 
@@ -223,7 +190,6 @@ class RegisterController extends Controller
      * Returns a redirect to the next step in the form
      */
     public function step2Post(Request $request) {
-
         $validator = Validator::make($request->all(), [
             'txtNaam' => 'required',
             'txtVoornaam' => 'required',
@@ -251,7 +217,6 @@ class RegisterController extends Controller
         $request->session()->put('sEnteredIban', $request->post('txtBank'));
         $request->session()->put('sEnteredBic', $request->post('txtBic'));
 
-
         /* Before validator runs, reset page validation */
         $request->session()->put('validated-step-2', false);
 
@@ -260,26 +225,6 @@ class RegisterController extends Controller
 
         /* When validator succeed save validation */
         $request->session()->put('validated-step-2', true);
-
-//        return var_dump($request->session());
-
-
-//        $traveller = $request->session()->get('traveller');
-//        $iZipId = Zip::where('city', $validatedData['dropGemeentes'])->pluck('zip_id')->first();
-//        $traveller->fill(['first_name' => $validatedData['txtVoornaam'],
-//            'last_name' => $validatedData['txtNaam'],
-//            'gender' => $validatedData['gender'],
-//            'nationality' => $validatedData['txtNationaliteit'],
-//            'birthdate' => $validatedData['dateGeboorte'],
-//            'birthplace' => $validatedData['txtGeboorteplaats'],
-//            'address' => $validatedData['txtAdres'],
-//            'zip_id' => $iZipId,
-//            'country' => $validatedData['txtLand'],
-//            'iban' => $validatedData['txtBank'],
-//                ]);
-//
-//
-//        $request->session()->put('traveller', $traveller);
 
         return redirect('/user/form/step-3');
     }
@@ -291,9 +236,38 @@ class RegisterController extends Controller
      * Gets the traveller from the session and returns it with the step3 view
      */
     public function step3(Request $request) {
-        $traveller = $request->session()->get('traveller');
-        $user = $request->session()->get('user');
-        return view('user.form.step3',['traveller'=> $traveller, 'user' => $user]);
+        $sEnteredEmail = $request->session()->get('sEnteredEmail', '');
+        $sEnteredMobile = $request->session()->get('sEnteredMobile', '');
+        $sEnteredEmergency1 = $request->session()->get('sEnteredEmergency1', '');
+        $sEnteredEmergency2 = $request->session()->get('sEnteredEmergency2', '');
+        $bCheckedMedicalCondition = $request->session()->get('bCheckedMedicalCondition', false);
+        $sEnteredMedicalCondition = $request->session()->get('sEnteredMedicalCondition', '');
+
+        switch ($request->session()->get('iSelectedMajorId')) {
+            /* Docent */
+            case 5:
+                $sEmailExtension = 'ucll.be';
+                break;
+            /* Extern */
+            case 6:
+                $sEmailExtension = false;
+                break;
+            /* Student */
+            default:
+                $sEmailExtension = 'student.ucll.be';
+                break;
+        }
+
+        return view('user.form.step3', [
+            'sEmailExtension' => $sEmailExtension,
+
+            'sEnteredEmail' => $sEnteredEmail,
+            'sEnteredMobile' => $sEnteredMobile,
+            'sEnteredEmergency1' => $sEnteredEmergency1,
+            'sEnteredEmergency2' => $sEnteredEmergency2,
+            'bCheckedMedicalCondition' => $bCheckedMedicalCondition,
+            'sEnteredMedicalCondition' => $sEnteredMedicalCondition,
+        ]);
     }
 
     /**
@@ -305,6 +279,7 @@ class RegisterController extends Controller
     public function step3Post(Request $request) {
         $validator = Validator::make($request->all(), [
             'txtEmail' => 'required',
+            'txtEmailExtension' => 'required',
             'txtGsm' => 'required|phone:BE,NL',
             'txtNoodnummer1' => 'required|phone:BE,NL',
             'txtNoodnummer2' => 'nullable|phone:BE,NL',
@@ -312,28 +287,32 @@ class RegisterController extends Controller
             'txtMedisch' => '',
         ],$this->messages());
 
+        $request->session()->put('validated-step-3', false);
+
         $validatedData = $validator->validate();
 
-        $traveller = $request->session()->get('traveller');
-        $traveller->fill(['email' => $validatedData['txtEmail'],
-            'phone' => $validatedData['txtGsm'],
-            'emergency_phone_1' => $validatedData['txtNoodnummer1'],
-            'medical_issue' => $validatedData['radioMedisch'],
-            'medical_info' => $validatedData['txtMedisch'],
-        ]);
-        if(isset($validatedData['txtNoodnummer2'])) {
-            $traveller->fill(['emergency_phone_2' => $validatedData['txtNoodnummer2']]);
-        }
+        $request->session()->put('validated-step-3', true);
 
-        $request->session()->put('traveller', $traveller);
-
-        $user = $request->session()->get('user');
-        $user->password = $this->randomPassword();
-        $user->save();
-        $traveller->fill(['user_id' => $user->user_id]);
-        $traveller->save();
-        $this->sendMail($traveller->email, $user->username, $user->password);
-        return redirect('/info')->with('message', 'Je hebt je succesvol geregistreert voor een reis!');
+//        $traveller = $request->session()->get('traveller');
+//        $traveller->fill(['email' => $validatedData['txtEmail'],
+//            'phone' => $validatedData['txtGsm'],
+//            'emergency_phone_1' => $validatedData['txtNoodnummer1'],
+//            'medical_issue' => $validatedData['radioMedisch'],
+//            'medical_info' => $validatedData['txtMedisch'],
+//        ]);
+//        if(isset($validatedData['txtNoodnummer2'])) {
+//            $traveller->fill(['emergency_phone_2' => $validatedData['txtNoodnummer2']]);
+//        }
+//
+//        $request->session()->put('traveller', $traveller);
+//
+//        $user = $request->session()->get('user');
+//        $user->password = $this->randomPassword();
+//        $user->save();
+//        $traveller->fill(['user_id' => $user->user_id]);
+//        $traveller->save();
+//        $this->sendMail($traveller->email, $user->username, $user->password);
+//        return redirect('/info')->with('message', 'Je hebt je succesvol geregistreert voor een reis!');
     }
 
     private function checkRole($sUsername) {
