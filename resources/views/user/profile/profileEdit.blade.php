@@ -14,9 +14,7 @@
 
         @if(str_contains($sPath, 'profile'))
             {{ Form::open(array('url' => "/profile/".$aUserData["username"]."/update", 'method' => 'post')) }}
-        @endif
-
-        @if(!str_contains($sPath, 'profile'))
+        @else
             {{ Form::open(array('url' => "/userinfo/".$aUserData["username"]."/update", 'method' => 'post')) }}
         @endif
 
@@ -85,7 +83,9 @@
                 <br/>
 
                 <label class="col-4 font-weight-bold" for="MedicalInfo">Medische info:</label>
-                <input id="MedicalInfo" name="MedicalInfo" class="col-6" type="text" value=@if($aUserData['medical_issue'])"{{$aUserData['medical_info']}}" @endif>
+                <textarea id="MedicalInfo" name="MedicalInfo"class="col-6">
+                    @if($aUserData['medical_issue']) {{$aUserData['medical_info']}} @endif
+                </textarea>
                 <br/>
             </div>
 
@@ -146,9 +146,17 @@
                 <input id="icePhone2" name="icePhone2" class="col-6" type="text" value="{{$aUserData['emergency_phone_2']}}">
             </div>
         </div>
+
         <div class="nav justify-content-center mb-3 font-weight-bold">
-            <a class="nav-link nav-link-white-hover bg-dark-blue d-inline-flex m-1" href="/profile">Annuleren</a>
+
+            @if(str_contains($sPath, 'profile'))
+                <a class="nav-link nav-link-white-hover bg-dark-blue d-inline-flex m-1" href="/profile">Annuleren</a>
+            @else
+                <a class="nav-link nav-link-white-hover bg-dark-blue d-inline-flex m-1" href="/userinfo/{{$aUserData["username"]}}">Annuleren</a>
+            @endif
+
             {{ Form::submit('Opslaan', ['class' => 'nav-link nav-link-white-hover bg-dark-blue d-inline-flex m-1 border-0 font-weight-bold'])}}
+
         </div>
         {{csrf_field()}}
         {{ Form::close() }}
