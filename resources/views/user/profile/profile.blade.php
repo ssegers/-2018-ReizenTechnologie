@@ -48,6 +48,10 @@
                         <span class="col-4">{{$aUserData['iban']}}</span>
                         <br/>
 
+                        <label class="col-4 font-weight-bold">BIC:</label>
+                        <span class="col-4">{{$aUserData['bic']}}</span>
+                        <br/>
+
                         <h4>
                             <u>Medisch</u>
                         </h4>

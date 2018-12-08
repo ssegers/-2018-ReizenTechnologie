@@ -36,7 +36,7 @@
     <!-- Name info -->
     <div class="form-row ">
         <div class="form-group col-md-4">
-            <label class="form-label">Naam*</label>
+            <label class="form-label">Achternaam*</label>
             {{ Form::text('txtNaam', $sEnteredLastName, ['required','id'=>'txtNaam','oninput'=>'this.className', 'class' => 'mb-2 form-control'])}}
         </div>
         <div class="form-group col-md-4">
@@ -102,9 +102,13 @@
     </div>
     <!-- Bank info -->
     <div class="form-row border-top pt-2">
-        <div class="form-group col-md-12">
+        <div class="form-group col-md-6">
             <label class="form-label">Bankrekeningnummer (IBAN)*</label>
             {{ Form::text('txtBank', $sEnteredIban, ['required', 'id'=>'txtBank','oninput'=>'this.className', 'maxlength'=>34, 'class' => 'mb-2 form-control'])}}
+        </div>
+        <div class="form-group col-md-6">
+            <label class="form-label">Bankidentificatiecode (BIC)*</label>
+            {{ Form::text('txtBic', $sEnteredBic, ['required', 'id'=>'txtBIC','oninput'=>'this.className', 'class' => 'mb-2 form-control'])}}
         </div>
     </div>
     <a class = "btn btn-secondary form-control col-sm-2 mb-4 mt-2" href="/user/form/step-1">Vorige</a>

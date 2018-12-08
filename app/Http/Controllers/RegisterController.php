@@ -235,6 +235,7 @@ class RegisterController extends Controller
             'dropGemeentes' => 'required',
             'txtLand' => 'required',
             'txtBank' => 'required | iban',
+            'txtBic' => 'required | bic',
         ],$this->messages());
 
         /* Put all the data in the session */
@@ -248,7 +249,7 @@ class RegisterController extends Controller
         $request->session()->put('iSelectedCityId', $request->post('dropGemeentes'));
         $request->session()->put('sEnteredCountry', $request->post('txtLand'));
         $request->session()->put('sEnteredIban', $request->post('txtBank'));
-//        $request->session()->put('sEnteredBic', $request->post('txtBank'));
+        $request->session()->put('sEnteredBic', $request->post('txtBic'));
 
 
         /* Before validator runs, reset page validation */
@@ -387,7 +388,9 @@ class RegisterController extends Controller
             'txtLand.required' => 'Je moet je land ingeven',
             'txtAdres.required' => 'Je moet je adres ingeven.',
             'txtBank.required' => 'Je moet je IBAN nummer ingeven.',
-            'iban' => 'Je moet een geldig IBAN nummer ingeven.!',
+            'iban' => 'Je moet een geldig IBAN nummer ingeven.',
+            'txtBic.required' => 'Je moet je BIC nummer ingeven.',
+            'bic' => 'Je moet een geldig BIC nummer ingeven',
             'txtGsm.required' => 'Je moet je GSM nummer invullen.',
             'txtGsm.phone' => 'Je moet een geldig GSM nummer invullen.',
             'txtNoodnummer1.required' => 'Je moet minstens 1 noodnummer invullen.',

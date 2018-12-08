@@ -334,6 +334,7 @@ class UserDataController extends Controller
             'LastName'      => 'required',
             'FirstName'     => 'required',
             'IBAN'          => 'required|iban',
+            'BIC'           => 'required|bic',
 
             'BirthDate'     => 'required',
             'Birthplace'    => 'required',
@@ -355,6 +356,7 @@ class UserDataController extends Controller
                     'gender'            => $aRequest->post('Gender'),
                     'major_id'          => $aRequest->post('Major'),
                     'iban'              => $aRequest->post('IBAN'),
+                    'bic'               => $aRequest->post('BIC'),
                     'medical_issue'     => $aRequest->post('MedicalIssue'),
                     'medical_info'      => $aRequest->post('MedicalInfo'),
 
@@ -403,6 +405,7 @@ class UserDataController extends Controller
             'FirstName.required'    => 'U heeft geen voornaam ingevuld.',
             'IBAN.required'         => 'U heeft geen IBAN-nummer ingevuld.',
             'iban'                  => 'U heeft geen geldig IBAN-nummer ingevuld.',
+            'bic'                   => 'U heeft geen geldig BIC-nummer ingevuld.',
             'BirthDate.required'    => 'U heeft geen geboortedatum ingevuld.',
             'Birthplace.required'   => 'U heeft geen geboorteplaats ingevuld.',
             'Nationality.required'  => 'U heeft geen nationaliteit ingevuld.',
@@ -410,10 +413,10 @@ class UserDataController extends Controller
             'Country.required'      => 'U heeft geen land ingevuld.',
 
             'Phone.required'        => 'U heeft geen GSM-nummer ingevuld.',
-            'Phone.phone'        => 'U heeft geen geldig GSM-nummer ingevuld.',
+            'Phone.phone'           => 'U heeft geen geldig GSM-nummer ingevuld.',
             'icePhone1.required'    => 'U heeft bij \'noodnummer 1\' niets ingevuld.',
-            'icePhone1.phone'    => 'U heeft bij \'noodnummer 1\' geen geldig nummer ingevuld.',
-            'icePhone2.phone'    => 'U heeft bij \'noodnummer 2\' geen geldig nummer ingevuld.',
+            'icePhone1.phone'       => 'U heeft bij \'noodnummer 1\' geen geldig nummer ingevuld.',
+            'icePhone2.phone'       => 'U heeft bij \'noodnummer 2\' geen geldig nummer ingevuld.',
         ];
     }
 

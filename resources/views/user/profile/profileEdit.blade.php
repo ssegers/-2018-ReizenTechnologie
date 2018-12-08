@@ -73,6 +73,10 @@
                 <input id="IBAN" name="IBAN" required class="col-6" type="text" value="{{$aUserData['iban']}}">
                 <br/>
 
+                <label class="col-4 font-weight-bold" for="BIC">BIC:</label>
+                <input id="BIC" name="BIC" required class="col-6" type="text" value="{{$aUserData['bic']}}">
+                <br/>
+
                 <h4>
                     <u>Medisch</u>
                 </h4>
