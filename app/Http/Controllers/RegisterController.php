@@ -144,7 +144,7 @@ class RegisterController extends Controller
      * Gets the traveller from the session, gets zip codes, cities and returns the step 2 view
      */
     public function step2(Request $request) {
-        if ($request->session()->get('validated-step-1' != true)) {
+        if ($request->session()->get('validated-step-1') != true) {
             return redirect('user/form/step-1');
         }
 
@@ -245,7 +245,7 @@ class RegisterController extends Controller
      * Gets the traveller from the session and returns it with the step3 view
      */
     public function step3(Request $request) {
-        if ($request->session()->get('validated-step-2' != true)) {
+        if ($request->session()->get('validated-step-2') != true) {
             return redirect('user/form/step-2');
         }
 
@@ -337,7 +337,7 @@ class RegisterController extends Controller
         $oTraveller->major_id = $request->session()->get('iSelectedMajorId');
         $oTraveller->first_name = $request->session()->get('sEnteredFirstName');
         $oTraveller->last_name = $request->session()->get('sEnteredLastName');
-        $oTraveller->email = $request->session()->get('sEnteredEmail');
+        $oTraveller->email = $request->session()->get('sEnteredEmail') + '@' + $request->post('txtEmailExtension');
         $oTraveller->country = $request->session()->get('sEnteredCountry');
         $oTraveller->address = $request->session()->get('sEnteredAddress');
         $oTraveller->zip_id = $request->session()->get('iSelectedCityId');
@@ -361,6 +361,15 @@ class RegisterController extends Controller
         $oTravellerPerTrip->traveller_id = $iTravellerId;
         $oTravellerPerTrip->is_organizer = false;
         $oTravellerPerTrip->save();
+
+        $aMailData = [
+            'subject' => 'Your registration for the UCLL trip.',
+            'username' => $oUser->username,
+            'email' => $oTraveller->email,
+            'description' => "berichtje",
+            'password' => $sRandomPass
+        ];
+        Mail::to(config('mail.username'))->send(new RegisterComplete($aMailData));
 
         return redirect('/info')->with('message', 'Je hebt je succesvol geregistreerd voor een reis!');
     }
