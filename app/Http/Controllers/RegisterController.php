@@ -7,6 +7,7 @@ use App\User;
 use App\Trip;
 use App\Study;
 use App\Major;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -370,6 +371,8 @@ class RegisterController extends Controller
             'password' => $sRandomPass
         ];
         Mail::to(config('mail.username'))->send(new RegisterComplete($aMailData));
+
+        Auth::logout();
 
         return redirect('/info')->with('message', 'Je hebt je succesvol geregistreerd voor een reis!');
     }
