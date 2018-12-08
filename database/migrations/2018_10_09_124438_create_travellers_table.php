@@ -32,6 +32,7 @@ class CreateTravellersTable extends Migration
             $table->string("birthdate");
             $table->string("birthplace");
             $table->string("iban");
+            $table->string("bic");
             $table->boolean("medical_issue");
             $table->string("medical_info")->nullable();
             $table->rememberToken();

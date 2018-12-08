@@ -14,8 +14,8 @@ class UsersTableSeeder extends Seeder
     {
         // Standaard Gebruiker
         DB::table('users')->insert([
-            'username' => '',
-            'password' => '',
+            'username' => 'guest',
+            'password' => bcrypt('123456'),
             'role' => 'guest'
         ]);
 

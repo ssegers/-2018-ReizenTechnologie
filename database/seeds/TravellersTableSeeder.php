@@ -30,6 +30,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -52,6 +53,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Genk',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -74,6 +76,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -96,6 +99,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -118,6 +122,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -140,6 +145,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -162,6 +168,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -184,6 +191,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -206,6 +214,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -228,6 +237,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -250,6 +260,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -272,6 +283,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -294,6 +306,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -316,6 +329,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -338,6 +352,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -361,6 +376,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -384,6 +400,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -407,6 +424,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -430,6 +448,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -453,6 +472,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -476,6 +496,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -499,6 +520,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -523,6 +545,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -547,6 +570,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -571,6 +595,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -593,6 +618,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -615,6 +641,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -637,6 +664,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -659,6 +687,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -681,6 +710,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -705,6 +735,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -725,6 +756,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -745,6 +777,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -765,6 +798,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -785,6 +819,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -805,6 +840,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -825,6 +861,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -845,6 +882,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -865,6 +903,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -885,6 +924,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -905,6 +945,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -925,6 +966,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -945,6 +987,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -965,6 +1008,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -985,6 +1029,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -1005,6 +1050,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -1025,6 +1071,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -1045,6 +1092,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -1065,6 +1113,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
