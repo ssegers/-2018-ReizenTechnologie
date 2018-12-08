@@ -20,7 +20,7 @@ class CreateTravellersPerTripsTable extends Migration
             $table->boolean('is_organizer');
             $table->timestamps();
             $table->foreign('trip_id')->references('trip_id')->on('trips');
-            $table->foreign('traveller_id')->references('traveller_id')->on('travellers');
+            $table->foreign('traveller_id')->references('traveller_id')->on('travellers')->onDelete("cascade");
         });
     }
 

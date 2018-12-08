@@ -19,7 +19,7 @@ class CreateTravellersPerRoomsTable extends Migration
             $table->integer('traveller_id')->unsigned();
             $table->timestamps();
             $table->foreign('rooms_hotel_trip_id')->references('rooms_hotel_trip_id')->on('rooms_per_hotel_per_trip');
-            $table->foreign('traveller_id')->references('traveller_id')->on('travellers');
+            $table->foreign('traveller_id')->references('traveller_id')->on('travellers')->onDelete("cascade");
         });
     }
 
