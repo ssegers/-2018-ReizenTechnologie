@@ -37,6 +37,7 @@
                 {{ Form::select('dropAfstudeerrichtingen', $aMajors, $iSelectedMajorId ,['id'=>'dropAfstudeerrichtingen','oninput'=>'this.className', 'class' => 'mb-2 form-control'])}}
             </div>
         </div>
+        <a class = "btn btn-secondary form-control col-sm-2 mb-4 mt-2" href="/user/form/step-0">Vorige</a>
         {{ Form::submit('Volgende',['class' => 'btn btn-primary form-control col-sm-2 mb-4 mt-2 ']) }}
         {{ Form::close() }}
     </div>
