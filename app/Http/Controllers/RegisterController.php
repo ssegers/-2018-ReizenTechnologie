@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 use App\Mail\RegisterComplete;
 use App\Traveller;
+use App\TravellersPerTrip;
 use App\User;
 use App\Trip;
 use App\Study;
@@ -226,6 +227,10 @@ class RegisterController extends Controller
         /* When validator succeed save validation */
         $request->session()->put('validated-step-2', true);
 
+        if ($request->post('back')) {
+            return redirect('user/form/step-1');
+        }
+
         return redirect('/user/form/step-3');
     }
 
@@ -279,7 +284,7 @@ class RegisterController extends Controller
     public function step3Post(Request $request) {
         $validator = Validator::make($request->all(), [
             'txtEmail' => 'required',
-            'txtEmailExtension' => 'required',
+            'txtEmailExtension' => '',
             'txtGsm' => 'required|phone:BE,NL',
             'txtNoodnummer1' => 'required|phone:BE,NL',
             'txtNoodnummer2' => 'nullable|phone:BE,NL',
@@ -287,55 +292,93 @@ class RegisterController extends Controller
             'txtMedisch' => '',
         ],$this->messages());
 
+        $request->session()->put('sEnteredEmail', $request->post('txtEmail'));
+        $request->session()->put('sEnteredMobile', $request->post('txtGsm'));
+        $request->session()->put('sEnteredEmergency1', $request->post('txtNoodnummer1'));
+        $request->session()->put('sEnteredEmergency2', $request->post('txtNoodnummer2'));
+        $request->session()->put('bCheckedMedicalCondition', $request->post('radioMedisch'));
+        $request->session()->put('sEnteredMedicalCondition', $request->post('txtMedisch'));
+
         $request->session()->put('validated-step-3', false);
 
         $validatedData = $validator->validate();
 
         $request->session()->put('validated-step-3', true);
 
-//        $traveller = $request->session()->get('traveller');
-//        $traveller->fill(['email' => $validatedData['txtEmail'],
-//            'phone' => $validatedData['txtGsm'],
-//            'emergency_phone_1' => $validatedData['txtNoodnummer1'],
-//            'medical_issue' => $validatedData['radioMedisch'],
-//            'medical_info' => $validatedData['txtMedisch'],
-//        ]);
-//        if(isset($validatedData['txtNoodnummer2'])) {
-//            $traveller->fill(['emergency_phone_2' => $validatedData['txtNoodnummer2']]);
-//        }
-//
-//        $request->session()->put('traveller', $traveller);
-//
-//        $user = $request->session()->get('user');
-//        $user->password = $this->randomPassword();
-//        $user->save();
-//        $traveller->fill(['user_id' => $user->user_id]);
-//        $traveller->save();
-//        $this->sendMail($traveller->email, $user->username, $user->password);
-//        return redirect('/info')->with('message', 'Je hebt je succesvol geregistreert voor een reis!');
-    }
-
-    private function checkRole($sUsername) {
-        if(substr($sUsername,0,1) == 'r' || substr($sUsername,0,1) == 'R') {
-            return "traveller";
-        } else {
-            return "guide";
+        if ($request->post('back')) {
+            return redirect('user/form/step-2');
         }
+
+        $iMajorId = $request->session()->get('iSelectedMajorId');
+
+        /* Create the user */
+        $oUser = new User;
+        $oUser->username = $request->session()->get('sEnteredUsername');
+        $oUser->password = bcrypt($sRandomPass = $this->randomPassword());
+        if ($iMajorId == 5 or $iMajorId == 6) {
+            $oUser->role = 'guide';
+        } else {
+            $oUser->role = 'traveller';
+        }
+        $oUser->save();
+        $iUserId = User::where('username', $oUser->username)->first()->user_id;
+
+        /* Create the traveller */
+        $oTraveller = new Traveller;
+        $oTraveller->user_id = $iUserId;
+        $oTraveller->major_id = $request->session()->get('iSelectedMajorId');
+        $oTraveller->first_name = $request->session()->get('sEnteredFirstName');
+        $oTraveller->last_name = $request->session()->get('sEnteredLastName');
+        $oTraveller->email = $request->session()->get('sEnteredEmail');
+        $oTraveller->country = $request->session()->get('sEnteredCountry');
+        $oTraveller->address = $request->session()->get('sEnteredAddress');
+        $oTraveller->zip_id = $request->session()->get('iSelectedCityId');
+        $oTraveller->gender = $request->session()->get('sCheckedGender');
+        $oTraveller->phone = $request->session()->get('sEnteredMobile');
+        $oTraveller->emergency_phone_1 = $request->session()->get('sEnteredEmergency1');
+        $oTraveller->emergency_phone_2 = $request->session()->get('sEnteredEmergency2');
+        $oTraveller->nationality = $request->session()->get('sEnteredNationality');
+        $oTraveller->birthdate = $request->session()->get('sEnteredBirthDate');
+        $oTraveller->birthplace = $request->session()->get('sEnteredBirthPlace');
+        $oTraveller->iban = $request->session()->get('sEnteredIban');
+        $oTraveller->bic = $request->session()->get('sEnteredBic');
+        $oTraveller->medical_issue = $request->session()->get('bCheckedMedicalCondition');
+        $oTraveller->medical_info = $request->session()->get('sEnteredMedicalCondition');
+        $oTraveller->save();
+        $iTravellerId = Traveller::where('user_id', $iUserId)->first()->traveller_id;
+
+        /* Link traveller to trip */
+        $oTravellerPerTrip = new TravellersPerTrip;
+        $oTravellerPerTrip->trip_id = $request->session()->get('iSelectedTripId');
+        $oTravellerPerTrip->traveller_id = $iTravellerId;
+        $oTravellerPerTrip->is_organizer = false;
+        $oTravellerPerTrip->save();
+
+        return redirect('/info')->with('message', 'Je hebt je succesvol geregistreert voor een reis!');
     }
 
-    public function GetMajorsByStudy(Request $request){
-        $study = $request->get('study');
-        $majors = Major::select()
-            ->where("study_id", $study)
-            ->get();
+//    private function checkRole($sUsername) {
+//        if(substr($sUsername,0,1) == 'r' || substr($sUsername,0,1) == 'R') {
+//            return "traveller";
+//        } else {
+//            return "guide";
+//        }
+//    }
+//
+//    public function GetMajorsByStudy(Request $request){
+//        $study = $request->get('study');
+//        $majors = Major::select()
+//            ->where("study_id", $study)
+//            ->get();
+//
+//    }
 
-    }
     /**
      * @author Nico Schelfhout & Kaan
      * @return array
      * Returns an array of all validator messages.
      */
-    public function messages()
+    private function messages()
     {
         return [
             'required' => 'The :attribute field must be filled in',

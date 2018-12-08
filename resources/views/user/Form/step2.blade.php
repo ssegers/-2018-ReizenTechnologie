@@ -111,8 +111,13 @@
             {{ Form::text('txtBic', $sEnteredBic, ['required', 'id'=>'txtBIC','oninput'=>'this.className', 'class' => 'mb-2 form-control'])}}
         </div>
     </div>
-    <a class = "btn btn-secondary form-control col-sm-2 mb-4 mt-2" href="/user/form/step-1">Vorige</a>
-    {{ Form::submit('Volgende',['class' => 'btn btn-primary form-control col-sm-2 mb-4 mt-2 ']) }}
+    <div class="form-row">
+        <div class="form-group col-md-12 float-right">
+            <button type="submit" class="btn" name="back" value="back">Vorige</button>
+            <button type="submit" class="btn btn-primary" name="next" value="next">Volgende</button>
+        </div>
+    </div>
+
     {{ Form::close() }}
 
 <!-- MODAL POPUP -->
