@@ -6,7 +6,6 @@ use App\Major;
 use App\Study;
 use App\Traveller;
 use App\Trip;
-use App\TripOrganizer;
 use App\User;
 use App\Zip;
 use App\TravellersPerTrip;
@@ -342,9 +341,9 @@ class UserDataController extends Controller
             'Address'       => 'required',
             'Country'       => 'required',
 
-            'Phone'         => 'required|phone:BE',
-            'icePhone1'     => 'required|phone:BE',
-            'icePhone2'     => 'nullable|phone:BE'
+            'Phone'         => 'required|phone:BE,NL',
+            'icePhone1'     => 'required|phone:BE,NL',
+            'icePhone2'     => 'nullable|phone:BE,NL'
         ],$this->messages());
         $oUser = User::where('users.username', $sUserName)->first();
         $oUser::where('users.username', '=', $sUserName) //r-nummer
