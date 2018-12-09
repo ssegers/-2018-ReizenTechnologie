@@ -112,7 +112,7 @@ class RegisterController extends Controller
     public function step1Post(Request $request) {
         $validator = Validator::make($request->all(), [
             'dropReis' => 'required',
-            'txtStudentNummer' => 'required | filled | regex:^[ruRU]^ | min:8 | max:8',
+            'txtStudentNummer' => 'required | filled | regex:^[ruRU]^ | min:8 | max:8 | unique:users,username',
             'dropOpleiding' => 'required',
             'dropAfstudeerrichtingen' => 'required',
         ],$this->messages());
@@ -331,7 +331,7 @@ class RegisterController extends Controller
      */
     public function step3Post(Request $request) {
         $validator = Validator::make($request->all(), [
-            'txtEmail' => 'required',
+            'txtEmail' => 'required|unique:travellers,email',
             'txtEmailExtension' => 'required',
             'txtGsm' => 'required|phone:BE,NL',
             'txtNoodnummer1' => 'required|phone:BE,NL',
@@ -448,6 +448,7 @@ class RegisterController extends Controller
             'txtStudentNummer.regex' => 'Een studenten-/docentennummer moet beginnen met een r of een u',
             'txtStudentNummer.min' => 'Een studenten-/docentennummer heeft 1 letter en 7 cijfers',
             'txtStudentNummer.max' => 'Een studenten-/docentennummer heeft 1 letter en 7 cijfers',
+            'txtStudentNummer.unique' => 'Dit r-/u-/b-nummer is al in gebruik. Als je denkt dat dit niet kan, ga naar de contactpagina en vraag om hulp.',
             'txtWachtwoord.required'  => 'Je moet een wachtwoord invullen.',
             'txtWachtwoord_confirmation.required'  => 'Je moet je wachtwoord bevestigen.',
             'txtWachtwoord.min' => 'Je wachtwoord moet minsten uit 8 tekens bestaan.',
