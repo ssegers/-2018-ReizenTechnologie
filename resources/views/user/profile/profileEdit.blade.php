@@ -87,7 +87,7 @@
                 <br/>
 
                 <label class="col-4 font-weight-bold" for="MedicalInfo">Medische info:</label>
-                <textarea id="MedicalInfo" name="MedicalInfo"class="col-6">
+                <textarea id="MedicalInfo" name="MedicalInfo" class="col-6">
                     @if($aUserData['medical_issue']) {{$aUserData['medical_info']}} @endif
                 </textarea>
                 <br/>
