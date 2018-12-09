@@ -330,7 +330,7 @@ class RegisterController extends Controller
      */
     public function step3Post(Request $request) {
         $validator = Validator::make($request->all(), [
-            'txtEmail' => 'required|uniqueEmailAndExtension:'.$request->txtEmailExtension,
+            'txtEmail' => 'required|uniqueEmailAndExtension:'.$request->txtEmailExtension.'|validEmail:'.$request->txtEmailExtension,
             'txtEmailExtension' => 'required',
             'txtGsm' => 'required|phone:BE,NL',
             'txtNoodnummer1' => 'required|phone:BE,NL',
