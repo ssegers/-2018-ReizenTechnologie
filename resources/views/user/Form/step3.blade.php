@@ -23,7 +23,7 @@
                 {{ Form::text('txtEmail', $sEnteredEmail, ['required','id'=>'txtEmail','oninput'=>'this.className', 'class' => 'mb-2 form-control '])}}
                 <input class="form-control" disabled value="@" />
                 @if($sEmailExtension != false)
-                    {{ Form::text('txtEmailExtension', $sEmailExtension, ['required', 'class' => 'form-control', 'disabled']) }}
+                    {{ Form::text('txtEmailExtension', $sEmailExtension, ['required', 'class' => 'form-control', 'readonly']) }}
                 @else
                     {{ Form::text('txtEmailExtension', $sEmailExtension, ['required', 'class' => 'form-control']) }}
                 @endif

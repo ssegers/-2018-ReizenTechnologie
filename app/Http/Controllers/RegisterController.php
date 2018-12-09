@@ -32,9 +32,6 @@ class RegisterController extends Controller
             session_reset();
         }
     }
-    function __destruct() {
-        session_abort();
-    }
 
     /**
      * This function returns a random password
@@ -293,7 +290,7 @@ class RegisterController extends Controller
     public function step3Post(Request $request) {
         $validator = Validator::make($request->all(), [
             'txtEmail' => 'required',
-            'txtEmailExtension' => '',
+            'txtEmailExtension' => 'required',
             'txtGsm' => 'required|phone:BE,NL',
             'txtNoodnummer1' => 'required|phone:BE,NL',
             'txtNoodnummer2' => 'nullable|phone:BE,NL',
@@ -338,7 +335,7 @@ class RegisterController extends Controller
         $oTraveller->major_id = $request->session()->get('iSelectedMajorId');
         $oTraveller->first_name = $request->session()->get('sEnteredFirstName');
         $oTraveller->last_name = $request->session()->get('sEnteredLastName');
-        $oTraveller->email = $request->session()->get('sEnteredEmail') + '@' + $request->post('txtEmailExtension');
+        $oTraveller->email = ($request->session()->get('sEnteredEmail') . "@" . $request->post('txtEmailExtension'));
         $oTraveller->country = $request->session()->get('sEnteredCountry');
         $oTraveller->address = $request->session()->get('sEnteredAddress');
         $oTraveller->zip_id = $request->session()->get('iSelectedCityId');
@@ -373,6 +370,8 @@ class RegisterController extends Controller
         Mail::to(config('mail.username'))->send(new RegisterComplete($aMailData));
 
         Auth::logout();
+
+        session_abort();
 
         return redirect('/info')->with('message', 'Je hebt je succesvol geregistreerd voor een reis!');
     }
