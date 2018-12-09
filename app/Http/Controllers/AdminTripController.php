@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use App\Trip;
+use Illuminate\Support\Facades\Validator;
 
 class AdminTripController extends Controller
 {
@@ -45,6 +46,18 @@ class AdminTripController extends Controller
     //POST::/admin/trips/
     function UpdateOrCreateTrip(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'trip-name'     => 'required',
+            'trip-year'     => 'required',
+            'trip-price'    => 'required',
+            'trip-mail'     => 'email|nullable',
+        ],$this->messages());
+
+        if ($validator->fails())
+        {
+            return response()->json(['errors'=>$validator->errors()->all()]);
+        }
+
         if($request->post('trip-id') == -1)
         {
             $oTrip = new Trip();
@@ -68,4 +81,17 @@ class AdminTripController extends Controller
         return redirect('/admin/trips');
     }
 
+    /**
+     * @author Joren Meynen
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'trip-name.required'    => 'U heeft de naam van de reis niet ingevuld.',
+            'trip-year.required'    => 'U heeft het jaar van de reis niet ingevuld.',
+            'trip-price.required'   => 'U heeft de prijs van de reis niet ingevuld.',
+            'trip-mail.email'       => 'U heeft geen geldig email ingevuld.',
+        ];
+    }
 }

@@ -68,9 +68,9 @@ Route::middleware(['auth','admin'])->group(function () {
  * -------------------------------   Organisator   -------------------------------
  * -------------------------------------------------------------------------------
  */
-Route::middleware(['auth','organisator'])->group(function () {
+Route::middleware(['auth','guide'])->group(function () {
     Route::prefix('user')->group(function () {
-        Route::get('trip/{trip?}', 'UserDataController@showUsersAsMentor');
+        Route::get('trip/{trip?}', 'UserDataController@showUsersAsMentor')->name("filter");
         Route::post('trip/{trip?}', 'UserDataController@showUsersAsMentor');
         Route::get('updatemail','MailController@getUpdateForm')->name('updatemail');
         Route::post('updatemail', 'MailController@sendUpdateMail');
@@ -142,9 +142,9 @@ Route::middleware(['auth','guest'])->group(function () {
 Route::middleware(['auth','loggedIn'])->group(function () {
 //User profile
     Route::prefix('profile')->group(function() {
-        Route::get('', 'UserProfileController@showUserData')->name('profile');
-        Route::get('/edit', 'UserProfileController@showUserData');
-        Route::post('{sUserName}/update', 'UserProfileController@updateUserData');
+        Route::get('', 'UserDataController@showUserData')->name('profile');
+        Route::get('/edit', 'UserDataController@showUserData');
+        Route::post('{sUserName}/update', 'UserDataController@updateUserData');
     });
     Route::get('/logout','AuthController@logout')->name("logout");
 });

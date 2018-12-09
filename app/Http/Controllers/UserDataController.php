@@ -6,9 +6,9 @@ use App\Major;
 use App\Study;
 use App\Traveller;
 use App\Trip;
-use App\TripOrganizer;
 use App\User;
 use App\Zip;
+use App\TravellersPerTrip;
 use Dotenv\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -60,16 +60,19 @@ class UserDataController extends Controller
      */
     public function showUsersAsMentor(Request $request, $iTripId = null) {
         $oUser = Auth::user();
-
         $aAuthenticatedTrips = array();
 
         if ($iTripId == null) {
             if ($oUser->role == 'admin') {
                 $aAuthenticatedTrips = Trip::where('is_active', true)->get();
             }
-            else if ($oUser->role == 'organizer') {
-                $iTravellerId = Traveller::where('user_id', $oUser->user_id)->first()->traveller_id;
-                $aAuthenticatedTrips = TripOrganizer::where('traveller_id', $iTravellerId)->get();
+            else if ($oUser->role == 'guide') {
+                foreach($oUser->traveller->travellersPerTrip as $travellersPerTrip) {
+                    if($travellersPerTrip->is_organizer) {
+                        $iTravellerId = Traveller::where('user_id', $oUser->user_id)->first()->traveller_id;
+                        $aAuthenticatedTrips = TravellersPerTrip::where('traveller_id', $iTravellerId)->get();
+                    }
+                }
             }
 
             try {
@@ -103,14 +106,16 @@ class UserDataController extends Controller
         $aFiltersChecked = $this->aFiltersChecked;
 
         /* Get the trip where the organizer is involved with */
-        $aOrganizerTrip = Trip::where('trip_id', $iTripId)->first();
-
+       /* $oSelectedTraveller = Traveller::where('user_id', $oUser->user_id)->first();
+        $oTravellersPerTrips = $oSelectedTraveller->travellersPerTrip()->first();
+        $aOrganizerTrip = $oTravellersPerTrips->trip()->orderBy('year', 'desc')->first();*/
+       $aOrganizerTrip = Trip::where('trip_id', $iTripId)->first();
         /* Get all active trips */
         $aActiveTrips = array();
         foreach (Trip::where('is_active', true)->get() as $oTrip) {
             array_push($aActiveTrips, array(
                 'oTrip' => $oTrip,
-                'iCount' => Traveller::where('trip_id', $oTrip->trip_id)
+                'iCount' => TravellersPerTrip::where('trip_id', $oTrip->trip_id)
                     ->get()
                     ->count(),
             ));
@@ -158,9 +163,9 @@ class UserDataController extends Controller
 
     private function checkUserPermissions($oUser, $iTripId) {
         switch ($oUser->role) {
-            case 'organizer':
+            case 'guide':
                 $iTravellerId = Traveller::where('user_id', $oUser->user_id)->first()->traveller_id;
-                $aAuthenticatedTrips = TripOrganizer::where('traveller_id', $iTravellerId)->get();
+                $aAuthenticatedTrips = TravellersPerTrip::where('traveller_id', $iTravellerId)->where('is_organizer',true)->get();
 
 //                return var_dump($aTripOrganizers);
                 foreach ($aAuthenticatedTrips as $oTrip) {
@@ -243,6 +248,40 @@ class UserDataController extends Controller
     }
 
     /**
+     * Returns the filtered users based on the applied filters and selected trip. The users will be paginated if an amount is specified.
+     *
+     * @author Yoeri op't Roodt
+     *
+     * @param $aFilters
+     * @param $oTrip
+     * @param bool $iPaginate
+     *
+     * @return mixed
+     */
+    private function getUserData($aFilters, $oTrip, $iPaginate = false) {
+        $aTravellerIds = TravellersPerTrip::select('traveller_id')->where('trip_id', $oTrip->trip_id)->get();
+        if ($iPaginate) {
+            /* For click event: Add name to selection */
+            return Traveller::select(array_keys(array_add($aFilters, 'username', true)))
+                ->join('users','travellers.user_id','=','users.user_id')
+                ->join('zips','travellers.zip_id','=','zips.zip_id')
+                ->join('majors','travellers.major_id','=','majors.major_id')
+                ->join('studies','majors.study_id','=','studies.study_id')
+                ->whereIn('traveller_id', $aTravellerIds)
+                ->paginate($iPaginate);
+
+
+        }
+        return Traveller::select(array_keys($aFilters))
+            ->join('users','travellers.user_id','=','users.user_id')
+            ->join('zips','travellers.zip_id','=','zips.zip_id')
+            ->join('majors','travellers.major_id','=','majors.major_id')
+            ->join('studies','majors.study_id','=','studies.study_id')
+            ->whereIn('traveller_id', $aTravellerIds)
+            ->get()->toArray();
+    }
+
+    /**
      * Shows the data of a selected user
      *
      * @author Joren Meynen
@@ -251,43 +290,32 @@ class UserDataController extends Controller
      * @param $sUserName
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View|string
      */
-    public function showUserData(Request $request, $sUserName)
+    public function showUserData(Request $request, $sUserName = 'undefined')
     {
-        /* Get user from Auth */
-        $oUser = Auth::user();
-        $sSegers = 'u0598673';
-        $sRoox = 'u0569802';
-        /* Get user from URL */
-        $oUser = User::where('username', $sSegers)->first();
-        try {
-            if ($oUser->role != 'organizer') {
-                return 'Deze gebruiker is niet gemachtigd';
-            }
+        if($sUserName == 'undefined'){
+            $sUserName = Auth::user()->username;
         }
-        catch (\Exception $exception) {
-            return 'Deze gebruiker bestaat niet';
-        }
-
-
-
         $aUserData = User::select()
             ->join('travellers', 'users.user_id', '=', 'travellers.user_id')
             ->join('zips', 'travellers.zip_id', '=', 'zips.zip_id')
-            ->join('trips', 'travellers.trip_id', '=', 'trips.trip_id')
+            ->join('travellers_per_trips', 'travellers.traveller_id', '=', 'travellers_per_trips.traveller_id')
+            ->join('trips', 'travellers_per_trips.trip_id', '=', 'trips.trip_id')
             ->join('majors', 'travellers.major_id', '=', 'majors.major_id')
             ->join('studies', 'majors.study_id', '=', 'studies.study_id')
             ->where('users.username', '=', $sUserName) //r-nummer
             ->first();
 
+        //var_dump($request);
 
         if(str_contains($request->path(), 'edit')){
             $oTrips = Trip::select()->where('is_active', '=', true)->get();
             $oZips = Zip::all();
             $oStudies = Study::all();
             $oMajors = Major::where("study_id", $aUserData->study_id)->get();
-            return view('user.filter.individualTravellerEdit', ['aUserData' => $aUserData, 'oTrips' => $oTrips, 'oZips' => $oZips, 'oStudies' => $oStudies, 'oMajors' => $oMajors]);
+
+            return view('user.profile.profileEdit', ['sPath' => $request->path(),'aUserData' => $aUserData, 'oTrips' => $oTrips, 'oZips' => $oZips, 'oStudies' => $oStudies, 'oMajors' => $oMajors]);
         }
-        return view('user.filter.individualTraveller', ['aUserData' => $aUserData, 'sName' => $oUser->username]);
+        return view('user.profile.profile', ['sPath' => $request->path(),'aUserData' => $aUserData]);
     }
 
     /**
@@ -305,6 +333,7 @@ class UserDataController extends Controller
             'LastName'      => 'required',
             'FirstName'     => 'required',
             'IBAN'          => 'required|iban',
+            'BIC'           => 'required|bic',
 
             'BirthDate'     => 'required',
             'Birthplace'    => 'required',
@@ -312,12 +341,12 @@ class UserDataController extends Controller
             'Address'       => 'required',
             'Country'       => 'required',
 
-            'Phone'         => 'required|phone:BE',
-            'icePhone1'     => 'required|phone:BE',
-            'icePhone2'     => 'nullable|phone:BE'
+            'Phone'         => 'required|phone:BE,NL',
+            'icePhone1'     => 'required|phone:BE,NL',
+            'icePhone2'     => 'nullable|phone:BE,NL'
         ],$this->messages());
-
-        User::where('users.username', '=', $sUserName) //r-nummer
+        $oUser = User::where('users.username', $sUserName)->first();
+        $oUser::where('users.username', '=', $sUserName) //r-nummer
             ->join('travellers', 'users.user_id', '=', 'travellers.user_id')
             ->update(
                 [
@@ -325,8 +354,8 @@ class UserDataController extends Controller
                     'first_name'        => $aRequest->post('FirstName'),
                     'gender'            => $aRequest->post('Gender'),
                     'major_id'          => $aRequest->post('Major'),
-                    'trip_id'           => $aRequest->post('Trip'),
                     'iban'              => $aRequest->post('IBAN'),
+                    'bic'               => $aRequest->post('BIC'),
                     'medical_issue'     => $aRequest->post('MedicalIssue'),
                     'medical_info'      => $aRequest->post('MedicalInfo'),
 
@@ -341,7 +370,10 @@ class UserDataController extends Controller
                     'emergency_phone_2' => $aRequest->post('icePhone2'),
                 ]
             );
-
+        TravellersPerTrip::where('traveller_id', $oUser->traveller->traveller_id)->update(['trip_id' => $aRequest->post('Trip')]);
+        if(str_contains($aRequest->path(), 'profile')){
+            return redirect('profile');
+        }
         return redirect('userinfo/'. $sUserName);
     }
 
@@ -360,8 +392,9 @@ class UserDataController extends Controller
     }
 
     /**
-     * @author Joren Meynen
+     * Error messages
      *
+     * @author Joren Meynen
      * @return array
      */
     public function messages()
@@ -371,6 +404,7 @@ class UserDataController extends Controller
             'FirstName.required'    => 'U heeft geen voornaam ingevuld.',
             'IBAN.required'         => 'U heeft geen IBAN-nummer ingevuld.',
             'iban'                  => 'U heeft geen geldig IBAN-nummer ingevuld.',
+            'bic'                   => 'U heeft geen geldig BIC-nummer ingevuld.',
             'BirthDate.required'    => 'U heeft geen geboortedatum ingevuld.',
             'Birthplace.required'   => 'U heeft geen geboorteplaats ingevuld.',
             'Nationality.required'  => 'U heeft geen nationaliteit ingevuld.',
@@ -378,13 +412,19 @@ class UserDataController extends Controller
             'Country.required'      => 'U heeft geen land ingevuld.',
 
             'Phone.required'        => 'U heeft geen GSM-nummer ingevuld.',
-            'Phone.phone'        => 'U heeft geen geldig GSM-nummer ingevuld.',
+            'Phone.phone'           => 'U heeft geen geldig GSM-nummer ingevuld.',
             'icePhone1.required'    => 'U heeft bij \'noodnummer 1\' niets ingevuld.',
-            'icePhone1.phone'    => 'U heeft bij \'noodnummer 1\' geen geldig nummer ingevuld.',
-            'icePhone2.phone'    => 'U heeft bij \'noodnummer 2\' geen geldig nummer ingevuld.',
+            'icePhone1.phone'       => 'U heeft bij \'noodnummer 1\' geen geldig nummer ingevuld.',
+            'icePhone2.phone'       => 'U heeft bij \'noodnummer 2\' geen geldig nummer ingevuld.',
         ];
     }
 
+    /**
+     * Cascading dropdown
+     *
+     * @author Joren Meynen
+     * @param Request $request
+     */
     public function GetMajorsByStudy(Request $request){
         $study = $request->get('study');
         $majors = Major::select()

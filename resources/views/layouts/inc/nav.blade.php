@@ -21,12 +21,11 @@
             }
             switch ($role){
                 case "admin":
-                case "organizer":?>
-                <li class="nav-item"><a class="nav-link" href="/user/trip">Reizigers</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ route('updatemail') }}">Updatemail</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ route('payments') }}">Betalingen</a></li>
-            <?php
                 case "guide":?>
+                <li class="nav-item"><a class="nav-link" href="/user/trip">Reizigers</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('updatemail') }}">Verstuur mail</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('payments') }}">Betalingen</a></li>
+
 
                     <?php
                 case "traveller":?>
@@ -43,6 +42,13 @@
         </ul>
         <ul class="navbar-nav">
             @if(\Illuminate\Support\Facades\Auth::check())
+                <?php
+                if ($role == "admin"){
+                ?>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('adminInfo') }}">AdminPanel</a></li>
+                <?php
+                }
+                ?>
                 <?php
                 if ($role == "guest"){
                 ?>

@@ -30,6 +30,6 @@ class CreateHotelsPerTripsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('hotels_per_trips');
+        Schema::dropIfExists('hotels_per_trip');
     }
 }

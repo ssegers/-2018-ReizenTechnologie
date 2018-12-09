@@ -15,7 +15,6 @@ class TravellersTableSeeder extends Seeder
         // Stefan Segers
         DB::table('travellers')->insert([
             'user_id' => 3,
-            'trip_id' => 1,
             'zip_id' =>1,
             'major_id' =>3,
             'first_name' => 'Stefan',
@@ -31,6 +30,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -38,7 +38,6 @@ class TravellersTableSeeder extends Seeder
         // Rudi Roox
         DB::table('travellers')->insert([
             'user_id' => 4,
-            'trip_id' => 2,
             'zip_id' =>2,
             'major_id' =>1,
             'first_name' => 'Rudi',
@@ -54,6 +53,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Genk',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -61,7 +61,6 @@ class TravellersTableSeeder extends Seeder
         // Daan Vandebosch
         DB::table('travellers')->insert([
             'user_id' => 5,
-            'trip_id' => 2,
             'zip_id' =>2,
             'major_id' =>1,
             'first_name' => 'Daan',
@@ -77,6 +76,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -84,7 +84,6 @@ class TravellersTableSeeder extends Seeder
         // Kaan Akpinar
         DB::table('travellers')->insert([
             'user_id' => 6,
-            'trip_id' => 1,
             'zip_id' =>4,
             'major_id' =>1,
             'first_name' => 'Kaan',
@@ -100,6 +99,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -107,7 +107,6 @@ class TravellersTableSeeder extends Seeder
         // Joren Meynen
         DB::table('travellers')->insert([
             'user_id' => 7,
-            'trip_id' => 1,
             'zip_id' =>3,
             'major_id' =>1,
             'first_name' => 'Joren',
@@ -123,6 +122,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -130,7 +130,6 @@ class TravellersTableSeeder extends Seeder
         // Michiel Guilliams
         DB::table('travellers')->insert([
             'user_id' => 8,
-            'trip_id' => 2,
             'zip_id' =>1,
             'major_id' =>1,
             'first_name' => 'Michiel',
@@ -146,6 +145,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -153,7 +153,6 @@ class TravellersTableSeeder extends Seeder
         // Nicolaas Schelfhout
         DB::table('travellers')->insert([
             'user_id' => 9,
-            'trip_id' => 1,
             'zip_id' =>3,
             'major_id' =>1,
             'first_name' => 'Nicolaas',
@@ -169,6 +168,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -176,7 +176,6 @@ class TravellersTableSeeder extends Seeder
         // Robin Machiels
         DB::table('travellers')->insert([
             'user_id' => 10,
-            'trip_id' => 2,
             'zip_id' =>3,
             'major_id' =>1,
             'first_name' => 'Robin',
@@ -192,6 +191,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -199,7 +199,6 @@ class TravellersTableSeeder extends Seeder
         // Sasha Van De Voorde
         DB::table('travellers')->insert([
             'user_id' => 11,
-            'trip_id' => 1,
             'zip_id' =>5,
             'major_id' =>1,
             'first_name' => 'Sasha',
@@ -215,6 +214,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -222,7 +222,6 @@ class TravellersTableSeeder extends Seeder
         // Stef Kerkhofs
         DB::table('travellers')->insert([
             'user_id' => 12,
-            'trip_id' => 2,
             'zip_id' =>2,
             'major_id' =>1,
             'first_name' => 'Stef',
@@ -238,6 +237,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -245,7 +245,6 @@ class TravellersTableSeeder extends Seeder
         // Yoeri op't Roodt
         DB::table('travellers')->insert([
             'user_id' => 13,
-            'trip_id' => 2,
             'zip_id' =>2,
             'major_id' =>1,
             'first_name' => 'Yoeri',
@@ -261,6 +260,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -268,7 +268,6 @@ class TravellersTableSeeder extends Seeder
         // Jan Modaal
         DB::table('travellers')->insert([
             'user_id' => 14,
-            'trip_id' => 1,
             'zip_id' =>2,
             'major_id' =>1,
             'first_name' => 'Jan',
@@ -284,6 +283,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -291,7 +291,6 @@ class TravellersTableSeeder extends Seeder
         //Piet Janssen
         DB::table('travellers')->insert([
             'user_id' => 15,
-            'trip_id' => 2,
             'zip_id' =>2,
             'major_id' =>1,
             'first_name' => 'Piet',
@@ -307,6 +306,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -314,7 +314,6 @@ class TravellersTableSeeder extends Seeder
         //Toon Peeters
         DB::table('travellers')->insert([
             'user_id' => 16,
-            'trip_id' => 1,
             'zip_id' =>2,
             'major_id' =>1,
             'first_name' => 'Toon',
@@ -330,6 +329,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -337,7 +337,6 @@ class TravellersTableSeeder extends Seeder
         //Gert Nullens
         DB::table('travellers')->insert([
             'user_id' => 17,
-            'trip_id' => 2,
             'zip_id' =>2,
             'major_id' =>1,
             'first_name' => 'Gert',
@@ -353,6 +352,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -361,7 +361,6 @@ class TravellersTableSeeder extends Seeder
         //Bram Bongers
         DB::table('travellers')->insert([
             'user_id' => 18,
-            'trip_id' => 1,
             'zip_id' =>2,
             'major_id' =>1,
             'first_name' => 'Bram',
@@ -377,6 +376,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -385,7 +385,6 @@ class TravellersTableSeeder extends Seeder
         //Tom Moons
         DB::table('travellers')->insert([
             'user_id' => 19,
-            'trip_id' => 2,
             'zip_id' =>2,
             'major_id' =>1,
             'first_name' => 'Tom',
@@ -401,6 +400,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -409,7 +409,6 @@ class TravellersTableSeeder extends Seeder
         //Jens Janssen
         DB::table('travellers')->insert([
             'user_id' => 20,
-            'trip_id' => 1,
             'zip_id' =>2,
             'major_id' =>1,
             'first_name' => 'Jens',
@@ -425,6 +424,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -433,7 +433,6 @@ class TravellersTableSeeder extends Seeder
         //Martijn Theunissen
         DB::table('travellers')->insert([
             'user_id' => 21,
-            'trip_id' => 2,
             'zip_id' =>2,
             'major_id' =>1,
             'first_name' => 'Martijn',
@@ -449,6 +448,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -457,7 +457,6 @@ class TravellersTableSeeder extends Seeder
         //Steve Stevens
         DB::table('travellers')->insert([
             'user_id' => 22,
-            'trip_id' => 1,
             'zip_id' =>2,
             'major_id' =>1,
             'first_name' => 'Steve',
@@ -473,6 +472,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -481,7 +481,6 @@ class TravellersTableSeeder extends Seeder
         //Dario Thielens
         DB::table('travellers')->insert([
             'user_id' => 23,
-            'trip_id' => 2,
             'zip_id' =>2,
             'major_id' =>1,
             'first_name' => 'Dario',
@@ -497,6 +496,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -505,7 +505,6 @@ class TravellersTableSeeder extends Seeder
         //Bert Bertens
         DB::table('travellers')->insert([
             'user_id' => 24,
-            'trip_id' => 1,
             'zip_id' =>2,
             'major_id' =>1,
             'first_name' => 'Bert',
@@ -521,6 +520,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -530,7 +530,6 @@ class TravellersTableSeeder extends Seeder
         //Piet Pieters
         DB::table('travellers')->insert([
             'user_id' => 25,
-            'trip_id' => 2,
             'zip_id' =>2,
             'major_id' =>1,
             'first_name' => 'Piet',
@@ -546,6 +545,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -555,7 +555,6 @@ class TravellersTableSeeder extends Seeder
         //Rudy Verboven
         DB::table('travellers')->insert([
             'user_id' => 26,
-            'trip_id' => 1,
             'zip_id' =>2,
             'major_id' =>1,
             'first_name' => 'Rudy',
@@ -571,6 +570,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -580,7 +580,6 @@ class TravellersTableSeeder extends Seeder
         //Johnny Bravo
         DB::table('travellers')->insert([
             'user_id' => 27,
-            'trip_id' => 2,
             'zip_id' =>2,
             'major_id' =>1,
             'first_name' => 'Johnny',
@@ -596,6 +595,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -603,7 +603,6 @@ class TravellersTableSeeder extends Seeder
         //Bjorn Mertens
         DB::table('travellers')->insert([
             'user_id' => 28,
-            'trip_id' => 1,
             'zip_id' =>2,
             'major_id' =>1,
             'first_name' => 'Bjorn',
@@ -619,6 +618,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -626,7 +626,6 @@ class TravellersTableSeeder extends Seeder
         //Jan Tomassen
         DB::table('travellers')->insert([
             'user_id' => 29,
-            'trip_id' => 2,
             'zip_id' =>2,
             'major_id' =>1,
             'first_name' => 'Jan',
@@ -642,6 +641,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -649,7 +649,6 @@ class TravellersTableSeeder extends Seeder
         //Vincent Ramaekers
         DB::table('travellers')->insert([
             'user_id' => 30,
-            'trip_id' => 1,
             'zip_id' =>2,
             'major_id' =>1,
             'first_name' => 'Vincent',
@@ -665,6 +664,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -672,7 +672,6 @@ class TravellersTableSeeder extends Seeder
         //Glenn Vanaken
         DB::table('travellers')->insert([
             'user_id' => 31,
-            'trip_id' => 2,
             'zip_id' =>2,
             'major_id' =>1,
             'first_name' => 'Glenn',
@@ -688,6 +687,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -695,7 +695,6 @@ class TravellersTableSeeder extends Seeder
         //Roel Aegten
         DB::table('travellers')->insert([
             'user_id' => 32,
-            'trip_id' => 1,
             'zip_id' =>2,
             'major_id' =>1,
             'first_name' => 'Roel',
@@ -711,6 +710,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
@@ -720,7 +720,6 @@ class TravellersTableSeeder extends Seeder
         //More Dummy Data
         DB::table('travellers')->insert([
             'user_id' => 33,
-            'trip_id' => 1,
             'zip_id' =>2,
             'major_id' =>1,
             'first_name' => '32',
@@ -736,12 +735,12 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
         DB::table('travellers')->insert([
             'user_id' => 34,
-            'trip_id' => 1,
             'zip_id' =>2,
             'major_id' =>1,
             'first_name' => '33',
@@ -757,12 +756,12 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
         DB::table('travellers')->insert([
             'user_id' => 35,
-            'trip_id' => 1,
             'zip_id' =>2,
             'major_id' =>1,
             'first_name' => '34',
@@ -778,12 +777,12 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
         DB::table('travellers')->insert([
             'user_id' => 36,
-            'trip_id' => 1,
             'zip_id' =>2,
             'major_id' =>1,
             'first_name' => '35',
@@ -799,12 +798,12 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
         DB::table('travellers')->insert([
             'user_id' => 37,
-            'trip_id' => 1,
             'zip_id' =>2,
             'major_id' =>1,
             'first_name' => '36',
@@ -820,12 +819,12 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
         DB::table('travellers')->insert([
             'user_id' => 38,
-            'trip_id' => 1,
             'zip_id' =>2,
             'major_id' =>1,
             'first_name' => '37',
@@ -841,12 +840,12 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
         DB::table('travellers')->insert([
             'user_id' => 39,
-            'trip_id' => 1,
             'zip_id' =>2,
             'major_id' =>1,
             'first_name' => '38',
@@ -862,12 +861,12 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
         DB::table('travellers')->insert([
             'user_id' => 40,
-            'trip_id' => 1,
             'zip_id' =>2,
             'major_id' =>1,
             'first_name' => '39',
@@ -883,12 +882,12 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
         DB::table('travellers')->insert([
             'user_id' => 41,
-            'trip_id' => 1,
             'zip_id' =>2,
             'major_id' =>1,
             'first_name' => '40',
@@ -904,12 +903,12 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
         DB::table('travellers')->insert([
             'user_id' => 42,
-            'trip_id' => 1,
             'zip_id' =>2,
             'major_id' =>1,
             'first_name' => '41',
@@ -925,12 +924,12 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
         DB::table('travellers')->insert([
             'user_id' => 43,
-            'trip_id' => 2,
             'zip_id' =>2,
             'major_id' =>1,
             'first_name' => '42',
@@ -946,12 +945,12 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
         DB::table('travellers')->insert([
             'user_id' => 44,
-            'trip_id' => 2,
             'zip_id' =>2,
             'major_id' =>1,
             'first_name' => '43',
@@ -967,12 +966,12 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
         DB::table('travellers')->insert([
             'user_id' => 45,
-            'trip_id' => 2,
             'zip_id' =>2,
             'major_id' =>1,
             'first_name' => '44',
@@ -988,12 +987,12 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
         DB::table('travellers')->insert([
             'user_id' => 46,
-            'trip_id' => 2,
             'zip_id' =>2,
             'major_id' =>1,
             'first_name' => '45',
@@ -1009,12 +1008,12 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
         DB::table('travellers')->insert([
             'user_id' => 47,
-            'trip_id' => 2,
             'zip_id' =>2,
             'major_id' =>1,
             'first_name' => '46',
@@ -1030,12 +1029,12 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
         DB::table('travellers')->insert([
             'user_id' => 48,
-            'trip_id' => 2,
             'zip_id' =>2,
             'major_id' =>1,
             'first_name' => '47',
@@ -1051,12 +1050,12 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
         DB::table('travellers')->insert([
             'user_id' => 49,
-            'trip_id' => 2,
             'zip_id' =>2,
             'major_id' =>1,
             'first_name' => '48',
@@ -1072,12 +1071,12 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
         DB::table('travellers')->insert([
             'user_id' => 50,
-            'trip_id' => 2,
             'zip_id' =>2,
             'major_id' =>1,
             'first_name' => '49',
@@ -1093,12 +1092,12 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);
         DB::table('travellers')->insert([
             'user_id' => 51,
-            'trip_id' => 2,
             'zip_id' =>2,
             'major_id' =>1,
             'first_name' => '50',
@@ -1114,6 +1113,7 @@ class TravellersTableSeeder extends Seeder
             'birthdate' => '2000-01-01',
             'birthplace' => 'Diest',
             'iban' => 'BE68539007547034',
+            'bic' => 'ARSP BE 22',
             'medical_issue' => false,
             'medical_info' => null
         ]);

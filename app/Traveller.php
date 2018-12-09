@@ -11,19 +11,29 @@ class Traveller extends Model
 
     public function user()
     {
-        return $this->belongsTo('App\User');
-    }
-
-    public function trip()
-    {
-        return $this->belongsTo('App\Trip');
+        return $this->belongsTo('App\User', 'user_id', 'user_id');
     }
 
     public function zip()
     {
-        return $this->belongsTo('App\Zip');
+        return $this->belongsTo('App\Zip', 'zip_id', 'zip_id');
     }
 
+    public function major()
+    {
+        return $this->belongsTo('App\Major', 'major_id', 'major_id');
+    }
+
+    public function travellersPerTrip()
+    {
+        return $this->hasMany('App\TravellersPerTrip', 'traveller_id', 'traveller_id');
+
+    }
+    public function travellersPerRoom()
+    {
+        return $this->hasMany('App\TravellersPerRoom', 'traveller_id', 'traveller_id');
+
+    }
     public $timestamps = false;
 
     /**
@@ -38,7 +48,8 @@ class Traveller extends Model
         join('majors', 'travellers.major_id', '=', 'majors.major_id')
             ->join('studies','majors.study_id', '=', 'studies.study_id')
             ->join('payments', 'travellers.traveller_id','=','payments.traveller_id')
-            ->join('trips','travellers.trip_id', '=', 'trips.trip_id' )
+            ->join('travellers_per_trips', 'travellers.traveller_id', '=', 'travellers_per_trips.traveller_id')
+            ->join('trips', 'travellers_per_trips.trip_id', 'trips.trip_id')
             ->get();
         return $userdata;
     }
@@ -60,6 +71,7 @@ class Traveller extends Model
                 ->join('users','travellers.user_id','=','users.user_id')
                 ->join('zips','travellers.zip_id','=','zips.zip_id')
                 ->join('majors','travellers.major_id','=','majors.major_id')
+                ->join('travellers_per_trips', 'travellers.traveller_id', '=', 'travellers_per_trips.traveller_id')
                 ->join('studies','majors.study_id','=','studies.study_id')
                 ->where('trip_id', $iTripId)->paginate($iPagination);
         }

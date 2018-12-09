@@ -12,15 +12,15 @@
                     <div class="modal-body">
                         <div class="form-group">
                             {{Form::label('trip-name','Naam:')}}
-                            {{Form::text('trip-name', null, array('class' => 'form-control'))}}
+                            {{Form::text('trip-name', null, array('class' => 'form-control', 'required'))}}
                         </div>
                         <div class="form-group">
                             {{Form::label('trip-year','Jaar:')}}
-                            {{Form::number('trip-year', null, array('class' => 'form-control'))}}
+                            {{Form::number('trip-year', null, array('class' => 'form-control', 'required'))}}
                         </div>
                         <div class="form-group">
                             {{Form::label('trip-price','Prijs in Euro:')}}
-                            {{Form::number('trip-price', null, array('class' => 'form-control'))}}
+                            {{Form::number('trip-price', null, array('class' => 'form-control', 'required'))}}
                         </div>
                         <div class="form-group">
                             {{Form::label('trip-is-active','Actief:')}}
