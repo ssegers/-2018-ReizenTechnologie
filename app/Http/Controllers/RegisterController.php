@@ -409,7 +409,7 @@ class RegisterController extends Controller
             'description' => "berichtje",
             'password' => $sRandomPass
         ];
-        Mail::to(config('mail.username'))->send(new RegisterComplete($aMailData));
+        Mail::to($aMailData['email'])->send(new RegisterComplete($aMailData));
 
         $request->session()->flush();
         session_reset();
