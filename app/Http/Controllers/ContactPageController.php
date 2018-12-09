@@ -20,7 +20,8 @@ class ContactPageController extends Controller
             'email' => 'required',
             'onderwerp' => 'required|max:160',
             'bericht' => 'required',
-        ]);
+            'captcha' => 'required|captcha'
+        ],['captcha.captcha'=>'Foute captcha code.']);
 
         $oTrip = Trip::where('trip_id',(int)$request->post("reis"))->pluck('contact_mail');
         $sMail = $oTrip;
@@ -31,7 +32,10 @@ class ContactPageController extends Controller
         $this->sendMailTo($sMail, $sOnderwerp, $sbericht, $sContactMail);
         return redirect('info')->with('message', 'De e-mail is succesvol verzonden.');
     }
-
+    public function refreshCaptcha()
+    {
+        return response()->json(['captcha'=> captcha_img()]);
+    }
     public function sendMailTo($email,$subject, $bericht,$contactMail) {
         $aMailData = [
             'subject' => $subject,

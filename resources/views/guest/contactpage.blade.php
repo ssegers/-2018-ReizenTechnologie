@@ -40,9 +40,42 @@
             <label for="bericht">Bericht: </label><br>
             {{ Form::textarea('bericht','',array("class" => "form-control", "required" )) }}<br>
             </div>
+
+            <div class="form-group">
+                <label for="captcha" class="col-md-4 control-label">Captcha:</label>
+                <div class="col-md-6">
+                    <div class="captcha">
+                        <span>{!! captcha_img() !!}</span>
+                        <button type="button" class="btn btn-success btn-refresh"><span class="glyphicon glyphicon-refresh"></span>Ververs</button>
+                    </div>
+                    <input id="captcha" type="text" class="form-control" placeholder="Vul Captcha in" name="captcha">
+
+                    @if ($errors->has('captcha'))
+                        <span class="help-block">
+                                  <strong>{{ $errors->first('captcha') }}</strong>
+                              </span>
+                    @endif
+                </div>
+            </div>
+            <br>
+            <div class="form-group">
             {{ Form::submit('Verzend',array("class" => "btn btn-primary")) }}
             <input type="button" class="btn btn-danger" onclick="history.go(0)" value="Annuleren"/>
             {{ Form::close() }}
+            </div>
         <br>
     </div>
+    <script type="text/javascript">
+
+
+        $(".btn-refresh").click(function(){
+            $.ajax({
+                type:'GET',
+                url:'refresh_captcha',
+                success:function(data){
+                    $(".captcha > span").html(data.captcha);
+                }
+            });
+        });
+    </script>
 @endsection

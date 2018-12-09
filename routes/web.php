@@ -161,6 +161,7 @@ Route::prefix('user')->group(function () {
     Route::post('payment', 'PaymentsOverviewController@sendMail');
     Route::get('contact','ContactPageController@getInfo')->name('contact');
     Route::post('contact', 'ContactPageController@sendMail');
+    Route::get('refresh_captcha', 'ContactPageController@refreshCaptcha')->name('refresh_captcha');
 
 });
 Route::get('/', function () {
