@@ -302,7 +302,7 @@ class RegisterController extends Controller
                 break;
             /* Extern */
             case 6:
-                $sEmailExtension = false;
+                $sEmailExtension = $request->session()->get('sEmailExtension', false);
                 break;
             /* Student */
             default:
@@ -340,6 +340,7 @@ class RegisterController extends Controller
         ],$this->messages());
 
         $request->session()->put('sEnteredEmail', $request->post('txtEmail'));
+        $request->session()->put('sEmailExtension', $request->post('txtEmailExtension'));
         $request->session()->put('sEnteredMobile', $request->post('txtGsm'));
         $request->session()->put('sEnteredEmergency1', $request->post('txtNoodnummer1'));
         $request->session()->put('sEnteredEmergency2', $request->post('txtNoodnummer2'));
