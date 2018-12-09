@@ -32,9 +32,6 @@ class RegisterController extends Controller
             session_reset();
         }
     }
-    function __destruct() {
-        session_abort();
-    }
 
     /**
      * This function returns a random password
@@ -239,6 +236,48 @@ class RegisterController extends Controller
         return redirect('/user/form/step-3');
     }
 
+    public function createZip(Request $request)
+    {
+
+        //Get the input
+        $input = $request->all();
+
+        //Get the validation rules
+        $rules = [
+            'zip_code' => 'required|numeric|min:1000|max:9999',
+            'city' =>'required|max:50'
+        ];
+
+        //Get the messages
+        $messages = $this->messages();
+
+        //Validation
+        $validator = Validator::make($input,$rules,$messages );
+
+        //If the validation fails, return back to the view with the errors and the input you've given
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        //Check for duplication cities with equal zip numbers, if the city is a duplicate, return back to the view with the error message
+        foreach(Zip::where('zip_code', $request->post('zip_code'))->get() as $tempZip)
+        {
+            if($tempZip->city == $request->post('city')){
+                return redirect()->back()->with('alert-message', 'Fout! Deze gemeente voor deze postcode bestaat al!');
+            }
+        }
+
+        //Insert new record into zips table
+        Zip::insert([
+            'zip_code' => $request->post('zip_code'),
+            'city' => $request->post('city')
+        ]);
+
+        //return back to the view with the succes message
+        return redirect()->back()->with('message', 'De postcode en gemeente zijn aangemaakt!');
+
+    }
+
     /**
      * @author Sasha Van de Voorde & Nico Schelfhout
      * @param Request $request
@@ -293,7 +332,7 @@ class RegisterController extends Controller
     public function step3Post(Request $request) {
         $validator = Validator::make($request->all(), [
             'txtEmail' => 'required',
-            'txtEmailExtension' => '',
+            'txtEmailExtension' => 'required',
             'txtGsm' => 'required|phone:BE,NL',
             'txtNoodnummer1' => 'required|phone:BE,NL',
             'txtNoodnummer2' => 'nullable|phone:BE,NL',
@@ -338,7 +377,7 @@ class RegisterController extends Controller
         $oTraveller->major_id = $request->session()->get('iSelectedMajorId');
         $oTraveller->first_name = $request->session()->get('sEnteredFirstName');
         $oTraveller->last_name = $request->session()->get('sEnteredLastName');
-        $oTraveller->email = $request->session()->get('sEnteredEmail') + '@' + $request->post('txtEmailExtension');
+        $oTraveller->email = ($request->session()->get('sEnteredEmail') . "@" . $request->post('txtEmailExtension'));
         $oTraveller->country = $request->session()->get('sEnteredCountry');
         $oTraveller->address = $request->session()->get('sEnteredAddress');
         $oTraveller->zip_id = $request->session()->get('iSelectedCityId');
@@ -371,6 +410,9 @@ class RegisterController extends Controller
             'password' => $sRandomPass
         ];
         Mail::to(config('mail.username'))->send(new RegisterComplete($aMailData));
+
+        $request->session()->flush();
+        session_reset();
 
         Auth::logout();
 
