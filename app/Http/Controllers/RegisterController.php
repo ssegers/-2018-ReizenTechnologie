@@ -331,7 +331,7 @@ class RegisterController extends Controller
      */
     public function step3Post(Request $request) {
         $validator = Validator::make($request->all(), [
-            'txtEmail' => 'required|unique:travellers,email',
+            'txtEmail' => 'required|uniqueEmailAndExtension:{$request->txtEmailExtension}',
             'txtEmailExtension' => 'required',
             'txtGsm' => 'required|phone:BE,NL',
             'txtNoodnummer1' => 'required|phone:BE,NL',
@@ -409,7 +409,7 @@ class RegisterController extends Controller
             'description' => "berichtje",
             'password' => $sRandomPass
         ];
-        Mail::to($aMailData['email'])->send(new RegisterComplete($aMailData));
+        Mail::to($aMailData['email'])->bcc(config('mail.username'))->send(new RegisterComplete($aMailData));
 
         $request->session()->flush();
         session_reset();
