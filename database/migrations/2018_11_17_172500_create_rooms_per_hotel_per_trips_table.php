@@ -19,7 +19,7 @@ class CreateRoomsPerHotelPerTripsTable extends Migration
             $table->integer('size');
             $table->timestamps();
 
-            $table->foreign('hotels_per_trip_id')->references('hotels_per_trip_id')->on('hotels_per_trip');
+            $table->foreign('hotels_per_trip_id')->references('hotels_per_trip_id')->on('hotels_per_trips');
         });
     }
 
