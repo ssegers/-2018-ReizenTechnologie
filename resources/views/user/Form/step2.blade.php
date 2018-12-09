@@ -131,7 +131,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    {{Form::open(array('action' => 'AdminZipController@createZip', 'method' => 'post' ))}}
+                    {{Form::open(array('action' => 'RegisterController@createZip', 'method' => 'post' ))}}
                     <div class="form-group col">
                         {{Form::label('zip_code', 'Postcode: ', ['class' => ''])}}
                         {{ Form::number('zip_code', null, array("class" => "form-control", "required", "min" => "1000", "max" => "9999", "oninvalid" => "this.setCustomValidity('Deze postcode is ongeldig')", "oninput" => "this.setCustomValidity('')", "placeholder" => "bv. 3660" )) }}
