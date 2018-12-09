@@ -7,7 +7,7 @@
         {{ csrf_field() }}
 
         <h2 class="my-2 pb-2 border-bottom border-dark">Lees aandachtig!</h2>
-        <div class="form-row border-bottom pt-2">
+        <div class="border-bottom pt-2">
             <p>Beste student,</p>
 
             <p>Met dit inschrijfformulier kan je je inschrijven voor de buitenlandse reis.</p>
