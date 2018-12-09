@@ -34,7 +34,7 @@
             </div>
             <div class="form-group col-md-6">
                 <label class="form-label ">Afstudeerrichting*</label>
-                {{ Form::select('dropAfstudeerrichtingen', $aMajors, $iSelectedMajorId ,['id'=>'dropAfstudeerrichtingen','oninput'=>'this.className', 'class' => 'mb-2 form-control'])}}
+                {{ Form::select('dropAfstudeerrichtingen', $aMajors, $iSelectedMajorId ,['id'=>'dropAfstudeerrichtingen', 'placeholder' => 'Selecteer eerst een afstudeerrichting','oninput'=>'this.className', 'class' => 'mb-2 form-control'])}}
             </div>
         </div>
         <a class = "btn btn-secondary form-control col-sm-2 mb-4 mt-2" href="/user/form/step-0">Vorige</a>
