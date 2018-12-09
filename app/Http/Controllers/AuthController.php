@@ -48,10 +48,8 @@ class AuthController extends controller
         }
     }
 
-    public function logout(){
-        if(isset($_SESSION)) {
-            session_abort();
-        }
+    public function logout(Request $request){
+        $request->session()->flush();
         Auth::logout();
         return redirect('/info');
     }
