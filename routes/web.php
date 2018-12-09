@@ -125,6 +125,7 @@ Route::middleware(['auth','guest'])->group(function () {
 
             route::get('step-2', 'RegisterController@step2');
             route::post('step-2', 'RegisterController@step2Post');
+            route::post('step-add-zip', 'RegisterController@createZip');
 
             route::get('step-3', 'RegisterController@step3');
             route::post('step-3', 'RegisterController@step3Post');
