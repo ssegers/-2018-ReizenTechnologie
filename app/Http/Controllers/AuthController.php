@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Traveller;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -48,12 +49,45 @@ class AuthController extends controller
     }
 
     public function logout(){
-
+        if(isset($_SESSION)) {
+            session_abort();
+        }
         Auth::logout();
         return redirect('/info');
     }
 
     public function showView(){
         return view("auth.Authenticate");
+    }
+
+    public function ResetPassword(Request $request)
+    {
+
+    }
+
+    public function ShowResetPassword()
+    {
+        return view('auth.passwords.resetpassword');
+    }
+
+    public function ShowEmail()
+    {
+        return view('auth.passwords.enteremail');
+    }
+
+    public function ShowEmailPost(Request $request){
+        $traveller = Traveller::where('email', $request->input('email'))->get('user_id');
+        echo $traveller;
+    }
+
+    public function sendMail($email, $name, $password) {
+        $aMailData = [
+            'subject' => 'Your registration for the UCLL trip.',
+            'username' => $name,
+            'email' => $email,
+            'description' => "berichtje",
+            'password' => $password
+        ];
+        Mail::to($email)->send(new RegisterComplete($aMailData));
     }
 }
