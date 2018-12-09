@@ -369,9 +369,10 @@ class RegisterController extends Controller
         ];
         Mail::to(config('mail.username'))->send(new RegisterComplete($aMailData));
 
-        Auth::logout();
+        $request->session()->flush();
+        session_reset();
 
-        session_abort();
+        Auth::logout();
 
         return redirect('/info')->with('message', 'Je hebt je succesvol geregistreerd voor een reis!');
     }
