@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Hotel;
 use App\HotelsPerTrip;
 use App\RoomsPerHotelPerTrip;
 use App\TravellersPerRoom;
+use App\TravellersPerTrip;
+use App\Trip;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class HotelRoomController extends Controller
 {
@@ -14,9 +19,18 @@ class HotelRoomController extends Controller
     function getHotelsPerTrip()
     {
         //Haal trip id van de ingelogde traveller
-        $aHotelIds = HotelsPerTrip::where('trip_id', 1)->get();
+        $oUser = Auth::user();
+        $iTripId=null;
+        foreach($oUser->traveller->travellersPerTrip as $travellersPerTrip) {
+            $iTripId=$travellersPerTrip->trip_id;
+        }
+        $aHotels = HotelsPerTrip::where('trip_id', $iTripId)->get();
         //Haal alle hotel gegevens met de gevonden hotelIds
-        return view('user.HotelsAndRooms.hotels', []);
+
+        return view('user.HotelsAndRooms.hotels',
+            [
+                'aHotels'=>$aHotels
+            ]);
     }
 
     //GET::/listrooms/{{hotels_per_trip_id}}
