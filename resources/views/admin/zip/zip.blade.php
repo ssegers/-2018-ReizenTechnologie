@@ -31,40 +31,32 @@
         {{Form::label('city', 'Stad of Gemeente: ', ['class' => ''])}}
         {{ Form::text('city', null, array("class" => "form-control", "required","maxlength" => "50", "oninvalid" => "this.setCustomValidity('Deze gemeente is ongeldig')", "oninput" => "this.setCustomValidity('')", "placeholder" => "bv: Opglabbeek")) }}
     </div>
-    <div class="actions float-right">
-        {{Form::submit('Postcode Toevoegen', ['class' =>'btn btn-primary mr-5 p-3' ])}}
-        <input type="button" class="btn btn-danger p-3" onclick="history.go(0)" value="Annuleren"/>
+    <div class="actions mb-3">
+        {{Form::submit('Postcode Toevoegen', ['class' =>'btn btn-primary mr-4 p-2' ])}}
+        <input type="button" class="btn btn-danger p-2" onclick="history.go(0)" value="Annuleren"/>
     </div>
     {{Form::close()}}
-   <div id="tabel" clas="col">
-       <table class="table" >
-           <tr>
-               <td>
-                   <table cellspacing="0"; cellpadding="0" border="0">
-                        <tr>
-                            <th scope="col">Postcode</th>
-                            <th scope="col">Gemeente</th>
-                        </tr>
-                   </table>
-               </td>
 
-           </tr>
-           <tr>
-             <td>
-                 <div style="width:100%; height:250px; overflow:auto;">
-                     <table cellspacing="0"; cellpadding="1" border="0" width="300">
-                         <tbody>
-                         @foreach($aZipData as $oZip)
-                             <tr>
-                                 <td  >{{$oZip->zip_code}}</td>
-                                 <td >{{$oZip->city}}</td>
-                             </tr>
-                         @endforeach
-                         </tbody>
-                     </table>
-                 </div>
-             </td>
-           </tr>
-       </table>
-   </div>
-    @endsection
+    Zoek bestaande postcodes:
+    <input type="search" class="form-control form-control-sm" placeholder="" aria-controls="paymentStatusTable" style="width: 510px;">
+    <table class="table" style="width: 510px;">
+        <thead style="display: block;">
+        <tr>
+            <th scope="col" style="width: 150px;">Postcode</th>
+            <th scope="col" style="width: 300px;">Gemeente</th>
+            <th scope="col" style="width: 60px;"></th>
+        </tr>
+        </thead>
+        <tbody style="display: block; height: 350px; overflow-y: auto; overflow-x: hidden;">
+        @foreach($aZipData as $oZip)
+            <tr>
+                <td style="width: 150px;">{{$oZip->zip_code}}</td>
+                <td style="width: 300px;">{{$oZip->city}}</td>
+                <td style="width: 60px;">
+                    <button type="button" class="btn btn-primary" ><i class="fas fa-trash-alt"></i></button>
+                </td>
+            </tr>
+        @endforeach
+        </tbody>
+    </table>
+@endsection
