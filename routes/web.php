@@ -71,6 +71,11 @@ Route::middleware(['auth','guide'])->group(function () {
     Route::prefix('user')->group(function () {
         Route::get('trip/{trip?}', 'UserDataController@showUsersAsMentor')->name("filter");
         Route::post('trip/{trip?}', 'UserDataController@showUsersAsMentor');
+
+        Route::get('payment/{trip?}','PaymentsOverviewController@showTable')->name('payments');
+        Route::post('AddPayment/{traveller_id}', 'PaymentsOverviewController@addPayment');
+        Route::post('payment', 'PaymentsOverviewController@sendMail');
+
         Route::get('updatemail','MailController@getUpdateForm')->name('updatemail');
         Route::post('updatemail', 'MailController@sendUpdateMail');
         Route::post('updatemail/getEmail', 'MailController@getContactPersonByTripId');
