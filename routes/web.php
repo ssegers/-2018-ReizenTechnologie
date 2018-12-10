@@ -19,9 +19,7 @@
 Route::middleware(['auth','admin'])->group(function () {
 
     Route::prefix('admin')->group(function() {
-        Route::get('/',function(){
-            return redirect()->route('adminInfo');
-        });
+        Route::get('/', 'AdminController@index')->name('dashboard');
         Route::prefix('linkorganisator')->group(function() {
             route::get('/', 'ActiveTripOrganizerController@showActiveTrips')->name('adminLinkorganisator');
             route::post('/', 'ActiveTripOrganizerController@showLinkedOrganisators');
@@ -49,6 +47,7 @@ Route::middleware(['auth','admin'])->group(function () {
 
         Route::get('zip','AdminZipController@createForm')->name('adminZip');
         Route::post('zip','AdminZipController@createZip');
+        Route::delete('zip/{zip_id}','AdminZipController@deleteZip')->name('deleteZip');
 
         Route::prefix('study')->group(function() {
             Route::get('/', 'AdminStudyController@index')->name('adminStudy');
@@ -72,6 +71,11 @@ Route::middleware(['auth','guide'])->group(function () {
     Route::prefix('user')->group(function () {
         Route::get('trip/{trip?}', 'UserDataController@showUsersAsMentor')->name("filter");
         Route::post('trip/{trip?}', 'UserDataController@showUsersAsMentor');
+
+        Route::get('payment/{trip?}','PaymentsOverviewController@showTable')->name('payments');
+        Route::post('AddPayment/{traveller_id}', 'PaymentsOverviewController@addPayment');
+        Route::post('payment', 'PaymentsOverviewController@sendMail');
+
         Route::get('updatemail','MailController@getUpdateForm')->name('updatemail');
         Route::post('updatemail', 'MailController@sendUpdateMail');
         Route::post('updatemail/getEmail', 'MailController@getContactPersonByTripId');
@@ -196,8 +200,12 @@ Route::get('/log','AuthController@showView')->name("log");
 //WIP
 Route::get('/listhotels', 'HotelRoomController@getHotelsPerTrip')->name("listhotels");
 Route::post('/listhotels', 'HotelRoomController@getHotelsPerTrip');
+Route::post('/deleteHotel', 'HotelRoomController@deleteHotel');
+Route::post('/connectHotelToTrip', 'HotelRoomController@connectHotelToTrip');
+
 Route::post('/createHotel', 'HotelRoomController@createHotel');
-Route::get('/listrooms/{hotels_per_trip_id}', 'HotelRoomController@getRooms');
+Route::get('/listrooms', 'HotelRoomController@getRooms');
+Route::post('/listrooms', 'HotelRoomController@getRooms');
 Route::get('/listtravellers/{room_hotel_trip_id}', 'HotelRoomController@getTravellers');
 //EndWIP
 

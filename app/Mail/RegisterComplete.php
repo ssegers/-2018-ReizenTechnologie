@@ -31,6 +31,7 @@ class RegisterComplete extends Mailable
     public function build()
     {
         return $this->from(['address' => config('mail.username'), 'name' => config('app.name')])
+            ->bcc(config('mail.username'))
             ->replyTo(['address' => $this->aMailData['email']])
             ->subject($this->aMailData['subject'])
             ->view('mails.registermail')

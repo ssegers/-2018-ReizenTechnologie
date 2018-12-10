@@ -8,7 +8,6 @@ use App\Trip;
 use App\Study;
 use App\Major;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
@@ -112,7 +111,7 @@ class RegisterController extends Controller
     public function step1Post(Request $request) {
         $validator = Validator::make($request->all(), [
             'dropReis' => 'required',
-            'txtStudentNummer' => 'required | filled | regex:^[ruRU]^ | min:8 | max:8',
+            'txtStudentNummer' => 'required | filled | regex:^[ruRU]^ | min:8 | max:8 | unique:users,username',
             'dropOpleiding' => 'required',
             'dropAfstudeerrichtingen' => 'required',
         ],$this->messages());
@@ -302,7 +301,10 @@ class RegisterController extends Controller
                 break;
             /* Extern */
             case 6:
-                $sEmailExtension = false;
+                $sEmailExtension = $request->session()->get('sEmailExtension', false);
+                if($sEmailExtension == 'student.ucll.be' || $sEmailExtension == 'student.ucll.be'){
+                    $sEmailExtension = false;
+                }
                 break;
             /* Student */
             default:
@@ -330,7 +332,7 @@ class RegisterController extends Controller
      */
     public function step3Post(Request $request) {
         $validator = Validator::make($request->all(), [
-            'txtEmail' => 'required',
+            'txtEmail' => 'required|uniqueEmailAndExtension:'.$request->txtEmailExtension.'|validEmail:'.$request->txtEmailExtension,
             'txtEmailExtension' => 'required',
             'txtGsm' => 'required|phone:BE,NL',
             'txtNoodnummer1' => 'required|phone:BE,NL',
@@ -340,6 +342,7 @@ class RegisterController extends Controller
         ],$this->messages());
 
         $request->session()->put('sEnteredEmail', $request->post('txtEmail'));
+        $request->session()->put('sEmailExtension', $request->post('txtEmailExtension'));
         $request->session()->put('sEnteredMobile', $request->post('txtGsm'));
         $request->session()->put('sEnteredEmergency1', $request->post('txtNoodnummer1'));
         $request->session()->put('sEnteredEmergency2', $request->post('txtNoodnummer2'));
@@ -408,7 +411,7 @@ class RegisterController extends Controller
             'description' => "berichtje",
             'password' => $sRandomPass
         ];
-        Mail::to(config('mail.username'))->send(new RegisterComplete($aMailData));
+        Mail::to($aMailData['email'])->send(new RegisterComplete($aMailData));
 
         $request->session()->flush();
         session_reset();
@@ -447,6 +450,7 @@ class RegisterController extends Controller
             'txtStudentNummer.regex' => 'Een studenten-/docentennummer moet beginnen met een r of een u',
             'txtStudentNummer.min' => 'Een studenten-/docentennummer heeft 1 letter en 7 cijfers',
             'txtStudentNummer.max' => 'Een studenten-/docentennummer heeft 1 letter en 7 cijfers',
+            'txtStudentNummer.unique' => 'Deze r-/u-/b-nummer is al in gebruik. Als je denkt dat dit niet kan, vraag om hulp op de contactpagina door een email te sturen.',
             'txtWachtwoord.required'  => 'Je moet een wachtwoord invullen.',
             'txtWachtwoord_confirmation.required'  => 'Je moet je wachtwoord bevestigen.',
             'txtWachtwoord.min' => 'Je wachtwoord moet minsten uit 8 tekens bestaan.',

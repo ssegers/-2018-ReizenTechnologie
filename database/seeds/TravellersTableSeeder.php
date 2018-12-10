@@ -16,7 +16,7 @@ class TravellersTableSeeder extends Seeder
         DB::table('travellers')->insert([
             'user_id' => 3,
             'zip_id' =>1,
-            'major_id' =>3,
+            'major_id' =>5,
             'first_name' => 'Stefan',
             'last_name' => 'Segers',
             'email' => 'stefan.segers@ucll.be',
@@ -39,7 +39,7 @@ class TravellersTableSeeder extends Seeder
         DB::table('travellers')->insert([
             'user_id' => 4,
             'zip_id' =>2,
-            'major_id' =>1,
+            'major_id' =>5,
             'first_name' => 'Rudi',
             'last_name' => 'Roox',
             'email' => 'rudi.roox@ucll.be',

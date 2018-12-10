@@ -33,28 +33,30 @@ class HotelRoomController extends Controller
 
             //Haal alle hotel gegevens met de gevonden hotelIds
 
-            $aHotels=HotelsPerTrip::whereIn('hotels.hotel_id', $aHotelsid)
+            $aHotelsPerTrip=HotelsPerTrip::whereIn('hotels.hotel_id', $aHotelsid)
                 ->join('hotels','hotels_per_trips.hotel_id','=','hotels.hotel_id')
                 ->get();
 
             $aActiveTrips=Trip::where('is_active',true)->get();
 
+            $aHotels=Hotel::get();
+
             return view('user.HotelsAndRooms.hotels',
                 [
+                    'aHotelsPerTrip'=>$aHotelsPerTrip,
                     'aHotels'=>$aHotels,
                     'aActiveTrips'=>$aActiveTrips,
                     'iTripId'=>$iTripId
                 ]);
         }
         else{
-            $iTripId=null;
             foreach($oUser->traveller->travellersPerTrip as $travellersPerTrip) {
                 $iTripId=$travellersPerTrip->trip_id;
             }
             $aHotelsid = HotelsPerTrip::where('trip_id', $iTripId)->select('hotel_id')->get();
             //Haal alle hotel gegevens met de gevonden hotelIds
 
-            $aHotels=HotelsPerTrip::whereIn('hotels.hotel_id', $aHotelsid)
+            $aHotelsPerTrip=HotelsPerTrip::whereIn('hotels.hotel_id', $aHotelsid)
                 ->join('hotels','hotels_per_trips.hotel_id','=','hotels.hotel_id')
                 ->get();
 
@@ -62,16 +64,16 @@ class HotelRoomController extends Controller
 
             return view('user.HotelsAndRooms.hotels',
                 [
-                    'aHotels'=>$aHotels,
+                    'aHotelsPerTrip'=>$aHotelsPerTrip,
                     'aActiveTrips'=>$aActiveTrips
                 ]);
         }
     }
 
     //GET::/listrooms/{{hotels_per_trip_id}}
-    function getRooms($iHotelsPerTripId)
+    function getRooms(Request $request)
     {
-        $aRooms = RoomsPerHotelPerTrip::where('hotels_per_trip_id', $iHotelsPerTripId)->get();
+        $aRooms = RoomsPerHotelPerTrip::where('hotels_per_trip_id', $request->post("hotels_per_trip_id"))->get();
         $aCurrentOccupation = array();
         foreach ($aRooms as $oRoom)
         {
@@ -107,13 +109,6 @@ class HotelRoomController extends Controller
             $oHotel->phone=$request->post('Telnr');
             $oHotel->email=$request->post('EmailHotel');
             $oHotel->save();
-            $iHotelId = Hotel::orderby('created_at','desc')->first()->hotel_id;
-            $oHotelsPerTrip=new HotelsPerTrip();
-            $oHotelsPerTrip->trip_id=$request->post('trip_id');
-            $oHotelsPerTrip->hotel_id=$iHotelId;
-            $oHotelsPerTrip->hotel_start_date=$request->post('Startdatum');
-            $oHotelsPerTrip->hotel_end_date=$request->post('Einddatum');
-            $oHotelsPerTrip->save();
 
             return redirect()->back();
         }
@@ -121,6 +116,25 @@ class HotelRoomController extends Controller
             return redirect()->back();
         }
         //Maak een nieuw hotel aan
+    }
+
+    public function connectHotelToTrip(Request $request){
+        $oHotelsPerTrip=new HotelsPerTrip();
+        $oHotelsPerTrip->trip_id=$request->post('trip_id');
+        $oHotelsPerTrip->hotel_id=$request->post('hotel_id');
+        $oHotelsPerTrip->hotel_start_date=$request->post('Startdatum');
+        $oHotelsPerTrip->hotel_end_date=$request->post('Einddatum');
+        $oHotelsPerTrip->save();
+
+        return redirect()->back();
+    }
+
+    public function deleteHotel(Request $request){
+
+        $hotels_per_trip_id=$request->input('hotels_per_trip_id');
+
+        HotelsPerTrip::where('hotels_per_trip_id',$hotels_per_trip_id)->delete();
+        return redirect()->back()->with('message', 'Het hotel is verwijderd');
     }
 
 
