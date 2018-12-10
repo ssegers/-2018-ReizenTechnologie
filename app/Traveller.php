@@ -80,6 +80,7 @@ class Traveller extends Model
                 ->join('users','travellers.user_id','=','users.user_id')
                 ->join('zips','travellers.zip_id','=','zips.zip_id')
                 ->join('majors','travellers.major_id','=','majors.major_id')
+                ->join('travellers_per_trips', 'travellers.traveller_id', '=', 'travellers_per_trips.traveller_id')
                 ->join('studies','majors.study_id','=','studies.study_id')
                 ->where('trip_id', $iTripId)->get()->toArray();
         }
