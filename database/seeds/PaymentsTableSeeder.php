@@ -13,12 +13,12 @@ class PaymentsTableSeeder extends Seeder
     {
         for($i = 1; $i<50;$i++){
             DB::table('payments')->insert([
-                'traveller_id' => $i,
+                'travellers_per_trip_id' => $i,
                 'amount' => 200
             ]);
         }
         DB::table('payments')->insert([
-            'traveller_id' => 1,
+            'travellers_per_trip_id' => 1,
             'amount' => 300
         ]);
     }
