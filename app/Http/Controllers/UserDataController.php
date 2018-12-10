@@ -60,41 +60,35 @@ class UserDataController extends Controller
      */
     public function showUsersAsMentor(Request $request, $iTripId = null) {
         $oUser = Auth::user();
-        $aAuthenticatedTrips = array();
 
-        if ($iTripId == null) {
-            if ($oUser->role == 'admin') {
-                $aAuthenticatedTrips = Trip::where('is_active', true)->get();
-            }
-            else if ($oUser->role == 'guide') {
-                foreach($oUser->traveller->travellersPerTrip as $travellersPerTrip) {
-                    if($travellersPerTrip->is_organizer) {
-                        $iTravellerId = Traveller::where('user_id', $oUser->user_id)->first()->traveller_id;
-                        $aAuthenticatedTrips = TravellersPerTrip::where('traveller_id', $iTravellerId)->get();
-                    }
+        /* Get all active trips */
+        $aActiveTrips = Trip::where('is_active', true)->get();
+
+        /* Get all trips that can be accessed by the user */
+        if ($oUser->role == 'admin') {
+            $aOrganizerTrips = $aActiveTrips;
+        } else if ($oUser->role == 'guide') {
+            $aOrganizerTrips = User::where('users.user_id', $oUser->user_id)->where('is_active', true)->where('is_organizer', true)
+                ->join('travellers', 'travellers.user_id', '=', 'users.user_id')
+                ->join('travellers_per_trips', 'travellers_per_trips.traveller_id', '=', 'travellers.traveller_id')
+                ->join('trips', 'trips.trip_id', '=', 'travellers_per_trips.trip_id')
+                ->get()->toArray();
+        }
+
+        /* Check if user can access the trip */
+        if ($iTripId != null) {
+            $bCanAccess = false;
+            foreach ($aOrganizerTrips as $oTrip) {
+                if ($iTripId == $oTrip->trip_id) {
+                    $bCanAccess = true;
                 }
             }
-
-            try {
-                $iTripId = $aAuthenticatedTrips[0]->trip_id;
+            if ($bCanAccess == false) {
+                return 'U heeft geen rechten om deze lijst te bekijken';
             }
-            catch (\Exception $exception) {
-                return 'U heeft geen actieve reizen';
-            }
-        }
-        else {
-            if (($aAuthenticatedTrips = $this->checkUserPermissions($oUser, $iTripId)) == false) {
-                return 'Deze gebruiker is niet gemachtigd!';
-            }
-        }
-
-        if ($aAuthenticatedTrips == null) {
-            return 'U heeft geen actieve reizen';
-        }
-
-        $aAuthenticatedTripId = array();
-        foreach ($aAuthenticatedTrips as $oTrip) {
-            $aAuthenticatedTripId[$oTrip->trip_id] = $oTrip->trip_id;
+        } else {
+            $iTripId = $aOrganizerTrips[0]->trip_id;
+            $bCanAccess = true;
         }
 
         /* Detect the applied filters and add to the list of standard filters */
@@ -105,12 +99,6 @@ class UserDataController extends Controller
         }
         $aFiltersChecked = $this->aFiltersChecked;
 
-        /* Get the trip where the organizer is involved with */
-       /* $oSelectedTraveller = Traveller::where('user_id', $oUser->user_id)->first();
-        $oTravellersPerTrips = $oSelectedTraveller->travellersPerTrip()->first();
-        $aOrganizerTrip = $oTravellersPerTrips->trip()->orderBy('year', 'desc')->first();*/
-       $aOrganizerTrip = Trip::where('trip_id', $iTripId)->first();
-        /* Get all active trips */
         $aActiveTrips = array();
         foreach (Trip::where('is_active', true)->get() as $oTrip) {
             array_push($aActiveTrips, array(
@@ -154,33 +142,11 @@ class UserDataController extends Controller
             'aFilterList' => $this->aFilterList,
             'aFiltersChecked' => $aFiltersChecked,
             'sUserName' => $oUser->username,
-            'oCurrentTrip' => $aOrganizerTrip,
+            'oCurrentTrip' => $oCurrentTrip,
             'aActiveTrips' => $aActiveTrips,
             'aPaginate' => $aPaginate,
-            'aAuthenticatedTripId' => $aAuthenticatedTripId,
+            'aAuthenticatedTripId' => $aActiveTrips,
         ]);
-    }
-
-    private function checkUserPermissions($oUser, $iTripId) {
-        switch ($oUser->role) {
-            case 'guide':
-                $iTravellerId = Traveller::where('user_id', $oUser->user_id)->first()->traveller_id;
-                $aAuthenticatedTrips = TravellersPerTrip::where('traveller_id', $iTravellerId)->where('is_organizer',true)->get();
-
-//                return var_dump($aTripOrganizers);
-                foreach ($aAuthenticatedTrips as $oTrip) {
-                    if ($oTrip->trip_id == $iTripId) {
-                        return $aAuthenticatedTrips;
-                    }
-                }
-
-                return false;
-            case 'admin':
-                return Trip::where('is_active', true)->get();
-
-            default:
-                return false;
-        }
     }
 
 
