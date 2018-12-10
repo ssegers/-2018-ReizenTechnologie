@@ -303,6 +303,9 @@ class RegisterController extends Controller
             /* Extern */
             case 6:
                 $sEmailExtension = $request->session()->get('sEmailExtension', false);
+                if($sEmailExtension == 'student.ucll.be' || $sEmailExtension == 'student.ucll.be'){
+                    $sEmailExtension = false;
+                }
                 break;
             /* Student */
             default:
