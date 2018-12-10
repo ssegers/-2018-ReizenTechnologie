@@ -20,8 +20,7 @@ class guest
             if (Auth::user()->role == 'guest' || Auth::user()->role == 'admin'){
                 return $next($request);
             }
-        } else {
-            return redirect('info');
         }
+        return redirect('info');
     }
 }

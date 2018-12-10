@@ -264,6 +264,9 @@ class UserDataController extends Controller
      */
     public function showUserData(Request $request, $sUserName = 'undefined')
     {
+        if (Auth::user()->role == "admin"){
+            return redirect(route("info"));
+        }
         if($sUserName == 'undefined'){
             $sUserName = Auth::user()->username;
         }
@@ -301,6 +304,10 @@ class UserDataController extends Controller
      */
     public function updateUserData(Request $aRequest, $sUserName)
     {
+        if (Auth::user()->role == "admin"){
+            return redirect(route("info"));
+        }
+        
         $aRequest->validate([
             'LastName'      => 'required',
             'FirstName'     => 'required',
