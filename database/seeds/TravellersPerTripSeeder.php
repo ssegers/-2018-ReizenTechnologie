@@ -39,7 +39,7 @@ class TravellersPerTripSeeder extends Seeder
         ]);
 
         DB::table('travellers_per_trips')->insert([
-            'trip_id' => 1,
+            'trip_id' => 2,
             'traveller_id' => 3,
             'is_organizer' => false,
         ]);
@@ -51,7 +51,7 @@ class TravellersPerTripSeeder extends Seeder
         ]);
 
         DB::table('travellers_per_trips')->insert([
-            'trip_id' => 1,
+            'trip_id' => 2,
             'traveller_id' => 5,
             'is_organizer' => false,
         ]);
@@ -62,7 +62,7 @@ class TravellersPerTripSeeder extends Seeder
             'is_organizer' => false,
         ]);
         DB::table('travellers_per_trips')->insert([
-            'trip_id' => 1,
+            'trip_id' => 2,
             'traveller_id' => 7,
             'is_organizer' => false,
         ]);
@@ -72,7 +72,7 @@ class TravellersPerTripSeeder extends Seeder
             'is_organizer' => false,
         ]);
         DB::table('travellers_per_trips')->insert([
-            'trip_id' => 1,
+            'trip_id' => 2,
             'traveller_id' => 9,
             'is_organizer' => false,
         ]);
@@ -82,7 +82,7 @@ class TravellersPerTripSeeder extends Seeder
             'is_organizer' => false,
         ]);
         DB::table('travellers_per_trips')->insert([
-            'trip_id' => 1,
+            'trip_id' => 2,
             'traveller_id' => 11,
             'is_organizer' => false,
         ]);
@@ -92,7 +92,7 @@ class TravellersPerTripSeeder extends Seeder
             'is_organizer' => false,
         ]);
         DB::table('travellers_per_trips')->insert([
-            'trip_id' => 1,
+            'trip_id' => 2,
             'traveller_id' => 13,
             'is_organizer' => false,
         ]);
@@ -102,7 +102,7 @@ class TravellersPerTripSeeder extends Seeder
             'is_organizer' => false,
         ]);
         DB::table('travellers_per_trips')->insert([
-            'trip_id' => 1,
+            'trip_id' => 2,
             'traveller_id' => 15,
             'is_organizer' => false,
         ]);
@@ -112,7 +112,7 @@ class TravellersPerTripSeeder extends Seeder
             'is_organizer' => false,
         ]);
         DB::table('travellers_per_trips')->insert([
-            'trip_id' => 1,
+            'trip_id' => 2,
             'traveller_id' => 17,
             'is_organizer' => false,
         ]);
@@ -122,7 +122,7 @@ class TravellersPerTripSeeder extends Seeder
             'is_organizer' => false,
         ]);
         DB::table('travellers_per_trips')->insert([
-            'trip_id' => 1,
+            'trip_id' => 2,
             'traveller_id' => 19,
             'is_organizer' => false,
         ]);
@@ -132,7 +132,7 @@ class TravellersPerTripSeeder extends Seeder
             'is_organizer' => false,
         ]);
         DB::table('travellers_per_trips')->insert([
-            'trip_id' => 1,
+            'trip_id' => 2,
             'traveller_id' => 21,
             'is_organizer' => false,
         ]);
@@ -142,7 +142,7 @@ class TravellersPerTripSeeder extends Seeder
             'is_organizer' => false,
         ]);
         DB::table('travellers_per_trips')->insert([
-            'trip_id' => 1,
+            'trip_id' => 2,
             'traveller_id' => 23,
             'is_organizer' => false,
         ]);
@@ -152,12 +152,12 @@ class TravellersPerTripSeeder extends Seeder
             'is_organizer' => false,
         ]);
         DB::table('travellers_per_trips')->insert([
-            'trip_id' => 1,
+            'trip_id' => 2,
             'traveller_id' => 25,
             'is_organizer' => false,
         ]);
         DB::table('travellers_per_trips')->insert([
-            'trip_id' => 2,
+            'trip_id' => 1,
             'traveller_id' => 26,
             'is_organizer' => false,
         ]);
@@ -167,7 +167,7 @@ class TravellersPerTripSeeder extends Seeder
             'is_organizer' => false,
         ]);
         DB::table('travellers_per_trips')->insert([
-            'trip_id' => 2,
+            'trip_id' => 1,
             'traveller_id' => 28,
             'is_organizer' => false,
         ]);
@@ -177,7 +177,7 @@ class TravellersPerTripSeeder extends Seeder
             'is_organizer' => false,
         ]);
         DB::table('travellers_per_trips')->insert([
-            'trip_id' => 2,
+            'trip_id' => 1,
             'traveller_id' => 30,
             'is_organizer' => false,
         ]);
@@ -187,7 +187,7 @@ class TravellersPerTripSeeder extends Seeder
             'is_organizer' => false,
         ]);
         DB::table('travellers_per_trips')->insert([
-            'trip_id' => 2,
+            'trip_id' => 1,
             'traveller_id' => 32,
             'is_organizer' => false,
         ]);
@@ -197,7 +197,7 @@ class TravellersPerTripSeeder extends Seeder
             'is_organizer' => false,
         ]);
         DB::table('travellers_per_trips')->insert([
-            'trip_id' => 2,
+            'trip_id' => 1,
             'traveller_id' => 34,
             'is_organizer' => false,
         ]);
@@ -207,7 +207,7 @@ class TravellersPerTripSeeder extends Seeder
             'is_organizer' => false,
         ]);
         DB::table('travellers_per_trips')->insert([
-            'trip_id' => 2,
+            'trip_id' => 1,
             'traveller_id' => 36,
             'is_organizer' => false,
         ]);
@@ -217,7 +217,7 @@ class TravellersPerTripSeeder extends Seeder
             'is_organizer' => false,
         ]);
         DB::table('travellers_per_trips')->insert([
-            'trip_id' => 2,
+            'trip_id' => 1,
             'traveller_id' => 38,
             'is_organizer' => false,
         ]);
@@ -227,7 +227,7 @@ class TravellersPerTripSeeder extends Seeder
             'is_organizer' => false,
         ]);
         DB::table('travellers_per_trips')->insert([
-            'trip_id' => 2,
+            'trip_id' => 1,
             'traveller_id' => 40,
             'is_organizer' => false,
         ]);
@@ -237,7 +237,7 @@ class TravellersPerTripSeeder extends Seeder
             'is_organizer' => false,
         ]);
         DB::table('travellers_per_trips')->insert([
-            'trip_id' => 2,
+            'trip_id' => 1,
             'traveller_id' => 42,
             'is_organizer' => false,
         ]);
@@ -247,7 +247,7 @@ class TravellersPerTripSeeder extends Seeder
             'is_organizer' => false,
         ]);
         DB::table('travellers_per_trips')->insert([
-            'trip_id' => 2,
+            'trip_id' => 1,
             'traveller_id' => 44,
             'is_organizer' => false,
         ]);
@@ -257,7 +257,7 @@ class TravellersPerTripSeeder extends Seeder
             'is_organizer' => false,
         ]);
         DB::table('travellers_per_trips')->insert([
-            'trip_id' => 2,
+            'trip_id' => 1,
             'traveller_id' => 46,
             'is_organizer' => false,
         ]);
@@ -267,7 +267,7 @@ class TravellersPerTripSeeder extends Seeder
             'is_organizer' => false,
         ]);
         DB::table('travellers_per_trips')->insert([
-            'trip_id' => 2,
+            'trip_id' => 1,
             'traveller_id' => 48,
             'is_organizer' => false,
         ]);
