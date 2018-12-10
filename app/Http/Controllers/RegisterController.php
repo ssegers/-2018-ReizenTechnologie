@@ -244,26 +244,25 @@ class RegisterController extends Controller
 
         //Get the validation rules
         $rules = [
+            'city' =>'required|max:50',
             'zip_code' => 'required|numeric|min:1000|max:9999',
-            'city' =>'required|max:50'
         ];
 
-        //Get the messages
-        $messages = $this->messages();
 
         //Validation
-        $validator = Validator::make($input,$rules,$messages );
+        $validator = Validator::make($input,$rules);
 
         //If the validation fails, return back to the view with the errors and the input you've given
         if($validator->fails()){
-            return redirect()->back()->withErrors($validator)->withInput();
+            return response()->json(['zipAdded' => "Validation error: city = ".$request->post('city')." zip = ".$request->post('zip_code')]);
+
         }
 
         //Check for duplication cities with equal zip numbers, if the city is a duplicate, return back to the view with the error message
         foreach(Zip::where('zip_code', $request->post('zip_code'))->get() as $tempZip)
         {
             if($tempZip->city == $request->post('city')){
-                return redirect()->back()->with('alert-message', 'Fout! Deze gemeente voor deze postcode bestaat al!');
+                return response()->json(['zipAdded' => false]);
             }
         }
 
@@ -273,8 +272,8 @@ class RegisterController extends Controller
             'city' => $request->post('city')
         ]);
 
-        //return back to the view with the succes message
-        return redirect()->back()->with('message', 'De postcode en gemeente zijn aangemaakt!');
+        $oZip = Zip::where('zip_code', $request->post('zip_code'))->first();
+        return response()->json(['zipAdded' => true,'zip_id'=>$oZip->zip_id,'zip_code'=>$oZip->zip_code,"city"=>$oZip->city]);
 
     }
 

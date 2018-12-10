@@ -9,6 +9,7 @@
 @section('content')
 <div class="container bg-white rounded shadow-sm">
 
+    <div id="error" class="alert alert-danger" role="alert"></div>
     {{ Form::open(array('action' => 'RegisterController@step2', 'method' => 'post')) }}
     {{ csrf_field() }}
 
@@ -84,7 +85,7 @@
         </div>
         <div class="form-group col-md-4">
             <label class="form-label">Woonplaats*</label>
-            <button type="button" class="open btn-primary rounded btn-xs float-right  " data-toggle="modal" data-target="#zipPopup">
+            <button type="button" id="cityButton" class="open btn-primary rounded btn-xs float-right  " data-toggle="modal" data-target="#zipPopup">
                 <i class="fas fa-plus-circle "></i>
             </button>
             <select style="z-index: 1000" id="dropGemeentes" name="dropGemeentes" data-live-search="true" required class="mb-2 form-control selectpicker">
@@ -131,26 +132,25 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    {{Form::open(array('action' => 'RegisterController@createZip', 'method' => 'post' ))}}
                     <div class="form-group col">
                         {{Form::label('zip_code', 'Postcode: ', ['class' => ''])}}
-                        {{ Form::number('zip_code', null, array("class" => "form-control", "required", "min" => "1000", "max" => "9999", "oninvalid" => "this.setCustomValidity('Deze postcode is ongeldig')", "oninput" => "this.setCustomValidity('')", "placeholder" => "bv. 3660" )) }}
+                        {{ Form::number('zip_code', null, array("id"=>"zip-text","class" => "form-control", "required", "min" => "1000", "max" => "9999", "oninvalid" => "this.setCustomValidity('Deze postcode is ongeldig')", "oninput" => "this.setCustomValidity('')", "placeholder" => "bv. 3660" )) }}
                     </div>
                     <div class="form-group col">
                         {{Form::label('city', 'Stad of Gemeente: ', ['class' => ''])}}
-                        {{ Form::text('city', null, array("class" => "form-control", "required","maxlength" => "50", "oninvalid" => "this.setCustomValidity('Deze gemeente is ongeldig')", "oninput" => "this.setCustomValidity('')", "placeholder" => "bv: Opglabbeek")) }}
+                        {{ Form::text('city', null, array("id"=>"city-text","class" => "form-control", "required","maxlength" => "50", "oninvalid" => "this.setCustomValidity('Deze gemeente is ongeldig')", "oninput" => "this.setCustomValidity('')", "placeholder" => "bv: Opglabbeek")) }}
                     </div>
                 </div>
 
                 <div class="modal-footer">
-                    {{Form::submit('Postcode Toevoegen', ['class' =>'btn btn-primary' ])}}
+                    <button id="add-zip-button" type="button" class="btn btn-primary" data-dismiss="modal">Postcode Toevoegen</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                 </div>
-                {{ Form::close() }}
             </div>
         </div>
     </div>
 </div>
 
     <script>$('#dropGemeentes').val({{ $iSelectedCityId }})</script>
+    <script src="{{ URL::asset('/js/addZipForm.js') }}"></script>
 @endsection
