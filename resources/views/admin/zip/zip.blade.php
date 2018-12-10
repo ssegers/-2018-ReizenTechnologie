@@ -33,7 +33,7 @@
     </div>
     <div class="actions mb-3">
         {{Form::submit('Postcode Toevoegen', ['class' =>'btn btn-primary mr-4 p-2' ])}}
-        <input type="button" class="btn btn-danger p-2" onclick="history.go(0)" value="Annuleren"/>
+        {{Form::button('Annuleren', array("class" => "btn btn-danger p-2", "onclick" => "history.go(0)"))}}
     </div>
     {{Form::close()}}
 

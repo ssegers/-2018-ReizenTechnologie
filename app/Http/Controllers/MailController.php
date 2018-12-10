@@ -6,6 +6,7 @@ use App\Mail\Update;
 use App\Traveller;
 use App\TravellersPerTrip;
 use App\Trip;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
@@ -23,7 +24,6 @@ class MailController extends Controller
     public function getUpdateForm(){
 
         $currentUserId = Auth::id();
-       // $iTravellerId = Traveller::where('user_id', $currentUserId)->pluck('traveller_id')->first();
         $sEmail = Traveller::where('user_id', $currentUserId)->pluck('email')->first();
         $aTrips = Trip::where('is_active', true)->get();
 
@@ -57,13 +57,9 @@ class MailController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withInput()->with(['message' => $validator->errors()]);
         }
-
-
-
-
-      
-
-        $sContactMail = Trip::where('trip_id', $request->post('trip'))->first()->contact_mail;
+        
+        //$sContactMail = Trip::where('trip_id', $request->post('trip'))->first()->contact_mail;
+        $sContactMail =  $request->post('contactMail');
 
         /* Set the mail data */
         $aMailData = [
@@ -75,11 +71,13 @@ class MailController extends Controller
 
         /* Get the mail list and chunk them by 10 */
             $aMailList = array();
-           $aAllTravellersPerTrip = TravellersPerTrip::where('trip_id',$request->post('trip'))->get();
-           foreach($aAllTravellersPerTrip as $traveller) {
-               array_push($aMailList,$traveller->traveller->email);
-           }
-           $aChunkedMailList = array_chunk($aMailList, 10);
+           //$aAllTravellersPerTrip = TravellersPerTrip::where('trip_id',$request->post('trip'))->get();
+           $aAllTravellersPerTrip = User::where('user_id', 12)->get(); //mijn email adres
+//           foreach($aAllTravellersPerTrip as $traveller) {
+//               array_push($aMailList,$traveller->traveller->email);
+//           }
+          // $aChunkedMailList = array_chunk($aMailList, 10);
+           $aChunkedMailList = $aAllTravellersPerTrip;
 
 
         /* Send the mail to each recipient */
@@ -90,22 +88,6 @@ class MailController extends Controller
         return redirect()->back()->with('message', 'De email is succesvol verstuurd!');
     }
 
-    /**
-     * This function returns the contact form a given trip
-     *
-     * @author Yoeri op't Roodt
-     *
-     * @param Request $request
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function getContactPersonByTripId(Request $request) {
-        $sContactMail = Trip::where('trip_id', $request->post('trip_id'))->first()->contact_mail;
-
-        return response()->json([
-            'sContactMail' => $sContactMail,
-        ]);
-    }
 
     /**
      * This method generates the error messages displayed when the validation fails

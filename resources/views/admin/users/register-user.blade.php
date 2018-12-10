@@ -26,7 +26,7 @@
     <h4>Huidige account: {{$sUserName}}</h4><br />
 
 
-    {{Form::open(array('action' => 'AdminUserController@createUser', 'method' => 'post' ))}}
+    {{Form::open(array('action' => 'AdminUserController@createUser', 'method' => 'post', "onsubmit" => 'return confirm("Bent u zeker dat u het standaard account voor registratie wilt aanpassen?")' ))}}
     <div class="form-group">
         {{Form::label('username', 'Gebruikersnaam: ', ['class' => ''])}}
         {{ Form::text('username', null, array("class" => "form-control", "required" )) }}
@@ -39,7 +39,7 @@
         {{Form::password('password_confirmation', ['required', "class" => "form-control"])}}<br />
         <div class="actions float-right">
             {{Form::submit('Account Registreren', ['class' =>'btn btn-primary mr-5 p-3' ])}}
-            <input type="button" class="btn btn-danger p-3" onclick="history.go(0)" value="Annuleren"/>
+            {{Form::button('Annuleren', array("class" => "btn btn-danger p-3", "onclick" => "history.go(0)"))}}
         </div>
 
     </div>
