@@ -13,7 +13,7 @@ class CreateRoomsPerHotelPerTripsTable extends Migration
      */
     public function up()
     {
-        Schema::create('rooms_per_hotel_per_trip', function (Blueprint $table) {
+        Schema::create('rooms_per_hotel_per_trips', function (Blueprint $table) {
             $table->increments('rooms_hotel_trip_id');
             $table->integer('hotels_per_trip_id')->unsigned();
             $table->integer('size');

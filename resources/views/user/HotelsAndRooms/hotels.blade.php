@@ -113,7 +113,12 @@
                 {{--<td>{{ $oHotel->hotel_amount_of_rooms }}</td>--}}
                 <td>{{ $oHotel->hotel_start_date }}</td>
                 <td>{{ $oHotel->hotel_end_date }}</td>
-                <td><button class="btn btn-primary">Bekijk kamers</button></td>
+                <td>
+                    {{ Form::open(array('action' => 'HotelRoomController@getRooms', 'method' => 'post')) }}
+                    {{ Form::hidden('hotels_per_trip_id', $oHotel->hotels_per_trip_id) }}
+                    {{ Form::submit('Bekijk kamers',array('class'=>"btn btn-primary")) }}
+                    {{ Form::close()}}
+                </td>
                 <td>
                     {{ Form::open(array('action' => 'HotelRoomController@deleteHotel', 'method' => 'post','onsubmit' => 'return ConfirmDelete()')) }}
                     {{ Form::hidden('hotels_per_trip_id', $oHotel->hotels_per_trip_id) }}

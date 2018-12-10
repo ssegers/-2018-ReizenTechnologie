@@ -11,15 +11,15 @@ class TravellersPerRoomSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('travellers_per_room')->insert(array(
+        DB::table('travellers_per_rooms')->insert(array(
             'traveller_id' => 1,
             'rooms_hotel_trip_id' => 1,
         ));
-        DB::table('travellers_per_room')->insert(array(
+        DB::table('travellers_per_rooms')->insert(array(
             'traveller_id' => 2,
             'rooms_hotel_trip_id' => 1,
         ));
-        DB::table('travellers_per_room')->insert(array(
+        DB::table('travellers_per_rooms')->insert(array(
             'traveller_id' => 3,
             'rooms_hotel_trip_id' => 1,
         ));

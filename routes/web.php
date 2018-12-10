@@ -200,7 +200,8 @@ Route::post('/deleteHotel', 'HotelRoomController@deleteHotel');
 Route::post('/connectHotelToTrip', 'HotelRoomController@connectHotelToTrip');
 
 Route::post('/createHotel', 'HotelRoomController@createHotel');
-Route::get('/listrooms/{hotels_per_trip_id}', 'HotelRoomController@getRooms');
+Route::get('/listrooms', 'HotelRoomController@getRooms');
+Route::post('/listrooms', 'HotelRoomController@getRooms');
 Route::get('/listtravellers/{room_hotel_trip_id}', 'HotelRoomController@getTravellers');
 //EndWIP
 
