@@ -110,11 +110,9 @@
                 <td>{{ $oHotel->hotel_end_date }}</td>
                 <td>
                     {{--{{ Form::open(array('action' => '/listrooms/'.$oHotel->hotels_per_trip_id, 'method' => 'post')) }}--}}
-                    <form method="POST" action="/listrooms/{{$oHotel->hotels_per_trip_id}}">
+                    <form method="POST" action="/listrooms/{{$oHotel->hotels_per_trip_id}}/{{$oHotel->hotel_name}}">
                         {{ csrf_field() }}
                         {{ method_field('POST') }}
-                    {{ Form::hidden('hotels_per_trip_id', $oHotel->hotels_per_trip_id) }}
-                    {{ Form::hidden('hotel_name', $oHotel->hotel_name) }}
                     {{ Form::submit('Bekijk kamers',array('class'=>"btn btn-primary")) }}
                     </form>
                 </td>
