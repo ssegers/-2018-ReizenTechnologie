@@ -19,9 +19,7 @@
 Route::middleware(['auth','admin'])->group(function () {
 
     Route::prefix('admin')->group(function() {
-        Route::get('/',function(){
-            return redirect()->route('adminInfo');
-        });
+        Route::get('/', 'AdminController@index');
         Route::prefix('linkorganisator')->group(function() {
             route::get('/', 'ActiveTripOrganizerController@showActiveTrips')->name('adminLinkorganisator');
             route::post('/', 'ActiveTripOrganizerController@showLinkedOrganisators');

@@ -111,6 +111,10 @@ class UserDataController extends Controller
             ));
         }
 
+        foreach ($aOrganizerTrips as $oTrip) {
+            $aAuthenticatedTrips[$oTrip->trip_id] = $oTrip->trip_id;
+        }
+
         /* Save th active pagination */
         $aPaginate = array(
             '5' => false,
@@ -147,7 +151,7 @@ class UserDataController extends Controller
             'oCurrentTrip' => $oCurrentTrip,
             'aActiveTrips' => $aActiveTrips,
             'aPaginate' => $aPaginate,
-            'aAuthenticatedTripId' => $aActiveTrips,
+            'aAuthenticatedTripId' => $aAuthenticatedTrips,
         ]);
     }
 
