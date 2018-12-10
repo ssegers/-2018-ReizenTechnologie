@@ -132,10 +132,10 @@ class UserDataController extends Controller
         /* Check witch download option is checked */
         switch ($request->post('export')) {
             case 'excel':
-                $this->downloadExcel($aFiltersChecked, $aOrganizerTrip);
+                $this->downloadExcel($aFiltersChecked, $oCurrentTrip);
                 break;
             case 'pdf':
-                $this->downloadPDF($aFiltersChecked, $aOrganizerTrip);
+                $this->downloadPDF($aFiltersChecked, $oCurrentTrip);
                 break;
         }
 
