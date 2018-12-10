@@ -50,7 +50,7 @@ class Traveller extends Model
             ->join('payments', 'travellers.traveller_id','=','payments.traveller_id')
             ->join('travellers_per_trips', 'travellers.traveller_id', '=', 'travellers_per_trips.traveller_id')
             ->join('trips', 'travellers_per_trips.trip_id', 'trips.trip_id')
-            ->where('trip_id', $iTripId)
+            ->where('trips.trip_id', $iTripId)
             ->get();
         return $userdata;
     }

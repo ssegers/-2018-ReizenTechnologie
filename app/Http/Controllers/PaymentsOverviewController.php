@@ -73,7 +73,7 @@ class PaymentsOverviewController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function addPayment(Request $request, $iTravellerId)
+    public function addPayment(Request $request)
     {
 
         //Get the input
@@ -100,7 +100,7 @@ class PaymentsOverviewController extends Controller
         Payment::insert([
             'amount' => $request->post('amount'),
             'payment_date' => $request->post('payment_date'),
-            'traveller_id' => $iTravellerId
+            'traveller_id' => $request->post('traveller_id')
 
         ]);
         //return back to the view with the succes message

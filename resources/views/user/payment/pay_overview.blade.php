@@ -56,7 +56,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        {{Form::open(array('action' => 'PaymentsOverviewController@addPayment', 'method' => 'post', $iTravellerId->$oUserData['traveller_id'] ))}}
+                        {{Form::open(array('action' => 'PaymentsOverviewController@addPayment', 'method' => 'post'))}}
                         {{Form::hidden('traveller_id',$oUserData['traveller_id'])}}
                         <div class="form-group col">
                             {{Form::label('payment_date', 'Betalingsdatum ', ['class' => ''])}}
