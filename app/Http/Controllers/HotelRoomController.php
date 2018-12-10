@@ -15,12 +15,10 @@ use Illuminate\Support\Facades\Auth;
 
 class HotelRoomController extends Controller
 {
-    //GET::/listhotels
     function getHotelsPerTrip(Request $request)
     {
         //Haal trip id van de ingelogde traveller
         $oUser = Auth::user();
-
         if ($oUser->role == 'guide')
         {
             if ($request->post('selectedActiveTrip')==null){
@@ -70,35 +68,36 @@ class HotelRoomController extends Controller
         }
     }
 
-    //GET::/listrooms/{{hotels_per_trip_id}}
-    function getRooms(Request $request)
+    function getRooms($hotel_id,Request $request)
     {
-        $aRooms = RoomsPerHotelPerTrip::where('hotels_per_trip_id', $request->post("hotels_per_trip_id"))->get();
+        $oUser=Auth::user();
+        $userTravellerId=$oUser->traveller->traveller_id;
+
+        $hotel_name=$request->post("hotel_name");
+        $aRooms = RoomsPerHotelPerTrip::where('hotels_per_trip_id', $hotel_id)->get();
         $aCurrentOccupation = array();
+        $aTravellerPerRoom = array();
+
         foreach ($aRooms as $oRoom)
         {
             $aCurrentOccupation[$oRoom->rooms_hotel_trip_id] = TravellersPerRoom::where('rooms_hotel_trip_id', $oRoom->rooms_hotel_trip_id)->count();
+            $aTravellerPerRoom[$oRoom->rooms_hotel_trip_id]=TravellersPerRoom::where('rooms_hotel_trip_id', $oRoom->rooms_hotel_trip_id)
+                ->join('travellers','travellers_per_rooms.traveller_id','=','travellers.traveller_id')
+                ->get();
         }
         return view('user.HotelsAndRooms.rooms',
             [
+                'userTravellerId'=>$userTravellerId,
+                'hotel_id'=>$hotel_id,
+                'hotel_name'=>$hotel_name,
                 'aRooms' => $aRooms,
                 'aCurrentOccupation' => $aCurrentOccupation,
+                'aTravellerPerRoom' =>$aTravellerPerRoom
             ]);
     }
 
-    //GET::/listtravellers/{{room_hotel_trip_id}}
-    function getTravellers($iRoomHotelTripId)
-    {
-        $aTravellerIds = TravellersPerRoom::where('room_hotel_trip_id', $iRoomHotelTripId)->get();
-        //zoek nu alle travellers met de gevonden ids
-        //geef deze travellers mee met de view
-        return view('user.HotelsAndRooms.travellers');
-    }
-
-    //POST::
     function createHotel(Request $request)
     {
-        //Indien organisator
         $oUser = Auth::user();
 
         if ($oUser->role == 'guide')
@@ -115,7 +114,49 @@ class HotelRoomController extends Controller
         else{
             return redirect()->back();
         }
-        //Maak een nieuw hotel aan
+    }
+
+    function addHotelRoom(Request $request){
+        $oUser = Auth::user();
+
+        if ($oUser->role == 'guide')
+        {
+            $oRoom=new RoomsPerHotelPerTrip();
+            $oRoom->hotels_per_trip_id=$request->post('hotels_per_trip_id');
+            $oRoom->size=$request->post('AantalPersonen');
+            $oRoom->save();
+
+            return redirect()->back();
+        }
+        else{
+            return redirect()->back();
+        }
+    }
+
+    function chooseRoom(Request $request){
+        $oUser = Auth::user();
+        $userTravellerId=$oUser->traveller->traveller_id;
+        $chosenTravellers=TravellersPerRoom::select("traveller_id")->get();
+        foreach ($chosenTravellers as $traveller) {
+            if ($traveller->traveller_id == $userTravellerId) {
+                return redirect()->back()->with('errormessage', 'U heeft al een kamer gekozen');
+            }
+        }
+        $oTravellerPerRoom=new TravellersPerRoom();
+        $oTravellerPerRoom->rooms_hotel_trip_id=$request->post('rooms_hotel_trip_id');
+        $oTravellerPerRoom->traveller_id=$userTravellerId;
+        $oTravellerPerRoom->save();
+        return redirect()->back();
+
+
+    }
+
+    function leaveRoom(Request $request){
+        $oUser = Auth::user();
+        $userTravellerId=$oUser->traveller->traveller_id;
+        $travellerPerRoom = TravellersPerRoom::where('traveller_id', $userTravellerId)->firstOrFail();
+        $travellerPerRoom->delete();
+        return redirect()->back()->with('succesmessage', 'U kunt nu een andere kamer kiezen');
     }
 
     public function connectHotelToTrip(Request $request){

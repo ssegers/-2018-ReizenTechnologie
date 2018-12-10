@@ -202,11 +202,15 @@ Route::get('/listhotels', 'HotelRoomController@getHotelsPerTrip')->name("listhot
 Route::post('/listhotels', 'HotelRoomController@getHotelsPerTrip');
 Route::post('/deleteHotel', 'HotelRoomController@deleteHotel');
 Route::post('/connectHotelToTrip', 'HotelRoomController@connectHotelToTrip');
-
 Route::post('/createHotel', 'HotelRoomController@createHotel');
-Route::get('/listrooms', 'HotelRoomController@getRooms');
-Route::post('/listrooms', 'HotelRoomController@getRooms');
-Route::get('/listtravellers/{room_hotel_trip_id}', 'HotelRoomController@getTravellers');
+
+Route::get('/listrooms/{hotel_id}', 'HotelRoomController@getRooms');
+Route::post('/listrooms/{hotel_id}', 'HotelRoomController@getRooms');
+Route::post('/chooseRoom', 'HotelRoomController@chooseRoom');
+Route::post('/leaveRoom', 'HotelRoomController@leaveRoom');
+
+Route::post('/addRoom', 'HotelRoomController@addHotelRoom');
+
 //EndWIP
 
 //API calls

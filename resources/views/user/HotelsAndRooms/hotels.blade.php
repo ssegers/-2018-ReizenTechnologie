@@ -35,10 +35,6 @@
                         {{Form::text('Adres', null, array('class' => 'form-control','required' => 'required'))}}
                         {{Form::label('Telnr','Telnr:')}}
                         {{Form::text('Telnr', null, array('class' => 'form-control','required' => 'required'))}}
-                        {{--{{Form::label('Startdatum','Startdatum:')}}--}}
-                        {{--{{Form::date('Startdatum', null, array('class' => 'form-control','required' => 'required'))}}--}}
-                        {{--{{Form::label('Einddatum','Einddatum:')}}--}}
-                        {{--{{Form::date('Einddatum', null, array('class' => 'form-control','required' => 'required'))}}--}}
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -110,14 +106,17 @@
             <tr>
                 <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#hotelinfoPopup" data-hotel-name="{{$oHotel->hotel_name}}" data-hotel-address="{{$oHotel->address}}" data-hotel-phone="{{$oHotel->phone}}" data-hotel-email="{{$oHotel->email}}" ><i class="fas fa-info-circle"></i></button></td>
                 <td>{{ $oHotel->hotel_name }}</td>
-                {{--<td>{{ $oHotel->hotel_amount_of_rooms }}</td>--}}
                 <td>{{ $oHotel->hotel_start_date }}</td>
                 <td>{{ $oHotel->hotel_end_date }}</td>
                 <td>
-                    {{ Form::open(array('action' => 'HotelRoomController@getRooms', 'method' => 'post')) }}
+                    {{--{{ Form::open(array('action' => '/listrooms/'.$oHotel->hotels_per_trip_id, 'method' => 'post')) }}--}}
+                    <form method="POST" action="/listrooms/{{$oHotel->hotels_per_trip_id}}">
+                        {{ csrf_field() }}
+                        {{ method_field('POST') }}
                     {{ Form::hidden('hotels_per_trip_id', $oHotel->hotels_per_trip_id) }}
+                    {{ Form::hidden('hotel_name', $oHotel->hotel_name) }}
                     {{ Form::submit('Bekijk kamers',array('class'=>"btn btn-primary")) }}
-                    {{ Form::close()}}
+                    </form>
                 </td>
                 <td>
                     {{ Form::open(array('action' => 'HotelRoomController@deleteHotel', 'method' => 'post','onsubmit' => 'return ConfirmDelete()')) }}
