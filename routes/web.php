@@ -47,6 +47,7 @@ Route::middleware(['auth','admin'])->group(function () {
 
         Route::get('zip','AdminZipController@createForm')->name('adminZip');
         Route::post('zip','AdminZipController@createZip');
+        Route::delete('zip/{zip_id}','AdminZipController@deleteZip')->name('deleteZip');
 
         Route::prefix('study')->group(function() {
             Route::get('/', 'AdminStudyController@index')->name('adminStudy');

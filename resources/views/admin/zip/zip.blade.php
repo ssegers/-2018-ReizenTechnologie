@@ -53,7 +53,11 @@
                 <td style="width: 150px;">{{$oZip->zip_code}}</td>
                 <td style="width: 300px;">{{$oZip->city}}</td>
                 <td style="width: 60px;">
-                    <button type="button" class="btn btn-primary" ><i class="fas fa-trash-alt"></i></button>
+                    <form method="POST" action="/admin/zip/{{$oZip->zip_id}}" onsubmit="return confirm('Are you sure?')">
+                        {{ csrf_field() }}
+                        {{ method_field('DELETE') }}
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-trash-alt"></i></button>
+                    </form>
                 </td>
             </tr>
         @endforeach
