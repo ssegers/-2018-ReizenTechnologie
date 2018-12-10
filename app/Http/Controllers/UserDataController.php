@@ -388,7 +388,7 @@ class UserDataController extends Controller
     public function deleteUserData($sUserName){
         $User = User::where('username', $sUserName)->firstOrFail();
         $User->delete();
-        return redirect(route("filter"))->with('message', 'Je hebt je succesvol het account van '.$sUserName.' verwijdert.');
+        return redirect(route("filter"))->with('success', 'Je hebt je succesvol het account van '.$sUserName.' verwijdert.');
     }
 
     /**
