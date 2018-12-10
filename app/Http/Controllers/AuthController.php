@@ -35,7 +35,7 @@ class AuthController extends controller
             if (Auth::user()) {
                 $role = Auth::user()->role;
                 if ($role == "admin"){
-                    return redirect('/admin');
+                    return redirect('/admin/info');
                 }
                 if ($role == "guest"){
                     return redirect('/user/form/step-0');

@@ -55,7 +55,7 @@
                 <li class="nav-item"><a class="nav-link" href="{{ route('registerTripMessage') }}">Registreren</a></li>
                 <?php
                 }
-                else{
+                else if ($role != "admin"){
                     ?>
                     <li class="nav-item"><a class="nav-link" href="{{ route('profile') }}">Profiel</a></li>
 

@@ -111,6 +111,10 @@ class UserDataController extends Controller
             ));
         }
 
+        foreach ($aOrganizerTrips as $oTrip) {
+            $aAuthenticatedTrips[$oTrip->trip_id] = $oTrip->trip_id;
+        }
+
         /* Save th active pagination */
         $aPaginate = array(
             '5' => false,
@@ -132,10 +136,10 @@ class UserDataController extends Controller
         /* Check witch download option is checked */
         switch ($request->post('export')) {
             case 'excel':
-                $this->downloadExcel($aFiltersChecked, $aOrganizerTrip);
+                $this->downloadExcel($aFiltersChecked, $oCurrentTrip);
                 break;
             case 'pdf':
-                $this->downloadPDF($aFiltersChecked, $aOrganizerTrip);
+                $this->downloadPDF($aFiltersChecked, $oCurrentTrip);
                 break;
         }
 
@@ -147,7 +151,7 @@ class UserDataController extends Controller
             'oCurrentTrip' => $oCurrentTrip,
             'aActiveTrips' => $aActiveTrips,
             'aPaginate' => $aPaginate,
-            'aAuthenticatedTripId' => $aActiveTrips,
+            'aAuthenticatedTripId' => $aAuthenticatedTrips,
         ]);
     }
 
@@ -260,6 +264,9 @@ class UserDataController extends Controller
      */
     public function showUserData(Request $request, $sUserName = 'undefined')
     {
+        if (Auth::user()->role == "admin"){
+            return redirect(route("info"));
+        }
         if($sUserName == 'undefined'){
             $sUserName = Auth::user()->username;
         }
@@ -297,6 +304,10 @@ class UserDataController extends Controller
      */
     public function updateUserData(Request $aRequest, $sUserName)
     {
+        if (Auth::user()->role == "admin"){
+            return redirect(route("info"));
+        }
+        
         $aRequest->validate([
             'LastName'      => 'required',
             'FirstName'     => 'required',

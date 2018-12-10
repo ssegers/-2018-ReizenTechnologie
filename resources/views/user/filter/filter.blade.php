@@ -38,6 +38,7 @@
         <div class="container-fluid d-flex h-100 flex-column">
             <div class="row flex-shrink-0">
                 @foreach($aActiveTrips as $aTripData)
+
                     @if(array_has($aAuthenticatedTripId, $aTripData['oTrip']->trip_id))
                         <a href="/user/trip/{{ $aTripData['oTrip']->trip_id }}" class="btn btn-success badge-custom">
                             {{ $aTripData['oTrip']->name }} {{ $aTripData['oTrip']->year }}
