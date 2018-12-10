@@ -17,5 +17,9 @@ class PaymentsTableSeeder extends Seeder
                 'amount' => 200
             ]);
         }
+        DB::table('payments')->insert([
+            'traveller_id' => 1,
+            'amount' => 300
+        ]);
     }
 }

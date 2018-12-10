@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use App\Mail\PaymentStatus;
 use App\Payment;
 use App\Traveller;
+use App\TravellersPerTrip;
 use App\Trip;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
@@ -19,13 +22,49 @@ class PaymentsOverviewController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function showTable(){
-        $userdata = Traveller::getTravellersWithPayment();
+    public function showTable($iTripId = null){
+        $aActiveTrips = Trip::where('is_active', true)->get();
+        $oUser = Auth::user();
+        /* Get all trips that can be accessed by the user */
+        if ($oUser->role == 'admin') {
+            $aOrganizerTrips = $aActiveTrips;
+        } else if ($oUser->role == 'guide') {
+            $aOrganizerTrips = User::where('users.user_id', $oUser->user_id)->where('is_active', true)->where('is_organizer', true)
+                ->join('travellers', 'travellers.user_id', '=', 'users.user_id')
+                ->join('travellers_per_trips', 'travellers_per_trips.traveller_id', '=', 'travellers.traveller_id')
+                ->join('trips', 'trips.trip_id', '=', 'travellers_per_trips.trip_id')
+                ->get();
+        }
+
+        /* Check if user can access the trip */
+        if ($iTripId != null) {
+            $bCanAccess = false;
+            foreach ($aOrganizerTrips as $oTrip) {
+                if ($iTripId == $oTrip->trip_id) {
+                    $bCanAccess = true;
+                }
+            }
+            if ($bCanAccess == false) {
+                return 'U heeft geen rechten om deze lijst te bekijken';
+            }
+        } else {
+            $iTripId = $aOrganizerTrips[0]->trip_id;
+            $bCanAccess = true;
+        }
+        $aActiveTrips = array();
+        foreach (Trip::where('is_active', true)->get() as $oTrip) {
+            array_push($aActiveTrips, array(
+                'oTrip' => $oTrip,
+                'iCount' => TravellersPerTrip::where('trip_id', $oTrip->trip_id)
+                    ->get()
+                    ->count(),
+            ));
+        }
+        $oCurrentTrip = Trip::where('trip_id', $iTripId)->first();
+        $userdata = Traveller::getTravellersWithPayment($iTripId);
         foreach($userdata as $oUserData){
             $paymentsum[$oUserData['traveller_id']] = DB::table('payments')->where('traveller_id', '=', $oUserData['traveller_id'])->sum('amount');
         }
-
-
         return view('user.payment.pay_overview',['userdata' => $userdata, 'paymentsum' => $paymentsum ]);
     }
 
@@ -34,7 +73,7 @@ class PaymentsOverviewController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function addPayment(Request $request)
+    public function addPayment(Request $request, $iTravellerId)
     {
 
         //Get the input
@@ -61,7 +100,7 @@ class PaymentsOverviewController extends Controller
         Payment::insert([
             'amount' => $request->post('amount'),
             'payment_date' => $request->post('payment_date'),
-            'traveller_id' => $request->post('traveller_id')
+            'traveller_id' => $iTravellerId
 
         ]);
         //return back to the view with the succes message
