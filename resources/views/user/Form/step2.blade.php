@@ -9,7 +9,7 @@
 @section('content')
 <div class="container bg-white rounded shadow-sm">
 
-    <div id="error" class="alert alert-danger" role="alert"></div>
+    <div id="error" class="alert alert-danger" role="alert" style="display: none;:"></div>
     {{ Form::open(array('action' => 'RegisterController@step2', 'method' => 'post')) }}
     {{ csrf_field() }}
 

@@ -1,5 +1,4 @@
 $(document).ready(function () {
-    $('#error').hide();
     $('#add-zip-button').click(function(){
         var zip_code = $('#zip-text').val();
         var city = $('#city-text').val();
