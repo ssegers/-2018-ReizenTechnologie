@@ -72,7 +72,12 @@ class AdminZipController extends Controller
     public function deleteZip($zip_id){
         $Zip = Zip::where('zip_id', $zip_id)->firstOrFail();
         $sZipName = $Zip->zip_code . ' ' . $Zip->city;
-        $Zip->delete();
+        try{
+            $Zip->delete();
+        }
+        catch (\Exception $e){
+            return redirect(route("adminZip"))->with('alert-message', $sZipName.' : is in gebruik door reizigers en kan dus niet verwijdert worden.');
+        }
         return redirect(route("adminZip"))->with('message', 'Je hebt je succesvol '.$sZipName.' verwijdert.');
     }
 

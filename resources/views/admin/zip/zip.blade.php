@@ -37,8 +37,10 @@
     </div>
     {{Form::close()}}
 
+    {{--
     Zoek bestaande postcodes:
     <input type="search" class="form-control form-control-sm" placeholder="" aria-controls="paymentStatusTable" style="width: 510px;">
+    --}}
     <table class="table" style="width: 510px;">
         <thead style="display: block;">
         <tr>
@@ -53,7 +55,7 @@
                 <td style="width: 150px;">{{$oZip->zip_code}}</td>
                 <td style="width: 300px;">{{$oZip->city}}</td>
                 <td style="width: 60px;">
-                    <form method="POST" action="/admin/zip/{{$oZip->zip_id}}" onsubmit="return confirm('Are you sure?')">
+                    <form method="POST" action="/admin/zip/{{$oZip->zip_id}}" onsubmit='return confirm("Bent u zeker dat u {{$oZip->zip_code}} {{$oZip->city}} wilt verwijderen?")'>
                         {{ csrf_field() }}
                         {{ method_field('DELETE') }}
                     <button type="submit" class="btn btn-primary"><i class="fas fa-trash-alt"></i></button>
