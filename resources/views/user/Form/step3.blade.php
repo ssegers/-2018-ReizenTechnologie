@@ -21,7 +21,9 @@
             <label class="form-label">E-mail adres (van de school)*</label>
             <div class="input-group">
                 {{ Form::text('txtEmail', $sEnteredEmail, ['required','id'=>'txtEmail','oninput'=>'this.className', 'class' => 'mb-2 form-control '])}}
-                <input class="form-control" disabled value="@" />
+                <div class="input-group-append">
+                    <span class="form-control">@</span>
+                </div>
                 @if($sEmailExtension == 'student.ucll.be' || $sEmailExtension == 'student.ucll.be')
                     {{ Form::text('txtEmailExtension', $sEmailExtension, ['required', 'class' => 'form-control', 'readonly']) }}
                 @else
