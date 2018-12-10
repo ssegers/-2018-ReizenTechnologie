@@ -71,10 +71,12 @@
     </div>
 
     <div id="content-right">
-        <div class="container d-flex h-100 flex-column">
-            <div class="row flex-fill d-flex overflow-auto">
+        <div class="container-fluid d-flex h-100 flex-column overflow-auto">
+            <div class="row flex-fill d-flex">
                 <div class="col">
-                    @yield('content')
+                    <div class="container">
+                        @yield('content')
+                    </div>
                 </div>
             </div>
         </div>
