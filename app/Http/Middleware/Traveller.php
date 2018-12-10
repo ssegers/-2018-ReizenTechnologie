@@ -20,8 +20,7 @@ class Traveller
             if (Auth::user()->role == 'traveller' || Auth::user()->role == 'admin'){
                 return $next($request);
             }
-        } else {
-            return redirect('info');
         }
+        return redirect('info');
     }
 }

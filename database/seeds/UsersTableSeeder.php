@@ -286,57 +286,57 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->insert([
             'username' => 'r0000040',
             'password' => bcrypt('0000040'),
-            'role' => 'traveller',
+            'role' => 'guide',
         ]);
         DB::table('users')->insert([
             'username' => 'r0000041',
             'password' => bcrypt('0000041'),
-            'role' => 'traveller',
+            'role' => 'guide',
         ]);
         DB::table('users')->insert([
             'username' => 'r0000042',
             'password' => bcrypt('0000042'),
-            'role' => 'traveller',
+            'role' => 'guide',
         ]);
         DB::table('users')->insert([
             'username' => 'r0000043',
             'password' => bcrypt('0000043'),
-            'role' => 'traveller',
+            'role' => 'guide',
         ]);
         DB::table('users')->insert([
             'username' => 'r0000044',
             'password' => bcrypt('0000044'),
-            'role' => 'traveller',
+            'role' => 'guide',
         ]);
         DB::table('users')->insert([
             'username' => 'r0000045',
             'password' => bcrypt('0000045'),
-            'role' => 'traveller',
+            'role' => 'guide',
         ]);
         DB::table('users')->insert([
             'username' => 'r0000046',
             'password' => bcrypt('0000046'),
-            'role' => 'traveller',
+            'role' => 'guide',
         ]);
         DB::table('users')->insert([
             'username' => 'r0000047',
             'password' => bcrypt('0000047'),
-            'role' => 'traveller',
+            'role' => 'guide',
         ]);
         DB::table('users')->insert([
             'username' => 'r0000048',
             'password' => bcrypt('0000048'),
-            'role' => 'traveller',
+            'role' => 'guide',
         ]);
         DB::table('users')->insert([
             'username' => 'r0000049',
             'password' => bcrypt('0000049'),
-            'role' => 'traveller',
+            'role' => 'guide',
         ]);
         DB::table('users')->insert([
             'username' => 'r0000050',
             'password' => bcrypt('0000050'),
-            'role' => 'traveller',
+            'role' => 'guide',
         ]);
 
 
