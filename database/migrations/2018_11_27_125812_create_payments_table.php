@@ -16,10 +16,10 @@ class CreatePaymentsTable extends Migration
         Schema::create('payments', function (Blueprint $table) {
             $table->increments('payment_id');
             $table->string('payment_date')->nullable();
-            $table->integer('travellers_per_trip_id')->unsigned();
+            $table->integer('traveller_id')->unsigned();
             $table->integer('amount')->nullable();
             $table->timestamps();
-            $table->foreign('travellers_per_trip_id')->references('travellers_per_trip_id')->on('travellers_per_trips')->onDelete("cascade");
+            $table->foreign('traveller_id')->references('traveller_id')->on('travellers')->onDelete("cascade");
         });
     }
 
