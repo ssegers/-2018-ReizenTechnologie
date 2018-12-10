@@ -204,8 +204,8 @@ Route::post('/deleteHotel', 'HotelRoomController@deleteHotel');
 Route::post('/connectHotelToTrip', 'HotelRoomController@connectHotelToTrip');
 Route::post('/createHotel', 'HotelRoomController@createHotel');
 
-Route::get('/listrooms/{hotel_id}', 'HotelRoomController@getRooms');
-Route::post('/listrooms/{hotel_id}', 'HotelRoomController@getRooms');
+Route::get('/listrooms/{hotel_id}/{hotel_name}', 'HotelRoomController@getRooms');
+Route::post('/listrooms/{hotel_id}/{hotel_name}', 'HotelRoomController@getRooms');
 Route::post('/chooseRoom', 'HotelRoomController@chooseRoom');
 Route::post('/leaveRoom', 'HotelRoomController@leaveRoom');
 

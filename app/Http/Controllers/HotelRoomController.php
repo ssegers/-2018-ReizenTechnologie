@@ -68,12 +68,11 @@ class HotelRoomController extends Controller
         }
     }
 
-    function getRooms($hotel_id,Request $request)
+    function getRooms($hotel_id,$hotel_name)
     {
         $oUser=Auth::user();
         $userTravellerId=$oUser->traveller->traveller_id;
 
-        $hotel_name=$request->post("hotel_name");
         $aRooms = RoomsPerHotelPerTrip::where('hotels_per_trip_id', $hotel_id)->get();
         $aCurrentOccupation = array();
         $aTravellerPerRoom = array();
