@@ -19,7 +19,7 @@
 Route::middleware(['auth','admin'])->group(function () {
 
     Route::prefix('admin')->group(function() {
-        Route::get('/', 'AdminController@index');
+        Route::get('/', 'AdminController@index')->name('dashboard');
         Route::prefix('linkorganisator')->group(function() {
             route::get('/', 'ActiveTripOrganizerController@showActiveTrips')->name('adminLinkorganisator');
             route::post('/', 'ActiveTripOrganizerController@showLinkedOrganisators');
@@ -71,6 +71,11 @@ Route::middleware(['auth','guide'])->group(function () {
     Route::prefix('user')->group(function () {
         Route::get('trip/{trip?}', 'UserDataController@showUsersAsMentor')->name("filter");
         Route::post('trip/{trip?}', 'UserDataController@showUsersAsMentor');
+
+        Route::get('payment/{trip?}','PaymentsOverviewController@showTable')->name('payments');
+        Route::post('AddPayment/{traveller_id}', 'PaymentsOverviewController@addPayment');
+        Route::post('payment', 'PaymentsOverviewController@sendMail');
+
         Route::get('updatemail','MailController@getUpdateForm')->name('updatemail');
         Route::post('updatemail', 'MailController@sendUpdateMail');
         Route::post('updatemail/getEmail', 'MailController@getContactPersonByTripId');

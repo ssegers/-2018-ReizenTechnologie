@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span id="toggle" class="navbar-toggler-icon"></span>
     </button>
@@ -40,33 +40,31 @@
                 <?php break;
                 }?>
         </ul>
-        <ul class="navbar-nav">
+        <ul class="navbar-nav mr-auto">
             @if(\Illuminate\Support\Facades\Auth::check())
-                <?php
-                if ($role == "admin"){
-                ?>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('adminInfo') }}">AdminPanel</a></li>
-                <?php
-                }
-                ?>
-                <?php
-                if ($role == "guest"){
-                ?>
-                <li class="nav-item"><a class="nav-link" href="{{ route('registerTripMessage') }}">Registreren</a></li>
-                <?php
-                }
-                else if ($role != "admin"){
-                    ?>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('profile') }}">Profiel</a></li>
+                @if(\Illuminate\Support\Facades\Auth::user()->role == 'guest')
+                    <li class="nav-item"><a class="nav-link" href="{{ route('registerTripMessage') }}">Registreren</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('logout') }}">Afmelden</a></li>
+                @else
+                    @if(\Illuminate\Support\Facades\Auth::user()->role == 'admin')
+                        <li class="nav-item"><a class="nav-link" href="{{ route('adminInfo') }}">AdminPanel</a></li>
+                    @endif
 
-                <?php
-                }
-                ?>
-                <li class="nav-item"><a class="nav-link" href="{{ route('logout') }}">Afmelden</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Profiel
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="profileDropdown">
+                            @if(\Illuminate\Support\Facades\Auth::user()->role == 'guide')
+                                <a class="dropdown-item" href="{{ route('profile') }}">Mijn gegevens</a>
+                            @endif
+                            <a class="dropdown-item" href="{{ route('logout') }}">Afmelden</a>
+                        </div>
+                    </li>
+                @endif
             @else
                 <li class="nav-item"><a class="nav-link" href="{{ route('log') }}">Inloggen</a></li>
             @endif
-
         </ul>
     </div>
 </nav>
