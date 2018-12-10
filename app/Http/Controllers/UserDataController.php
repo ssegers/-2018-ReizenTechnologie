@@ -72,7 +72,7 @@ class UserDataController extends Controller
                 ->join('travellers', 'travellers.user_id', '=', 'users.user_id')
                 ->join('travellers_per_trips', 'travellers_per_trips.traveller_id', '=', 'travellers.traveller_id')
                 ->join('trips', 'trips.trip_id', '=', 'travellers_per_trips.trip_id')
-                ->get()->toArray();
+                ->get();
         }
 
         /* Check if user can access the trip */
@@ -90,6 +90,8 @@ class UserDataController extends Controller
             $iTripId = $aOrganizerTrips[0]->trip_id;
             $bCanAccess = true;
         }
+
+        $oCurrentTrip = Trip::where('trip_id', $iTripId)->first();
 
         /* Detect the applied filters and add to the list of standard filters */
         foreach ($this->aFilterList as $sFilterName => $sFilterText) {
