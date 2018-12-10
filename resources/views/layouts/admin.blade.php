@@ -49,14 +49,10 @@
 
     <div id="menu-left">
         <div class="container-fluid d-flex h-100 flex-column">
-            <div class="row flex-shrink-0">
-                <div class="col">
-                    <a href="admin">Dashboard</a>
-                </div>
-            </div>
             <div class="row flex-fill d-flex overflow-auto">
                 <div class="col">
                     <nav class="nav flex-column">
+                        <a href="{{ route('dashboard') }}" class="nav-link">Dashboard</a>
                         <a href="{{ route('adminInfo') }}" class="nav-link">Info Aanpassen</a>
                         <a href="{{ route('adminRegUser') }}" class="nav-link">Account Registreren</a>
                         <a href="{{ route('adminTrips') }}" class="nav-link" >Beheer reizen</a>

@@ -19,7 +19,7 @@
 Route::middleware(['auth','admin'])->group(function () {
 
     Route::prefix('admin')->group(function() {
-        Route::get('/', 'AdminController@index');
+        Route::get('/', 'AdminController@index')->name('dashboard');
         Route::prefix('linkorganisator')->group(function() {
             route::get('/', 'ActiveTripOrganizerController@showActiveTrips')->name('adminLinkorganisator');
             route::post('/', 'ActiveTripOrganizerController@showLinkedOrganisators');
