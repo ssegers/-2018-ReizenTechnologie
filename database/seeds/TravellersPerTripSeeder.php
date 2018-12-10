@@ -15,13 +15,14 @@ class TravellersPerTripSeeder extends Seeder
         DB::table('travellers_per_trips')->insert([
             'trip_id' => 1,
             'traveller_id' => 1,
+            'is_guide' => true,
             'is_organizer' => true,
         ]);
         //koppel Mr. Segers aan Duitsland
         DB::table('travellers_per_trips')->insert([
             'trip_id' => 2,
             'traveller_id' => 1,
-            'is_organizer' => false,
+            'is_organizer' => true,
         ]);
         //koppel Mr. Rudi aan Amerika
         DB::table('travellers_per_trips')->insert([
@@ -33,6 +34,7 @@ class TravellersPerTripSeeder extends Seeder
         DB::table('travellers_per_trips')->insert([
             'trip_id' => 2,
             'traveller_id' => 2,
+            'is_guide' => true,
             'is_organizer' => false,
         ]);
 
