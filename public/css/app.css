@@ -26,14 +26,6 @@ a.navbar-brand {
   padding: 0;
 }
 
-a.nav-link {
-  color: white;
-}
-
-a.nav-link:hover {
-  color: #003469;
-}
-
 body {
   overflow-x: hidden;
   width: 100vw;
