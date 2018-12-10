@@ -164,7 +164,7 @@ Route::prefix('user')->group(function () {
 
 });
 Route::get('/', function () {
-    return redirect()->route('info')->name('info');
+    return redirect()->route('info');
 });
 
 Route::get('/info','AdminInfoController@showInfo')->name('info');
