@@ -196,6 +196,9 @@ Route::get('/log','AuthController@showView')->name("log");
 //WIP
 Route::get('/listhotels', 'HotelRoomController@getHotelsPerTrip')->name("listhotels");
 Route::post('/listhotels', 'HotelRoomController@getHotelsPerTrip');
+Route::post('/deleteHotel', 'HotelRoomController@deleteHotel');
+Route::post('/connectHotelToTrip', 'HotelRoomController@connectHotelToTrip');
+
 Route::post('/createHotel', 'HotelRoomController@createHotel');
 Route::get('/listrooms/{hotels_per_trip_id}', 'HotelRoomController@getRooms');
 Route::get('/listtravellers/{room_hotel_trip_id}', 'HotelRoomController@getTravellers');
