@@ -17,6 +17,7 @@ class CreateTravellersPerTripsTable extends Migration
             $table->increments('travellers_per_trip_id')->unsigned(); //wordt alleen gebruikt door eloquent zelf
             $table->integer('trip_id')->unsigned();
             $table->integer('traveller_id')->unsigned();
+            $table->boolean('is_guide')->default(false);
             $table->boolean('is_organizer');
             $table->timestamps();
             $table->foreign('trip_id')->references('trip_id')->on('trips');
