@@ -71,9 +71,9 @@ class HotelRoomController extends Controller
     }
 
     //GET::/listrooms/{{hotels_per_trip_id}}
-    function getRooms($iHotelsPerTripId)
+    function getRooms(Request $request)
     {
-        $aRooms = RoomsPerHotelPerTrip::where('hotels_per_trip_id', $iHotelsPerTripId)->get();
+        $aRooms = RoomsPerHotelPerTrip::where('hotels_per_trip_id', $request->post("hotels_per_trip_id"))->get();
         $aCurrentOccupation = array();
         foreach ($aRooms as $oRoom)
         {
