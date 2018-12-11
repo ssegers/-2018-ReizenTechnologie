@@ -32,7 +32,9 @@ class HotelRoomController extends Controller
             //Haal alle hotel gegevens met de gevonden hotelIds
 
             $aHotelsPerTrip=HotelsPerTrip::whereIn('hotels.hotel_id', $aHotelsid)
+                ->where('trip_id',$iTripId->trip_id)
                 ->join('hotels','hotels_per_trips.hotel_id','=','hotels.hotel_id')
+                ->orderBy('hotel_start_date','asc')
                 ->get();
 
             $aActiveTrips=Trip::where('is_active',true)->get();
@@ -135,10 +137,13 @@ class HotelRoomController extends Controller
     function chooseRoom(Request $request){
         $oUser = Auth::user();
         $userTravellerId=$oUser->traveller->traveller_id;
-        $chosenTravellers=TravellersPerRoom::select("traveller_id")->get();
+        $chosenTravellers=RoomsPerHotelPerTrip::join('travellers_per_rooms','rooms_per_hotel_per_trips.rooms_hotel_trip_id','=','travellers_per_rooms.rooms_hotel_trip_id')
+            ->where('hotels_per_trip_id',$request->post('hotels_per_trip_id'))
+            ->select("traveller_id")
+            ->get();
         foreach ($chosenTravellers as $traveller) {
             if ($traveller->traveller_id == $userTravellerId) {
-                return redirect()->back()->with('errormessage', 'U heeft al een kamer gekozen');
+                return redirect()->back()->with('errormessage', 'U heeft al een kamer gekozen in dit hotel');
             }
         }
         $oTravellerPerRoom=new TravellersPerRoom();

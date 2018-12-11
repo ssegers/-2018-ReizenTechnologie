@@ -7,7 +7,7 @@
     {{ Form::open(array('id'=>'travelChanged','action' => 'HotelRoomController@getHotelsPerTrip', 'method' => 'post')) }}
         <select id="selectedActiveTrip" name="selectedActiveTrip" class="form-control-lg form-control mt-3 travelChanged">
             @foreach ($aActiveTrips as $trip)
-                <option class="dropdown-item" value={{$trip->trip_id}}>{{$trip->name}}</option>
+                <option class="dropdown-item" value={{$trip->trip_id}}>{{$trip->name}} {{$trip->year}}</option>
             @endforeach
         </select>
     {{ Form::close() }}
@@ -97,8 +97,8 @@
     </div>
 
 
-    <button type="button" class="m-5 p-3 float-right open btn btn-primary" data-toggle="modal" data-target="#hotelPopup">Hotel toevoegen</button>
-    <button type="button" class="m-5 p-3 float-right open btn btn-primary" data-toggle="modal" data-target="#hoteltripPopup" onclick="connectHotelToTrip()">Hotel toevoegen aan reis</button>
+    <button type="button" class="m-5 p-3 float-right open btn btn-primary" data-toggle="modal" data-target="#hotelPopup">Nieuw hotel aanmaken</button>
+    <button id="connectButton" type="button" class="m-5 p-3 float-right open btn btn-primary" data-toggle="modal" data-target="#hoteltripPopup" onclick="connectHotelToTrip()">Hotel toevoegen aan reis</button>
 
     <!--Altijd-->
     <table class="table">
@@ -106,8 +106,8 @@
             <tr>
                 <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#hotelinfoPopup" data-hotel-name="{{$oHotel->hotel_name}}" data-hotel-address="{{$oHotel->address}}" data-hotel-phone="{{$oHotel->phone}}" data-hotel-email="{{$oHotel->email}}" ><i class="fas fa-info-circle"></i></button></td>
                 <td>{{ $oHotel->hotel_name }}</td>
-                <td>{{ $oHotel->hotel_start_date }}</td>
-                <td>{{ $oHotel->hotel_end_date }}</td>
+                <td><?php echo $dd = date("d-m-Y", strtotime($oHotel->hotel_start_date)); ?></td>
+                <td><?php echo $dd = date("d-m-Y", strtotime($oHotel->hotel_end_date)); ?></td>
                 <td>
                     {{--{{ Form::open(array('action' => '/listrooms/'.$oHotel->hotels_per_trip_id, 'method' => 'post')) }}--}}
                     <form method="POST" action="/listrooms/{{$oHotel->hotels_per_trip_id}}/{{$oHotel->hotel_name}}">
@@ -145,6 +145,7 @@
 
     var selectTrip = document.getElementById('selectedActiveTrip');
     var selectHotel = document.getElementById('selectedHotel');
+    var connectButton=document.getElementById('connectButton');
 
     selectTrip.addEventListener('change',function(){
         document.getElementById("travelChanged").submit();
@@ -154,6 +155,7 @@
     var iTripId=<?php echo $iTripId ?>;
     var tripId=iTripId.trip_id
     selectTrip.value=tripId;
+    connectButton.textContent="Hotel toevoegen aan "+selectTrip.options[selectTrip.selectedIndex].text+" reis";
 
     function connectHotelToTrip() {
         var hiddenTripField=document.getElementById('hiddenTripId')

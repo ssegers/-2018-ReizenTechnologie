@@ -68,6 +68,7 @@
                                     @endforeach
                                     @for($i;$i<$oRoom->size;$i++)
                                         {{ Form::open(array('action' => 'HotelRoomController@chooseRoom', 'method' => 'post')) }}
+                                            {{Form::hidden('hotels_per_trip_id',$hotel_id)}}
                                             {{Form::hidden('rooms_hotel_trip_id',$oRoom->rooms_hotel_trip_id)}}
                                             <tr><td>{{Form::button('Kies Kamer',array('class' => 'btn btn-secondary', 'type' => 'submit'))}}</td></tr>
                                             {{Form::close()}}
