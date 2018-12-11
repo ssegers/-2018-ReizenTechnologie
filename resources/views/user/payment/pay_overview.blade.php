@@ -1,26 +1,46 @@
 @extends('layouts.app')
 
 @section('content')
-
     <div class="loader">
     </div>
     <div class="loaderBackground"></div>
-    <div class="container">
+    <div id="content-right">
+        <div class="container-fluid d-flex  flex-column">
+            <div class="row flex-shrink-0">
+                @foreach($aActiveTrips as $aTripData)
+
+                    @if(array_has($aAuthenticatedTripId, $aTripData['oTrip']->trip_id))
+                        <a href="/user/payment/trip/{{ $aTripData['oTrip']->trip_id }}" class="btn btn-success badge-custom">
+                            {{ $aTripData['oTrip']->name }} {{ $aTripData['oTrip']->year }}
+                            <span class="badge badge-light">{{ $aTripData['iCount'] }}</span>
+                        </a>
+                    @else
+                        <div class="btn btn-danger badge-custom">
+                            {{ $aTripData['oTrip']->name }} {{ $aTripData['oTrip']->year }}
+                            <span class="badge badge-light">{{ $aTripData['iCount'] }}</span>
+                        </div>
+                    @endif
+                @endforeach
+            </div>
+
+            <div class="row flex-shrink-0">
+                <div class="col-lg">
+                    <h1>Betalingsstatus deelnemers {{ $oCurrentTrip->name }} {{ $oCurrentTrip->year }}</h1>
+                </div><div class="col-md-6"> <button type="button" style="margin-top: 9px;" class="loadButton btn float-right btn-primary">Studenten betalingsstatus mailen</button></div></div>
+            </div>
         <div class="alert alert-success success-mail">
             <strong>Succes!</strong> De emails zijn succesvol verzonden
         </div>
         <div class="alert alert-danger error-mail">
             <strong>Error!</strong> De emails zijn niet verzonden. Probeer opnieuw of check je internetconnectie.
         </div>
-        <div class="row"><div class="col-md-6"><h1 class="page-title">Betalingsoverzicht</h1></div><div class="col-md-6"> <button type="button" style="margin-top: 9px;" class="loadButton btn float-right btn-primary">Studenten betalingsstatus mailen</button></div></div>
         <div class="table-wrapper-scroll">
             <table id="paymentStatusTable" class="table table-striped table-hover">
                 <thead>
                 <tr>
                     <th class="th-sm">Naam</th>
                     <th class="th-sm">Voornaam</th>
-                    <th class="th-sm">Studierichting</th>
-                    <th class="th-sm">Afstudeerrichting</th>
+                    <th class="th-sm">Bankrekening</th>
                     <th class="th-sm">Totaal</th>
                     <th class="th-sm">Reeds betaald</th>
                     <th class="th-sm">Saldo (te betalen)</th>
@@ -32,14 +52,14 @@
                     <tr>
                         <td class="field">{{ $oUserData['last_name'] }}</td>
                         <td class="field">{{ $oUserData['first_name'] }}</td>
-                        <td class="field">{{ $oUserData['study_name'] }}</td>
-                        <td class="field">{{ $oUserData['major_name'] }}</td>
+                        <td class="field">{{ $oUserData['iban'] }}</td>
                         <td class="field">{{ $oUserData['price'] }}</td>
                         <td class="field">{{ $paymentsum[$oUserData['traveller_id']] }}</td>
                         <td class="field">{{ $oUserData['price']-$paymentsum[$oUserData['traveller_id']] }}</td>
                         <td class="field"> <button type="button" class="open btn-primary rounded btn-xs  " data-id="{{$oUserData['traveller_id']}}"data-toggle="modal" data-target="#paymentPopUp">
                                 <i class="fas fa-plus-circle "></i>
                             </button></td>
+
                     </tr>
                 @endforeach
                 </tbody>
@@ -56,7 +76,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        {{Form::open(array('action' => 'PaymentsOverviewController@addPayment', 'method' => 'post', $iTravellerId->$oUserData['traveller_id'] ))}}
+                        {{Form::open(array('action' => 'PaymentsOverviewController@addPayment', 'method' => 'post'))}}
                         {{Form::hidden('traveller_id',$oUserData['traveller_id'])}}
                         <div class="form-group col">
                             {{Form::label('payment_date', 'Betalingsdatum ', ['class' => ''])}}

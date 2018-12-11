@@ -72,8 +72,8 @@ Route::middleware(['auth','guide'])->group(function () {
         Route::get('trip/{trip?}', 'UserDataController@showUsersAsMentor')->name("filter");
         Route::post('trip/{trip?}', 'UserDataController@showUsersAsMentor');
 
-        Route::get('payment/{trip?}','PaymentsOverviewController@showTable')->name('payments');
-        Route::post('AddPayment/{traveller_id}', 'PaymentsOverviewController@addPayment');
+        Route::get('payment/trip/{trip?}','PaymentsOverviewController@showTable')->name('payments');
+        Route::post('AddPayment', 'PaymentsOverviewController@addPayment');
         Route::post('payment', 'PaymentsOverviewController@sendMail');
 
         Route::get('updatemail','MailController@getUpdateForm')->name('updatemail');
@@ -161,9 +161,7 @@ Route::middleware(['auth','loggedIn'])->group(function () {
  * -------------------------------------------------------------------------------
  */
 Route::prefix('user')->group(function () {
-    Route::get('payment','PaymentsOverviewController@showTable')->name('payments');
-    Route::post('AddPayment', 'PaymentsOverviewController@addPayment');
-    Route::post('payment', 'PaymentsOverviewController@sendMail');
+
     Route::get('contact','ContactPageController@getInfo')->name('contact');
     Route::post('contact', 'ContactPageController@sendMail');
     Route::get('refresh_captcha', 'ContactPageController@refreshCaptcha')->name('refresh_captcha');
