@@ -104,7 +104,6 @@ class AdminZipController extends Controller
     private function messages(){
         return [
             'zip_code.required' => 'Postcode moet ingevuld zijn',
-            'zip_code.max' => 'Postcode is te lang',
             'city.required' => 'Gemeente moet ingevuld zijn',
             'city.max' => 'Naam van de gemeente is te lang',
 
