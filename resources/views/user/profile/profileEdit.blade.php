@@ -51,7 +51,7 @@
                                     <div class="form-row form-group">
                                         <div class="col-5">{{ Form::label('Study', 'Richting*') }}</div>
                                         <div class="col-7">
-                                            <select id="Study" name="Study" required class="form-control" data-dependent="Major">
+                                            <select id="Study" name="Study" required class="form-control cascadingMajor" data-dependent="Major">
                                                 @foreach($oStudies as $oStudy)
                                                     <option value="{{ $oStudy->study_id}}" @if($oStudy->study_id == $aUserData["study_id"]) selected @endif> {{ $oStudy->study_name }} </option>
                                                 @endforeach
@@ -202,8 +202,5 @@
                 {{csrf_field()}}
             {{ Form::close() }}
         </div>
-        {{csrf_field()}}
-        {{ Form::close() }}
-    </div>
     <script src="{{ URL::asset('/js/cascadingDropDownStudyMajors.js') }}"></script>
 @endsection
