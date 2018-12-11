@@ -6,6 +6,8 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'App\\Auto' => $baseDir . '/app/Auto.php',
+    'App\\AutosPerTrip' => $baseDir . '/app/AutosPerTrip.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Hotel' => $baseDir . '/app/Hotel.php',
@@ -61,11 +63,14 @@ return array(
     'App\\RoomsPerHotelPerTrip' => $baseDir . '/app/RoomsPerHotelPerTrip.php',
     'App\\Study' => $baseDir . '/app/Study.php',
     'App\\Traveller' => $baseDir . '/app/Traveller.php',
+    'App\\TravellersPerAuto' => $baseDir . '/app/TravellersPerAuto.php',
     'App\\TravellersPerRoom' => $baseDir . '/app/TravellersPerRoom.php',
     'App\\TravellersPerTrip' => $baseDir . '/app/TravellersPerTrip.php',
     'App\\Trip' => $baseDir . '/app/Trip.php',
     'App\\User' => $baseDir . '/app/User.php',
     'App\\Zip' => $baseDir . '/app/Zip.php',
+    'AutosPerTripSeeder' => $baseDir . '/database/seeds/AutosPerTripSeeder.php',
+    'AutosSeeder' => $baseDir . '/database/seeds/AutosSeeder.php',
     'BeyondCode\\DumpServer\\DumpServerCommand' => $vendorDir . '/beyondcode/laravel-dump-server/src/DumpServerCommand.php',
     'BeyondCode\\DumpServer\\DumpServerServiceProvider' => $vendorDir . '/beyondcode/laravel-dump-server/src/DumpServerServiceProvider.php',
     'BeyondCode\\DumpServer\\Dumper' => $vendorDir . '/beyondcode/laravel-dump-server/src/Dumper.php',
@@ -4597,6 +4602,7 @@ return array(
     'TijsVerkoyen\\CssToInlineStyles\\Css\\Property\\Property' => $vendorDir . '/tijsverkoyen/css-to-inline-styles/src/Css/Property/Property.php',
     'TijsVerkoyen\\CssToInlineStyles\\Css\\Rule\\Processor' => $vendorDir . '/tijsverkoyen/css-to-inline-styles/src/Css/Rule/Processor.php',
     'TijsVerkoyen\\CssToInlineStyles\\Css\\Rule\\Rule' => $vendorDir . '/tijsverkoyen/css-to-inline-styles/src/Css/Rule/Rule.php',
+    'TravellersPerAutoSeeder' => $baseDir . '/database/seeds/TravellersPerAutoSeeder.php',
     'TravellersPerRoomSeeder' => $baseDir . '/database/seeds/TravellersPerRoomSeeder.php',
     'TravellersPerTripSeeder' => $baseDir . '/database/seeds/TravellersPerTripSeeder.php',
     'TravellersTableSeeder' => $baseDir . '/database/seeds/TravellersTableSeeder.php',
