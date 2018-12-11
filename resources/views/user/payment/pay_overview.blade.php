@@ -77,7 +77,7 @@
                     </div>
                     <div class="modal-body">
                         {{Form::open(array('action' => 'PaymentsOverviewController@addPayment', 'method' => 'post'))}}
-                        {{Form::hidden('traveller_id',$oUserData['traveller_id'], array("id"=>"traveller-id")}}
+                        {{Form::hidden('traveller_id',$oUserData['traveller_id'], array("id"=>"traveller-id"))}}
                         <div class="form-group col">
                             {{Form::label('payment_date', 'Betalingsdatum ', ['class' => ''])}}
                             {{ Form::date('payment_date', null, array("id"=>"date-text","class" => "form-control", "required", "oninvalid" => "this.setCustomValidity('Deze datum is ongeldig')", "oninput" => "this.setCustomValidity('')")) }}
