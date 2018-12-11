@@ -25,7 +25,7 @@
     {{Form::open(array('action' => 'AdminZipController@createZip', 'method' => 'post' ))}}
     <div class="form-group">
         {{Form::label('zip_code', 'Postcode: ', ['class' => ''])}}
-        {{ Form::number('zip_code', null, array("class" => "form-control", "required", "min" => "1000", "max" => "9999", "oninvalid" => "this.setCustomValidity('Deze postcode is ongeldig')", "oninput" => "this.setCustomValidity('')", "placeholder" => "bv. 3660" )) }}
+        {{ Form::text('zip_code', null, array("class" => "form-control", "required", "oninvalid" => "this.setCustomValidity('Deze postcode is ongeldig')", "oninput" => "this.setCustomValidity('')", "placeholder" => "bv. 3660" )) }}
         <br/>
         {{Form::label('city', 'Stad of Gemeente: ', ['class' => ''])}}
         {{ Form::text('city', null, array("class" => "form-control", "required","maxlength" => "50", "oninvalid" => "this.setCustomValidity('Deze gemeente is ongeldig')", "oninput" => "this.setCustomValidity('')", "placeholder" => "bv: Opglabbeek")) }}

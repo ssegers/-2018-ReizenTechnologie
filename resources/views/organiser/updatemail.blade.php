@@ -23,7 +23,7 @@
     @csrf
     <div class="container">
         <h1>Verstuur hier een mail naar de deelnemers van een reis:</h1><br />
-        {{ Form::open(array('action' => 'MailController@sendUpdateMail', 'method' =>'post')) }}
+        {{ Form::open(array('action' => 'MailController@sendUpdateMail', 'method' =>'post', "onsubmit" => 'return confirm("Bent u zeker dat u de mail wilt versturen?")')) }}
         <div class="form-group">
             {{ Form::label('subject', 'Onderwerp:') }}
             {{ Form::text('subject', '', ['class' => 'form-control', 'required']) }}
@@ -34,14 +34,14 @@
         </div>
         <div class="form-group">
             {{ Form::label('contactMail','Email Contactpersoon:') }}
-            {{ Form::text('contactMail', $sEmail, array("class" => "form-control")) }}
+            {{ Form::text('contactMail', $sEmail, array("class" => "form-control", 'readonly')) }}
             {{--<input class="form-control" disabled="disabled" id="email-field"/>--}}
         </div>
         <div class="form-group">
             {{ Form::label('message', 'Bericht:') }}
             {{ Form::textArea('message', '', ['class' => 'form-control', 'required']) }}
         </div>
-        {{ Form::submit('Verzend',array("class" => "btn btn-primary", "onsubmit" => 'return confirm("Bent u zeker dat u de mail wilt versturen?")')) }}
+        {{ Form::submit('Verzend',array("class" => "btn btn-primary")) }}
         {{Form::button('Annuleren', array("class" => "btn btn-danger", "onclick" => "history.go(0)"))}}
         {{ Form::close() }}
     </div>

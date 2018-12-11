@@ -37,7 +37,7 @@
                 {{ session()->get('succesmessage') }}
             </div>
         @endif
-        <table class="table">
+        <table class="table text-center">
             <tr><td colspan="2"><h1>{{$hotel_name}}</h1></td></tr>
             <tr>
                 <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addHotelKamerPopup">Voeg kamer toe</button></td>
@@ -55,18 +55,18 @@
                 <tr>
                     <td colspan="2">
                         <div class="collapse" id="collapse{{$oRoom->rooms_hotel_trip_id}}">
-                            <div class="card card-body">
-                                <table>
+                            <div class="card card-body ">
+                                <table class="table text-center">
                                     <?php $i=0 ?>
                                     @foreach($aTravellerPerRoom[$oRoom->rooms_hotel_trip_id] as $oTraveller)
-                                        <tr><td>{{$oTraveller->first_name}} {{$oTraveller->last_name}}</td>
-                                        @if($oTraveller->traveller_id==$userTravellerId)
-                                                {{ Form::open(array('action' => 'HotelRoomController@leaveRoom', 'method' => 'post')) }}
-                                                {{Form::hidden('rooms_hotel_trip_id',$oRoom->rooms_hotel_trip_id)}}
-                                                <td>{{Form::button('Verlaat Kamer',array('class' => 'btn btn-secondary', 'type' => 'submit'))}}</td>
-                                                {{Form::close()}}
-                                        @endif
-                                        </tr>
+                                            <tr><td>{{$oTraveller->first_name}} {{$oTraveller->last_name}}
+                                                    @if($oTraveller->traveller_id==$userTravellerId)
+                                                        {{ Form::open(array('action' => 'HotelRoomController@leaveRoom', 'method' => 'post')) }}
+                                                        {{Form::hidden('rooms_hotel_trip_id',$oRoom->rooms_hotel_trip_id)}}
+                                                        {{Form::button('Verlaat Kamer',array('class' => 'btn btn-secondary', 'type' => 'submit'))}}
+                                                        {{Form::close()}}
+                                                    @endif
+                                            </td></tr>
                                         <?php $i++ ?>
                                     @endforeach
                                     @for($i;$i<$oRoom->size;$i++)

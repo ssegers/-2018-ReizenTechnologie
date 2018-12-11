@@ -23,7 +23,7 @@
                             <div class="dropdown-menu" aria-labelledby="personalDropdown">
                                 <a class="dropdown-item" href="/user/trip">Reizigers</a>
                                 <a class="dropdown-item" href="{{ route('updatemail') }}">Verstuur mail</a>
-                                <a class="dropdown-item" href="{{ route('payments') }}">Betalingen</a>
+                                <a class="dropdown-item" href="/user/payment/trip">Betalingen</a>
                                 <a class="dropdown-item" href="{{ route('listhotelsOrganizer') }}">Hotels</a>
                             </div>
                         </li>

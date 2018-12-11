@@ -16,6 +16,14 @@ use Illuminate\Support\Facades\Mail;
 
 class PaymentsOverviewController extends Controller
 {
+    protected $aSearchValues = array(
+        'last_name' => 'Familienaam',
+        'first_name' => 'Voornaam',
+        'iban' => 'Bankrekening',
+        'amount' => 'Betaling',
+        'travellers.traveller_id' => 'Reiziger Id',
+        'price' => 'Prijs'
+    );
     /**
      * Shows table with userdata(traveller, study, payment)
      * @author Nico Schelfhout
@@ -60,12 +68,18 @@ class PaymentsOverviewController extends Controller
                     ->count(),
             ));
         }
+        foreach ($aOrganizerTrips as $oTrip) {
+            $aAuthenticatedTrips[$oTrip->trip_id] = $oTrip->trip_id;
+        }
+        $aSearchValues = $this->aSearchValues;
         $oCurrentTrip = Trip::where('trip_id', $iTripId)->first();
         $userdata = Traveller::getTravellersWithPayment($iTripId);
         foreach($userdata as $oUserData){
             $paymentsum[$oUserData['traveller_id']] = DB::table('payments')->where('traveller_id', '=', $oUserData['traveller_id'])->sum('amount');
         }
-        return view('user.payment.pay_overview',['userdata' => $userdata, 'paymentsum' => $paymentsum ]);
+        return view('user.payment.pay_overview',['userdata' => $userdata, 'paymentsum' => $paymentsum ,
+            'oCurrentTrip' => $oCurrentTrip,
+            'aActiveTrips' => $aActiveTrips,'aAuthenticatedTripId' => $aAuthenticatedTrips]);
     }
 
     /**
@@ -73,7 +87,7 @@ class PaymentsOverviewController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function addPayment(Request $request, $iTravellerId)
+    public function addPayment(Request $request)
     {
 
         //Get the input
@@ -100,8 +114,7 @@ class PaymentsOverviewController extends Controller
         Payment::insert([
             'amount' => $request->post('amount'),
             'payment_date' => $request->post('payment_date'),
-            'traveller_id' => $iTravellerId
-
+            'traveller_id' => $request->post('traveller_id')
         ]);
         //return back to the view with the succes message
 
