@@ -148,7 +148,7 @@
                     <div class="col">
                         @if(!str_contains($sPath, 'profile'))
                             <a class="btn btn-info" href="{{route("filter")}}">Terug</a>
-                            <a class="btn btn-primary" href="/profile/edit">Aanpassen</a>
+                            <a class="btn btn-primary" href="/userinfo/{{$aUserData["username"]}}/edit">Aanpassen</a>
                             {{ csrf_field() }}
                             {{ method_field('DELETE') }}
                             <button class="btn btn-danger" type="submit">Verwijderen</button>
