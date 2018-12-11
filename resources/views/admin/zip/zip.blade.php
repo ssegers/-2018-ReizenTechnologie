@@ -1,36 +1,6 @@
 @extends('layouts.admin')
 
 @section('content')
-
-    <style>
-        .zips-table-wrapper{
-        }
-
-        .zipsTable > thead{
-        }
-        .zipsTableHeaderZip{
-            width: 150px;
-        }
-        .zipsTableHeaderCity{
-            width: 300px;
-        }
-        .zipsTableHeaderDelete{
-            width: 60px;
-        }
-        .zipsTable > tbody{
-
-        }
-        .zipsTableRowZip{
-            width: 150px;
-        }
-        .zipsTableRowCity{
-            width: 300px;
-        }
-        .zipsTableRowDelete{
-            width: 60px;
-        }
-    </style>
-
     @if ($errors->any())
         <div class="alert alert-danger">
             <ul>
@@ -66,21 +36,20 @@
     </div>
     {{Form::close()}}
 
-    <div class="zips-table-wrapper">
-        <table class="table zipsTable" id="ZipsTable">
+        <table class="table" id="ZipsTable">
             <thead>
             <tr>
-                <th class="zipsTableHeaderZip" scope="col">Postcode</th>
-                <th class="zipsTableHeaderCity" scope="col">Gemeente</th>
-                <th class="zipsTableHeaderDelete" scope="col"></th>
+                <th scope="col">Postcode</th>
+                <th scope="col">Gemeente</th>
+                <th scope="col"></th>
             </tr>
             </thead>
             <tbody>
             @foreach($aZipData as $oZip)
                 <tr>
-                    <td class="zipsTableRowZip">{{$oZip->zip_code}}</td>
-                    <td class="zipsTableRowCity">{{$oZip->city}}</td>
-                    <td class="zipsTableRowDelete">
+                    <td>{{$oZip->zip_code}}</td>
+                    <td>{{$oZip->city}}</td>
+                    <td>
                         <form method="POST" action="/admin/zip/{{$oZip->zip_id}}" onsubmit='return confirm("Bent u zeker dat u {{$oZip->zip_code}} {{$oZip->city}} wilt verwijderen?")'>
                             {{ csrf_field() }}
                             {{ method_field('DELETE') }}
@@ -91,7 +60,6 @@
             @endforeach
             </tbody>
         </table>
-    </div>
 
 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.css"/>
