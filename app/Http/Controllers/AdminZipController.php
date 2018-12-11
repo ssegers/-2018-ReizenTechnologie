@@ -69,11 +69,21 @@ class AdminZipController extends Controller
 
     }
 
+    /**Author: Joren Meynen
+     * @return \Illuminate\Http\RedirectResponse
+     *
+     * Returns an array with custom error messages
+     */
     public function deleteZip($zip_id){
         $Zip = Zip::where('zip_id', $zip_id)->firstOrFail();
         $sZipName = $Zip->zip_code . ' ' . $Zip->city;
-        $Zip->delete();
-        return redirect(route("adminZip"))->with('message', 'Je hebt je succesvol '.$sZipName.' verwijdert.');
+        try{
+            $Zip->delete();
+        }
+        catch (\Exception $e){
+            return redirect(route("adminZip"))->with('alert-message', $sZipName.' : is in gebruik door reizigers en kan dus niet verwijdert worden.');
+        }
+        return redirect()->back()->with('message', 'Je hebt je succesvol '.$sZipName.' verwijdert.');
     }
 
 
@@ -96,6 +106,6 @@ class AdminZipController extends Controller
 
 
 
-    //misschien eventueel csv kunnen uploaden van de postcodes
+
 }
 

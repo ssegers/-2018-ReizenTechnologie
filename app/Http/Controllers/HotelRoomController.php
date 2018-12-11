@@ -15,14 +15,8 @@ use Illuminate\Support\Facades\Auth;
 
 class HotelRoomController extends Controller
 {
-    //GET::/listhotels
-    function getHotelsPerTrip(Request $request)
+    function getHotelsPerTripOrganizer(Request $request)
     {
-        //Haal trip id van de ingelogde traveller
-        $oUser = Auth::user();
-
-        if ($oUser->role == 'guide')
-        {
             if ($request->post('selectedActiveTrip')==null){
                 $iTripId=Trip::where('is_active',true)->select('trip_id')->first();
             }
@@ -31,91 +25,132 @@ class HotelRoomController extends Controller
             }
             $aHotelsid = HotelsPerTrip::whereIn('trip_id', $iTripId)->select('hotel_id')->get();
 
-            //Haal alle hotel gegevens met de gevonden hotelIds
-
             $aHotelsPerTrip=HotelsPerTrip::whereIn('hotels.hotel_id', $aHotelsid)
+                ->where('trip_id',$iTripId->trip_id)
                 ->join('hotels','hotels_per_trips.hotel_id','=','hotels.hotel_id')
+                ->orderBy('hotel_start_date','asc')
                 ->get();
 
             $aActiveTrips=Trip::where('is_active',true)->get();
 
             $aHotels=Hotel::get();
 
-            return view('user.HotelsAndRooms.hotels',
+            return view('organiser.HotelsAndRooms.hotels',
                 [
                     'aHotelsPerTrip'=>$aHotelsPerTrip,
                     'aHotels'=>$aHotels,
                     'aActiveTrips'=>$aActiveTrips,
                     'iTripId'=>$iTripId
                 ]);
-        }
-        else{
-            foreach($oUser->traveller->travellersPerTrip as $travellersPerTrip) {
-                $iTripId=$travellersPerTrip->trip_id;
-            }
-            $aHotelsid = HotelsPerTrip::where('trip_id', $iTripId)->select('hotel_id')->get();
-            //Haal alle hotel gegevens met de gevonden hotelIds
-
-            $aHotelsPerTrip=HotelsPerTrip::whereIn('hotels.hotel_id', $aHotelsid)
-                ->join('hotels','hotels_per_trips.hotel_id','=','hotels.hotel_id')
-                ->get();
-
-            $aActiveTrips=Trip::where('is_active',true)->get();
-
-            return view('user.HotelsAndRooms.hotels',
-                [
-                    'aHotelsPerTrip'=>$aHotelsPerTrip,
-                    'aActiveTrips'=>$aActiveTrips
-                ]);
-        }
     }
 
-    //GET::/listrooms/{{hotels_per_trip_id}}
-    function getRooms(Request $request)
-    {
-        $aRooms = RoomsPerHotelPerTrip::where('hotels_per_trip_id', $request->post("hotels_per_trip_id"))->get();
-        $aCurrentOccupation = array();
-        foreach ($aRooms as $oRoom)
-        {
-            $aCurrentOccupation[$oRoom->rooms_hotel_trip_id] = TravellersPerRoom::where('rooms_hotel_trip_id', $oRoom->rooms_hotel_trip_id)->count();
+    function getHotelsPerTripUser(){
+        $oUser=Auth::user();
+        foreach($oUser->traveller->travellersPerTrip as $travellersPerTrip) {
+            $iTripId=$travellersPerTrip->trip_id;
         }
-        return view('user.HotelsAndRooms.rooms',
+        $aHotelsid = HotelsPerTrip::where('trip_id', $iTripId)->select('hotel_id')->get();
+        //Haal alle hotel gegevens met de gevonden hotelIds
+
+        $aHotelsPerTrip=HotelsPerTrip::whereIn('hotels.hotel_id', $aHotelsid)
+            ->join('hotels','hotels_per_trips.hotel_id','=','hotels.hotel_id')
+            ->get();
+
+        $aActiveTrips=Trip::where('is_active',true)->get();
+
+        return view('organiser.HotelsAndRooms.hotels',
             [
-                'aRooms' => $aRooms,
-                'aCurrentOccupation' => $aCurrentOccupation,
+                'aHotelsPerTrip'=>$aHotelsPerTrip,
+                'aActiveTrips'=>$aActiveTrips
             ]);
     }
 
-    //GET::/listtravellers/{{room_hotel_trip_id}}
-    function getTravellers($iRoomHotelTripId)
+    function getRooms($hotel_id,$hotel_name)
     {
-        $aTravellerIds = TravellersPerRoom::where('room_hotel_trip_id', $iRoomHotelTripId)->get();
-        //zoek nu alle travellers met de gevonden ids
-        //geef deze travellers mee met de view
-        return view('user.HotelsAndRooms.travellers');
+        $oUser=Auth::user();
+        $userTravellerId=$oUser->traveller->traveller_id;
+
+        $aRooms = RoomsPerHotelPerTrip::where('hotels_per_trip_id', $hotel_id)->get();
+        $aCurrentOccupation = array();
+        $aTravellerPerRoom = array();
+
+        foreach ($aRooms as $oRoom)
+        {
+            $aCurrentOccupation[$oRoom->rooms_hotel_trip_id] = TravellersPerRoom::where('rooms_hotel_trip_id', $oRoom->rooms_hotel_trip_id)->count();
+            $aTravellerPerRoom[$oRoom->rooms_hotel_trip_id]=TravellersPerRoom::where('rooms_hotel_trip_id', $oRoom->rooms_hotel_trip_id)
+                ->join('travellers','travellers_per_rooms.traveller_id','=','travellers.traveller_id')
+                ->get();
+        }
+        return view('organiser.HotelsAndRooms.rooms',
+            [
+                'userTravellerId'=>$userTravellerId,
+                'hotel_id'=>$hotel_id,
+                'hotel_name'=>$hotel_name,
+                'aRooms' => $aRooms,
+                'aCurrentOccupation' => $aCurrentOccupation,
+                'aTravellerPerRoom' =>$aTravellerPerRoom
+            ]);
     }
 
-    //POST::
     function createHotel(Request $request)
     {
-        //Indien organisator
-        $oUser = Auth::user();
+        $oHotel=new Hotel();
+        $oHotel->hotel_name=$request->post('Hotelnaam');
+        $oHotel->address=$request->post('Adres');
+        $oHotel->phone=$request->post('Telnr');
+        $oHotel->email=$request->post('EmailHotel');
+        $oHotel->save();
 
-        if ($oUser->role == 'guide')
+        return redirect()->back();
+    }
+
+    function addHotelRoom(Request $request){
+        $oUser = Auth::user();
+        $is_organizer=false;
+        foreach($oUser->traveller->travellersPerTrip as $travellersPerTrip) {
+            $is_organizer=$travellersPerTrip->is_organizer;
+        }
+        if ($oUser->role == 'guide'&& $is_organizer)
         {
-            $oHotel=new Hotel();
-            $oHotel->hotel_name=$request->post('Hotelnaam');
-            $oHotel->address=$request->post('Adres');
-            $oHotel->phone=$request->post('Telnr');
-            $oHotel->email=$request->post('EmailHotel');
-            $oHotel->save();
+            $oRoom=new RoomsPerHotelPerTrip();
+            $oRoom->hotels_per_trip_id=$request->post('hotels_per_trip_id');
+            $oRoom->size=$request->post('AantalPersonen');
+            $oRoom->save();
 
             return redirect()->back();
         }
         else{
             return redirect()->back();
         }
-        //Maak een nieuw hotel aan
+    }
+
+    function chooseRoom(Request $request){
+        $oUser = Auth::user();
+        $userTravellerId=$oUser->traveller->traveller_id;
+        $chosenTravellers=RoomsPerHotelPerTrip::join('travellers_per_rooms','rooms_per_hotel_per_trips.rooms_hotel_trip_id','=','travellers_per_rooms.rooms_hotel_trip_id')
+            ->where('hotels_per_trip_id',$request->post('hotels_per_trip_id'))
+            ->select("traveller_id")
+            ->get();
+        foreach ($chosenTravellers as $traveller) {
+            if ($traveller->traveller_id == $userTravellerId) {
+                return redirect()->back()->with('errormessage', 'U heeft al een kamer gekozen in dit hotel');
+            }
+        }
+        $oTravellerPerRoom=new TravellersPerRoom();
+        $oTravellerPerRoom->rooms_hotel_trip_id=$request->post('rooms_hotel_trip_id');
+        $oTravellerPerRoom->traveller_id=$userTravellerId;
+        $oTravellerPerRoom->save();
+        return redirect()->back();
+
+
+    }
+
+    function leaveRoom(Request $request){
+        $oUser = Auth::user();
+        $userTravellerId=$oUser->traveller->traveller_id;
+        $travellerPerRoom = TravellersPerRoom::where('traveller_id', $userTravellerId)->firstOrFail();
+        $travellerPerRoom->delete();
+        return redirect()->back()->with('succesmessage', 'U kunt nu een andere kamer kiezen');
     }
 
     public function connectHotelToTrip(Request $request){
