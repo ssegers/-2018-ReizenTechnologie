@@ -9,6 +9,7 @@ use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\View;
+use Mpdf\Tag\Tr;
 
 class ActiveTripOrganizerController extends Controller
 {
@@ -44,11 +45,6 @@ class ActiveTripOrganizerController extends Controller
          * Pak de reis, haal de users op , filter de users op rol begeleider
          */
         $iTripId = $request->post('trip_id');
-       /* $aUserId = TravellersPerTrip::Select('traveller_id')->where('trip_id', $iTripId)->get();
-        $oMentors = Traveller::Select('traveller_id','first_name', 'last_name')
-            ->whereIn('traveller_id', $aUserId)
-            ->orderBy('first_name')
-            ->get();*/
 
        $aTravellers = TravellersPerTrip::with('traveller')->where('trip_id', $iTripId)->where('is_organizer', true)->get();
        $aMentors = [];
@@ -78,17 +74,20 @@ class ActiveTripOrganizerController extends Controller
         $iTripId = $request->post('trip_id');
 
         for ($i = 0; $i < count($aTravellerId); $i++) {
-            $oOrganizer = TravellersPerTrip::where('traveller_id', '=', $aTravellerId[$i])->where('trip_id', '=', $iTripId)->first();
+                $oOrganizer = TravellersPerTrip::where('traveller_id', '=', $aTravellerId[$i])->where('trip_id', '=', $iTripId)->first();
+              if($oOrganizer != null){
+                  $oOrganizer->is_organizer = true;
+                  $oOrganizer->save();
+              } else {
+                  $oOrganizer = new TravellersPerTrip();
+                  $oOrganizer->traveller_id = $aTravellerId[$i];
+                  $oOrganizer->trip_id = $iTripId;
+                  $oOrganizer->is_organizer = true;
+                  $oOrganizer->save();
+              }
+
            // return response()->json(['organizer' => $oOrganizer]);
-            $oOrganizer->is_organizer = true;
-            $oOrganizer->save();
         }
-        /*$aUserId = TripOrganizer::Select('traveller_id')->where('trip_id', $iTripId)->get();
-        $oMentors = Traveller::Select('traveller_id','first_name', 'last_name')
-            ->whereIn('traveller_id', $aUserId)
-            ->orderBy('first_name')
-            ->get();
-        */
        $request->session()->flash('alert-success', 'Het opslaan van begeleiders is gelukt.');
         return response()->json(['success' => true]);
     }

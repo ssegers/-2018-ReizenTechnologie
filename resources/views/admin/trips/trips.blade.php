@@ -9,34 +9,34 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
                 {{ Form::open(array('action' => 'AdminTripController@UpdateOrCreateTrip', 'method' => 'post')) }}
-                    <div class="modal-body">
-                        <div class="form-group">
-                            {{Form::label('trip-name','Naam:')}}
-                            {{Form::text('trip-name', null, array('class' => 'form-control', 'required'))}}
-                        </div>
-                        <div class="form-group">
-                            {{Form::label('trip-year','Jaar:')}}
-                            {{Form::number('trip-year', null, array('class' => 'form-control', 'required'))}}
-                        </div>
-                        <div class="form-group">
-                            {{Form::label('trip-price','Prijs in Euro:')}}
-                            {{Form::number('trip-price', null, array('class' => 'form-control', 'required'))}}
-                        </div>
-                        <div class="form-group">
-                            {{Form::label('trip-is-active','Actief:')}}
-                            <input type="checkbox" class="checkbox-lg m-3" name="trip-is-active" value="1" id="trip-is-active"/>
-                            {{--{{Form::checkbox('trip-is-active','1' )}}--}}
-                        </div>
-                        <div class="form-group">
-                            {{Form::label('trip-mail','Mail contactpersoon:')}}
-                            {{Form::text('trip-mail', null, array('class' => 'form-control'))}}
-                        </div>
-                            {{ Form::hidden('trip-id','trip-id',array('id'=>'trip-id')) }}
+                <div class="modal-body">
+                    <div class="form-group">
+                        {{Form::label('trip-name','Naam:')}}
+                        {{Form::text('trip-name', null, array('class' => 'form-control', 'required'))}}
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Sluiten</button>
-                        <button type="submit" class="btn btn-primary">Opslaan</button>
+                    <div class="form-group">
+                        {{Form::label('trip-year','Jaar:')}}
+                        {{Form::number('trip-year', null, array('class' => 'form-control', 'required'))}}
                     </div>
+                    <div class="form-group">
+                        {{Form::label('trip-price','Prijs in Euro:')}}
+                        {{Form::number('trip-price', null, array('class' => 'form-control', 'required'))}}
+                    </div>
+                    <div class="form-group">
+                        {{Form::label('trip-is-active','Actief:')}}
+                        <input type="checkbox" class="checkbox-lg m-3" name="trip-is-active" value="1" id="trip-is-active"/>
+                        {{--{{Form::checkbox('trip-is-active','1' )}}--}}
+                    </div>
+                    <div class="form-group">
+                        {{Form::label('trip-mail','Mail contactpersoon:')}}
+                        {{Form::text('trip-mail', null, array('class' => 'form-control'))}}
+                    </div>
+                    {{ Form::hidden('trip-id','trip-id',array('id'=>'trip-id')) }}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Sluiten</button>
+                    <button type="submit" class="btn btn-primary">Opslaan</button>
+                </div>
                 {{ Form::close() }}
             </div>
         </div>
@@ -51,15 +51,15 @@
             </button>
             <table class="table">
                 <thead>
-                    <tr>
-                        <th scope="col">Naam</th>
-                        <th scope="col">Jaar</th>
-                        <th scope="col">Prijs</th>
-                        <th scope="col">Inscrijvingen actief</th>
-                        <th scope="col">Mail contactpersoon</th>
-                        <th scope="col">Bewerken</th>
-                        
-                    </tr>
+                <tr>
+                    <th scope="col">Naam</th>
+                    <th scope="col">Jaar</th>
+                    <th scope="col">Prijs</th>
+                    <th scope="col">Inscrijvingen actief</th>
+                    <th scope="col">Mail contactpersoon</th>
+                    <th scope="col">Bewerken</th>
+
+                </tr>
                 </thead>
 
                 <tbody>
@@ -82,35 +82,33 @@
             </table>
         </div>
     </div>
-<script>
-    $('#tripModal').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget); // Button that triggered the modal
-        var tripName = button.data('trip-name');
-        var tripYear = button.data('trip-year');
-        var tripActive = button.data('trip-active');
-        var tripPrice = button.data('trip-price');
-        var tripMail = button.data('trip-mail');
-        console.log(tripActive);
-        var tripId = button.data('trip-id');
-        // Extract info from data-* attributes
-        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-        var modal = $(this);
-
-        modal.find('.modal-body #trip-name').val(tripName);
-        modal.find('.modal-body #trip-year').val(tripYear);
-        modal.find('.modal-body #trip-active').val(tripActive);
-        modal.find('.modal-body #trip-price').val(tripPrice);
-        modal.find('.modal-body #trip-id').val(tripId);
-        modal.find('.modal-body #trip-mail').val(tripMail);
-
-        var active = $('#trip-is-active');
-        if (tripActive == 1) {
-            active.prop('checked', true);
-        }
-        else {
-            active.prop('checked', false);
-        }
-    })
-</script>
+    <script>
+        $('#tripModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget); // Button that triggered the modal
+            var tripName = button.data('trip-name');
+            var tripYear = button.data('trip-year');
+            var tripActive = button.data('trip-active');
+            var tripPrice = button.data('trip-price');
+            var tripMail = button.data('trip-mail');
+            console.log(tripActive);
+            var tripId = button.data('trip-id');
+            // Extract info from data-* attributes
+            // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+            // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+            var modal = $(this);
+            modal.find('.modal-body #trip-name').val(tripName);
+            modal.find('.modal-body #trip-year').val(tripYear);
+            modal.find('.modal-body #trip-active').val(tripActive);
+            modal.find('.modal-body #trip-price').val(tripPrice);
+            modal.find('.modal-body #trip-id').val(tripId);
+            modal.find('.modal-body #trip-mail').val(tripMail);
+            var active = $('#trip-is-active');
+            if (tripActive == 1) {
+                active.prop('checked', true);
+            }
+            else {
+                active.prop('checked', false);
+            }
+        })
+    </script>
 @endsection
