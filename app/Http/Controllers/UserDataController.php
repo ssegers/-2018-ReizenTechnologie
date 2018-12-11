@@ -280,13 +280,19 @@ class UserDataController extends Controller
                 ->join('users', 'travellers.user_id', '=', 'users.user_id')
                 ->where('username', $sUserName)
                 ->first();
-            $iTripIdGuide = TravellersPerTrip::select('trip_id')
+            $aTripIdsGuide = TravellersPerTrip::select('trip_id')
                 ->join('travellers', 'travellers_per_trips.traveller_id', '=', 'travellers.traveller_id')
                 ->join('users', 'travellers.user_id', '=', 'users.user_id')
                 ->where('username', Auth::user()->username)
-                ->first();
+                ->get();
 
-            if($iTripIdTraveller != $iTripIdGuide){
+            $bIsGuideOfTraveller = false;
+            foreach($aTripIdsGuide as $aTripIdGuide){
+                if($iTripIdTraveller != $aTripIdGuide){
+                    $bIsGuideOfTraveller = true;
+                }
+            }
+            if(!$bIsGuideOfTraveller){
                 return redirect(route("info"));
             }
             /*  */
