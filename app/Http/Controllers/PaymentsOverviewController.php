@@ -142,14 +142,34 @@ class PaymentsOverviewController extends Controller
 
     public function sendMail(Request $request){
         $bsendMail = $request->post("sendMail");
-        $this->sendMailToStudentsInTrip(2,"Rudi");
-        return response()->json(['mailsSent' => true]);
+        $aTripIdGuide = TravellersPerTrip::select('trip_id')
+            ->join('travellers', 'travellers_per_trips.traveller_id', '=', 'travellers.traveller_id')
+            ->join('users', 'travellers.user_id', '=', 'users.user_id')
+            ->where('username', Auth::user()->username)
+            ->first();
+        //foreach ($aTripIdGuide as $iTrip){
+            //$this->sendMailToStudentsInTrip($aTripIdGuide["trip_id"]);
+        //}
+        $oStudents = Traveller::join('travellers_per_trips', 'travellers_per_trips.traveller_id', '=', 'travellers.traveller_id')->where('trip_id',$aTripIdGuide["trip_id"])->get()->toArray();
+        $sTrip = Trip::where('trip_id',$aTripIdGuide["trip_id"])->first();
+        $sTripNaam = $sTrip->name;
+        $iPrijs=$sTrip->price;
+        foreach ($oStudents as $oStudent){
+            $aBetalingen = Payment::where('traveller_id',$oStudent->traveller_id)->get()->pluck('amount');
+            $iBetaald = 0;
+            foreach ($aBetalingen as $iAmount){
+                $iBetaald+=$iAmount;
+            }
+
+        }
+        return response()->json(["Travellers in je trip"=>$oStudents]);
     }
 
-    public function sendMailToStudentsInTrip($sTripId,$sBegeleider){
-        $oStudents = Traveller::where('trip_id',$sTripId)->get();
+    public function sendMailToStudentsInTrip($sTripId,$sBegeleider=" "){
+
+        $oStudents = Traveller::join('travellers_per_trips', 'travellers_per_trips.traveller_id', '=', 'travellers.traveller_id')->where('trip_id',$sTripId)->get()->toArray();
         $sTrip = Trip::where('trip_id',$sTripId)->first();
-        $sTripNaam = $sTrip->naam;
+        $sTripNaam = $sTrip->name;
         $iPrijs=$sTrip->price;
         foreach ($oStudents as $oStudent){
             $aBetalingen = Payment::where('traveller_id',$oStudent->traveller_id)->get()->pluck('amount');

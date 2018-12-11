@@ -8,7 +8,7 @@ $(document).ready(function () {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: "POST",
-                url: "payment/",
+                url: "/user/payment",
                 data: {
                     sendMail: true,
                 },

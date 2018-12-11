@@ -62,7 +62,7 @@
             invisibleBeforeSelect.css("display","none");
             studySelect.change(function () {
             var selectValue = studySelect.val();
-            majorLabel.html('Niewe afstudeerrichting toevoegen voor '+ $( "#studySelect option:selected" ).text());
+            majorLabel.html('Nieuwe afstudeerrichting toevoegen voor '+ $( "#studySelect option:selected" ).text());
             majorTitle.html("Afstudeerrichtingen van "+$( "#studySelect option:selected" ).text());
             invisibleAfterSelect.css("display","none");
             invisibleBeforeSelect.css("display","block");
