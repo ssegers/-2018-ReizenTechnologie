@@ -11,6 +11,7 @@ class PaymentsTableSeeder extends Seeder
      */
     public function run()
     {
+
         for($i = 1; $i<50;$i++){
             DB::table('payments')->insert([
                 'traveller_id' => $i,
