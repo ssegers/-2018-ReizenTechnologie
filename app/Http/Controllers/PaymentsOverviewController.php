@@ -109,17 +109,17 @@ class PaymentsOverviewController extends Controller
         if($validator->fails()){
             return redirect()->back()->withErrors($validator)->withInput();
         }
-
+        $amount=$request->post('amount');
         //Insert new record into table
-        Payment::insert([
-            'amount' => $request->post('amount'),
+        Payment::where('traveller_id', $request->post('traveller_id'))
+        ->update([
             'payment_date' => $request->post('payment_date'),
-            'traveller_id' => $request->post('traveller_id')
+            'amount' => DB::raw('amount+'.$request->post('amount'))
+
         ]);
+
         //return back to the view with the succes message
-
-        return back();
-
+        return response()->json(['paymentAdded' => true]);
     }
 
 

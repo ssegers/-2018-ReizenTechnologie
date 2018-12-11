@@ -17,31 +17,41 @@ class HotelRoomController extends Controller
 {
     function getHotelsPerTripOrganizer(Request $request)
     {
-            if ($request->post('selectedActiveTrip')==null){
-                $iTripId=Trip::where('is_active',true)->select('trip_id')->first();
+        $oUser=Auth::user();
+        foreach($oUser->traveller->travellersPerTrip as $travellersPerTrip) {
+            $is_organizer=$travellersPerTrip->is_organizer;
+            if($is_organizer){
+                $travellerId=$oUser->traveller->traveller_id;
+                $aIsOrganizerOfTrip=TravellersPerTrip::where('traveller_id',$travellerId)->where('is_organizer',true)->select('trip_id')->get();
+
+                if ($request->post('selectedActiveTrip') == null) {
+                    $iTripId = Trip::where('is_active', true)->whereIn('trip_id',$aIsOrganizerOfTrip)->first();
+                } else {
+                    $iTripId = Trip::where('trip_id', $request->post('selectedActiveTrip'))->select('trip_id')->first();
+                }
+                $aHotelsid = HotelsPerTrip::whereIn('trip_id', $iTripId)->select('hotel_id')->get();
+
+                $aHotelsPerTrip = HotelsPerTrip::whereIn('hotels.hotel_id', $aHotelsid)
+                    ->where('trip_id', $iTripId->trip_id)
+                    ->join('hotels', 'hotels_per_trips.hotel_id', '=', 'hotels.hotel_id')
+                    ->orderBy('hotel_start_date', 'asc')
+                    ->get();
+
+
+                $aActiveTrips = Trip::where('is_active', true)->whereIn('trip_id',$aIsOrganizerOfTrip)->get();
+
+                $aHotels = Hotel::get();
+
+                return view('organiser.HotelsAndRooms.hotels',
+                    [
+                        'aHotelsPerTrip' => $aHotelsPerTrip,
+                        'aHotels' => $aHotels,
+                        'aActiveTrips' => $aActiveTrips,
+                        'iTripId' => $iTripId
+                    ]);
             }
-            else {
-                $iTripId = Trip::where('trip_id', $request->post('selectedActiveTrip'))->select('trip_id')->first();
-            }
-            $aHotelsid = HotelsPerTrip::whereIn('trip_id', $iTripId)->select('hotel_id')->get();
-
-            $aHotelsPerTrip=HotelsPerTrip::whereIn('hotels.hotel_id', $aHotelsid)
-                ->where('trip_id',$iTripId->trip_id)
-                ->join('hotels','hotels_per_trips.hotel_id','=','hotels.hotel_id')
-                ->orderBy('hotel_start_date','asc')
-                ->get();
-
-            $aActiveTrips=Trip::where('is_active',true)->get();
-
-            $aHotels=Hotel::get();
-
-            return view('organiser.HotelsAndRooms.hotels',
-                [
-                    'aHotelsPerTrip'=>$aHotelsPerTrip,
-                    'aHotels'=>$aHotels,
-                    'aActiveTrips'=>$aActiveTrips,
-                    'iTripId'=>$iTripId
-                ]);
+        }
+        return $this->getHotelsPerTripUser();
     }
 
     function getHotelsPerTripUser(){
@@ -56,7 +66,15 @@ class HotelRoomController extends Controller
             ->join('hotels','hotels_per_trips.hotel_id','=','hotels.hotel_id')
             ->get();
 
-        $aTrip=Trip::where('trip_id',$iTripId)->first();
+        if($oUser->role=='guide'){
+            $travellerId=$oUser->traveller->traveller_id;
+            $oTripId=TravellersPerTrip::where('traveller_id',$travellerId)->where('is_guide',true)->select('trip_id')->first();
+            $aTrip=Trip::where('trip_id',$oTripId->trip_id)->first();
+        }
+        else{
+            $aTrip=Trip::where('trip_id',$iTripId)->first();
+        }
+
 
         return view('user.HotelsAndRooms.hotels',
             [

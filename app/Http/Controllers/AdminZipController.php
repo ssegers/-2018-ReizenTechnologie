@@ -67,7 +67,7 @@ class AdminZipController extends Controller
         }
         else
         {
-            return redirect()->back()->with('alert-message', "Dit is geen geldige postcode!");
+            return redirect()->back()->with('alert-message', "Dit is geen geldige postcode!")->withInput();
         }
 
 
