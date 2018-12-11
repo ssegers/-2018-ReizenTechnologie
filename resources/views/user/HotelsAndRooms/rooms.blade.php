@@ -39,7 +39,10 @@
         @endif
         <table class="table">
             <tr><td colspan="2"><h1>{{$hotel_name}}</h1></td></tr>
-            <tr><td colspan="2"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addHotelKamerPopup">Voeg kamer toe</button></td></tr>
+            <tr>
+                <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addHotelKamerPopup">Voeg kamer toe</button></td>
+                <td>{!! link_to(URL::previous(), 'Terug', ['class' => 'btn btn-primary']) !!}</td>
+            </tr>
             @foreach ($aRooms as $oRoom)
                 <tr>
                     <td><h4>{{$aCurrentOccupation[$oRoom->rooms_hotel_trip_id]}}/{{$oRoom->size}}</h4></td>
