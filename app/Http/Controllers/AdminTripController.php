@@ -45,7 +45,7 @@ class AdminTripController extends Controller
     //POST::/admin/trips/
     function UpdateOrCreateTrip(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        /*$validator = Validator::make($request->all(), [
             'trip-name'     => 'required',
             'trip-year'     => 'required',
             'trip-price'    => 'required',
@@ -54,7 +54,7 @@ class AdminTripController extends Controller
         if ($validator->fails())
         {
             return response()->json(['errors'=>$validator->errors()->all()]);
-        }
+        }*/
         if($request->post('trip-id') == -1)
         {
             $oTrip = new Trip();
