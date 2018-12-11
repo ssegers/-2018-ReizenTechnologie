@@ -33,14 +33,14 @@
                                 <table>
                                     <?php $i=0 ?>
                                     @foreach($aTravellerPerRoom[$oRoom->rooms_hotel_trip_id] as $oTraveller)
-                                        <tr><td>{{$oTraveller->first_name}} {{$oTraveller->last_name}}</td>
+                                            <tr><td>{{$oTraveller->first_name}} {{$oTraveller->last_name}}
                                         @if($oTraveller->traveller_id==$userTravellerId)
                                                 {{ Form::open(array('action' => 'HotelRoomController@leaveRoom', 'method' => 'post')) }}
                                                 {{Form::hidden('rooms_hotel_trip_id',$oRoom->rooms_hotel_trip_id)}}
-                                                <td>{{Form::button('Verlaat Kamer',array('class' => 'btn btn-secondary', 'type' => 'submit'))}}</td>
+                                                {{Form::button('Verlaat Kamer',array('class' => 'btn btn-secondary', 'type' => 'submit'))}}
                                                 {{Form::close()}}
                                         @endif
-                                        </tr>
+                                            </td></tr>
                                         <?php $i++ ?>
                                     @endforeach
                                     @for($i;$i<$oRoom->size;$i++)

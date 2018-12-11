@@ -25,8 +25,14 @@
         </div>
     </div>
 
-    <table class="table">
-        <tr><td colspan="4"><h1>{{$aTrip->name}} {{$aTrip->year}}</h1></td></tr>
+    <table class="table text-center">
+        <tr><td colspan="5"><h1>{{$aTrip->name}} {{$aTrip->year}}</h1></td></tr>
+        <tr>
+            <th></th>
+            <th>Hotel Naam</th>
+            <th>Startdatum</th>
+            <th>Einddatum</th>
+        </tr>
     @foreach ($aHotelsPerTrip as $oHotel)
             <tr>
                 <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#hotelinfoPopup" data-hotel-name="{{$oHotel->hotel_name}}" data-hotel-address="{{$oHotel->address}}" data-hotel-phone="{{$oHotel->phone}}" data-hotel-email="{{$oHotel->email}}" ><i class="fas fa-info-circle"></i></button></td>

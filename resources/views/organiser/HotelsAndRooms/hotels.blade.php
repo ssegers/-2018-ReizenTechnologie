@@ -96,12 +96,21 @@
         </div>
     </div>
 
-
-    <button type="button" class="m-5 p-3 float-right open btn btn-primary" data-toggle="modal" data-target="#hotelPopup">Nieuw hotel aanmaken</button>
-    <button id="connectButton" type="button" class="m-5 p-3 float-right open btn btn-primary" data-toggle="modal" data-target="#hoteltripPopup" onclick="connectHotelToTrip()">Hotel toevoegen aan reis</button>
-
-    <!--Altijd-->
-    <table class="table">
+    <table class="table text-center">
+        <tr>
+            <td colspan="3">
+                <button type="button" class="m-5 p-3 float-right open btn btn-primary" data-toggle="modal" data-target="#hotelPopup">Nieuw hotel aanmaken</button>
+            </td>
+            <td colspan="2">
+                <button id="connectButton" type="button" class="m-5 p-3 float-right open btn btn-primary" data-toggle="modal" data-target="#hoteltripPopup" onclick="connectHotelToTrip()">Hotel toevoegen aan reis</button>
+            </td>
+        </tr>
+        <tr>
+            <th></th>
+            <th>Hotel Naam</th>
+            <th>Startdatum</th>
+            <th>Einddatum</th>
+        </tr>
         @foreach ($aHotelsPerTrip as $oHotel)
             <tr>
                 <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#hotelinfoPopup" data-hotel-name="{{$oHotel->hotel_name}}" data-hotel-address="{{$oHotel->address}}" data-hotel-phone="{{$oHotel->phone}}" data-hotel-email="{{$oHotel->email}}" ><i class="fas fa-info-circle"></i></button></td>
