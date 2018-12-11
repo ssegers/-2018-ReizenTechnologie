@@ -22,11 +22,7 @@ class MailController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function getUpdateForm(){
-
         $currentUserId = Auth::id();
-        if($currentUserId < 3){
-            return back()->with('danger','U kan geen mail versturen als administrator');
-        }
         $sEmail = Traveller::where('user_id', $currentUserId)->pluck('email')->first();
         $aTrips = Trip::where('is_active', true)->get();
 
@@ -49,6 +45,9 @@ class MailController extends Controller
      */
     public function sendUpdateMail(Request $request)
     {
+        if(Auth::user()->role == "admin"){
+            return back()->with('danger','U kan geen mail versturen als administrator');
+        }
         /* Validate the request */
         $validator = \Validator::make($request->all(), [
             'subject' => 'required',

@@ -264,11 +264,30 @@ class UserDataController extends Controller
      */
     public function showUserData(Request $request, $sUserName = 'undefined')
     {
-        if (Auth::user()->role == "admin"){
-            return redirect(route("info"));
-        }
         if($sUserName == 'undefined'){
+            if (Auth::user()->role == "admin"){
+                return redirect(route("info"));
+            }
+
             $sUserName = Auth::user()->username;
+        }
+        else{
+            /** Beveiliging - Begeleider mag enkel de profielen van zijn reizigers bekijken **/
+            $iTripIdTraveller = TravellersPerTrip::select('trip_id')
+                ->join('travellers', 'travellers_per_trips.traveller_id', '=', 'travellers.traveller_id')
+                ->join('users', 'travellers.user_id', '=', 'users.user_id')
+                ->where('username', $sUserName)
+                ->first();
+            $iTripIdGuide = TravellersPerTrip::select('trip_id')
+                ->join('travellers', 'travellers_per_trips.traveller_id', '=', 'travellers.traveller_id')
+                ->join('users', 'travellers.user_id', '=', 'users.user_id')
+                ->where('username', Auth::user()->username)
+                ->first();
+
+            if($iTripIdTraveller != $iTripIdGuide){
+                return redirect(route("info"));
+            }
+            /** **/
         }
         $aUserData = User::select()
             ->join('travellers', 'users.user_id', '=', 'travellers.user_id')
