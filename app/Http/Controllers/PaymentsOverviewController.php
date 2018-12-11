@@ -10,6 +10,7 @@ use App\Trip;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
@@ -74,10 +75,8 @@ class PaymentsOverviewController extends Controller
         $aSearchValues = $this->aSearchValues;
         $oCurrentTrip = Trip::where('trip_id', $iTripId)->first();
         $userdata = Traveller::getTravellersWithPayment($iTripId);
-        foreach($userdata as $oUserData){
-            $paymentsum[$oUserData['traveller_id']] = DB::table('payments')->where('traveller_id', '=', $oUserData['traveller_id'])->sum('amount');
-        }
-        return view('user.payment.pay_overview',['userdata' => $userdata, 'paymentsum' => $paymentsum ,
+
+        return view('user.payment.pay_overview',['userdata' => $userdata,
             'oCurrentTrip' => $oCurrentTrip,
             'aActiveTrips' => $aActiveTrips,'aAuthenticatedTripId' => $aAuthenticatedTrips]);
     }
@@ -119,7 +118,7 @@ class PaymentsOverviewController extends Controller
         ]);
 
         //return back to the view with the succes message
-        return response()->json(['paymentAdded' => true]);
+        return back();
     }
 
 
