@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Rules\Postcode;
 use App\Zip;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
