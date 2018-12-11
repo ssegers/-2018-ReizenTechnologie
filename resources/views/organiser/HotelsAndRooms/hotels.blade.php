@@ -4,7 +4,7 @@
 
 <div class="container">
     <!--Indien organisator-->
-    {{ Form::open(array('id'=>'travelChanged','action' => 'HotelRoomController@getHotelsPerTrip', 'method' => 'post')) }}
+    {{ Form::open(array('id'=>'travelChanged','action' => 'HotelRoomController@getHotelsPerTripOrganizer', 'method' => 'post')) }}
         <select id="selectedActiveTrip" name="selectedActiveTrip" class="form-control-lg form-control mt-3 travelChanged">
             @foreach ($aActiveTrips as $trip)
                 <option class="dropdown-item" value={{$trip->trip_id}}>{{$trip->name}} {{$trip->year}}</option>
@@ -110,7 +110,7 @@
                 <td><?php echo $dd = date("d-m-Y", strtotime($oHotel->hotel_end_date)); ?></td>
                 <td>
                     {{--{{ Form::open(array('action' => '/listrooms/'.$oHotel->hotels_per_trip_id, 'method' => 'post')) }}--}}
-                    <form method="POST" action="/listrooms/{{$oHotel->hotels_per_trip_id}}/{{$oHotel->hotel_name}}">
+                    <form method="POST" action="/hotel/listrooms/{{$oHotel->hotels_per_trip_id}}/{{$oHotel->hotel_name}}">
                         {{ csrf_field() }}
                         {{ method_field('POST') }}
                     {{ Form::submit('Bekijk kamers',array('class'=>"btn btn-primary")) }}

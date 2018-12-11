@@ -87,6 +87,21 @@ Route::middleware(['auth','guide'])->group(function () {
         Route::post('{sUserName}/update', 'UserDataController@updateUserData');
         Route::delete('{sUserName}/delete', 'UserDataController@deleteUserData')->name('user.destroy');
     });
+
+    //hotels
+    Route::prefix('hotel')->group(function() {
+        Route::get('/listhotels', 'HotelRoomController@getHotelsPerTripOrganizer')->name("listhotels");
+        Route::post('/listhotels', 'HotelRoomController@getHotelsPerTripOrganizer');
+        Route::post('/deleteHotel', 'HotelRoomController@deleteHotel');
+        Route::post('/connectHotelToTrip', 'HotelRoomController@connectHotelToTrip');
+        Route::post('/createHotel', 'HotelRoomController@createHotel');
+
+        Route::get('/listrooms/{hotel_id}/{hotel_name}', 'HotelRoomController@getRooms');
+        Route::post('/listrooms/{hotel_id}/{hotel_name}', 'HotelRoomController@getRooms');
+        Route::post('/chooseRoom', 'HotelRoomController@chooseRoom');
+        Route::post('/leaveRoom', 'HotelRoomController@leaveRoom');
+        Route::post('/addRoom', 'HotelRoomController@addHotelRoom');
+    });
 });
 //--------------------------------------END---------------------------------------
 
@@ -196,22 +211,6 @@ Auth::routes();
 Route::post('/auth', 'AuthController@login');
 Route::get('/log','AuthController@showView')->name("log");
 
-
-//WIP
-Route::get('/listhotels', 'HotelRoomController@getHotelsPerTrip')->name("listhotels");
-Route::post('/listhotels', 'HotelRoomController@getHotelsPerTrip');
-Route::post('/deleteHotel', 'HotelRoomController@deleteHotel');
-Route::post('/connectHotelToTrip', 'HotelRoomController@connectHotelToTrip');
-Route::post('/createHotel', 'HotelRoomController@createHotel');
-
-Route::get('/listrooms/{hotel_id}/{hotel_name}', 'HotelRoomController@getRooms');
-Route::post('/listrooms/{hotel_id}/{hotel_name}', 'HotelRoomController@getRooms');
-Route::post('/chooseRoom', 'HotelRoomController@chooseRoom');
-Route::post('/leaveRoom', 'HotelRoomController@leaveRoom');
-
-Route::post('/addRoom', 'HotelRoomController@addHotelRoom');
-
-//EndWIP
 
 //API calls
 Route::post('cascade', 'UserDataController@GetMajorsByStudy');
