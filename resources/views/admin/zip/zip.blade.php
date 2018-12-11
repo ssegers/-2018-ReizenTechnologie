@@ -2,6 +2,35 @@
 
 @section('content')
 
+    <style>
+        .zips-table-wrapper{
+        }
+
+        .zipsTable > thead{
+        }
+        .zipsTableHeaderZip{
+            width: 150px;
+        }
+        .zipsTableHeaderCity{
+            width: 300px;
+        }
+        .zipsTableHeaderDelete{
+            width: 60px;
+        }
+        .zipsTable > tbody{
+
+        }
+        .zipsTableRowZip{
+            width: 150px;
+        }
+        .zipsTableRowCity{
+            width: 300px;
+        }
+        .zipsTableRowDelete{
+            width: 60px;
+        }
+    </style>
+
     @if ($errors->any())
         <div class="alert alert-danger">
             <ul>
@@ -37,32 +66,40 @@
     </div>
     {{Form::close()}}
 
-    {{--
-    Zoek bestaande postcodes:
-    <input type="search" class="form-control form-control-sm" placeholder="" aria-controls="paymentStatusTable" style="width: 510px;">
-    --}}
-    <table class="table" style="width: 510px;">
-        <thead style="display: block;">
-        <tr>
-            <th scope="col" style="width: 150px;">Postcode</th>
-            <th scope="col" style="width: 300px;">Gemeente</th>
-            <th scope="col" style="width: 60px;"></th>
-        </tr>
-        </thead>
-        <tbody style="display: block; height: 350px; overflow-y: auto; overflow-x: hidden;">
-        @foreach($aZipData as $oZip)
+    <div class="zips-table-wrapper">
+        <table class="table zipsTable" id="ZipsTable">
+            <thead>
             <tr>
-                <td style="width: 150px;">{{$oZip->zip_code}}</td>
-                <td style="width: 300px;">{{$oZip->city}}</td>
-                <td style="width: 60px;">
-                    <form method="POST" action="/admin/zip/{{$oZip->zip_id}}" onsubmit='return confirm("Bent u zeker dat u {{$oZip->zip_code}} {{$oZip->city}} wilt verwijderen?")'>
-                        {{ csrf_field() }}
-                        {{ method_field('DELETE') }}
-                    <button type="submit" class="btn btn-primary"><i class="fas fa-trash-alt"></i></button>
-                    </form>
-                </td>
+                <th class="zipsTableHeaderZip" scope="col">Postcode</th>
+                <th class="zipsTableHeaderCity" scope="col">Gemeente</th>
+                <th class="zipsTableHeaderDelete" scope="col"></th>
             </tr>
-        @endforeach
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            @foreach($aZipData as $oZip)
+                <tr>
+                    <td class="zipsTableRowZip">{{$oZip->zip_code}}</td>
+                    <td class="zipsTableRowCity">{{$oZip->city}}</td>
+                    <td class="zipsTableRowDelete">
+                        <form method="POST" action="/admin/zip/{{$oZip->zip_id}}" onsubmit='return confirm("Bent u zeker dat u {{$oZip->zip_code}} {{$oZip->city}} wilt verwijderen?")'>
+                            {{ csrf_field() }}
+                            {{ method_field('DELETE') }}
+                            <button type="submit" class="btn btn-primary"><i class="fas fa-trash-alt"></i></button>
+                        </form>
+                    </td>
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
+    </div>
+
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.css"/>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#ZipsTable').DataTable();
+            $('.dataTables_length').addClass('bs-select');
+        });
+    </script>
 @endsection
