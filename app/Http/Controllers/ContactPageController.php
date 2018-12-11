@@ -21,7 +21,15 @@ class ContactPageController extends Controller
             'onderwerp' => 'required|max:160',
             'bericht' => 'required',
             'captcha' => 'required|captcha'
-        ],['captcha.captcha'=>'Foute captcha code.']);
+        ],
+            [
+                'captcha.captcha'=>'Foute captcha code.',
+                'email.required' => 'Geef jouw email adres op',
+                'onderwerp.required' => 'Geef een onderwerp op',
+                'bericht.required' => 'Geef een bericht in',
+                'captcha.required' => 'Vul de captcha in'
+            ]
+        );
 
         $oTrip = Trip::where('trip_id',(int)$request->post("reis"))->pluck('contact_mail');
         $sMail = $oTrip;
