@@ -1,7 +1,6 @@
 @extends('layouts.admin')
 
 @section('content')
-
     @if ($errors->any())
         <div class="alert alert-danger">
             <ul>
@@ -25,10 +24,10 @@
     <h1 class="my-5 text-center">Voeg hier een nieuwe postcode toe:</h1>
     {{Form::open(array('action' => 'AdminZipController@createZip', 'method' => 'post' ))}}
     <div class="form-group">
-        {{Form::label('zip_code', 'Postcode: ', ['class' => ''])}}
-        {{ Form::number('zip_code', null, array("class" => "form-control", "required", "min" => "1000", "max" => "9999", "oninvalid" => "this.setCustomValidity('Deze postcode is ongeldig')", "oninput" => "this.setCustomValidity('')", "placeholder" => "bv. 3660" )) }}
+        {{Form::label('zip_code', 'Postcode: ')}}
+        {{ Form::text('zip_code', null, array("class" => "form-control", "required", "oninvalid" => "this.setCustomValidity('Deze postcode is ongeldig')", "oninput" => "this.setCustomValidity('')", "placeholder" => "bv. 3660" )) }}
         <br/>
-        {{Form::label('city', 'Stad of Gemeente: ', ['class' => ''])}}
+        {{Form::label('city', 'Stad of Gemeente: ')}}
         {{ Form::text('city', null, array("class" => "form-control", "required","maxlength" => "50", "oninvalid" => "this.setCustomValidity('Deze gemeente is ongeldig')", "oninput" => "this.setCustomValidity('')", "placeholder" => "bv: Opglabbeek")) }}
     </div>
     <div class="actions mb-3">
@@ -37,32 +36,38 @@
     </div>
     {{Form::close()}}
 
-    {{--
-    Zoek bestaande postcodes:
-    <input type="search" class="form-control form-control-sm" placeholder="" aria-controls="paymentStatusTable" style="width: 510px;">
-    --}}
-    <table class="table" style="width: 510px;">
-        <thead style="display: block;">
-        <tr>
-            <th scope="col" style="width: 150px;">Postcode</th>
-            <th scope="col" style="width: 300px;">Gemeente</th>
-            <th scope="col" style="width: 60px;"></th>
-        </tr>
-        </thead>
-        <tbody style="display: block; height: 350px; overflow-y: auto; overflow-x: hidden;">
-        @foreach($aZipData as $oZip)
+        <table class="table" id="ZipsTable">
+            <thead>
             <tr>
-                <td style="width: 150px;">{{$oZip->zip_code}}</td>
-                <td style="width: 300px;">{{$oZip->city}}</td>
-                <td style="width: 60px;">
-                    <form method="POST" action="/admin/zip/{{$oZip->zip_id}}" onsubmit='return confirm("Bent u zeker dat u {{$oZip->zip_code}} {{$oZip->city}} wilt verwijderen?")'>
-                        {{ csrf_field() }}
-                        {{ method_field('DELETE') }}
-                    <button type="submit" class="btn btn-primary"><i class="fas fa-trash-alt"></i></button>
-                    </form>
-                </td>
+                <th scope="col">Postcode</th>
+                <th scope="col">Gemeente</th>
+                <th scope="col"></th>
             </tr>
-        @endforeach
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            @foreach($aZipData as $oZip)
+                <tr>
+                    <td>{{$oZip->zip_code}}</td>
+                    <td>{{$oZip->city}}</td>
+                    <td>
+                        <form method="POST" action="/admin/zip/{{$oZip->zip_id}}" onsubmit='return confirm("Bent u zeker dat u {{$oZip->zip_code}} {{$oZip->city}} wilt verwijderen?")'>
+                            {{ csrf_field() }}
+                            {{ method_field('DELETE') }}
+                            <button type="submit" class="btn btn-primary"><i class="fas fa-trash-alt"></i></button>
+                        </form>
+                    </td>
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
+
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.css"/>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#ZipsTable').DataTable();
+            $('.dataTables_length').addClass('bs-select');
+        });
+    </script>
 @endsection

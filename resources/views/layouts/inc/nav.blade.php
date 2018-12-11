@@ -45,9 +45,13 @@
                                 Profiel
                             </a>
                             <div class="dropdown-menu" aria-labelledby="profileDropdown">
-                                @if(\Illuminate\Support\Facades\Auth::user()->role == 'guide')
-                                    <a class="dropdown-item" href="{{ route('profile') }}">Mijn gegevens</a>
-                                    <div class="dropdown-divider"></div>
+                                @if (\Illuminate\Support\Facades\Auth::check())
+                                    @if(\Illuminate\Support\Facades\Auth::user()->role != 'admin')
+                                        @if(\Illuminate\Support\Facades\Auth::user()->role != 'guest')
+                                            <a class="dropdown-item" href="{{ route('profile') }}">Mijn gegevens</a>
+                                            <div class="dropdown-divider"></div>
+                                        @endif
+                                    @endif
                                 @endif
                                 <a class="dropdown-item" href="{{ route('logout') }}">Afmelden</a>
                             </div>

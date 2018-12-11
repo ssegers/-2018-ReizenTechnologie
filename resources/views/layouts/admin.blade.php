@@ -9,6 +9,7 @@
 
     <title>{{config('app.name')}}</title>
 
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link type="text/css" rel="stylesheet" href="{{ asset('css/app.css') }}">
 
@@ -50,16 +51,16 @@
     <div id="menu-left">
         <div class="container-fluid d-flex h-100 flex-column">
             <div class="row flex-fill d-flex overflow-auto">
-                <div class="col">
+                <div class="col w3-sand font-weight-bold" style="padding: 0;">
                     <nav class="nav flex-column">
-                        <a href="{{ route('dashboard') }}" class="nav-link">Dashboard</a>
-                        <a href="{{ route('adminInfo') }}" class="nav-link">Info Aanpassen</a>
-                        <a href="{{ route('adminRegUser') }}" class="nav-link">Account Registreren</a>
-                        <a href="{{ route('adminTrips') }}" class="nav-link" >Beheer reizen</a>
-                        <a href="{{ route('adminLinkorganisator') }}" class="nav-link">Organisator Koppelen</a>
-                        <a href="{{ route('adminPages') }}" class="nav-link">Pagina's Aanpassen</a>
-                        <a href="{{ route('adminZip') }}" class="nav-link">Postcode Toevoegen</a>
-                        <a href="{{ route('adminStudy') }}" class="nav-link">Studierichting toevoegen</a>
+                        <a href="{{ route('dashboard') }}" class="nav-link w3-hover-red border p-3">Dashboard</a>
+                        <a href="{{ route('adminInfo') }}" class="nav-link w3-hover-red border p-3">Info Aanpassen</a>
+                        <a href="{{ route('adminRegUser') }}" class="nav-link w3-hover-red border p-3">Account Registreren</a>
+                        <a href="{{ route('adminTrips') }}" class="nav-link w3-hover-red border p-3" >Beheer reizen</a>
+                        <a href="{{ route('adminLinkorganisator') }}" class="nav-link w3-hover-red border p-3">Organisator Koppelen</a>
+                        <a href="{{ route('adminPages') }}" class="nav-link w3-hover-red border p-3">Pagina's Aanpassen</a>
+                        <a href="{{ route('adminZip') }}" class="nav-link w3-hover-red border p-3">Postcode Toevoegen</a>
+                        <a href="{{ route('adminStudy') }}" class="nav-link w3-hover-red border p-3">Studierichting toevoegen</a>
                     </nav>
                 </div>
             </div>
