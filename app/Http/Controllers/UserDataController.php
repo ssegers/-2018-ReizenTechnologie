@@ -298,15 +298,30 @@ class UserDataController extends Controller
             /*  */
         }
 
-        $aUserData = User::select()
-            ->join('travellers', 'users.user_id', '=', 'travellers.user_id')
-            ->join('zips', 'travellers.zip_id', '=', 'zips.zip_id')
-            ->join('travellers_per_trips', 'travellers.traveller_id', '=', 'travellers_per_trips.traveller_id')
-            ->join('trips', 'travellers_per_trips.trip_id', '=', 'trips.trip_id')
-            ->join('majors', 'travellers.major_id', '=', 'majors.major_id')
-            ->join('studies', 'majors.study_id', '=', 'studies.study_id')
-            ->where('users.username', '=', $sUserName) //r-nummer
-            ->first();
+        $sUserRole = User::where('username', $sUserName)->select('role')->first();
+        if($sUserRole["role"] == 'guide'){
+            $aUserData = User::select()
+                ->join('travellers', 'users.user_id', '=', 'travellers.user_id')
+                ->join('zips', 'travellers.zip_id', '=', 'zips.zip_id')
+                ->join('travellers_per_trips', 'travellers.traveller_id', '=', 'travellers_per_trips.traveller_id')
+                ->join('trips', 'travellers_per_trips.trip_id', '=', 'trips.trip_id')
+                ->join('majors', 'travellers.major_id', '=', 'majors.major_id')
+                ->join('studies', 'majors.study_id', '=', 'studies.study_id')
+                ->where('users.username', '=', $sUserName) //r-nummer
+                ->where('is_guide', true)
+                ->first();
+        }
+        else{
+            $aUserData = User::select()
+                ->join('travellers', 'users.user_id', '=', 'travellers.user_id')
+                ->join('zips', 'travellers.zip_id', '=', 'zips.zip_id')
+                ->join('travellers_per_trips', 'travellers.traveller_id', '=', 'travellers_per_trips.traveller_id')
+                ->join('trips', 'travellers_per_trips.trip_id', '=', 'trips.trip_id')
+                ->join('majors', 'travellers.major_id', '=', 'majors.major_id')
+                ->join('studies', 'majors.study_id', '=', 'studies.study_id')
+                ->where('users.username', '=', $sUserName) //r-nummer
+                ->first();
+        }
 
         //var_dump($request);
 
@@ -377,7 +392,41 @@ class UserDataController extends Controller
                     'emergency_phone_2' => $aRequest->post('icePhone2'),
                 ]
             );
-        TravellersPerTrip::where('traveller_id', $oUser->traveller->traveller_id)->update(['trip_id' => $aRequest->post('Trip')]);
+
+
+        /* travellers_per_trips table */
+        if(Auth::user()->role == "traveller"){
+            TravellersPerTrip::where('traveller_id', $oUser->traveller->traveller_id)->update(['trip_id' => $aRequest->post('Trip')]);
+        }
+        else if (Auth::user()->role == "guide"){
+            $aTripsGuide = TravellersPerTrip::select('is_organizer')
+                ->join('travellers', 'travellers_per_trips.traveller_id', '=', 'travellers.traveller_id')
+                ->join('users', 'travellers.user_id', '=', 'users.user_id')
+                ->where('username', Auth::user()->username)
+                ->get();
+            $bIsGuideAnOrganiser = false;
+            foreach($aTripsGuide as $aTripGuide){
+                if($aTripGuide->is_orangiser == true){
+                    $bIsGuideAnOrganiser = true;
+                }
+            }
+            if(!$bIsGuideAnOrganiser){
+                TravellersPerTrip::where('traveller_id', $oUser->traveller->traveller_id)
+                    ->where('is_guide', true)
+                    ->update(['is_guide' => false]);
+
+                TravellersPerTrip::where('trip_id', $aRequest->post('Trip'))
+                    ->where('traveller_id', $oUser->traveller->traveller_id)
+                    ->update([
+                        'is_guide' => true,
+                    ]);
+            }
+            /* Update travellers_per_trips table for guides who are organisers */
+            else{
+                TravellersPerTrip::where('traveller_id', $oUser->traveller->traveller_id)->update(['trip_id' => $aRequest->post('Trip')]);
+            }
+        }
+
         if(str_contains($aRequest->path(), 'profile')){
             return redirect('profile');
         }
