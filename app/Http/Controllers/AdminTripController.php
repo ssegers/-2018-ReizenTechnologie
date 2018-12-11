@@ -1,15 +1,16 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use App\Trip;
 use Illuminate\Support\Facades\Validator;
-
 class AdminTripController extends Controller
 {
+    function getTrip(Request $request)
+    {
+        //geef data aan modal door
+    }
     //GET::/admin/trips
     function getTrips()
     {
@@ -17,7 +18,6 @@ class AdminTripController extends Controller
         $aTrips = Trip::orderby('year', 'desc')->get();
         return view('admin.trips.trips', ['aTripData' => $aTrips]);
     }
-
     private function CreateTrip(Request $request)
     {
         DB::table('trips')
@@ -29,7 +29,6 @@ class AdminTripController extends Controller
                 'price'=>$request->post('trip-price')
             ]);
     }
-
     function UpdateTrip(Request $request)
     {
         DB::table('trips')
@@ -42,7 +41,6 @@ class AdminTripController extends Controller
                 'price'=>$request->post('trip-price')
             ]);
     }
-
     //POST::/admin/trips/
     function UpdateOrCreateTrip(Request $request)
     {
@@ -52,12 +50,10 @@ class AdminTripController extends Controller
             'trip-price'    => 'required',
             'trip-mail'     => 'email|nullable',
         ],$this->messages());
-
         if ($validator->fails())
         {
             return response()->json(['errors'=>$validator->errors()->all()]);
         }
-
         if($request->post('trip-id') == -1)
         {
             $oTrip = new Trip();
@@ -80,7 +76,6 @@ class AdminTripController extends Controller
         }
         return redirect('/admin/trips');
     }
-
     /**
      * @author Joren Meynen
      * @return array

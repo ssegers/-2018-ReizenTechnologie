@@ -224,7 +224,7 @@ Route::get('/log','AuthController@showView')->name("log");
 
 //API calls
 Route::post('cascade', 'UserDataController@GetMajorsByStudy');
-
+Route::post('getTrip', 'AdminTripController@GetTrip');
 
 
 //Route::get('/home', 'HomeController@index')->name('home');
