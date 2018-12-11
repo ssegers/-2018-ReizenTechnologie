@@ -572,6 +572,8 @@ class ComposerStaticInitfaaaac5d6a6221cf37492ca47e1c3a30
     );
 
     public static $classMap = array (
+        'App\\Auto' => __DIR__ . '/../..' . '/app/Auto.php',
+        'App\\AutosPerTrip' => __DIR__ . '/../..' . '/app/AutosPerTrip.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Hotel' => __DIR__ . '/../..' . '/app/Hotel.php',
@@ -627,11 +629,14 @@ class ComposerStaticInitfaaaac5d6a6221cf37492ca47e1c3a30
         'App\\RoomsPerHotelPerTrip' => __DIR__ . '/../..' . '/app/RoomsPerHotelPerTrip.php',
         'App\\Study' => __DIR__ . '/../..' . '/app/Study.php',
         'App\\Traveller' => __DIR__ . '/../..' . '/app/Traveller.php',
+        'App\\TravellersPerAuto' => __DIR__ . '/../..' . '/app/TravellersPerAuto.php',
         'App\\TravellersPerRoom' => __DIR__ . '/../..' . '/app/TravellersPerRoom.php',
         'App\\TravellersPerTrip' => __DIR__ . '/../..' . '/app/TravellersPerTrip.php',
         'App\\Trip' => __DIR__ . '/../..' . '/app/Trip.php',
         'App\\User' => __DIR__ . '/../..' . '/app/User.php',
         'App\\Zip' => __DIR__ . '/../..' . '/app/Zip.php',
+        'AutosPerTripSeeder' => __DIR__ . '/../..' . '/database/seeds/AutosPerTripSeeder.php',
+        'AutosSeeder' => __DIR__ . '/../..' . '/database/seeds/AutosSeeder.php',
         'BeyondCode\\DumpServer\\DumpServerCommand' => __DIR__ . '/..' . '/beyondcode/laravel-dump-server/src/DumpServerCommand.php',
         'BeyondCode\\DumpServer\\DumpServerServiceProvider' => __DIR__ . '/..' . '/beyondcode/laravel-dump-server/src/DumpServerServiceProvider.php',
         'BeyondCode\\DumpServer\\Dumper' => __DIR__ . '/..' . '/beyondcode/laravel-dump-server/src/Dumper.php',
@@ -5163,6 +5168,7 @@ class ComposerStaticInitfaaaac5d6a6221cf37492ca47e1c3a30
         'TijsVerkoyen\\CssToInlineStyles\\Css\\Property\\Property' => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src/Css/Property/Property.php',
         'TijsVerkoyen\\CssToInlineStyles\\Css\\Rule\\Processor' => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src/Css/Rule/Processor.php',
         'TijsVerkoyen\\CssToInlineStyles\\Css\\Rule\\Rule' => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src/Css/Rule/Rule.php',
+        'TravellersPerAutoSeeder' => __DIR__ . '/../..' . '/database/seeds/TravellersPerAutoSeeder.php',
         'TravellersPerRoomSeeder' => __DIR__ . '/../..' . '/database/seeds/TravellersPerRoomSeeder.php',
         'TravellersPerTripSeeder' => __DIR__ . '/../..' . '/database/seeds/TravellersPerTripSeeder.php',
         'TravellersTableSeeder' => __DIR__ . '/../..' . '/database/seeds/TravellersTableSeeder.php',
