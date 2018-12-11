@@ -1,31 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="modal fade" id="addHotelKamerPopup" tabindex="-1" role="dialog" aria-labelledby="addHotelKamerPopupLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="addHotelKamerPopupLabel">Hotelkamer Toevoegen</h4>
-                    {{Form::button('<span aria-hidden="true">&times;</span>',array('class' => 'close', 'type' => 'button','data-dismiss'=>'modal','aria-label'=>'close'))}}
-                </div>
-                {{ Form::open(array('action' => 'HotelRoomController@addHotelRoom', 'method' => 'post')) }}
-                <div class="modal-body">
-                    <div class="form-group">
-                        {{Form::hidden('hotels_per_trip_id',$hotel_id)}}
-                        {{Form::label('AantalPersonen','Aantal Personen:')}}
-                        {{Form::text('AantalPersonen', null, array('class' => 'form-control','required' => 'required'))}}
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    {{Form::button('Sluiten',array('class' => 'btn btn-default', 'type' => 'button','data-dismiss'=>'modal'))}}
-                    {{Form::button('Opslaan',array('class' => 'btn btn-primary', 'type' => 'submit'))}}
-                </div>
-                {{ Form::close() }}
-            </div>
-        </div>
-    </div>
-
-
     <div class="container">
         @if(session()->has('errormessage'))
             <div id="removeTimer" class="alert alert-warning">
@@ -40,8 +15,7 @@
         <table class="table">
             <tr><td colspan="2"><h1>{{$hotel_name}}</h1></td></tr>
             <tr>
-                <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addHotelKamerPopup">Voeg kamer toe</button></td>
-                <td><a class="btn btn-primary" href="{{route('listhotelsOrganizer')}}">Terug</a></td>
+                <td><a class="btn btn-primary" href="{{route('listhotelsUser')}}">Terug</a></td>
             </tr>
             @foreach ($aRooms as $oRoom)
                 <tr>
