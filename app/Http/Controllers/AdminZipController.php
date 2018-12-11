@@ -39,6 +39,7 @@ class AdminZipController extends Controller
             }
         }
 
+        //if postcode is british, belgian or dutch, insert new zip, else return error message
         if($this->isPostcode($request->post('zip_code'))){
             //Get the input
             $input = $request->all();
@@ -66,7 +67,7 @@ class AdminZipController extends Controller
         }
         else
         {
-            return redirect()->back()->with('message', "dit is geen geldige postcode");
+            return redirect()->back()->with('alert-message', "Dit is geen geldige postcode!");
         }
 
 
