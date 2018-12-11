@@ -56,16 +56,16 @@ class HotelRoomController extends Controller
             ->join('hotels','hotels_per_trips.hotel_id','=','hotels.hotel_id')
             ->get();
 
-        $aActiveTrips=Trip::where('is_active',true)->get();
+        $aTrip=Trip::where('trip_id',$iTripId)->first();
 
-        return view('organiser.HotelsAndRooms.hotels',
+        return view('user.HotelsAndRooms.hotels',
             [
                 'aHotelsPerTrip'=>$aHotelsPerTrip,
-                'aActiveTrips'=>$aActiveTrips
+                'aTrip'=>$aTrip
             ]);
     }
 
-    function getRooms($hotel_id,$hotel_name)
+    function getRoomsOrganisator($hotel_id,$hotel_name)
     {
         $oUser=Auth::user();
         $userTravellerId=$oUser->traveller->traveller_id;
@@ -82,6 +82,31 @@ class HotelRoomController extends Controller
                 ->get();
         }
         return view('organiser.HotelsAndRooms.rooms',
+            [
+                'userTravellerId'=>$userTravellerId,
+                'hotel_id'=>$hotel_id,
+                'hotel_name'=>$hotel_name,
+                'aRooms' => $aRooms,
+                'aCurrentOccupation' => $aCurrentOccupation,
+                'aTravellerPerRoom' =>$aTravellerPerRoom
+            ]);
+    }
+    function getRoomsUser($hotel_id,$hotel_name){
+        $oUser=Auth::user();
+        $userTravellerId=$oUser->traveller->traveller_id;
+
+        $aRooms = RoomsPerHotelPerTrip::where('hotels_per_trip_id', $hotel_id)->get();
+        $aCurrentOccupation = array();
+        $aTravellerPerRoom = array();
+
+        foreach ($aRooms as $oRoom)
+        {
+            $aCurrentOccupation[$oRoom->rooms_hotel_trip_id] = TravellersPerRoom::where('rooms_hotel_trip_id', $oRoom->rooms_hotel_trip_id)->count();
+            $aTravellerPerRoom[$oRoom->rooms_hotel_trip_id]=TravellersPerRoom::where('rooms_hotel_trip_id', $oRoom->rooms_hotel_trip_id)
+                ->join('travellers','travellers_per_rooms.traveller_id','=','travellers.traveller_id')
+                ->get();
+        }
+        return view('user.HotelsAndRooms.rooms',
             [
                 'userTravellerId'=>$userTravellerId,
                 'hotel_id'=>$hotel_id,

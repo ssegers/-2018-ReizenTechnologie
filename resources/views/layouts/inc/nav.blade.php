@@ -12,6 +12,9 @@
                 @endforeach
                 <li class="nav-item"><a class="nav-link" href="{{ route('contact') }}">Contact</a></li>
                 @if(\Illuminate\Support\Facades\Auth::check())
+                    @if(\Illuminate\Support\Facades\Auth::user()->role=='traveller')
+                        <li class="nav-item"><a class="nav-link" href="{{ route('listhotelsUser') }}">Hotels</a></li>
+                    @endif
                     @if(\Illuminate\Support\Facades\Auth::user()->role == 'guide' or \Illuminate\Support\Facades\Auth::user()->role == 'admin')
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="personalDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -21,7 +24,7 @@
                                 <a class="dropdown-item" href="/user/trip">Reizigers</a>
                                 <a class="dropdown-item" href="{{ route('updatemail') }}">Verstuur mail</a>
                                 <a class="dropdown-item" href="{{ route('payments') }}">Betalingen</a>
-                                <a class="dropdown-item" href="{{ route('listhotels') }}">Hotels</a>
+                                <a class="dropdown-item" href="{{ route('listhotelsOrganizer') }}">Hotels</a>
                             </div>
                         </li>
                     @endif
