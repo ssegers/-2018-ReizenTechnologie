@@ -44,11 +44,12 @@
             <div class="form-group">
                 <label for="captcha" class="col-md-4 control-label">Captcha:</label>
                 <div class="col-md-6">
-                    <div class="captcha">
+                    <div class="captcha" style="display: inline-flex;">
+                        <input id="captcha" type="text" class="form-control" placeholder="Vul Captcha in" name="captcha">
                         <span>{!! captcha_img() !!}</span>
                         <button type="button" class="btn btn-success btn-refresh"><span class="glyphicon glyphicon-refresh"></span>Ververs</button>
                     </div>
-                    <input id="captcha" type="text" class="form-control" placeholder="Vul Captcha in" name="captcha">
+
 
                     @if ($errors->has('captcha'))
                         <span class="help-block">
