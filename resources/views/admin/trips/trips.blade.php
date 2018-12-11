@@ -82,7 +82,5 @@
             </table>
         </div>
     </div>
-<script src="{{ URL::asset('js/adminTrip.js') }}">
-
-</script>
+<script src="{{ URL::asset('js/adminTrip.js') }}"></script>
 @endsection
