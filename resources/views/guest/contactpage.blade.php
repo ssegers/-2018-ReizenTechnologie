@@ -45,8 +45,8 @@
                 <label for="captcha" class="col-md-4 control-label">Captcha:</label>
                 <div class="col-md-6">
                     <div class="captcha" style="display: inline-flex;">
-                        <input id="captcha" type="text" class="form-control" placeholder="Vul Captcha in" name="captcha">
-                        <span>{!! captcha_img() !!}</span>
+                        <input id="captcha" autocomplete="off" autocorrect="off" type="text" class="form-control pr-2" placeholder="Vul Captcha in" name="captcha">
+                        <span class="pr-2 pl-2">{!! captcha_img() !!}</span>
                         <button type="button" class="btn btn-success btn-refresh"><span class="glyphicon glyphicon-refresh"></span>Ververs</button>
                     </div>
 
