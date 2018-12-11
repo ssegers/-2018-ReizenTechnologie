@@ -146,28 +146,19 @@ class PaymentsOverviewController extends Controller
             ->join('travellers', 'travellers_per_trips.traveller_id', '=', 'travellers.traveller_id')
             ->join('users', 'travellers.user_id', '=', 'users.user_id')
             ->where('username', Auth::user()->username)
-            ->first();
-        //foreach ($aTripIdGuide as $iTrip){
-            //$this->sendMailToStudentsInTrip($aTripIdGuide["trip_id"]);
-        //}
-        $oStudents = Traveller::join('travellers_per_trips', 'travellers_per_trips.traveller_id', '=', 'travellers.traveller_id')->where('trip_id',$aTripIdGuide["trip_id"])->get()->toArray();
-        $sTrip = Trip::where('trip_id',$aTripIdGuide["trip_id"])->first();
-        $sTripNaam = $sTrip->name;
-        $iPrijs=$sTrip->price;
-        foreach ($oStudents as $oStudent){
-            $aBetalingen = Payment::where('traveller_id',$oStudent->traveller_id)->get()->pluck('amount');
-            $iBetaald = 0;
-            foreach ($aBetalingen as $iAmount){
-                $iBetaald+=$iAmount;
-            }
-
+            ->get();
+        $aName = Traveller::select('last_name', 'first_name')->where('user_id',Auth::id())->first();
+        $sName = $aName['first_name']." ".$aName['last_name'];
+        foreach ($aTripIdGuide as $iTrip){
+            $this->sendMailToStudentsInTrip($iTrip["trip_id"],$sName);
         }
-        return response()->json(["Travellers in je trip"=>$oStudents]);
+
+        return response()->json(["mailsSent"=>true]);
     }
 
     public function sendMailToStudentsInTrip($sTripId,$sBegeleider=" "){
 
-        $oStudents = Traveller::join('travellers_per_trips', 'travellers_per_trips.traveller_id', '=', 'travellers.traveller_id')->where('trip_id',$sTripId)->get()->toArray();
+        $oStudents = Traveller::join('travellers_per_trips', 'travellers_per_trips.traveller_id', '=', 'travellers.traveller_id')->where('trip_id',$sTripId)->get();
         $sTrip = Trip::where('trip_id',$sTripId)->first();
         $sTripNaam = $sTrip->name;
         $iPrijs=$sTrip->price;
