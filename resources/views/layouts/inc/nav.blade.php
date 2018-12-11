@@ -1,19 +1,16 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span id="toggle" class="navbar-toggler-icon"></span>
         </button>
 
-        <ul class="navbar-nav">
-            <li class="nav-item"><a class="nav-link" href="{{ route('info') }}">Info</a></li>
-            @foreach(\App\Page::where('type','!=','info')->where('is_visible',true)->get() as $page)
-                <li class="nav-item"><a class="nav-link" href='/page/{{$page->name}}'>{{$page->name}}</a></li>
-            @endforeach
-            <li class="nav-item"><a class="nav-link" href="{{ route('contact') }}">Contact</a></li>
-        </ul>
-
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
+                <li class="nav-item"><a class="nav-link" href="{{ route('info') }}">Info</a></li>
+                @foreach(\App\Page::where('type','!=','info')->where('is_visible',true)->get() as $page)
+                    <li class="nav-item"><a class="nav-link" href='/page/{{$page->name}}'>{{$page->name}}</a></li>
+                @endforeach
+                <li class="nav-item"><a class="nav-link" href="{{ route('contact') }}">Contact</a></li>
                 @if(\Illuminate\Support\Facades\Auth::check())
                     @if(\Illuminate\Support\Facades\Auth::user()->role == 'guide' or \Illuminate\Support\Facades\Auth::user()->role == 'admin')
                         <li class="nav-item dropdown">
