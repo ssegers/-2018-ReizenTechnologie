@@ -4,7 +4,7 @@
     <div class="loader">
     </div>
     <div class="loaderBackground"></div>
-    <div id="content-right">
+    <div class="container">
         <div class="container-fluid d-flex  flex-column">
             <div class="row flex-shrink-0">
                 @foreach($aActiveTrips as $aTripData)
