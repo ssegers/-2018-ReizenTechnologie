@@ -24,6 +24,9 @@ class MailController extends Controller
     public function getUpdateForm(){
 
         $currentUserId = Auth::id();
+        if($currentUserId < 3){
+            return back()->with('danger','U kan geen mail versturen als administrator');
+        }
         $sEmail = Traveller::where('user_id', $currentUserId)->pluck('email')->first();
         $aTrips = Trip::where('is_active', true)->get();
 
@@ -57,8 +60,6 @@ class MailController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withInput()->with(['message' => $validator->errors()]);
         }
-        
-        //$sContactMail = Trip::where('trip_id', $request->post('trip'))->first()->contact_mail;
         $sContactMail =  $request->post('contactMail');
 
         /* Set the mail data */
@@ -71,13 +72,13 @@ class MailController extends Controller
 
         /* Get the mail list and chunk them by 10 */
             $aMailList = array();
-           //$aAllTravellersPerTrip = TravellersPerTrip::where('trip_id',$request->post('trip'))->get();
-           $aAllTravellersPerTrip = User::where('user_id', 12)->get(); //mijn email adres
-//           foreach($aAllTravellersPerTrip as $traveller) {
-//               array_push($aMailList,$traveller->traveller->email);
-//           }
-          // $aChunkedMailList = array_chunk($aMailList, 10);
-           $aChunkedMailList = $aAllTravellersPerTrip;
+           $aAllTravellersPerTrip = TravellersPerTrip::where('trip_id',$request->post('trip'))->get();
+
+           foreach($aAllTravellersPerTrip as $traveller) {
+               array_push($aMailList,$traveller->traveller->email);
+           }
+           $aChunkedMailList = array_chunk($aMailList, 10);
+
 
 
         /* Send the mail to each recipient */
