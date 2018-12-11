@@ -399,6 +399,10 @@ class RegisterController extends Controller
 
         /* Link traveller to trip */
         $oTravellerPerTrip = new TravellersPerTrip;
+
+        if($oUser->role == 'guide') {
+            $oTravellerPerTrip->is_guide = true;
+        }
         $oTravellerPerTrip->trip_id = $request->session()->get('iSelectedTripId');
         $oTravellerPerTrip->traveller_id = $iTravellerId;
         $oTravellerPerTrip->is_organizer = false;
