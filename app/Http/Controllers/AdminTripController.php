@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\Validator;
 
 class AdminTripController extends Controller
 {
+    function getTrip(Request $request)
+    {
+        //geef data aan modal door
+    }
+
     //GET::/admin/trips
     function getTrips()
     {
