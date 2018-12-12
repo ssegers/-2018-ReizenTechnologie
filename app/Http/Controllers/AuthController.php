@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Traveller;
+use Carbon\Carbon;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -79,14 +80,20 @@ class AuthController extends controller
     }
 
     public function ShowEmailPost(Request $request){
-        
-        $traveller = Traveller::Where('email', $request->input('email'))->get('user_id');
-        return var_dump($traveller);
+
+        $traveller = Traveller::where('email', $request->input('email'))->pluck('user_id');
+        $voornaam = raveller::where('email', $request->input('email'))->pluck('first_name');
+        $achternaam = raveller::where('email', $request->input('email'))->pluck('last_name');
+        $naam = $voornaam . " " . $achternaam;
+        $token = Carbon::now() . RegisterController::randomPassword(25);
+        if (User::where('user_id',$traveller)->update(['resettoken' => $token])){
+            $this->sendMail($request->input('email'),$naam, $token);
+        }
     }
 
     public function sendMail($email, $name, $password) {
         $aMailData = [
-            'subject' => 'Your registration for the UCLL trip.',
+            'subject' => 'Password reset',
             'username' => $name,
             'email' => $email,
             'description' => "berichtje",
