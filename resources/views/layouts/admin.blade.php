@@ -53,7 +53,7 @@
             <div class="row flex-fill d-flex overflow-auto">
                 <div class="col w3-sand font-weight-bold" style="padding: 0;">
                     <nav class="nav flex-column">
-                        <a href="{{ route('dashboard') }}" class="nav-link w3-hover-red border p-3">Dashboard</a>
+                        <a href="{{ route('dashboard') }}" class="nav-link w3-hover-red border p-3 pt-4 pb-4">Dashboard</a>
                         <a href="{{ route('adminInfo') }}" class="nav-link w3-hover-red border p-3">Info Aanpassen</a>
                         <a href="{{ route('adminRegUser') }}" class="nav-link w3-hover-red border p-3">Account Registreren</a>
                         <a href="{{ route('adminTrips') }}" class="nav-link w3-hover-red border p-3" >Beheer reizen</a>
