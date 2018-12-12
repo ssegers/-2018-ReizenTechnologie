@@ -88,7 +88,7 @@ class TravellersTableSeeder extends Seeder
             'major_id' =>1,
             'first_name' => 'Kaan',
             'last_name' => 'Akpinar',
-            'email' => 'kaan.akpinar@student.ucll.be',
+            'email' => 'kaan.akpinar@hotmail.com',
             'country' => 'belgië',
             'address' => 'kaan zijn straat 15',
             'gender' => 'Man',
