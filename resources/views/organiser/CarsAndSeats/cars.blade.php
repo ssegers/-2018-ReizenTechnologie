@@ -35,7 +35,7 @@
                             {{Form::label('AutoNaam','Auto naam:')}}
                             {{Form::text('AutoNaam', null, array('class' => 'form-control','required' => 'required'))}}
                             {{Form::label('AutoSize','Auto plaatsen:')}}
-                            {{Form::text('AutoSize', null, array('class' => 'form-control','required' => 'required'))}}
+                            {{Form::number('AutoSize', null, array('class' => 'form-control','required' => 'required'))}}
                         </div>
                     </div>
                     <div class="modal-footer">
