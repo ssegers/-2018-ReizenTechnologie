@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ResetPas;
 use App\Traveller;
 use Carbon\Carbon;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -13,6 +14,8 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\User;
+use Illuminate\Support\Facades\Mail;
+use Symfony\Component\Routing\Route;
 
 
 class AuthController extends controller
@@ -64,13 +67,19 @@ class AuthController extends controller
         }
     }
 
-    public function ResetPassword(Request $request)
+    public function ResetPassword(Request $request, $token)
     {
 
     }
 
-    public function ShowResetPassword()
+    public function ShowResetPassword($token)
     {
+        $t = $token;
+        $year = substr($t,0,4);
+        $month = substr($t,4,2);
+        $day = substr($t,6,2);
+
+        return $day;
         return view('auth.passwords.resetpassword');
     }
 
@@ -80,25 +89,45 @@ class AuthController extends controller
     }
 
     public function ShowEmailPost(Request $request){
-
-        $traveller = Traveller::where('email', $request->input('email'))->pluck('user_id');
-        $voornaam = raveller::where('email', $request->input('email'))->pluck('first_name');
-        $achternaam = raveller::where('email', $request->input('email'))->pluck('last_name');
+        $traveller = Traveller::where('email', $request->input('email'))->first();
+        $travellerid = $traveller->user_id;
+        $voornaam = $traveller->first_name;
+        $achternaam = $traveller->last_name;
         $naam = $voornaam . " " . $achternaam;
-        $token = Carbon::now() . RegisterController::randomPassword(25);
-        if (User::where('user_id',$traveller)->update(['resettoken' => $token])){
+        $year = Carbon::now()->year;
+        $month = Carbon::now()->month;
+        if ($month < 10){
+            $month = '0'. $month;
+        }
+        $day = Carbon::now()->day;
+        if ($day < 10){
+            $day = '0'. $day;
+        }
+        $hour = (string)Carbon::now()->hour;
+        if ($hour < 10){
+            $hour = '0'. $hour;
+        }
+        $minute = Carbon::now()->minute;
+        if ($minute < 10){
+            $minute = '0'. $minute;
+        }
+        $token = $year.$month.$day.$hour.$minute.RegisterController::randomPassword(25);
+        return $token;
+        if (User::where('user_id',$travellerid)->update(['resettoken' => $token])){
             $this->sendMail($request->input('email'),$naam, $token);
+        }
+        else{
+            return redirect(route('info'));
         }
     }
 
-    public function sendMail($email, $name, $password) {
+    public function sendMail($email, $name, $token) {
         $aMailData = [
             'subject' => 'Password reset',
-            'username' => $name,
+            'fullname' => $name,
             'email' => $email,
-            'description' => "berichtje",
-            'password' => $password
+            'token' => $token
         ];
-        Mail::to($email)->send(new RegisterComplete($aMailData));
+        Mail::to($email)->send(new ResetPas($aMailData));
     }
 }
