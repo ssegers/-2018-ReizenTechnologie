@@ -292,10 +292,11 @@ class UserDataController extends Controller
                     $bIsGuideOfTraveller = true;
                 }
             }
-            if(!$bIsGuideOfTraveller){
-                return redirect(route("info"));
+            if (Auth::user()->role != "admin"){
+                if(!$bIsGuideOfTraveller){
+                    return redirect(route("info"));
+                }
             }
-            /*  */
         }
 
         $sUserRole = User::where('username', $sUserName)->select('role')->first();

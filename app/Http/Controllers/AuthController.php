@@ -79,8 +79,9 @@ class AuthController extends controller
     }
 
     public function ShowEmailPost(Request $request){
-        $traveller = Traveller::where('email', $request->input('email'))->get('user_id');
-        echo $traveller;
+        
+        $traveller = Traveller::Where('email', $request->input('email'))->get('user_id');
+        return var_dump($traveller);
     }
 
     public function sendMail($email, $name, $password) {
