@@ -22,12 +22,14 @@ class TravellersPerTripSeeder extends Seeder
         DB::table('travellers_per_trips')->insert([
             'trip_id' => 2,
             'traveller_id' => 1,
+            'is_guide' => false,
             'is_organizer' => true,
         ]);
         //koppel Mr. Rudi aan Amerika
         DB::table('travellers_per_trips')->insert([
             'trip_id' => 1,
             'traveller_id' => 2,
+            'is_guide' => false,
             'is_organizer' => true,
         ]);
         //koppel Mr. Roox aan Duitsland
@@ -41,39 +43,46 @@ class TravellersPerTripSeeder extends Seeder
         DB::table('travellers_per_trips')->insert([
             'trip_id' => 2,
             'traveller_id' => 3,
+            'is_guide' => false,
             'is_organizer' => false,
         ]);
 
         DB::table('travellers_per_trips')->insert([
             'trip_id' => 1,
             'traveller_id' => 4,
+            'is_guide' => false,
             'is_organizer' => false,
         ]);
 
         DB::table('travellers_per_trips')->insert([
             'trip_id' => 2,
             'traveller_id' => 5,
+            'is_guide' => false,
             'is_organizer' => false,
         ]);
 /******/
         DB::table('travellers_per_trips')->insert([
             'trip_id' => 1,
             'traveller_id' => 6,
+            'is_guide' => false,
             'is_organizer' => false,
         ]);
         DB::table('travellers_per_trips')->insert([
             'trip_id' => 2,
             'traveller_id' => 7,
+            'is_guide' => false,
             'is_organizer' => false,
         ]);
         DB::table('travellers_per_trips')->insert([
             'trip_id' => 1,
             'traveller_id' => 8,
+            'is_guide' => false,
             'is_organizer' => false,
         ]);
         DB::table('travellers_per_trips')->insert([
             'trip_id' => 2,
             'traveller_id' => 9,
+            'is_guide' => false,
             'is_organizer' => false,
         ]);
         DB::table('travellers_per_trips')->insert([
@@ -199,81 +208,97 @@ class TravellersPerTripSeeder extends Seeder
         DB::table('travellers_per_trips')->insert([
             'trip_id' => 1,
             'traveller_id' => 34,
+            'is_guide' => false,
             'is_organizer' => false,
         ]);
         DB::table('travellers_per_trips')->insert([
             'trip_id' => 2,
             'traveller_id' => 35,
+            'is_guide' => false,
             'is_organizer' => false,
         ]);
         DB::table('travellers_per_trips')->insert([
             'trip_id' => 1,
             'traveller_id' => 36,
+            'is_guide' => false,
             'is_organizer' => false,
         ]);
         DB::table('travellers_per_trips')->insert([
             'trip_id' => 2,
             'traveller_id' => 37,
+            'is_guide' => false,
             'is_organizer' => false,
         ]);
         DB::table('travellers_per_trips')->insert([
             'trip_id' => 1,
             'traveller_id' => 38,
+            'is_guide' => false,
             'is_organizer' => false,
         ]);
         DB::table('travellers_per_trips')->insert([
             'trip_id' => 2,
             'traveller_id' => 39,
+            'is_guide' => true,
             'is_organizer' => false,
         ]);
         DB::table('travellers_per_trips')->insert([
             'trip_id' => 1,
             'traveller_id' => 40,
+            'is_guide' => true,
             'is_organizer' => false,
         ]);
         DB::table('travellers_per_trips')->insert([
             'trip_id' => 2,
             'traveller_id' => 41,
+            'is_guide' => true,
             'is_organizer' => false,
         ]);
         DB::table('travellers_per_trips')->insert([
             'trip_id' => 1,
             'traveller_id' => 42,
+            'is_guide' => true,
             'is_organizer' => false,
         ]);
         DB::table('travellers_per_trips')->insert([
             'trip_id' => 2,
             'traveller_id' => 43,
+            'is_guide' => true,
             'is_organizer' => false,
         ]);
         DB::table('travellers_per_trips')->insert([
             'trip_id' => 1,
             'traveller_id' => 44,
+            'is_guide' => true,
             'is_organizer' => false,
         ]);
         DB::table('travellers_per_trips')->insert([
             'trip_id' => 2,
             'traveller_id' => 45,
+            'is_guide' => true,
             'is_organizer' => false,
         ]);
         DB::table('travellers_per_trips')->insert([
             'trip_id' => 1,
             'traveller_id' => 46,
+            'is_guide' => true,
             'is_organizer' => false,
         ]);
         DB::table('travellers_per_trips')->insert([
             'trip_id' => 2,
             'traveller_id' => 47,
+            'is_guide' => true,
             'is_organizer' => false,
         ]);
         DB::table('travellers_per_trips')->insert([
             'trip_id' => 1,
             'traveller_id' => 48,
+            'is_guide' => true,
             'is_organizer' => false,
         ]);
         DB::table('travellers_per_trips')->insert([
             'trip_id' => 2,
             'traveller_id' => 49,
+            'is_guide' => true,
             'is_organizer' => false,
         ]);
     }
