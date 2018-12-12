@@ -13,7 +13,7 @@
                     <div class="form-group">
                         {{Form::hidden('hotels_per_trip_id',$hotel_id)}}
                         {{Form::label('AantalPersonen','Aantal Personen:')}}
-                        {{Form::text('AantalPersonen', null, array('class' => 'form-control','required' => 'required'))}}
+                        {{Form::number('AantalPersonen', null, array('class' => 'form-control','required' => 'required'))}}
                     </div>
                 </div>
                 <div class="modal-footer">
