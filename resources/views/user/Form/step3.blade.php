@@ -61,7 +61,7 @@
     </div>
     <div class="form-row">
         <div class="form-group col-md-12">
-        <label class="formLabel">Wat houden deze in?</label>
+        <label class="formLabel">Medische gegevens die belangrijk zijn voor begeleiders:</label>
             {{ Form::textarea('txtMedisch', $sEnteredMedicalCondition, ['id'=>'txtMedisch','oninput'=>'this.className','placeholder'=>'Niet verplicht'])}}
         </div>
     </div>
