@@ -44,7 +44,7 @@
                                     </div>
                                     <div class="form-row">
                                         <div class="col-5">Reis</div>
-                                        <div class="col-7">{{ $aUserData['name'] }}</div>
+                                        <div class="col-7">{{ $aUserData['name'] }} {{ $aUserData['year'] }}</div>
                                     </div>
                                 </div>
                             </div>
