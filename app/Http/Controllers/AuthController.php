@@ -55,7 +55,12 @@ class AuthController extends controller
     }
 
     public function showView(){
-        return view("auth.Authenticate");
+        if (Auth::check()){
+            return (route("info"));
+        }
+        else{
+            return view("auth.Authenticate");
+        }
     }
 
     public function ResetPassword(Request $request)
