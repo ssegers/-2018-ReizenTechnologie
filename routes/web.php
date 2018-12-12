@@ -101,6 +101,12 @@ Route::middleware(['auth','guide'])->group(function () {
 
         Route::post('/addRoom', 'HotelRoomController@addHotelRoom');
     });
+    Route::prefix('auto')->group(function() {
+        Route::get('/listautos', 'AutoController@getAutosPerTripOrganizer')->name("listautosOrganizer");
+        Route::post('/listautos', 'AutoController@getAutosPerTripOrganizer');
+        Route::post('/deleteAuto', 'AutoController@deleteAuto');
+        Route::post('/createAuto', 'AutoController@createAuto');
+    });
 });
 //--------------------------------------END---------------------------------------
 
@@ -124,15 +130,22 @@ Route::middleware(['auth','guide'])->group(function () {
 Route::middleware(['auth','traveller'])->group(function () {
     Route::prefix('user')->group(function () {
         //hotels
-        Route::prefix('hotel')->group(function() {
+        Route::prefix('hotel')->group(function () {
             Route::get('/listhotels', 'HotelRoomController@getHotelsPerTripUser')->name("listhotelsUser");
 
             Route::get('/listrooms/{hotel_id}/{hotel_name}', 'HotelRoomController@getRoomsUser');
             Route::post('/listrooms/{hotel_id}/{hotel_name}', 'HotelRoomController@getRoomsUser');
+            Route::post('/chooseRoom', 'HotelRoomController@chooseRoom');
+            Route::post('/leaveRoom', 'HotelRoomController@leaveRoom');
 
         });
+        //autos
+        Route::prefix('auto')->group(function () {
+            Route::get('/listautos', 'AutoController@getAutosPerTripUser')->name("listautosUser");
+            Route::post('/chooseSeat', 'AutoController@chooseSeat');
+            Route::post('/leaveSeat', 'AutoController@leaveSeat');
+        });
     });
-
 });
 //--------------------------------------END---------------------------------------
 
@@ -174,11 +187,6 @@ Route::middleware(['auth','loggedIn'])->group(function () {
         Route::post('{sUserName}/update', 'UserDataController@updateUserData');
     });
     Route::get('/logout','AuthController@logout')->name("logout");
-
-    Route::prefix('hotel')->group(function() {
-        Route::post('/chooseRoom', 'HotelRoomController@chooseRoom');
-        Route::post('/leaveRoom', 'HotelRoomController@leaveRoom');
-    });
 });
 
 

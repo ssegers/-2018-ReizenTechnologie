@@ -14,6 +14,7 @@
                 @if(\Illuminate\Support\Facades\Auth::check())
                     @if(\Illuminate\Support\Facades\Auth::user()->role=='traveller')
                         <li class="nav-item"><a class="nav-link" href="{{ route('listhotelsUser') }}">Hotels</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('listautosUser') }}">Autos</a></li>
                     @endif
                     @if(\Illuminate\Support\Facades\Auth::user()->role == 'guide' or \Illuminate\Support\Facades\Auth::user()->role == 'admin')
                         <li class="nav-item dropdown">
@@ -25,6 +26,7 @@
                                 <a class="dropdown-item" href="{{ route('updatemail') }}">Verstuur mail</a>
                                 <a class="dropdown-item" href="/user/payment/trip">Betalingen</a>
                                 <a class="dropdown-item" href="{{ route('listhotelsOrganizer') }}">Hotels</a>
+                                <a class="dropdown-item" href="{{ route('listautosOrganizer') }}">Autos</a>
                             </div>
                         </li>
                     @endif
