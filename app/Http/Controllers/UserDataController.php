@@ -395,14 +395,14 @@ class UserDataController extends Controller
 
 
         /* travellers_per_trips table */
-        if(Auth::user()->role == "traveller"){
+        if($oUser->role == "traveller"){
             TravellersPerTrip::where('traveller_id', $oUser->traveller->traveller_id)->update(['trip_id' => $aRequest->post('Trip')]);
         }
-        else if (Auth::user()->role == "guide"){
+        else if ($oUser->role == "guide"){
             $aTripsGuide = TravellersPerTrip::select('is_organizer')
                 ->join('travellers', 'travellers_per_trips.traveller_id', '=', 'travellers.traveller_id')
                 ->join('users', 'travellers.user_id', '=', 'users.user_id')
-                ->where('username', Auth::user()->username)
+                ->where('username', $oUser->username)
                 ->get();
             $bIsGuideAnOrganiser = false;
             foreach($aTripsGuide as $aTripGuide){
@@ -415,11 +415,23 @@ class UserDataController extends Controller
                     ->where('is_guide', true)
                     ->update(['is_guide' => false]);
 
-                TravellersPerTrip::where('trip_id', $aRequest->post('Trip'))
-                    ->where('traveller_id', $oUser->traveller->traveller_id)
-                    ->update([
-                        'is_guide' => true,
-                    ]);
+                if(TravellersPerTrip::where('trip_id', $aRequest->post('Trip'))->where('traveller_id', $oUser->traveller->traveller_id)->exists()){
+                    TravellersPerTrip::where('trip_id', $aRequest->post('Trip'))
+                        ->where('traveller_id', $oUser->traveller->traveller_id)
+                        ->update([
+                            'is_guide' => true,
+                        ]);
+                }
+                else{
+                    TravellersPerTrip::where('trip_id', $aRequest->post('Trip'))
+                        ->where('traveller_id', $oUser->traveller->traveller_id)
+                        ->insert([
+                            'trip_id' => $aRequest->post('Trip'),
+                            'traveller_id' => $oUser->traveller->traveller_id,
+                            'is_guide' => true,
+                            'is_organizer' => false
+                        ]);
+                }
             }
             /* Update travellers_per_trips table for guides who are organisers */
             else{
