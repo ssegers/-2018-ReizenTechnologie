@@ -11,28 +11,28 @@ class TravellersPerTripSeeder extends Seeder
      */
     public function run()
     {
-        //koppel Mr. Segers aan Amerika
+        //Segers organisator Amerika en reist
         DB::table('travellers_per_trips')->insert([
             'trip_id' => 1,
             'traveller_id' => 1,
             'is_guide' => true,
             'is_organizer' => true,
         ]);
-        //koppel Mr. Segers aan Duitsland
+        //Segers organisator Duitsland
         DB::table('travellers_per_trips')->insert([
             'trip_id' => 2,
             'traveller_id' => 1,
             'is_guide' => false,
             'is_organizer' => true,
         ]);
-        //koppel Mr. Rudi aan Amerika
+        //Roox organisator Amerika
         DB::table('travellers_per_trips')->insert([
             'trip_id' => 1,
             'traveller_id' => 2,
             'is_guide' => false,
             'is_organizer' => true,
         ]);
-        //koppel Mr. Roox aan Duitsland
+        //Roox organisator Duitsland en reist
         DB::table('travellers_per_trips')->insert([
             'trip_id' => 2,
             'traveller_id' => 2,
