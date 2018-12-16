@@ -35,7 +35,7 @@
                                         <div class="col-7">{{ $aUserData['gender'] }}</div>
                                     </div>
                                     <div class="form-row">
-                                        <div class="col-5">Klas</div>
+                                        <div class="col-5">Richting</div>
                                         <div class="col-7">{{ $aUserData['study_name'] }}</div>
                                     </div>
                                     <div class="form-row">
@@ -44,7 +44,7 @@
                                     </div>
                                     <div class="form-row">
                                         <div class="col-5">Reis</div>
-                                        <div class="col-7">{{ $aUserData['name'] }}</div>
+                                        <div class="col-7">{{ $aUserData['name'] }} {{ $aUserData['year'] }}</div>
                                     </div>
                                 </div>
                             </div>

@@ -43,7 +43,7 @@
 
             <div class="form-group">
                 <label for="captcha" class="col-md-4 control-label">Captcha:</label>
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <div class="captcha" style="display: inline-flex;">
                         <input id="captcha" autocomplete="off" autocorrect="off" type="text" class="form-control pr-2" placeholder="Vul Captcha in" name="captcha">
                         <span class="pr-2 pl-2">{!! captcha_img() !!}</span>

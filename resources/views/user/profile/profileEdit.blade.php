@@ -73,7 +73,7 @@
                                         <div class="col-7">
                                             <select id="Trip" name="Trip" required class="form-control">
                                                 @foreach($oTrips as $oTrip)
-                                                    <option value="{{ $oTrip->trip_id }}" @if($oTrip->trip_id == $aUserData["trip_id"]) selected @endif> {{ $oTrip->name }} </option>
+                                                    <option value="{{ $oTrip->trip_id }}" @if($oTrip->trip_id == $aUserData["trip_id"]) selected @endif> {{ $oTrip->name }} {{ $oTrip->year }} </option>
                                                 @endforeach
                                             </select>
                                         </div>
