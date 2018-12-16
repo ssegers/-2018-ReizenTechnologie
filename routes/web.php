@@ -209,11 +209,11 @@ Route::get('/', function () {
 Route::get('/info','AdminInfoController@showInfo')->name('info');
 Route::get('/page/{page_name}','AdminPagesController@showPage');
 
-// Password reset link request routes...
-Route::get('password/setmail', 'AuthController@ShowEmail');
+// Password reset link request routes
+Route::get('password/setmail', 'AuthController@ShowEmail')->name('showreset');
 Route::post('password/setmail', 'AuthController@ShowEmailPost');
 
-// Password reset routes...
+// Password reset routes
 Route::get('password/resetpassword/{token}', 'AuthController@ShowResetPassword')->name('resetpass');
 Route::post('password/resetpassword', 'AuthController@ResetPassword');
 

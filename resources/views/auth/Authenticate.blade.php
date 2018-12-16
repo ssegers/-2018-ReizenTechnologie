@@ -25,6 +25,7 @@
             </div>
         <hr/>
         {{ Form::submit('Volgende',['class' => 'btn btn-primary form-control mb-12 ']) }}
+        <a href="{{ route('showreset')}}">Forgot password</a>
         {{ Form::close() }}
         </div>
     </div>

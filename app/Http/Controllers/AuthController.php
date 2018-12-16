@@ -127,6 +127,9 @@ class AuthController extends controller
 
     public function ShowEmailPost(Request $request){
         $traveller = Traveller::where('email', $request->input('email'))->first();
+        if ($traveller == ""){
+            return back()->with('message', 'Geen gebruiker gevonden met dit emailadres.');
+        }
         $travellerid = $traveller->user_id;
         $voornaam = $traveller->first_name;
         $achternaam = $traveller->last_name;
@@ -151,10 +154,10 @@ class AuthController extends controller
         $token = $year.$month.$day.$hour.$minute.RegisterController::randomPassword(25).'*'.$travellerid;
         if (User::where('user_id',$travellerid)->update(['resettoken' => $token])){
             $this->sendMail($request->input('email'),$naam, $token);
-            return redirect(route('info'));
+            return redirect()->route("info")->with('message', 'Mail is verstuurd.');
         }
         else{
-            return redirect(route('info'));
+            return redirect()->route("info")->with('errormessage', 'Er is een fout opgetreden met het versturen van de mail, probeer later opnieuw.');
         }
     }
 
