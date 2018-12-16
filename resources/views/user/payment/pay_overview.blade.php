@@ -99,6 +99,15 @@
 
     </div>
 
+    <style>
+        #paymentStatusTable_wrapper {
+            display: flex;
+            flex-direction: column;
+        }
+        #paymentStatusTable_wrapper:last-child{
+
+        }
+    </style>
 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.css"/>
     <style src="{{ URL::asset('/css/payment.scss') }}"></style>
