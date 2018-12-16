@@ -67,20 +67,57 @@ class AuthController extends controller
         }
     }
 
-    public function ResetPassword(Request $request, $token)
+    public function ResetPassword(Request $request)
     {
-
+        $p1 = $request->input('password1');
+        $p2 = $request->input('password2');
+        $userid = $request->input('userid');
+        $GivenToken = $request->input("fulltoken");
+        $user = User::where('user_id',$userid)->first();
+        $userToken = $user->resettoken;
+        if($this->IsTokenStillValid($userToken,$GivenToken)){
+            if ($p1 == $p2){
+                User::where('user_id',$userid)->update(['password' => bcrypt($p1),"resettoken" => ""]);
+                return redirect()->route("info")->with('message', 'Paswoord is aangepast.');
+            }
+            else
+                return back()->with('message', 'Paswoorden komen niet met elkaar overeen.');
+        }
+        else
+            return redirect()->route("info")->with('errormessage', 'Deze link is niet meer beschikbaar.');
     }
 
     public function ShowResetPassword($token)
     {
-        $t = $token;
-        $year = substr($t,0,4);
-        $month = substr($t,4,2);
-        $day = substr($t,6,2);
+        $userid = explode("*", $token)[1];
+        $user = User::where('user_id',$userid)->first();
+        $userToken = $user->resettoken;
+        if ($this->IsTokenStillValid($userToken,$token)){
+            return view("auth.passwords.resetpassword", ["userid"=>$userid,"fulltoken"=>$token]);
+        }
+        else{
+            return redirect()->route("info")->with('errormessage', 'Deze link is niet meer beschikbaar.');
+        }
+    }
 
-        return $day;
-        return view('auth.passwords.resetpassword');
+    private function IsTokenStillValid($tokenUser, $GivenToken){
+        $year = substr($GivenToken,0,4);
+        $month = substr($GivenToken,4,2);
+        $day = substr($GivenToken,6,2);
+        $hour = substr($GivenToken,8,2);
+        $minute = substr($GivenToken,10,2);
+        $TokenTime = Carbon::create($year,$month,$day,$hour,$minute);
+        if($tokenUser == $GivenToken){
+            if (Carbon::now()->diffInMinutes($TokenTime) < 30){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        else{
+            return false;
+        }
     }
 
     public function ShowEmail()
@@ -111,10 +148,10 @@ class AuthController extends controller
         if ($minute < 10){
             $minute = '0'. $minute;
         }
-        $token = $year.$month.$day.$hour.$minute.RegisterController::randomPassword(25);
-        return $token;
+        $token = $year.$month.$day.$hour.$minute.RegisterController::randomPassword(25).'*'.$travellerid;
         if (User::where('user_id',$travellerid)->update(['resettoken' => $token])){
             $this->sendMail($request->input('email'),$naam, $token);
+            return redirect(route('info'));
         }
         else{
             return redirect(route('info'));
