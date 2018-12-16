@@ -60,12 +60,21 @@
                                     <?php $i=0 ?>
                                     @foreach($aTravellerPerRoom[$oRoom->rooms_hotel_trip_id] as $oTraveller)
                                             <tr><td>{{$oTraveller->first_name}} {{$oTraveller->last_name}}
-                                                    @if($oTraveller->traveller_id==$userTravellerId)
+                                                    @if($userTravellerId=='admin')
                                                         {{ Form::open(array('action' => 'HotelRoomController@leaveRoom', 'method' => 'post')) }}
                                                         {{Form::hidden('rooms_hotel_trip_id',$oRoom->rooms_hotel_trip_id)}}
+                                                        {{Form::hidden('traveller_id',$oTraveller->traveller_id)}}
                                                         {{Form::button('Verlaat Kamer',array('class' => 'btn btn-secondary', 'type' => 'submit'))}}
                                                         {{Form::close()}}
+                                                    @else
+                                                        @if($oTraveller->traveller_id==$userTravellerId)
+                                                            {{ Form::open(array('action' => 'HotelRoomController@leaveRoom', 'method' => 'post')) }}
+                                                            {{Form::hidden('rooms_hotel_trip_id',$oRoom->rooms_hotel_trip_id)}}
+                                                            {{Form::button('Verlaat Kamer',array('class' => 'btn btn-secondary', 'type' => 'submit'))}}
+                                                            {{Form::close()}}
+                                                        @endif
                                                     @endif
+
                                             </td></tr>
                                         <?php $i++ ?>
                                     @endforeach
