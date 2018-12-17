@@ -1,10 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="loader">
-    </div>
+    <div class="loader"></div>
     <div class="loaderBackground"></div>
-    <div class="container">
+    <div class="container cont">
+
+        <div class="alert alert-success success-mail">
+            <strong>Succes!</strong> De emails zijn succesvol verzonden
+        </div>
+        <div class="alert alert-danger error-mail">
+            <strong>Error!</strong> De emails zijn niet verzonden. Probeer opnieuw of check je internetconnectie.
+        </div>
+
         <div class="container-fluid d-flex  flex-column">
             <div class="row flex-shrink-0">
                 @foreach($aActiveTrips as $aTripData)
@@ -26,45 +33,47 @@
             <div class="row flex-shrink-0">
                 <div class="col-lg">
                     <h1>Betalingsstatus deelnemers {{ $oCurrentTrip->name }} {{ $oCurrentTrip->year }}</h1>
-                </div><div class="col-md-6"> <button type="button" style="margin-top: 9px;" class="loadButton btn float-right btn-primary">Studenten betalingsstatus mailen</button></div></div>
+                </div>
+                <div class="col-md-6">
+                    <button type="button" style="margin-top: 9px;" class="loadButton btn float-right btn-primary">Studenten betalingsstatus mailen</button>
+                </div>
             </div>
-        <div class="alert alert-success success-mail">
-            <strong>Succes!</strong> De emails zijn succesvol verzonden
-        </div>
-        <div class="alert alert-danger error-mail">
-            <strong>Error!</strong> De emails zijn niet verzonden. Probeer opnieuw of check je internetconnectie.
-        </div>
-        <div class="table-wrapper-scroll">
-            <table id="paymentStatusTable" class="table table-striped table-hover">
-                <thead>
-                <tr>
-                    <th class="th-sm">Naam</th>
-                    <th class="th-sm">Voornaam</th>
-                    <th class="th-sm">Bankrekening</th>
-                    <th class="th-sm">Totaal</th>
-                    <th class="th-sm">Reeds betaald</th>
-                    <th class="th-sm">Saldo (te betalen)</th>
-                    <th class="th-sm">Betaling</th>
-                </tr>
-                </thead>
-                <tbody>
-                @foreach($userdata as $oUserData)
-                    <tr>
-                        <td class="field">{{ $oUserData['last_name'] }}</td>
-                        <td class="field">{{ $oUserData['first_name'] }}</td>
-                        <td class="field">{{ $oUserData['iban'] }}</td>
-                        <td class="field">{{ $oUserData['price'] }}</td>
-                        <td class="field">{{ $oUserData['amount'] }}</td>
-                        <td class="field">{{ $oUserData['price']-$oUserData['amount'] }}</td>
-                        <td class="field"> <button type="button" class="open btn-primary rounded btn-xs  " data-id="{{$oUserData['traveller_id']}}"data-toggle="modal" data-target="#paymentPopUp">
-                                <i class="fas fa-plus-circle "></i>
-                            </button></td>
 
+            <div class="table-wrapper-scroll">
+                <table id="paymentStatusTable" class="table table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th class="th-sm">Naam</th>
+                        <th class="th-sm">Voornaam</th>
+                        <th class="th-sm">Bankrekening</th>
+                        <th class="th-sm">Totaal</th>
+                        <th class="th-sm">Reeds betaald</th>
+                        <th class="th-sm">Saldo (te betalen)</th>
+                        <th class="th-sm">Betaling</th>
                     </tr>
-                @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                    @foreach($userdata as $oUserData)
+                        <tr>
+                            <td class="field">{{ $oUserData['last_name'] }}</td>
+                            <td class="field">{{ $oUserData['first_name'] }}</td>
+                            <td class="field">{{ $oUserData['iban'] }}</td>
+                            <td class="field">{{ $oUserData['price'] }}</td>
+                            <td class="field">{{ $oUserData['amount'] }}</td>
+                            <td class="field">{{ $oUserData['price']-$oUserData['amount'] }}</td>
+                            <td class="field"> <button type="button" class="open btn-primary rounded btn-xs  " data-id="{{$oUserData['traveller_id']}}"data-toggle="modal" data-target="#paymentPopUp">
+                                    <i class="fas fa-plus-circle "></i>
+                                </button></td>
+
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
+
+
+
 
         <div class="modal" id="paymentPopUp" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
@@ -99,15 +108,7 @@
 
     </div>
 
-    <style>
-        #paymentStatusTable_wrapper {
-            display: flex;
-            flex-direction: column;
-        }
-        #paymentStatusTable_wrapper:last-child{
 
-        }
-    </style>
 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.css"/>
     <style src="{{ URL::asset('/css/payment.scss') }}"></style>
@@ -116,4 +117,29 @@
     <script src="{{URL::asset('/js/addPayment.js')}}"></script>
     <script src="{{ URL::asset('/js/payment.js') }}"></script>
     <script src="{{ URL::asset('/js/PaymentMailStatus.js') }}"></script>
+
+    <style>
+        .cont{
+            height: 100vh;
+        }
+        .table-wrapper-scroll{
+            flex-shrink: 0;
+        }
+        #paymentStatusTable_wrapper {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        #paymentStatusTable_wrapper > div:first-child{
+            padding-bottom: 5px;
+            flex-shrink: 0;
+        }
+        #paymentStatusTable_wrapper > div:nth-last-child(2){
+            height: auto;
+            overflow: auto;
+         }
+        #paymentStatusTable_wrapper > div:last-child{
+            flex-shrink: 0;
+        }
+    </style>
 @endsection
