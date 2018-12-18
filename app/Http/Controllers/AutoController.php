@@ -178,7 +178,7 @@ class AutoController extends Controller
 
     function chooseSeat(Request $request){
         $oUser = Auth::user();
-        if($oUser->role="admin"){
+        if($oUser->role=="admin"){
             return redirect()->back()->with('errormessage', 'U kunt geen auto kiezen als administrator');
         }
         else {
@@ -202,13 +202,13 @@ class AutoController extends Controller
             $userTravellerId=$request->post('traveller_id');
             $travellerPerAuto = TravellersPerAuto::where('traveller_id', $userTravellerId)->firstOrFail();
             $travellerPerAuto->delete();
-            return redirect()->back()->with('succesmessage', 'De reiziger nu een andere kamer kiezen');
+            return redirect()->back()->with('succesmessage', 'De reiziger kan nu een andere auto kiezen');
         }
         else{
             $userTravellerId=$oUser->traveller->traveller_id;
             $travellerPerAuto = TravellersPerAuto::where('traveller_id', $userTravellerId)->firstOrFail();
             $travellerPerAuto->delete();
-            return redirect()->back()->with('succesmessage', 'U kunt nu een andere kamer kiezen');
+            return redirect()->back()->with('succesmessage', 'U kunt nu een andere auto kiezen');
         }
     }
 
@@ -216,8 +216,8 @@ class AutoController extends Controller
 
         $auto_id=$request->input('auto_id');
 
+        TravellersPerAuto::where('autos_per_trip_id',$request->post('autos_per_trip_id'))->delete();
         AutosPerTrip::where('autos_per_trip_id',$request->post('autos_per_trip_id'))->delete();
-
         Auto::where('auto_id',$auto_id)->delete();
         return redirect()->back()->with('message', 'De auto is verwijderd');
     }

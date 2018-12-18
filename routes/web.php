@@ -93,6 +93,7 @@ Route::middleware(['auth','guide'])->group(function () {
         Route::get('/listhotels', 'HotelRoomController@getHotelsPerTripOrganizer')->name("listhotelsOrganizer");
         Route::post('/listhotels', 'HotelRoomController@getHotelsPerTripOrganizer');
         Route::post('/deleteHotel', 'HotelRoomController@deleteHotel');
+        Route::post('/deleteHotelRoom', 'HotelRoomController@deleteHotelRoom');
         Route::post('/connectHotelToTrip', 'HotelRoomController@connectHotelToTrip');
         Route::post('/createHotel', 'HotelRoomController@createHotel');
 

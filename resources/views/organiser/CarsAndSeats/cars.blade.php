@@ -126,7 +126,7 @@
             hiddenTripField.value=selectTrip.options[selectTrip.selectedIndex].value;
         }
         function ConfirmDelete(){
-            return confirm('Are you sure?');
+            return confirm('Bent u zeker? \nDe reizigers die al een plaats gekozen hebben moeten hierna een andere plaats kiezen.');
         }
         setTimeout(function(){
             if ($('#removeTimer').length > 0) {

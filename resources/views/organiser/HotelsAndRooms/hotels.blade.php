@@ -82,11 +82,11 @@
                     {{Form::button('<span aria-hidden="true">&times;</span>',array('class' => 'close', 'type' => 'button','data-dismiss'=>'modal','aria-label'=>'close'))}}
                 </div>
                 <div class="modal-body">
-                    <table>
-                        <tr><td><p id="hotel-name"></p></td></tr>
-                        <tr><td><p id="hotel-address"></p></td></tr>
-                        <tr><td><p id="hotel-phone"></p></td></tr>
-                        <tr><td><p id="hotel-email"></p></td></tr>
+                    <table class="table">
+                        <tr><td>Naam:</td><td><p id="hotel-name"></p></td></tr>
+                        <tr><td>Adres:</td><td><p id="hotel-address"></p></td></tr>
+                        <tr><td>Telnr:</td><td><p id="hotel-phone"></p></td></tr>
+                        <tr><td>Emailadres:</td><td><p id="hotel-email"></p></td></tr>
                     </table>
                 </div>
                 <div class="modal-footer">
@@ -173,7 +173,7 @@
         hiddenHotelField.value=selectHotel.options[selectHotel.selectedIndex].value;
     }
     function ConfirmDelete(){
-        return confirm('Are you sure?');
+        return confirm('Bent u zeker? \nDe reizigers die al een plaats in het hotel gekozen hebben moeten hierna een andere plaats kiezen.');
     }
 </script>
 @endsection

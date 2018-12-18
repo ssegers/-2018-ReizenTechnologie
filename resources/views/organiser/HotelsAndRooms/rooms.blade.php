@@ -38,8 +38,9 @@
             </div>
         @endif
         <table class="table text-center">
-            <tr><td colspan="2"><h1>{{$hotel_name}}</h1></td></tr>
+            <tr><td></td><td><h1>{{$hotel_name}}</h1></td><td></td></tr>
             <tr>
+                <td></td>
                 <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addHotelKamerPopup">Voeg kamer toe</button></td>
                 <td><a class="btn btn-primary" href="{{route('listhotelsOrganizer')}}">Terug</a></td>
             </tr>
@@ -51,9 +52,16 @@
                         Bekijk kamer
                     </button>
                     </td>
+                    <td>
+                        {{ Form::open(array('action' => 'HotelRoomController@deleteHotelRoom', 'method' => 'post','onsubmit' => 'return ConfirmDelete()')) }}
+                        {{ Form::hidden('rooms_hotel_trip_id', $oRoom->rooms_hotel_trip_id) }}
+                        {{ Form::submit('Delete',array('class'=>"btn btn-primary")) }}
+                        {{ Form::close()}}
+                    </td>
                 </tr>
                 <tr>
-                    <td colspan="2">
+                    <td></td>
+                    <td>
                         <div class="collapse" id="collapse{{$oRoom->rooms_hotel_trip_id}}">
                             <div class="card card-body ">
                                 <table class="table text-center">
@@ -89,6 +97,7 @@
                             </div>
                         </div>
                     </td>
+                    <td></td>
                 </tr>
             @endforeach
         </table>
@@ -100,5 +109,9 @@
                 $('#removeTimer').remove();
             }
         }, 5000);
+
+        function ConfirmDelete(){
+            return confirm('Bent u zeker? \nDe reizigers die al een plaats in deze hotelkamer gekozen hebben moeten hierna een andere kamer kiezen.');
+        }
     </script>
 @endsection

@@ -260,8 +260,18 @@ class HotelRoomController extends Controller
 
         $hotels_per_trip_id=$request->input('hotels_per_trip_id');
 
+        $aRoomsId=RoomsPerHotelPerTrip::where('hotels_per_trip_id',$hotels_per_trip_id)->select('rooms_hotel_trip_id')->get();
+        TravellersPerRoom::whereIn('rooms_hotel_trip_id',$aRoomsId)->delete();
+        RoomsPerHotelPerTrip::where('hotels_per_trip_id',$hotels_per_trip_id)->delete();
         HotelsPerTrip::where('hotels_per_trip_id',$hotels_per_trip_id)->delete();
         return redirect()->back()->with('message', 'Het hotel is verwijderd');
+    }
+
+    public function deleteHotelRoom(Request $request){
+
+        TravellersPerRoom::where('rooms_hotel_trip_id',$request->post('rooms_hotel_trip_id'))->delete();
+        RoomsPerHotelPerTrip::where('rooms_hotel_trip_id',$request->post('rooms_hotel_trip_id'))->delete();
+        return redirect()->back()->with('message', 'De hotelkamer is verwijderd');
     }
 
 
