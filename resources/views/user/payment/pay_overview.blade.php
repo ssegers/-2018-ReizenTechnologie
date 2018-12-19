@@ -75,8 +75,10 @@
 
                                 <i class="fas fa-plus-circle "></i>
                             </button></td>
-
-           
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
         </div>
         <div class="modal" id="paymentPopUp" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
@@ -122,6 +124,7 @@
             </div>
         </div>
 
+    </div>
     </div>
 
 
