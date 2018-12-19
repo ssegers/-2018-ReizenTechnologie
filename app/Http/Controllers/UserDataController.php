@@ -59,6 +59,9 @@ class UserDataController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View|string
      */
     public function showUsersAsMentor(Request $request, $iTripId = null) {
+        if(!Auth::user()->isOrganizer()){
+            return redirect('info');
+        }
         $oUser = Auth::user();
 
         /* Get all active trips */

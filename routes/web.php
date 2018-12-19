@@ -235,5 +235,8 @@ Route::get('/log','AuthController@showView')->name("log");
 Route::post('cascade', 'UserDataController@GetMajorsByStudy');
 Route::post('getTrip', 'AdminTripController@GetTrip');
 
+Route::get('test',function (){
+    return \Illuminate\Support\Facades\Auth::user()->isOrganizer;
+});
 
 //Route::get('/home', 'HomeController@index')->name('home');

@@ -22,6 +22,12 @@ class MailController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function getUpdateForm(){
+        if(Auth::user()->role=='admin'){
+            return redirect('info');
+        }
+        if(!Auth::user()->isOrganizer()){
+            return redirect('info');
+        }
         $currentUserId = Auth::id();
         $sEmail = Traveller::where('user_id', $currentUserId)->pluck('email')->first();
         $travellerId = Auth::user()->traveller->traveller_id;

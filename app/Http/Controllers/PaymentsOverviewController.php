@@ -32,6 +32,9 @@ class PaymentsOverviewController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function showTable($iTripId = null){
+        if(!Auth::user()->isOrganizer()){
+            return redirect('info');
+        }
         $aActiveTrips = Trip::where('is_active', true)->get();
         $oUser = Auth::user();
         /* Get all trips that can be accessed by the user */
