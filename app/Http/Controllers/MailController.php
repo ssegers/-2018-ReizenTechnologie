@@ -28,19 +28,10 @@ class MailController extends Controller
         if(!Auth::user()->isOrganizer()){
             return redirect('info');
         }
-        $currentUserId = Auth::id();
-        $sEmail = Traveller::where('user_id', $currentUserId)->pluck('email')->first();
-        $travellerId = Auth::user()->traveller->traveller_id;
-        $aTripsPerOrganiser = TravellersPerTrip::where('traveller_id', $travellerId)->where('is_organizer', true)->select('trip_id')->get();
 
-        //get the current user
-        $currentUser = Auth::user();
+                 //get the current user
+                $currentUser = Auth::user();
 
-
-        foreach($currentUser->traveller->travellersPerTrip as $travellersPerTrip){
-            $is_organizer = $travellersPerTrip->is_organizer;
-
-            if($is_organizer){
                 $sEmail = Traveller::where('user_id', $currentUser->user_id)->pluck('email')->first();
                 $travellerId = $currentUser->traveller->traveller_id;
                 $aTripsPerOrganiser = TravellersPerTrip::where('traveller_id', $travellerId)->where('is_organizer', true)->select('trip_id')->get();
@@ -52,9 +43,8 @@ class MailController extends Controller
                     $aNewTrips[$oTrip->trip_id] = $oTrip->name . ' ' . $oTrip->year;
                 }
                 return view('organiser.updatemail', ['aTrips' => $aNewTrips, 'sEmail' => $sEmail]);
-            }
-            else return redirect('info')->with('warning', 'u hebt niet genoeg rechten om deze pagina te bezoeken');
-        }
+
+
 
 
 
