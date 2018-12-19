@@ -16,9 +16,9 @@
         @endif
         <div class="container">
             @if(str_contains($sPath, 'profile'))
-                {{ Form::open(array('url' => "/profile/".$aUserData["username"]."/update", 'method' => 'post')) }}
+                {{ Form::open(array('url' => "/profile/".$aUserData["username"]."/update", 'method' => 'post', 'name' => 'myForm')) }}
             @else
-                {{ Form::open(array('url' => "/userinfo/".$aUserData["username"]."/update", 'method' => 'post')) }}
+                {{ Form::open(array('url' => "/userinfo/".$aUserData["username"]."/update", 'method' => 'post', 'name' => 'myForm')) }}
             @endif
 
                 <div class="row">
@@ -69,13 +69,14 @@
                                         </div>
                                     </div>
                                     <div class="form-row form-group">
-                                        <div class="col-5">{{ Form::label('Trip', 'Reis*') }}</div>
+                                        <div class="col-5">{{ Form::label('Trip', 'Reis') }}</div>
                                         <div class="col-7">
-                                            <select id="Trip" name="Trip" required class="form-control">
-                                                @foreach($oTrips as $oTrip)
-                                                    <option value="{{ $oTrip->trip_id }}" @if($oTrip->trip_id == $aUserData["trip_id"]) selected @endif> {{ $oTrip->name }} {{ $oTrip->year }} </option>
-                                                @endforeach
-                                            </select>
+                                            {{ $aUserData['name'] }} {{ $aUserData['year'] }}
+                                            {{--<select id="Trip" name="Trip" required class="form-control">--}}
+                                                {{--@foreach($oTrips as $oTrip)--}}
+                                                    {{--<option value="{{ $oTrip->trip_id }}" @if($oTrip->trip_id == $aUserData["trip_id"]) selected @endif> {{ $oTrip->name }} {{ $oTrip->year }} </option>--}}
+                                                {{--@endforeach--}}
+                                            {{--</select>--}}
                                         </div>
                                     </div>
                                 </div>
@@ -151,14 +152,14 @@
                                     <div class="form-row form-group">
                                         <div class="col-5">{{ Form::label('MedicalIssue', 'Behandeling of aandoening*') }}</div>
                                         <div class="col-7">
-                                            <input id="MedicalIssue" name="MedicalIssue" type="radio" value="1" @if($aUserData["medical_issue"] == "1") checked @endif>Ja
-                                            <input id="MedicalIssue" name="MedicalIssue" type="radio" value="0" @if($aUserData["medical_issue"] == "0") checked @endif>Nee
+                                            <input id="MedicalIssue" name="MedicalIssue"  type="radio" value="1" @if($aUserData["medical_issue"] == "1") checked @endif>Ja
+                                            <input id="MedicalIssue" name="MedicalIssue"  type="radio" value="0" @if($aUserData["medical_issue"] == "0") checked @endif>Nee
                                         </div>
                                     </div>
                                     <div class="form-row form-group">
                                         <div class="col-5">{{ Form::label('MedicalInfo', 'Medische info') }}</div>
                                         <div class="col-7">
-                                            <textarea name="MedicalInfo" class="form-control" rows="5">{{ $aUserData['medical_info'] }}</textarea>
+                                            <textarea id="MedicalInfo" name="MedicalInfo" class="form-control"  rows="5">{{ $aUserData['medical_info'] }}</textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -202,5 +203,34 @@
                 {{csrf_field()}}
             {{ Form::close() }}
         </div>
-    <script src="{{ URL::asset('/js/cascadingDropDownStudyMajors.js') }}"></script>
+    <script src="{{ URL::asset('/js/cascadingDropDownStudyMajors.js') }}">
+    </script>
+    <script type="text/javascript">
+        var radio = document.getElementsByName("MedicalIssue");
+        for(var i =0; i<radio.length; i++){
+            radio[i].addEventListener('change', function(){
+                LaatTextAreaZien();
+            })
+        }
+
+        function LaatTextAreaZien(){
+            var radio = document.getElementsByName("MedicalIssue");
+            var value = null;
+            for(var i = 0; i< radio.length; i++){
+                if(radio[i].checked){
+                  value= radio[i].value;
+                }
+            }
+            var textarea = document.getElementById("MedicalInfo");
+            if(value == 0){
+                document.getElementById("MedicalInfo").disabled = true;
+            }
+            else{
+                document.getElementById("MedicalInfo").disabled = false;
+            }
+        }
+
+        LaatTextAreaZien();
+
+    </script>
 @endsection
