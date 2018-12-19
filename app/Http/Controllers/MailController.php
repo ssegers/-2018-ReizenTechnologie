@@ -33,13 +33,31 @@ class MailController extends Controller
         $travellerId = Auth::user()->traveller->traveller_id;
         $aTripsPerOrganiser = TravellersPerTrip::where('traveller_id', $travellerId)->where('is_organizer', true)->select('trip_id')->get();
 
-        $aActiveTrips = Trip::where('is_active', true)->whereIn('trip_id', $aTripsPerOrganiser)->get();
+        //get the current user
+        $currentUser = Auth::user();
 
-        $aNewTrips = array();
-        foreach ($aActiveTrips as $oTrip) {
-            $aNewTrips[$oTrip->trip_id] = $oTrip->name . ' ' . $oTrip->year;
+
+        foreach($currentUser->traveller->travellersPerTrip as $travellersPerTrip){
+            $is_organizer = $travellersPerTrip->is_organizer;
+
+            if($is_organizer){
+                $sEmail = Traveller::where('user_id', $currentUser->user_id)->pluck('email')->first();
+                $travellerId = $currentUser->traveller->traveller_id;
+                $aTripsPerOrganiser = TravellersPerTrip::where('traveller_id', $travellerId)->where('is_organizer', true)->select('trip_id')->get();
+
+                $aActiveTrips = Trip::where('is_active', true)->whereIn('trip_id', $aTripsPerOrganiser)->get();
+
+                $aNewTrips = array();
+                foreach ($aActiveTrips as $oTrip) {
+                    $aNewTrips[$oTrip->trip_id] = $oTrip->name . ' ' . $oTrip->year;
+                }
+                return view('organiser.updatemail', ['aTrips' => $aNewTrips, 'sEmail' => $sEmail]);
+            }
+            else return redirect('info')->with('warning', 'u hebt niet genoeg rechten om deze pagina te bezoeken');
         }
-        return view('organiser.updatemail', ['aTrips' => $aNewTrips, 'sEmail' => $sEmail]);
+
+
+
     }
 
 
