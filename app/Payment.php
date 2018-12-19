@@ -11,6 +11,7 @@ class Payment extends Model
     public function traveller(){
         return $this->hasMany('App\Traveller');
     }
+
     /**public static function getPaymentsPerTraveller($traveller_id){
 
         $paymentdata = self::

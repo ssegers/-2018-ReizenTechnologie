@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+    <?php use \App\Http\Controllers\PaymentsOverviewController;?>
     <div class="loader">
     </div>
     <div class="loaderBackground"></div>
@@ -38,6 +39,7 @@
             <table id="paymentStatusTable" class="table table-striped table-hover">
                 <thead>
                 <tr>
+                    <th class="th-sm">ID nummer</th>
                     <th class="th-sm">Naam</th>
                     <th class="th-sm">Voornaam</th>
                     <th class="th-sm">Bankrekening</th>
@@ -50,13 +52,16 @@
                 <tbody>
                 @foreach($userdata as $oUserData)
                     <tr>
+                        <td class="field">{{ $oUserData['username'] }}</td>
                         <td class="field">{{ $oUserData['last_name'] }}</td>
                         <td class="field">{{ $oUserData['first_name'] }}</td>
                         <td class="field">{{ $oUserData['iban'] }}</td>
                         <td class="field">{{ $oUserData['price'] }}</td>
                         <td class="field">{{ $oUserData['amount'] }}</td>
                         <td class="field">{{ $oUserData['price']-$oUserData['amount'] }}</td>
-                        <td class="field"> <button type="button" class="open btn-primary rounded btn-xs  " data-id="{{$oUserData['traveller_id']}}"data-toggle="modal" data-target="#paymentPopUp">
+                        <td class="field"> <button id="modalButton-{{$oUserData['traveller_id']}}" type="button" class="open btn-primary rounded btn-xs  " data-content="{{$oUserData['username']}}"
+                                                   data-id="{{$oUserData['traveller_id']}}"data-toggle="modal" data-target="#paymentPopUp" onclick="loadPaymentData({{$oUserData['traveller_id']}})">
+
                                 <i class="fas fa-plus-circle "></i>
                             </button></td>
 
@@ -65,17 +70,29 @@
                 </tbody>
             </table>
         </div>
-
         <div class="modal" id="paymentPopUp" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Overzicht</h5>
+                        <h5 class="modal-title"></h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
+                        <h6>Overzicht van betalingen</h6>
+                        <table id="paymentOverviewTable" class="table table-striped table-hover">
+                            <thead>
+                            <tr>
+                                <th>Datum</th>
+                                <th>Bedrag</th>
+                                <th>Verwijderen?</th>
+                            </tr>
+                            </thead>
+                            <tbody id="paymentdata">
+
+                            </tbody>
+                        </table>
                         {{Form::open(array('action' => 'PaymentsOverviewController@addPayment', 'method' => 'post'))}}
                         {{Form::hidden('traveller_id','', array("id"=>"traveller-id"))}}
                         <div class="form-group col">
@@ -90,7 +107,7 @@
 
                     <div class="modal-footer">
                         {{Form::submit('Betaling toevoegen', ['class' =>'btn btn-primary' ])}}
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="window.location.reload()">Cancel</button>
                     </div>
                     {{ Form::close() }}
                 </div>
@@ -104,7 +121,7 @@
     <style src="{{ URL::asset('/css/payment.scss') }}"></style>
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js"></script>
 
-    <script src="{{URL::asset('/js/addPayment.js')}}"></script>
+    <script src="{{URL::asset('/js/AddPayment.js')}}"></script>
     <script src="{{ URL::asset('/js/payment.js') }}"></script>
     <script src="{{ URL::asset('/js/PaymentMailStatus.js') }}"></script>
 @endsection

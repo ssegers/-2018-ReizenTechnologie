@@ -45,15 +45,15 @@ class Traveller extends Model
      * @return mixed
      */
     public static function getTravellersWithPayment($iTripId){
-        $userdata= self::select('last_name','first_name', 'iban', 'price', 'amount', 'travellers.traveller_id')
+        $userdata= self::select('last_name','first_name', 'iban', 'price', 'amount', 'travellers_per_trips.traveller_id', 'username')
             ->join('users','travellers.user_id','=','users.user_id')
             ->join('majors','travellers.major_id','=','majors.major_id')
             ->join('travellers_per_trips', 'travellers.traveller_id', '=', 'travellers_per_trips.traveller_id')
             ->join('studies','majors.study_id','=','studies.study_id')
             ->join('trips', 'travellers_per_trips.trip_id','=', 'trips.trip_id')
             ->join('payments', 'travellers.traveller_id','=','payments.traveller_id')
-            ->where('travellers_per_trips.trip_id', $iTripId)
-            ->groupBy('travellers.traveller_id', 'price', 'amount')->get()->toArray();
+            ->where('travellers_per_trips.trip_id', $iTripId)->where('is_guide', false)->where('is_organizer', false)
+            ->groupBy('travellers_per_trips.traveller_id', 'price', 'amount')->get()->toArray();
 
         return $userdata;
     }

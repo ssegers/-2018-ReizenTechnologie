@@ -1,4 +1,6 @@
 $(document).ready(function () {
-    $('#paymentStatusTable').DataTable();
+    $('#paymentStatusTable').DataTable({
+        "order": [[ 5, "desc" ]]
+    });
     $('.dataTables_length').addClass('bs-select');
 });

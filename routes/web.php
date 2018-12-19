@@ -75,6 +75,10 @@ Route::middleware(['auth','guide'])->group(function () {
         Route::get('payment/trip/{trip?}','PaymentsOverviewController@showTable')->name('payments');
         Route::post('AddPayment', 'PaymentsOverviewController@addPayment');
         Route::post('payment', 'PaymentsOverviewController@sendMail');
+        route::post('payment/showPayment', 'PaymentsOverviewController@showPayment');
+        route::post('payment/deletePayment', 'PaymentsOverviewController@deletePayment');
+
+
 
         Route::get('updatemail','MailController@getUpdateForm')->name('updatemail');
         Route::post('updatemail', 'MailController@sendUpdateMail');

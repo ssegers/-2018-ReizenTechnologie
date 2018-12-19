@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\PaymentStatus;
 use App\Payment;
+use App\PaymentsPerTraveller;
 use App\Traveller;
 use App\TravellersPerTrip;
 use App\Trip;
@@ -76,11 +77,27 @@ class PaymentsOverviewController extends Controller
         $oCurrentTrip = Trip::where('trip_id', $iTripId)->first();
         $userdata = Traveller::getTravellersWithPayment($iTripId);
 
+
+
         return view('user.payment.pay_overview',['userdata' => $userdata,
             'oCurrentTrip' => $oCurrentTrip,
             'aActiveTrips' => $aActiveTrips,'aAuthenticatedTripId' => $aAuthenticatedTrips]);
     }
+    public static function showPayment(Request $request){
+//        die();
+        $paymentdata = PaymentsPerTraveller::getPaymentsPerTravellersOverview($request->post('traveller_id'));
+        return response()->json(['paymentdata'=>$paymentdata]);
+    }
 
+    public static function deletePayment(Request $request){
+        PaymentsPerTraveller::where('paymentPerTravellers_id', $request->post('paymentPerTravellers_id'))->delete();
+        Payment::where('traveller_id', $request->post('traveller_id'))
+            ->update([
+                'payment_date' => $request->post('payment_date'),
+                'amount' => DB::raw('amount-'.$request->post('amount'))
+
+            ]);
+    }
     /**
      * @author Nico Schelfhout
      * @param Request $request
@@ -88,7 +105,7 @@ class PaymentsOverviewController extends Controller
      */
     public function addPayment(Request $request)
     {
-
+//        return $request->post();
         //Get the input
         $input = $request->all();
 
@@ -116,7 +133,12 @@ class PaymentsOverviewController extends Controller
             'amount' => DB::raw('amount+'.$request->post('amount'))
 
         ]);
-
+        PaymentsPerTraveller::insert([
+            'traveller_id' => $request->post('traveller_id'),
+            'amount' => $request->post('amount'),
+            'payment_date' => $request->post('payment_date'),
+            'paymentPerTravellers_id' => $request->post('payment_id')
+        ]);
         //return back to the view with the succes message
         return back();
     }

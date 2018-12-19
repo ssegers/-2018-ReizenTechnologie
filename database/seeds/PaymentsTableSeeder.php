@@ -1,5 +1,6 @@
 <?php
 
+use App\Traveller;
 use Illuminate\Database\Seeder;
 
 class PaymentsTableSeeder extends Seeder
@@ -11,11 +12,11 @@ class PaymentsTableSeeder extends Seeder
      */
     public function run()
     {
-
-        for($i = 1; $i<50;$i++){
+        $travellers = Traveller::select('traveller_id')->get();
+        for($i = 1; $i<count($travellers);$i++){
             DB::table('payments')->insert([
                 'traveller_id' => $i,
-                'amount' => 200
+                'amount' => 0
             ]);
         }
 
