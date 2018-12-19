@@ -30,7 +30,7 @@
                                 <a class="dropdown-item" href="/user/payment/trip">Betalingen</a>
                                 @endif
                                 <a class="dropdown-item" href="{{ route('listhotelsOrganizer') }}">Hotels</a>
-                                <a class="dropdown-item" href="{{ route('listautosOrganizer') }}">Autos</a>
+                                <a class="dropdown-item" href="{{ route('listautosOrganizer') }}">Auto's</a>
                             </div>
                         </li>
                     @endif
