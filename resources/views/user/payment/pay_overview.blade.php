@@ -81,13 +81,12 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title"></h5>
+                            <h5 class="modal-title">Overzicht van betalingen</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
-                            <h6>Overzicht van betalingen</h6>
                             <table id="paymentOverviewTable" class="table table-striped table-hover">
                                 <thead>
                                 <tr>
