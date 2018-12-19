@@ -219,7 +219,7 @@
                 }
 
                 if(value == 0){
-                    if (confirm("Hierbij wordt uw opgeslagen medische info verwijdert, bent u zeker dat u wil doorgan?"))  {
+                    if (confirm("Hierbij wordt uw opgeslagen medische info verwijdert, bent u zeker dat u wil doorgaan?"))  {
                         var medic = document.getElementById("MedicalInfo");
                         medic.disabled = true;
                         medic.value = null;
