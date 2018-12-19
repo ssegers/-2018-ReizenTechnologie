@@ -22,9 +22,13 @@
                                 Mijn reizen
                             </a>
                             <div class="dropdown-menu" aria-labelledby="personalDropdown">
+                                @if(\Illuminate\Support\Facades\Auth::user()->isOrganizer())
                                 <a class="dropdown-item" href="/user/trip">Reizigers</a>
+                                @if(\Illuminate\Support\Facades\Auth::user()->role!='admin')
                                 <a class="dropdown-item" href="{{ route('updatemail') }}">Verstuur mail</a>
+                                @endif
                                 <a class="dropdown-item" href="/user/payment/trip">Betalingen</a>
+                                @endif
                                 <a class="dropdown-item" href="{{ route('listhotelsOrganizer') }}">Hotels</a>
                                 <a class="dropdown-item" href="{{ route('listautosOrganizer') }}">Autos</a>
                             </div>

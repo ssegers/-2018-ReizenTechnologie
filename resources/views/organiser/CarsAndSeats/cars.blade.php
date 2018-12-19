@@ -82,10 +82,17 @@
                                     <?php $i=0 ?>
                                     @foreach($aTravellerPerAuto[$oAuto->auto_id] as $oTraveller)
                                         <tr><td>{{$oTraveller->first_name}} {{$oTraveller->last_name}}
-                                                @if($oTraveller->traveller_id==$userTravellerId)
+                                                @if($userTravellerId=='admin')
                                                     {{ Form::open(array('action' => 'AutoController@leaveSeat', 'method' => 'post')) }}
+                                                    {{Form::hidden('traveller_id',$oTraveller->traveller_id)}}
                                                     {{Form::button('Verlaat Auto',array('class' => 'btn btn-secondary', 'type' => 'submit'))}}
                                                     {{Form::close()}}
+                                                @else
+                                                    @if($oTraveller->traveller_id==$userTravellerId)
+                                                        {{ Form::open(array('action' => 'AutoController@leaveSeat', 'method' => 'post')) }}
+                                                        {{Form::button('Verlaat Auto',array('class' => 'btn btn-secondary', 'type' => 'submit'))}}
+                                                        {{Form::close()}}
+                                                    @endif
                                                 @endif
                                             </td></tr>
                                         <?php $i++ ?>
@@ -119,7 +126,7 @@
             hiddenTripField.value=selectTrip.options[selectTrip.selectedIndex].value;
         }
         function ConfirmDelete(){
-            return confirm('Are you sure?');
+            return confirm('Bent u zeker? \nDe reizigers die al een plaats gekozen hebben moeten hierna een andere plaats kiezen.');
         }
         setTimeout(function(){
             if ($('#removeTimer').length > 0) {

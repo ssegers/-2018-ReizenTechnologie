@@ -70,6 +70,7 @@ class Traveller extends Model
      * @return mixed
      */
     public static function getTravellersDataByTrip($iTripId, $aDataFields, $iPagination = null) {
+        //example: filter table
         if ($iPagination != null) {
             return self::select(array_keys(array_add($aDataFields, 'username', true)))
                 ->join('users','travellers.user_id','=','users.user_id')
@@ -77,8 +78,16 @@ class Traveller extends Model
                 ->join('majors','travellers.major_id','=','majors.major_id')
                 ->join('travellers_per_trips', 'travellers.traveller_id', '=', 'travellers_per_trips.traveller_id')
                 ->join('studies','majors.study_id','=','studies.study_id')
-                ->where('trip_id', $iTripId)->paginate($iPagination);
+                ->where('trip_id', $iTripId)
+                ->where(function ($query) {
+                    $query
+                        ->where('is_guide', true)
+                        ->orWhere('role', '=', 'traveller');})
+                ->orderBy('role', 'asc')
+                ->orderBy('last_name', 'asc')
+                ->paginate($iPagination);
         }
+        //example: to pdf/excel
         else {
             return self::select(array_keys($aDataFields))
                 ->join('users','travellers.user_id','=','users.user_id')
@@ -86,7 +95,14 @@ class Traveller extends Model
                 ->join('majors','travellers.major_id','=','majors.major_id')
                 ->join('travellers_per_trips', 'travellers.traveller_id', '=', 'travellers_per_trips.traveller_id')
                 ->join('studies','majors.study_id','=','studies.study_id')
-                ->where('trip_id', $iTripId)->get()->toArray();
+                ->where('trip_id', $iTripId)
+                ->where(function ($query) {
+                    $query
+                        ->where('is_guide', true)
+                        ->orWhere('role', '=', 'traveller');})
+                ->orderBy('role', 'asc')
+                ->orderBy('last_name', 'asc')
+                ->get()->toArray();
         }
     }
 }

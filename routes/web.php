@@ -97,6 +97,7 @@ Route::middleware(['auth','guide'])->group(function () {
         Route::get('/listhotels', 'HotelRoomController@getHotelsPerTripOrganizer')->name("listhotelsOrganizer");
         Route::post('/listhotels', 'HotelRoomController@getHotelsPerTripOrganizer');
         Route::post('/deleteHotel', 'HotelRoomController@deleteHotel');
+        Route::post('/deleteHotelRoom', 'HotelRoomController@deleteHotelRoom');
         Route::post('/connectHotelToTrip', 'HotelRoomController@connectHotelToTrip');
         Route::post('/createHotel', 'HotelRoomController@createHotel');
 
@@ -213,12 +214,12 @@ Route::get('/', function () {
 Route::get('/info','AdminInfoController@showInfo')->name('info');
 Route::get('/page/{page_name}','AdminPagesController@showPage');
 
-// Password reset link request routes...
-Route::get('password/setmail', 'AuthController@ShowEmail');
+// Password reset link request routes
+Route::get('password/setmail', 'AuthController@ShowEmail')->name('showreset');
 Route::post('password/setmail', 'AuthController@ShowEmailPost');
 
-// Password reset routes...
-Route::get('password/resetpassword/{token}', 'AuthController@ShowResetPassword');
+// Password reset routes
+Route::get('password/resetpassword/{token}', 'AuthController@ShowResetPassword')->name('resetpass');
 Route::post('password/resetpassword', 'AuthController@ResetPassword');
 
 //--------------------------------------END---------------------------------------
@@ -238,5 +239,8 @@ Route::get('/log','AuthController@showView')->name("log");
 Route::post('cascade', 'UserDataController@GetMajorsByStudy');
 Route::post('getTrip', 'AdminTripController@GetTrip');
 
+Route::get('test',function (){
+    return \Illuminate\Support\Facades\Auth::user()->isOrganizer;
+});
 
 //Route::get('/home', 'HomeController@index')->name('home');

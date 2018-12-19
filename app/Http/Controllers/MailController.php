@@ -22,16 +22,32 @@ class MailController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function getUpdateForm(){
-        $currentUserId = Auth::id();
-        $sEmail = Traveller::where('user_id', $currentUserId)->pluck('email')->first();
-        $aTrips = Trip::where('is_active', true)->get();
-
-        $aNewTrips = array();
-        foreach ($aTrips as $oTrip) {
-            $aNewTrips[$oTrip->trip_id] = $oTrip->name . ' ' . $oTrip->year;
+        if(Auth::user()->role=='admin'){
+            return redirect('info');
+        }
+        if(!Auth::user()->isOrganizer()){
+            return redirect('info');
         }
 
-        return view('organiser.updatemail', ['aTrips' => $aNewTrips, 'sEmail' => $sEmail]);
+                 //get the current user
+                $currentUser = Auth::user();
+
+                $sEmail = Traveller::where('user_id', $currentUser->user_id)->pluck('email')->first();
+                $travellerId = $currentUser->traveller->traveller_id;
+                $aTripsPerOrganiser = TravellersPerTrip::where('traveller_id', $travellerId)->where('is_organizer', true)->select('trip_id')->get();
+
+                $aActiveTrips = Trip::where('is_active', true)->whereIn('trip_id', $aTripsPerOrganiser)->get();
+
+                $aNewTrips = array();
+                foreach ($aActiveTrips as $oTrip) {
+                    $aNewTrips[$oTrip->trip_id] = $oTrip->name . ' ' . $oTrip->year;
+                }
+                return view('organiser.updatemail', ['aTrips' => $aNewTrips, 'sEmail' => $sEmail]);
+
+
+
+
+
     }
 
 

@@ -24,6 +24,11 @@
                 {{ session()->get('message') }}
             </div>
         @endif
+            @if(session()->has('errormessage'))
+                <div class="alert alert-danger">
+                    {{ session()->get('errormessage') }}
+                </div>
+            @endif
         {!!$oContent->content!!}
         </div>
     </div>

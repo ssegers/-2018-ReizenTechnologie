@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ResetPas;
 use App\Traveller;
+use Carbon\Carbon;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -12,6 +14,8 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\User;
+use Illuminate\Support\Facades\Mail;
+use Symfony\Component\Routing\Route;
 
 
 class AuthController extends controller
@@ -65,12 +69,55 @@ class AuthController extends controller
 
     public function ResetPassword(Request $request)
     {
-
+        $p1 = $request->input('password1');
+        $p2 = $request->input('password2');
+        $userid = $request->input('userid');
+        $GivenToken = $request->input("fulltoken");
+        $user = User::where('user_id',$userid)->first();
+        $userToken = $user->resettoken;
+        if($this->IsTokenStillValid($userToken,$GivenToken)){
+            if ($p1 == $p2){
+                User::where('user_id',$userid)->update(['password' => bcrypt($p1),"resettoken" => ""]);
+                return redirect()->route("info")->with('message', 'Paswoord is aangepast.');
+            }
+            else
+                return back()->with('message', 'Paswoorden komen niet met elkaar overeen.');
+        }
+        else
+            return redirect()->route("info")->with('errormessage', 'Deze link is niet meer beschikbaar.');
     }
 
-    public function ShowResetPassword()
+    public function ShowResetPassword($token)
     {
-        return view('auth.passwords.resetpassword');
+        $userid = explode("*", $token)[1];
+        $user = User::where('user_id',$userid)->first();
+        $userToken = $user->resettoken;
+        if ($this->IsTokenStillValid($userToken,$token)){
+            return view("auth.passwords.resetpassword", ["userid"=>$userid,"fulltoken"=>$token]);
+        }
+        else{
+            return redirect()->route("info")->with('errormessage', 'Deze link is niet meer beschikbaar.');
+        }
+    }
+
+    private function IsTokenStillValid($tokenUser, $GivenToken){
+        $year = substr($GivenToken,0,4);
+        $month = substr($GivenToken,4,2);
+        $day = substr($GivenToken,6,2);
+        $hour = substr($GivenToken,8,2);
+        $minute = substr($GivenToken,10,2);
+        $TokenTime = Carbon::create($year,$month,$day,$hour,$minute);
+        if($tokenUser == $GivenToken){
+            if (Carbon::now()->diffInMinutes($TokenTime) < 30){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        else{
+            return false;
+        }
     }
 
     public function ShowEmail()
@@ -79,18 +126,48 @@ class AuthController extends controller
     }
 
     public function ShowEmailPost(Request $request){
-        $traveller = Traveller::where('email', $request->input('email'))->get('user_id');
-        echo $traveller;
+        $traveller = Traveller::where('email', $request->input('email'))->first();
+        if ($traveller == ""){
+            return back()->with('message', 'Geen gebruiker gevonden met dit emailadres.');
+        }
+        $travellerid = $traveller->user_id;
+        $voornaam = $traveller->first_name;
+        $achternaam = $traveller->last_name;
+        $naam = $voornaam . " " . $achternaam;
+        $year = Carbon::now()->year;
+        $month = Carbon::now()->month;
+        if ($month < 10){
+            $month = '0'. $month;
+        }
+        $day = Carbon::now()->day;
+        if ($day < 10){
+            $day = '0'. $day;
+        }
+        $hour = (string)Carbon::now()->hour;
+        if ($hour < 10){
+            $hour = '0'. $hour;
+        }
+        $minute = Carbon::now()->minute;
+        if ($minute < 10){
+            $minute = '0'. $minute;
+        }
+        $token = $year.$month.$day.$hour.$minute.RegisterController::randomPassword(25).'*'.$travellerid;
+        if (User::where('user_id',$travellerid)->update(['resettoken' => $token])){
+            $this->sendMail($request->input('email'),$naam, $token);
+            return redirect()->route("info")->with('message', 'Mail is verstuurd.');
+        }
+        else{
+            return redirect()->route("info")->with('errormessage', 'Er is een fout opgetreden met het versturen van de mail, probeer later opnieuw.');
+        }
     }
 
-    public function sendMail($email, $name, $password) {
+    public function sendMail($email, $name, $token) {
         $aMailData = [
-            'subject' => 'Your registration for the UCLL trip.',
-            'username' => $name,
+            'subject' => 'Password reset',
+            'fullname' => $name,
             'email' => $email,
-            'description' => "berichtje",
-            'password' => $password
+            'token' => $token
         ];
-        Mail::to($email)->send(new RegisterComplete($aMailData));
+        Mail::to($email)->send(new ResetPas($aMailData));
     }
 }

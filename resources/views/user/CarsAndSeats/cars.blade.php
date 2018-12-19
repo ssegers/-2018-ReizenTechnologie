@@ -31,7 +31,8 @@
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="4">
+                    <td></td>
+                    <td>
                         <div class="collapse" id="collapse{{$oAuto->auto_id}}">
                             <div class="card card-body ">
                                 <table class="table text-center">
@@ -39,7 +40,7 @@
                                     @foreach($aTravellerPerAuto[$oAuto->auto_id] as $oTraveller)
                                         <tr><td>{{$oTraveller->first_name}} {{$oTraveller->last_name}}
                                                 @if($oTraveller->traveller_id==$userTravellerId)
-                                                    {{ Form::open(array('action' => 'AutoController@leaveSeat', 'method' => 'post')) }}
+                                                    {{Form::open(array('action' => 'AutoController@leaveSeat', 'method' => 'post')) }}
                                                     {{Form::button('Verlaat Auto',array('class' => 'btn btn-secondary', 'type' => 'submit'))}}
                                                     {{Form::close()}}
                                                 @endif
@@ -56,6 +57,7 @@
                             </div>
                         </div>
                     </td>
+                    <td></td>
                 </tr>
             @endforeach
         </table>

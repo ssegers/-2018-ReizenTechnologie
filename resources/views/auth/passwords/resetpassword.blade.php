@@ -1,4 +1,5 @@
 @extends('layouts.app')
+<br>
 
 @section('content')
     <div class="container col-md-4 background-white" style="padding-bottom: 15px; border-radius: 10px;">
@@ -8,7 +9,7 @@
             </div>
         @endif
 
-        {{ Form::open(array('action' => 'AuthController@ShowEmailPost', 'method' => 'post')) }}
+        {{ Form::open(array('action' => 'AuthController@ResetPassword', 'method' => 'post')) }}
         {{ csrf_field() }}
             <div class="form-group col-md-12">
                 <label>Password: </label>
@@ -18,7 +19,9 @@
             <label>Confirm password: </label>
             <input type="password" class="form-control" id="password2" name="password2">
         </div>
-        <hr/>
+            <input type="hidden" id="userid" name="userid" value="<?php echo $userid ?>">
+            <input type="hidden" id="fulltoken" name="fulltoken" value="<?php echo $fulltoken ?>">
+            <hr/>
         {{ Form::submit('Volgende',['class' => 'btn btn-primary form-control mb-12 ']) }}
         {{ Form::close() }}
     </div>

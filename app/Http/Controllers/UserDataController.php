@@ -59,6 +59,9 @@ class UserDataController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View|string
      */
     public function showUsersAsMentor(Request $request, $iTripId = null) {
+        if(!Auth::user()->isOrganizer()){
+            return redirect('info');
+        }
         $oUser = Auth::user();
 
         /* Get all active trips */
@@ -292,10 +295,11 @@ class UserDataController extends Controller
                     $bIsGuideOfTraveller = true;
                 }
             }
-            if(!$bIsGuideOfTraveller){
-                return redirect(route("info"));
+            if (Auth::user()->role != "admin"){
+                if(!$bIsGuideOfTraveller){
+                    return redirect(route("info"));
+                }
             }
-            /*  */
         }
 
         $sUserRole = User::where('username', $sUserName)->select('role')->first();
@@ -350,6 +354,8 @@ class UserDataController extends Controller
         if (Auth::user()->role == "admin"){
             return redirect(route("info"));
         }
+
+
         
         $aRequest->validate([
             'LastName'      => 'required',
@@ -392,53 +398,7 @@ class UserDataController extends Controller
                     'emergency_phone_2' => $aRequest->post('icePhone2'),
                 ]
             );
-
-
-        /* travellers_per_trips table */
-        if($oUser->role == "traveller"){
-            TravellersPerTrip::where('traveller_id', $oUser->traveller->traveller_id)->update(['trip_id' => $aRequest->post('Trip')]);
-        }
-        else if ($oUser->role == "guide"){
-            $aTripsGuide = TravellersPerTrip::select('is_organizer')
-                ->join('travellers', 'travellers_per_trips.traveller_id', '=', 'travellers.traveller_id')
-                ->join('users', 'travellers.user_id', '=', 'users.user_id')
-                ->where('username', $oUser->username)
-                ->get();
-            $bIsGuideAnOrganiser = false;
-            foreach($aTripsGuide as $aTripGuide){
-                if($aTripGuide->is_orangiser == true){
-                    $bIsGuideAnOrganiser = true;
-                }
-            }
-            if(!$bIsGuideAnOrganiser){
-                TravellersPerTrip::where('traveller_id', $oUser->traveller->traveller_id)
-                    ->where('is_guide', true)
-                    ->update(['is_guide' => false]);
-
-                if(TravellersPerTrip::where('trip_id', $aRequest->post('Trip'))->where('traveller_id', $oUser->traveller->traveller_id)->exists()){
-                    TravellersPerTrip::where('trip_id', $aRequest->post('Trip'))
-                        ->where('traveller_id', $oUser->traveller->traveller_id)
-                        ->update([
-                            'is_guide' => true,
-                        ]);
-                }
-                else{
-                    TravellersPerTrip::where('trip_id', $aRequest->post('Trip'))
-                        ->where('traveller_id', $oUser->traveller->traveller_id)
-                        ->insert([
-                            'trip_id' => $aRequest->post('Trip'),
-                            'traveller_id' => $oUser->traveller->traveller_id,
-                            'is_guide' => true,
-                            'is_organizer' => false
-                        ]);
-                }
-            }
-            /* Update travellers_per_trips table for guides who are organisers */
-            else{
-                TravellersPerTrip::where('traveller_id', $oUser->traveller->traveller_id)->update(['trip_id' => $aRequest->post('Trip')]);
-            }
-        }
-
+        
         if(str_contains($aRequest->path(), 'profile')){
             return redirect('profile');
         }

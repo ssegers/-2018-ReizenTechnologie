@@ -1,4 +1,5 @@
 @extends('layouts.app')
+<br>
 
 @section('content')
     <div class="container col-md-4 background-white" style="padding-bottom: 15px; border-radius: 10px;">

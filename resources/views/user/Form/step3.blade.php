@@ -20,7 +20,7 @@
         <div class="form-group col-md-8">
             <label class="form-label">E-mail adres (van de school)*</label>
             <div class="input-group">
-                {{ Form::text('txtEmail', $sEnteredEmail, ['required','id'=>'txtEmail','oninput'=>'this.className', 'class' => 'mb-2 form-control '])}}
+                {{ Form::text('txtEmail', $sEnteredEmail, ['required','id'=>'txtEmail','oninput'=>'this.className', 'class' => 'mb-2 form-control ', 'placeholder' => 'voornaam.achternaam'])}}
                 <div class="input-group-append">
                     <span class="form-control">@</span>
                 </div>

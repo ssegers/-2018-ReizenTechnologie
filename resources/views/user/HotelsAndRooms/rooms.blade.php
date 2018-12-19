@@ -12,11 +12,12 @@
                 {{ session()->get('succesmessage') }}
             </div>
         @endif
-        <table class="table">
-            <tr><td colspan="2"><h1>{{$hotel_name}}</h1></td></tr>
+        <table class="table text-center">
             <tr>
-                <td><a class="btn btn-primary" href="{{route('listhotelsUser')}}">Terug</a></td>
+                <th><h1>{{$hotel_name}}</h1></th>
+                <th><a class="btn btn-primary" href="{{route('listhotelsUser')}}">Terug</a></th>
             </tr>
+
             @foreach ($aRooms as $oRoom)
                 <tr>
                     <td><h4>{{$aCurrentOccupation[$oRoom->rooms_hotel_trip_id]}}/{{$oRoom->size}}</h4></td>
@@ -30,7 +31,7 @@
                     <td colspan="2">
                         <div class="collapse" id="collapse{{$oRoom->rooms_hotel_trip_id}}">
                             <div class="card card-body">
-                                <table>
+                                <table class="table text-center">
                                     <?php $i=0 ?>
                                     @foreach($aTravellerPerRoom[$oRoom->rooms_hotel_trip_id] as $oTraveller)
                                             <tr><td>{{$oTraveller->first_name}} {{$oTraveller->last_name}}
