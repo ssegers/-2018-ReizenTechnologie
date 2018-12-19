@@ -24,13 +24,15 @@ class MailController extends Controller
     public function getUpdateForm(){
         $currentUserId = Auth::id();
         $sEmail = Traveller::where('user_id', $currentUserId)->pluck('email')->first();
-        $aTrips = Trip::where('is_active', true)->get();
+        $travellerId = Auth::user()->traveller->traveller_id;
+        $aTripsPerOrganiser = TravellersPerTrip::where('traveller_id', $travellerId)->where('is_organizer', true)->select('trip_id')->get();
+
+        $aActiveTrips = Trip::where('is_active', true)->whereIn('trip_id', $aTripsPerOrganiser)->get();
 
         $aNewTrips = array();
-        foreach ($aTrips as $oTrip) {
+        foreach ($aActiveTrips as $oTrip) {
             $aNewTrips[$oTrip->trip_id] = $oTrip->name . ' ' . $oTrip->year;
         }
-
         return view('organiser.updatemail', ['aTrips' => $aNewTrips, 'sEmail' => $sEmail]);
     }
 
