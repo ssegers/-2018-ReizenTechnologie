@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 use App\Mail\RegisterComplete;
+use App\Payment;
 use App\Traveller;
 use App\TravellersPerTrip;
 use App\User;
@@ -396,7 +397,12 @@ class RegisterController extends Controller
         $oTraveller->medical_info = $request->session()->get('sEnteredMedicalCondition');
         $oTraveller->save();
         $iTravellerId = Traveller::where('user_id', $iUserId)->first()->traveller_id;
+        Payment::insert([
+                'payment_date' => "",
+                'amount' => 0,
+                'traveller_id' => $iTravellerId
 
+            ]);
         /* Link traveller to trip */
         $oTravellerPerTrip = new TravellersPerTrip;
 
