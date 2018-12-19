@@ -412,7 +412,6 @@ class RegisterController extends Controller
             'subject' => 'Your registration for the UCLL trip.',
             'username' => $oUser->username,
             'email' => $oTraveller->email,
-            'description' => "berichtje",
             'password' => $sRandomPass
         ];
         Mail::to($aMailData['email'])->send(new RegisterComplete($aMailData));
