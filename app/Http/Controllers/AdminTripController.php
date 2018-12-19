@@ -75,7 +75,7 @@ class AdminTripController extends Controller
             $oTrip->price = $request->post('trip-price');
             $oTrip->save();
         }
-        return redirect('/admin/trips');
+        return redirect('/admin/trips')->with('message', 'De reis is succesvol opgeslagen');
     }
     /**
      * @author Joren Meynen
