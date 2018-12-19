@@ -209,6 +209,26 @@
         var radio = document.getElementsByName("MedicalIssue");
         for(var i =0; i<radio.length; i++){
             radio[i].addEventListener('change', function(){
+
+                var radio = document.getElementsByName("MedicalIssue");
+                var value = null;
+                for(var i = 0; i< radio.length; i++){
+                    if(radio[i].checked){
+                        value= radio[i].value;
+                    }
+                }
+
+                if(value == 0){
+                    if (confirm("Hierbij wordt uw opgeslagen medische info verwijdert, bent u zeker dat u wil doorgan?"))  {
+                        var medic = document.getElementById("MedicalInfo");
+                        medic.disabled = true;
+                        medic.value = null;
+                    }
+                    else {
+                        document.getElementsByName("MedicalIssue").value=0;
+                    }
+                }
+
                 LaatTextAreaZien();
             })
         }
