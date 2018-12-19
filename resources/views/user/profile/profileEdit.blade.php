@@ -243,10 +243,10 @@
             }
             var textarea = document.getElementById("MedicalInfo");
             if(value == 0){
-                document.getElementById("MedicalInfo").disabled = true;
+                textarea.disabled = true;
             }
             else{
-                document.getElementById("MedicalInfo").disabled = false;
+               textarea.disabled = false;
             }
         }
 
