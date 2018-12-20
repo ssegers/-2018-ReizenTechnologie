@@ -77,14 +77,21 @@ class AuthController extends controller
         $userToken = $user->resettoken;
         if($this->IsTokenStillValid($userToken,$GivenToken)){
             if ($p1 == $p2){
-                User::where('user_id',$userid)->update(['password' => bcrypt($p1),"resettoken" => ""]);
-                return redirect()->route("info")->with('message', 'Paswoord is aangepast.');
+                if (strlen($p1) >= 9){
+                    User::where('user_id',$userid)->update(['password' => bcrypt($p1),"resettoken" => ""]);
+                    return redirect()->route("info")->with('message', 'Paswoord is aangepast.');
+                }
+                else{
+                    return back()->with('message', 'Het paswoord moet minstens 8 tekens lang zijn.');
+                }
             }
-            else
-                return back()->with('message', 'Paswoorden komen niet met elkaar overeen.');
-        }
-        else
+                else{
+                    return back()->with('message', 'Paswoorden komen niet met elkaar overeen.');
+                }
+            }
+        else {
             return redirect()->route("info")->with('errormessage', 'Deze link is niet meer beschikbaar.');
+        }
     }
 
     public function ShowResetPassword($token)
@@ -93,7 +100,12 @@ class AuthController extends controller
         $user = User::where('user_id',$userid)->first();
         $userToken = $user->resettoken;
         if ($this->IsTokenStillValid($userToken,$token)){
-            return view("auth.passwords.resetpassword", ["userid"=>$userid,"fulltoken"=>$token]);
+            if (Auth::check()){
+                return redirect(\route('info'));
+            }
+            else{
+                return view("auth.passwords.resetpassword", ["userid"=>$userid,"fulltoken"=>$token]);
+            }
         }
         else{
             return redirect()->route("info")->with('errormessage', 'Deze link is niet meer beschikbaar.');
@@ -122,7 +134,12 @@ class AuthController extends controller
 
     public function ShowEmail()
     {
-        return view('auth.passwords.enteremail');
+        if (Auth::check()){
+            return redirect(route('info'));
+        }
+        else{
+            return view('auth.passwords.enteremail');
+        }
     }
 
     public function ShowEmailPost(Request $request){
@@ -168,6 +185,12 @@ class AuthController extends controller
             'email' => $email,
             'token' => $token
         ];
-        Mail::to($email)->send(new ResetPas($aMailData));
+        try{
+            Mail::to($email)->send(new ResetPas($aMailData));
+        }
+        catch (\Exception $ex){
+            return redirect()->route("info")->with('errormessage', "mail sturen niet gelukt, probeer opnieuw.");
+
+        }
     }
 }
