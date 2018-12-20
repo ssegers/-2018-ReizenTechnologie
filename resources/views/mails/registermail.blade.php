@@ -6,7 +6,3 @@
         <li><b>password:</b> {{ $password }}</li>
     </ul>
 </div>
-<div>
-    <p><b>Bericht:</b></p>
-    <p>{{ $description }}</p>
-</div>

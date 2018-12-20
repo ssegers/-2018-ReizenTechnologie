@@ -19,7 +19,7 @@ class CreatePaymentsPerTravellersTable extends Migration
                 $table->integer('traveller_id')->unsigned();
                 $table->integer('amount')->nullable();
                 $table->timestamps();
-                $table->foreign('traveller_id')->references('traveller_id')->on('travellers_per_trips')->onDelete("cascade");
+                $table->foreign('traveller_id')->references('traveller_id')->on('travellers')->onDelete("cascade");
 
         });
     }

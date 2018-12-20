@@ -42,6 +42,12 @@
         </div>
     </div>
 
+    @if(session()->has('message'))
+        <div id="removeTimer" class="alert alert-success">
+            {{ session()->get('message') }}
+        </div>
+    @endif
+
     <div class="row" style="margin-left: 2px; margin-top: 2px;">
         <div class="col">
             <h1 class="my-5">Beheer reizen</h1>

@@ -219,7 +219,7 @@
                 }
 
                 if(value == 0){
-                    if (confirm("Hierbij wordt uw opgeslagen medische info verwijdert, bent u zeker dat u wil doorgan?"))  {
+                    if (confirm("Hierbij wordt uw opgeslagen medische info verwijdert, bent u zeker dat u wil doorgaan?"))  {
                         var medic = document.getElementById("MedicalInfo");
                         medic.disabled = true;
                         medic.value = null;
@@ -243,10 +243,10 @@
             }
             var textarea = document.getElementById("MedicalInfo");
             if(value == 0){
-                document.getElementById("MedicalInfo").disabled = true;
+                textarea.disabled = true;
             }
             else{
-                document.getElementById("MedicalInfo").disabled = false;
+               textarea.disabled = false;
             }
         }
 

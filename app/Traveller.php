@@ -52,7 +52,10 @@ class Traveller extends Model
             ->join('studies','majors.study_id','=','studies.study_id')
             ->join('trips', 'travellers_per_trips.trip_id','=', 'trips.trip_id')
             ->join('payments', 'travellers.traveller_id','=','payments.traveller_id')
-            ->where('travellers_per_trips.trip_id', $iTripId)->where('is_guide', false)->where('is_organizer', false)
+            ->where('travellers_per_trips.trip_id', $iTripId) ->where(function ($query) {
+                $query
+                    ->where('is_guide', true)
+                    ->orWhere('role', '=', 'traveller');})
             ->groupBy('travellers_per_trips.traveller_id', 'price', 'amount')->get()->toArray();
 
         return $userdata;

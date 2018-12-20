@@ -14,7 +14,7 @@
     </div>
     <div class="row">
         <div class="col">
-            <h1 class="text-center mt-5">Koppel begeleiders aan actieve reizen.</h1>
+            <h1 class="text-center mt-5">Koppel organisatoren aan actieve reizen.</h1>
         </div>
     </div>
     <div class="row">

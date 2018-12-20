@@ -73,5 +73,54 @@
     </div>
     {{ Form::close() }}
 </div>
+<script type="text/javascript">
+    var radio = document.getElementsByName("radioMedisch");
+    for(var i =0; i<radio.length; i++){
+        radio[i].addEventListener('change', function(){
+
+            var radio = document.getElementsByName("radioMedisch");
+            var value = null;
+            for(var i = 0; i< radio.length; i++){
+                if(radio[i].checked){
+                    value= radio[i].value;
+                }
+            }
+
+            if(value == 0){
+                if (confirm("Hierbij wordt uw opgeslagen medische info verwijdert, bent u zeker dat u wil doorgaan?"))  {
+                    var medic = document.getElementById("txtMedisch");
+                    medic.disabled = true;
+                    medic.value = null;
+                }
+                else {
+                    document.getElementsByName("radioMedisch").value=0;
+                }
+            }
+
+            LaatTextAreaZien();
+        })
+    }
+
+    function LaatTextAreaZien(){
+        var radio = document.getElementsByName("radioMedisch");
+        var value = null;
+        for(var i = 0; i< radio.length; i++){
+            if(radio[i].checked){
+                value= radio[i].value;
+            }
+        }
+        var textarea = document.getElementById("txtMedisch");
+        if(value == 0){
+           textarea.disabled = true;
+        }
+        else{
+            textarea.disabled = false;
+        }
+    }
+
+    LaatTextAreaZien();
+
+</script>
+
 
 @endsection
