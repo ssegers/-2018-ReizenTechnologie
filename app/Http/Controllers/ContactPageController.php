@@ -10,7 +10,9 @@ use Illuminate\Support\Facades\Mail;
 
 class ContactPageController extends Controller
 {
-    //
+    /**Author: Kaan Akpinar
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function getInfo(){
         $oActiveTrips = Trip::where('is_active',true)->where('contact_mail', '!=' , null)->get();
         return view('guest.contactpage',array('oActiveTrips'=>$oActiveTrips));
