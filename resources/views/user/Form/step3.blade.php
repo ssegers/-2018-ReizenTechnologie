@@ -24,7 +24,7 @@
                 <div class="input-group-append">
                     <span class="form-control">@</span>
                 </div>
-                @if($sEmailExtension == 'student.ucll.be' || $sEmailExtension == 'student.ucll.be')
+                @if($sEmailExtension == 'student.ucll.be' || $sEmailExtension == 'ucll.be')
                     {{ Form::text('txtEmailExtension', $sEmailExtension, ['required', 'class' => 'form-control', 'readonly']) }}
                 @else
                     {{ Form::text('txtEmailExtension', $sEmailExtension, ['required', 'class' => 'form-control']) }}
