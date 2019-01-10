@@ -15,18 +15,25 @@ use Illuminate\Support\Facades\Auth;
 
 class HotelRoomController extends Controller
 {
+    /**
+     * This function gets all hotels of the selected trip for an admin or an organizer
+     *
+     * @author Michiel Guilliams
+     *
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     function getHotelsPerTripOrganizer(Request $request)
     {
         $oUser=Auth::user();
         if ($oUser->role=='admin'){
-            $aIsOrganizerOfTrip = TravellersPerTrip::select('trip_id')->get();
 
-            $aActiveTrips = Trip::where('is_active', true)->whereIn('trip_id', $aIsOrganizerOfTrip)->get();
+            $aActiveTrips = Trip::where('is_active', true)->get();
 
             $aHotels = Hotel::get();
 
             if ($request->post('selectedActiveTrip') == null) {
-                $iTripId = Trip::where('is_active', true)->whereIn('trip_id', $aIsOrganizerOfTrip)->first();
+                $iTripId = Trip::where('is_active', true)->first();
             } else {
                 $iTripId = Trip::where('trip_id', $request->post('selectedActiveTrip'))->select('trip_id')->first();
             }
@@ -84,13 +91,19 @@ class HotelRoomController extends Controller
         }
     }
 
+    /**
+     * This function gets all hotels of the selected trip for a normal traveller
+     *
+     * @author Michiel Guilliams
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     function getHotelsPerTripUser(){
         $oUser=Auth::user();
         foreach($oUser->traveller->travellersPerTrip as $travellersPerTrip) {
             $iTripId=$travellersPerTrip->trip_id;
         }
         $aHotelsid = HotelsPerTrip::where('trip_id', $iTripId)->select('hotel_id')->get();
-        //Haal alle hotel gegevens met de gevonden hotelIds
 
         $aHotelsPerTrip=HotelsPerTrip::whereIn('hotels.hotel_id', $aHotelsid)
             ->join('hotels','hotels_per_trips.hotel_id','=','hotels.hotel_id')
@@ -113,7 +126,16 @@ class HotelRoomController extends Controller
             ]);
     }
 
-    function getRoomsOrganisator($hotel_id,$hotel_name)
+    /**
+     * This function gets all rooms of the selected hotel for an admin or an organizer
+     *
+     * @author Michiel Guilliams
+     *
+     * @param $hotel_id
+     * @param $hotel_name
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    function getRoomsOrganisator($hotel_id, $hotel_name)
     {
         $oUser=Auth::user();
         if($oUser->role=='admin'){
@@ -144,7 +166,17 @@ class HotelRoomController extends Controller
                 'aTravellerPerRoom' =>$aTravellerPerRoom
             ]);
     }
-    function getRoomsUser($hotel_id,$hotel_name){
+
+    /**
+     * This function gets all rooms of the selected hotel for an normal traveller
+     *
+     * @author Michiel Guilliams
+     *
+     * @param $hotel_id
+     * @param $hotel_name
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    function getRoomsUser($hotel_id, $hotel_name){
         $oUser=Auth::user();
         $userTravellerId=$oUser->traveller->traveller_id;
 
@@ -170,6 +202,14 @@ class HotelRoomController extends Controller
             ]);
     }
 
+    /**
+     * This function creates a new hotel
+     *
+     * @author Michiel Guilliams
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     function createHotel(Request $request)
     {
         $oHotel=new Hotel();
@@ -182,6 +222,13 @@ class HotelRoomController extends Controller
         return redirect()->back();
     }
 
+    /**
+     * This function creates a hotel room for a hotel
+     * @author Michiel Guilliams
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     function addHotelRoom(Request $request){
         $oUser = Auth::user();
         $is_organizer=false;
@@ -205,6 +252,14 @@ class HotelRoomController extends Controller
         }
     }
 
+    /**
+     * This function adds a user to a hotel room
+     *
+     * @author Michiel Guilliams
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     function chooseRoom(Request $request){
         $oUser = Auth::user();
         if($oUser->role=='admin'){
@@ -229,6 +284,14 @@ class HotelRoomController extends Controller
         }
     }
 
+    /**
+     * This function deletes a user out of a hotel room
+     *
+     * @author Michiel Guilliams
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     function leaveRoom(Request $request){
         $oUser = Auth::user();
         if ($oUser->role=='admin'){
@@ -245,6 +308,14 @@ class HotelRoomController extends Controller
         }
     }
 
+    /**
+     * This function connects a hotel to a trip
+     *
+     * @author Michiel Guilliams
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function connectHotelToTrip(Request $request){
         $oHotelsPerTrip=new HotelsPerTrip();
         $oHotelsPerTrip->trip_id=$request->post('trip_id');
@@ -256,6 +327,14 @@ class HotelRoomController extends Controller
         return redirect()->back();
     }
 
+    /**
+     * This function deletes a hotel
+     *
+     * @author Michiel Guilliams
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function deleteHotel(Request $request){
 
         $hotels_per_trip_id=$request->input('hotels_per_trip_id');
@@ -267,6 +346,14 @@ class HotelRoomController extends Controller
         return redirect()->back()->with('message', 'Het hotel is verwijderd');
     }
 
+    /**
+     * This function deletes a hotel room
+     *
+     * @author Michiel Guilliams
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function deleteHotelRoom(Request $request){
 
         TravellersPerRoom::where('rooms_hotel_trip_id',$request->post('rooms_hotel_trip_id'))->delete();

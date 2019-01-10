@@ -14,16 +14,23 @@ use Illuminate\Support\Facades\Auth;
 
 class AutoController extends Controller
 {
+    /**
+     * This function gets all cars of the selected trip for a admin or organizer
+     *
+     * @author Michiel Guilliams
+     *
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     function getAutosPerTripOrganizer(Request $request)
     {
         $oUser=Auth::user();
         if($oUser->role=='admin'){
-            $aIsOrganizerOfTrip = TravellersPerTrip::select('trip_id')->get();
 
-            $aActiveTrips = Trip::where('is_active', true)->whereIn('trip_id',$aIsOrganizerOfTrip)->get();
+            $aActiveTrips = Trip::where('is_active', true)->get();
 
             if ($request->post('selectedActiveTrip') == null) {
-                $iTripId = Trip::where('is_active', true)->whereIn('trip_id',$aIsOrganizerOfTrip)->first();
+                $iTripId = Trip::where('is_active', true)->first();
             } else {
                 $iTripId = Trip::where('trip_id', $request->post('selectedActiveTrip'))->select('trip_id')->first();
             }
@@ -114,6 +121,13 @@ class AutoController extends Controller
 
     }
 
+    /**
+     * This function gets all cars of the selected trip for a normal traveller
+     *
+     * @author Michiel Guilliams
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     function getAutosPerTripUser(){
         $oUser=Auth::user();
         foreach($oUser->traveller->travellersPerTrip as $travellersPerTrip) {
@@ -160,6 +174,14 @@ class AutoController extends Controller
             ]);
     }
 
+    /**
+     * This function creates a new car
+     *
+     * @author Michiel Guilliams
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     function createAuto(Request $request)
     {
         $oAuto=new Auto();
@@ -176,6 +198,14 @@ class AutoController extends Controller
         return redirect()->back();
     }
 
+    /**
+     * This function adds a user to a car
+     *
+     * @author Michiel Guilliams
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     function chooseSeat(Request $request){
         $oUser = Auth::user();
         if($oUser->role=="admin"){
@@ -196,6 +226,15 @@ class AutoController extends Controller
             return redirect()->back();
         }
     }
+
+    /**
+     * This function deletes a user out of a car
+     *
+     * @author Michiel Guilliams
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     function leaveSeat(Request $request){
         $oUser = Auth::user();
         if ($oUser->role=='admin'){
@@ -212,6 +251,14 @@ class AutoController extends Controller
         }
     }
 
+    /**
+     * This function deletes a car
+     *
+     * @author Michiel Guilliams
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function deleteAuto(Request $request){
 
         $auto_id=$request->input('auto_id');
