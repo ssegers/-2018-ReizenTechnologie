@@ -111,7 +111,7 @@ class TravellersTableSeeder extends Seeder
             'major_id' =>1,
             'first_name' => 'Joren',
             'last_name' => 'Meynen',
-            'email' => 'joren.meynen@student.ucll.be',
+            'email' => 'iets@student.ucll.be',
             'country' => 'belgië',
             'address' => 'joren zijn straat 15',
             'gender' => 'Man',
