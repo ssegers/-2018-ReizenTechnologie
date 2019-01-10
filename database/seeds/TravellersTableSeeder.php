@@ -157,7 +157,7 @@ class TravellersTableSeeder extends Seeder
             'major_id' =>1,
             'first_name' => 'Nicolaas',
             'last_name' => 'Schelfhout',
-            'email' => 'nicolaas.schelfhout@ucll.be',
+            'email' => 'nicolaas.schelfhout@student.ucll.be',
             'country' => 'belgië',
             'address' => 'nicolaas zijn straat 15',
             'gender' => 'Man',
